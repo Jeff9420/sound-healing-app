@@ -79,51 +79,11 @@ sound-healing-app/
 - **BackgroundSceneManager** - Canvas 动画场景
 - **i18n System** - 多语言国际化系统
 
-### 性能优化
-- **音频懒加载** - 按需加载，节省内存
-- **LRU 缓存** - 智能缓存管理
-- **Service Worker** - 离线支持和缓存优化
-- **网络自适应** - 根据网络状况调整加载策略
+## 🚀 生产环境部署状态
 
-### 浏览器兼容性
-- Chrome 80+ ✅
-- Firefox 75+ ✅  
-- Safari 13+ ✅
-- Edge 80+ ✅
+[![部署状态](https://img.shields.io/badge/Vercel-已连接-00C7B7?logo=vercel)](https://sound-healing-app.vercel.app)
 
-## 🎯 使用说明
+**部署地址**: [https://sound-healing-app.vercel.app](https://sound-healing-app.vercel.app)  
+**自定义域名**: [https://soundflow.app](https://soundflow.app)  
 
-1. **选择音频分类** - 从9个生态卡片中选择音频类型
-2. **切换语言** - 右上角语言选择器支持5种语言
-3. **控制播放** - 底部播放控制面板，支持音量调节、进度控制
-4. **享受场景** - 背景场景自动匹配音频类型，提供沉浸体验
-
-## 📊 性能指标
-
-- **首屏加载时间**: < 1.5秒（优化前：17-102秒）
-- **内存使用**: < 200MB（优化前：4.2GB）
-- **缓存命中率**: > 95%
-- **错误率**: < 1%
-
-## 📈 优化成果
-
-- ✅ 99% 性能提升
-- ✅ 95% 内存使用减少  
-- ✅ 完整多语言支持
-- ✅ Service Worker 离线缓存
-- ✅ 智能预加载策略
-- ✅ 跨浏览器兼容性
-
-## 🔧 开发和维护
-
-详细的开发指南和维护说明请参考：
-- [DEPLOYMENT.md](DEPLOYMENT.md) - 部署指南
-- [CLAUDE.md](CLAUDE.md) - 开发文档
-
-## 📄 许可证
-
-本项目仅供学习和个人使用。音频文件版权归原作者所有。
-
----
-
-**🎵 享受您的声音疗愈之旅！**
+> 最后更新: 2025年1月9日 - 触发生产环境部署
