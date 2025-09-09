@@ -33,57 +33,13 @@ git commit -m "Initial deployment"
 # 2. 推送到 GitHub
 git remote add origin https://github.com/yourusername/sound-healing-app.git
 git push -u origin main
-
-# 3. 在 Netlify 连接 GitHub 仓库自动部署
 ```
 
-### 方法三：命令行部署
+## 🌐 现已部署
 
-```bash
-# 安装 Netlify CLI
-npm install -g netlify-cli
+✅ **生产环境**: [soundflows.app](https://soundflows.app)
+✅ **备用域名**: [www.soundflows.app](https://www.soundflows.app)
 
-# 部署
-netlify deploy --prod --dir .
-```
+---
 
-## 📁 项目结构
-
-```
-sound-healing-app/
-├── index.html                 # 主页面
-├── netlify.toml              # Netlify 部署配置
-├── _redirects                # 路由重定向规则
-├── .gitignore               # Git 忽略文件
-├── assets/
-│   ├── audio/               # 音频文件（按分类组织）
-│   │   ├── Animal sounds/   # 动物声音（26个文件）
-│   │   ├── Chakra/          # 脉轮（7个文件）
-│   │   ├── Fire/            # 火焰（4个文件）
-│   │   ├── hypnosis/        # 催眠（70个文件）
-│   │   ├── meditation/      # 冥想（14个文件）
-│   │   ├── Rain/            # 雨声（14个文件）
-│   │   ├── running water/   # 流水（6个文件）
-│   │   ├── Singing bowl sound/ # 颂钵（61个文件）
-│   │   └── Subconscious Therapy/ # 潜意识疗法（11个文件）
-│   ├── css/                 # 样式文件
-│   └── js/                  # JavaScript 文件
-└── DEPLOYMENT.md            # 详细部署指南
-```
-
-## 🛠️ 技术架构
-
-### 核心系统
-- **AudioManager** - 音频管理和播放控制
-- **PlaylistUI** - 分类浏览和曲目选择
-- **BackgroundSceneManager** - Canvas 动画场景
-- **i18n System** - 多语言国际化系统
-
-## 🚀 生产环境部署状态
-
-[![部署状态](https://img.shields.io/badge/Vercel-已连接-00C7B7?logo=vercel)](https://sound-healing-app.vercel.app)
-
-**部署地址**: [https://sound-healing-app.vercel.app](https://sound-healing-app.vercel.app)  
-**自定义域名**: [https://soundflow.app](https://soundflow.app)  
-
-> 最后更新: 2025年1月9日 - 触发生产环境部署
+*🎵 Deployed with Claude Code and Vercel*
