@@ -1,0 +1,35 @@
+# 声音疗愈应用 Robots.txt
+# 允许搜索引擎索引所有内容
+
+User-agent: *
+Allow: /
+
+# 特别允许的路径
+Allow: /assets/css/
+Allow: /assets/js/
+Allow: /assets/images/
+
+# 不希望索引的内容
+Disallow: /assets/audio/
+Disallow: /.netlify/
+Disallow: /monitoring-setup.js
+Disallow: /update-audio-config.py
+
+# 网站地图位置
+Sitemap: https://your-domain.com/sitemap.xml
+
+# 爬虫延迟设置（可选）
+Crawl-delay: 1
+
+# 针对特定搜索引擎的设置
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot  
+Allow: /
+Crawl-delay: 1
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2
