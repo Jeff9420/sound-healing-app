@@ -1,11 +1,4 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "**",
-      "use": "@vercel/static"
-    }
-  ],
   "rewrites": [
     {
       "source": "/((?!assets|sw|manifest|robots|sitemap|.*\\..*).*)",
@@ -53,8 +46,5 @@
         }
       ]
     }
-  ],
-  "github": {
-    "silent": true
-  }
+  ]
 }
