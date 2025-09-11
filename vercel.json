@@ -63,7 +63,6 @@
       ]
     }
   ],
-  "regions": ["iad1", "fra1", "hkg1"],
   "github": {
     "silent": true
   }
