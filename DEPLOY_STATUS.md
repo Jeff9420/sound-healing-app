@@ -57,4 +57,4 @@
 1. 推送代码到GitHub仓库 (触发Vercel自动部署)
 2. 验证sounflows.app网站功能
 3. 继续监控Archive.org上传进度
-4. 完成后进行全功能测试
+4. 完成后进行全功能测试# Force deployment trigger - 2025年09月11日 13:53:25
