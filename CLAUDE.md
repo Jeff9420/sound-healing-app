@@ -148,10 +148,45 @@ Always test in multiple browsers, especially:
 
 ## Deployment Notes
 
-- This is a **static web application** - no server-side requirements
-- Audio files must be served over HTTPS for full functionality
-- See `DEPLOYMENT.md` for complete production deployment guide
-- Service Worker caching implemented for offline functionality
+### Production Deployment Status
+- **✅ Successfully deployed**: https://soundflows.app
+- **Platform**: Vercel (recommended)
+- **Deployment Method**: Vercel CLI (`vercel --prod --yes`)
+- **Domain**: Custom domain with DNS A records to `216.198.79.1`
+
+### Key Deployment Requirements
+- **Directory Structure**: Must have `assets/js/` and `assets/css/` (NOT root-level `js/` and `css/`)
+- **Vercel Configuration**: Simplified `vercel.json` without builds configuration
+- **HTTPS Required**: Audio files must be served over HTTPS for full functionality
+- **Service Worker**: Caching implemented for offline functionality
+
+### Verified Deployment Process
+1. **Fix Directory Structure**:
+   ```bash
+   mkdir -p assets/js assets/css
+   cp -r js/* assets/js/
+   cp -r css/* assets/css/
+   ```
+
+2. **Configure vercel.json**:
+   ```json
+   {
+     "rewrites": [
+       {
+         "source": "/((?!assets|sw|manifest|robots|sitemap|.*\\..*).*)",
+         "destination": "/index.html"
+       }
+     ]
+   }
+   ```
+
+3. **Deploy**:
+   ```bash
+   npm install -g vercel
+   vercel --prod --yes
+   ```
+
+See `DEPLOYMENT.md` and `VERCEL-DEPLOYMENT-SUCCESS.md` for complete guides
 
 ## Common Issues & Solutions
 
