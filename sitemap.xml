@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://your-domain.com/</loc>
+    <lastmod>2025-09-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://your-domain.com/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://your-domain.com/?lang=zh" />
+    <xhtml:link rel="alternate" hreflang="ja-JP" href="https://your-domain.com/?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://your-domain.com/?lang=ko" />
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://your-domain.com/?lang=es" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://your-domain.com/" />
+    <image:image>
+      <image:loc>https://your-domain.com/assets/images/app-hero.jpg</image:loc>
+      <image:title>Free Sound Healing Music App</image:title>
+      <image:caption>213+ premium healing sounds for meditation and relaxation</image:caption>
+    </image:image>
+  </url>
+
+  <!-- 各语言版本 -->
+  <url>
+    <loc>https://your-domain.com/?lang=en</loc>
+    <lastmod>2025-09-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://your-domain.com/?lang=ja</loc>
+    <lastmod>2025-09-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://your-domain.com/?lang=ko</loc>
+    <lastmod>2025-09-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://your-domain.com/?lang=es</loc>
+    <lastmod>2025-09-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 音频分类页面 (虚拟页面，通过 JavaScript 路由) -->
+  <url>
+    <loc>https://your-domain.com/#/meditation-music</loc>
+    <lastmod>2025-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://your-domain.com/#/rain-sounds</loc>
+    <lastmod>2025-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://your-domain.com/#/singing-bowl</loc>
+    <lastmod>2025-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://your-domain.com/#/chakra-healing</loc>
+    <lastmod>2025-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://your-domain.com/#/hypnosis-music</loc>
+    <lastmod>2025-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://your-domain.com/#/nature-sounds</loc>
+    <lastmod>2025-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://your-domain.com/#/fire-sounds</loc>
+    <lastmod>2025-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://your-domain.com/#/water-sounds</loc>
+    <lastmod>2025-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://your-domain.com/#/subconscious-therapy</loc>
+    <lastmod>2025-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>

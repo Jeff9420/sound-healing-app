@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive.org 外部存储测试 - 声音疗愈应用</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .status-panel {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .category {
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .category-header {
+            background: #f8f9fa;
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .category-header:hover {
+            background: #e9ecef;
+        }
+        
+        .category-content {
+            padding: 15px;
+            display: none;
+        }
+        
+        .category-content.active {
+            display: block;
+        }
+        
+        .track {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            margin-bottom: 8px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+        }
+        
+        .track:hover {
+            background: #e9ecef;
+        }
+        
+        .track-info {
+            flex: 1;
+        }
+        
+        .track-name {
+            font-weight: 500;
+            color: #495057;
+        }
+        
+        .track-meta {
+            font-size: 0.85em;
+            color: #6c757d;
+            margin-top: 4px;
+        }
+        
+        .track-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: background-color 0.2s;
+        }
+        
+        .btn-play {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-play:hover {
+            background: #218838;
+        }
+        
+        .btn-pause {
+            background: #ffc107;
+            color: black;
+        }
+        
+        .btn-pause:hover {
+            background: #e0a800;
+        }
+        
+        .btn-test {
+            background: #17a2b8;
+            color: white;
+        }
+        
+        .btn-test:hover {
+            background: #138496;
+        }
+        
+        .loading {
+            color: #6c757d;
+            font-style: italic;
+        }
+        
+        .error {
+            color: #dc3545;
+            font-style: italic;
+        }
+        
+        .success {
+            color: #28a745;
+            font-style: italic;
+        }
+        
+        .url-display {
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.8em;
+            background: #f1f3f4;
+            padding: 8px;
+            border-radius: 4px;
+            word-break: break-all;
+            margin-top: 8px;
+        }
+        
+        .network-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .volume-slider {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎵 Archive.org 外部存储测试</h1>
+        <p>测试声音疗愈应用使用Archive.org作为音频文件存储的可行性</p>
+    </div>
+
+    <div class="status-panel">
+        <h3>系统状态</h3>
+        <div id="system-status">
+            <p>🔄 初始化中...</p>
+        </div>
+        
+        <div class="network-info" id="network-info" style="display: none;">
+            <h4>网络连接信息</h4>
+            <div id="archive-status">检查 Archive.org 连接状态...</div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <h3>全局控制</h3>
+        <button id="check-network" class="btn btn-test">检查网络连接</button>
+        <button id="pause-all" class="btn btn-pause">暂停所有</button>
+        
+        <div class="volume-control">
+            <label>全局音量:</label>
+            <input type="range" id="global-volume" class="volume-slider" min="0" max="100" value="50">
+            <span id="volume-value">50%</span>
+        </div>
+    </div>
+
+    <div id="categories"></div>
+
+    <!-- 加载 Archive.org 配置和管理器 -->
+    <script src="assets/js/audio-config-archive.js"></script>
+    <script src="assets/js/audio-manager-archive.js"></script>
+    
+    <script>
+        let audioManager;
+        
+        // 初始化应用
+        async function initApp() {
+            try {
+                // 创建音频管理器
+                audioManager = new ArchiveAudioManager();
+                
+                // 初始化管理器
+                await audioManager.initialize();
+                
+                updateSystemStatus('✅ Archive音频管理器初始化成功', 'success');
+                
+                // 检查网络连接
+                await checkNetworkConnection();
+                
+                // 渲染分类
+                renderCategories();
+                
+                // 设置事件监听器
+                setupEventListeners();
+                
+            } catch (error) {
+                console.error('初始化失败:', error);
+                updateSystemStatus(`❌ 初始化失败: ${error.message}`, 'error');
+            }
+        }
+        
+        // 更新系统状态
+        function updateSystemStatus(message, type = '') {
+            const statusEl = document.getElementById('system-status');
+            statusEl.innerHTML = `<p class="${type}">${message}</p>`;
+        }
+        
+        // 检查网络连接
+        async function checkNetworkConnection() {
+            const networkInfoEl = document.getElementById('network-info');
+            const archiveStatusEl = document.getElementById('archive-status');
+            
+            networkInfoEl.style.display = 'block';
+            archiveStatusEl.innerHTML = '🔄 检查 Archive.org 连接状态...';
+            
+            try {
+                const isAvailable = await audioManager.checkArchiveAvailability();
+                
+                if (isAvailable) {
+                    archiveStatusEl.innerHTML = '✅ Archive.org 连接正常，可以使用外部存储';
+                    archiveStatusEl.className = 'success';
+                } else {
+                    archiveStatusEl.innerHTML = '⚠️ Archive.org 连接异常，将尝试使用镜像站点或本地存储';
+                    archiveStatusEl.className = 'error';
+                }
+            } catch (error) {
+                archiveStatusEl.innerHTML = `❌ 网络检查失败: ${error.message}`;
+                archiveStatusEl.className = 'error';
+            }
+        }
+        
+        // 渲染分类
+        function renderCategories() {
+            const categories = audioManager.getCategories();
+            const categoriesEl = document.getElementById('categories');
+            
+            categoriesEl.innerHTML = Object.entries(categories).map(([key, category]) => {
+                return `
+                    <div class="category">
+                        <div class="category-header" onclick="toggleCategory('${key}')">
+                            <div>
+                                <span style="font-size: 1.2em; margin-right: 8px;">${category.icon}</span>
+                                <strong>${category.name}</strong>
+                                <span style="margin-left: 10px; color: #6c757d; font-size: 0.9em;">
+                                    (${category.files.length} 个文件)
+                                </span>
+                            </div>
+                            <span>▼</span>
+                        </div>
+                        <div class="category-content" id="category-${key}">
+                            ${category.files.map((file, index) => {
+                                const trackId = audioManager.generateTrackId(key, file);
+                                const filename = typeof file === 'object' ? file.filename : file;
+                                const originalName = typeof file === 'object' ? file.originalName : file;
+                                const duration = typeof file === 'object' ? file.duration : '未知';
+                                const size = typeof file === 'object' ? file.size : '未知';
+                                
+                                return `
+                                    <div class="track" id="track-${trackId}">
+                                        <div class="track-info">
+                                            <div class="track-name">${originalName}</div>
+                                            <div class="track-meta">
+                                                文件名: ${filename} | 时长: ${duration} | 大小: ${size}
+                                            </div>
+                                            <div class="url-display" id="url-${trackId}" style="display: none;"></div>
+                                        </div>
+                                        <div class="track-controls">
+                                            <button class="btn btn-test" onclick="testTrackUrl('${key}', ${index})">
+                                                测试URL
+                                            </button>
+                                            <button class="btn btn-play" onclick="playTrack('${trackId}', '${key}', ${index})">
+                                                播放
+                                            </button>
+                                            <button class="btn btn-pause" onclick="pauseTrack('${trackId}')" style="display: none;">
+                                                暂停
+                                            </button>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // 切换分类显示
+        function toggleCategory(categoryKey) {
+            const contentEl = document.getElementById(`category-${categoryKey}`);
+            const isActive = contentEl.classList.contains('active');
+            
+            // 关闭所有其他分类
+            document.querySelectorAll('.category-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // 切换当前分类
+            if (!isActive) {
+                contentEl.classList.add('active');
+            }
+        }
+        
+        // 测试音频URL
+        function testTrackUrl(categoryKey, fileIndex) {
+            const categories = audioManager.getCategories();
+            const file = categories[categoryKey].files[fileIndex];
+            const trackId = audioManager.generateTrackId(categoryKey, file);
+            const urlEl = document.getElementById(`url-${trackId}`);
+            
+            // 生成不同的URL并显示
+            const mainUrl = generateArchiveUrl(categoryKey, file);
+            const mirror1 = getMirrorUrl(categoryKey, file, 0);
+            const mirror2 = getMirrorUrl(categoryKey, file, 1);
+            const fallbackUrl = getFallbackUrl(categoryKey, file);
+            
+            urlEl.innerHTML = `
+                <strong>URL测试结果:</strong><br>
+                主URL: <a href="${mainUrl}" target="_blank">${mainUrl}</a><br>
+                镜像1: <a href="${mirror1}" target="_blank">${mirror1}</a><br>
+                镜像2: <a href="${mirror2}" target="_blank">${mirror2}</a><br>
+                本地备份: ${fallbackUrl}
+            `;
+            urlEl.style.display = 'block';
+            
+            // 测试主URL是否可访问
+            testUrlAvailability(mainUrl, `url-${trackId}`);
+        }
+        
+        // 测试URL可访问性
+        async function testUrlAvailability(url, elementId) {
+            try {
+                const response = await fetch(url, { method: 'HEAD' });
+                const urlEl = document.getElementById(elementId);
+                
+                if (response.ok) {
+                    urlEl.innerHTML += '<br><span class="success">✅ 主URL可访问</span>';
+                } else {
+                    urlEl.innerHTML += '<br><span class="error">❌ 主URL不可访问</span>';
+                }
+            } catch (error) {
+                const urlEl = document.getElementById(elementId);
+                urlEl.innerHTML += `<br><span class="error">❌ 主URL测试失败: ${error.message}</span>`;
+            }
+        }
+        
+        // 播放音频
+        async function playTrack(trackId, categoryKey, fileIndex) {
+            const categories = audioManager.getCategories();
+            const file = categories[categoryKey].files[fileIndex];
+            
+            try {
+                // 显示loading状态
+                updateTrackStatus(trackId, '🔄 加载中...', 'loading');
+                
+                await audioManager.playTrack(trackId, categoryKey, file);
+                
+                // 更新UI
+                updateTrackStatus(trackId, '▶️ 播放中', 'success');
+                toggleTrackButtons(trackId, true);
+                
+            } catch (error) {
+                console.error('播放失败:', error);
+                updateTrackStatus(trackId, `❌ 播放失败: ${error.message}`, 'error');
+            }
+        }
+        
+        // 暂停音频
+        function pauseTrack(trackId) {
+            audioManager.pauseTrack(trackId);
+            updateTrackStatus(trackId, '⏸️ 已暂停', '');
+            toggleTrackButtons(trackId, false);
+        }
+        
+        // 更新音轨状态
+        function updateTrackStatus(trackId, message, className) {
+            const trackEl = document.getElementById(`track-${trackId}`);
+            const trackInfo = trackEl.querySelector('.track-info');
+            
+            // 移除之前的状态信息
+            const existingStatus = trackInfo.querySelector('.track-status');
+            if (existingStatus) {
+                existingStatus.remove();
+            }
+            
+            // 添加新的状态信息
+            const statusEl = document.createElement('div');
+            statusEl.className = `track-status ${className}`;
+            statusEl.textContent = message;
+            trackInfo.appendChild(statusEl);
+        }
+        
+        // 切换播放/暂停按钮
+        function toggleTrackButtons(trackId, isPlaying) {
+            const trackEl = document.getElementById(`track-${trackId}`);
+            const playBtn = trackEl.querySelector('.btn-play');
+            const pauseBtn = trackEl.querySelector('.btn-pause');
+            
+            if (isPlaying) {
+                playBtn.style.display = 'none';
+                pauseBtn.style.display = 'inline-block';
+            } else {
+                playBtn.style.display = 'inline-block';
+                pauseBtn.style.display = 'none';
+            }
+        }
+        
+        // 设置事件监听器
+        function setupEventListeners() {
+            // 网络检查按钮
+            document.getElementById('check-network').addEventListener('click', checkNetworkConnection);
+            
+            // 暂停所有按钮
+            document.getElementById('pause-all').addEventListener('click', () => {
+                audioManager.pauseAll();
+                
+                // 更新所有音轨的UI状态
+                document.querySelectorAll('.track').forEach(trackEl => {
+                    const trackId = trackEl.id.replace('track-', '');
+                    updateTrackStatus(trackId, '⏸️ 已暂停', '');
+                    toggleTrackButtons(trackId, false);
+                });
+            });
+            
+            // 音量控制
+            const volumeSlider = document.getElementById('global-volume');
+            const volumeValue = document.getElementById('volume-value');
+            
+            volumeSlider.addEventListener('input', (e) => {
+                const volume = e.target.value / 100;
+                audioManager.setGlobalVolume(volume);
+                volumeValue.textContent = `${e.target.value}%`;
+            });
+            
+            // 监听音频管理器事件
+            audioManager.eventBus.addEventListener('trackPlay', (e) => {
+                console.log('Track started playing:', e.detail);
+            });
+            
+            audioManager.eventBus.addEventListener('trackPause', (e) => {
+                console.log('Track paused:', e.detail);
+            });
+            
+            audioManager.eventBus.addEventListener('loadingStart', (e) => {
+                console.log('Loading started:', e.detail);
+            });
+            
+            audioManager.eventBus.addEventListener('loadingEnd', (e) => {
+                console.log('Loading ended:', e.detail);
+            });
+        }
+        
+        // 启动应用
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

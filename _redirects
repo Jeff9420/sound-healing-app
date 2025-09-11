@@ -1,0 +1,17 @@
+# Netlify 重定向规则
+# 确保单页应用(SPA)正常工作
+
+# API 路由（如果有）
+/api/*  /api/:splat  200
+
+# 音频文件路由优化
+/assets/audio/*  /assets/audio/:splat  200
+
+# 静态资源路由
+/assets/*  /assets/:splat  200
+
+# Service Worker 路由
+/sw*.js  /sw*.js  200
+
+# 所有其他路由重定向到 index.html (SPA)
+/*    /index.html   200

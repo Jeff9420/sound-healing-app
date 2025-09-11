@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="声音疗愈应用 - 聆听大自然的治愈之声，重归内心宁静">
+    <meta name="theme-color" content="#4a6741">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="声音疗愈">
+    
+    <!-- 性能优化：预连接外部资源 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    
+    <!-- 资源提示：预加载关键资源 -->
+    <link rel="preload" href="assets/css/main.css" as="style">
+    <link rel="preload" href="assets/js/module-loader.js" as="script">
+    <link rel="preload" href="assets/js/audio-config.js" as="script">
+    
+    <title>声音疗愈 - 自然之声</title>
+    
+    <!-- 内联关键CSS以减少渲染阻塞 -->
+    <style>
+        /* 关键路径CSS - 仅首屏必需样式 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --nature-dark: #1a2e1a;
+            --nature-forest: #2d4a2d;
+            --nature-moss: #4a6741;
+            --nature-sage: #7fb069;
+            --nature-mint: #b8e6b8;
+            --nature-cream: #f7f4e9;
+            --nature-transition: all 0.4s ease;
+        }
+        
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(180deg, #87ceeb 0%, #b8e6b8 20%, #7fb069 40%, #4a6741 70%, #2d4a2d 100%);
+            background-attachment: fixed;
+            color: var(--nature-cream);
+            min-height: 100vh;
+            line-height: 1.7;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* 加载动画 */
+        .loading-spinner {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(127, 176, 105, 0.3);
+            border-top: 3px solid var(--nature-sage);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            z-index: 10000;
+        }
+        
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        /* 骨架屏样式 */
+        .skeleton {
+            background: linear-gradient(90deg, rgba(127, 176, 105, 0.1) 25%, rgba(127, 176, 105, 0.2) 50%, rgba(127, 176, 105, 0.1) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+    
+    <!-- 异步加载非关键CSS -->
+    <link rel="stylesheet" href="assets/css/main.css" media="print" onload="this.media='all'; this.onload=null;">
+    <link rel="stylesheet" href="assets/css/playlist.css" media="print" onload="this.media='all'; this.onload=null;">
+    
+    <!-- 降级方案 -->
+    <noscript>
+        <link rel="stylesheet" href="assets/css/main.css">
+        <link rel="stylesheet" href="assets/css/playlist.css">
+    </noscript>
+</head>
+<body>
+    <!-- 加载指示器 -->
+    <div id="loadingSpinner" class="loading-spinner"></div>
+    
+    <!-- 云朵背景动效（延迟加载） -->
+    <div class="clouds" style="display: none;" id="cloudsContainer">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="cloud cloud3"></div>
+    </div>
+    
+    <!-- 全屏背景场景画布（延迟加载） -->
+    <canvas id="backgroundCanvas" class="background-scene" style="display: none;"></canvas>
+    
+    <!-- 主要内容区域 -->
+    <header class="nature-header organic-container">
+        <div class="tree-logo">
+            <div class="tree-trunk"></div>
+            <div class="tree-crown"></div>
+        </div>
+        <h1 class="nature-title">声音疗愈</h1>
+        <p class="nature-subtitle">聆听大自然的治愈之声，重归内心宁静</p>
+        <div class="season-indicator">
+            <div class="season spring" title="春" data-season="spring"></div>
+            <div class="season summer" title="夏" data-season="summer"></div>
+            <div class="season autumn" title="秋" data-season="autumn"></div>
+            <div class="season winter" title="冬" data-season="winter"></div>
+        </div>
+    </header>
+
+    <!-- 中央池塘播放器 -->
+    <div class="pond-player">
+        <div class="ripple" style="animation-delay: 0s; display: none;"></div>
+        <div class="ripple" style="animation-delay: 1s; display: none;"></div>
+        <div class="ripple" style="animation-delay: 2s; display: none;"></div>
+        <button id="lotusPlayBtn" class="lotus-player" aria-label="主播放按钮">▶</button>
+        <div class="now-playing-info">
+            <div class="current-track-name">选择您的疗愈之声</div>
+            <div class="current-track-artist">开始您的自然之旅</div>
+        </div>
+    </div>
+
+    <main class="forest-path">
+        <h2 class="path-title">探索声音生态</h2>
+        
+        <!-- 生态系统分类网格（骨架屏） -->
+        <div class="ecosystem-grid" id="categoriesContainer">
+            <!-- 骨架屏占位符 -->
+            <div class="ecosystem-card skeleton" style="height: 120px; border-radius: 20px; margin: 1rem;"></div>
+            <div class="ecosystem-card skeleton" style="height: 120px; border-radius: 20px; margin: 1rem;"></div>
+            <div class="ecosystem-card skeleton" style="height: 120px; border-radius: 20px; margin: 1rem;"></div>
+        </div>
+    </main>
+
+    <!-- 播放列表区域（延迟渲染） -->
+    <section id="playlistSection" class="playlist-section" style="display: none;">
+        <!-- 内容将通过JavaScript延迟加载 -->
+    </section>
+
+    <!-- 自然控制台（延迟加载） -->
+    <div class="nature-console" style="opacity: 0; transition: opacity 0.3s ease;">
+        <!-- 控制台内容将延迟显示 -->
+    </div>
+
+    <footer class="nature-footer">
+        <p>🎧 使用耳机聆听，获得最佳的自然疗愈体验</p>
+    </footer>
+
+    <!-- 优化的脚本加载 -->
+    <script>
+        // 内联的关键初始化代码
+        window.appConfig = {
+            loadStartTime: performance.now(),
+            isInitialized: false,
+            criticalResourcesLoaded: false
+        };
+
+        // 性能监控
+        function markMilestone(name) {
+            performance.mark(name);
+            console.log(`⏱️ ${name}: ${performance.now() - window.appConfig.loadStartTime}ms`);
+        }
+        
+        markMilestone('html-parsed');
+    </script>
+
+    <!-- 异步加载模块管理器 -->
+    <script src="assets/js/module-loader.js" async></script>
+    
+    <!-- 主应用启动脚本 -->
+    <script>
+        // 等待DOM和模块加载器准备就绪
+        document.addEventListener('DOMContentLoaded', async function() {
+            markMilestone('dom-ready');
+            
+            try {
+                // 等待模块加载器就绪
+                while (!window.moduleLoader) {
+                    await new Promise(resolve => setTimeout(resolve, 50));
+                }
+                
+                markMilestone('module-loader-ready');
+                
+                // 开始按优先级加载模块
+                await window.moduleLoader.loadByPriority();
+                markMilestone('critical-modules-loaded');
+                
+                // 隐藏加载指示器
+                const spinner = document.getElementById('loadingSpinner');
+                if (spinner) {
+                    spinner.style.opacity = '0';
+                    setTimeout(() => spinner.remove(), 300);
+                }
+                
+                // 逐步显示视觉效果
+                setTimeout(() => {
+                    const clouds = document.getElementById('cloudsContainer');
+                    const canvas = document.getElementById('backgroundCanvas');
+                    const console = document.querySelector('.nature-console');
+                    
+                    if (clouds) clouds.style.display = 'block';
+                    if (canvas) canvas.style.display = 'block';
+                    if (console) console.style.opacity = '1';
+                    
+                    // 启动涟漪动画
+                    document.querySelectorAll('.ripple').forEach(ripple => {
+                        ripple.style.display = 'block';
+                    });
+                }, 1000);
+                
+                // 初始化应用
+                if (typeof SoundHealingApp !== 'undefined') {
+                    window.app = new SoundHealingApp();
+                    await window.app.initialize();
+                    window.appConfig.isInitialized = true;
+                    markMilestone('app-initialized');
+                }
+                
+                // 替换骨架屏为实际内容
+                if (typeof AUDIO_CONFIG !== 'undefined') {
+                    await window.renderEcosystemCards();
+                }
+                
+                markMilestone('app-fully-loaded');
+                
+            } catch (error) {
+                console.error('应用初始化失败:', error);
+                // 显示用户友好的错误信息
+                showErrorMessage('应用加载失败，请刷新页面重试');
+            }
+        });
+        
+        // 错误处理
+        function showErrorMessage(message) {
+            const spinner = document.getElementById('loadingSpinner');
+            if (spinner) {
+                spinner.innerHTML = `
+                    <div style="color: var(--nature-cream); text-align: center; padding: 20px;">
+                        <p>${message}</p>
+                        <button onclick="location.reload()" style="margin-top: 10px; padding: 8px 16px; background: var(--nature-sage); color: white; border: none; border-radius: 4px; cursor: pointer;">重试</button>
+                    </div>
+                `;
+            }
+        }
+        
+        // 网络状态检测
+        if ('connection' in navigator) {
+            const connection = navigator.connection;
+            if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
+                console.log('检测到慢速网络，启用节能模式');
+                document.body.classList.add('low-bandwidth');
+            }
+        }
+    </script>
+</body>
+</html>

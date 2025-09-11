@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced UI Test - Archive.org External Storage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #1a2e1a, #2d4a2d);
+            color: #f7f4e9;
+            min-height: 100vh;
+        }
+        
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(45, 74, 45, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        
+        .test-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(26, 46, 26, 0.6);
+            border-radius: 10px;
+            border-left: 4px solid #7fb069;
+        }
+        
+        .test-controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+        
+        .test-btn {
+            padding: 12px 24px;
+            background: #7fb069;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .test-btn:hover {
+            background: #6a9556;
+            transform: translateY(-2px);
+        }
+        
+        .test-results {
+            background: rgba(15, 25, 15, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 13px;
+            line-height: 1.4;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-online { background: #4ade80; }
+        .status-offline { background: #ef4444; }
+        .status-checking { background: #fbbf24; animation: pulse 1.5s infinite; }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .audio-test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .audio-card {
+            background: rgba(127, 176, 105, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .audio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        
+        .loading-indicator {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .loading-indicator.active {
+            display: block;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #7fb069, #9fc47f);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-header">
+            <h1>🎵 Enhanced UI Test</h1>
+            <p>Testing Archive.org External Storage & Enhanced Audio UI</p>
+        </div>
+        
+        <!-- Connection Status Test -->
+        <div class="test-section">
+            <h2>📡 Connection Status Monitoring</h2>
+            <p>Testing Archive.org connection status and UI indicators</p>
+            
+            <div class="test-controls">
+                <button class="test-btn" onclick="testConnectionStatus()">Test Connection</button>
+                <button class="test-btn" onclick="forceCheckStatus()">Force Check</button>
+                <button class="test-btn" onclick="simulateOffline()">Simulate Offline</button>
+            </div>
+            
+            <div class="test-results" id="connectionResults">
+                <div>🔄 Initializing connection status monitor...</div>
+            </div>
+        </div>
+        
+        <!-- Enhanced Audio Loading Test -->
+        <div class="test-section">
+            <h2>🎧 Enhanced Audio Loading</h2>
+            <p>Testing progressive loading, retry mechanisms, and error handling</p>
+            
+            <div class="test-controls">
+                <button class="test-btn" onclick="testAudioLoading()">Test Audio Loading</button>
+                <button class="test-btn" onclick="testRetryMechanism()">Test Retry Logic</button>
+                <button class="test-btn" onclick="testProgressIndicator()">Test Progress Bar</button>
+                <button class="test-btn" onclick="clearAudioTests()">Clear Tests</button>
+            </div>
+            
+            <div class="loading-indicator" id="audioLoadingIndicator">
+                <div>⚡ Loading audio from Archive.org...</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="audioProgressBar"></div>
+                </div>
+            </div>
+            
+            <div class="audio-test-grid" id="audioTestGrid">
+                <!-- Audio test cards will be generated here -->
+            </div>
+            
+            <div class="test-results" id="audioResults">
+                <div>Ready to test audio loading functionality...</div>
+            </div>
+        </div>
+        
+        <!-- Module Integration Test -->
+        <div class="test-section">
+            <h2>🔧 Module Integration Status</h2>
+            <p>Checking if all enhanced modules are loaded correctly</p>
+            
+            <div class="test-controls">
+                <button class="test-btn" onclick="checkModuleStatus()">Check Modules</button>
+                <button class="test-btn" onclick="reloadModules()">Reload Modules</button>
+            </div>
+            
+            <div class="test-results" id="moduleResults">
+                <div>Click "Check Modules" to verify integration status...</div>
+            </div>
+        </div>
+        
+        <!-- Archive.org Configuration Test -->
+        <div class="test-section">
+            <h2>🗂️ Archive.org Configuration</h2>
+            <p>Testing external storage configuration and fallback mechanisms</p>
+            
+            <div class="test-controls">
+                <button class="test-btn" onclick="testArchiveConfig()">Test Config</button>
+                <button class="test-btn" onclick="testFallbackUrls()">Test Fallbacks</button>
+                <button class="test-btn" onclick="validateFileStructure()">Validate Files</button>
+            </div>
+            
+            <div class="test-results" id="configResults">
+                <div>Ready to test Archive.org configuration...</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Load required modules -->
+    <script src="assets/js/connection-status-ui.js"></script>
+    <script src="assets/js/enhanced-audio-ui.js"></script>
+    <script src="assets/js/audio-config-archive.js"></script>
+    
+    <script>
+        // Test helper functions
+        let testResults = {
+            connection: [],
+            audio: [],
+            modules: [],
+            config: []
+        };
+        
+        // Connection Status Tests
+        function testConnectionStatus() {
+            addResult('connection', '🔄 Testing connection status UI...');
+            
+            if (window.connectionStatusUI) {
+                addResult('connection', '✅ Connection Status UI loaded');
+                window.connectionStatusUI.forceCheck().then(() => {
+                    const status = window.connectionStatusUI.getStatus();
+                    addResult('connection', `📊 Status: ${JSON.stringify(status, null, 2)}`);
+                });
+            } else {
+                addResult('connection', '❌ Connection Status UI not loaded');
+            }
+        }
+        
+        function forceCheckStatus() {
+            if (window.connectionStatusUI) {
+                addResult('connection', '⚡ Forcing status check...');
+                window.connectionStatusUI.forceCheck();
+            }
+        }
+        
+        function simulateOffline() {
+            addResult('connection', '🔌 Simulating offline mode...');
+            window.dispatchEvent(new Event('offline'));
+        }
+        
+        // Audio Loading Tests
+        function testAudioLoading() {
+            addResult('audio', '🎵 Testing enhanced audio loading...');
+            
+            if (typeof AUDIO_CONFIG_ARCHIVE !== 'undefined') {
+                addResult('audio', '✅ Archive.org config loaded');
+                
+                // Test loading first audio file
+                const firstCategory = Object.keys(AUDIO_CONFIG_ARCHIVE.categories)[0];
+                const firstFile = AUDIO_CONFIG_ARCHIVE.categories[firstCategory].files[0];
+                
+                addResult('audio', `🎧 Testing file: ${firstFile.originalName}`);
+                
+                // Create audio test card
+                createAudioTestCard(firstCategory, firstFile, 0);
+                
+            } else {
+                addResult('audio', '❌ Archive.org config not loaded');
+            }
+        }
+        
+        function createAudioTestCard(category, file, index) {
+            const grid = document.getElementById('audioTestGrid');
+            const card = document.createElement('div');
+            card.className = 'audio-card';
+            card.innerHTML = `
+                <h4>${file.originalName}</h4>
+                <p><span class="status-indicator status-checking"></span> Loading...</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+                <div class="test-controls">
+                    <button class="test-btn" onclick="playTestAudio('${category}', ${index})">Play</button>
+                    <button class="test-btn" onclick="stopTestAudio(${index})">Stop</button>
+                </div>
+            `;
+            grid.appendChild(card);
+        }
+        
+        function testRetryMechanism() {
+            addResult('audio', '🔄 Testing retry mechanism...');
+            // Simulate connection failure and retry
+        }
+        
+        function testProgressIndicator() {
+            addResult('audio', '📊 Testing progress indicator...');
+            const indicator = document.getElementById('audioLoadingIndicator');
+            const progressBar = document.getElementById('audioProgressBar');
+            
+            indicator.classList.add('active');
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 10;
+                progressBar.style.width = progress + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        indicator.classList.remove('active');
+                        addResult('audio', '✅ Progress indicator test completed');
+                    }, 1000);
+                }
+            }, 200);
+        }
+        
+        function clearAudioTests() {
+            document.getElementById('audioTestGrid').innerHTML = '';
+            addResult('audio', '🧹 Audio test area cleared');
+        }
+        
+        // Module Integration Tests
+        function checkModuleStatus() {
+            addResult('modules', '🔍 Checking module integration status...');
+            
+            const modules = [
+                'connectionStatusUI',
+                'enhancedAudioUI', 
+                'AUDIO_CONFIG_ARCHIVE',
+                'moduleLoader'
+            ];
+            
+            modules.forEach(module => {
+                if (window[module]) {
+                    addResult('modules', `✅ ${module} loaded`);
+                } else {
+                    addResult('modules', `❌ ${module} not found`);
+                }
+            });
+        }
+        
+        function reloadModules() {
+            addResult('modules', '🔄 Attempting to reload modules...');
+            
+            if (window.moduleLoader) {
+                window.moduleLoader.retryFailedModules();
+                addResult('modules', '⚡ Module reload triggered');
+            } else {
+                addResult('modules', '❌ Module loader not available');
+            }
+        }
+        
+        // Archive.org Configuration Tests
+        function testArchiveConfig() {
+            addResult('config', '🗂️ Testing Archive.org configuration...');
+            
+            if (typeof AUDIO_CONFIG_ARCHIVE !== 'undefined') {
+                const config = AUDIO_CONFIG_ARCHIVE;
+                addResult('config', `✅ Base URL: ${config.baseUrl}`);
+                addResult('config', `✅ Mirror URLs: ${config.mirrorUrls.length} configured`);
+                addResult('config', `✅ Categories: ${Object.keys(config.categories).length} loaded`);
+                
+                let totalFiles = 0;
+                Object.values(config.categories).forEach(cat => {
+                    totalFiles += cat.files ? cat.files.length : 0;
+                });
+                addResult('config', `✅ Total files: ${totalFiles} configured`);
+            } else {
+                addResult('config', '❌ Archive.org configuration not loaded');
+            }
+        }
+        
+        function testFallbackUrls() {
+            addResult('config', '🔄 Testing fallback URLs...');
+            
+            if (typeof AUDIO_CONFIG_ARCHIVE !== 'undefined') {
+                const urls = [AUDIO_CONFIG_ARCHIVE.baseUrl, ...AUDIO_CONFIG_ARCHIVE.mirrorUrls];
+                
+                urls.forEach((url, index) => {
+                    fetch(url, { method: 'HEAD', mode: 'no-cors' })
+                        .then(() => addResult('config', `✅ URL ${index + 1} accessible: ${url}`))
+                        .catch(() => addResult('config', `❌ URL ${index + 1} failed: ${url}`));
+                });
+            }
+        }
+        
+        function validateFileStructure() {
+            addResult('config', '🔍 Validating file structure...');
+            
+            if (typeof AUDIO_CONFIG_ARCHIVE !== 'undefined') {
+                const categories = AUDIO_CONFIG_ARCHIVE.categories;
+                
+                Object.entries(categories).forEach(([key, category]) => {
+                    if (category.files && category.files.length > 0) {
+                        addResult('config', `✅ ${key}: ${category.files.length} files`);
+                        
+                        // Check first file structure
+                        const firstFile = category.files[0];
+                        if (firstFile.filename && firstFile.originalName) {
+                            addResult('config', `  📄 Sample: ${firstFile.filename}`);
+                        }
+                    } else {
+                        addResult('config', `⚠️ ${key}: No files configured`);
+                    }
+                });
+            }
+        }
+        
+        // Helper function to add results
+        function addResult(type, message) {
+            const timestamp = new Date().toLocaleTimeString();
+            const resultsDiv = document.getElementById(type + 'Results');
+            const resultLine = document.createElement('div');
+            resultLine.innerHTML = `[${timestamp}] ${message}`;
+            resultsDiv.appendChild(resultLine);
+            resultsDiv.scrollTop = resultsDiv.scrollHeight;
+            
+            testResults[type].push({ timestamp, message });
+        }
+        
+        // Initialize test page
+        window.addEventListener('load', () => {
+            addResult('modules', '🚀 Enhanced UI test page loaded');
+            
+            setTimeout(() => {
+                checkModuleStatus();
+                testArchiveConfig();
+            }, 2000);
+        });
+        
+        // Listen for Archive.org status changes
+        window.addEventListener('archiveStatusChanged', (event) => {
+            const { isAvailable, responseTime } = event.detail;
+            addResult('connection', `📡 Archive.org status: ${isAvailable ? 'Online' : 'Offline'} (${responseTime}ms)`);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+# 开发环境文件
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDE 文件
+.vscode/
+.idea/
+*.sublime-*
+
+# 日志文件
+*.log
+logs/
+
+# 临时文件
+tmp/
+temp/
+
+# 缓存文件
+.cache/
+.parcel-cache/
+
+# 环境变量文件
+.env
+.env.local
+.env.production
+.env.test
+
+# Netlify 文件
+.netlify/
+
+# 音频临时文件
+*.tmp
+
+# 系统生成文件
+*.pid
+*.seed
+*.pid.lock
+
+# 覆盖率报告
+coverage/
+*.lcov
+
+# 依赖文件夹（如果使用npm）
+node_modules/
+
+# 构建输出
+build/
+dist/
+
+# 测试文件
+test-results/
+playwright-report/
+
+# 性能分析文件
+*.cpuprofile
+*.heapprofile

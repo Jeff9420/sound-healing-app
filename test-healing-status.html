@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>疗愈状态模块测试</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a2e1a 0%, #2d4a2d 100%);
+            color: #f7f4e9;
+            padding: 20px;
+            margin: 0;
+        }
+        
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(127, 176, 105, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #90EE90;
+            margin-bottom: 30px;
+        }
+        
+        .test-section {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .test-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #90EE90;
+            margin-bottom: 15px;
+        }
+        
+        .control-group {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 8px 16px;
+            background: rgba(127, 176, 105, 0.3);
+            border: 1px solid rgba(127, 176, 105, 0.5);
+            border-radius: 20px;
+            color: #f7f4e9;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: rgba(127, 176, 105, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .status-display {
+            background: rgba(127, 176, 105, 0.15);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        
+        .demo-healing-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #f7f4e9;
+            font-size: 0.85rem;
+            padding: 6px 12px;
+            background: rgba(127, 176, 105, 0.15);
+            border-radius: 18px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(127, 176, 105, 0.25);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin: 10px 0;
+            justify-content: center;
+        }
+        
+        .demo-healing-status:hover {
+            background: rgba(127, 176, 105, 0.25);
+            border-color: rgba(127, 176, 105, 0.4);
+            transform: translateY(-1px);
+        }
+        
+        .demo-healing-mode-icon {
+            font-size: 1.1rem;
+            animation: healing-pulse 4s ease-in-out infinite;
+        }
+        
+        .demo-healing-mode-text {
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+        
+        .demo-session-time {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #90EE90;
+            text-shadow: 0 0 8px rgba(144, 238, 144, 0.4);
+            font-size: 0.9rem;
+        }
+        
+        @keyframes healing-pulse {
+            0%, 100% { 
+                transform: scale(1);
+                filter: brightness(1);
+            }
+            50% { 
+                transform: scale(1.08);
+                filter: brightness(1.15);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧘 疗愈状态模块测试</h1>
+        
+        <div class="test-section">
+            <div class="test-title">模块预览</div>
+            <div class="demo-healing-status" id="demoStatus">
+                <span class="demo-healing-mode-icon" id="demoIcon">🧘</span>
+                <span class="demo-healing-mode-text" id="demoText">专注模式</span>
+                <span>•</span>
+                <span class="demo-session-time" id="demoTime">00:00</span>
+            </div>
+            <p>👆 点击上面的状态栏来切换模式</p>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">模式切换测试</div>
+            <div class="control-group">
+                <button onclick="testSetMode('focus')">🧘 专注模式</button>
+                <button onclick="testSetMode('relax')">😌 放松模式</button>
+                <button onclick="testSetMode('sleep')">😴 睡眠模式</button>
+                <button onclick="testSetMode('meditation')">🕯️ 冥想模式</button>
+                <button onclick="testSetMode('work')">💼 工作模式</button>
+                <button onclick="testSetMode('nature')">🌿 自然模式</button>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">功能测试</div>
+            <div class="control-group">
+                <button onclick="testAudioPlay()">🎵 模拟音频播放</button>
+                <button onclick="testGetStatus()">📊 获取状态信息</button>
+                <button onclick="testGetSuggestions()">💡 获取智能建议</button>
+                <button onclick="testSessionTimer()">⏱️ 测试会话计时</button>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">输出结果</div>
+            <div class="status-display" id="outputDisplay">
+                等待测试结果...
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">API 测试</div>
+            <div class="control-group">
+                <button onclick="testAPI()">🔧 测试所有API</button>
+                <button onclick="clearOutput()">🗑️ 清空输出</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 模拟疗愈状态控制器的基本功能
+        class TestHealingStatusController {
+            constructor() {
+                this.healingModes = {
+                    focus: { icon: '🧘', name: '专注模式', description: '帮助集中注意力' },
+                    relax: { icon: '😌', name: '放松模式', description: '缓解压力和紧张' },
+                    sleep: { icon: '😴', name: '睡眠模式', description: '帮助快速入眠' },
+                    meditation: { icon: '🕯️', name: '冥想模式', description: '深度内观和平静' },
+                    work: { icon: '💼', name: '工作模式', description: '提高工作效率' },
+                    nature: { icon: '🌿', name: '自然模式', description: '感受大自然的力量' }
+                };
+                this.currentMode = 'focus';
+                this.sessionStartTime = Date.now();
+                this.startTimer();
+            }
+            
+            setMode(mode) {
+                if (this.healingModes[mode]) {
+                    this.currentMode = mode;
+                    this.updateDemoDisplay();
+                    this.logOutput(`模式切换: ${this.healingModes[mode].name}`);
+                }
+            }
+            
+            updateDemoDisplay() {
+                const config = this.healingModes[this.currentMode];
+                document.getElementById('demoIcon').textContent = config.icon;
+                document.getElementById('demoText').textContent = config.name;
+            }
+            
+            startTimer() {
+                setInterval(() => {
+                    const elapsed = Date.now() - this.sessionStartTime;
+                    const minutes = Math.floor(elapsed / 60000);
+                    const seconds = Math.floor((elapsed % 60000) / 1000);
+                    const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    document.getElementById('demoTime').textContent = timeString;
+                }, 1000);
+            }
+            
+            getStatus() {
+                const elapsed = Date.now() - this.sessionStartTime;
+                const config = this.healingModes[this.currentMode];
+                return {
+                    currentMode: this.currentMode,
+                    modeName: config.name,
+                    modeDescription: config.description,
+                    sessionDuration: elapsed,
+                    sessionActive: true
+                };
+            }
+            
+            getSuggestions() {
+                const suggestions = {
+                    focus: ['Rain', 'stream', 'wind'],
+                    relax: ['ocean', 'Rain', 'meditation'],
+                    sleep: ['Rain', 'ocean', 'meditation'],
+                    meditation: ['Singing bowl sound', 'meditation', 'wind'],
+                    work: ['stream', 'wind', 'birds'],
+                    nature: ['birds', 'stream', 'wind']
+                };
+                
+                return {
+                    mode: this.healingModes[this.currentMode].name,
+                    categories: suggestions[this.currentMode] || [],
+                    reason: '基于当前模式的智能推荐'
+                };
+            }
+            
+            logOutput(message) {
+                const output = document.getElementById('outputDisplay');
+                const timestamp = new Date().toLocaleTimeString();
+                output.innerHTML += `[${timestamp}] ${message}\n`;
+                output.scrollTop = output.scrollHeight;
+            }
+        }
+        
+        // 初始化测试控制器
+        const testController = new TestHealingStatusController();
+        
+        // 点击演示状态栏切换模式
+        document.getElementById('demoStatus').addEventListener('click', () => {
+            const modes = Object.keys(testController.healingModes);
+            const currentIndex = modes.indexOf(testController.currentMode);
+            const nextIndex = (currentIndex + 1) % modes.length;
+            testController.setMode(modes[nextIndex]);
+        });
+        
+        // 测试函数
+        function testSetMode(mode) {
+            testController.setMode(mode);
+        }
+        
+        function testAudioPlay() {
+            testController.logOutput('模拟音频播放事件: Rain 类别');
+            testController.setMode('relax'); // 模拟根据音频类型自动切换模式
+        }
+        
+        function testGetStatus() {
+            const status = testController.getStatus();
+            testController.logOutput(`状态信息: ${JSON.stringify(status, null, 2)}`);
+        }
+        
+        function testGetSuggestions() {
+            const suggestions = testController.getSuggestions();
+            testController.logOutput(`智能建议: ${JSON.stringify(suggestions, null, 2)}`);
+        }
+        
+        function testSessionTimer() {
+            testController.logOutput('会话计时器正在运行，查看右上角时间显示');
+            testController.sessionStartTime = Date.now(); // 重置计时器
+        }
+        
+        function testAPI() {
+            testController.logOutput('=== API 测试开始 ===');
+            testGetStatus();
+            testGetSuggestions();
+            testController.logOutput('=== API 测试完成 ===');
+        }
+        
+        function clearOutput() {
+            document.getElementById('outputDisplay').innerHTML = '输出已清空...\n';
+        }
+        
+        // 初始日志
+        testController.logOutput('疗愈状态模块测试已启动');
+        testController.logOutput('当前模式: ' + testController.healingModes[testController.currentMode].name);
+    </script>
+</body>
+</html>

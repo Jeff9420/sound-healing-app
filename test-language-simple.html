@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语言切换简单测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #1a2e1a;
+            color: #f7f4e9;
+        }
+        .test-box {
+            background: rgba(127, 176, 105, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        button {
+            background: rgba(127, 176, 105, 0.3);
+            border: 1px solid rgba(127, 176, 105, 0.5);
+            color: #f7f4e9;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: rgba(127, 176, 105, 0.5);
+        }
+        .status {
+            background: rgba(0,0,0,0.2);
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: monospace;
+        }
+        
+        /* 语言选择器样式 */
+        .language-selector {
+            position: relative;
+            display: inline-block;
+        }
+        .language-toggle {
+            background: rgba(127, 176, 105, 0.15);
+            border: 1px solid rgba(127, 176, 105, 0.3);
+            color: #f7f4e9;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(26, 46, 26, 0.95);
+            border: 1px solid rgba(127, 176, 105, 0.3);
+            border-radius: 15px;
+            min-width: 150px;
+            margin-top: 5px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        .language-selector.active .language-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .language-option {
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            border-radius: 10px;
+            margin: 5px;
+        }
+        .language-option:hover {
+            background: rgba(127, 176, 105, 0.2);
+        }
+        .language-option.active {
+            background: rgba(127, 176, 105, 0.3);
+            color: #90EE90;
+        }
+    </style>
+</head>
+<body>
+    <h1>语言切换简单测试</h1>
+    
+    <div class="test-box">
+        <h2>语言选择器</h2>
+        <div class="language-selector" id="languageSelector">
+            <button class="language-toggle" id="languageToggle">🌐 简体中文</button>
+            <div class="language-dropdown" id="languageDropdown">
+                <div class="language-option" data-lang="zh-CN">🇨🇳 简体中文</div>
+                <div class="language-option" data-lang="en-US">🇺🇸 English</div>
+                <div class="language-option" data-lang="ja-JP">🇯🇵 日本語</div>
+                <div class="language-option" data-lang="ko-KR">🇰🇷 한국어</div>
+                <div class="language-option" data-lang="es-ES">🇪🇸 Español</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="test-box">
+        <h2>测试内容</h2>
+        <h3 data-i18n="header.title">声音疗愈</h3>
+        <p data-i18n="header.subtitle">聆听大自然的治愈之声，重归内心宁静</p>
+        <p data-i18n="player.selectSound">选择您的疗愈之声</p>
+        <p data-i18n="categories.rain">雨声</p>
+        <p data-i18n="categories.ocean">海洋</p>
+    </div>
+    
+    <div class="test-box">
+        <h2>手动测试按钮</h2>
+        <button onclick="testChangeLanguage('zh-CN')">中文</button>
+        <button onclick="testChangeLanguage('en-US')">English</button>
+        <button onclick="testChangeLanguage('ja-JP')">日本語</button>
+        <button onclick="testChangeLanguage('ko-KR')">한국어</button>
+        <button onclick="testChangeLanguage('es-ES')">Español</button>
+    </div>
+    
+    <div class="test-box">
+        <h2>系统状态</h2>
+        <div class="status" id="systemStatus">检查系统状态...</div>
+        <button onclick="checkSystemStatus()">刷新状态</button>
+    </div>
+
+    <!-- 加载脚本 -->
+    <script src="assets/js/i18n-system.js"></script>
+    <script src="assets/js/language-integration.js"></script>
+    
+    <script>
+        // 等待系统初始化
+        function waitForInit() {
+            setTimeout(() => {
+                checkSystemStatus();
+            }, 1000);
+        }
+        
+        // 检查系统状态
+        function checkSystemStatus() {
+            const status = document.getElementById('systemStatus');
+            const i18nReady = window.i18n && window.i18n.isInitialized;
+            const integrationReady = window.languageIntegration && window.languageIntegration.isInitialized;
+            
+            status.innerHTML = `
+                i18n系统: ${i18nReady ? '✅ 已就绪' : '❌ 未就绪'}
+                语言集成: ${integrationReady ? '✅ 已就绪' : '❌ 未就绪'}
+                当前语言: ${window.i18n ? window.i18n.currentLanguage : '未知'}
+            `;
+        }
+        
+        // 手动语言切换测试
+        async function testChangeLanguage(langCode) {
+            if (window.i18n && window.i18n.isInitialized) {
+                try {
+                    await window.i18n.changeLanguage(langCode);
+                    console.log('语言切换成功:', langCode);
+                    checkSystemStatus();
+                } catch (error) {
+                    console.error('语言切换失败:', error);
+                    alert('语言切换失败: ' + error.message);
+                }
+            } else {
+                alert('i18n系统未就绪');
+            }
+        }
+        
+        // 页面加载完成后检查状态
+        window.addEventListener('load', () => {
+            waitForInit();
+        });
+        
+        // 监听语言变更事件
+        document.addEventListener('languageChanged', (e) => {
+            console.log('语言变更事件:', e.detail);
+            checkSystemStatus();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="声音疗愈应用 - 聆听大自然的治愈之声，重归内心宁静">
+    <meta name="theme-color" content="#4a6741">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="声音疗愈">
+    <link rel="manifest" href="./manifest.json">
+    <title>声音疗愈 - 自然之声</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/playlist.css">
+</head>
+<body>
+    <!-- 云朵背景动效 -->
+    <div class="clouds">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="cloud cloud3"></div>
+    </div>
+    
+    <!-- 全屏背景场景画布 -->
+    <canvas id="backgroundCanvas" class="background-scene"></canvas>
+    
+    <header class="nature-header organic-container">
+        <div class="tree-logo">
+            <div class="tree-trunk"></div>
+            <div class="tree-crown"></div>
+        </div>
+        <h1 class="nature-title">声音疗愈</h1>
+        <p class="nature-subtitle">聆听大自然的治愈之声，重归内心宁静</p>
+        <div class="season-indicator">
+            <div class="season spring" title="春" data-season="spring"></div>
+            <div class="season summer" title="夏" data-season="summer"></div>
+            <div class="season autumn" title="秋" data-season="autumn"></div>
+            <div class="season winter" title="冬" data-season="winter"></div>
+        </div>
+    </header>
+
+    <!-- 中央池塘播放器 -->
+    <div class="pond-player">
+        <div class="ripple" style="animation-delay: 0s;"></div>
+        <div class="ripple" style="animation-delay: 1s;"></div>
+        <div class="ripple" style="animation-delay: 2s;"></div>
+        <button id="lotusPlayBtn" class="lotus-player" aria-label="主播放按钮">▶</button>
+        <div class="now-playing-info">
+            <div class="current-track-name">选择您的疗愈之声</div>
+            <div class="current-track-artist">开始您的自然之旅</div>
+        </div>
+    </div>
+
+    <main class="forest-path">
+        <h2 class="path-title">探索声音生态</h2>
+        
+        <!-- 隐藏调试工具面板 - 避免干扰正常功能 -->
+        <div id="debugToolsPanel" style="display: none; margin: 10px 0; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px; border: 1px dashed rgba(127, 176, 105, 0.3);">
+            <h4 style="margin: 0 0 10px 0; color: #b8e6b8;">🔧 调试工具面板</h4>
+            <div style="margin-bottom: 8px;">
+                <button onclick="window.testEcosystemClick()" style="background: #9c27b0; color: white; border: none; padding: 10px 20px; border-radius: 4px; margin: 5px; font-weight: bold;">🧪 测试卡片点击</button>
+                <button onclick="window.fixGlobalAccess()" style="background: #ff9500; color: white; border: none; padding: 8px 16px; border-radius: 4px; margin: 5px;">🛠️ 修复全局访问</button>
+            </div>
+            <div>
+                <button onclick="window.debugTest()" style="background: #ff6b6b; color: white; border: none; padding: 8px 16px; border-radius: 4px; margin: 5px;">🔧 完整诊断</button>
+                <button onclick="window.forceShowPlaylist()" style="background: #4ecdc4; color: white; border: none; padding: 8px 16px; border-radius: 4px; margin: 5px;">📋 测试播放列表</button>
+                <button onclick="window.checkNatureUI()" style="background: #45b7d1; color: white; border: none; padding: 8px 16px; border-radius: 4px; margin: 5px;">🌿 检查NatureUI</button>
+                <button onclick="window.verifyFix()" style="background: #4CAF50; color: white; border: none; padding: 8px 16px; border-radius: 4px; margin: 5px;">✅ 验证修复</button>
+                <button onclick="window.emergencyPlaylistFix()" style="background: #ff4444; color: white; border: none; padding: 8px 16px; border-radius: 4px; margin: 5px;">🚨 紧急修复</button>
+            </div>
+        </div>
+        
+        <!-- 快速调试按钮 - 按需显示 -->
+        <div style="position: fixed; top: 10px; right: 10px; z-index: 9999;">
+            <button onclick="toggleDebugTools()" style="background: rgba(74, 103, 65, 0.8); color: #f7f4e9; border: 1px solid #7fb069; padding: 8px; border-radius: 50%; cursor: pointer; font-size: 16px;" title="显示/隐藏调试工具">🔧</button>
+        </div>
+        
+        <!-- 紧急修复按钮 - 固定显示 -->
+        <div style="position: fixed; top: 60px; right: 10px; z-index: 9999;">
+            <button onclick="window.emergencyPlaylistFix()" style="background: #ff4444; color: white; border: 1px solid #fff; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: bold;" title="如果播放列表不显示，点击这里">🚨 修复</button>
+        </div>
+
+        <!-- 生态系统分类网格 -->
+        <div class="ecosystem-grid" id="categoriesContainer">
+            <!-- 音频分类将通过JavaScript动态生成为生态系统卡片 -->
+        </div>
+
+        <!-- 播放列表区域 -->
+        <section id="playlistSection" class="playlist-section" style="display: none;">
+            <div class="playlist-header organic-container">
+                <button id="backToCategories" class="nature-back-btn">🌿 返回生态</button>
+                <h3 id="playlistTitle" class="habitat-title">栖息地音频</h3>
+                <div class="habitat-controls">
+                    <button id="shuffleBtn" class="nature-control-btn" title="随机播放">🔀</button>
+                    <button id="repeatBtn" class="nature-control-btn" title="重复播放">🔁</button>
+                </div>
+            </div>
+            <div class="habitat-player organic-container">
+                <div id="currentTrackInfo" class="track-display">
+                    <span id="currentTrackName" class="track-name">未选择音频</span>
+                    <div class="track-controls">
+                        <button id="prevBtn" class="nature-control-btn">⏮</button>
+                        <button id="playPauseBtn" class="nature-control-btn nature-play-main">▶️</button>
+                        <button id="nextBtn" class="nature-control-btn">⏭</button>
+                    </div>
+                </div>
+                
+                <!-- 自然风格进度条 -->
+                <div class="nature-progress-section">
+                    <div class="nature-progress-container">
+                        <input type="range" id="progressBar" class="nature-progress-slider" min="0" max="100" value="0">
+                    </div>
+                    <div class="nature-time-display">
+                        <span id="currentTime">00:00</span>
+                        <span id="totalTime">00:00</span>
+                    </div>
+                </div>
+                
+                <div class="nature-volume-section">
+                    <span class="nature-label">音量</span>
+                    <input type="range" id="currentTrackVolume" class="nature-slider" min="0" max="1" step="0.01" value="0.5">
+                    <span id="currentVolumeDisplay" class="volume-display">50%</span>
+                </div>
+            </div>
+            <div id="trackList" class="habitat-track-list">
+                <!-- 播放列表将通过JavaScript动态生成 -->
+            </div>
+        </section>
+    </main>
+
+    <!-- 自然控制台 -->
+    <div class="nature-console">
+        <div class="console-content">
+            <div class="nature-controls">
+                <button id="globalPrevBtn" class="nature-control-btn" title="上一首">⏮</button>
+                <button id="globalPlayBtn" class="nature-control-btn" title="播放/暂停">⏸</button>
+                <button id="globalNextBtn" class="nature-control-btn" title="下一首">⏭</button>
+            </div>
+
+            <div class="nature-slider-group">
+                <span class="nature-label">氛围</span>
+                <input type="range" id="globalVolume" class="nature-slider" min="0" max="1" step="0.01" value="0.5">
+                <span class="volume-value nature-label">50%</span>
+            </div>
+
+            <div class="nature-info">
+                <span class="weather-icon">🌤️</span>
+                <span class="weather-text">晴朗</span>
+                <span>•</span>
+                <span class="temp-text">23°C</span>
+            </div>
+
+            <div class="nature-controls">
+                <button id="shuffleModeBtn" class="nature-control-btn" title="随机播放">🔀</button>
+                <button id="repeatModeBtn" class="nature-control-btn" title="循环模式">🔁</button>
+                <button id="timerBtn" class="nature-control-btn" title="睡眠定时">⏰</button>
+            </div>
+        </div>
+        
+        <!-- 隐藏的定时器控制 -->
+        <div id="timerControls" class="timer-controls-hidden" style="display: none;">
+            <select id="timerDuration" class="nature-select">
+                <option value="0">无定时</option>
+                <option value="15">15分钟</option>
+                <option value="30">30分钟</option>
+                <option value="60">60分钟</option>
+                <option value="90">90分钟</option>
+                <option value="120">120分钟</option>
+            </select>
+            <button id="timerStartBtn" class="nature-button">开始</button>
+            <span id="timerStatus" class="timer-status">未启动</span>
+        </div>
+    </div>
+
+    <footer class="nature-footer">
+        <p>🎧 使用耳机聆听，获得最佳的自然疗愈体验</p>
+    </footer>
+
+    <script src="assets/js/audio-config.js"></script>
+    <script src="assets/js/audio-manager.js"></script>
+    <script src="assets/js/playlist-ui.js"></script>
+    <script src="assets/js/sleep-timer.js"></script>
+    <script src="assets/js/visual-effects.js"></script>
+    <script src="assets/js/theme-manager.js"></script>
+    <script src="assets/js/performance-monitor.js"></script>
+    <script src="assets/js/background-scene-manager.js"></script>
+    <script src="assets/js/ui-controller.js"></script>
+    <script src="assets/js/nature-ui.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+播放列表功能修复 - 备份信息
+=====================================
+
+备份创建时间: $(date)
+
+备份文件说明:
+1. index-original-backup.html  - 原始版本备份（修复前）
+2. index-working-backup.html   - 可用版本备份（强制修复版本）
+3. index-no-cors.html          - 无CORS问题版本
+4. minimal-debug.html          - 最小化调试版本
+5. final-test.html            - 完整功能验证版本
+
+如果新版本出现问题，可以使用以下命令恢复:
+- 恢复到修复前版本: cp index-original-backup.html index.html  
+- 恢复到可用版本: cp index-working-backup.html index.html
+
+注意: index-working-backup.html 是经过验证可用的版本，包含强制修复逻辑。

@@ -1,0 +1,73 @@
+{
+  "name": "sound-healing-app",
+  "version": "3.0.0",
+  "description": "声音疗愈应用 - 高性能优化版本",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --config build-tools/vite.config.js",
+    "build": "vite build --config build-tools/vite.config.js",
+    "build:analyze": "vite build --config build-tools/vite.config.js --mode analyze",
+    "preview": "vite preview --config build-tools/vite.config.js",
+    "serve": "vite preview --config build-tools/vite.config.js",
+    "lint": "eslint assets/js --ext .js --fix",
+    "format": "prettier --write 'assets/**/*.{js,css,html}'",
+    "test": "echo \"Testing framework to be implemented\" && exit 0",
+    "bundle-analyzer": "npx vite-bundle-analyzer dist",
+    "performance-test": "node build-tools/performance-test.js",
+    "clean": "rm -rf dist node_modules/.vite",
+    "deploy": "npm run build && npm run bundle-analyzer"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "cssnano": "^6.0.1",
+    "eslint": "^8.55.0",
+    "prettier": "^3.1.0",
+    "terser": "^5.24.0",
+    "vite": "^5.0.0",
+    "vite-bundle-analyzer": "^0.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "browserslist": [
+    "Chrome >= 80",
+    "Firefox >= 75",
+    "Safari >= 13",
+    "iOS >= 13",
+    "Android >= 8"
+  ],
+  "keywords": [
+    "sound-healing",
+    "audio",
+    "meditation",
+    "performance-optimized",
+    "pwa",
+    "web-audio"
+  ],
+  "author": "Claude Code Performance Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "."
+  },
+  "performance": {
+    "targets": {
+      "fcp": "< 1.5s",
+      "lcp": "< 2s",
+      "cls": "< 0.1",
+      "fid": "< 100ms",
+      "bundle_size": "< 500kb"
+    }
+  },
+  "optimization": {
+    "treeshaking": true,
+    "codesplitting": true,
+    "compression": "terser",
+    "minification": true
+  },
+  "main": ".eslintrc.js",
+  "dependencies": {
+    "playwright": "^1.55.0"
+  }
+}

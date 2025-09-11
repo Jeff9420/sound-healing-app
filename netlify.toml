@@ -1,0 +1,102 @@
+[build]
+  # 构建命令（静态应用不需要构建）
+  command = "echo 'No build required for static app'"
+  
+  # 发布目录
+  publish = "."
+  
+  # 忽略构建，因为这是静态应用
+  ignore = "exit 0"
+
+[build.environment]
+  # Node.js 版本（如果需要）
+  NODE_VERSION = "18"
+
+# 头部设置 - 安全性和缓存优化
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # 安全头部
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # HTTPS 安全
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    
+    # 内容安全策略
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; media-src 'self' data: blob:; connect-src 'self' https:; font-src 'self' data:;"
+
+# 音频文件缓存优化
+[[headers]]
+  for = "/assets/audio/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    
+# CSS/JS 文件缓存
+[[headers]]
+  for = "/assets/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+    
+[[headers]]
+  for = "/assets/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+# Service Worker 不缓存
+[[headers]]
+  for = "/sw*.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+# HTML 文件短期缓存
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+# 重定向规则 - SPA 支持
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  conditions = {Role = ["visitor"]}
+
+# 预压缩支持
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Content-Encoding = "gzip"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Content-Encoding = "gzip"
+
+# 插件配置
+[[plugins]]
+  package = "netlify-plugin-minify-html"
+
+# 表单处理（如果有反馈表单）
+[build.processing]
+  skip_processing = false
+[build.processing.css]
+  bundle = false
+  minify = true
+[build.processing.js]
+  bundle = false
+  minify = true
+[build.processing.html]
+  pretty_urls = true
+
+# 环境变量
+[context.production.environment]
+  ENVIRONMENT = "production"
+  
+[context.deploy-preview.environment]
+  ENVIRONMENT = "preview"
+  
+[context.branch-deploy.environment]
+  ENVIRONMENT = "development"

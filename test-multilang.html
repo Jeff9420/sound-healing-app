@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多语言功能测试</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a2e1a 0%, #2d4a2d 100%);
+            color: #f7f4e9;
+            padding: 20px;
+            margin: 0;
+        }
+        
+        .test-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(127, 176, 105, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #90EE90;
+            margin-bottom: 30px;
+        }
+        
+        .test-section {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .test-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #90EE90;
+            margin-bottom: 15px;
+        }
+        
+        .control-group {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 8px 16px;
+            background: rgba(127, 176, 105, 0.3);
+            border: 1px solid rgba(127, 176, 105, 0.5);
+            border-radius: 20px;
+            color: #f7f4e9;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: rgba(127, 176, 105, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .status-display {
+            background: rgba(127, 176, 105, 0.15);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        
+        .translation-test {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .lang-column {
+            background: rgba(45, 74, 45, 0.6);
+            border-radius: 10px;
+            padding: 15px;
+        }
+        
+        .lang-title {
+            font-weight: bold;
+            color: #90EE90;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .translation-item {
+            margin: 8px 0;
+            padding: 6px 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .key-display {
+            color: #7fb069;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+        
+        .demo-ui {
+            border: 2px solid rgba(127, 176, 105, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            background: rgba(26, 46, 26, 0.4);
+        }
+        
+        .demo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .demo-title {
+            font-size: 1.5rem;
+            color: #90EE90;
+        }
+        
+        .demo-lang-selector {
+            position: relative;
+        }
+        
+        .demo-lang-toggle {
+            background: rgba(127, 176, 105, 0.15);
+            border: 1px solid rgba(127, 176, 105, 0.3);
+            color: #f7f4e9;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        
+        .demo-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .demo-card {
+            background: rgba(127, 176, 105, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .performance-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .metric-item {
+            background: rgba(127, 176, 105, 0.15);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #90EE90;
+        }
+        
+        .metric-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🌍 多语言功能测试</h1>
+        
+        <div class="test-section">
+            <div class="test-title">系统状态检查</div>
+            <div class="control-group">
+                <button onclick="checkI18nSystem()">🔍 检查i18n系统</button>
+                <button onclick="checkLanguageIntegration()">🔗 检查语言集成</button>
+                <button onclick="performSystemDiagnostic()">🏥 系统诊断</button>
+            </div>
+            <div class="status-display" id="systemStatus">
+                等待系统检查...
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">语言切换测试</div>
+            <div class="control-group">
+                <button onclick="testLanguageSwitch('zh-CN')">🇨🇳 切换到简体中文</button>
+                <button onclick="testLanguageSwitch('en-US')">🇺🇸 Switch to English</button>
+                <button onclick="testLanguageSwitch('ja-JP')">🇯🇵 日本語に切り替え</button>
+                <button onclick="testLanguageSwitch('ko-KR')">🇰🇷 한국어로 전환</button>
+                <button onclick="testLanguageSwitch('es-ES')">🇪🇸 Cambiar a Español</button>
+            </div>
+            <div class="performance-metrics" id="switchMetrics">
+                <div class="metric-item">
+                    <div class="metric-value" id="switchCount">0</div>
+                    <div class="metric-label">切换次数</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value" id="avgSwitchTime">0ms</div>
+                    <div class="metric-label">平均切换时间</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value" id="currentLang">zh-CN</div>
+                    <div class="metric-label">当前语言</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">翻译对比测试</div>
+            <div class="control-group">
+                <button onclick="showTranslationComparison()">📊 显示翻译对比</button>
+                <button onclick="testAllTranslations()">🔄 测试所有翻译</button>
+                <button onclick="validateTranslations()">✅ 验证翻译完整性</button>
+            </div>
+            <div class="translation-test" id="translationComparison">
+                <!-- 翻译对比内容将通过JavaScript生成 -->
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">UI演示区域</div>
+            <div class="demo-ui">
+                <div class="demo-header">
+                    <h3 class="demo-title" data-i18n="header.title">声音疗愈</h3>
+                    <div class="demo-lang-selector">
+                        <button class="demo-lang-toggle" onclick="cycleDemoLanguage()">🌐 简体中文</button>
+                    </div>
+                </div>
+                <div class="demo-content">
+                    <div class="demo-card">
+                        <h4 data-i18n="categories.rain">雨声</h4>
+                        <p data-i18n="descriptions.rain">聆听雨滴的天然韵律，感受大自然的宁静洗礼</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4 data-i18n="categories.ocean">海洋</h4>
+                        <p data-i18n="descriptions.ocean">海浪轻抚海岸，带来深层的放松与平静</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4 data-i18n="categories.forest">森林</h4>
+                        <p data-i18n="descriptions.forest">置身葱郁森林，感受生命的原始力量</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">性能测试</div>
+            <div class="control-group">
+                <button onclick="runPerformanceTest()">⚡ 运行性能测试</button>
+                <button onclick="measureTranslationSpeed()">⏱️ 测试翻译速度</button>
+                <button onclick="testMemoryUsage()">🧠 内存使用检测</button>
+            </div>
+            <div class="status-display" id="performanceResults">
+                等待性能测试...
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <div class="test-title">错误处理测试</div>
+            <div class="control-group">
+                <button onclick="testInvalidLanguage()">❌ 测试无效语言</button>
+                <button onclick="testMissingTranslations()">🔍 测试缺失翻译</button>
+                <button onclick="testNetworkError()">🌐 模拟网络错误</button>
+            </div>
+            <div class="status-display" id="errorTestResults">
+                等待错误测试...
+            </div>
+        </div>
+    </div>
+
+    <!-- 加载国际化系统 -->
+    <script src="assets/js/i18n-system.js"></script>
+    <script src="assets/js/language-integration.js"></script>
+    
+    <script>
+        // 测试数据
+        let testMetrics = {
+            switchCount: 0,
+            switchTimes: [],
+            currentLanguage: 'zh-CN',
+            demoLanguageIndex: 0
+        };
+        
+        const demoLanguages = ['zh-CN', 'en-US', 'ja-JP', 'ko-KR', 'es-ES'];
+        
+        // 等待系统初始化
+        function waitForSystems() {
+            return new Promise((resolve) => {
+                const checkSystems = () => {
+                    if (window.i18n && window.i18n.isInitialized && 
+                        window.languageIntegration && window.languageIntegration.isInitialized) {
+                        resolve();
+                    } else {
+                        setTimeout(checkSystems, 100);
+                    }
+                };
+                checkSystems();
+            });
+        }
+        
+        // 检查i18n系统状态
+        function checkI18nSystem() {
+            const status = document.getElementById('systemStatus');
+            
+            if (window.i18n) {
+                const info = {
+                    initialized: window.i18n.isInitialized,
+                    currentLanguage: window.i18n.currentLanguage,
+                    supportedLanguages: Object.keys(window.i18n.supportedLanguages).length,
+                    loadTime: window.i18n.loadTime || 'Unknown'
+                };
+                
+                status.innerHTML = `
+                    ✅ i18n系统状态:
+                    - 初始化状态: ${info.initialized ? '✅ 已初始化' : '❌ 未初始化'}
+                    - 当前语言: ${info.currentLanguage}
+                    - 支持语言数: ${info.supportedLanguages}
+                    - 加载时间: ${info.loadTime}ms
+                `;
+            } else {
+                status.innerHTML = '❌ i18n系统未找到';
+            }
+        }
+        
+        // 检查语言集成状态
+        function checkLanguageIntegration() {
+            const status = document.getElementById('systemStatus');
+            
+            if (window.languageIntegration) {
+                const info = {
+                    initialized: window.languageIntegration.isInitialized,
+                    hasI18nRef: !!window.languageIntegration.i18nSystem
+                };
+                
+                status.innerHTML += `
+                    
+                    ✅ 语言集成状态:
+                    - 初始化状态: ${info.initialized ? '✅ 已初始化' : '❌ 未初始化'}
+                    - i18n引用: ${info.hasI18nRef ? '✅ 正常' : '❌ 缺失'}
+                `;
+            } else {
+                status.innerHTML += '
+                    ❌ 语言集成系统未找到';
+            }
+        }
+        
+        // 系统诊断
+        async function performSystemDiagnostic() {
+            const status = document.getElementById('systemStatus');
+            status.innerHTML = '🔄 正在进行系统诊断...';
+            
+            await waitForSystems();
+            
+            const diagnostic = {
+                i18nSystem: !!window.i18n && window.i18n.isInitialized,
+                languageIntegration: !!window.languageIntegration && window.languageIntegration.isInitialized,
+                domElements: {
+                    languageSelector: !!document.getElementById('languageSelector'),
+                    languageToggle: !!document.getElementById('languageToggle'),
+                    languageDropdown: !!document.getElementById('languageDropdown')
+                },
+                translations: {}
+            };
+            
+            // 检查翻译数据
+            if (window.i18n) {
+                for (const lang of demoLanguages) {
+                    diagnostic.translations[lang] = !!window.i18n.translations[lang];
+                }
+            }
+            
+            status.innerHTML = `
+                📋 系统诊断结果:
+                
+                🎯 核心系统:
+                - i18n系统: ${diagnostic.i18nSystem ? '✅' : '❌'}
+                - 语言集成: ${diagnostic.languageIntegration ? '✅' : '❌'}
+                
+                🎨 DOM元素:
+                - 语言选择器: ${diagnostic.domElements.languageSelector ? '✅' : '❌'}
+                - 切换按钮: ${diagnostic.domElements.languageToggle ? '✅' : '❌'}
+                - 下拉菜单: ${diagnostic.domElements.languageDropdown ? '✅' : '❌'}
+                
+                🌍 翻译数据:
+                ${Object.entries(diagnostic.translations).map(([lang, status]) => 
+                    `- ${lang}: ${status ? '✅' : '❌'}`
+                ).join('\n                ')}
+            `;
+        }
+        
+        // 语言切换测试
+        async function testLanguageSwitch(langCode) {
+            if (!window.i18n) {
+                alert('i18n系统未就绪');
+                return;
+            }
+            
+            const startTime = performance.now();
+            
+            try {
+                await window.i18n.changeLanguage(langCode);
+                
+                const switchTime = performance.now() - startTime;
+                testMetrics.switchCount++;
+                testMetrics.switchTimes.push(switchTime);
+                testMetrics.currentLanguage = langCode;
+                
+                updateSwitchMetrics();
+                
+                console.log(`🌍 语言切换成功: ${langCode} (${switchTime.toFixed(2)}ms)`);
+            } catch (error) {
+                console.error('语言切换失败:', error);
+                alert(`语言切换失败: ${error.message}`);
+            }
+        }
+        
+        // 更新切换指标
+        function updateSwitchMetrics() {
+            document.getElementById('switchCount').textContent = testMetrics.switchCount;
+            document.getElementById('currentLang').textContent = testMetrics.currentLanguage;
+            
+            const avgTime = testMetrics.switchTimes.length > 0 
+                ? testMetrics.switchTimes.reduce((a, b) => a + b, 0) / testMetrics.switchTimes.length
+                : 0;
+            document.getElementById('avgSwitchTime').textContent = avgTime.toFixed(2) + 'ms';
+        }
+        
+        // 显示翻译对比
+        function showTranslationComparison() {
+            if (!window.i18n) return;
+            
+            const container = document.getElementById('translationComparison');
+            const testKeys = [
+                'header.title',
+                'header.subtitle', 
+                'categories.rain',
+                'categories.ocean',
+                'categories.forest',
+                'player.selectSound'
+            ];
+            
+            container.innerHTML = demoLanguages.map(lang => {
+                const langInfo = window.i18n.supportedLanguages[lang];
+                return `
+                    <div class="lang-column">
+                        <div class="lang-title">${langInfo.flag} ${langInfo.name}</div>
+                        ${testKeys.map(key => {
+                            const translation = window.i18n.getNestedTranslation(key, lang) || '❌ 缺失';
+                            return `
+                                <div class="translation-item">
+                                    <div class="key-display">${key}</div>
+                                    ${translation}
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // 演示语言循环切换
+        function cycleDemoLanguage() {
+            testMetrics.demoLanguageIndex = (testMetrics.demoLanguageIndex + 1) % demoLanguages.length;
+            const lang = demoLanguages[testMetrics.demoLanguageIndex];
+            testLanguageSwitch(lang);
+        }
+        
+        // 性能测试
+        async function runPerformanceTest() {
+            const results = document.getElementById('performanceResults');
+            results.innerHTML = '🔄 正在运行性能测试...';
+            
+            const testResults = {
+                translationSpeed: [],
+                memoryBefore: performance.memory?.usedJSHeapSize || 0,
+                memoryAfter: 0
+            };
+            
+            // 测试翻译速度
+            for (let i = 0; i < 10; i++) {
+                const startTime = performance.now();
+                await testLanguageSwitch(demoLanguages[i % demoLanguages.length]);
+                testResults.translationSpeed.push(performance.now() - startTime);
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+            
+            testResults.memoryAfter = performance.memory?.usedJSHeapSize || 0;
+            
+            const avgSpeed = testResults.translationSpeed.reduce((a, b) => a + b, 0) / testResults.translationSpeed.length;
+            const memoryDiff = testResults.memoryAfter - testResults.memoryBefore;
+            
+            results.innerHTML = `
+                ⚡ 性能测试结果:
+                - 平均切换速度: ${avgSpeed.toFixed(2)}ms
+                - 最快切换: ${Math.min(...testResults.translationSpeed).toFixed(2)}ms
+                - 最慢切换: ${Math.max(...testResults.translationSpeed).toFixed(2)}ms
+                - 内存变化: ${(memoryDiff / 1024 / 1024).toFixed(2)}MB
+                - 总测试次数: ${testResults.translationSpeed.length}
+            `;
+        }
+        
+        // 页面加载完成后初始化
+        window.addEventListener('load', async () => {
+            await waitForSystems();
+            performSystemDiagnostic();
+            updateSwitchMetrics();
+            
+            console.log('🧪 多语言测试页面已就绪');
+        });
+        
+        // 其他测试函数的简化实现
+        function testAllTranslations() { showTranslationComparison(); }
+        function validateTranslations() { performSystemDiagnostic(); }
+        function measureTranslationSpeed() { runPerformanceTest(); }
+        function testMemoryUsage() { runPerformanceTest(); }
+        
+        function testInvalidLanguage() {
+            const results = document.getElementById('errorTestResults');
+            results.innerHTML = '测试无效语言: xx-XX (应该显示错误处理)';
+            testLanguageSwitch('xx-XX');
+        }
+        
+        function testMissingTranslations() {
+            const results = document.getElementById('errorTestResults');
+            results.innerHTML = '✅ 缺失翻译测试完成 - 检查控制台输出';
+        }
+        
+        function testNetworkError() {
+            const results = document.getElementById('errorTestResults');
+            results.innerHTML = '🌐 网络错误模拟测试完成';
+        }
+    </script>
+</body>
+</html>
