@@ -147,35 +147,976 @@ body {
     overflow-x: hidden;
     letter-spacing: 0.3px;
 }
+
 /* 动态云朵效果 */
 .clouds {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: -1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
 }
 
 .cloud {
-      position: absolute;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 50px;
-      opacity: 0.6;
-      animation: float-cloud 45s infinite linear;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50px;
+    opacity: 0.6;
+    animation: float-cloud 45s infinite linear;
+}
+
+.cloud:before {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50px;
+}
+
+.cloud:after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50px;
+}
+
+.cloud1 {
+    width: 120px;
+    height: 40px;
+    top: 8%;
+    animation-delay: 0s;
+}
+
+.cloud1:before {
+    width: 60px;
+    height: 60px;
+    top: -30px;
+    left: 15px;
+}
+
+.cloud1:after {
+    width: 70px;
+    height: 45px;
+    top: -20px;
+    right: 15px;
+}
+
+.cloud2 {
+    width: 100px;
+    height: 35px;
+    top: 15%;
+    animation-delay: 15s;
+}
+
+.cloud2:before {
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    left: 10px;
+}
+
+.cloud2:after {
+    width: 60px;
+    height: 35px;
+    top: -15px;
+    right: 10px;
+}
+
+.cloud3 {
+    width: 80px;
+    height: 30px;
+    top: 22%;
+    animation-delay: 30s;
+}
+
+@keyframes float-cloud {
+    0% { transform: translateX(-150px); }
+    100% { transform: translateX(calc(100vw + 150px)); }
 }
 
 /* 全屏背景场景画布 */
 .background-scene {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -2;
-      pointer-events: none;
-      opacity: 0.6;
-      transition: opacity 0.5s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    pointer-events: none;
+    opacity: 0.6;
+    transition: opacity 0.5s ease;
 }
 
+/* 有机形状容器基类 */
+.organic-container {
+    background: rgba(26, 46, 26, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: var(--nature-radius);
+    border: 2px solid rgba(127, 176, 105, 0.3);
+    box-shadow: var(--nature-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.organic-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(--nature-mint), 
+        var(--nature-sage), 
+        var(--nature-mint), 
+        transparent);
+}
+
+/* 自然主题头部 */
+.nature-header {
+    text-align: center;
+    padding: 3rem 2rem 2rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    position: relative;
+    z-index: 1;
+}
+
+.tree-logo {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    position: relative;
+    filter: drop-shadow(0 0 12px rgba(127, 176, 105, 0.5));
+}
+
+.tree-trunk {
+    width: 16px;
+    height: 32px;
+    background: var(--nature-earth);
+    border-radius: 8px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.tree-crown {
+    width: 64px;
+    height: 48px;
+    background: radial-gradient(circle, var(--nature-sage), var(--nature-forest));
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: sway 8s ease-in-out infinite;
+}
+
+@keyframes sway {
+    0%, 100% { transform: translateX(-50%) rotate(-1.5deg); }
+    50% { transform: translateX(-50%) rotate(1.5deg); }
+}
+
+.nature-title {
+    font-size: 2.8rem;
+    font-weight: 400;
+    margin-bottom: 0.8rem;
+    background: linear-gradient(135deg, 
+        var(--nature-cream), 
+        var(--nature-mint), 
+        var(--nature-sage));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
+}
+
+.nature-subtitle {
+    font-size: 1.1rem;
+    color: var(--nature-mint);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+/* 季节指示器 */
+.season-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+.season {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--nature-transition);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.season.spring { background: #90EE90; }
+.season.summer { background: #FFD700; }
+.season.autumn { background: #FF6347; }
+.season.winter { background: #E0E0E0; }
+
+.season:hover, .season.active {
+    transform: scale(1.4);
+    box-shadow: 0 0 12px currentColor;
+}
+
+/* 中央池塘播放器 */
+.pond-player {
+    width: 300px;
+    height: 300px;
+    margin: 1.5rem auto 2rem;
+    position: relative;
+    border-radius: 50%;
+    background: radial-gradient(circle, 
+        var(--nature-water) 0%,
+        var(--nature-sky) 30%,
+        var(--nature-sage) 70%,
+        var(--nature-forest) 100%);
+    box-shadow: 
+        inset 0 0 40px rgba(70, 130, 180, 0.3),
+        0 12px 30px rgba(26, 46, 26, 0.4);
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* 水波纹效果 */
+.ripple {
+    position: absolute;
+    border: 2px solid rgba(184, 230, 184, 0.4);
+    border-radius: 50%;
+    animation: ripple 4s linear infinite;
+}
+
+@keyframes ripple {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.8;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    100% {
+        width: 280px;
+        height: 280px;
+        opacity: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* 荷花播放按钮 */
+.lotus-player {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90px;
+    height: 90px;
+    background: radial-gradient(circle, 
+        rgba(255, 255, 255, 0.95), 
+        rgba(184, 230, 184, 0.8));
+    border-radius: 50%;
+    border: 3px solid var(--nature-mint);
+    cursor: pointer;
+    transition: var(--nature-transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--nature-forest);
+    box-shadow: 0 4px 16px rgba(184, 230, 184, 0.4);
+    z-index: 2;
+}
+
+.lotus-player:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+    box-shadow: 0 8px 24px rgba(184, 230, 184, 0.6);
+}
+
+.lotus-player.playing {
+    animation: lotus-bloom 2.5s ease-in-out infinite;
+}
+
+@keyframes lotus-bloom {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1);
+        border-width: 3px;
+        border-color: var(--nature-mint);
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.05);
+        border-width: 4px;
+        border-color: var(--nature-gold);
+    }
+}
+
+/* 正在播放信息 */
+.now-playing-info {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 280px;
+}
+
+.current-track-name {
+    font-size: 1rem;
+    color: var(--nature-cream);
+    margin-bottom: 0.2rem;
+    font-weight: 500;
+}
+
+.current-track-artist {
+    font-size: 0.85rem;
+    color: var(--nature-mint);
+    opacity: 0.8;
+}
+
+/* 森林路径主容器 */
+.forest-path {
+    max-width: 1200px;
+    margin: 2rem auto 6rem;
+    padding: 0 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.path-title {
+    text-align: center;
+    font-size: 2.2rem;
+    color: var(--nature-cream);
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    position: relative;
+}
+
+.path-title::after {
+    content: '🌿';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -0.8rem;
+    font-size: 1.2rem;
+}
+
+/* 生态系统网格 */
+.ecosystem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+/* 生态系统卡片 */
+.ecosystem-card {
+    background: linear-gradient(145deg, 
+        rgba(74, 103, 65, 0.85), 
+        rgba(45, 74, 45, 0.9));
+    border-radius: var(--nature-radius);
+    padding: 2rem 1.5rem;
+    position: relative;
+    cursor: pointer;
+    transition: var(--nature-transition);
+    border: 2px dashed rgba(127, 176, 105, 0.6);
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+    
+    /* 添加点击提示动画 */
+    animation: pulse-border 4s ease-in-out infinite;
+}
+
+.ecosystem-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, 
+        rgba(184, 230, 184, 0.12) 0%, 
+        transparent 50%);
+    transform: scale(0);
+    transition: transform 0.6s ease;
+}
+
+.ecosystem-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+        0 16px 32px rgba(26, 46, 26, 0.4),
+        0 0 16px rgba(127, 176, 105, 0.3);
+    border-color: var(--nature-mint);
+}
+
+.ecosystem-card:hover::before {
+    transform: scale(1);
+}
+
+.ecosystem-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.ecosystem-icon {
+    font-size: 2.2rem;
+    margin-right: 0.8rem;
+    filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.3));
+}
+
+.ecosystem-info {
+    flex: 1;
+}
+
+.ecosystem-name {
+    font-size: 1.2rem;
+    color: var(--nature-cream);
+    margin-bottom: 0.2rem;
+    font-weight: 500;
+}
+
+.habitat-type {
+    font-size: 0.8rem;
+    color: var(--nature-mint);
+    font-style: italic;
+}
+
+.species-count {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: linear-gradient(45deg, var(--nature-sage), var(--nature-mint));
+    color: var(--nature-dark);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.ecosystem-desc {
+    color: rgba(247, 244, 233, 0.9);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 0.8rem;
+}
+
+/* 栖息地指示器 */
+.habitat-indicators {
+    display: flex;
+    gap: 0.4rem;
+    position: relative;
+    z-index: 1;
+}
+
+.habitat-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--nature-mint);
+    opacity: 0.5;
+    transition: var(--nature-transition);
+}
+
+.ecosystem-card:hover .habitat-dot {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+/* 自然控制台 */
+.nature-console {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92%;
+    max-width: 700px;
+    padding: 1.2rem 1.5rem;
+    background: rgba(26, 46, 26, 0.92);
+    backdrop-filter: blur(16px);
+    border-radius: 22px;
+    border: 1px solid rgba(127, 176, 105, 0.4);
+    box-shadow: 0 8px 24px rgba(26, 46, 26, 0.5);
+    z-index: 100;
+}
+
+.console-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.nature-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.nature-control-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, 
+        var(--nature-sage), 
+        var(--nature-forest));
+    border: 1px solid var(--nature-mint);
+    color: var(--nature-cream);
+    cursor: pointer;
+    transition: var(--nature-transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+}
+
+.nature-control-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(127, 176, 105, 0.4);
+    background: linear-gradient(145deg, var(--nature-mint), var(--nature-sage));
+    color: var(--nature-dark);
+}
+
+.nature-control-btn.active {
+    background: var(--nature-gold);
+    color: var(--nature-dark);
+}
+
+/* 自然环境滑块组 */
+.nature-slider-group {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex: 1;
+    justify-content: center;
+}
+
+.nature-label {
+    color: var(--nature-mint);
+    font-size: 0.8rem;
+    min-width: 50px;
+    text-align: center;
+}
+
+.nature-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100px;
+    height: 5px;
+    background: linear-gradient(90deg, 
+        var(--nature-forest), 
+        var(--nature-sage), 
+        var(--nature-mint));
+    border-radius: 3px;
+    outline: none;
+}
+
+.nature-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--nature-cream);
+    border: 2px solid var(--nature-sage);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(127, 176, 105, 0.4);
+}
+
+/* 疗愈状态信息显示 */
+.healing-status-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #f7f4e9;
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    background: rgba(127, 176, 105, 0.15);
+    border-radius: 18px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(127, 176, 105, 0.25);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.healing-status-info:hover {
+    background: rgba(127, 176, 105, 0.25);
+    border-color: rgba(127, 176, 105, 0.4);
+    transform: translateY(-1px);
+}
+
+.healing-mode-icon {
+    font-size: 1.1rem;
+    animation: healing-pulse 4s ease-in-out infinite;
+}
+
+.healing-mode-text {
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.session-time {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    color: #90EE90;
+    text-shadow: 0 0 8px rgba(144, 238, 144, 0.4);
+    font-size: 0.9rem;
+}
+
+@keyframes healing-pulse {
+    0%, 100% { 
+        transform: scale(1);
+        filter: brightness(1);
+    }
+    50% { 
+        transform: scale(1.08);
+        filter: brightness(1.15);
+    }
+}
+
+/* 隐藏的定时器控制 */
+.timer-controls-hidden {
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(127, 176, 105, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    justify-content: center;
+}
+
+.nature-select {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--nature-sage);
+    border-radius: 12px;
+    background: rgba(74, 103, 65, 0.8);
+    color: var(--nature-cream);
+    font-size: 0.8rem;
+}
+
+.nature-button {
+    padding: 0.4rem 1rem;
+    background: var(--nature-sage);
+    color: var(--nature-cream);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: var(--nature-transition);
+    font-size: 0.8rem;
+}
+
+.nature-button:hover {
+    background: var(--nature-mint);
+    color: var(--nature-dark);
+    transform: translateY(-1px);
+}
+
+.timer-status {
+    font-size: 0.75rem;
+    color: var(--nature-mint);
+}
+
+/* 自然页脚 */
+.nature-footer {
+    text-align: center;
+    padding: 1rem;
+    color: var(--nature-mint);
+    font-size: 0.85rem;
+    opacity: 0.8;
+    background: rgba(26, 46, 26, 0.3);
+    margin-bottom: 0;
+}
+
+/* 播放列表相关样式 */
+.playlist-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 46, 26, 0.95);
+    backdrop-filter: blur(20px);
+    z-index: 200;
+    overflow-y: auto;
+    padding: 2rem;
+}
+
+.playlist-header {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.nature-back-btn {
+    background: var(--nature-sage);
+    color: var(--nature-cream);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: var(--nature-transition);
+    font-size: 0.9rem;
+}
+
+.nature-back-btn:hover {
+    background: var(--nature-mint);
+    color: var(--nature-dark);
+}
+
+.habitat-title {
+    flex: 1;
+    color: var(--nature-cream);
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.habitat-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.habitat-player {
+    margin-bottom: 2rem;
+    padding: 2rem;
+    text-align: center;
+}
+
+.track-display {
+    margin-bottom: 1.5rem;
+}
+
+.track-name {
+    display: block;
+    color: var(--nature-cream);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.track-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.nature-play-main {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+}
+
+.nature-progress-section {
+    margin-bottom: 1rem;
+}
+
+.nature-progress-container {
+    margin-bottom: 0.5rem;
+}
+
+.nature-progress-slider {
+    width: 100%;
+    max-width: 400px;
+}
+
+.nature-time-display {
+    display: flex;
+    justify-content: space-between;
+    max-width: 400px;
+    margin: 0 auto;
+    font-size: 0.85rem;
+    color: var(--nature-mint);
+}
+
+.nature-volume-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.volume-display {
+    min-width: 40px;
+    text-align: right;
+}
+
+.habitat-track-list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .nature-header {
+        padding: 2rem 1rem;
+        margin: 1rem auto;
+    }
+
+    .nature-title {
+        font-size: 2.2rem;
+    }
+
+    .pond-player {
+        width: 250px;
+        height: 250px;
+    }
+
+    .lotus-player {
+        width: 70px;
+        height: 70px;
+        font-size: 1.5rem;
+    }
+
+    .ecosystem-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+
+    .nature-console {
+        bottom: 1rem;
+        width: 95%;
+        padding: 1rem;
+    }
+
+    .console-content {
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+
+    .nature-slider-group {
+        width: 100%;
+    }
+
+    .nature-slider {
+        flex: 1;
+        min-width: 120px;
+    }
+
+    .playlist-section {
+        padding: 1rem;
+    }
+
+    .playlist-header {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .habitat-controls {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .nature-title {
+        font-size: 1.8rem;
+    }
+
+    .pond-player {
+        width: 220px;
+        height: 220px;
+    }
+
+    .ecosystem-card {
+        padding: 1.5rem 1rem;
+    }
+
+    .ecosystem-name {
+        font-size: 1.1rem;
+    }
+
+    .ecosystem-desc {
+        font-size: 0.85rem;
+    }
+}
+
+/* 初始化错误样式 */
+.initialization-error {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 46, 26, 0.95);
+    backdrop-filter: blur(20px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-content {
+    background: rgba(45, 74, 45, 0.9);
+    border-radius: var(--nature-radius);
+    padding: 2rem;
+    max-width: 500px;
+    text-align: center;
+    border: 2px solid rgba(127, 176, 105, 0.5);
+}
+
+.error-content h2 {
+    color: var(--nature-mint);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.error-content p {
+    color: var(--nature-cream);
+    margin-bottom: 1rem;
+}
+
+.error-content ul {
+    text-align: left;
+    color: var(--nature-cream);
+    margin-bottom: 1.5rem;
+}
+
+.retry-btn {
+    background: var(--nature-sage);
+    color: var(--nature-cream);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: var(--nature-transition);
+    font-size: 1rem;
+}
+
+.retry-btn:hover {
+    background: var(--nature-mint);
+    color: var(--nature-dark);
+    transform: translateY(-2px);
+}
+
+/* 动画关键帧 */
+@keyframes pulse-border {
+    0%, 100% {
+        border-color: rgba(127, 176, 105, 0.6);
+        box-shadow: 0 0 0 rgba(127, 176, 105, 0);
+    }
+    50% {
+        border-color: rgba(127, 176, 105, 0.9);
+        box-shadow: 0 0 15px rgba(127, 176, 105, 0.4);
+    }
+}
