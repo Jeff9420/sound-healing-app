@@ -1,0 +1,50 @@
+🎯 NameSilo DNS配置 - 快速清单
+
+═══════════════════════════════════════════════
+
+📝 准备信息：
+✓ 网站: https://www.namesilo.com
+✓ 域名: sounflows.app  
+✓ Vercel IP: 76.76.19.19
+✓ CNAME目标: cname.vercel-dns.com
+
+═══════════════════════════════════════════════
+
+⚡ 快速操作步骤：
+
+□ 1. 访问 namesilo.com，点击 Login 登录
+
+□ 2. 点击顶部菜单 "Domain Manager"
+
+□ 3. 找到 sounflows.app，点击左侧蓝色球 🌐
+
+□ 4. 删除所有旧记录（特别是指向 216.198.79.1 的）
+
+□ 5. 添加A记录：
+    Type: A
+    Hostname: @ （不能留空，填@符号）
+    IPv4: 76.76.19.19
+    TTL: 3600
+    点击 SUBMIT
+
+□ 6. 添加CNAME记录：
+    Type: CNAME
+    Hostname: www
+    Target: cname.vercel-dns.com. （末尾加点）
+    TTL: 3600
+    点击 SUBMIT
+
+□ 7. 等待5-30分钟
+
+□ 8. 双击运行 dns-test.bat 验证
+
+□ 9. 访问 https://sounflows.app 确认成功
+
+═══════════════════════════════════════════════
+
+🎯 成功标志：
+✓ DNS测试显示 76.76.19.19
+✓ 网站可正常访问
+✓ 音频可正常播放
+
+═══════════════════════════════════════════════
