@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "sound-healing-app",
   "builds": [
     {
       "src": "index.html",
@@ -64,11 +63,6 @@
       ]
     }
   ],
-  "functions": {
-    "app.js": {
-      "includeFiles": "assets/**"
-    }
-  },
   "regions": ["iad1", "fra1", "hkg1"],
   "github": {
     "silent": true
