@@ -200,10 +200,54 @@ class ModuleLoader {
     }
     
     /**
+     * 检查模块是否已通过其他方式加载（如HTML直接引用）
+     */
+    checkIfModuleAlreadyLoaded(moduleName) {
+        // 检查对应的全局变量或类是否已存在
+        const moduleChecks = {
+            'i18n-system.js': () => window.i18n || window.I18nSystem,
+            'language-integration.js': () => window.languageIntegration || window.LanguageIntegration,
+            'audio-config.js': () => window.AUDIO_CONFIG,
+            'audio-manager.js': () => window.AudioManager || window.audioManager,
+            'playlist-ui.js': () => window.PlaylistUI,
+            'background-scene-manager.js': () => window.BackgroundSceneManager,
+            'theme-manager.js': () => window.themeManager || window.ThemeManager,
+            'ui-controller.js': () => window.UIController || window.uiController,
+            'nature-ui.js': () => window.NatureUI,
+            'app.js': () => window.SoundHealingApp || window.app,
+            'audio-lazy-loader.js': () => window.audioLazyLoader || window.AudioLazyLoader,
+            'cache-manager.js': () => window.cacheManager || window.CacheManager,
+            'performance-monitor.js': () => window.performanceMonitor || window.PerformanceMonitor,
+            'sleep-timer.js': () => window.sleepTimer || window.SleepTimer
+        };
+        
+        const checkFunction = moduleChecks[moduleName];
+        if (checkFunction && checkFunction()) {
+            console.log(`✅ 模块 ${moduleName} 已通过其他方式加载，跳过动态加载`);
+            return true;
+        }
+        
+        // 检查是否已有对应的script标签
+        const existingScript = document.querySelector(`script[src*="${moduleName}"]`);
+        if (existingScript) {
+            console.log(`✅ 发现现有script标签: ${moduleName}，跳过动态加载`);
+            return true;
+        }
+        
+        return false;
+    }
+
+    /**
      * 异步加载模块
      */
     async loadModule(moduleName, basePath = 'assets/js/') {
         if (this.loadedModules.has(moduleName)) {
+            return Promise.resolve();
+        }
+        
+        // 检查模块是否已通过其他方式加载
+        if (this.checkIfModuleAlreadyLoaded(moduleName)) {
+            this.loadedModules.add(moduleName);
             return Promise.resolve();
         }
         

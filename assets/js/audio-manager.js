@@ -1,3 +1,6 @@
+// 防止重复声明
+if (typeof AudioManager === 'undefined') {
+
 class AudioManager {
     constructor() {
         this.audioInstances = new Map();
@@ -108,7 +111,7 @@ class AudioManager {
         audio.preload = 'metadata';
         
         // 设置音频路径
-        const fullPath = `assets/audio/${categoryName}/${fileName}`;
+        const fullPath = getAudioUrl(categoryName, fileName);
         
         this.loadingStates.set(trackId, true);
         this.eventBus.dispatchEvent(new CustomEvent('loadingStart', { detail: trackId }));
@@ -581,4 +584,17 @@ class AudioManager {
         this.audioInstances.clear();
         this.isInitialized = false;
     }
+}
+
+} // 结束 AudioManager 类定义检查
+
+// 创建全局实例（在类定义检查外，确保实例被创建）
+if (typeof window !== 'undefined' && !window.audioManager) {
+    window.audioManager = new AudioManager();
+    console.log('✅ AudioManager全局实例已创建');
+    
+    // 立即初始化AudioManager
+    window.audioManager.initialize().catch(error => {
+        console.error('❌ AudioManager初始化失败:', error);
+    });
 }
