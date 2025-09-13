@@ -12,11 +12,54 @@ class SoundHealingApp {
         this.isReady = false;
     }
 
+    async initializeAudioManager() {
+        // 等待AudioManager类可用，解决模块加载顺序问题
+        let retryCount = 0;
+        const maxRetries = 100; // 最多等待10秒
+        
+        while (retryCount < maxRetries) {
+            try {
+                // 检查全局AudioManager是否可用
+                if (typeof window !== 'undefined' && window.audioManager) {
+                    console.log('✅ 使用现有的全局AudioManager实例');
+                    this.audioManager = window.audioManager;
+                    return;
+                }
+                
+                // 检查AudioManager类是否可用
+                if (typeof AudioManager !== 'undefined') {
+                    console.log('✅ 创建新的AudioManager实例');
+                    this.audioManager = new AudioManager();
+                    return;
+                }
+                
+                // 检查window.AudioManager是否可用
+                if (typeof window !== 'undefined' && typeof window.AudioManager !== 'undefined') {
+                    console.log('✅ 使用window.AudioManager创建实例');
+                    this.audioManager = new window.AudioManager();
+                    return;
+                }
+                
+                console.log(`AudioManager初始化重试 ${retryCount + 1}/${maxRetries}`);
+                retryCount++;
+                await new Promise(resolve => setTimeout(resolve, 100));
+                
+            } catch (error) {
+                console.warn('AudioManager初始化尝试失败:', error);
+                retryCount++;
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+        }
+        
+        throw new Error('AudioManager初始化超时 - 模块加载失败');
+    }
+
     async initialize() {
         try {
             this.showAppStatus('初始化中...');
             
-            this.audioManager = new AudioManager();
+            // 健壮的AudioManager初始化，解决模块冲突问题
+            await this.initializeAudioManager();
             await this.audioManager.initialize();
             console.log('✅ AudioManager 初始化完成，准备初始化UI组件');
             
