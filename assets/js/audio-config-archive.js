@@ -1,11 +1,11 @@
-// Production Audio Configuration - Archive.org via Vercel Proxy (191 files)
-// Using Vercel proxy to solve CORS issues with Archive.org
+// Archive.org version of audio configuration
+// Base URL points to Archive.org collection
 const AUDIO_CONFIG = {
-    baseUrl: '/api/audio/',
+    baseUrl: 'https://archive.org/download/sound-healing-collection/',
     categories: {
         'Animal sounds': {
-            name: '森林栖息地',
-            icon: '🦅',
+            name: '动物声音',
+            icon: '🐾',
             description: '自然动物的声音，如鸟鸣、溪水声等',
             files: [
                 'SPA音乐疗馆 1 - 减压疗程 The Curing Shop - For Decompression.mp3',
@@ -36,23 +36,36 @@ const AUDIO_CONFIG = {
                 '非常难得的清脆鸟叫，深山里录制.mp3'
             ]
         },
+        'Chakra': {
+            name: '脉轮音乐',
+            icon: '🌈',
+            description: '调节身体能量中心的音乐',
+            files: [
+                'Hals-Chakra 蓝玉莲华(喉轮).mp3',
+                'Herz-Chakra 綠石蓮華(心輪).mp3',
+                'Milz-Chakra 玛瑙莲华(脐轮).mp3',
+                'Nabel-Chakra 水晶莲华(太阳神经严).mp3',
+                'Scheitel-Chakra 紫晶莲华(顶轮).mp3',
+                'Stirn-Chakra 石英莲华(眉轮).mp3',
+                'Wurzel-Chakra 碧玉莲华(海底轮).mp3'
+            ]
+        },
         'Fire': {
-            name: '温暖壁炉',
+            name: '火焰声音',
             icon: '🔥',
             description: '篝火、壁炉等温暖的火焰声音',
             files: [
-                // Currently only 3/4 files uploaded
+                '下雪天卧室壁炉声木柴燃烧白噪音.mp3',
                 '河边点燃篝火、水声和清脆的鸟鸣01.mp3',
                 '河边点燃篝火、水声和清脆的鸟鸣02.mp3',
                 '河边点燃篝火、水声和清脆的鸟鸣03.mp3'
             ]
         },
         'hypnosis': {
-            name: '梦境花园',
-            icon: '🌙',
+            name: '催眠音乐',
+            icon: '😴',
             description: '专业催眠和深度放松音乐',
             files: [
-                // Currently 58/70 files uploaded - using most common ones
                 'Bolo Ram.mp3',
                 'Gayatri (Luscious Chill Mix).mp3',
                 'Gopala Hare.mp3',
@@ -100,6 +113,8 @@ const AUDIO_CONFIG = {
                 '催眠音乐40.mp3',
                 '催眠音乐41.mp3',
                 '催眠音乐42.mp3',
+                '催眠音乐43.MP3',
+                '催眠音乐44.MP3',
                 '催眠音乐45.mp3',
                 '催眠音乐46.mp3',
                 '催眠音乐47.mp3',
@@ -114,12 +129,18 @@ const AUDIO_CONFIG = {
                 '催眠音乐55.mp3',
                 '催眠音乐56.mp3',
                 '催眠音乐57.mp3',
-                '催眠音乐58.mp3'
+                '催眠音乐58.mp3',
+                '催眠音乐6.mp3',
+                '催眠音乐7.mp3',
+                '催眠音乐8.mp3',
+                '催眠音乐9.mp3',
+                '放松轻音乐1.mp3',
+                '放松轻音乐2.mp3'
             ]
         },
         'meditation': {
-            name: '禅境山谷',
-            icon: '🧘‍♀️',
+            name: '冥想音乐',
+            icon: '🧘',
             description: '专用于冥想、瑜伽的宁静音乐',
             files: [
                 '冥想 瑜伽必听.mp3',
@@ -139,11 +160,10 @@ const AUDIO_CONFIG = {
             ]
         },
         'Rain': {
-            name: '雨林圣地',
-            icon: '☔',
+            name: '雨声',
+            icon: '🌧️',
             description: '各种雨声，助眠放松必备',
             files: [
-                // Currently 13/14 files uploaded
                 '一声闷雷，大雨倾盆.mp3',
                 '倾听山谷中小雨，净化心灵.mp3',
                 '奶奶家里听打雷下雨-..必备，治愈失眠.mp3',
@@ -156,15 +176,16 @@ const AUDIO_CONFIG = {
                 '记住乡愁打雷下雨-..必备，治愈失眠06.mp3',
                 '记住乡愁打雷下雨-..必备，治愈失眠09.mp3',
                 '记住乡愁打雷下雨-必备，治愈失眠07.mp3',
-                '记住乡愁雷雨过后-..必备，治愈失眠08.mp3'
+                '记住乡愁雷雨过后-..必备，治愈失眠08.mp3',
+                '身临情景的雨声.mp3'
             ]
         },
         'running water': {
-            name: '溪流秘境',
+            name: '流水声',
             icon: '💧',
             description: '溪流、河水等自然流水声',
             files: [
-                // Currently 5/6 files uploaded
+                '【冥想音乐】钢琴 & 流水声 .mp3',
                 '河边点燃篝火、水声和清脆的鸟鸣01.mp3',
                 '河边点燃篝火、水声和清脆的鸟鸣02.mp3',
                 '河边点燃篝火、水声和清脆的鸟鸣03.mp3',
@@ -173,7 +194,7 @@ const AUDIO_CONFIG = {
             ]
         },
         'Singing bowl sound': {
-            name: '颂钵圣殿',
+            name: '颂钵声音',
             icon: '🎵',
             description: '藏族颂钵音疗，身心疗愈',
             files: [
@@ -242,8 +263,8 @@ const AUDIO_CONFIG = {
             ]
         },
         'Subconscious Therapy': {
-            name: '潜识星域',
-            icon: '🌌',
+            name: '潜意识疗愈',
+            icon: '🌙',
             description: '潜意识修复与疗愈音乐',
             files: [
                 '潜意识疗愈 01 宽恕与原谅.mp3',
@@ -264,6 +285,7 @@ const AUDIO_CONFIG = {
 
 // Update folder paths to match Archive.org structure  
 AUDIO_CONFIG.categories['Animal sounds'].folder = 'animal-sounds';
+AUDIO_CONFIG.categories['Chakra'].folder = 'chakra';
 AUDIO_CONFIG.categories['Fire'].folder = 'fire-sounds';
 AUDIO_CONFIG.categories['hypnosis'].folder = 'hypnosis';
 AUDIO_CONFIG.categories['meditation'].folder = 'meditation';

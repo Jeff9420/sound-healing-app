@@ -1,3 +1,6 @@
+// 防止重复声明
+if (typeof PlaylistUI === 'undefined') {
+
 class PlaylistUI {
     constructor(audioManager) {
         this.audioManager = audioManager;
@@ -445,3 +448,5 @@ class PlaylistUI {
         }, 3000);
     }
 }
+
+} // 结束 PlaylistUI 类定义检查

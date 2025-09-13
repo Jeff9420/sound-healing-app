@@ -142,7 +142,7 @@ class AudioLazyLoader {
         
         try {
             const audio = new Audio();
-            const audioUrl = `assets/audio/${categoryKey}/${fileName}`;
+            const audioUrl = getAudioUrl(categoryKey, fileName);
             
             // 设置预加载策略
             audio.preload = 'metadata'; // 仅加载元数据，不下载完整文件
