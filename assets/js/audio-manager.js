@@ -1,5 +1,5 @@
-// 防止重复声明
-if (typeof AudioManager === 'undefined') {
+// 防止重复加载和声明
+if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined') {
 
 class AudioManager {
     constructor() {
@@ -586,15 +586,23 @@ class AudioManager {
     }
 }
 
+    // 将AudioManager类添加到window对象以便全局访问
+    if (typeof window !== 'undefined') {
+        window.AudioManager = AudioManager;
+        console.log('✅ AudioManager类定义已加载');
+    }
+
 } // 结束 AudioManager 类定义检查
 
-// 创建全局实例（在类定义检查外，确保实例被创建）
-if (typeof window !== 'undefined' && !window.audioManager) {
-    window.audioManager = new AudioManager();
+// 创建全局实例（只创建一次）
+if (typeof window !== 'undefined' && !window.audioManager && typeof window.AudioManager !== 'undefined') {
+    window.audioManager = new window.AudioManager();
     console.log('✅ AudioManager全局实例已创建');
     
     // 立即初始化AudioManager
     window.audioManager.initialize().catch(error => {
         console.error('❌ AudioManager初始化失败:', error);
     });
+} else if (typeof window !== 'undefined' && window.audioManager) {
+    console.log('✅ AudioManager实例已存在，跳过创建');
 }

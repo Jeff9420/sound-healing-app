@@ -1,3 +1,6 @@
+// 防止重复加载和声明
+if (typeof window !== 'undefined' && typeof window.UIController === 'undefined') {
+
 class UIController {
     constructor(audioManager) {
         this.audioManager = audioManager;
@@ -469,3 +472,11 @@ class UIController {
         console.log('✅ 初始音量同步完成');
     }
 }
+
+    // 将UIController类添加到window对象以便全局访问
+    if (typeof window !== 'undefined') {
+        window.UIController = UIController;
+        console.log('✅ UIController类定义已加载');
+    }
+
+} // 结束 UIController 类定义检查

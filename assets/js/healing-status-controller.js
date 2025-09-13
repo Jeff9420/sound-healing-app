@@ -436,9 +436,11 @@ window.getHealingStatus = () => window.healingStatusController.getStatusInfo();
 window.getHealingSuggestions = () => window.healingStatusController.getSmartSuggestions();
 window.setHealingMode = (mode) => window.healingStatusController.setMode(mode);
 
-// 添加CSS动画样式
-const animationStyles = document.createElement('style');
-animationStyles.textContent = `
+// 防止重复创建样式
+if (!document.getElementById('healing-status-animations')) {
+    const animationStyles = document.createElement('style');
+    animationStyles.id = 'healing-status-animations';
+    animationStyles.textContent = `
 @keyframes slideInFade {
     0% {
         transform: translateX(100px);
@@ -471,6 +473,7 @@ animationStyles.textContent = `
     font-size: 1.1rem;
 }
 `;
-document.head.appendChild(animationStyles);
+    document.head.appendChild(animationStyles);
+}
 
 console.log('🚀 疗愈状态控制器模块加载完成');

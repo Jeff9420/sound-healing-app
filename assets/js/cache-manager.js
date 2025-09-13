@@ -253,7 +253,7 @@ class CacheManager {
                 const filesToCache = category.files.slice(0, 3);
                 
                 for (const fileName of filesToCache) {
-                    const audioUrl = `assets/audio/${categoryKey}/${fileName}`;
+                    const audioUrl = getAudioUrl(categoryKey, fileName);
                     precachePromises.push(
                         fetch(audioUrl, { mode: 'no-cors' }).catch(error => {
                             console.warn(`⚠️ 预缓存音频失败: ${audioUrl}`, error);

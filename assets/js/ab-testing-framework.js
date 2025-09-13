@@ -8,6 +8,9 @@
  * @version 3.1.0
  */
 
+// 防止重复加载和声明
+if (typeof window !== 'undefined' && typeof window.ABTestingFramework === 'undefined') {
+
 class ABTestingFramework {
     constructor() {
         // 测试配置存储
@@ -641,13 +644,25 @@ class ABTestingFramework {
     }
 }
 
-// 创建全局实例
-window.abTestFramework = new ABTestingFramework();
+    // 将ABTestingFramework类添加到window对象以便全局访问
+    if (typeof window !== 'undefined') {
+        window.ABTestingFramework = ABTestingFramework;
+        console.log('✅ ABTestingFramework类定义已加载');
+    }
 
-// 导出API给其他模块使用
-window.getFeatureVariant = (featureName) => window.abTestFramework.getFeatureVariant(featureName);
-window.recordABMetric = (metric, value) => window.abTestFramework.recordMetric(metric, value);
-window.getABTestReport = () => window.abTestFramework.getABTestReport();
-window.analyzeExperiment = (experimentId) => window.abTestFramework.analyzeExperiment(experimentId);
+} // 结束 ABTestingFramework 类定义检查
 
-console.log('🚀 A/B测试框架加载完成');
+// 创建全局实例（只创建一次）
+if (typeof window !== 'undefined' && !window.abTestFramework && typeof window.ABTestingFramework !== 'undefined') {
+    window.abTestFramework = new window.ABTestingFramework();
+
+    // 导出API给其他模块使用
+    window.getFeatureVariant = (featureName) => window.abTestFramework.getFeatureVariant(featureName);
+    window.recordABMetric = (metric, value) => window.abTestFramework.recordMetric(metric, value);
+    window.getABTestReport = () => window.abTestFramework.getABTestReport();
+    window.analyzeExperiment = (experimentId) => window.abTestFramework.analyzeExperiment(experimentId);
+
+    console.log('🚀 A/B测试框架加载完成');
+} else if (typeof window !== 'undefined' && window.abTestFramework) {
+    console.log('✅ A/B测试框架实例已存在，跳过创建');
+}

@@ -1,7 +1,7 @@
-// Production Audio Configuration - Archive.org via Vercel Proxy (191 files)
-// Using Vercel proxy to solve CORS issues with Archive.org
+// Production Audio Configuration - Archive.org (191 files)
+// Only includes files that are confirmed uploaded to Archive.org
 const AUDIO_CONFIG = {
-    baseUrl: '/api/audio/',
+    baseUrl: 'https://archive.org/download/sound-healing-collection/',
     categories: {
         'Animal sounds': {
             name: '森林栖息地',

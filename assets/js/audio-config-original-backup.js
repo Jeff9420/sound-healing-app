@@ -1,11 +1,10 @@
-// Production Audio Configuration - Archive.org via Vercel Proxy (191 files)
-// Using Vercel proxy to solve CORS issues with Archive.org
+// 音频配置文件 - 基于音频文件夹结构
 const AUDIO_CONFIG = {
-    baseUrl: '/api/audio/',
+    baseUrl: 'assets/audio/',
     categories: {
         'Animal sounds': {
-            name: '森林栖息地',
-            icon: '🦅',
+            name: '动物声音',
+            icon: '🐾',
             description: '自然动物的声音，如鸟鸣、溪水声等',
             files: [
                 'SPA音乐疗馆 1 - 减压疗程 The Curing Shop - For Decompression.mp3',
@@ -36,23 +35,36 @@ const AUDIO_CONFIG = {
                 '非常难得的清脆鸟叫，深山里录制.mp3'
             ]
         },
+        'Chakra': {
+            name: '脉轮音乐',
+            icon: '🌈',
+            description: '调节身体能量中心的音乐',
+            files: [
+                'Hals-Chakra 蓝玉莲华(喉轮).mp3',
+                'Herz-Chakra 綠石蓮華(心輪).mp3',
+                'Milz-Chakra 玛瑙莲华(脐轮).mp3',
+                'Nabel-Chakra 水晶莲华(太阳神经严).mp3',
+                'Scheitel-Chakra 紫晶莲华(顶轮).mp3',
+                'Stirn-Chakra 石英莲华(眉轮).mp3',
+                'Wurzel-Chakra 碧玉莲华(海底轮).mp3'
+            ]
+        },
         'Fire': {
-            name: '温暖壁炉',
+            name: '火焰声音',
             icon: '🔥',
             description: '篝火、壁炉等温暖的火焰声音',
             files: [
-                // Currently only 3/4 files uploaded
+                '下雪天卧室壁炉声木柴燃烧白噪音.mp3',
                 '河边点燃篝火、水声和清脆的鸟鸣01.mp3',
                 '河边点燃篝火、水声和清脆的鸟鸣02.mp3',
                 '河边点燃篝火、水声和清脆的鸟鸣03.mp3'
             ]
         },
         'hypnosis': {
-            name: '梦境花园',
-            icon: '🌙',
+            name: '催眠音乐',
+            icon: '😴',
             description: '专业催眠和深度放松音乐',
             files: [
-                // Currently 58/70 files uploaded - using most common ones
                 'Bolo Ram.mp3',
                 'Gayatri (Luscious Chill Mix).mp3',
                 'Gopala Hare.mp3',
@@ -100,6 +112,8 @@ const AUDIO_CONFIG = {
                 '催眠音乐40.mp3',
                 '催眠音乐41.mp3',
                 '催眠音乐42.mp3',
+                '催眠音乐43.MP3',
+                '催眠音乐44.MP3',
                 '催眠音乐45.mp3',
                 '催眠音乐46.mp3',
                 '催眠音乐47.mp3',
@@ -114,12 +128,18 @@ const AUDIO_CONFIG = {
                 '催眠音乐55.mp3',
                 '催眠音乐56.mp3',
                 '催眠音乐57.mp3',
-                '催眠音乐58.mp3'
+                '催眠音乐58.mp3',
+                '催眠音乐6.mp3',
+                '催眠音乐7.mp3',
+                '催眠音乐8.mp3',
+                '催眠音乐9.mp3',
+                '放松轻音乐1.mp3',
+                '放松轻音乐2.mp3'
             ]
         },
         'meditation': {
-            name: '禅境山谷',
-            icon: '🧘‍♀️',
+            name: '冥想音乐',
+            icon: '🧘',
             description: '专用于冥想、瑜伽的宁静音乐',
             files: [
                 '冥想 瑜伽必听.mp3',
@@ -139,11 +159,10 @@ const AUDIO_CONFIG = {
             ]
         },
         'Rain': {
-            name: '雨林圣地',
-            icon: '☔',
+            name: '雨声',
+            icon: '🌧️',
             description: '各种雨声，助眠放松必备',
             files: [
-                // Currently 13/14 files uploaded
                 '一声闷雷，大雨倾盆.mp3',
                 '倾听山谷中小雨，净化心灵.mp3',
                 '奶奶家里听打雷下雨-..必备，治愈失眠.mp3',
@@ -156,15 +175,16 @@ const AUDIO_CONFIG = {
                 '记住乡愁打雷下雨-..必备，治愈失眠06.mp3',
                 '记住乡愁打雷下雨-..必备，治愈失眠09.mp3',
                 '记住乡愁打雷下雨-必备，治愈失眠07.mp3',
-                '记住乡愁雷雨过后-..必备，治愈失眠08.mp3'
+                '记住乡愁雷雨过后-..必备，治愈失眠08.mp3',
+                '身临情景的雨声.mp3'
             ]
         },
         'running water': {
-            name: '溪流秘境',
+            name: '流水声',
             icon: '💧',
             description: '溪流、河水等自然流水声',
             files: [
-                // Currently 5/6 files uploaded
+                '【冥想音乐】钢琴 & 流水声 .mp3',
                 '河边点燃篝火、水声和清脆的鸟鸣01.mp3',
                 '河边点燃篝火、水声和清脆的鸟鸣02.mp3',
                 '河边点燃篝火、水声和清脆的鸟鸣03.mp3',
@@ -173,115 +193,95 @@ const AUDIO_CONFIG = {
             ]
         },
         'Singing bowl sound': {
-            name: '颂钵圣殿',
+            name: '颂钵声音',
             icon: '🎵',
             description: '藏族颂钵音疗，身心疗愈',
             files: [
                 '01-Healing Bowls - Instrumental - Jane Winther.mp3',
-                '02-Celtic Harp - Instrumental - Jane Winther.mp3',
-                '03-Forest - Instrumental - Jane Winther.mp3',
-                '04-Bamboo Flute - Instrumental - Jane Winther.mp3',
-                '05-Inner Light - Instrumental - Jane Winther.mp3',
-                '06-Om Mani Padme Hum - Vocal - Jane Winther.mp3',
-                '07-Lightworker - Vocal - Jane Winther.mp3',
-                '08-Gate Gate - Vocal - Jane Winther.mp3',
-                'Bowls-Tibetan-C_GMinor.mp3',
-                'Bowls-Tibetan-Eb.mp3',
-                'Bowls-Tibetan-F.mp3',
-                'Bowls-Tibetan-G_DMinor.mp3',
-                'tibetan-singing-bowl-1.mp3',
-                'tibetan-singing-bowl-2.mp3',
-                'tibetan-singing-bowl-3.mp3',
-                'tibetan-singing-bowl-4.mp3',
-                'tibetan-singing-bowl-5.mp3',
-                'tibetan-singing-bowl-6.mp3',
-                'tibetan-singing-bowl-7.mp3',
-                'tibetan-singing-bowl-8.mp3',
-                '不同音级颂钵-第1组.mp3',
-                '不同音级颂钵-第2组.mp3',
-                '不同音级颂钵-第3组.mp3',
-                '不同音级颂钵-第4组.mp3',
-                '不同音级颂钵-第5组.mp3',
-                '不同音级颂钵-第6组.mp3',
-                '不同音级颂钵-第7组.mp3',
-                '不同音级颂钵-第8组.mp3',
-                '五分钟颂钵,给忙碌的都市人.mp3',
-                '单颂钵-C大调-沉稳低沉专注.mp3',
-                '单颂钵-D大调-坚定果决肯定.mp3',
-                '单颂钵-E大调-温暖柔和陶醉.mp3',
-                '单颂钵-F大调-广袤深邃悠远.mp3',
-                '单颂钵-G大调-激昂兴奋振奋.mp3',
-                '单颂钵-A大调-飘逸温柔浪漫.mp3',
-                '单颂钵-B大调-缥缈通透清澈.mp3',
-                '参禅-颂钵+木鱼,3分钟.mp3',
-                '安眠-颂钵+三角铃,5分钟.mp3',
-                '寺庙颂钵-三分钟.mp3',
-                '快速安眠颂钵3分钟.mp3',
-                '快速清理负能量-颂钵+磬.mp3',
-                '慈悲天音最美妙的颂钵合集.mp3',
-                '明亮型颂钵.mp3',
-                '沉稳型颂钵.mp3',
-                '清洗脑垢,最强颂钵4分钟.mp3',
-                '清除负能量,颂钵疗愈15分钟.mp3',
-                '疗愈型颂钵.mp3',
-                '睡前专用,6分钟颂钵.mp3',
-                '纯颂钵-五分钟版.mp3',
-                '纯颂钵-六分钟版.mp3',
-                '能量清理,10分钟颂钵.mp3',
-                '脉轮平衡,7个颂钵连奏.mp3',
-                '莲花绽放,感受慈悲的颂钵合奏.mp3',
-                '藏区原声颂钵采录.mp3',
-                '让人安静的纯颂钵声.mp3',
-                '赏花弄月,优雅的颂钵独奏.mp3',
-                '轻柔的颂钵,舒展身心.mp3',
-                '静心,3分钟纯净颂钵.mp3',
-                '静心养性颂钵10分钟.mp3',
-                '餐前,祈祷感恩的颂钵.mp3',
-                '高频净化,强力颂钵6分钟.mp3',
-                '龙腾四海,阳刚的颂钵合奏.mp3'
+                '02-Falling Still (Moving Toward Nothingness) - Diane Mandle.mp3',
+                '03-Return to Om - Diane Mandle.mp3',
+                '04-Singing Bowls - Tibetan Meditation Academy.mp3',
+                '05-Relaxing Tibetan Bowl - Buddhism Academy.mp3',
+                '06-Spiritual Sanctuary - Buddhism Academy.mp3',
+                '07-Cycle of Life and Death - Buddha Music Sanctuary.mp3',
+                '08-Sacral Chakra (Singing Bowl Only) - Ben Scott.mp3',
+                '09-Sonic Massage(Singing Bowl Only) - Ben Scott.mp3',
+                '10-The Sea and Healing Bowls II - Jane Winther.mp3',
+                '11-The Sea and Healing Bowls - Jane Winther.mp3',
+                '12-Singingbowls - Instrumental - Jane Winther.mp3',
+                '13-Singing Bowls & Bells - Jane Winther.mp3',
+                '14-Chapter One Into the Blue - Tinnitrana Orchestra.mp3',
+                '15-Bonus Chapter People the Beings of Water - Tinnitrana Orchestra.mp3',
+                '16-Tibetan Bowls - Inspiring Meditation Sounds Academy.mp3',
+                '17-Final - Deuter.mp3',
+                '18-Nada Himalaya 1 - Deuter.mp3',
+                '19-Nada Himalaya 2 - Deuter.mp3',
+                '20-Nanga Parbat - Deuter.mp3',
+                '21-Lhotse - Deuter.mp3',
+                '22-Khumbe - Deuter.mp3',
+                '23-Kailash - Deuter.mp3',
+                '24-Yantra - Deuter.mp3',
+                '25-Om Mani Padme Hum - Tibetan Buddhist Mantras.mp3',
+                '26-Heart Chakra(Singing Bowl Only) - Ben Scott.mp3',
+                '27-Solar Plexus Chakra Harmony - Wychazel.mp3',
+                '28-Root Chakra Harmony - Wychazel.mp3',
+                '29-Being Grounded (Muladhara - Root Chakra) - Tibetan Chakra Meditations.mp3',
+                '30-Connection to New Experiences - Tibetan Chakra Meditations.mp3',
+                '31-Self-Confidence (Manipura - Solar Plexus Chakra) - Tibetan Chakra Meditations.mp3',
+                '32-Love, Joy & Inner Peace (Anahata - Heart Chakra) - Tibetan Chakra Meditations.mp3',
+                '33-Pure Zen Meditative Life - Buddhist Meditation Music.mp3',
+                '34-Wisdom (Ajna - Third Eye Chakra) - Tibetan Chakra Meditations.mp3',
+                '35-Pure Bliss (Sahasrara - Crown Chakra) - Tibetan Chakra Meditations.mp3',
+                '36-Tibetan Singing Bowls Session on the Seashore -AKIMOTO.mp3',
+                '37-Tibetan Singing Bowls Session on the Calm Lakeshore -AKIMOTO.mp3',
+                '38-Tibetan Singing Bowls Session with Thunder and Rain -AKIMOTO.mp3',
+                '39-432Hz Alpha Binaural Bells Enhances Your Cognition & Focus.mp3',
+                '40-Amazing Secrets - Essential Reiki.mp3',
+                '41-天人合一 - 许嫚烜.mp3',
+                '42-爱与祝福 - Noble Music Project.mp3',
+                '43-Tibetan Temple Sounds @555Hz - Meditative Mind.mp3',
+                '【颂钵+夜晚鸟鸣】清静自然，独享一份清雅.mp3',
+                '【颂钵+山间鸟鸣】让你的眼睛更舒服、明亮、清澈.mp3',
+                '【颂钵.静心】急速释放负面情绪.mp3',
+                '【颂钵】神奇的声音按摩.mp3',
+                '【颂钵按摩】获得超级能量.mp3',
+                '大自然中感受颂钵冥想，要不要来听听呀！.mp3',
+                '当安静音乐相遇钵音，简直美极了.mp3',
+                '能量颂-钵声.音，敲击与磨缓解精神压力.mp3',
+                '能量颂-钵声.音，调整身心压力.mp3',
+                '远离喧闹都市，颂钵宇宙能量之音！.mp3',
+                '钵声与潺潺流水.鸟鸣. 静心.舒压.mp3',
+                '钵音+水声+鸟叫自然声 让你平静下来的声音 01.mp3',
+                '钵音+水声+鸟叫自然声 让你平静下来的声音 02.mp3',
+                '钵音按摩 流水涤荡心灵，静心.mp3',
+                '音愈：钵音水泡，治疗睡眠不足.mp3',
+                '顶级水晶钵颂音.音疗.mp3',
+                '颂钵音疗，平躺或，放下身心，全然融入的体会.mp3',
+                '高效放松冥想，林中翠鸟与溪水.mp3'
             ]
         },
         'Subconscious Therapy': {
-            name: '潜识星域',
-            icon: '🌌',
-            description: '潜意识修复与疗愈音乐',
+            name: '潜意识疗愈',
+            icon: '🌙',
+            description: '潜意识层面的心理疗愈音乐',
             files: [
-                '潜意识疗愈 01 宽恕与原谅.mp3',
-                '潜意识疗愈 02 感恩与欣赏.mp3',
-                '潜意识疗愈 03 创造与成功.mp3',
-                '潜意识疗愈 04 金钱丰盛.mp3',
-                '潜意识疗愈 05 圆满关系.mp3',
-                '潜意识疗愈 06 重塑自信.mp3',
-                '潜意识疗愈 07 身心健康.mp3',
-                '潜意识疗愈 08 内在小孩.mp3',
-                '潜意识疗愈 09 快乐生活.mp3',
-                '潜意识疗愈 10 母亲疗愈.mp3',
-                '潜意识疗愈 11 父亲疗愈.mp3'
+                '全新的开始.mp3',
+                '净空.mp3',
+                '唤醒.mp3',
+                '回忆微微笑.mp3',
+                '微醺.mp3',
+                '柔情.mp3',
+                '梦起始的地方.mp3',
+                '滴落的星子.mp3',
+                '生机无限.mp3',
+                '薄纱之舞.mp3',
+                '遇见林间精灵.mp3'
             ]
         }
     }
 };
 
-// Update folder paths to match Archive.org structure  
-AUDIO_CONFIG.categories['Animal sounds'].folder = 'animal-sounds';
-AUDIO_CONFIG.categories['Fire'].folder = 'fire-sounds';
-AUDIO_CONFIG.categories['hypnosis'].folder = 'hypnosis';
-AUDIO_CONFIG.categories['meditation'].folder = 'meditation';
-AUDIO_CONFIG.categories['Rain'].folder = 'rain-sounds';
-AUDIO_CONFIG.categories['running water'].folder = 'water-sounds';
-AUDIO_CONFIG.categories['Singing bowl sound'].folder = 'singing-bowls';
-AUDIO_CONFIG.categories['Subconscious Therapy'].folder = 'subconscious-therapy';
-
-// Helper function to get full URL for a file
-function getAudioUrl(categoryKey, filename) {
-    const category = AUDIO_CONFIG.categories[categoryKey];
-    if (!category) return null;
-    
-    const folderName = category.folder || categoryKey.toLowerCase().replace(/\s+/g, '-');
-    return `${AUDIO_CONFIG.baseUrl}${folderName}/${encodeURIComponent(filename)}`;
-}
-
-// Export for use in other modules
+// 导出配置
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { AUDIO_CONFIG, getAudioUrl };
+    module.exports = AUDIO_CONFIG;
 }
