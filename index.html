@@ -275,6 +275,339 @@
     </script>
     
     <!-- 应用初始化和修复逻辑保持内联以确保稳定性 -->
+    
+    <!-- 🚨 EMERGENCY FIX: 直接在HTML中实现完整的AudioManager以绕过所有模块冲突和缓存问题 -->
+    <script>
+        // 紧急音频管理器 - 直接在HTML中定义以绕过所有模块加载问题
+        class EmergencyAudioManager {
+            constructor() {
+                this.audioInstances = new Map();
+                this.isInitialized = false;
+                this.globalVolume = 0.5;
+                this.currentCategory = null;
+                this.currentTrack = null;
+                this.eventBus = document.createElement('div');
+                
+                console.log('🚨 紧急音频管理器启动');
+                this.initialize();
+            }
+            
+            async initialize() {
+                try {
+                    // 基本配置检查
+                    if (typeof AUDIO_CONFIG === 'undefined') {
+                        console.warn('AUDIO_CONFIG未定义，等待加载...');
+                        // 等待配置加载
+                        let retries = 0;
+                        while (typeof AUDIO_CONFIG === 'undefined' && retries < 50) {
+                            await new Promise(resolve => setTimeout(resolve, 100));
+                            retries++;
+                        }
+                    }
+                    
+                    this.isInitialized = true;
+                    console.log('✅ 紧急音频管理器初始化完成');
+                    
+                    // 设置为全局 AudioManager 以兼容现有代码
+                    window.AudioManager = EmergencyAudioManager;
+                    window.audioManager = this;
+                    
+                    // 触发初始化完成事件
+                    this.eventBus.dispatchEvent(new CustomEvent('initialized'));
+                    
+                } catch (error) {
+                    console.error('紧急音频管理器初始化失败:', error);
+                }
+            }
+            
+            getAudioUrl(categoryKey, fileName) {
+                // 直接构建Archive.org代理URL - 使用实际的Archive.org目录名
+                const categoryMappings = {
+                    'Animal sounds': 'animal-sounds',
+                    'Chakra': 'chakra',
+                    'Fire': 'fire-sounds',
+                    'hypnosis': 'hypnosis',
+                    'meditation': 'meditation',
+                    'Rain': 'rain-sounds',
+                    'running water': 'water-sounds',
+                    'Singing bowl sound': 'singing-bowls',
+                    'Subconscious Therapy': 'subconscious-therapy'
+                };
+                
+                const mappedCategory = categoryMappings[categoryKey] || categoryKey.toLowerCase().replace(/\s+/g, '-');
+                const encodedFileName = encodeURIComponent(fileName);
+                return `/api/audio/${mappedCategory}/${encodedFileName}`;
+            }
+            
+            async playTrack(categoryKey, fileName) {
+                try {
+                    console.log(`🎵 播放音轨: ${categoryKey} - ${fileName}`);
+                    
+                    const audioUrl = this.getAudioUrl(categoryKey, fileName);
+                    const trackId = `${categoryKey}-${fileName}`;
+                    
+                    // 停止其他正在播放的音频
+                    this.pauseAll();
+                    
+                    // 创建或获取音频实例
+                    let audio = this.audioInstances.get(trackId);
+                    if (!audio) {
+                        audio = new Audio();
+                        audio.volume = this.globalVolume;
+                        audio.preload = 'metadata';
+                        this.audioInstances.set(trackId, audio);
+                        
+                        // 添加事件监听
+                        audio.addEventListener('loadstart', () => {
+                            console.log(`开始加载: ${fileName}`);
+                        });
+                        
+                        audio.addEventListener('canplay', () => {
+                            console.log(`可以播放: ${fileName}`);
+                        });
+                        
+                        audio.addEventListener('error', (e) => {
+                            console.error(`音频加载错误: ${fileName}`, e);
+                        });
+                        
+                        audio.addEventListener('play', () => {
+                            this.currentCategory = categoryKey;
+                            this.currentTrack = fileName;
+                            this.updateNowPlaying(categoryKey, fileName);
+                        });
+                    }
+                    
+                    // 设置音频源并播放
+                    audio.src = audioUrl;
+                    
+                    // 等待用户交互后播放
+                    await audio.play();
+                    
+                    console.log(`✅ 成功播放: ${fileName}`);
+                    return true;
+                    
+                } catch (error) {
+                    console.error(`播放失败: ${fileName}`, error);
+                    
+                    if (error.name === 'NotAllowedError') {
+                        this.showError('需要用户交互才能播放音频，请点击播放按钮');
+                    } else {
+                        this.showError(`播放失败: ${error.message}`);
+                    }
+                    return false;
+                }
+            }
+            
+            pauseAll() {
+                for (const [trackId, audio] of this.audioInstances) {
+                    if (!audio.paused) {
+                        audio.pause();
+                    }
+                }
+            }
+            
+            updateNowPlaying(categoryKey, fileName) {
+                // 更新现在播放信息
+                const currentTrackName = document.getElementById('currentTrackName');
+                const pondTrackName = document.querySelector('.current-track-name');
+                const pondTrackArtist = document.querySelector('.current-track-artist');
+                
+                const displayName = fileName.replace('.mp3', '');
+                
+                if (currentTrackName) {
+                    currentTrackName.textContent = displayName;
+                }
+                
+                if (pondTrackName) {
+                    pondTrackName.textContent = displayName;
+                }
+                
+                if (pondTrackArtist) {
+                    const categoryNames = {
+                        'Animal sounds': '森林栖息地',
+                        'Chakra': '能量场域',
+                        'Fire': '温暖壁炉',
+                        'hypnosis': '梦境花园',
+                        'meditation': '禅境山谷',
+                        'Rain': '雨林圣地',
+                        'running water': '溪流秘境',
+                        'Singing bowl sound': '颂钵圣殿',
+                        'Subconscious Therapy': '潜识星域'
+                    };
+                    pondTrackArtist.textContent = categoryNames[categoryKey] || categoryKey;
+                }
+                
+                // 更新池塘播放按钮状态
+                const lotusBtn = document.getElementById('lotusPlayBtn');
+                if (lotusBtn) {
+                    lotusBtn.textContent = '⏸';
+                    lotusBtn.onclick = () => this.pauseAll();
+                }
+            }
+            
+            // 添加应用兼容性方法
+            isAnyPlaying() {
+                for (const [key, audio] of this.audioInstances) {
+                    if (audio && !audio.paused) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            
+            getPlayingSounds() {
+                const playing = [];
+                for (const [key, audio] of this.audioInstances) {
+                    if (audio && !audio.paused) {
+                        playing.push(key);
+                    }
+                }
+                return playing;
+            }
+            
+            setGlobalVolume(volume) {
+                this.globalVolume = volume;
+                for (const [key, audio] of this.audioInstances) {
+                    if (audio) {
+                        audio.volume = volume;
+                    }
+                }
+            }
+            
+            setSoundVolume(soundId, volume) {
+                const audio = this.audioInstances.get(soundId);
+                if (audio) {
+                    audio.volume = volume;
+                }
+            }
+            
+            toggleSound(soundId) {
+                // 简化的实现，直接使用分类播放
+                if (soundId === 'rain') {
+                    return this.playCategory('Rain');
+                } else if (soundId === 'ocean') {
+                    return this.playCategory('water-sounds');
+                } else if (soundId === 'meditation') {
+                    return this.playCategory('meditation');
+                }
+                console.warn('Unknown sound ID:', soundId);
+            }
+            
+            playSound(soundId) {
+                return this.toggleSound(soundId);
+            }
+            
+            showError(message) {
+                console.error(message);
+                
+                // 创建错误提示
+                const errorDiv = document.createElement('div');
+                errorDiv.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: rgba(220, 53, 69, 0.9);
+                    color: white;
+                    padding: 15px 20px;
+                    border-radius: 8px;
+                    z-index: 10000;
+                    max-width: 300px;
+                    font-size: 14px;
+                `;
+                errorDiv.textContent = message;
+                
+                document.body.appendChild(errorDiv);
+                
+                setTimeout(() => {
+                    if (errorDiv.parentNode) {
+                        errorDiv.parentNode.removeChild(errorDiv);
+                    }
+                }, 5000);
+            }
+        }
+        
+        // 全局变量
+        window.emergencyAudioManager = null;
+        
+        // 紧急初始化函数
+        async function emergencyInitialize() {
+            console.log('🚨 开始紧急初始化...');
+            
+            try {
+                // 创建紧急音频管理器
+                window.emergencyAudioManager = new EmergencyAudioManager();
+                
+                // 等待音频管理器初始化
+                await new Promise((resolve) => {
+                    if (window.emergencyAudioManager.isInitialized) {
+                        resolve();
+                    } else {
+                        window.emergencyAudioManager.eventBus.addEventListener('initialized', resolve, { once: true });
+                    }
+                });
+                
+                console.log('✅ 紧急音频管理器已就绪');
+                
+                // 绑定池塘播放按钮
+                const lotusBtn = document.getElementById('lotusPlayBtn');
+                if (lotusBtn) {
+                    lotusBtn.onclick = () => {
+                        // 播放默认音轨
+                        if (typeof AUDIO_CONFIG !== 'undefined' && AUDIO_CONFIG.categories['Rain']?.files?.length > 0) {
+                            const firstRainFile = AUDIO_CONFIG.categories['Rain'].files[0];
+                            window.emergencyAudioManager.playTrack('Rain', firstRainFile);
+                        }
+                    };
+                }
+                
+                // 绑定音轨播放事件
+                document.addEventListener('click', (e) => {
+                    const trackItem = e.target.closest('.track-item');
+                    if (trackItem) {
+                        const trackTitle = trackItem.querySelector('.track-title');
+                        if (trackTitle) {
+                            const fileName = trackTitle.textContent.trim() + '.mp3';
+                            
+                            // 从播放列表标题中获取分类
+                            const playlistTitle = document.getElementById('playlistTitle');
+                            const ecosystemName = playlistTitle ? playlistTitle.textContent : '';
+                            
+                            // 映射生态系统名称到分类键
+                            const ecosystemToCategoryMap = {
+                                '森林栖息地': 'Animal sounds',
+                                '能量场域': 'Chakra',
+                                '温暖壁炉': 'Fire',
+                                '梦境花园': 'hypnosis',
+                                '禅境山谷': 'meditation',
+                                '雨林圣地': 'Rain',
+                                '溪流秘境': 'running water',
+                                '颂钵圣殿': 'Singing bowl sound',
+                                '潜识星域': 'Subconscious Therapy'
+                            };
+                            
+                            const categoryKey = ecosystemToCategoryMap[ecosystemName];
+                            if (categoryKey && window.emergencyAudioManager) {
+                                window.emergencyAudioManager.playTrack(categoryKey, fileName);
+                            }
+                        }
+                    }
+                });
+                
+                console.log('✅ 紧急初始化完成');
+                
+            } catch (error) {
+                console.error('🚨 紧急初始化失败:', error);
+            }
+        }
+        
+        // 在DOM加载完成后立即初始化
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', emergencyInitialize);
+        } else {
+            emergencyInitialize();
+        }
+        
+    </script>
 
     <script>
         // 强制修复脚本 - 确保播放列表功能正常工作
