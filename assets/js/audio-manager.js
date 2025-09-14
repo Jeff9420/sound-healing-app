@@ -116,10 +116,21 @@ class AudioManager {
         this.loadingStates.set(trackId, true);
         this.eventBus.dispatchEvent(new CustomEvent('loadingStart', { detail: trackId }));
 
+        // Show loading indicator for external audio
+        if (typeof window.loadingIndicator !== 'undefined') {
+            window.loadingIndicator.showExternalAudioLoading(fileName);
+        }
+
         return new Promise((resolve, reject) => {
             const timeout = setTimeout(() => {
                 this.loadingStates.set(trackId, false);
                 this.eventBus.dispatchEvent(new CustomEvent('loadingEnd', { detail: trackId }));
+
+                // Show timeout error in loading indicator
+                if (typeof window.loadingIndicator !== 'undefined') {
+                    window.loadingIndicator.showError(`音频加载超时: ${fileName}\n网络连接较慢，请检查网络或稍后重试`);
+                }
+
                 reject(new Error(`音频加载超时: ${fileName}`));
             }, 15000);
 
@@ -127,6 +138,11 @@ class AudioManager {
                 clearTimeout(timeout);
                 this.loadingStates.set(trackId, false);
                 this.eventBus.dispatchEvent(new CustomEvent('loadingEnd', { detail: trackId }));
+
+                // Complete loading indicator
+                if (typeof window.loadingIndicator !== 'undefined') {
+                    window.loadingIndicator.completeLoading();
+                }
                 
                 audio.volume = this.globalVolume * 0.5;
                 this.audioInstances.set(trackId, {
@@ -145,6 +161,12 @@ class AudioManager {
                 console.error(`音频文件加载失败: ${fileName}`, error);
                 this.loadingStates.set(trackId, false);
                 this.eventBus.dispatchEvent(new CustomEvent('loadingEnd', { detail: trackId }));
+
+                // Show error in loading indicator
+                if (typeof window.loadingIndicator !== 'undefined') {
+                    window.loadingIndicator.showError(`音频加载失败: ${fileName}\n正在创建静默实例以保持应用运行`);
+                }
+
                 this.createSilentAudioInstance(trackId, categoryName, fileName);
                 resolve();
             };

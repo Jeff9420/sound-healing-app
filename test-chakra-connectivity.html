@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chakra Category & Archive.org Connectivity Test</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+
+        .test-container {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 20px;
+        }
+
+        .test-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+
+        .test-result {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .success { background: rgba(76, 175, 80, 0.3); }
+        .error { background: rgba(244, 67, 54, 0.3); }
+        .loading { background: rgba(255, 193, 7, 0.3); }
+
+        .category-test {
+            border: 1px solid rgba(255,255,255,0.3);
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .file-test {
+            margin: 5px 0;
+            padding: 8px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        button {
+            background: linear-gradient(45deg, #7c4dff, #536dfe);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .test-container { padding: 15px; }
+            .test-section { padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🕉️ Chakra Category & Archive.org 连接测试</h1>
+        <p>测试新转换的Chakra分类和Archive.org通过Vercel代理的连接性能</p>
+
+        <div class="test-section">
+            <h2>📋 配置加载测试</h2>
+            <div id="config-test" class="test-result loading">
+                正在加载配置文件...
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>🎵 分类测试</h2>
+            <div id="category-tests"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>🔗 Archive.org 连接测试</h2>
+            <button onclick="testArchiveConnection()">测试连接性能</button>
+            <div id="connection-results"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>📱 移动端适配测试</h2>
+            <div class="test-result" id="mobile-test">
+                屏幕尺寸: <span id="screen-size"></span><br>
+                触摸支持: <span id="touch-support"></span><br>
+                网络类型: <span id="network-type"></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/audio-config.js"></script>
+    <script>
+        // 配置加载测试
+        function testConfiguration() {
+            const configTest = document.getElementById('config-test');
+
+            try {
+                if (typeof AUDIO_CONFIG === 'undefined') {
+                    configTest.className = 'test-result error';
+                    configTest.innerHTML = '❌ 配置文件未加载';
+                    return;
+                }
+
+                const categories = Object.keys(AUDIO_CONFIG.categories);
+                const hasChakra = categories.includes('Chakra');
+                const baseUrl = AUDIO_CONFIG.baseUrl;
+
+                configTest.className = `test-result ${hasChakra ? 'success' : 'error'}`;
+                configTest.innerHTML = `
+                    ✅ 配置加载成功<br>
+                    📁 总分类数: ${categories.length}<br>
+                    🕉️ Chakra分类: ${hasChakra ? '已启用' : '未找到'}<br>
+                    🌐 Base URL: ${baseUrl}
+                `;
+
+                // 显示分类详情
+                displayCategoryTests();
+
+            } catch (error) {
+                configTest.className = 'test-result error';
+                configTest.innerHTML = `❌ 配置测试错误: ${error.message}`;
+            }
+        }
+
+        // 分类详细测试
+        function displayCategoryTests() {
+            const container = document.getElementById('category-tests');
+            container.innerHTML = '';
+
+            Object.entries(AUDIO_CONFIG.categories).forEach(([key, category]) => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category-test';
+
+                const isChakra = key === 'Chakra';
+                const fileCount = category.files.length;
+                const icon = category.icon;
+                const name = category.name;
+
+                categoryDiv.innerHTML = `
+                    <h3>${icon} ${name} (${key})</h3>
+                    <div class="test-result ${isChakra ? 'success' : 'success'}">
+                        📊 文件数量: ${fileCount}<br>
+                        ${isChakra ? '🆕 新转换的ASF→MP3文件' : '✅ 现有文件'}
+                    </div>
+                    <details>
+                        <summary>查看文件列表 (${fileCount} 个)</summary>
+                        ${category.files.map(file => `
+                            <div class="file-test">
+                                📄 ${file.split('/').pop()}
+                            </div>
+                        `).join('')}
+                    </details>
+                `;
+
+                container.appendChild(categoryDiv);
+            });
+        }
+
+        // Archive.org 连接测试
+        async function testArchiveConnection() {
+            const resultsDiv = document.getElementById('connection-results');
+            resultsDiv.innerHTML = '<div class="test-result loading">🔄 正在测试连接...</div>';
+
+            const testUrls = [
+                '/api/audio/animal-sounds/SPA音乐疗馆 1 - 减压疗程 The Curing Shop - For Decompression.mp3',
+                '/api/audio/chakra/Hals-Chakra 蓝玉莲华(喉轮).mp3' // 测试新的Chakra文件
+            ];
+
+            let results = [];
+
+            for (const url of testUrls) {
+                const startTime = performance.now();
+                try {
+                    const response = await fetch(url, {
+                        method: 'HEAD',
+                        mode: 'cors'
+                    });
+                    const endTime = performance.now();
+                    const responseTime = Math.round(endTime - startTime);
+
+                    const fileName = url.split('/').pop();
+                    const status = response.ok ? 'success' : 'error';
+                    const statusText = response.ok ?
+                        `✅ ${response.status} - ${responseTime}ms` :
+                        `❌ ${response.status} ${response.statusText}`;
+
+                    results.push(`
+                        <div class="test-result ${status}">
+                            📁 ${fileName}<br>
+                            🌐 ${statusText}
+                        </div>
+                    `);
+                } catch (error) {
+                    const fileName = url.split('/').pop();
+                    results.push(`
+                        <div class="test-result error">
+                            📁 ${fileName}<br>
+                            ❌ 连接错误: ${error.message}
+                        </div>
+                    `);
+                }
+            }
+
+            resultsDiv.innerHTML = results.join('');
+        }
+
+        // 移动端检测
+        function detectMobileCapabilities() {
+            const screenSize = `${window.innerWidth}x${window.innerHeight}`;
+            const touchSupport = 'ontouchstart' in window ? '✅ 支持' : '❌ 不支持';
+
+            // 网络类型检测
+            let networkType = '未知';
+            if ('connection' in navigator) {
+                const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+                if (connection) {
+                    networkType = `${connection.effectiveType || '未知'} (${connection.downlink || '?'}Mbps)`;
+                }
+            }
+
+            document.getElementById('screen-size').textContent = screenSize;
+            document.getElementById('touch-support').textContent = touchSupport;
+            document.getElementById('network-type').textContent = networkType;
+        }
+
+        // 页面加载完成后运行测试
+        document.addEventListener('DOMContentLoaded', () => {
+            testConfiguration();
+            detectMobileCapabilities();
+        });
+    </script>
+</body>
+</html>

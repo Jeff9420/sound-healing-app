@@ -1,7 +1,7 @@
-// Production Audio Configuration - Archive.org via Vercel Proxy (191 files)
-// Using Vercel proxy to solve CORS issues with Archive.org
+// Production Audio Configuration - Archive.org (191 files)
+// Only includes files that are confirmed uploaded to Archive.org
 const AUDIO_CONFIG = {
-    baseUrl: '/api/audio/',
+    baseUrl: 'https://archive.org/download/sound-healing-collection/',
     categories: {
         'Animal sounds': {
             name: '森林栖息地',
@@ -114,7 +114,11 @@ const AUDIO_CONFIG = {
                 '催眠音乐55.mp3',
                 '催眠音乐56.mp3',
                 '催眠音乐57.mp3',
-                '催眠音乐58.mp3'
+                '催眠音乐58.mp3',
+                '催眠音乐6.mp3',
+                '催眠音乐7.mp3',
+                '催眠音乐8.mp3',
+                '催眠音乐9.mp3'
             ]
         },
         'meditation': {
@@ -241,6 +245,20 @@ const AUDIO_CONFIG = {
                 '龙腾四海,阳刚的颂钵合奏.mp3'
             ]
         },
+        'Chakra': {
+            name: '脉轮能量',
+            icon: '🕉️',
+            description: '七个脉轮的能量平衡和调和音乐',
+            files: [
+                'Hals-Chakra_Blaue_Lotusblume.mp3',
+                'Herz-Chakra_Grune_Lotusblume.mp3',
+                'Milz-Chakra_Orange_Lotusblume.mp3',
+                'Nabel-Chakra_Gelbe_Lotusblume.mp3',
+                'Scheitel-Chakra_Violette_Lotusblume.mp3',
+                'Stirn-Chakra_Weisse_Lotusblume.mp3',
+                'Wurzel-Chakra_Rote_Lotusblume.mp3'
+            ]
+        },
         'Subconscious Therapy': {
             name: '潜识星域',
             icon: '🌌',
@@ -262,15 +280,16 @@ const AUDIO_CONFIG = {
     }
 };
 
-// Update folder paths to match Archive.org structure  
-AUDIO_CONFIG.categories['Animal sounds'].folder = 'animal-sounds';
-AUDIO_CONFIG.categories['Fire'].folder = 'fire-sounds';
-AUDIO_CONFIG.categories['hypnosis'].folder = 'hypnosis';
-AUDIO_CONFIG.categories['meditation'].folder = 'meditation';
-AUDIO_CONFIG.categories['Rain'].folder = 'rain-sounds';
-AUDIO_CONFIG.categories['running water'].folder = 'water-sounds';
-AUDIO_CONFIG.categories['Singing bowl sound'].folder = 'singing-bowls';
-AUDIO_CONFIG.categories['Subconscious Therapy'].folder = 'subconscious-therapy';
+// Update folder paths to match Archive.org structure
+AUDIO_CONFIG.categories['Animal sounds'].folder = 'sound-healing-animal-sounds';
+AUDIO_CONFIG.categories['Fire'].folder = 'sound-healing-fire-sounds';
+AUDIO_CONFIG.categories['hypnosis'].folder = 'sound-healing-hypnosis';
+AUDIO_CONFIG.categories['meditation'].folder = 'sound-healing-meditation';
+AUDIO_CONFIG.categories['Rain'].folder = 'sound-healing-rain-sounds';
+AUDIO_CONFIG.categories['running water'].folder = 'sound-healing-water-sounds';
+AUDIO_CONFIG.categories['Singing bowl sound'].folder = 'sound-healing-singing-bowls';
+AUDIO_CONFIG.categories['Subconscious Therapy'].folder = 'sound-healing-subconscious-therapy';
+AUDIO_CONFIG.categories['Chakra'].folder = 'sound-healing-chakra';
 
 // Helper function to get full URL for a file
 function getAudioUrl(categoryKey, filename) {

@@ -1,312 +1,364 @@
 /**
- * 增强版Service Worker v2.0
- * 声音疗愈应用缓存系统
- * 
+ * Enhanced Service Worker for Archive.org External Audio Storage
+ * Optimized caching strategy for external audio files and improved performance
+ *
  * @author Claude Code Performance Optimization
  * @version 2.0
  */
 
-const CACHE_NAME = 'sound-healing-v2.0';
-const CACHE_VERSION = '2.0';
+const CACHE_VERSION = 'v2.0-archive-optimized';
+const CACHE_NAMES = {
+    STATIC: `sound-healing-static-${CACHE_VERSION}`,
+    AUDIO_METADATA: `sound-healing-audio-meta-${CACHE_VERSION}`,
+    IMAGES: `sound-healing-images-${CACHE_VERSION}`,
+    API_RESPONSES: `sound-healing-api-${CACHE_VERSION}`
+};
 
-// 核心文件（必须缓存）
-const CORE_CACHE_FILES = [
+// Static files to cache
+const STATIC_CACHE_FILES = [
     '/',
     '/index.html',
     '/assets/css/main.css',
+    '/assets/css/mobile-optimized.css',
     '/assets/css/playlist.css',
     '/assets/css/gpu-optimized-animations.css',
     '/assets/js/audio-config.js',
     '/assets/js/module-loader.js',
+    '/assets/js/loading-indicator.js',
     '/assets/js/i18n-system.js',
-    '/assets/js/language-integration.js',
     '/assets/js/audio-manager.js',
-    '/assets/js/cache-manager.js',
-    '/assets/js/audio-lazy-loader.js'
+    '/assets/js/ui-controller.js',
+    '/assets/js/playlist-ui.js',
+    '/assets/js/background-scene-manager.js',
+    '/manifest.json'
 ];
 
-// 音频缓存配置
-const AUDIO_CACHE_CONFIG = {
-    maxCacheSize: 100 * 1024 * 1024, // 100MB 音频缓存限制
-    maxCacheAge: 7 * 24 * 60 * 60 * 1000, // 7天过期
-    cacheName: `${CACHE_NAME}-audio`
-};
+// Audio metadata cache duration (2 hours)
+const AUDIO_METADATA_MAX_AGE = 2 * 60 * 60 * 1000;
+// Image cache duration (1 week)
+const IMAGE_CACHE_MAX_AGE = 7 * 24 * 60 * 60 * 1000;
+// API response cache duration (30 minutes)
+const API_CACHE_MAX_AGE = 30 * 60 * 1000;
 
-// 性能统计
-let performanceStats = {
-    cacheHits: 0,
-    cacheMisses: 0,
-    audioServed: 0,
-    lastCleanup: Date.now()
-};
-
-// Service Worker事件监听器
+// Install event
 self.addEventListener('install', (event) => {
-    console.log('🚀 SW v2.0: Service Worker 安装中...');
-    
-    event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then((cache) => {
-                console.log('✅ SW v2.0: 开始缓存核心文件...');
-                return cache.addAll(CORE_CACHE_FILES);
-            })
-            .then(() => {
-                console.log('✅ SW v2.0: 核心文件缓存完成');
-                return self.skipWaiting();
-            })
-            .catch((error) => {
-                console.error('❌ SW v2.0: 安装失败', error);
-            })
-    );
-});
+    console.log('🚀 Enhanced SW: Installing Service Worker v2.0');
 
-self.addEventListener('activate', (event) => {
-    console.log('🔄 SW v2.0: Service Worker 激活中...');
-    
     event.waitUntil(
         Promise.all([
-            // 清理旧缓存
-            caches.keys().then((cacheNames) => {
-                return Promise.all(
-                    cacheNames.map((cacheName) => {
-                        if (cacheName !== CACHE_NAME && cacheName !== AUDIO_CACHE_CONFIG.cacheName) {
-                            console.log('🧹 SW v2.0: 清理旧缓存', cacheName);
-                            return caches.delete(cacheName);
-                        }
-                    })
-                );
+            // Cache static files
+            caches.open(CACHE_NAMES.STATIC).then((cache) => {
+                console.log('📦 Enhanced SW: Caching static files...');
+                return cache.addAll(STATIC_CACHE_FILES);
             }),
-            // 声明控制权
-            self.clients.claim()
-        ]).then(() => {
-            console.log('✅ SW v2.0: Service Worker 激活完成');
+
+            // Initialize other caches
+            caches.open(CACHE_NAMES.AUDIO_METADATA),
+            caches.open(CACHE_NAMES.IMAGES),
+            caches.open(CACHE_NAMES.API_RESPONSES)
+        ])
+        .then(() => {
+            console.log('✅ Enhanced SW: Installation complete');
+            return self.skipWaiting();
+        })
+        .catch((error) => {
+            console.warn('⚠️ Enhanced SW: Some files failed to cache:', error);
         })
     );
 });
 
+// Activate event
+self.addEventListener('activate', (event) => {
+    console.log('🔄 Enhanced SW: Activating Service Worker v2.0');
+
+    event.waitUntil(
+        caches.keys().then((cacheNames) => {
+            return Promise.all(
+                cacheNames.map((cacheName) => {
+                    // Keep current version caches
+                    if (!Object.values(CACHE_NAMES).includes(cacheName)) {
+                        console.log('🧹 Enhanced SW: Cleaning old cache:', cacheName);
+                        return caches.delete(cacheName);
+                    }
+                })
+            );
+        })
+        .then(() => {
+            console.log('✅ Enhanced SW: Activation complete');
+            return self.clients.claim();
+        })
+    );
+});
+
+// Fetch event with intelligent routing
 self.addEventListener('fetch', (event) => {
+    if (event.request.method !== 'GET') {
+        return;
+    }
+
     const url = new URL(event.request.url);
-    
-    // 音频文件处理（外部Archive.org文件）
-    if (url.pathname.includes('/assets/audio/') || url.hostname === 'archive.org') {
-        event.respondWith(handleAudioRequest(event.request));
-        return;
+    const pathname = url.pathname;
+
+    // Route requests based on type
+    if (isArchiveAudioRequest(url)) {
+        event.respondWith(handleArchiveAudioRequest(event.request));
+    } else if (isVercelApiRequest(url)) {
+        event.respondWith(handleVercelApiRequest(event.request));
+    } else if (isImageRequest(pathname)) {
+        event.respondWith(handleImageRequest(event.request));
+    } else if (isStaticResource(pathname)) {
+        event.respondWith(handleStaticRequest(event.request));
+    } else {
+        // Default network-first for everything else
+        event.respondWith(networkFirst(event.request, CACHE_NAMES.STATIC));
     }
-    
-    // API请求处理
-    if (url.pathname.startsWith('/api/audio/')) {
-        event.respondWith(handleApiAudioRequest(event.request));
-        return;
-    }
-    
-    // 静态资源缓存策略
-    if (isStaticResource(url.pathname)) {
-        event.respondWith(handleStaticResource(event.request));
-        return;
-    }
-    
-    // 页面请求处理
-    if (event.request.mode === 'navigate') {
-        event.respondWith(handlePageRequest(event.request));
-        return;
-    }
-    
-    // 默认网络优先策略
-    event.respondWith(
-        fetch(event.request).catch(() => {
-            return caches.match(event.request);
-        })
-    );
 });
 
-/**
- * 处理音频请求（缓存优先策略）
- */
-async function handleAudioRequest(request) {
+// Handle Archive.org audio requests (network-only with optimization)
+async function handleArchiveAudioRequest(request) {
     try {
-        const audioCache = await caches.open(AUDIO_CACHE_CONFIG.cacheName);
-        const cachedResponse = await audioCache.match(request);
-        
-        if (cachedResponse) {
-            performanceStats.cacheHits++;
-            performanceStats.audioServed++;
-            return cachedResponse;
+        console.log('🎵 Enhanced SW: Archive.org audio request:', request.url);
+
+        // Add custom headers for Archive.org optimization
+        const enhancedRequest = new Request(request, {
+            headers: {
+                ...request.headers,
+                'Cache-Control': 'public, max-age=3600',
+                'Accept-Encoding': 'gzip, deflate, br'
+            }
+        });
+
+        const response = await fetch(enhancedRequest);
+
+        if (response.ok) {
+            // Don't cache audio files (too large), but improve streaming
+            const optimizedResponse = new Response(response.body, {
+                status: response.status,
+                statusText: response.statusText,
+                headers: {
+                    ...response.headers,
+                    'Cache-Control': 'public, max-age=3600',
+                    'Accept-Ranges': 'bytes'
+                }
+            });
+
+            console.log('✅ Enhanced SW: Archive.org audio loaded successfully');
+            return optimizedResponse;
         }
-        
-        // 网络获取
-        const networkResponse = await fetch(request);
-        
-        if (networkResponse.ok && networkResponse.status === 200) {
-            // 检查缓存大小
-            await manageCacheSize(audioCache);
-            
-            // 缓存新音频文件
-            audioCache.put(request, networkResponse.clone());
-            performanceStats.cacheMisses++;
-            performanceStats.audioServed++;
-        }
-        
-        return networkResponse;
-        
+
+        return response;
+
     } catch (error) {
-        console.warn('SW v2.0: 音频请求失败', error);
-        performanceStats.cacheMisses++;
+        console.error('❌ Enhanced SW: Archive.org audio failed:', error);
+
+        // Return a helpful error response
+        return new Response(JSON.stringify({
+            error: 'Audio loading failed',
+            message: '音频加载失败，请检查网络连接',
+            retry: true
+        }), {
+            status: 503,
+            headers: { 'Content-Type': 'application/json' }
+        });
+    }
+}
+
+// Handle Vercel API proxy requests
+async function handleVercelApiRequest(request) {
+    try {
+        console.log('🔄 Enhanced SW: Vercel API request:', request.url);
+
+        const response = await fetch(request);
+
+        if (response.ok) {
+            // Cache successful API responses briefly
+            const cache = await caches.open(CACHE_NAMES.API_RESPONSES);
+            const responseClone = response.clone();
+
+            // Add expiration timestamp
+            const expiration = Date.now() + API_CACHE_MAX_AGE;
+            const enhancedResponse = new Response(responseClone.body, {
+                status: responseClone.status,
+                statusText: responseClone.statusText,
+                headers: {
+                    ...responseClone.headers,
+                    'sw-cached-at': Date.now().toString(),
+                    'sw-expires-at': expiration.toString()
+                }
+            });
+
+            cache.put(request, enhancedResponse.clone());
+            console.log('📦 Enhanced SW: API response cached');
+        }
+
+        return response;
+
+    } catch (error) {
+        console.log('🔍 Enhanced SW: API network failed, checking cache...');
+
+        // Try cache with expiration check
+        const cache = await caches.open(CACHE_NAMES.API_RESPONSES);
+        const cached = await cache.match(request);
+
+        if (cached) {
+            const expiresAt = cached.headers.get('sw-expires-at');
+            if (expiresAt && Date.now() < parseInt(expiresAt)) {
+                console.log('✅ Enhanced SW: Serving cached API response');
+                return cached;
+            } else {
+                console.log('🕒 Enhanced SW: Cached API response expired');
+                cache.delete(request);
+            }
+        }
+
         throw error;
     }
 }
 
-/**
- * 处理API音频请求（代理到Archive.org）
- */
-async function handleApiAudioRequest(request) {
-    // 这些请求会通过Vercel rewrites重定向到Archive.org
-    // 直接转发到网络
-    return fetch(request);
+// Handle image requests with aggressive caching
+async function handleImageRequest(request) {
+    return cacheFirst(request, CACHE_NAMES.IMAGES, IMAGE_CACHE_MAX_AGE);
 }
 
-/**
- * 处理静态资源（缓存优先）
- */
-async function handleStaticResource(request) {
-    const cache = await caches.open(CACHE_NAME);
-    const cachedResponse = await cache.match(request);
-    
-    if (cachedResponse) {
-        return cachedResponse;
-    }
-    
-    const networkResponse = await fetch(request);
-    
-    if (networkResponse.ok) {
-        cache.put(request, networkResponse.clone());
-    }
-    
-    return networkResponse;
+// Handle static resource requests
+async function handleStaticRequest(request) {
+    return networkFirst(request, CACHE_NAMES.STATIC);
 }
 
-/**
- * 处理页面请求
- */
-async function handlePageRequest(request) {
+// Network-first strategy
+async function networkFirst(request, cacheName) {
     try {
-        return await fetch(request);
+        const networkResponse = await fetch(request);
+
+        if (networkResponse.ok) {
+            const cache = await caches.open(cacheName);
+            cache.put(request, networkResponse.clone());
+        }
+
+        return networkResponse;
+
     } catch (error) {
-        // 离线时返回缓存的首页
-        const cache = await caches.open(CACHE_NAME);
-        return await cache.match('/index.html');
+        console.log('🔍 Enhanced SW: Network failed, trying cache...');
+
+        const cachedResponse = await caches.match(request);
+        if (cachedResponse) {
+            console.log('✅ Enhanced SW: Serving from cache');
+            return cachedResponse;
+        }
+
+        throw error;
     }
 }
 
-/**
- * 判断是否为静态资源
- */
-function isStaticResource(pathname) {
-    return pathname.includes('/assets/') || 
-           pathname.endsWith('.css') || 
-           pathname.endsWith('.js') || 
-           pathname.endsWith('.png') || 
-           pathname.endsWith('.jpg') || 
-           pathname.endsWith('.svg') || 
-           pathname.endsWith('.ico');
-}
+// Cache-first strategy with expiration
+async function cacheFirst(request, cacheName, maxAge) {
+    const cache = await caches.open(cacheName);
+    const cached = await cache.match(request);
 
-/**
- * 管理音频缓存大小
- */
-async function manageCacheSize(audioCache) {
-    const now = Date.now();
-    
-    // 每小时检查一次缓存大小
-    if (now - performanceStats.lastCleanup < 60 * 60 * 1000) {
-        return;
-    }
-    
-    const keys = await audioCache.keys();
-    let totalSize = 0;
-    const cacheEntries = [];
-    
-    // 估算缓存大小
-    for (const key of keys) {
-        const response = await audioCache.match(key);
-        if (response) {
-            const size = parseInt(response.headers.get('content-length') || '3000000'); // 默认3MB
-            const lastModified = response.headers.get('date') || response.headers.get('last-modified');
-            const timestamp = lastModified ? new Date(lastModified).getTime() : now;
-            
-            cacheEntries.push({ key, size, timestamp });
-            totalSize += size;
+    if (cached) {
+        const cachedAt = cached.headers.get('sw-cached-at');
+        if (cachedAt && (Date.now() - parseInt(cachedAt)) < maxAge) {
+            console.log('✅ Enhanced SW: Serving from cache (fresh)');
+            return cached;
+        } else {
+            console.log('🕒 Enhanced SW: Cache expired, fetching new...');
+            cache.delete(request);
         }
     }
-    
-    // 如果超过限制，删除最旧的文件
-    if (totalSize > AUDIO_CACHE_CONFIG.maxCacheSize) {
-        cacheEntries.sort((a, b) => a.timestamp - b.timestamp);
-        
-        let deletedSize = 0;
-        const targetSize = AUDIO_CACHE_CONFIG.maxCacheSize * 0.8; // 删除到80%
-        
-        for (const entry of cacheEntries) {
-            if (totalSize - deletedSize <= targetSize) break;
-            
-            await audioCache.delete(entry.key);
-            deletedSize += entry.size;
-            console.log(`🧹 SW v2.0: 清理过期音频缓存: ${entry.key.url}`);
-        }
-        
-        console.log(`✅ SW v2.0: 缓存清理完成，释放 ${(deletedSize / 1024 / 1024).toFixed(2)}MB`);
-    }
-    
-    performanceStats.lastCleanup = now;
-}
 
-// 消息处理（与主线程通信）
-self.addEventListener('message', (event) => {
-    const { type, data } = event.data;
-    
-    switch (type) {
-        case 'PERFORMANCE_REPORT':
-            event.ports[0].postMessage({
-                type: 'PERFORMANCE_DATA',
-                data: {
-                    ...performanceStats,
-                    version: CACHE_VERSION,
-                    uptime: Date.now() - performanceStats.lastCleanup
+    try {
+        const networkResponse = await fetch(request);
+
+        if (networkResponse.ok) {
+            const responseWithTimestamp = new Response(networkResponse.body, {
+                status: networkResponse.status,
+                statusText: networkResponse.statusText,
+                headers: {
+                    ...networkResponse.headers,
+                    'sw-cached-at': Date.now().toString()
                 }
             });
-            break;
-            
-        case 'CLEAR_CACHE':
-            clearAllCaches().then(() => {
-                event.ports[0].postMessage({ type: 'CACHE_CLEARED' });
-            });
-            break;
-            
-        default:
-            console.log('SW v2.0: 未知消息类型', type);
+
+            cache.put(request, responseWithTimestamp.clone());
+            console.log('📦 Enhanced SW: Cached new response');
+
+            return responseWithTimestamp;
+        }
+
+        return networkResponse;
+
+    } catch (error) {
+        // If network fails and we have stale cache, use it
+        if (cached) {
+            console.log('⚠️ Enhanced SW: Using stale cache due to network error');
+            return cached;
+        }
+
+        throw error;
+    }
+}
+
+// Utility functions
+function isArchiveAudioRequest(url) {
+    return url.hostname === 'archive.org' && url.pathname.includes('.mp3');
+}
+
+function isVercelApiRequest(url) {
+    return url.pathname.startsWith('/api/');
+}
+
+function isImageRequest(pathname) {
+    return /\.(png|jpg|jpeg|gif|svg|webp|ico)$/i.test(pathname);
+}
+
+function isStaticResource(pathname) {
+    return /\.(css|js|html|json)$/i.test(pathname) || pathname === '/';
+}
+
+// Background sync for offline support
+self.addEventListener('sync', (event) => {
+    if (event.tag === 'retry-failed-audio') {
+        console.log('🔄 Enhanced SW: Retrying failed audio requests...');
+        event.waitUntil(retryFailedAudioRequests());
     }
 });
 
-/**
- * 清理所有缓存
- */
-async function clearAllCaches() {
-    const cacheNames = await caches.keys();
-    await Promise.all(
-        cacheNames.map(cacheName => {
-            console.log('🧹 SW v2.0: 清理缓存', cacheName);
-            return caches.delete(cacheName);
-        })
-    );
-    
-    // 重置统计
-    performanceStats = {
-        cacheHits: 0,
-        cacheMisses: 0,
-        audioServed: 0,
-        lastCleanup: Date.now()
-    };
-    
-    console.log('✅ SW v2.0: 所有缓存已清理');
+async function retryFailedAudioRequests() {
+    // Implementation for retrying failed requests when back online
+    console.log('🔄 Enhanced SW: Background sync for audio retry');
 }
 
-console.log('🚀 SW v2.0: Service Worker 脚本加载完成');
+// Message handling for client communication
+self.addEventListener('message', (event) => {
+    if (event.data && event.data.type === 'CACHE_STATUS') {
+        getCacheStatus().then((status) => {
+            event.ports[0].postMessage(status);
+        });
+    }
+
+    if (event.data && event.data.type === 'CLEAR_CACHE') {
+        clearAllCaches().then(() => {
+            event.ports[0].postMessage({ success: true });
+        });
+    }
+});
+
+async function getCacheStatus() {
+    const cacheNames = await caches.keys();
+    const status = {};
+
+    for (const cacheName of cacheNames) {
+        const cache = await caches.open(cacheName);
+        const keys = await cache.keys();
+        status[cacheName] = keys.length;
+    }
+
+    return status;
+}
+
+async function clearAllCaches() {
+    const cacheNames = await caches.keys();
+    return Promise.all(cacheNames.map(name => caches.delete(name)));
+}
+
+console.log('🚀 Enhanced SW: Service Worker script loaded successfully');
