@@ -195,8 +195,16 @@ class ModuleLoader {
         const memory = navigator.deviceMemory || 4;
         const connection = navigator.connection?.effectiveType;
         
-        // 低端设备标准：核心数 < 4 或 内存 < 4GB 或 网络 <= 3G
-        return cores < 4 || memory < 4 || ['slow-2g', '2g', '3g'].includes(connection);
+        // 修正低端设备判断逻辑：
+        // 只有CPU核心数 < 4 且 内存 < 4GB 时才算低端设备
+        // 网络连接速度不应该成为跳过核心UI模块的理由
+        const isCpuLowEnd = cores < 4;
+        const isMemoryLowEnd = memory < 4;
+        const isNetworkSlow = ['slow-2g', '2g'].includes(connection);
+        
+        // 只有同时满足CPU和内存都是低端才算低端设备
+        // 或者网络极慢（slow-2g, 2g）的情况下才跳过视觉效果
+        return (isCpuLowEnd && isMemoryLowEnd) || isNetworkSlow;
     }
     
     /**
