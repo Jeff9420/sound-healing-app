@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D轮播测试 - 声音疗愈应用</title>
+    <link rel="stylesheet" href="sound-healing-app/assets/css/main.css">
+    <link rel="stylesheet" href="sound-healing-app/assets/css/playlist.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a2e1a, #2d4a2d);
+            color: #f7f4e9;
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .test-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .test-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .controls-panel {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .test-button {
+            background: rgba(127, 176, 105, 0.6);
+            border: 2px solid rgba(127, 176, 105, 0.8);
+            color: #f7f4e9;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .test-button:hover {
+            background: rgba(127, 176, 105, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .status-indicator {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .status-ok {
+            background: rgba(76, 175, 80, 0.3);
+            color: #4CAF50;
+        }
+
+        .status-error {
+            background: rgba(244, 67, 54, 0.3);
+            color: #F44336;
+        }
+
+        .status-loading {
+            background: rgba(255, 193, 7, 0.3);
+            color: #FFC107;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-header">
+        <h1>🎠 3D轮播测试页面</h1>
+        <p>测试声音疗愈应用的3D旋转轮播功能</p>
+    </div>
+
+    <div class="test-info">
+        <h3>📋 测试项目</h3>
+        <ul>
+            <li>✅ 3D轮播容器是否正确渲染</li>
+            <li>✅ 9个音频分类卡片是否正确生成</li>
+            <li>✅ 3D旋转动画是否流畅</li>
+            <li>✅ 轮播控制按钮是否响应</li>
+            <li>✅ 鼠标拖拽控制是否工作</li>
+            <li>✅ 键盘快捷键是否工作</li>
+            <li>✅ 自动旋转功能是否正常</li>
+            <li>✅ 卡片点击是否触发播放列表</li>
+        </ul>
+    </div>
+
+    <!-- 3D声音轮播 -->
+    <div class="audio-carousel-container">
+        <div class="audio-carousel" id="audioCarousel">
+            <div class="carousel-inner" id="categoriesContainer">
+                <!-- 音频分类将通过JavaScript动态生成为3D轮播卡片 -->
+            </div>
+        </div>
+
+        <!-- 轮播控制器 -->
+        <div class="carousel-controls">
+            <button class="carousel-btn prev-btn" id="carouselPrev" aria-label="上一个分类">‹</button>
+            <button class="carousel-btn auto-btn" id="carouselAuto" aria-label="自动轮播">⏯</button>
+            <button class="carousel-btn next-btn" id="carouselNext" aria-label="下一个分类">›</button>
+        </div>
+
+        <!-- 分类指示器 -->
+        <div class="carousel-indicators" id="carouselIndicators">
+            <!-- 将通过JavaScript动态生成 -->
+        </div>
+    </div>
+
+    <div class="controls-panel">
+        <h3>🎮 测试控制</h3>
+        <button class="test-button" onclick="testCarouselCreation()">创建轮播卡片</button>
+        <button class="test-button" onclick="testRotateNext()">向前旋转</button>
+        <button class="test-button" onclick="testRotatePrev()">向后旋转</button>
+        <button class="test-button" onclick="testAutoRotate()">切换自动旋转</button>
+        <button class="test-button" onclick="testRandomJump()">随机跳转</button>
+
+        <div style="margin-top: 20px;">
+            <h4>📊 状态监控</h4>
+            <div>
+                音频配置: <span id="configStatus" class="status-indicator status-loading">检查中...</span>
+            </div>
+            <div>
+                3D轮播管理器: <span id="carouselStatus" class="status-indicator status-loading">检查中...</span>
+            </div>
+            <div>
+                轮播卡片数量: <span id="cardCount">0</span>
+            </div>
+            <div>
+                当前索引: <span id="currentIndex">0</span>
+            </div>
+            <div>
+                当前角度: <span id="currentAngle">0°</span>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <h4>⌨️ 快捷键说明</h4>
+            <ul style="font-size: 14px;">
+                <li>←/→ 方向键：手动旋转轮播</li>
+                <li>空格键：切换自动旋转</li>
+                <li>ESC键：停止自动旋转</li>
+                <li>鼠标拖拽：手动控制旋转</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 加载必要的脚本 -->
+    <script src="sound-healing-app/assets/js/audio-config.js"></script>
+    <script src="sound-healing-app/assets/js/audio-carousel-3d.js"></script>
+
+    <script>
+        // 测试状态监控
+        let testMonitor = {
+            configLoaded: false,
+            carouselLoaded: false,
+
+            checkStatus() {
+                // 检查音频配置
+                if (typeof AUDIO_CONFIG !== 'undefined') {
+                    document.getElementById('configStatus').textContent = '已加载';
+                    document.getElementById('configStatus').className = 'status-indicator status-ok';
+                    this.configLoaded = true;
+                } else {
+                    document.getElementById('configStatus').textContent = '未加载';
+                    document.getElementById('configStatus').className = 'status-indicator status-error';
+                }
+
+                // 检查3D轮播管理器
+                if (window.audioCarousel3D) {
+                    document.getElementById('carouselStatus').textContent = '已初始化';
+                    document.getElementById('carouselStatus').className = 'status-indicator status-ok';
+                    this.carouselLoaded = true;
+
+                    // 更新状态信息
+                    const carousel = window.audioCarousel3D;
+                    document.getElementById('currentIndex').textContent = carousel.currentIndex;
+                    document.getElementById('currentAngle').textContent = carousel.currentAngle + '°';
+
+                    // 计算卡片数量
+                    const cards = document.querySelectorAll('#categoriesContainer .ecosystem-card');
+                    document.getElementById('cardCount').textContent = cards.length;
+                } else {
+                    document.getElementById('carouselStatus').textContent = '未初始化';
+                    document.getElementById('carouselStatus').className = 'status-indicator status-error';
+                }
+            },
+
+            startMonitoring() {
+                setInterval(() => this.checkStatus(), 1000);
+            }
+        };
+
+        // 测试函数
+        function testCarouselCreation() {
+            console.log('🧪 测试：创建轮播卡片');
+
+            if (typeof forceCreateEcosystemCards3D === 'function') {
+                forceCreateEcosystemCards3D();
+                console.log('✅ 3D轮播卡片创建函数已调用');
+            } else if (window.audioCarousel3D) {
+                window.audioCarousel3D.createCarouselCards();
+                console.log('✅ 通过轮播实例创建卡片');
+            } else {
+                console.error('❌ 轮播功能未就绪');
+                alert('❌ 轮播功能未就绪，请检查脚本加载');
+            }
+        }
+
+        function testRotateNext() {
+            console.log('🧪 测试：向前旋转');
+            if (window.audioCarousel3D) {
+                window.audioCarousel3D.nextCategory();
+                console.log('✅ 向前旋转执行完成');
+            } else {
+                console.error('❌ 轮播实例未找到');
+                alert('❌ 轮播实例未找到');
+            }
+        }
+
+        function testRotatePrev() {
+            console.log('🧪 测试：向后旋转');
+            if (window.audioCarousel3D) {
+                window.audioCarousel3D.previousCategory();
+                console.log('✅ 向后旋转执行完成');
+            } else {
+                console.error('❌ 轮播实例未找到');
+                alert('❌ 轮播实例未找到');
+            }
+        }
+
+        function testAutoRotate() {
+            console.log('🧪 测试：切换自动旋转');
+            if (window.audioCarousel3D) {
+                window.audioCarousel3D.toggleAutoRotate();
+                const status = window.audioCarousel3D.autoRotateActive ? '已启动' : '已停止';
+                console.log(`✅ 自动旋转 ${status}`);
+                alert(`🎠 自动旋转 ${status}`);
+            } else {
+                console.error('❌ 轮播实例未找到');
+                alert('❌ 轮播实例未找到');
+            }
+        }
+
+        function testRandomJump() {
+            console.log('🧪 测试：随机跳转');
+            if (window.audioCarousel3D) {
+                const randomIndex = Math.floor(Math.random() * 9);
+                window.audioCarousel3D.goToCategory(randomIndex);
+                console.log(`✅ 跳转到分类 ${randomIndex}`);
+                alert(`🎯 已跳转到分类 ${randomIndex}`);
+            } else {
+                console.error('❌ 轮播实例未找到');
+                alert('❌ 轮播实例未找到');
+            }
+        }
+
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('📄 测试页面加载完成');
+
+            // 开始状态监控
+            testMonitor.startMonitoring();
+
+            // 延迟执行初始测试
+            setTimeout(() => {
+                console.log('🔄 开始初始化测试...');
+                testMonitor.checkStatus();
+
+                // 如果配置和轮播都就绪，自动创建卡片
+                if (testMonitor.configLoaded && testMonitor.carouselLoaded) {
+                    console.log('✅ 自动创建3D轮播卡片');
+                    testCarouselCreation();
+                }
+            }, 2000);
+
+            // 添加额外的检查和重试逻辑
+            let retryCount = 0;
+            const maxRetries = 10;
+
+            const retryInit = () => {
+                if (retryCount >= maxRetries) {
+                    console.warn('⚠️ 达到最大重试次数，停止重试');
+                    return;
+                }
+
+                testMonitor.checkStatus();
+
+                if (!testMonitor.configLoaded || !testMonitor.carouselLoaded) {
+                    retryCount++;
+                    console.log(`🔄 重试初始化 (${retryCount}/${maxRetries})`);
+                    setTimeout(retryInit, 1000);
+                } else {
+                    console.log('✅ 初始化成功，创建轮播卡片');
+                    testCarouselCreation();
+                }
+            };
+
+            setTimeout(retryInit, 3000);
+        });
+
+        // 添加性能监控
+        let performanceMonitor = {
+            startTime: Date.now(),
+
+            logTiming(event) {
+                const elapsed = Date.now() - this.startTime;
+                console.log(`⏱️ 性能：${event} - ${elapsed}ms`);
+            }
+        };
+
+        // 监控轮播性能
+        if (window.audioCarousel3D) {
+            const originalUpdate = window.audioCarousel3D.updateCarousel;
+            window.audioCarousel3D.updateCarousel = function() {
+                const start = performance.now();
+                originalUpdate.call(this);
+                const end = performance.now();
+                console.log(`⚡ 轮播更新耗时: ${(end - start).toFixed(2)}ms`);
+            };
+        }
+
+        console.log('🚀 3D轮播测试页面初始化完成');
+    </script>
+</body>
+</html>
