@@ -1488,7 +1488,7 @@ main.forest-path {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 120px 20px 120px 20px; /* 为顶部和底部留出空间 */
+    padding: 80px 20px 100px 20px; /* 减少顶部padding，让房间卡片更居中 */
     box-sizing: border-box;
 }
 
@@ -1697,13 +1697,13 @@ main.forest-path {
 /* 移除池塘播放器的固定定位，让它自然居中 */
 .pond-player {
     position: relative;
-    margin: 2rem 0;
+    margin: 1rem 0; /* 减少margin，让布局更紧凑 */
 }
 
 /* 调整轮播容器高度，确保在可视区域内 */
 .container-carrossel {
     height: 400px;
-    margin: 1rem 0;
+    margin: 0; /* 移除上下margin，让内容更居中 */
 }
 
 /* 轮播导航按钮 */
