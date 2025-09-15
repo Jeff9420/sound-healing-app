@@ -1,30 +1,25 @@
-// 3D音频轮播管理器
-class AudioCarousel3D {
+// 3D音频房间轮播管理器 - 基于carrossel-3d.html的六边形轮播
+class AudioRoomCarousel3D {
     constructor() {
         this.currentAngle = 0;
         this.currentIndex = 0;
-        this.totalCategories = 9;
+        this.totalRooms = 6; // 6个房间（六边形）
         this.autoRotateActive = false;
         this.autoRotateInterval = null;
+        this.currentPlayingAudio = null;
 
         this.carousel = null;
-        this.carouselInner = null;
         this.indicators = [];
 
         this.initializeElements();
         this.bindEvents();
-        this.setupRotationVariables();
     }
 
     initializeElements() {
-        this.carousel = document.getElementById('audioCarousel');
-        this.carouselInner = document.getElementById('categoriesContainer');
-        this.prevBtn = document.getElementById('carouselPrev');
-        this.nextBtn = document.getElementById('carouselNext');
-        this.autoBtn = document.getElementById('carouselAuto');
-        this.indicatorsContainer = document.getElementById('carouselIndicators');
+        this.carousel = document.getElementById('carrossel');
+        this.indicatorsContainer = document.getElementById('indicadores');
 
-        if (!this.carouselInner) {
+        if (!this.carousel) {
             console.error('3D轮播容器未找到');
             return;
         }

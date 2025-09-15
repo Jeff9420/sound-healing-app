@@ -102,25 +102,23 @@
         <h2 class="path-title" data-i18n="main.exploreTitle">探索声音生态</h2>
         
 
-        <!-- 3D声音轮播 -->
-        <div class="audio-carousel-container">
-            <div class="audio-carousel" id="audioCarousel">
-                <div class="carousel-inner" id="categoriesContainer">
-                    <!-- 音频分类将通过JavaScript动态生成为3D轮播卡片 -->
-                </div>
+        <!-- 3D音频房间轮播 -->
+        <div class="container-carrossel">
+            <div class="carrossel" id="carrossel">
+                <!-- 音频房间将通过JavaScript动态生成 -->
             </div>
+        </div>
 
-            <!-- 轮播控制器 -->
-            <div class="carousel-controls">
-                <button class="carousel-btn prev-btn" id="carouselPrev" aria-label="上一个分类">‹</button>
-                <button class="carousel-btn auto-btn" id="carouselAuto" aria-label="自动轮播">⏯</button>
-                <button class="carousel-btn next-btn" id="carouselNext" aria-label="下一个分类">›</button>
-            </div>
+        <!-- 轮播控制器 -->
+        <div class="controles">
+            <button class="btn-controle" onclick="anterior()">← 上一个房间</button>
+            <button class="btn-controle" onclick="toggleAutoRotate()">⏯ 自动浏览</button>
+            <button class="btn-controle" onclick="proximo()">下一个房间 →</button>
+        </div>
 
-            <!-- 分类指示器 -->
-            <div class="carousel-indicators" id="carouselIndicators">
-                <!-- 将通过JavaScript动态生成 -->
-            </div>
+        <!-- 房间指示器 -->
+        <div class="indicadores" id="indicadores">
+            <!-- 将通过JavaScript动态生成 -->
         </div>
     </main>
 
