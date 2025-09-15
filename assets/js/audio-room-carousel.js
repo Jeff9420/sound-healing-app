@@ -147,6 +147,7 @@ class AudioRoomCarousel {
         });
 
         this.createIndicators();
+        this.updateRoomVisibility(); // 初始化房间可见性
         console.log('✅ 9个音频房间创建完成');
     }
 
@@ -320,7 +321,28 @@ class AudioRoomCarousel {
     updateCarousel() {
         if (this.carousel) {
             this.carousel.style.transform = `rotateY(${this.currentAngle}deg)`;
+            this.updateRoomVisibility();
         }
+    }
+
+    // 更新房间可见性和焦点效果
+    updateRoomVisibility() {
+        this.rooms.forEach((room, index) => {
+            // 移除所有类
+            room.classList.remove('active', 'adjacent');
+
+            // 当前房间
+            if (index === this.currentIndex) {
+                room.classList.add('active');
+            }
+            // 相邻房间（前一个和后一个）
+            else if (
+                index === (this.currentIndex - 1 + this.totalRooms) % this.totalRooms ||
+                index === (this.currentIndex + 1) % this.totalRooms
+            ) {
+                room.classList.add('adjacent');
+            }
+        });
     }
 
     updateIndicators() {
