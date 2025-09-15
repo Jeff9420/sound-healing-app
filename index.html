@@ -153,46 +153,59 @@
         </div>
     </section>
 
-    <!-- 底部浮动控制器 -->
-    <div class="floating-controls">
-        <div class="control-row">
-            <div class="playback-controls">
-                <button id="globalPrevBtn" class="control-btn" title="上一首">⏮</button>
-                <button id="globalPlayBtn" class="control-btn play-btn" title="播放/暂停">⏸</button>
-                <button id="globalNextBtn" class="control-btn" title="下一首">⏭</button>
+    <!-- 轮播控制按钮 -->
+    <div class="carousel-navigation">
+        <button class="nav-btn prev-btn" onclick="anterior()" title="上一个房间">‹</button>
+        <button class="nav-btn next-btn" onclick="proximo()" title="下一个房间">›</button>
+    </div>
+
+    <!-- 可拖拽浮动控制器 -->
+    <div class="floating-controls" id="floatingControls">
+        <div class="control-header" id="controlHeader">
+            <span class="control-title">播放控制</span>
+            <button class="toggle-btn" id="toggleBtn" title="展开/收起">−</button>
+        </div>
+
+        <div class="control-content" id="controlContent">
+            <div class="control-row">
+                <div class="playback-controls">
+                    <button id="globalPrevBtn" class="control-btn" title="上一首">⏮</button>
+                    <button id="globalPlayBtn" class="control-btn play-btn" title="播放/暂停">⏸</button>
+                    <button id="globalNextBtn" class="control-btn" title="下一首">⏭</button>
+                </div>
+
+                <div class="mode-controls">
+                    <button id="shuffleModeBtn" class="control-btn" title="随机播放">🔀</button>
+                    <button id="repeatModeBtn" class="control-btn" title="循环模式">🔁</button>
+                    <button id="timerBtn" class="control-btn" title="睡眠定时">⏰</button>
+                </div>
             </div>
 
-            <div class="mode-controls">
-                <button id="shuffleModeBtn" class="control-btn" title="随机播放">🔀</button>
-                <button id="repeatModeBtn" class="control-btn" title="循环模式">🔁</button>
-                <button id="timerBtn" class="control-btn" title="睡眠定时">⏰</button>
+            <div class="volume-row">
+                <span class="volume-label">音量</span>
+                <input type="range" id="globalVolume" class="volume-slider" min="0" max="1" step="0.01" value="0.5">
+                <span class="volume-value">50%</span>
             </div>
-        </div>
 
-        <div class="volume-row">
-            <span class="volume-label">氛围</span>
-            <input type="range" id="globalVolume" class="volume-slider" min="0" max="1" step="0.01" value="0.5">
-            <span class="volume-value">50%</span>
-        </div>
+            <div class="status-row">
+                <span class="status-icon">🧘</span>
+                <span class="status-text" data-i18n="healing.mode.focus">专注模式</span>
+                <span class="session-time">00:00</span>
+            </div>
 
-        <div class="status-row">
-            <span class="status-icon">🧘</span>
-            <span class="status-text" data-i18n="healing.mode.focus">专注模式</span>
-            <span class="session-time">00:00</span>
-        </div>
-
-        <!-- 隐藏的定时器控制 -->
-        <div id="timerControls" class="timer-controls-hidden" style="display: none;">
-            <select id="timerDuration" class="timer-select">
-                <option value="0">无定时</option>
-                <option value="15">15分钟</option>
-                <option value="30">30分钟</option>
-                <option value="60">60分钟</option>
-                <option value="90">90分钟</option>
-                <option value="120">120分钟</option>
-            </select>
-            <button id="timerStartBtn" class="timer-button" data-i18n="timer.start">开始</button>
-            <span id="timerStatus" class="timer-status" data-i18n="timer.notStarted">未启动</span>
+            <!-- 隐藏的定时器控制 -->
+            <div id="timerControls" class="timer-controls-hidden" style="display: none;">
+                <select id="timerDuration" class="timer-select">
+                    <option value="0">无定时</option>
+                    <option value="15">15分钟</option>
+                    <option value="30">30分钟</option>
+                    <option value="60">60分钟</option>
+                    <option value="90">90分钟</option>
+                    <option value="120">120分钟</option>
+                </select>
+                <button id="timerStartBtn" class="timer-button" data-i18n="timer.start">开始</button>
+                <span id="timerStatus" class="timer-status" data-i18n="timer.notStarted">未启动</span>
+            </div>
         </div>
     </div>
 
@@ -225,7 +238,110 @@
     <script src="assets/js/i18n-system.js"></script>
     <script src="assets/js/language-integration.js"></script>
     <script src="assets/js/audio-room-carousel.js"></script>
-    
+
+    <!-- 拖拽控制器功能 -->
+    <script>
+        // 拖拽功能
+        let isDragging = false;
+        let currentX;
+        let currentY;
+        let initialX;
+        let initialY;
+        let xOffset = 0;
+        let yOffset = 0;
+
+        const floatingControls = document.getElementById('floatingControls');
+        const controlHeader = document.getElementById('controlHeader');
+        const toggleBtn = document.getElementById('toggleBtn');
+        const controlContent = document.getElementById('controlContent');
+
+        // 展开收起功能
+        let isCollapsed = false;
+
+        toggleBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            isCollapsed = !isCollapsed;
+
+            if (isCollapsed) {
+                floatingControls.classList.add('collapsed');
+                toggleBtn.textContent = '+';
+                toggleBtn.title = '展开';
+            } else {
+                floatingControls.classList.remove('collapsed');
+                toggleBtn.textContent = '−';
+                toggleBtn.title = '收起';
+            }
+        });
+
+        // 拖拽功能
+        controlHeader.addEventListener('mousedown', dragStart);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', dragEnd);
+
+        // 触摸事件
+        controlHeader.addEventListener('touchstart', dragStart);
+        document.addEventListener('touchmove', drag);
+        document.addEventListener('touchend', dragEnd);
+
+        function dragStart(e) {
+            if (e.type === "touchstart") {
+                initialX = e.touches[0].clientX - xOffset;
+                initialY = e.touches[0].clientY - yOffset;
+            } else {
+                initialX = e.clientX - xOffset;
+                initialY = e.clientY - yOffset;
+            }
+
+            if (e.target === controlHeader || controlHeader.contains(e.target)) {
+                isDragging = true;
+                floatingControls.style.cursor = 'grabbing';
+            }
+        }
+
+        function drag(e) {
+            if (isDragging) {
+                e.preventDefault();
+
+                if (e.type === "touchmove") {
+                    currentX = e.touches[0].clientX - initialX;
+                    currentY = e.touches[0].clientY - initialY;
+                } else {
+                    currentX = e.clientX - initialX;
+                    currentY = e.clientY - initialY;
+                }
+
+                xOffset = currentX;
+                yOffset = currentY;
+
+                // 限制在视窗内
+                const rect = floatingControls.getBoundingClientRect();
+                const maxX = window.innerWidth - rect.width;
+                const maxY = window.innerHeight - rect.height;
+
+                xOffset = Math.max(0, Math.min(xOffset, maxX));
+                yOffset = Math.max(0, Math.min(yOffset, maxY));
+
+                floatingControls.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+                floatingControls.style.right = 'auto';
+                floatingControls.style.bottom = 'auto';
+                floatingControls.style.left = '0';
+                floatingControls.style.top = '0';
+            }
+        }
+
+        function dragEnd(e) {
+            isDragging = false;
+            floatingControls.style.cursor = 'move';
+        }
+
+        // 防止在收起状态下的意外拖拽
+        floatingControls.addEventListener('mousedown', function(e) {
+            if (isCollapsed && !controlHeader.contains(e.target)) {
+                e.stopPropagation();
+            }
+        });
+    </script>
+
     <!-- 多语言功能调试和初始化脚本 -->
     <script>
         // 检查多语言系统状态
