@@ -1126,7 +1126,7 @@ body {
    ======================================== */
 
 .container-carrossel {
-    perspective: 1000px;
+    perspective: 1500px;
     perspective-origin: center center;
     height: 500px;
     display: flex;
@@ -1134,6 +1134,7 @@ body {
     justify-content: center;
     position: relative;
     margin: 2rem 0;
+    overflow: hidden;
 }
 
 .carrossel {
@@ -1156,64 +1157,85 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     backface-visibility: hidden;
     padding: 1.5rem;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+    opacity: 0.3;
+    filter: blur(2px);
+    transform-origin: center center;
+}
+
+/* 当前活跃房间样式 */
+.carrossel-item.active {
+    opacity: 1;
+    filter: blur(0px);
+    z-index: 10;
+    transform: scale(1.05);
+}
+
+/* 相邻房间样式 */
+.carrossel-item.adjacent {
+    opacity: 0.6;
+    filter: blur(1px);
+    z-index: 5;
 }
 
 .carrossel-item:hover {
     box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
     border-color: rgba(255, 255, 255, 0.4);
-    transform: scale(1.02);
 }
 
-/* 九边形房间布局 */
+.carrossel-item.active:hover {
+    transform: scale(1.08);
+}
+
+/* 九边形房间布局 - 增大间距优化视觉 */
 .carrossel-item:nth-child(1) {
     background: linear-gradient(135deg, rgba(103, 126, 234, 0.85), rgba(118, 75, 162, 0.85));
-    transform: rotateY(0deg) translateZ(250px);
+    transform: rotateY(0deg) translateZ(400px);
 }
 
 .carrossel-item:nth-child(2) {
     background: linear-gradient(135deg, rgba(240, 147, 251, 0.85), rgba(245, 87, 108, 0.85));
-    transform: rotateY(40deg) translateZ(250px);
+    transform: rotateY(40deg) translateZ(400px);
 }
 
 .carrossel-item:nth-child(3) {
     background: linear-gradient(135deg, rgba(79, 172, 254, 0.85), rgba(0, 242, 254, 0.85));
-    transform: rotateY(80deg) translateZ(250px);
+    transform: rotateY(80deg) translateZ(400px);
 }
 
 .carrossel-item:nth-child(4) {
     background: linear-gradient(135deg, rgba(67, 233, 123, 0.85), rgba(56, 249, 215, 0.85));
-    transform: rotateY(120deg) translateZ(250px);
+    transform: rotateY(120deg) translateZ(400px);
 }
 
 .carrossel-item:nth-child(5) {
     background: linear-gradient(135deg, rgba(250, 112, 154, 0.85), rgba(254, 225, 64, 0.85));
-    transform: rotateY(160deg) translateZ(250px);
+    transform: rotateY(160deg) translateZ(400px);
 }
 
 .carrossel-item:nth-child(6) {
     background: linear-gradient(135deg, rgba(168, 237, 234, 0.85), rgba(254, 214, 227, 0.85));
-    transform: rotateY(200deg) translateZ(250px);
+    transform: rotateY(200deg) translateZ(400px);
 }
 
 .carrossel-item:nth-child(7) {
     background: linear-gradient(135deg, rgba(255, 183, 77, 0.85), rgba(255, 140, 0, 0.85));
-    transform: rotateY(240deg) translateZ(250px);
+    transform: rotateY(240deg) translateZ(400px);
 }
 
 .carrossel-item:nth-child(8) {
     background: linear-gradient(135deg, rgba(255, 94, 77, 0.85), rgba(255, 154, 0, 0.85));
-    transform: rotateY(280deg) translateZ(250px);
+    transform: rotateY(280deg) translateZ(400px);
 }
 
 .carrossel-item:nth-child(9) {
     background: linear-gradient(135deg, rgba(72, 198, 239, 0.85), rgba(111, 134, 214, 0.85));
-    transform: rotateY(320deg) translateZ(250px);
+    transform: rotateY(320deg) translateZ(400px);
 }
 
 /* 房间头部 */
@@ -1391,15 +1413,15 @@ body {
         font-size: 14px;
     }
 
-    .carrossel-item:nth-child(1) { transform: rotateY(0deg) translateZ(200px); }
-    .carrossel-item:nth-child(2) { transform: rotateY(40deg) translateZ(200px); }
-    .carrossel-item:nth-child(3) { transform: rotateY(80deg) translateZ(200px); }
-    .carrossel-item:nth-child(4) { transform: rotateY(120deg) translateZ(200px); }
-    .carrossel-item:nth-child(5) { transform: rotateY(160deg) translateZ(200px); }
-    .carrossel-item:nth-child(6) { transform: rotateY(200deg) translateZ(200px); }
-    .carrossel-item:nth-child(7) { transform: rotateY(240deg) translateZ(200px); }
-    .carrossel-item:nth-child(8) { transform: rotateY(280deg) translateZ(200px); }
-    .carrossel-item:nth-child(9) { transform: rotateY(320deg) translateZ(200px); }
+    .carrossel-item:nth-child(1) { transform: rotateY(0deg) translateZ(300px); }
+    .carrossel-item:nth-child(2) { transform: rotateY(40deg) translateZ(300px); }
+    .carrossel-item:nth-child(3) { transform: rotateY(80deg) translateZ(300px); }
+    .carrossel-item:nth-child(4) { transform: rotateY(120deg) translateZ(300px); }
+    .carrossel-item:nth-child(5) { transform: rotateY(160deg) translateZ(300px); }
+    .carrossel-item:nth-child(6) { transform: rotateY(200deg) translateZ(300px); }
+    .carrossel-item:nth-child(7) { transform: rotateY(240deg) translateZ(300px); }
+    .carrossel-item:nth-child(8) { transform: rotateY(280deg) translateZ(300px); }
+    .carrossel-item:nth-child(9) { transform: rotateY(320deg) translateZ(300px); }
 
     .room-icon {
         font-size: 2rem;
@@ -1430,15 +1452,15 @@ body {
         padding: 0.8rem;
     }
 
-    .carrossel-item:nth-child(1) { transform: rotateY(0deg) translateZ(150px); }
-    .carrossel-item:nth-child(2) { transform: rotateY(40deg) translateZ(150px); }
-    .carrossel-item:nth-child(3) { transform: rotateY(80deg) translateZ(150px); }
-    .carrossel-item:nth-child(4) { transform: rotateY(120deg) translateZ(150px); }
-    .carrossel-item:nth-child(5) { transform: rotateY(160deg) translateZ(150px); }
-    .carrossel-item:nth-child(6) { transform: rotateY(200deg) translateZ(150px); }
-    .carrossel-item:nth-child(7) { transform: rotateY(240deg) translateZ(150px); }
-    .carrossel-item:nth-child(8) { transform: rotateY(280deg) translateZ(150px); }
-    .carrossel-item:nth-child(9) { transform: rotateY(320deg) translateZ(150px); }
+    .carrossel-item:nth-child(1) { transform: rotateY(0deg) translateZ(200px); }
+    .carrossel-item:nth-child(2) { transform: rotateY(40deg) translateZ(200px); }
+    .carrossel-item:nth-child(3) { transform: rotateY(80deg) translateZ(200px); }
+    .carrossel-item:nth-child(4) { transform: rotateY(120deg) translateZ(200px); }
+    .carrossel-item:nth-child(5) { transform: rotateY(160deg) translateZ(200px); }
+    .carrossel-item:nth-child(6) { transform: rotateY(200deg) translateZ(200px); }
+    .carrossel-item:nth-child(7) { transform: rotateY(240deg) translateZ(200px); }
+    .carrossel-item:nth-child(8) { transform: rotateY(280deg) translateZ(200px); }
+    .carrossel-item:nth-child(9) { transform: rotateY(320deg) translateZ(200px); }
 
     .controles {
         gap: 10px;
