@@ -26,6 +26,7 @@ class AudioRoomCarousel {
         ];
 
         this.initializeElements();
+        this.setupDragControls();
     }
 
     initializeElements() {
@@ -412,6 +413,124 @@ class AudioRoomCarousel {
                 errorDiv.parentNode.removeChild(errorDiv);
             }
         }, 5000);
+    }
+
+    // 设置拖拽控制
+    setupDragControls() {
+        this.setupMouseDragControls();
+        this.setupTouchControls();
+    }
+
+    // 鼠标拖拽控制
+    setupMouseDragControls() {
+        let isDragging = false;
+        let startX = 0;
+        let currentX = 0;
+        let lastAngle = this.currentAngle;
+
+        const handleMouseDown = (e) => {
+            isDragging = true;
+            startX = e.clientX;
+            lastAngle = this.currentAngle;
+            this.stopAutoRotate();
+            e.preventDefault();
+            document.body.style.userSelect = 'none'; // 防止拖拽时选中文本
+        };
+
+        const handleMouseMove = (e) => {
+            if (!isDragging) return;
+
+            currentX = e.clientX;
+            const deltaX = currentX - startX;
+            const deltaAngle = deltaX * 0.3; // 调整敏感度
+
+            this.currentAngle = lastAngle + deltaAngle;
+            if (this.carousel) {
+                this.carousel.style.transform = `rotateY(${this.currentAngle}deg)`;
+            }
+        };
+
+        const handleMouseUp = () => {
+            if (!isDragging) return;
+
+            isDragging = false;
+            document.body.style.userSelect = ''; // 恢复文本选择
+            const deltaX = currentX - startX;
+            const threshold = 50;
+
+            if (Math.abs(deltaX) > threshold) {
+                if (deltaX > 0) {
+                    this.previousRoom();
+                } else {
+                    this.nextRoom();
+                }
+            } else {
+                // 回到最近的位置
+                this.currentAngle = lastAngle;
+                this.updateCarousel();
+            }
+        };
+
+        if (this.carousel) {
+            this.carousel.addEventListener('mousedown', handleMouseDown);
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', handleMouseUp);
+        }
+    }
+
+    // 触摸控制
+    setupTouchControls() {
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let isDragging = false;
+        let lastAngle = this.currentAngle;
+
+        const handleTouchStart = (e) => {
+            touchStartX = e.touches[0].clientX;
+            lastAngle = this.currentAngle;
+            isDragging = true;
+            this.stopAutoRotate();
+        };
+
+        const handleTouchMove = (e) => {
+            if (!isDragging) return;
+            e.preventDefault(); // 防止页面滚动
+
+            const currentX = e.touches[0].clientX;
+            const deltaX = currentX - touchStartX;
+            const deltaAngle = deltaX * 0.3;
+
+            this.currentAngle = lastAngle + deltaAngle;
+            if (this.carousel) {
+                this.carousel.style.transform = `rotateY(${this.currentAngle}deg)`;
+            }
+        };
+
+        const handleTouchEnd = (e) => {
+            if (!isDragging) return;
+
+            touchEndX = e.changedTouches[0].clientX;
+            isDragging = false;
+            const deltaX = touchEndX - touchStartX;
+
+            if (Math.abs(deltaX) > 50) {
+                if (deltaX > 0) {
+                    this.previousRoom();
+                } else {
+                    this.nextRoom();
+                }
+            } else {
+                // 回到最近的位置
+                this.currentAngle = lastAngle;
+                this.updateCarousel();
+            }
+        };
+
+        if (this.carousel) {
+            this.carousel.addEventListener('touchstart', handleTouchStart, { passive: false });
+            this.carousel.addEventListener('touchmove', handleTouchMove, { passive: false });
+            this.carousel.addEventListener('touchend', handleTouchEnd);
+        }
     }
 }
 

@@ -1471,3 +1471,228 @@ body {
         font-size: 14px;
     }
 }
+
+/* ========================================
+   新的简化布局样式
+   ======================================== */
+
+/* 页面整体无滚动布局 */
+body {
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+main.forest-path {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* 简化的顶部标题 */
+.simple-header {
+    text-align: center;
+    padding: 1rem 0;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.simple-title {
+    font-size: 2.5rem;
+    color: var(--nature-cream);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.simple-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0.5rem 0 0 0;
+    font-weight: 300;
+}
+
+/* 底部浮动控制器 */
+.floating-controls {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 15px 20px;
+    z-index: 1000;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 300px;
+}
+
+.control-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.playback-controls,
+.mode-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.control-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.play-btn {
+    background: rgba(76, 175, 80, 0.3);
+    border-color: rgba(76, 175, 80, 0.5);
+}
+
+.play-btn:hover {
+    background: rgba(76, 175, 80, 0.5);
+}
+
+.volume-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.volume-label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    min-width: 40px;
+}
+
+.volume-slider {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.volume-value {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.8rem;
+    min-width: 35px;
+    text-align: right;
+}
+
+.status-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.status-icon {
+    font-size: 1rem;
+}
+
+/* 隐藏footer在单页面布局中 */
+.nature-footer {
+    display: none;
+}
+
+/* 移除池塘播放器的固定定位，让它自然居中 */
+.pond-player {
+    position: relative;
+    margin: 2rem 0;
+}
+
+/* 调整轮播容器高度，确保在可视区域内 */
+.container-carrossel {
+    height: 400px;
+    margin: 1rem 0;
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+    .simple-title {
+        font-size: 2rem;
+    }
+
+    .simple-subtitle {
+        font-size: 1rem;
+    }
+
+    .floating-controls {
+        min-width: 280px;
+        left: 10px;
+        right: 10px;
+        transform: none;
+    }
+
+    .control-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .simple-header {
+        top: 40px;
+    }
+
+    .simple-title {
+        font-size: 1.8rem;
+    }
+
+    .floating-controls {
+        padding: 12px 15px;
+        min-width: auto;
+    }
+
+    .control-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+        padding: 6px;
+    }
+
+    .volume-label,
+    .volume-value {
+        font-size: 0.8rem;
+    }
+}
