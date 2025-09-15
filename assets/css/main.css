@@ -1480,17 +1480,16 @@ body {
 body {
     height: 100vh;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
 }
 
 main.forest-path {
-    flex: 1;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    padding: 120px 20px 120px 20px; /* 为顶部和底部留出空间 */
+    box-sizing: border-box;
 }
 
 /* 简化的顶部标题 */
@@ -1520,20 +1519,81 @@ main.forest-path {
     font-weight: 300;
 }
 
-/* 底部浮动控制器 */
+/* 可拖拽浮动控制器 */
 .floating-controls {
     position: fixed;
     bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.7);
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(20px);
-    border-radius: 20px;
-    padding: 15px 20px;
+    border-radius: 16px;
     z-index: 1000;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    min-width: 300px;
+    cursor: move;
+    transition: all 0.3s ease;
+    user-select: none;
+    min-width: 280px;
+    max-width: 320px;
+}
+
+.floating-controls.collapsed {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.floating-controls.collapsed .control-content {
+    display: none;
+}
+
+.floating-controls.collapsed .toggle-btn {
+    width: 100%;
+    height: 100%;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 控制器头部 */
+.control-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: move;
+}
+
+.control-title {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.toggle-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* 控制器内容 */
+.control-content {
+    padding: 15px;
 }
 
 .control-row {
@@ -1644,6 +1704,52 @@ main.forest-path {
 .container-carrossel {
     height: 400px;
     margin: 1rem 0;
+}
+
+/* 轮播导航按钮 */
+.carousel-navigation {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 500;
+    padding: 0 20px;
+}
+
+.nav-btn {
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.nav-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: scale(1.1);
+}
+
+.prev-btn {
+    margin-left: 0;
+}
+
+.next-btn {
+    margin-right: 0;
 }
 
 /* 响应式优化 */
