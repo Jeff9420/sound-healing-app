@@ -102,9 +102,25 @@
         <h2 class="path-title" data-i18n="main.exploreTitle">探索声音生态</h2>
         
 
-        <!-- 生态系统分类网格 -->
-        <div class="ecosystem-grid" id="categoriesContainer">
-            <!-- 音频分类将通过JavaScript动态生成为生态系统卡片 -->
+        <!-- 3D声音轮播 -->
+        <div class="audio-carousel-container">
+            <div class="audio-carousel" id="audioCarousel">
+                <div class="carousel-inner" id="categoriesContainer">
+                    <!-- 音频分类将通过JavaScript动态生成为3D轮播卡片 -->
+                </div>
+            </div>
+
+            <!-- 轮播控制器 -->
+            <div class="carousel-controls">
+                <button class="carousel-btn prev-btn" id="carouselPrev" aria-label="上一个分类">‹</button>
+                <button class="carousel-btn auto-btn" id="carouselAuto" aria-label="自动轮播">⏯</button>
+                <button class="carousel-btn next-btn" id="carouselNext" aria-label="下一个分类">›</button>
+            </div>
+
+            <!-- 分类指示器 -->
+            <div class="carousel-indicators" id="carouselIndicators">
+                <!-- 将通过JavaScript动态生成 -->
+            </div>
         </div>
     </main>
 
@@ -222,6 +238,7 @@
     <script src="assets/js/loading-indicator.js"></script>
     <script src="assets/js/i18n-system.js"></script>
     <script src="assets/js/language-integration.js"></script>
+    <script src="assets/js/audio-carousel-3d.js"></script>
     
     <!-- 多语言功能调试和初始化脚本 -->
     <script>
@@ -844,9 +861,15 @@
                 // 等待脚本加载完成
                 await new Promise(resolve => setTimeout(resolve, 1000));
                 
-                // 检查AUDIO_CONFIG并创建卡片
+                // 检查AUDIO_CONFIG并创建3D轮播卡片
                 if (typeof AUDIO_CONFIG !== 'undefined') {
-                    forceCreateEcosystemCards();
+                    // 使用3D轮播替代原网格布局
+                    if (typeof forceCreateEcosystemCards3D === 'function') {
+                        forceCreateEcosystemCards3D();
+                    } else {
+                        console.warn('3D轮播未就绪，使用传统布局');
+                        forceCreateEcosystemCards();
+                    }
                 }
                 
                 // 初始化原始应用音频管理器
@@ -912,7 +935,12 @@
         // 添加全局修复函数（保留供手动调用）
         window.fixPlaylist = () => {
             if (typeof AUDIO_CONFIG !== 'undefined') {
-                forceCreateEcosystemCards();
+                // 优先使用3D轮播
+                if (typeof forceCreateEcosystemCards3D === 'function') {
+                    forceCreateEcosystemCards3D();
+                } else {
+                    forceCreateEcosystemCards();
+                }
             }
         };
         
