@@ -1120,3 +1120,263 @@ body {
         box-shadow: 0 0 15px rgba(127, 176, 105, 0.4);
     }
 }
+
+/* ========================================
+   3D 音频轮播样式
+   ======================================== */
+
+.audio-carousel-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.audio-carousel {
+    perspective: 1200px;
+    perspective-origin: center center;
+    height: 500px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.carousel-inner {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: rotateY(0deg);
+}
+
+/* 9个分类的3D排列 - 9边形 */
+.carousel-inner .ecosystem-card {
+    position: absolute;
+    width: 280px;
+    height: 360px;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* 9边形每个面相隔40度 (360/9 = 40) */
+.carousel-inner .ecosystem-card:nth-child(1) {
+    transform: rotateY(0deg) translateZ(350px);
+    background: linear-gradient(145deg, rgba(103, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
+}
+
+.carousel-inner .ecosystem-card:nth-child(2) {
+    transform: rotateY(40deg) translateZ(350px);
+    background: linear-gradient(145deg, rgba(240, 147, 251, 0.9), rgba(245, 87, 108, 0.9));
+}
+
+.carousel-inner .ecosystem-card:nth-child(3) {
+    transform: rotateY(80deg) translateZ(350px);
+    background: linear-gradient(145deg, rgba(79, 172, 254, 0.9), rgba(0, 242, 254, 0.9));
+}
+
+.carousel-inner .ecosystem-card:nth-child(4) {
+    transform: rotateY(120deg) translateZ(350px);
+    background: linear-gradient(145deg, rgba(67, 233, 123, 0.9), rgba(56, 249, 215, 0.9));
+}
+
+.carousel-inner .ecosystem-card:nth-child(5) {
+    transform: rotateY(160deg) translateZ(350px);
+    background: linear-gradient(145deg, rgba(250, 112, 154, 0.9), rgba(254, 225, 64, 0.9));
+}
+
+.carousel-inner .ecosystem-card:nth-child(6) {
+    transform: rotateY(200deg) translateZ(350px);
+    background: linear-gradient(145deg, rgba(168, 237, 234, 0.9), rgba(254, 214, 227, 0.9));
+}
+
+.carousel-inner .ecosystem-card:nth-child(7) {
+    transform: rotateY(240deg) translateZ(350px);
+    background: linear-gradient(145deg, rgba(255, 183, 197, 0.9), rgba(142, 197, 252, 0.9));
+}
+
+.carousel-inner .ecosystem-card:nth-child(8) {
+    transform: rotateY(280deg) translateZ(350px);
+    background: linear-gradient(145deg, rgba(251, 194, 235, 0.9), rgba(166, 193, 238, 0.9));
+}
+
+.carousel-inner .ecosystem-card:nth-child(9) {
+    transform: rotateY(320deg) translateZ(350px);
+    background: linear-gradient(145deg, rgba(162, 155, 254, 0.9), rgba(199, 146, 234, 0.9));
+}
+
+/* 轮播卡片悬停效果 */
+.carousel-inner .ecosystem-card:hover {
+    transform: rotateY(var(--rotation)) translateZ(380px) scale(1.05);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+/* 轮播控制按钮 */
+.carousel-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+}
+
+.carousel-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: var(--nature-cream);
+    padding: 12px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    min-width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-btn:active {
+    transform: translateY(0);
+}
+
+.prev-btn::before {
+    content: '‹';
+    font-size: 24px;
+}
+
+.next-btn::before {
+    content: '›';
+    font-size: 24px;
+}
+
+.auto-btn {
+    font-size: 16px;
+}
+
+.auto-btn.active {
+    background: rgba(127, 176, 105, 0.4);
+    border-color: rgba(127, 176, 105, 0.6);
+}
+
+/* 轮播指示器 */
+.carousel-indicators {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.carousel-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.carousel-indicator:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
+}
+
+.carousel-indicator.active {
+    background: var(--nature-mint);
+    transform: scale(1.3);
+    box-shadow: 0 0 10px rgba(127, 176, 105, 0.5);
+}
+
+/* 自动旋转动画 */
+.carousel-inner.auto-rotate {
+    animation: autoRotateCarousel 18s infinite linear;
+}
+
+@keyframes autoRotateCarousel {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .audio-carousel {
+        height: 400px;
+    }
+
+    .carousel-inner {
+        width: 250px;
+        height: 320px;
+    }
+
+    .carousel-inner .ecosystem-card {
+        width: 220px;
+        height: 280px;
+        padding: 1rem;
+    }
+
+    .carousel-inner .ecosystem-card:nth-child(n) {
+        transform: rotateY(var(--rotation)) translateZ(280px);
+    }
+
+    .carousel-inner .ecosystem-card:hover {
+        transform: rotateY(var(--rotation)) translateZ(300px) scale(1.03);
+    }
+
+    .carousel-btn {
+        padding: 8px 15px;
+        font-size: 16px;
+        min-width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-inner {
+        width: 200px;
+        height: 260px;
+    }
+
+    .carousel-inner .ecosystem-card {
+        width: 180px;
+        height: 240px;
+        padding: 0.8rem;
+    }
+
+    .carousel-inner .ecosystem-card:nth-child(n) {
+        transform: rotateY(var(--rotation)) translateZ(200px);
+    }
+
+    .carousel-controls {
+        gap: 0.5rem;
+    }
+
+    .carousel-btn {
+        padding: 6px 12px;
+        font-size: 14px;
+        min-width: 35px;
+        height: 35px;
+    }
+}
