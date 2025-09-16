@@ -296,6 +296,24 @@ class InternationalizationSystem {
                 'recommendation.evening': '傍晚时分，适合减压和放松的音频',
                 'recommendation.night': '夜间时光，推荐舒缓的声音帮助放松',
                 
+                // 房间卡片翻译 (用于动态生成的房间)
+                'rooms.Subconscious Therapy': '潜识星域',
+                'rooms.hypnosis': '梦境花园',
+                'rooms.meditation': '禅境山谷',
+                'rooms.Singing bowl sound': '颂钵圣殿',
+                'rooms.Rain': '雨林圣地',
+                'rooms.Chakra': '能量场域',
+                'rooms.Animal sounds': '森林栖息地',
+                'rooms.Fire': '温暖壁炉',
+                'rooms.running water': '溪流秘境',
+
+                // 播放列表界面翻译
+                'rooms.showPlaylist': '显示播放列表',
+                'rooms.hidePlaylist': '隐藏播放列表',
+                'playlist.title': '播放列表',
+                'playlist.noTracks': '此分类暂无音频文件',
+                'playlist.loading': '加载中...',
+
                 // 生态系统卡片
                 'ecosystem.Animal sounds.name': '森林栖息地',
                 'ecosystem.Animal sounds.type': '鸟类与动物声',
@@ -446,7 +464,25 @@ class InternationalizationSystem {
                 'recommendation.work': 'Work hours, recommended natural sounds for focus',
                 'recommendation.evening': 'Evening time, suitable for stress relief and relaxation',
                 'recommendation.night': 'Night time, recommended soothing sounds for relaxation',
-                
+
+                // Room card translations (for dynamically generated rooms)
+                'rooms.Subconscious Therapy': 'Subconscious Starfield',
+                'rooms.hypnosis': 'Dream Garden',
+                'rooms.meditation': 'Zen Valley',
+                'rooms.Singing bowl sound': 'Singing Bowl Temple',
+                'rooms.Rain': 'Rainforest Sanctuary',
+                'rooms.Chakra': 'Energy Field',
+                'rooms.Animal sounds': 'Forest Habitat',
+                'rooms.Fire': 'Warm Fireplace',
+                'rooms.running water': 'Stream Sanctuary',
+
+                // Playlist interface translations
+                'rooms.showPlaylist': 'Show Playlist',
+                'rooms.hidePlaylist': 'Hide Playlist',
+                'playlist.title': 'Playlist',
+                'playlist.noTracks': 'No audio files in this category',
+                'playlist.loading': 'Loading...',
+
                 // 生态系统卡片
                 'ecosystem.Animal sounds.name': 'Forest Habitat',
                 'ecosystem.Animal sounds.type': 'Birds & Animal Sounds',
@@ -592,7 +628,25 @@ class InternationalizationSystem {
                 'recommendation.work': '仕事の時間、集中に役立つ自然の音をお勧めします',
                 'recommendation.evening': '夕方の時間、ストレス解消とリラクゼーションに適した音声',
                 'recommendation.night': '夜の時間、リラクゼーションを助ける穏やかな音をお勧めします',
-                
+
+                // ルームカード翻訳（動的に生成されるルーム用）
+                'rooms.Subconscious Therapy': '潜在意識の星域',
+                'rooms.hypnosis': '夢の花園',
+                'rooms.meditation': '禅の谷',
+                'rooms.Singing bowl sound': 'シンギングボウル寺院',
+                'rooms.Rain': '雨林の聖地',
+                'rooms.Chakra': 'エネルギーフィールド',
+                'rooms.Animal sounds': '森の生息地',
+                'rooms.Fire': '暖かい暖炉',
+                'rooms.running water': '渓流の聖域',
+
+                // プレイリストインターフェース翻訳
+                'rooms.showPlaylist': 'プレイリストを表示',
+                'rooms.hidePlaylist': 'プレイリストを非表示',
+                'playlist.title': 'プレイリスト',
+                'playlist.noTracks': 'このカテゴリにはオーディオファイルがありません',
+                'playlist.loading': '読み込み中...',
+
                 // エコシステムカード
                 'ecosystem.Animal sounds.name': '森の生息地',
                 'ecosystem.Animal sounds.type': '鳥と動物の音',
@@ -740,7 +794,25 @@ class InternationalizationSystem {
                 'recommendation.work': '업무 시간, 집중에 도움이 되는 자연 소리를 추천합니다',
                 'recommendation.evening': '저녁 시간, 스트레스 해소와 이완에 적합한 오디오',
                 'recommendation.night': '밤 시간, 이완을 돕는 부드러운 소리를 추천합니다',
-                
+
+                // 룸 카드 번역 (동적으로 생성되는 룸용)
+                'rooms.Subconscious Therapy': '잠재의식 별자리',
+                'rooms.hypnosis': '꿈의 정원',
+                'rooms.meditation': '선 계곡',
+                'rooms.Singing bowl sound': '싱잉볼 사원',
+                'rooms.Rain': '우림 성역',
+                'rooms.Chakra': '에너지 필드',
+                'rooms.Animal sounds': '숲 서식지',
+                'rooms.Fire': '따뜻한 벽난로',
+                'rooms.running water': '시내 성역',
+
+                // 플레이리스트 인터페이스 번역
+                'rooms.showPlaylist': '플레이리스트 표시',
+                'rooms.hidePlaylist': '플레이리스트 숨기기',
+                'playlist.title': '플레이리스트',
+                'playlist.noTracks': '이 카테고리에는 오디오 파일이 없습니다',
+                'playlist.loading': '로딩 중...',
+
                 // 생태계 카드
                 'ecosystem.Animal sounds.name': '숲 서식지',
                 'ecosystem.Animal sounds.type': '새와 동물 소리',
@@ -888,7 +960,25 @@ class InternationalizationSystem {
                 'recommendation.work': 'Horas de trabajo, sonidos naturales recomendados para la concentración',
                 'recommendation.evening': 'Tiempo vespertino, adecuado para el alivio del estrés y la relajación',
                 'recommendation.night': 'Tiempo nocturno, sonidos relajantes recomendados para la relajación',
-                
+
+                // Traducciones de tarjetas de sala (para salas generadas dinámicamente)
+                'rooms.Subconscious Therapy': 'Campo Estelar Subconsciente',
+                'rooms.hypnosis': 'Jardín de Ensueños',
+                'rooms.meditation': 'Valle Zen',
+                'rooms.Singing bowl sound': 'Templo de Cuencos Tibetanos',
+                'rooms.Rain': 'Santuario de la Selva Tropical',
+                'rooms.Chakra': 'Campo de Energía',
+                'rooms.Animal sounds': 'Hábitat Forestal',
+                'rooms.Fire': 'Chimenea Cálida',
+                'rooms.running water': 'Santuario del Arroyo',
+
+                // Traducciones de interfaz de lista de reproducción
+                'rooms.showPlaylist': 'Mostrar Lista de Reproducción',
+                'rooms.hidePlaylist': 'Ocultar Lista de Reproducción',
+                'playlist.title': 'Lista de Reproducción',
+                'playlist.noTracks': 'No hay archivos de audio en esta categoría',
+                'playlist.loading': 'Cargando...',
+
                 // Tarjetas del ecosistema
                 'ecosystem.Animal sounds.name': 'Hábitat Forestal',
                 'ecosystem.Animal sounds.type': 'Sonidos de Aves y Animales',
@@ -1048,7 +1138,7 @@ class InternationalizationSystem {
         document.documentElement.lang = langCode;
         
         // 更新页面标题
-        document.title = this.t('app.title');
+        document.title = this.getTranslation('app.title');
         
         // 更新字体
         if (langConfig.fontFamily) {
@@ -1068,11 +1158,11 @@ class InternationalizationSystem {
     updatePageContent() {
         // 查找所有带有 data-i18n 属性的元素
         const i18nElements = document.querySelectorAll('[data-i18n]');
-        
+
         i18nElements.forEach(element => {
             const key = element.getAttribute('data-i18n');
-            const translation = this.t(key);
-            
+            const translation = this.getTranslation(key);
+
             // 根据元素类型更新内容
             if (element.tagName === 'INPUT' && (element.type === 'text' || element.type === 'search')) {
                 element.placeholder = translation;
@@ -1096,7 +1186,7 @@ class InternationalizationSystem {
         seasonButtons.forEach(btn => {
             const season = btn.getAttribute('data-season');
             if (season) {
-                btn.title = this.t(`season.${season}`);
+                btn.title = this.getTranslation(`season.${season}`);
             }
         });
         
@@ -1105,9 +1195,9 @@ class InternationalizationSystem {
         timerOptions.forEach(option => {
             const value = option.value;
             if (value === '0') {
-                option.textContent = this.t('timer.none');
+                option.textContent = this.getTranslation('timer.none');
             } else {
-                option.textContent = this.t(`timer.${value}min`);
+                option.textContent = this.getTranslation(`timer.${value}min`);
             }
         });
     }

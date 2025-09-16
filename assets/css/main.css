@@ -1126,7 +1126,7 @@ body {
    ======================================== */
 
 .container-carrossel {
-    perspective: 1500px;
+    perspective: 2000px;
     perspective-origin: center center;
     height: 500px;
     display: flex;
@@ -1163,9 +1163,10 @@ body {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    opacity: 0.3;
-    filter: blur(2px);
+    opacity: 0.15;
+    filter: blur(3px);
     transform-origin: center center;
+    transform: scale(0.85);
 }
 
 /* 当前活跃房间样式 */
@@ -1173,14 +1174,18 @@ body {
     opacity: 1;
     filter: blur(0px);
     z-index: 10;
-    transform: scale(1.05);
+    transform: scale(1.1);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5), 0 0 40px rgba(127, 176, 105, 0.3);
+    border-color: rgba(127, 176, 105, 0.6);
+    animation: activeRoomGlow 3s ease-in-out infinite alternate;
 }
 
 /* 相邻房间样式 */
 .carrossel-item.adjacent {
-    opacity: 0.6;
-    filter: blur(1px);
+    opacity: 0.45;
+    filter: blur(1.5px);
     z-index: 5;
+    transform: scale(0.95);
 }
 
 .carrossel-item:hover {
@@ -1195,47 +1200,47 @@ body {
 /* 九边形房间布局 - 增大间距优化视觉 */
 .carrossel-item:nth-child(1) {
     background: linear-gradient(135deg, rgba(103, 126, 234, 0.85), rgba(118, 75, 162, 0.85));
-    transform: rotateY(0deg) translateZ(400px);
+    transform: rotateY(0deg) translateZ(500px);
 }
 
 .carrossel-item:nth-child(2) {
     background: linear-gradient(135deg, rgba(240, 147, 251, 0.85), rgba(245, 87, 108, 0.85));
-    transform: rotateY(40deg) translateZ(400px);
+    transform: rotateY(40deg) translateZ(500px);
 }
 
 .carrossel-item:nth-child(3) {
     background: linear-gradient(135deg, rgba(79, 172, 254, 0.85), rgba(0, 242, 254, 0.85));
-    transform: rotateY(80deg) translateZ(400px);
+    transform: rotateY(80deg) translateZ(500px);
 }
 
 .carrossel-item:nth-child(4) {
     background: linear-gradient(135deg, rgba(67, 233, 123, 0.85), rgba(56, 249, 215, 0.85));
-    transform: rotateY(120deg) translateZ(400px);
+    transform: rotateY(120deg) translateZ(500px);
 }
 
 .carrossel-item:nth-child(5) {
     background: linear-gradient(135deg, rgba(250, 112, 154, 0.85), rgba(254, 225, 64, 0.85));
-    transform: rotateY(160deg) translateZ(400px);
+    transform: rotateY(160deg) translateZ(500px);
 }
 
 .carrossel-item:nth-child(6) {
     background: linear-gradient(135deg, rgba(168, 237, 234, 0.85), rgba(254, 214, 227, 0.85));
-    transform: rotateY(200deg) translateZ(400px);
+    transform: rotateY(200deg) translateZ(500px);
 }
 
 .carrossel-item:nth-child(7) {
     background: linear-gradient(135deg, rgba(255, 183, 77, 0.85), rgba(255, 140, 0, 0.85));
-    transform: rotateY(240deg) translateZ(400px);
+    transform: rotateY(240deg) translateZ(500px);
 }
 
 .carrossel-item:nth-child(8) {
     background: linear-gradient(135deg, rgba(255, 94, 77, 0.85), rgba(255, 154, 0, 0.85));
-    transform: rotateY(280deg) translateZ(400px);
+    transform: rotateY(280deg) translateZ(500px);
 }
 
 .carrossel-item:nth-child(9) {
     background: linear-gradient(135deg, rgba(72, 198, 239, 0.85), rgba(111, 134, 214, 0.85));
-    transform: rotateY(320deg) translateZ(400px);
+    transform: rotateY(320deg) translateZ(500px);
 }
 
 /* 房间头部 */
@@ -1376,6 +1381,18 @@ body {
     to { transform: rotateY(360deg); }
 }
 
+/* 活跃房间发光动画 */
+@keyframes activeRoomGlow {
+    from {
+        box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5), 0 0 40px rgba(127, 176, 105, 0.3);
+        border-color: rgba(127, 176, 105, 0.6);
+    }
+    to {
+        box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5), 0 0 60px rgba(127, 176, 105, 0.6);
+        border-color: rgba(127, 176, 105, 0.9);
+    }
+}
+
 /* 滚动条样式 */
 .audio-list::-webkit-scrollbar {
     width: 4px;
@@ -1413,15 +1430,15 @@ body {
         font-size: 14px;
     }
 
-    .carrossel-item:nth-child(1) { transform: rotateY(0deg) translateZ(300px); }
-    .carrossel-item:nth-child(2) { transform: rotateY(40deg) translateZ(300px); }
-    .carrossel-item:nth-child(3) { transform: rotateY(80deg) translateZ(300px); }
-    .carrossel-item:nth-child(4) { transform: rotateY(120deg) translateZ(300px); }
-    .carrossel-item:nth-child(5) { transform: rotateY(160deg) translateZ(300px); }
-    .carrossel-item:nth-child(6) { transform: rotateY(200deg) translateZ(300px); }
-    .carrossel-item:nth-child(7) { transform: rotateY(240deg) translateZ(300px); }
-    .carrossel-item:nth-child(8) { transform: rotateY(280deg) translateZ(300px); }
-    .carrossel-item:nth-child(9) { transform: rotateY(320deg) translateZ(300px); }
+    .carrossel-item:nth-child(1) { transform: rotateY(0deg) translateZ(400px); }
+    .carrossel-item:nth-child(2) { transform: rotateY(40deg) translateZ(400px); }
+    .carrossel-item:nth-child(3) { transform: rotateY(80deg) translateZ(400px); }
+    .carrossel-item:nth-child(4) { transform: rotateY(120deg) translateZ(400px); }
+    .carrossel-item:nth-child(5) { transform: rotateY(160deg) translateZ(400px); }
+    .carrossel-item:nth-child(6) { transform: rotateY(200deg) translateZ(400px); }
+    .carrossel-item:nth-child(7) { transform: rotateY(240deg) translateZ(400px); }
+    .carrossel-item:nth-child(8) { transform: rotateY(280deg) translateZ(400px); }
+    .carrossel-item:nth-child(9) { transform: rotateY(320deg) translateZ(400px); }
 
     .room-icon {
         font-size: 2rem;
@@ -1452,15 +1469,15 @@ body {
         padding: 0.8rem;
     }
 
-    .carrossel-item:nth-child(1) { transform: rotateY(0deg) translateZ(200px); }
-    .carrossel-item:nth-child(2) { transform: rotateY(40deg) translateZ(200px); }
-    .carrossel-item:nth-child(3) { transform: rotateY(80deg) translateZ(200px); }
-    .carrossel-item:nth-child(4) { transform: rotateY(120deg) translateZ(200px); }
-    .carrossel-item:nth-child(5) { transform: rotateY(160deg) translateZ(200px); }
-    .carrossel-item:nth-child(6) { transform: rotateY(200deg) translateZ(200px); }
-    .carrossel-item:nth-child(7) { transform: rotateY(240deg) translateZ(200px); }
-    .carrossel-item:nth-child(8) { transform: rotateY(280deg) translateZ(200px); }
-    .carrossel-item:nth-child(9) { transform: rotateY(320deg) translateZ(200px); }
+    .carrossel-item:nth-child(1) { transform: rotateY(0deg) translateZ(300px); }
+    .carrossel-item:nth-child(2) { transform: rotateY(40deg) translateZ(300px); }
+    .carrossel-item:nth-child(3) { transform: rotateY(80deg) translateZ(300px); }
+    .carrossel-item:nth-child(4) { transform: rotateY(120deg) translateZ(300px); }
+    .carrossel-item:nth-child(5) { transform: rotateY(160deg) translateZ(300px); }
+    .carrossel-item:nth-child(6) { transform: rotateY(200deg) translateZ(300px); }
+    .carrossel-item:nth-child(7) { transform: rotateY(240deg) translateZ(300px); }
+    .carrossel-item:nth-child(8) { transform: rotateY(280deg) translateZ(300px); }
+    .carrossel-item:nth-child(9) { transform: rotateY(320deg) translateZ(300px); }
 
     .controles {
         gap: 10px;
