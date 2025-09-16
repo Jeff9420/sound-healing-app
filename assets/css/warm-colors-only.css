@@ -1,0 +1,114 @@
+/* =================================================================
+   🌙 温暖夜色颜色主题 - 仅颜色修改，不改变布局
+   ================================================================= */
+
+/* 覆盖颜色变量 */
+:root {
+    /* === 核心颜色变量 === */
+    /* 背景色系 - 模拟蜡烛光环境 */
+    --bg-deepest: #0d0704;      /* 深咖啡黑 - 最深背景 */
+    --bg-deep: #1a0f08;         /* 深暖棕 - 深层背景 */
+    --bg-medium: #2d1810;       /* 温暖棕 - 中层背景 */
+    --bg-light: #3d2817;        /* 暖褐色 - 浅层背景 */
+
+    /* 文字色系 - 温暖金色调 */
+    --text-primary: #f4e4bc;    /* 温暖米色 - 主要文字 */
+    --text-secondary: #d4a574;  /* 金色 - 次要文字 */
+    --text-tertiary: #b8956b;   /* 暗金色 - 辅助文字 */
+    --text-muted: #9a7f5a;      /* 静音文字 */
+
+    /* 强调和交互色系 */
+    --accent-primary: #8b4513;   /* 深棕色 - 主要强调色 */
+    --accent-warm: #cd853f;      /* 暖棕色 - 温暖强调色 */
+    --accent-glow: #daa520;      /* 金光色 - 发光强调色 */
+
+    /* 半透明覆盖层 */
+    --overlay-dark: rgba(13, 7, 4, 0.9);        /* 深色遮罩 */
+    --overlay-medium: rgba(45, 24, 16, 0.8);    /* 中等遮罩 */
+    --overlay-light: rgba(61, 40, 23, 0.6);     /* 浅色遮罩 */
+    --overlay-subtle: rgba(77, 51, 34, 0.4);    /* 微妙遮罩 */
+
+    /* 渐变定义 */
+    --gradient-warm: linear-gradient(135deg, var(--bg-deepest) 0%, var(--bg-deep) 30%, var(--bg-medium) 70%, var(--bg-light) 100%);
+    --gradient-card: linear-gradient(145deg, var(--overlay-medium) 0%, var(--overlay-light) 50%, var(--overlay-subtle) 100%);
+    --gradient-glow: radial-gradient(circle at center, var(--accent-glow) 0%, transparent 70%);
+
+    /* 阴影定义 - 温暖柔和 */
+    --shadow-soft: 0 4px 20px rgba(139, 69, 19, 0.15);
+    --shadow-medium: 0 8px 32px rgba(139, 69, 19, 0.25);
+    --shadow-strong: 0 12px 48px rgba(139, 69, 19, 0.35);
+    --shadow-glow: 0 0 24px rgba(218, 165, 32, 0.3);
+
+    /* 边框和描边 */
+    --border-warm: 1px solid rgba(212, 165, 116, 0.3);
+    --border-glow: 1px solid rgba(218, 165, 32, 0.5);
+    --border-soft: 1px solid rgba(139, 69, 19, 0.2);
+}
+
+/* 全局蓝光过滤 */
+html {
+    filter: sepia(0.15) saturate(0.85) hue-rotate(18deg) brightness(0.88) contrast(0.92);
+}
+
+/* 背景渐变应用 */
+body {
+    background: var(--gradient-warm) !important;
+    color: var(--text-primary) !important;
+}
+
+/* 文字阴影增强温暖感 */
+h1, h2, h3, h4, h5, h6, .simple-title, .simple-subtitle {
+    color: var(--text-primary) !important;
+    text-shadow: 0 2px 8px rgba(13, 7, 4, 0.8) !important;
+}
+
+/* 按钮和交互元素温暖化 */
+button, .btn-controle, .nature-control-btn {
+    background: var(--gradient-card) !important;
+    border: var(--border-warm) !important;
+    color: var(--text-primary) !important;
+    box-shadow: var(--shadow-soft) !important;
+}
+
+button:hover, .btn-controle:hover, .nature-control-btn:hover {
+    background: var(--accent-warm) !important;
+    box-shadow: var(--shadow-glow) !important;
+    border-color: var(--accent-glow) !important;
+}
+
+/* 播放器元素 */
+.lotus-player {
+    background: var(--gradient-card) !important;
+    border: 2px solid var(--accent-glow) !important;
+    color: var(--accent-glow) !important;
+    box-shadow: var(--shadow-glow) !important;
+}
+
+/* 卡片和容器 */
+.card-item, .organic-container, .playlist-section {
+    background: var(--overlay-medium) !important;
+    border: var(--border-warm) !important;
+    box-shadow: var(--shadow-medium) !important;
+}
+
+/* 输入框和滑块 */
+input[type="range"], .nature-slider {
+    background: var(--bg-medium) !important;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    background: var(--accent-glow) !important;
+    box-shadow: var(--shadow-glow) !important;
+}
+
+/* 文本元素 */
+.now-playing-info, .current-track-name, .current-track-artist {
+    color: var(--text-secondary) !important;
+}
+
+/* 时间自适应（晚上8点后加深） */
+@media (prefers-color-scheme: dark) {
+    html {
+        filter: sepia(0.2) saturate(0.8) hue-rotate(20deg) brightness(0.8) contrast(0.9);
+    }
+}
