@@ -1,25 +1,33 @@
 # 声音疗愈应用部署指南 / Sound Healing App Deployment Guide
 
-## 🚀 快速部署到 Vercel (推荐)
+## 🚀 生产部署流程 (GitHub → Vercel 自动集成)
 
-### 1. 前置要求
-- Git 仓库 (GitHub, GitLab, Bitbucket)
-- Vercel 账户 (免费)
-- 正确的目录结构：
+### ✅ 当前已配置的部署方式
+
+**项目已绑定域名：** https://soundflows.app
+
+**部署流程 (自动化)：**
+1. **提交代码到 GitHub**
+2. **GitHub 自动触发 Vercel 部署**
+3. **自动更新到生产域名：** https://soundflows.app
+
+### 1. 标准部署操作
+
+#### 步骤1：本地代码提交
+```bash
+# 在项目根目录 sound-healing-app/ 下执行：
+cd sound-healing-app
+git add .
+git commit -m "描述你的修改内容"
+git push origin main
 ```
-sound-healing-app/
-├── index.html
-├── vercel.json
-├── assets/
-│   ├── js/
-│   ├── css/
-│   └── audio/
-└── 其他文件...
-```
 
-### 2. 成功部署流程 (已验证)
+#### 步骤2：自动部署完成
+- GitHub 收到推送后自动触发 Vercel 构建
+- Vercel 自动部署到生产环境
+- 2-3分钟后，访问 https://soundflows.app 查看更新
 
-#### 步骤1：准备 vercel.json 配置文件
+### 2. 项目结构要求
 创建 `vercel.json` 配置，内容如下：
 ```json
 {
@@ -80,26 +88,38 @@ cp -r js/* assets/js/
 cp -r css/* assets/css/
 ```
 
-#### 步骤3：使用 Vercel CLI 部署
+### 3. 紧急手动部署 (备用方法)
+如果自动部署出现问题，可以使用 Vercel CLI 手动部署：
 ```bash
-# 1. 安装 Vercel CLI
+# 1. 安装 Vercel CLI (如果未安装)
 npm install -g vercel
 
-# 2. 在项目目录下登录
+# 2. 登录 Vercel 账户
 vercel login
 
-# 3. 部署到生产环境
+# 3. 手动部署到生产环境
 vercel --prod --yes
+
+# ⚠️ 注意：手动部署会创建临时URL，不会更新绑定域名
+# 推荐使用 GitHub 自动部署来更新 soundflows.app
 ```
 
-#### 步骤4：配置自定义域名 (可选)
-1. 在域名注册商处配置DNS：
-   - A记录：`@` → `216.198.79.1`
-   - A记录：`www` → `216.198.79.1`
+### 4. 域名配置 (已完成)
+**当前域名：** https://soundflows.app
+**DNS 配置：** 已正确配置，指向 Vercel
+**Vercel 项目：** sound-healing-app (weiqas-projects)
 
-2. 在Vercel项目设置中添加域名
+## 🔧 故障排除和注意事项
 
-### 3. 常见问题解决方案
+### 重要提醒
+❌ **不要直接使用 `vercel --prod --yes`**
+- 这会创建临时部署URL (如 `sound-healing-xxx.vercel.app`)
+- 不会更新到正式域名 `soundflows.app`
+
+✅ **正确方式：通过 GitHub 部署**
+- 代码推送到 GitHub → 自动部署到 `soundflows.app`
+
+### 常见问题解决方案
 
 #### 🚨 静态文件404错误
 **症状：** JavaScript/CSS文件返回404
