@@ -373,6 +373,29 @@
             display: none;
         }
 
+        /* 手机端收起状态仍显示播放控制按钮 */
+        @media (max-width: 768px) {
+            .audio-controls.collapsed .control-content {
+                display: block !important;
+            }
+
+            .audio-controls.collapsed .control-content > *:not(.playback-buttons) {
+                display: none !important;
+            }
+
+            .audio-controls.collapsed .playback-buttons {
+                display: flex !important;
+                margin: 5px 0 0 0;
+                justify-content: center;
+            }
+
+            .audio-controls.collapsed .playback-buttons .control-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 12px;
+            }
+        }
+
         /* 拖拽手柄 */
         .drag-handle {
             position: absolute;
@@ -480,6 +503,43 @@
         .control-btn:hover {
             background: rgba(255,255,255,0.2);
             transform: scale(1.1);
+        }
+
+        /* 激活状态的播放控制按钮 */
+        .control-btn.active {
+            background: rgba(74, 144, 226, 0.8);
+            border-color: rgba(74, 144, 226, 1);
+            color: white;
+        }
+
+        .control-btn.active:hover {
+            background: rgba(74, 144, 226, 0.9);
+            border-color: rgba(74, 144, 226, 1);
+        }
+
+        /* 定时器控制样式 */
+        .timer-select {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin: 0 10px;
+        }
+
+        .timer-select option {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .timer-status {
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .timer-status.active {
+            color: #4CAF50;
+            font-weight: bold;
         }
 
         .play-pause-btn {
@@ -774,18 +834,29 @@
                 padding: 10px;
             }
 
-            /* 手机端默认收起状态 */
+            /* 手机端默认收起状态 - 修复播放按钮显示 */
             .audio-controls {
-                height: 50px;
-                overflow: hidden;
+                height: auto;
+                min-height: 60px;
+                overflow: visible;
             }
 
-            .audio-controls .control-content {
+            /* 手机端显示基本播放控制按钮 */
+            .audio-controls .control-content .playback-buttons {
+                display: flex !important;
+                opacity: 1;
+                visibility: visible;
+            }
+
+            /* 其他控制内容默认隐藏 */
+            .audio-controls .control-content > *:not(.playback-buttons) {
                 display: none;
             }
 
-            .audio-controls.expanded .control-content {
+            .audio-controls.expanded .control-content > * {
                 display: block;
+                opacity: 1;
+                visibility: visible;
             }
 
             .audio-controls.expanded {
@@ -1000,9 +1071,11 @@
         <div class="control-content">
             <!-- 播放控制按钮 -->
             <div class="control-row playback-buttons">
+            <button class="control-btn" id="shuffleBtn" data-i18n-title="controls.shuffle" title="随机播放">🔀</button>
             <button class="control-btn" id="prevBtn" data-i18n-title="controls.previous" title="上一首">⏮</button>
             <button class="control-btn play-pause-btn" id="playPauseBtn" data-i18n-title="controls.playPause" title="播放/暂停">▶️</button>
             <button class="control-btn" id="nextBtn" data-i18n-title="controls.next" title="下一首">⏭</button>
+            <button class="control-btn" id="repeatBtn" data-i18n-title="controls.repeat" title="循环播放">🔁</button>
         </div>
 
         <!-- 当前播放信息 -->
@@ -1031,10 +1104,14 @@
             <span class="control-label" data-i18n="timer.label">定时</span>
             <select class="timer-select" id="timerSelect">
                 <option value="0" data-i18n="timer.off">关闭</option>
+                <option value="5" data-i18n="timer.5min">5分钟</option>
+                <option value="10" data-i18n="timer.10min">10分钟</option>
                 <option value="15" data-i18n="timer.15min">15分钟</option>
                 <option value="30" data-i18n="timer.30min">30分钟</option>
+                <option value="45" data-i18n="timer.45min">45分钟</option>
                 <option value="60" data-i18n="timer.60min">60分钟</option>
                 <option value="90" data-i18n="timer.90min">90分钟</option>
+                <option value="120" data-i18n="timer.120min">120分钟</option>
             </select>
             <span class="timer-status" id="timerStatus" data-i18n="timer.inactive">未启动</span>
         </div>
@@ -1067,6 +1144,9 @@
         let currentTrackIndex = 0;
         let sleepTimer = null;
         let timerStartTime = null;
+        let isShuffleActive = false;
+        let isRepeatActive = false;
+        let originalPlaylist = []; // 保存原始播放列表
         let currentLanguage = 'zh-CN';
 
         // 多语言翻译
@@ -1758,10 +1838,55 @@
         function playNextTrack() {
             if (currentPlaylist.length === 0) return;
 
-            currentTrackIndex = (currentTrackIndex + 1) % currentPlaylist.length;
+            if (isShuffleActive) {
+                // 随机播放模式：选择随机下一首
+                const randomIndex = Math.floor(Math.random() * currentPlaylist.length);
+                currentTrackIndex = randomIndex;
+            } else {
+                // 普通模式：顺序播放
+                if (isRepeatActive && currentTrackIndex === currentPlaylist.length - 1) {
+                    // 循环播放模式：回到第一首
+                    currentTrackIndex = 0;
+                } else {
+                    currentTrackIndex = (currentTrackIndex + 1) % currentPlaylist.length;
+                }
+            }
+
             const fileName = currentPlaylist[currentTrackIndex];
             const categoryName = getCurrentCategory();
             playAudio(fileName, categoryName, currentTrackIndex);
+        }
+
+        // 切换随机播放
+        function toggleShuffle() {
+            isShuffleActive = !isShuffleActive;
+            const shuffleBtn = document.getElementById('shuffleBtn');
+
+            if (isShuffleActive) {
+                shuffleBtn.classList.add('active');
+                shuffleBtn.title = '关闭随机播放';
+                console.log('🔀 随机播放已开启');
+            } else {
+                shuffleBtn.classList.remove('active');
+                shuffleBtn.title = '开启随机播放';
+                console.log('🔀 随机播放已关闭');
+            }
+        }
+
+        // 切换循环播放
+        function toggleRepeat() {
+            isRepeatActive = !isRepeatActive;
+            const repeatBtn = document.getElementById('repeatBtn');
+
+            if (isRepeatActive) {
+                repeatBtn.classList.add('active');
+                repeatBtn.title = '关闭循环播放';
+                console.log('🔁 循环播放已开启');
+            } else {
+                repeatBtn.classList.remove('active');
+                repeatBtn.title = '开启循环播放';
+                console.log('🔁 循环播放已关闭');
+            }
         }
 
         // 获取当前分类
@@ -1883,6 +2008,8 @@
         document.getElementById('playPauseBtn')?.addEventListener('click', togglePlayPause);
         document.getElementById('prevBtn')?.addEventListener('click', playPreviousTrack);
         document.getElementById('nextBtn')?.addEventListener('click', playNextTrack);
+        document.getElementById('shuffleBtn')?.addEventListener('click', toggleShuffle);
+        document.getElementById('repeatBtn')?.addEventListener('click', toggleRepeat);
 
         // 定时器选择事件
         document.getElementById('timerSelect')?.addEventListener('change', function() {
