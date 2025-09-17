@@ -1,1169 +1,1707 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-i18n-lang="zh-CN">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Experience 213+ high-quality healing sounds including meditation music, rain sounds, singing bowls, and white noise. Free online sound therapy for stress relief, better sleep, and mindfulness practice." data-i18n="meta.description">
-    <meta name="keywords" content="sound healing,meditation music,sleep sounds,relaxation music,rain sounds,white noise,singing bowls,chakra music,binaural beats,stress relief,yoga music,nature sounds,free meditation,sound therapy">
-    <meta name="author" content="SoundFlow Studio">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="English">
-    <meta name="geo.region" content="US">
-    <meta name="geo.placename" content="United States">
-    
-    <!-- Open Graph / Social Media Sharing -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Free Sound Healing Music | Meditation & Sleep Sounds Online">
-    <meta property="og:description" content="213+ premium healing audio tracks for meditation, sleep, and relaxation. Free online sound therapy with rain sounds, singing bowls, and white noise.">
-    <meta property="og:image" content="https://your-domain.com/assets/images/og-share-en.jpg">
-    <meta property="og:url" content="https://your-domain.com">
-    <meta property="og:site_name" content="SoundFlow - Sound Healing App">
-    <meta property="og:locale" content="en_US">
-    
-    <!-- Twitter Cards -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Free Sound Healing Music - 213+ Premium Audio Tracks">
-    <meta name="twitter:description" content="Premium meditation music, sleep sounds, and healing audio. Completely free, no signup required. Perfect for stress relief and mindfulness.">
-    <meta name="twitter:image" content="https://your-domain.com/assets/images/twitter-share-en.jpg">
-    <meta name="twitter:site" content="@soundflowapp">
-    <meta name="twitter:creator" content="@soundflowapp">
-    
-    <!-- 移动端优化 -->
-    <meta name="theme-color" content="#4a6741">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="声音疗愈" data-i18n="meta.appTitle">
-    <meta name="mobile-web-app-capable" content="yes">
-    
-    <!-- 性能优化 -->
-    <link rel="preload" as="style" href="assets/css/main.css">
-    <link rel="dns-prefetch" href="//fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <title data-i18n="meta.title">Free Sound Healing Music | Meditation & Sleep Sounds Online</title>
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/playlist.css">
-    <link rel="stylesheet" href="assets/css/gpu-optimized-animations.css">
-    <link rel="stylesheet" href="assets/css/insomnia-friendly-warm-theme.css">
+    <title>声音疗愈 - 3D播放列表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a2432 0%, #2d3748 30%, #1a202c 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            perspective: 1000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carousel {
+            position: relative;
+            width: 350px;
+            height: 480px;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .carousel-item {
+            position: absolute;
+            width: 350px;
+            height: 480px;
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            padding: 40px 30px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        /* 9个分类的3D布局 - 模拟原网站的效果 */
+        /* 森林栖息地 - Animal sounds */
+        .carousel-item:nth-child(1) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        /* 温暖壁炉 - Fire */
+        .carousel-item:nth-child(2) {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        /* 梦境花园 - hypnosis */
+        .carousel-item:nth-child(3) {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        /* 禅境山谷 - meditation */
+        .carousel-item:nth-child(4) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        /* 雨林圣地 - Rain */
+        .carousel-item:nth-child(5) {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        /* 溪流秘境 - running water */
+        .carousel-item:nth-child(6) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        /* 颂钵圣殿 - Singing bowl sound */
+        .carousel-item:nth-child(7) {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* 能量场域 - Chakra */
+        .carousel-item:nth-child(8) {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        /* 潜识星域 - Subconscious Therapy */
+        .carousel-item:nth-child(9) {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* 3D卡片位置布局 - 只显示3张卡片 */
+        .carousel-item {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(0) rotateY(45deg) scale(0.8);
+        }
+
+        /* 左侧卡片 */
+        .carousel-item.prev {
+            opacity: 0.7;
+            visibility: visible;
+            transform: translateX(-200px) rotateY(45deg) scale(0.85);
+            z-index: 1;
+        }
+
+        /* 中间当前卡片 */
+        .carousel-item.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0) rotateY(0deg) scale(1);
+            z-index: 3;
+        }
+
+        /* 右侧卡片 */
+        .carousel-item.next {
+            opacity: 0.7;
+            visibility: visible;
+            transform: translateX(200px) rotateY(-45deg) scale(0.85);
+            z-index: 1;
+        }
+
+        /* 卡片内容样式 - 模拟原网站设计 */
+        .item-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .item-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .item-title {
+            font-size: 28px;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .track-count {
+            font-size: 18px;
+            color: rgba(255,255,255,0.9);
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+
+        .item-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
+            width: 100%;
+        }
+
+        .play-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 16px 40px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .play-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .play-btn.active {
+            background: rgba(255,255,255,0.4);
+            color: white;
+        }
+
+        /* 展开的播放列表 */
+        .track-list {
+            width: 100%;
+            max-height: 250px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            margin-top: 20px;
+            display: none;
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            padding: 15px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,0.3) rgba(255,255,255,0.1);
+        }
+
+        .track-list.show {
+            display: block;
+        }
+
+        .track-item {
+            background: rgba(255,255,255,0.1);
+            margin: 4px 0;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.4;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .track-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(4px);
+        }
+
+        /* 控制按钮 */
+        .controls {
+            position: absolute;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .auto-btn.active {
+            background: rgba(76, 175, 80, 0.6);
+            border-color: rgba(76, 175, 80, 0.8);
+        }
+
+        /* 底部圆点导航 */
+        .dots-container {
+            position: absolute;
+            bottom: -140px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: rgba(255,255,255,0.9);
+            transform: scale(1.2);
+        }
+
+        .dot:hover {
+            background: rgba(255,255,255,0.7);
+        }
+
+        /* 滚动条美化 */
+        .track-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .track-list::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+        }
+
+        .track-list::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.3);
+            border-radius: 3px;
+        }
+
+        /* 音频控制器样式 */
+        .audio-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(26, 36, 50, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 20px;
+            width: 320px;
+            max-width: 320px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .audio-controls h4 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .control-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .playback-buttons {
+            justify-content: center;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .control-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .control-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.1);
+        }
+
+        .play-pause-btn {
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            background: rgba(76, 175, 80, 0.3);
+            border-color: rgba(76, 175, 80, 0.6);
+        }
+
+        .play-pause-btn:hover {
+            background: rgba(76, 175, 80, 0.5);
+        }
+
+        .current-track-info {
+            text-align: center;
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .track-name {
+            color: white;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 4px;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            position: relative;
+        }
+
+        .track-name.scrolling {
+            animation: scroll-left 10s linear infinite;
+        }
+
+        @keyframes scroll-left {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .track-category {
+            color: rgba(255,255,255,0.7);
+            font-size: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .control-label {
+            color: rgba(255,255,255,0.8);
+            font-size: 12px;
+            min-width: 40px;
+        }
+
+        .progress-slider, .volume-slider {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255,255,255,0.2);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .progress-slider::-webkit-slider-thumb, .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #fff;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .time-display {
+            color: rgba(255,255,255,0.8);
+            font-size: 11px;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .volume-display {
+            color: rgba(255,255,255,0.8);
+            font-size: 11px;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .timer-select {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            min-width: 80px;
+        }
+
+        .timer-status {
+            color: rgba(255,255,255,0.7);
+            font-size: 10px;
+            min-width: 50px;
+        }
+
+        /* 语言选择器样式 */
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .language-btn {
+            background: rgba(26, 36, 50, 0.9);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .language-btn:hover {
+            background: rgba(26, 36, 50, 1);
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(26, 36, 50, 0.95);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 8px 0;
+            min-width: 120px;
+            display: none;
+            backdrop-filter: blur(20px);
+        }
+
+        .language-dropdown.show {
+            display: block;
+        }
+
+        .language-option {
+            padding: 8px 12px;
+            color: white;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.2s ease;
+        }
+
+        .language-option:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .carousel-container {
+                width: 250px;
+                height: 160px;
+            }
+
+            .carousel-item {
+                font-size: 16px;
+            }
+
+            .item-title {
+                font-size: 20px;
+            }
+
+            .controls {
+                bottom: -50px;
+            }
+
+            .btn {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+
+            .audio-controls {
+                right: 10px;
+                bottom: 10px;
+                width: 280px;
+                max-width: 280px;
+                padding: 15px;
+            }
+        }
+    </style>
+    <script src="assets/js/audio-config.js"></script>
 </head>
 <body>
-    
-    <!-- 云朵背景动效 -->
-    <div class="clouds">
-        <div class="cloud cloud1"></div>
-        <div class="cloud cloud2"></div>
-        <div class="cloud cloud3"></div>
+    <div class="title" data-i18n="app.title">🎵 声音疗愈 - 3D播放列表 🎵</div>
+    <div class="carousel-container">
+        <div class="carousel" id="carousel">
+            <!-- 森林栖息地 - Animal sounds -->
+            <div class="carousel-item" data-category="Animal sounds">
+                <div class="item-header">
+                    <div class="item-icon">🦅</div>
+                    <div class="item-title">森林栖息地</div>
+                    <div class="track-count">26 个音频</div>
+                </div>
+                <div class="item-content">
+                    <button class="play-btn">显示播放列表</button>
+                    <div class="track-list">
+                        <div class="track-item">SPA音乐疗馆 1 - 减压疗程 The Curing Shop - For Decompression.mp3</div>
+                        <div class="track-item">【大自然韵律】鸟儿欢快的鸣叫.mp3</div>
+                        <div class="track-item">天籁之音，清脆的鸟鸣【放松减压】.mp3</div>
+                        <div class="track-item">山间清澈的小溪声音伴着清脆的鸟叫（上）.mp3</div>
+                        <div class="track-item">森林里百灵鸟鸣叫.mp3</div>
+                        <div class="track-item">歌唱的小鸟 减压静心 配舒缓音乐（上）.mp3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 温暖壁炉 - Fire -->
+            <div class="carousel-item" data-category="Fire">
+                <div class="item-header">
+                    <div class="item-icon">🔥</div>
+                    <div class="item-title">温暖壁炉</div>
+                    <div class="track-count">3 个音频</div>
+                </div>
+                <div class="item-content">
+                    <button class="play-btn">显示播放列表</button>
+                    <div class="track-list">
+                        <div class="track-item">河边点燃篝火、水声和清脆的鸟鸣01.mp3</div>
+                        <div class="track-item">河边点燃篝火、水声和清脆的鸟鸣02.mp3</div>
+                        <div class="track-item">河边点燃篝火、水声和清脆的鸟鸣03.mp3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 梦境花园 - hypnosis -->
+            <div class="carousel-item" data-category="hypnosis">
+                <div class="item-header">
+                    <div class="item-icon">🌙</div>
+                    <div class="item-title">梦境花园</div>
+                    <div class="track-count">66 个音频</div>
+                </div>
+                <div class="item-content">
+                    <button class="play-btn">显示播放列表</button>
+                    <div class="track-list">
+                        <div class="track-item">Bolo Ram.mp3</div>
+                        <div class="track-item">Om Mani Padme Hum.mp3</div>
+                        <div class="track-item">催眠专用冥想音乐1.mp3</div>
+                        <div class="track-item">催眠音乐10.mp3</div>
+                        <div class="track-item">放松轻音乐1.mp3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 禅境山谷 - meditation -->
+            <div class="carousel-item" data-category="meditation">
+                <div class="item-header">
+                    <div class="item-icon">🧘‍♀️</div>
+                    <div class="item-title">禅境山谷</div>
+                    <div class="track-count">14 个音频</div>
+                </div>
+                <div class="item-content">
+                    <button class="play-btn">显示播放列表</button>
+                    <div class="track-list">
+                        <div class="track-item">冥想 瑜伽必听.mp3</div>
+                        <div class="track-item">减压舒缓放松的神奇音乐.mp3</div>
+                        <div class="track-item">带您进入深层次睡眠.mp3</div>
+                        <div class="track-item">静心 大彻大悟.mp3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 雨林圣地 - Rain -->
+            <div class="carousel-item" data-category="Rain">
+                <div class="item-header">
+                    <div class="item-icon">☔</div>
+                    <div class="item-title">雨林圣地</div>
+                    <div class="track-count">13 个音频</div>
+                </div>
+                <div class="item-content">
+                    <button class="play-btn">显示播放列表</button>
+                    <div class="track-list">
+                        <div class="track-item">一声闷雷，大雨倾盆.mp3</div>
+                        <div class="track-item">小时候打雷下雨-..必备，治愈失眠01.mp3</div>
+                        <div class="track-item">倾听山谷中小雨，净化心灵.mp3</div>
+                        <div class="track-item">身临情景的雨声.mp3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 溪流秘境 - running water -->
+            <div class="carousel-item" data-category="running water">
+                <div class="item-header">
+                    <div class="item-icon">💧</div>
+                    <div class="item-title">溪流秘境</div>
+                    <div class="track-count">5 个音频</div>
+                </div>
+                <div class="item-content">
+                    <button class="play-btn">显示播放列表</button>
+                    <div class="track-list">
+                        <div class="track-item">缓缓流水，温柔的抚摸脸颊，恋人般的感觉（上）.mp3</div>
+                        <div class="track-item">缓缓流水，温柔的抚摸脸颊，恋人般的感觉（下）.mp3</div>
+                        <div class="track-item">河边点燃篝火、水声和清脆的鸟鸣01.mp3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 颂钵圣殿 - Singing bowl sound -->
+            <div class="carousel-item" data-category="Singing bowl sound">
+                <div class="item-header">
+                    <div class="item-icon">🎵</div>
+                    <div class="item-title">颂钵圣殿</div>
+                    <div class="track-count">61 个音频</div>
+                </div>
+                <div class="item-content">
+                    <button class="play-btn">显示播放列表</button>
+                    <div class="track-list">
+                        <div class="track-item">01-Healing Bowls - Instrumental - Jane Winther.mp3</div>
+                        <div class="track-item">颂钵音疗，平躺或，放下身心，全然融入的体会.mp3</div>
+                        <div class="track-item">顶级水晶钵颂音.音疗.mp3</div>
+                        <div class="track-item">钵音+水声+鸟叫自然声 让你平静下来的声音 01.mp3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 能量场域 - Chakra -->
+            <div class="carousel-item" data-category="Chakra">
+                <div class="item-header">
+                    <div class="item-icon">🌈</div>
+                    <div class="item-title">能量场域</div>
+                    <div class="track-count">7 个音频</div>
+                </div>
+                <div class="item-content">
+                    <button class="play-btn">显示播放列表</button>
+                    <div class="track-list">
+                        <div class="track-item">Hals-Chakra 蓝玉莲华(喉轮).mp3</div>
+                        <div class="track-item">Scheitel-Chakra 紫晶莲华(顶轮).mp3</div>
+                        <div class="track-item">Herz-Chakra 綠石蓮華(心輪).mp3</div>
+                        <div class="track-item">Wurzel-Chakra 碧玉莲华(海底轮).mp3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 潜识星域 - Subconscious Therapy -->
+            <div class="carousel-item" data-category="Subconscious Therapy">
+                <div class="item-header">
+                    <div class="item-icon">🌌</div>
+                    <div class="item-title">潜识星域</div>
+                    <div class="track-count">11 个音频</div>
+                </div>
+                <div class="item-content">
+                    <button class="play-btn">显示播放列表</button>
+                    <div class="track-list">
+                        <div class="track-item">全新的开始.mp3</div>
+                        <div class="track-item">梦起始的地方.mp3</div>
+                        <div class="track-item">遇见林间精灵.mp3</div>
+                        <div class="track-item">滴落的星子.mp3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn" onclick="rotateCarousel(-1)" data-i18n="carousel.prev">上一个</button>
+            <button class="btn auto-btn" onclick="toggleAuto()" id="autoBtn" data-i18n="carousel.auto">自动播放</button>
+            <button class="btn" onclick="rotateCarousel(1)" data-i18n="carousel.next">下一个</button>
+        </div>
+
+        <!-- 圆点导航 -->
+        <div class="dots-container">
+            <div class="dot active" onclick="goToSlide(0)"></div>
+            <div class="dot" onclick="goToSlide(1)"></div>
+            <div class="dot" onclick="goToSlide(2)"></div>
+            <div class="dot" onclick="goToSlide(3)"></div>
+            <div class="dot" onclick="goToSlide(4)"></div>
+            <div class="dot" onclick="goToSlide(5)"></div>
+            <div class="dot" onclick="goToSlide(6)"></div>
+            <div class="dot" onclick="goToSlide(7)"></div>
+            <div class="dot" onclick="goToSlide(8)"></div>
+        </div>
     </div>
-    
-    <!-- 全屏背景场景画布 -->
-    <canvas id="backgroundCanvas" class="background-scene"></canvas>
-    
-    <!-- 右上角语言选择器 -->
+
+    <!-- 音频控制器 - 增强版 -->
+    <div class="audio-controls">
+        <h4 data-i18n="audioControl.title">🎵 播放控制器</h4>
+
+        <!-- 播放控制按钮 -->
+        <div class="control-row playback-buttons">
+            <button class="control-btn" id="prevBtn" data-i18n-title="controls.previous" title="上一首">⏮</button>
+            <button class="control-btn play-pause-btn" id="playPauseBtn" data-i18n-title="controls.playPause" title="播放/暂停">▶️</button>
+            <button class="control-btn" id="nextBtn" data-i18n-title="controls.next" title="下一首">⏭</button>
+        </div>
+
+        <!-- 当前播放信息 -->
+        <div class="current-track-info">
+            <div class="track-name" id="currentTrackName" data-i18n="player.noTrack">未选择音频</div>
+            <div class="track-category" id="currentTrackCategory"></div>
+        </div>
+
+        <!-- 进度控制 -->
+        <div class="control-row">
+            <span class="control-label" data-i18n="controls.progress">进度</span>
+            <span class="time-display" id="currentTime">00:00</span>
+            <input type="range" class="progress-slider" id="progressSlider" min="0" max="100" step="0.1" value="0">
+            <span class="time-display" id="totalTime">00:00</span>
+        </div>
+
+        <!-- 音量控制 -->
+        <div class="control-row">
+            <span class="control-label" data-i18n="controls.volume">音量</span>
+            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="0.5">
+            <span class="volume-display" id="volumeDisplay">50%</span>
+        </div>
+
+        <!-- 定时器控制 -->
+        <div class="control-row timer-row">
+            <span class="control-label" data-i18n="timer.label">定时</span>
+            <select class="timer-select" id="timerSelect">
+                <option value="0" data-i18n="timer.off">关闭</option>
+                <option value="15" data-i18n="timer.15min">15分钟</option>
+                <option value="30" data-i18n="timer.30min">30分钟</option>
+                <option value="60" data-i18n="timer.60min">60分钟</option>
+                <option value="90" data-i18n="timer.90min">90分钟</option>
+            </select>
+            <span class="timer-status" id="timerStatus" data-i18n="timer.inactive">未启动</span>
+        </div>
+    </div>
+
+    <!-- 语言选择器 -->
     <div class="language-selector" id="languageSelector">
-        <button class="language-toggle" id="languageToggle">🌐 简体中文</button>
+        <button class="language-btn" id="languageBtn">🌐 中文</button>
         <div class="language-dropdown" id="languageDropdown">
-            <div class="language-option" data-lang="zh-CN">🇨🇳 简体中文</div>
+            <div class="language-option" data-lang="zh-CN">🇨🇳 中文</div>
             <div class="language-option" data-lang="en-US">🇺🇸 English</div>
             <div class="language-option" data-lang="ja-JP">🇯🇵 日本語</div>
             <div class="language-option" data-lang="ko-KR">🇰🇷 한국어</div>
-            <div class="language-option" data-lang="es-ES">🇪🇸 Español</div>
         </div>
     </div>
 
-    <!-- 简化的顶部标题 - 去除方框样式 -->
-    <div class="simple-header">
-        <h1 class="simple-title" data-i18n="header.title">声音疗愈</h1>
-        <p class="simple-subtitle" data-i18n="header.subtitle">聆听大自然的治愈之声，重归内心宁静</p>
-    </div>
-
-    <!-- 中央池塘播放器 -->
-    <div class="pond-player">
-        <div class="ripple" style="animation-delay: 0s;"></div>
-        <div class="ripple" style="animation-delay: 1s;"></div>
-        <div class="ripple" style="animation-delay: 2s;"></div>
-        <button id="lotusPlayBtn" class="lotus-player" data-i18n-aria="player.playButton" aria-label="主播放按钮">▶</button>
-        <div class="now-playing-info">
-            <div class="current-track-name" data-i18n="player.selectSound">选择您的疗愈之声</div>
-            <div class="current-track-artist" data-i18n="player.startJourney">开始您的自然之旅</div>
-        </div>
-    </div>
-
-    <main class="forest-path">
-        <!-- 3D音频房间轮播 -->
-        <div class="container-carrossel">
-            <div class="carrossel" id="carrossel">
-                <!-- 音频房间将通过JavaScript动态生成 -->
-            </div>
-        </div>
-
-        <!-- 轮播控制器 -->
-        <div class="controles">
-            <button class="btn-controle" onclick="anterior()">← 上一个房间</button>
-            <button class="btn-controle" onclick="toggleAutoRotate()">⏯ 自动浏览</button>
-            <button class="btn-controle" onclick="proximo()">下一个房间 →</button>
-        </div>
-
-        <!-- 房间指示器 -->
-        <div class="indicadores" id="indicadores">
-            <!-- 将通过JavaScript动态生成 -->
-        </div>
-    </main>
-
-    <!-- 播放列表区域 -->
-    <section id="playlistSection" class="playlist-section" style="display: none;">
-        <div class="playlist-header organic-container">
-            <button id="backToCategories" class="nature-back-btn" data-i18n="playlist.backToEcosystem">🌿 返回生态</button>
-            <h3 id="playlistTitle" class="habitat-title" data-i18n="playlist.habitatAudio">栖息地音频</h3>
-            <div class="habitat-controls">
-                <button id="shuffleBtn" class="nature-control-btn" data-i18n-title="playlist.shuffle" title="随机播放">🔀</button>
-                <button id="repeatBtn" class="nature-control-btn" data-i18n-title="playlist.repeat" title="重复播放">🔁</button>
-            </div>
-        </div>
-        <div class="habitat-player organic-container">
-            <div id="currentTrackInfo" class="track-display">
-                <span id="currentTrackName" class="track-name" data-i18n="player.noAudioSelected">未选择音频</span>
-                <div class="track-controls">
-                    <button id="prevBtn" class="nature-control-btn" data-i18n-title="controls.previous" title="上一首">⏮</button>
-                    <button id="playPauseBtn" class="nature-control-btn nature-play-main" data-i18n-title="controls.playPause" title="播放/暂停">▶️</button>
-                    <button id="nextBtn" class="nature-control-btn" data-i18n-title="controls.next" title="下一首">⏭</button>
-                </div>
-            </div>
-            
-            <!-- 自然风格进度条 -->
-            <div class="nature-progress-section">
-                <div class="nature-progress-container">
-                    <input type="range" id="progressBar" class="nature-progress-slider" min="0" max="100" value="0">
-                </div>
-                <div class="nature-time-display">
-                    <span id="currentTime">00:00</span>
-                    <span id="totalTime">00:00</span>
-                </div>
-            </div>
-            
-            <div class="nature-volume-section">
-                <span class="nature-label" data-i18n="controls.volume">音量</span>
-                <input type="range" id="currentTrackVolume" class="nature-slider" min="0" max="1" step="0.01" value="0.5">
-                <span id="currentVolumeDisplay" class="volume-display">50%</span>
-            </div>
-        </div>
-        <div id="trackList" class="habitat-track-list">
-            <!-- 播放列表将通过JavaScript动态生成 -->
-        </div>
-    </section>
-
-    <!-- 轮播控制按钮 -->
-    <div class="carousel-navigation">
-        <button class="nav-btn prev-btn" onclick="anterior()" title="上一个房间">‹</button>
-        <button class="nav-btn next-btn" onclick="proximo()" title="下一个房间">›</button>
-    </div>
-
-    <!-- 可拖拽浮动控制器 -->
-    <div class="floating-controls" id="floatingControls">
-        <div class="control-header" id="controlHeader">
-            <span class="control-title">播放控制</span>
-            <button class="toggle-btn" id="toggleBtn" title="展开/收起">−</button>
-        </div>
-
-        <div class="control-content" id="controlContent">
-            <div class="control-row">
-                <div class="playback-controls">
-                    <button id="globalPrevBtn" class="control-btn" title="上一首">⏮</button>
-                    <button id="globalPlayBtn" class="control-btn play-btn" title="播放/暂停">⏸</button>
-                    <button id="globalNextBtn" class="control-btn" title="下一首">⏭</button>
-                </div>
-
-                <div class="mode-controls">
-                    <button id="shuffleModeBtn" class="control-btn" title="随机播放">🔀</button>
-                    <button id="repeatModeBtn" class="control-btn" title="循环模式">🔁</button>
-                    <button id="timerBtn" class="control-btn" title="睡眠定时">⏰</button>
-                </div>
-            </div>
-
-            <div class="volume-row">
-                <span class="volume-label">音量</span>
-                <input type="range" id="globalVolume" class="volume-slider" min="0" max="1" step="0.01" value="0.5">
-                <span class="volume-value">50%</span>
-            </div>
-
-            <div class="status-row">
-                <span class="status-icon">🧘</span>
-                <span class="status-text" data-i18n="healing.mode.focus">专注模式</span>
-                <span class="session-time">00:00</span>
-            </div>
-
-            <!-- 隐藏的定时器控制 -->
-            <div id="timerControls" class="timer-controls-hidden" style="display: none;">
-                <select id="timerDuration" class="timer-select">
-                    <option value="0">无定时</option>
-                    <option value="15">15分钟</option>
-                    <option value="30">30分钟</option>
-                    <option value="60">60分钟</option>
-                    <option value="90">90分钟</option>
-                    <option value="120">120分钟</option>
-                </select>
-                <button id="timerStartBtn" class="timer-button" data-i18n="timer.start">开始</button>
-                <span id="timerStatus" class="timer-status" data-i18n="timer.notStarted">未启动</span>
-            </div>
-        </div>
-    </div>
-
-    <footer class="nature-footer">
-        <p data-i18n="app.footer">🎧 使用耳机聆听，获得最佳的自然疗愈体验</p>
-    </footer>
-
-    <!-- 🚀 性能优化版本：异步模块加载系统 -->
-    <!-- 仅加载关键路径脚本，其他模块通过异步加载器管理 -->
     <script>
-        // 检查Service Worker支持并注册增强版缓存系统
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw-enhanced.js')
-                    .then((registration) => {
-                        console.log('✅ SW v2.0: Service Worker注册成功', registration.scope);
-                    })
-                    .catch((error) => {
-                        console.warn('⚠️ Service Worker注册失败，使用降级模式', error);
-                        // 降级到原始Service Worker
-                        navigator.serviceWorker.register('/sw.js').catch(() => {
-                            console.log('💫 无Service Worker支持，继续使用基础缓存');
-                        });
-                    });
-            });
-        }
-    </script>
-    <script src="assets/js/module-loader.js"></script>
-    <script src="assets/js/loading-indicator.js"></script>
-    <script src="assets/js/i18n-system.js"></script>
-    <script src="assets/js/language-integration.js"></script>
-    <script src="assets/js/audio-room-carousel.js"></script>
+        let currentIndex = 0;
+        let isAutoRotating = false;
+        let autoInterval;
+        const carousel = document.getElementById('carousel');
+        const autoBtn = document.getElementById('autoBtn');
+        const totalItems = 9;
 
-    <!-- 拖拽控制器功能 -->
-    <script>
-        // 拖拽功能
-        let isDragging = false;
-        let currentX;
-        let currentY;
-        let initialX;
-        let initialY;
-        let xOffset = 0;
-        let yOffset = 0;
+        // 音频相关变量
+        let currentAudio = null;
+        let isPlaying = false;
+        let currentPlaylist = [];
+        let currentTrackIndex = 0;
+        let sleepTimer = null;
+        let timerStartTime = null;
+        let currentLanguage = 'zh-CN';
 
-        const floatingControls = document.getElementById('floatingControls');
-        const controlHeader = document.getElementById('controlHeader');
-        const toggleBtn = document.getElementById('toggleBtn');
-        const controlContent = document.getElementById('controlContent');
-
-        // 展开收起功能
-        let isCollapsed = false;
-
-        toggleBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            isCollapsed = !isCollapsed;
-
-            if (isCollapsed) {
-                floatingControls.classList.add('collapsed');
-                toggleBtn.textContent = '+';
-                toggleBtn.title = '展开';
-            } else {
-                floatingControls.classList.remove('collapsed');
-                toggleBtn.textContent = '−';
-                toggleBtn.title = '收起';
-            }
-        });
-
-        // 拖拽功能
-        controlHeader.addEventListener('mousedown', dragStart);
-        document.addEventListener('mousemove', drag);
-        document.addEventListener('mouseup', dragEnd);
-
-        // 触摸事件
-        controlHeader.addEventListener('touchstart', dragStart);
-        document.addEventListener('touchmove', drag);
-        document.addEventListener('touchend', dragEnd);
-
-        function dragStart(e) {
-            if (e.type === "touchstart") {
-                initialX = e.touches[0].clientX - xOffset;
-                initialY = e.touches[0].clientY - yOffset;
-            } else {
-                initialX = e.clientX - xOffset;
-                initialY = e.clientY - yOffset;
-            }
-
-            if (e.target === controlHeader || controlHeader.contains(e.target)) {
-                isDragging = true;
-                floatingControls.style.cursor = 'grabbing';
-            }
-        }
-
-        function drag(e) {
-            if (isDragging) {
-                e.preventDefault();
-
-                if (e.type === "touchmove") {
-                    currentX = e.touches[0].clientX - initialX;
-                    currentY = e.touches[0].clientY - initialY;
-                } else {
-                    currentX = e.clientX - initialX;
-                    currentY = e.clientY - initialY;
-                }
-
-                xOffset = currentX;
-                yOffset = currentY;
-
-                // 限制在视窗内
-                const rect = floatingControls.getBoundingClientRect();
-                const maxX = window.innerWidth - rect.width;
-                const maxY = window.innerHeight - rect.height;
-
-                xOffset = Math.max(0, Math.min(xOffset, maxX));
-                yOffset = Math.max(0, Math.min(yOffset, maxY));
-
-                floatingControls.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
-                floatingControls.style.right = 'auto';
-                floatingControls.style.bottom = 'auto';
-                floatingControls.style.left = '0';
-                floatingControls.style.top = '0';
-            }
-        }
-
-        function dragEnd(e) {
-            isDragging = false;
-            floatingControls.style.cursor = 'move';
-        }
-
-        // 防止在收起状态下的意外拖拽
-        floatingControls.addEventListener('mousedown', function(e) {
-            if (isCollapsed && !controlHeader.contains(e.target)) {
-                e.stopPropagation();
-            }
-        });
-    </script>
-
-    <!-- 多语言功能调试和初始化脚本 -->
-    <script>
-        // 检查多语言系统状态
-        function checkMultiLanguageStatus() {
-            console.log('🔍 多语言系统状态检查:');
-            console.log('- i18n系统:', window.i18n ? '✅' : '❌');
-            console.log('- i18n初始化:', window.i18n?.isInitialized ? '✅' : '❌');
-            console.log('- 语言集成:', window.languageIntegration ? '✅' : '❌');
-            console.log('- 集成初始化:', window.languageIntegration?.isInitialized ? '✅' : '❌');
-            
-            // 检查DOM元素
-            const langSelector = document.getElementById('languageSelector');
-            const langToggle = document.getElementById('languageToggle');
-            const langDropdown = document.getElementById('languageDropdown');
-            
-            console.log('- DOM元素检查:');
-            console.log('  - languageSelector:', !!langSelector);
-            console.log('  - languageToggle:', !!langToggle);
-            console.log('  - languageDropdown:', !!langDropdown);
-        }
-        
-        // 手动初始化多语言功能
-        function initMultiLanguage() {
-            console.log('🔧 手动初始化多语言功能...');
-            
-            if (window.initLanguageIntegration) {
-                window.initLanguageIntegration();
-            }
-            
-            setTimeout(() => {
-                checkMultiLanguageStatus();
-            }, 1000);
-        }
-        
-        // 页面加载完成后检查状态
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                checkMultiLanguageStatus();
-                
-                // 如果系统未就绪，尝试手动初始化
-                if (!window.languageIntegration?.isInitialized) {
-                    console.log('🔧 系统未就绪，尝试手动初始化...');
-                    initMultiLanguage();
-                }
-            }, 2000);
-        });
-        
-        // 将调试函数暴露到全局，便于控制台调用
-        window.checkMultiLanguageStatus = checkMultiLanguageStatus;
-        window.initMultiLanguage = initMultiLanguage;
-    </script>
-    
-    <!-- 应用初始化和修复逻辑保持内联以确保稳定性 -->
-    
-    <!-- 🚨 EMERGENCY FIX: 直接在HTML中实现完整的AudioManager以绕过所有模块冲突和缓存问题 -->
-    <script>
-        // 紧急音频管理器 - 直接在HTML中定义以绕过所有模块加载问题
-        class EmergencyAudioManager {
-            constructor() {
-                this.audioInstances = new Map();
-                this.isInitialized = false;
-                this.globalVolume = 0.5;
-                this.currentCategory = null;
-                this.currentTrack = null;
-                this.eventBus = document.createElement('div');
-                
-                console.log('🚨 紧急音频管理器启动');
-                this.initialize();
-            }
-            
-            async initialize() {
-                try {
-                    // 基本配置检查
-                    if (typeof AUDIO_CONFIG === 'undefined') {
-                        console.warn('AUDIO_CONFIG未定义，等待加载...');
-                        // 等待配置加载
-                        let retries = 0;
-                        while (typeof AUDIO_CONFIG === 'undefined' && retries < 50) {
-                            await new Promise(resolve => setTimeout(resolve, 100));
-                            retries++;
-                        }
-                    }
-                    
-                    this.isInitialized = true;
-                    console.log('✅ 紧急音频管理器初始化完成');
-                    
-                    // 设置为全局 AudioManager 以兼容现有代码
-                    window.AudioManager = EmergencyAudioManager;
-                    window.audioManager = this;
-                    
-                    // 触发初始化完成事件
-                    this.eventBus.dispatchEvent(new CustomEvent('initialized'));
-                    
-                } catch (error) {
-                    console.error('紧急音频管理器初始化失败:', error);
-                }
-            }
-            
-            getAudioUrl(categoryKey, fileName) {
-                // 直接构建Archive.org代理URL - 使用实际的Archive.org目录名
-                const categoryMappings = {
-                    'Animal sounds': 'animal-sounds',
-                    'Chakra': 'chakra',
-                    'Fire': 'fire-sounds',
-                    'hypnosis': 'hypnosis',
-                    'meditation': 'meditation',
-                    'Rain': 'rain-sounds',
-                    'running water': 'water-sounds',
-                    'Singing bowl sound': 'singing-bowls',
-                    'Subconscious Therapy': 'subconscious-therapy'
-                };
-                
-                const mappedCategory = categoryMappings[categoryKey] || categoryKey.toLowerCase().replace(/\s+/g, '-');
-                const encodedFileName = encodeURIComponent(fileName);
-                return `/api/audio/${mappedCategory}/${encodedFileName}`;
-            }
-            
-            async playTrack(categoryKey, fileName) {
-                try {
-                    console.log(`🎵 播放音轨: ${categoryKey} - ${fileName}`);
-                    
-                    const audioUrl = this.getAudioUrl(categoryKey, fileName);
-                    const trackId = `${categoryKey}-${fileName}`;
-                    
-                    // 停止其他正在播放的音频
-                    this.pauseAll();
-                    
-                    // 创建或获取音频实例
-                    let audio = this.audioInstances.get(trackId);
-                    if (!audio) {
-                        audio = new Audio();
-                        audio.volume = this.globalVolume;
-                        audio.preload = 'metadata';
-                        this.audioInstances.set(trackId, audio);
-                        
-                        // 添加事件监听
-                        audio.addEventListener('loadstart', () => {
-                            console.log(`开始加载: ${fileName}`);
-                        });
-                        
-                        audio.addEventListener('canplay', () => {
-                            console.log(`可以播放: ${fileName}`);
-                        });
-                        
-                        audio.addEventListener('error', (e) => {
-                            console.error(`音频加载错误: ${fileName}`, e);
-                        });
-                        
-                        audio.addEventListener('play', () => {
-                            this.currentCategory = categoryKey;
-                            this.currentTrack = fileName;
-                            this.updateNowPlaying(categoryKey, fileName);
-                        });
-                    }
-                    
-                    // 设置音频源并播放
-                    audio.src = audioUrl;
-                    
-                    // 等待用户交互后播放
-                    await audio.play();
-                    
-                    console.log(`✅ 成功播放: ${fileName}`);
-                    return true;
-                    
-                } catch (error) {
-                    console.error(`播放失败: ${fileName}`, error);
-                    
-                    if (error.name === 'NotAllowedError') {
-                        this.showError('需要用户交互才能播放音频，请点击播放按钮');
-                    } else {
-                        this.showError(`播放失败: ${error.message}`);
-                    }
-                    return false;
-                }
-            }
-            
-            pauseAll() {
-                for (const [trackId, audio] of this.audioInstances) {
-                    if (!audio.paused) {
-                        audio.pause();
-                    }
-                }
-            }
-            
-            updateNowPlaying(categoryKey, fileName) {
-                // 更新现在播放信息
-                const currentTrackName = document.getElementById('currentTrackName');
-                const pondTrackName = document.querySelector('.current-track-name');
-                const pondTrackArtist = document.querySelector('.current-track-artist');
-                
-                const displayName = fileName.replace('.mp3', '');
-                
-                if (currentTrackName) {
-                    currentTrackName.textContent = displayName;
-                }
-                
-                if (pondTrackName) {
-                    pondTrackName.textContent = displayName;
-                }
-                
-                if (pondTrackArtist) {
-                    const categoryNames = {
-                        'Animal sounds': '森林栖息地',
-                        'Chakra': '能量场域',
-                        'Fire': '温暖壁炉',
-                        'hypnosis': '梦境花园',
-                        'meditation': '禅境山谷',
-                        'Rain': '雨林圣地',
-                        'running water': '溪流秘境',
-                        'Singing bowl sound': '颂钵圣殿',
-                        'Subconscious Therapy': '潜识星域'
-                    };
-                    pondTrackArtist.textContent = categoryNames[categoryKey] || categoryKey;
-                }
-                
-                // 更新池塘播放按钮状态
-                const lotusBtn = document.getElementById('lotusPlayBtn');
-                if (lotusBtn) {
-                    lotusBtn.textContent = '⏸';
-                    lotusBtn.onclick = () => this.pauseAll();
-                }
-            }
-            
-            // 添加应用兼容性方法
-            isAnyPlaying() {
-                for (const [key, audio] of this.audioInstances) {
-                    if (audio && !audio.paused) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-            
-            getPlayingSounds() {
-                const playing = [];
-                for (const [key, audio] of this.audioInstances) {
-                    if (audio && !audio.paused) {
-                        playing.push(key);
-                    }
-                }
-                return playing;
-            }
-            
-            setGlobalVolume(volume) {
-                this.globalVolume = volume;
-                for (const [key, audio] of this.audioInstances) {
-                    if (audio) {
-                        audio.volume = volume;
-                    }
-                }
-            }
-            
-            setSoundVolume(soundId, volume) {
-                const audio = this.audioInstances.get(soundId);
-                if (audio) {
-                    audio.volume = volume;
-                }
-            }
-            
-            toggleSound(soundId) {
-                // 简化的实现，直接使用分类播放
-                if (soundId === 'rain') {
-                    return this.playCategory('Rain');
-                } else if (soundId === 'ocean') {
-                    return this.playCategory('water-sounds');
-                } else if (soundId === 'meditation') {
-                    return this.playCategory('meditation');
-                }
-                console.warn('Unknown sound ID:', soundId);
-            }
-            
-            playSound(soundId) {
-                return this.toggleSound(soundId);
-            }
-            
-            showError(message) {
-                console.error(message);
-                
-                // 创建错误提示
-                const errorDiv = document.createElement('div');
-                errorDiv.style.cssText = `
-                    position: fixed;
-                    top: 20px;
-                    right: 20px;
-                    background: rgba(220, 53, 69, 0.9);
-                    color: white;
-                    padding: 15px 20px;
-                    border-radius: 8px;
-                    z-index: 10000;
-                    max-width: 300px;
-                    font-size: 14px;
-                `;
-                errorDiv.textContent = message;
-                
-                document.body.appendChild(errorDiv);
-                
-                setTimeout(() => {
-                    if (errorDiv.parentNode) {
-                        errorDiv.parentNode.removeChild(errorDiv);
-                    }
-                }, 5000);
-            }
-        }
-        
-        // 全局变量
-        window.emergencyAudioManager = null;
-        
-        // 紧急初始化函数
-        async function emergencyInitialize() {
-            console.log('🚨 开始紧急初始化...');
-            
-            try {
-                // 创建紧急音频管理器
-                window.emergencyAudioManager = new EmergencyAudioManager();
-                
-                // 等待音频管理器初始化
-                await new Promise((resolve) => {
-                    if (window.emergencyAudioManager.isInitialized) {
-                        resolve();
-                    } else {
-                        window.emergencyAudioManager.eventBus.addEventListener('initialized', resolve, { once: true });
-                    }
-                });
-                
-                console.log('✅ 紧急音频管理器已就绪');
-                
-                // 绑定池塘播放按钮
-                const lotusBtn = document.getElementById('lotusPlayBtn');
-                if (lotusBtn) {
-                    lotusBtn.onclick = () => {
-                        // 播放默认音轨
-                        if (typeof AUDIO_CONFIG !== 'undefined' && AUDIO_CONFIG.categories['Rain']?.files?.length > 0) {
-                            const firstRainFile = AUDIO_CONFIG.categories['Rain'].files[0];
-                            window.emergencyAudioManager.playTrack('Rain', firstRainFile);
-                        }
-                    };
-                }
-                
-                // 绑定音轨播放事件
-                document.addEventListener('click', (e) => {
-                    const trackItem = e.target.closest('.track-item');
-                    if (trackItem) {
-                        const trackTitle = trackItem.querySelector('.track-title');
-                        if (trackTitle) {
-                            const fileName = trackTitle.textContent.trim() + '.mp3';
-                            
-                            // 从播放列表标题中获取分类
-                            const playlistTitle = document.getElementById('playlistTitle');
-                            const ecosystemName = playlistTitle ? playlistTitle.textContent : '';
-                            
-                            // 映射生态系统名称到分类键
-                            const ecosystemToCategoryMap = {
-                                '森林栖息地': 'Animal sounds',
-                                '能量场域': 'Chakra',
-                                '温暖壁炉': 'Fire',
-                                '梦境花园': 'hypnosis',
-                                '禅境山谷': 'meditation',
-                                '雨林圣地': 'Rain',
-                                '溪流秘境': 'running water',
-                                '颂钵圣殿': 'Singing bowl sound',
-                                '潜识星域': 'Subconscious Therapy'
-                            };
-                            
-                            const categoryKey = ecosystemToCategoryMap[ecosystemName];
-                            if (categoryKey && window.emergencyAudioManager) {
-                                window.emergencyAudioManager.playTrack(categoryKey, fileName);
-                            }
-                        }
-                    }
-                });
-                
-                console.log('✅ 紧急初始化完成');
-                
-            } catch (error) {
-                console.error('🚨 紧急初始化失败:', error);
-            }
-        }
-        
-        // 在DOM加载完成后立即初始化
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', emergencyInitialize);
-        } else {
-            emergencyInitialize();
-        }
-        
-    </script>
-
-    <script>
-        // 强制修复脚本 - 确保播放列表功能正常工作
-        let fixedApp = null;
-        let initProgress = 0;
-        
-        
-        function forceCreateEcosystemCards() {
-            
-            const container = document.getElementById('categoriesContainer');
-            if (!container) {
-                console.error('❌ 容器不存在');
-                return;
-            }
-            
-            // 清空容器
-            container.innerHTML = '';
-            
-            // 使用AUDIO_CONFIG直接创建卡片
-            if (typeof AUDIO_CONFIG === 'undefined') {
-                console.error('❌ AUDIO_CONFIG未加载');
-                return;
-            }
-            
-            const ecosystemData = {
-                'Animal sounds': { icon: '🦅', name: '森林栖息地', type: '鸟类与动物声' },
-                'Chakra': { icon: '🌈', name: '能量场域', type: '脉轮音疗' },
-                'Fire': { icon: '🔥', name: '温暖壁炉', type: '火焰与温暖' },
-                'hypnosis': { icon: '🌙', name: '梦境花园', type: '催眠引导' },
-                'meditation': { icon: '🧘‍♀️', name: '禅境山谷', type: '冥想音乐' },
-                'Rain': { icon: '☔', name: '雨林圣地', type: '雨声净化' },
-                'running water': { icon: '💧', name: '溪流秘境', type: '流水音律' },
-                'Singing bowl sound': { icon: '🎵', name: '颂钵圣殿', type: '音疗颂钵' },
-                'Subconscious Therapy': { icon: '🌌', name: '潜识星域', type: '潜意识疗愈' }
-            };
-            
-            Object.entries(ecosystemData).forEach(([categoryKey, data]) => {
-                if (!AUDIO_CONFIG.categories[categoryKey]) return;
-                
-                const count = AUDIO_CONFIG.categories[categoryKey].files?.length || 0;
-                
-                const card = document.createElement('div');
-                card.className = 'ecosystem-card';
-                card.dataset.category = categoryKey;
-                
-                card.innerHTML = `
-                    <span class="species-count">${count}种</span>
-                    <div class="ecosystem-header">
-                        <span class="ecosystem-icon" role="img" aria-label="${data.type}">${data.icon}</span>
-                        <div class="ecosystem-info">
-                            <h3 class="ecosystem-name">${data.name}</h3>
-                            <p class="habitat-type">${data.type}</p>
-                        </div>
-                    </div>
-                    <p class="ecosystem-desc">深入${data.name}，感受自然的治愈力量</p>
-                `;
-                
-                // 添加无障碍属性
-                card.setAttribute('role', 'button');
-                card.setAttribute('tabindex', '0');
-                card.setAttribute('aria-label', `打开${data.name}音频播放列表，包含${count}个音频文件`);
-                
-                // 强制绑定点击和键盘事件
-                const handleActivation = (event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    
-                    // 添加视觉反馈
-                    card.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        card.style.transform = '';
-                    }, 150);
-                    
-                    forceOpenPlaylist(categoryKey, data.name);
-                };
-                
-                card.addEventListener('click', handleActivation);
-                
-                // 键盘导航支持
-                card.addEventListener('keydown', (event) => {
-                    if (event.key === 'Enter' || event.key === ' ') {
-                        handleActivation(event);
-                    }
-                });
-                
-                container.appendChild(card);
-            });
-            
-        }
-        
-        async function forceOpenPlaylist(categoryKey, ecosystemName) {
-            console.log(`🚀 性能优化版：打开 ${ecosystemName} 播放列表`);
-            
-            const mainContainer = document.querySelector('main.forest-path');
-            const playlistSection = document.getElementById('playlistSection');
-            const titleElement = document.getElementById('playlistTitle');
-            const trackList = document.getElementById('trackList');
-            
-            if (!playlistSection) {
-                console.error('❌ 播放列表区域不存在');
-                return;
-            }
-            
-            // 🎵 使用懒加载预加载音频分类
-            try {
-                const loadingIndicator = document.createElement('div');
-                loadingIndicator.innerHTML = `
-                    <div style="display: flex; align-items: center; justify-content: center; padding: 20px; color: #b8e6b8;">
-                        <div style="animation: spin 1s linear infinite; margin-right: 10px;">⚡</div>
-                        正在加载 ${ecosystemName}...
-                    </div>
-                    <style>
-                        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-                    </style>
-                `;
-                
-                // 显示加载指示器
-                if (trackList) {
-                    trackList.innerHTML = '';
-                    trackList.appendChild(loadingIndicator);
-                }
-                
-                // 懒加载音频分类
-                if (window.audioLazyLoader) {
-                    await window.audioLazyLoader.lazyLoadCategory(categoryKey);
-                }
-                
-            } catch (error) {
-                console.warn('音频懒加载失败，使用传统方式:', error);
-            }
-            
-            // 强制隐藏主容器
-            if (mainContainer) {
-                mainContainer.style.cssText = 'display: none !important;';
-            }
-            
-            // 强制显示播放列表
-            playlistSection.style.cssText = `
-                display: block !important;
-                visibility: visible !important;
-                opacity: 1 !important;
-                position: fixed !important;
-                top: 0px !important;
-                left: 0px !important;
-                width: 100vw !important;
-                height: 100vh !important;
-                z-index: 99999 !important;
-                background: rgba(26, 46, 26, 0.95) !important;
-                backdrop-filter: blur(20px) !important;
-                overflow-y: auto !important;
-                padding: 2rem !important;
-                margin: 0 !important;
-                border: none !important;
-            `;
-            
-            playlistSection.classList.add('playlist-active');
-            
-            // 设置标题
-            if (titleElement) {
-                titleElement.textContent = ecosystemName;
-            }
-            
-            // 强制生成音轨列表
-            if (trackList && AUDIO_CONFIG.categories[categoryKey]) {
-                const files = AUDIO_CONFIG.categories[categoryKey].files || [];
-                
-                trackList.innerHTML = `
-                    <div class="track-list" style="display: block !important;">
-                        ${files.map((fileName, index) => `
-                            <div class="track-item" style="display: block !important; background: rgba(45, 74, 45, 0.6) !important; padding: 1rem !important; margin: 0.5rem 0 !important; border-radius: 12px !important; cursor: pointer !important;">
-                                <div class="track-header">
-                                    <div class="track-number" style="display: inline-block; width: 28px; height: 28px; background: rgba(127, 176, 105, 0.3); border-radius: 50%; text-align: center; line-height: 28px; color: #f7f4e9; margin-right: 10px;">${index + 1}</div>
-                                    <h4 class="track-title" style="display: inline; color: #f7f4e9;">${fileName.replace('.mp3', '').substring(0, 40)}</h4>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
-                
-            }
-            
-            // 强制绑定返回按钮
-            const backBtn = document.getElementById('backToCategories');
-            if (backBtn) {
-                backBtn.style.cssText = `
-                    display: flex !important;
-                    visibility: visible !important;
-                    opacity: 1 !important;
-                `;
-                
-                backBtn.onclick = (event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    
-                    playlistSection.style.cssText = 'display: none !important;';
-                    if (mainContainer) {
-                        mainContainer.style.cssText = 'display: block !important;';
-                    }
-                    
-                    playlistSection.classList.remove('playlist-active');
-                };
-                
-            }
-            
-            // 确保所有子元素可见
-            const header = playlistSection.querySelector('.playlist-header');
-            const player = playlistSection.querySelector('.habitat-player');
-            
-            [header, player, trackList].forEach(element => {
-                if (element) {
-                    element.style.cssText = `
-                        display: block !important;
-                        visibility: visible !important;
-                        opacity: 1 !important;
-                    `;
-                }
-            });
-            
-            
-            // 验证显示状态
-            setTimeout(() => {
-                const rect = playlistSection.getBoundingClientRect();
-                
-                if (rect.width > 0 && rect.height > 0) {
-                } else {
-                }
-            }, 100);
-        }
-        
-        // 初始化应用
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                // 等待脚本加载完成
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                
-                // 检查AUDIO_CONFIG并创建3D轮播卡片
-                if (typeof AUDIO_CONFIG !== 'undefined') {
-                    // 使用3D轮播替代原网格布局
-                    if (typeof forceCreateEcosystemCards3D === 'function') {
-                        forceCreateEcosystemCards3D();
-                    } else {
-                        console.warn('3D轮播未就绪，使用传统布局');
-                        forceCreateEcosystemCards();
-                    }
-                }
-                
-                // 初始化原始应用音频管理器
-                if (typeof SoundHealingApp !== 'undefined') {
-                    try {
-                        fixedApp = new SoundHealingApp();
-                        window.fixedApp = fixedApp;
-                        await fixedApp.initialize();
-                    } catch (error) {
-                        console.warn('原始应用初始化失败，但核心功能已可用');
-                    }
-                }
-                
-            } catch (error) {
-                console.error('初始化失败:', error);
-                // 即使失败也尝试创建卡片
-                setTimeout(() => {
-                    if (typeof AUDIO_CONFIG !== 'undefined') {
-                        forceCreateEcosystemCards();
-                    }
-                }, 1000);
-            }
-        });
-        
-        // 添加键盘快捷键支持
-        document.addEventListener('keydown', (e) => {
-            // ESC键返回主页面
-            if (e.key === 'Escape') {
-                const playlistSection = document.getElementById('playlistSection');
-                const mainContainer = document.querySelector('main.forest-path');
-                
-                if (playlistSection && playlistSection.style.display !== 'none') {
-                    playlistSection.style.cssText = 'display: none !important;';
-                    if (mainContainer) {
-                        mainContainer.style.cssText = 'display: block !important;';
-                    }
-                    playlistSection.classList.remove('playlist-active');
-                }
-            }
-        });
-        
-        // 添加音轨点击播放功能增强
-        function enhanceTrackInteraction() {
-            document.addEventListener('click', (e) => {
-                const trackItem = e.target.closest('.track-item');
-                if (trackItem && window.fixedApp) {
-                    const trackTitle = trackItem.querySelector('.track-title');
-                    if (trackTitle) {
-                        const fileName = trackTitle.textContent + '.mp3';
-                        // 通知音频管理器播放选中的音轨
-                        const event = new CustomEvent('trackSelect', {
-                            detail: { fileName: fileName }
-                        });
-                        document.dispatchEvent(event);
-                    }
-                }
-            });
-        }
-        
-        // 初始化增强功能
-        setTimeout(enhanceTrackInteraction, 2000);
-        
-        // 添加全局修复函数（保留供手动调用）
-        window.fixPlaylist = () => {
-            if (typeof AUDIO_CONFIG !== 'undefined') {
-                // 优先使用3D轮播
-                if (typeof forceCreateEcosystemCards3D === 'function') {
-                    forceCreateEcosystemCards3D();
-                } else {
-                    forceCreateEcosystemCards();
-                }
+        // 多语言翻译
+        const translations = {
+            'zh-CN': {
+                'app.title': '🎵 声音疗愈 - 3D播放列表 🎵',
+                'audioControl.title': '🎵 播放控制器',
+                'controls.previous': '上一首',
+                'controls.playPause': '播放/暂停',
+                'controls.next': '下一首',
+                'controls.progress': '进度',
+                'controls.volume': '音量',
+                'timer.label': '定时',
+                'timer.off': '关闭',
+                'timer.15min': '15分钟',
+                'timer.30min': '30分钟',
+                'timer.60min': '60分钟',
+                'timer.90min': '90分钟',
+                'timer.inactive': '未启动',
+                'timer.active': '剩余',
+                'player.noTrack': '未选择音频',
+                'playlist.show': '显示播放列表',
+                'playlist.hide': '收起列表',
+                'carousel.prev': '上一个',
+                'carousel.auto': '自动播放',
+                'carousel.autoStop': '停止播放',
+                'carousel.next': '下一个',
+                'tracks.count': '个音频'
+            },
+            'en-US': {
+                'app.title': '🎵 Sound Healing - 3D Playlist 🎵',
+                'audioControl.title': '🎵 Playback Controller',
+                'controls.previous': 'Previous',
+                'controls.playPause': 'Play/Pause',
+                'controls.next': 'Next',
+                'controls.progress': 'Progress',
+                'controls.volume': 'Volume',
+                'timer.label': 'Timer',
+                'timer.off': 'Off',
+                'timer.15min': '15 min',
+                'timer.30min': '30 min',
+                'timer.60min': '60 min',
+                'timer.90min': '90 min',
+                'timer.inactive': 'Inactive',
+                'timer.active': 'Remaining',
+                'player.noTrack': 'No track selected',
+                'playlist.show': 'Show Playlist',
+                'playlist.hide': 'Hide Playlist',
+                'carousel.prev': 'Previous',
+                'carousel.auto': 'Auto Play',
+                'carousel.autoStop': 'Stop Auto',
+                'carousel.next': 'Next',
+                'tracks.count': ' tracks'
+            },
+            'ja-JP': {
+                'app.title': '🎵 サウンドヒーリング - 3Dプレイリスト 🎵',
+                'audioControl.title': '🎵 再生コントローラー',
+                'controls.previous': '前へ',
+                'controls.playPause': '再生/一時停止',
+                'controls.next': '次へ',
+                'controls.progress': '進行状況',
+                'controls.volume': '音量',
+                'timer.label': 'タイマー',
+                'timer.off': 'オフ',
+                'timer.15min': '15分',
+                'timer.30min': '30分',
+                'timer.60min': '60分',
+                'timer.90min': '90分',
+                'timer.inactive': '非アクティブ',
+                'timer.active': '残り',
+                'player.noTrack': 'トラック未選択',
+                'playlist.show': 'プレイリストを表示',
+                'playlist.hide': 'プレイリストを隠す',
+                'carousel.prev': '前へ',
+                'carousel.auto': '自動再生',
+                'carousel.autoStop': '停止',
+                'carousel.next': '次へ',
+                'tracks.count': 'トラック'
+            },
+            'ko-KR': {
+                'app.title': '🎵 사운드 힐링 - 3D 플레이리스트 🎵',
+                'audioControl.title': '🎵 재생 컨트롤러',
+                'controls.previous': '이전',
+                'controls.playPause': '재생/일시정지',
+                'controls.next': '다음',
+                'controls.progress': '진행률',
+                'controls.volume': '볼륨',
+                'timer.label': '타이머',
+                'timer.off': '끄기',
+                'timer.15min': '15분',
+                'timer.30min': '30분',
+                'timer.60min': '60분',
+                'timer.90min': '90분',
+                'timer.inactive': '비활성',
+                'timer.active': '남은시간',
+                'player.noTrack': '트랙 미선택',
+                'playlist.show': '플레이리스트 보기',
+                'playlist.hide': '플레이리스트 숨기기',
+                'carousel.prev': '이전',
+                'carousel.auto': '자동 재생',
+                'carousel.autoStop': '정지',
+                'carousel.next': '다음',
+                'tracks.count': '개 트랙'
             }
         };
-        
-    </script>
 
-    <!-- Structured Data - SEO Optimization -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "SoundFlow - Sound Healing App",
-      "alternateName": ["Sound Healing Music", "Free Meditation Sounds", "Sleep Sounds Online"],
-      "description": "Experience 213+ high-quality healing sounds including meditation music, rain sounds, singing bowls, and white noise. Free online sound therapy for stress relief, better sleep, and mindfulness practice.",
-      "url": "https://your-domain.com",
-      "applicationCategory": "HealthApplication",
-      "operatingSystem": "Web Browser",
-      "browserRequirements": "HTML5, JavaScript, Web Audio API",
-      "softwareVersion": "2.0",
-      "dateModified": "2025-09-08",
-      "inLanguage": ["en-US", "zh-CN", "ja-JP", "ko-KR", "es-ES"],
-      "isAccessibleForFree": true,
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD",
-        "availability": "https://schema.org/InStock"
-      },
-      "featureList": [
-        "213+ Premium Audio Tracks",
-        "9 Sound Categories",
-        "Multi-language Interface",
-        "Immersive Background Scenes",
-        "Advanced Audio Loading",
-        "Smart Cache Management", 
-        "Responsive Design",
-        "No Registration Required"
-      ],
-      "screenshot": "https://your-domain.com/assets/images/app-screenshot-en.jpg",
-      "author": {
-        "@type": "Organization",
-        "name": "SoundFlow Studio",
-        "url": "https://your-domain.com"
-      },
-      "creator": {
-        "@type": "Organization", 
-        "name": "SoundFlow Studio"
-      },
-      "keywords": "sound healing,meditation music,sleep sounds,relaxation music,rain sounds,white noise,singing bowls,chakra music,binaural beats,stress relief,yoga music,nature sounds",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "ratingCount": "247",
-        "bestRating": "5",
-        "worstRating": "1"
-      }
-    }
-    </script>
+        // 分类中文名映射
+        const categoryNames = {
+            'Animal sounds': { 'zh-CN': '森林栖息地', 'en-US': 'Forest Habitat', 'ja-JP': '森の住処', 'ko-KR': '숲 서식지' },
+            'Fire': { 'zh-CN': '温暖壁炉', 'en-US': 'Warm Fireplace', 'ja-JP': '暖かい暖炉', 'ko-KR': '따뜻한 벽난로' },
+            'hypnosis': { 'zh-CN': '梦境花园', 'en-US': 'Dream Garden', 'ja-JP': '夢の庭', 'ko-KR': '꿈의 정원' },
+            'meditation': { 'zh-CN': '禅境山谷', 'en-US': 'Zen Valley', 'ja-JP': '禅の谷', 'ko-KR': '선경 계곡' },
+            'Rain': { 'zh-CN': '雨林圣地', 'en-US': 'Rainforest Sanctuary', 'ja-JP': '雨林聖地', 'ko-KR': '우림 성지' },
+            'running water': { 'zh-CN': '溪流秘境', 'en-US': 'Stream Secret', 'ja-JP': '渓流秘境', 'ko-KR': '계곡 비경' },
+            'Singing bowl sound': { 'zh-CN': '颂钵圣殿', 'en-US': 'Singing Bowl Temple', 'ja-JP': 'シンギングボウル聖殿', 'ko-KR': '싱잉볼 성전' },
+            'Chakra': { 'zh-CN': '能量场域', 'en-US': 'Energy Field', 'ja-JP': 'エネルギー場', 'ko-KR': '에너지 장' },
+            'Subconscious Therapy': { 'zh-CN': '潜识星域', 'en-US': 'Subconscious Realm', 'ja-JP': '潜在意識の星域', 'ko-KR': '잠재의식 성역' }
+        };
 
-    <!-- FAQ Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Is this sound healing app completely free?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, our sound healing app is completely free to use. You can access all 213+ premium audio tracks including meditation music, rain sounds, singing bowls across 9 categories without any cost or registration."
-          }
-        },
-        {
-          "@type": "Question", 
-          "name": "What languages are supported?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "We support 5 languages: English, Chinese, Japanese, Korean, and Spanish. You can easily switch the interface language using the language selector in the top right corner."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How many audio tracks are available?",
-          "acceptedAnswer": {
-            "@type": "Answer", 
-            "text": "We offer 213+ high-quality audio tracks across 9 categories: Nature sounds, Chakra, Fire, Hypnosis, Meditation, Rain, Running water, Singing bowl sounds, and Subconscious therapy."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I use this on my mobile device?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Absolutely! Our app features responsive design that works perfectly on desktop, tablet, and mobile devices. You can enjoy sound healing therapy anywhere, anytime."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is the audio quality like?", 
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "All audio tracks are high-quality MP3 format with 44.1kHz sampling rate, providing crystal clear sound experience. Our audio files are professionally processed to ensure optimal therapeutic effects."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do I need to create an account?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No account creation required! Simply visit our website and start using all features immediately. Your preferences are saved locally on your device for convenience."
-          }
+        // 更新卡片显示状态 - 模拟原网站3卡片布局
+        function updateCarouselDisplay() {
+            const items = document.querySelectorAll('.carousel-item');
+            const dots = document.querySelectorAll('.dot');
+
+            // 重置所有卡片状态
+            items.forEach((item, index) => {
+                item.classList.remove('active', 'prev', 'next');
+            });
+
+            // 计算前一个、当前、下一个卡片索引
+            const prevIndex = (currentIndex - 1 + totalItems) % totalItems;
+            const nextIndex = (currentIndex + 1) % totalItems;
+
+            // 设置卡片状态
+            items[prevIndex].classList.add('prev');
+            items[currentIndex].classList.add('active');
+            items[nextIndex].classList.add('next');
+
+            // 更新圆点状态
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
         }
-      ]
-    }
-    </script>
-    
-    <!-- 多语言页面标记 -->
-    <link rel="alternate" hreflang="zh-CN" href="https://your-domain.com">
-    <link rel="alternate" hreflang="en-US" href="https://your-domain.com/?lang=en">
-    <link rel="alternate" hreflang="ja-JP" href="https://your-domain.com/?lang=ja">
-    <link rel="alternate" hreflang="ko-KR" href="https://your-domain.com/?lang=ko">
-    <link rel="alternate" hreflang="es-ES" href="https://your-domain.com/?lang=es">
-    <link rel="alternate" hreflang="x-default" href="https://your-domain.com">
 
+        // 导航到指定卡片
+        function goToSlide(index) {
+            if (index !== currentIndex) {
+                currentIndex = index;
+                updateCarouselDisplay();
+            }
+        }
+
+        // 旋转轮播图
+        function rotateCarousel(direction) {
+            currentIndex = (currentIndex + direction + totalItems) % totalItems;
+            updateCarouselDisplay();
+        }
+
+        // 自动播放切换
+        function toggleAuto() {
+            isAutoRotating = !isAutoRotating;
+
+            if (isAutoRotating) {
+                autoBtn.textContent = translations[currentLanguage]['carousel.autoStop'] || '停止播放';
+                autoBtn.classList.add('active');
+                autoInterval = setInterval(() => {
+                    rotateCarousel(1);
+                }, 3000);
+            } else {
+                autoBtn.textContent = translations[currentLanguage]['carousel.auto'] || '自动播放';
+                autoBtn.classList.remove('active');
+                clearInterval(autoInterval);
+            }
+        }
+
+        // 播放列表展开/收起
+        function togglePlaylist(btn) {
+            const trackList = btn.nextElementSibling;
+            const isShown = trackList.classList.contains('show');
+
+            // 收起所有其他展开的列表
+            document.querySelectorAll('.track-list.show').forEach(list => {
+                list.classList.remove('show');
+            });
+            document.querySelectorAll('.play-btn.active').forEach(button => {
+                button.classList.remove('active');
+                button.textContent = translations[currentLanguage]['playlist.show'] || '显示播放列表';
+            });
+
+            // 切换当前列表
+            if (!isShown) {
+                trackList.classList.add('show');
+                btn.classList.add('active');
+                btn.textContent = translations[currentLanguage]['playlist.hide'] || '收起列表';
+            }
+        }
+
+        // 多语言函数
+        function updateLanguage(lang) {
+            currentLanguage = lang;
+
+            // 更新所有带data-i18n属性的元素
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // 更新所有带data-i18n-title属性的元素
+            document.querySelectorAll('[data-i18n-title]').forEach(element => {
+                const key = element.getAttribute('data-i18n-title');
+                if (translations[lang] && translations[lang][key]) {
+                    element.title = translations[lang][key];
+                }
+            });
+
+            // 更新卡片标题
+            document.querySelectorAll('.carousel-item').forEach(item => {
+                const category = item.dataset.category;
+                const titleElement = item.querySelector('.item-title');
+                if (titleElement && categoryNames[category] && categoryNames[category][lang]) {
+                    titleElement.textContent = categoryNames[category][lang];
+                }
+            });
+
+            // 更新音频数量显示
+            document.querySelectorAll('.track-count').forEach(element => {
+                const text = element.textContent;
+                const number = text.match(/\d+/);
+                if (number) {
+                    const count = number[0];
+                    const tracksText = translations[lang]['tracks.count'] || '个音频';
+                    element.textContent = count + tracksText;
+                }
+            });
+
+            // 更新播放列表按钮文字
+            document.querySelectorAll('.play-btn').forEach(btn => {
+                if (!btn.classList.contains('active')) {
+                    btn.textContent = translations[lang]['playlist.show'] || '显示播放列表';
+                }
+            });
+
+            // 更新自动播放按钮文字
+            const autoBtn = document.getElementById('autoBtn');
+            if (autoBtn && !isAutoRotating) {
+                autoBtn.textContent = translations[lang]['carousel.auto'] || '自动播放';
+            } else if (autoBtn && isAutoRotating) {
+                autoBtn.textContent = translations[lang]['carousel.autoStop'] || '停止播放';
+            }
+
+            // 更新语言按钮
+            const langNames = {
+                'zh-CN': '🇨🇳 中文',
+                'en-US': '🇺🇸 English',
+                'ja-JP': '🇯🇵 日本語',
+                'ko-KR': '🇰🇷 한국어'
+            };
+            document.getElementById('languageBtn').textContent = `🌐 ${langNames[lang].split(' ')[1]}`;
+
+            localStorage.setItem('language', lang);
+        }
+
+        // 动态生成音轨列表
+        function generateTrackLists() {
+            if (typeof AUDIO_CONFIG === 'undefined') {
+                console.warn('AUDIO_CONFIG not loaded');
+                return;
+            }
+
+            document.querySelectorAll('.carousel-item').forEach(item => {
+                const category = item.dataset.category;
+                const trackListContainer = item.querySelector('.track-list');
+
+                if (AUDIO_CONFIG.categories[category] && trackListContainer) {
+                    // 清空现有内容
+                    trackListContainer.innerHTML = '';
+
+                    // 生成完整的音轨列表
+                    AUDIO_CONFIG.categories[category].files.forEach((fileName, index) => {
+                        const trackItem = document.createElement('div');
+                        trackItem.className = 'track-item';
+                        trackItem.textContent = fileName;
+                        trackItem.addEventListener('click', (e) => {
+                            e.stopPropagation();
+
+                            // 高亮选中的音频
+                            trackListContainer.querySelectorAll('.track-item').forEach(track => {
+                                track.style.background = 'rgba(255,255,255,0.1)';
+                            });
+                            trackItem.style.background = 'rgba(255,255,255,0.3)';
+
+                            // 播放音频
+                            playAudio(fileName, category, index);
+                        });
+                        trackListContainer.appendChild(trackItem);
+                    });
+
+                    // 更新音频数量显示
+                    const trackCountElement = item.querySelector('.track-count');
+                    if (trackCountElement) {
+                        const count = AUDIO_CONFIG.categories[category].files.length;
+                        const tracksText = translations[currentLanguage]['tracks.count'] || '个音频';
+                        trackCountElement.textContent = count + tracksText;
+                    }
+                }
+            });
+        }
+
+        // 获取当前分类的所有音频文件
+        function getCategoryTracks(categoryName) {
+            if (typeof AUDIO_CONFIG !== 'undefined' && AUDIO_CONFIG.categories[categoryName]) {
+                return AUDIO_CONFIG.categories[categoryName].files;
+            }
+
+            // 备用方案：从DOM获取
+            const categoryElement = document.querySelector(`[data-category="${categoryName}"]`);
+            if (!categoryElement) return [];
+
+            const trackItems = categoryElement.querySelectorAll('.track-item');
+            return Array.from(trackItems).map(item => item.textContent);
+        }
+
+        // 音频播放功能 - 使用Archive.org
+        function playAudio(fileName, categoryName, trackIndex = 0) {
+            // 停止当前播放的音频
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio = null;
+            }
+
+            // 获取当前播放列表
+            currentPlaylist = getCategoryTracks(categoryName);
+            currentTrackIndex = trackIndex;
+
+            // 更新播放信息显示
+            updateCurrentTrackInfo(fileName, categoryName);
+
+            // 创建新的音频对象
+            currentAudio = new Audio();
+
+            // 使用Archive.org的音频URL
+            const archiveUrl = getArchiveAudioUrl(categoryName, fileName);
+            console.log('尝试播放音频:', archiveUrl);
+
+            // 设置音频源
+            currentAudio.src = archiveUrl;
+            currentAudio.crossOrigin = "anonymous";
+
+            // 设置音量
+            const volumeSlider = document.getElementById('volumeSlider');
+            currentAudio.volume = volumeSlider.value;
+
+            // 设置加载超时
+            const loadTimeout = setTimeout(() => {
+                console.log('主URL加载超时，尝试替代URL');
+                tryAlternativeUrls(categoryName, fileName);
+            }, 8000);
+
+            // 音频事件监听
+            currentAudio.addEventListener('canplaythrough', () => {
+                clearTimeout(loadTimeout);
+                console.log('音频加载完成，开始播放:', fileName);
+            }, { once: true });
+
+            currentAudio.addEventListener('loadstart', () => {
+                console.log('开始加载音频:', archiveUrl);
+            }, { once: true });
+
+            currentAudio.addEventListener('timeupdate', updateProgressBar);
+
+            currentAudio.addEventListener('ended', () => {
+                playNextTrack();
+            });
+
+            currentAudio.addEventListener('error', (e) => {
+                clearTimeout(loadTimeout);
+                console.error('音频加载错误:', e, '文件:', fileName);
+                tryAlternativeUrls(categoryName, fileName);
+            }, { once: true });
+
+            // 播放音频
+            currentAudio.play().then(() => {
+                clearTimeout(loadTimeout);
+                isPlaying = true;
+                updatePlayPauseButton();
+                console.log('音频播放成功:', fileName);
+            }).catch(error => {
+                clearTimeout(loadTimeout);
+                console.error('音频播放失败:', error);
+                console.log('尝试的URL:', archiveUrl);
+                // 尝试其他格式的URL
+                tryAlternativeUrls(categoryName, fileName);
+            });
+        }
+
+        // 获取Archive.org音频URL
+        function getArchiveAudioUrl(categoryName, fileName) {
+            // 优先使用AUDIO_CONFIG中的配置
+            if (typeof AUDIO_CONFIG !== 'undefined' && AUDIO_CONFIG.categories[categoryName]) {
+                const category = AUDIO_CONFIG.categories[categoryName];
+                const baseUrl = AUDIO_CONFIG.baseUrl || 'https://archive.org/download/sound-healing-collection/';
+                const folder = category.folder || categoryName.toLowerCase().replace(/\s+/g, '-');
+                return `${baseUrl}${folder}/${encodeURIComponent(fileName)}`;
+            }
+
+            // 备用方案：使用默认映射
+            const baseUrl = 'https://archive.org/download/sound-healing-collection/';
+            const folderMap = {
+                'Animal sounds': 'animal-sounds',
+                'Fire': 'fire-sounds',
+                'hypnosis': 'hypnosis',
+                'meditation': 'meditation',
+                'Rain': 'rain-sounds',
+                'running water': 'water-sounds',
+                'Singing bowl sound': 'singing-bowls',
+                'Chakra': 'chakra',
+                'Subconscious Therapy': 'subconscious-therapy'
+            };
+
+            const folder = folderMap[categoryName] || categoryName.toLowerCase().replace(/\s+/g, '-');
+            return `${baseUrl}${folder}/${encodeURIComponent(fileName)}`;
+        }
+
+        // 尝试替代URL - 增强版
+        function tryAlternativeUrls(categoryName, fileName) {
+            // 获取更多可能的文件夹名称和URL组合
+            const folderVariations = [
+                categoryName.toLowerCase().replace(/\s+/g, '-'),
+                categoryName.toLowerCase().replace(/\s+/g, '_'),
+                categoryName.toLowerCase().replace(/\s+/g, ''),
+                categoryName,
+                ''  // 直接在根目录
+            ];
+
+            const baseUrls = [
+                'https://archive.org/download/sound-healing-collection/',
+                'https://ia802307.us.archive.org/download/sound-healing-collection/',
+                'https://ia601507.us.archive.org/download/sound-healing-collection/',
+                'https://ia801507.us.archive.org/download/sound-healing-collection/'
+            ];
+
+            // 生成所有可能的URL组合
+            const alternativeUrls = [];
+            baseUrls.forEach(baseUrl => {
+                folderVariations.forEach(folder => {
+                    if (folder) {
+                        alternativeUrls.push(`${baseUrl}${folder}/${encodeURIComponent(fileName)}`);
+                    } else {
+                        alternativeUrls.push(`${baseUrl}${encodeURIComponent(fileName)}`);
+                    }
+                });
+            });
+
+            // 添加文件名变体（处理可能的编码问题）
+            const fileNameVariations = [
+                fileName,
+                fileName.replace(/\s+/g, '%20'),
+                fileName.replace(/\s+/g, '_'),
+                fileName.replace(/\s+/g, '-')
+            ];
+
+            fileNameVariations.forEach(nameVariation => {
+                if (nameVariation !== fileName) {
+                    baseUrls.forEach(baseUrl => {
+                        folderVariations.forEach(folder => {
+                            if (folder) {
+                                alternativeUrls.push(`${baseUrl}${folder}/${encodeURIComponent(nameVariation)}`);
+                            }
+                        });
+                    });
+                }
+            });
+
+            let urlIndex = 0;
+            let maxRetries = Math.min(alternativeUrls.length, 15); // 限制尝试次数
+
+            function tryNext() {
+                if (urlIndex >= maxRetries) {
+                    console.error('所有音频源都无法加载:', fileName);
+                    // 显示用户友好的错误信息
+                    const trackNameElement = document.getElementById('currentTrackName');
+                    if (trackNameElement) {
+                        trackNameElement.textContent = '音频加载失败，请尝试其他音频';
+                    }
+                    return;
+                }
+
+                const url = alternativeUrls[urlIndex];
+                console.log(`尝试替代URL ${urlIndex + 1}/${maxRetries}:`, url);
+
+                currentAudio.src = url;
+                currentAudio.load();
+
+                // 设置超时机制
+                const timeoutId = setTimeout(() => {
+                    console.log('URL超时，尝试下一个');
+                    urlIndex++;
+                    tryNext();
+                }, 5000);
+
+                currentAudio.addEventListener('canplaythrough', () => {
+                    clearTimeout(timeoutId);
+                    console.log('替代URL成功:', url);
+                    currentAudio.play().then(() => {
+                        isPlaying = true;
+                        updatePlayPauseButton();
+                    }).catch(error => {
+                        console.error('播放失败:', error);
+                        urlIndex++;
+                        tryNext();
+                    });
+                }, { once: true });
+
+                currentAudio.addEventListener('error', (e) => {
+                    clearTimeout(timeoutId);
+                    console.log('URL加载失败:', url, e);
+                    urlIndex++;
+                    tryNext();
+                }, { once: true });
+            }
+
+            tryNext();
+        }
+
+        // 尝试备用音频源
+        function tryBackupAudioSources(urls, fileName, categoryName) {
+            let urlIndex = 1;
+            function tryNextUrl() {
+                if (urlIndex >= urls.length) {
+                    console.error('所有音频源都无法加载');
+                    return;
+                }
+
+                currentAudio.src = urls[urlIndex];
+                currentAudio.load();
+
+                currentAudio.addEventListener('canplaythrough', () => {
+                    currentAudio.play().then(() => {
+                        isPlaying = true;
+                        updatePlayPauseButton();
+                    });
+                }, { once: true });
+
+                currentAudio.addEventListener('error', () => {
+                    urlIndex++;
+                    tryNextUrl();
+                }, { once: true });
+            }
+
+            tryNextUrl();
+        }
+
+        // 更新当前播放信息
+        function updateCurrentTrackInfo(fileName, categoryName) {
+            const trackNameElement = document.getElementById('currentTrackName');
+            const trackCategoryElement = document.getElementById('currentTrackCategory');
+
+            if (trackNameElement) {
+                const cleanFileName = fileName.replace(/\.(mp3|wav|ogg)$/i, '');
+                trackNameElement.textContent = cleanFileName;
+
+                // 检测歌曲名长度，如果超过24个字符则应用滚动动画
+                if (cleanFileName.length > 24) {
+                    trackNameElement.classList.add('scrolling');
+                } else {
+                    trackNameElement.classList.remove('scrolling');
+                }
+            }
+            if (trackCategoryElement) {
+                const categoryDisplay = categoryNames[categoryName]?.[currentLanguage] || categoryName;
+                trackCategoryElement.textContent = categoryDisplay;
+            }
+        }
+
+        // 播放/暂停切换
+        function togglePlayPause() {
+            if (!currentAudio) return;
+
+            if (isPlaying) {
+                currentAudio.pause();
+                isPlaying = false;
+            } else {
+                currentAudio.play().then(() => {
+                    isPlaying = true;
+                }).catch(error => {
+                    console.error('播放失败:', error);
+                });
+            }
+            updatePlayPauseButton();
+        }
+
+        // 更新播放/暂停按钮
+        function updatePlayPauseButton() {
+            const btn = document.getElementById('playPauseBtn');
+            if (btn) {
+                btn.textContent = isPlaying ? '⏸️' : '▶️';
+            }
+        }
+
+        // 播放上一首
+        function playPreviousTrack() {
+            if (currentPlaylist.length === 0) return;
+
+            currentTrackIndex = (currentTrackIndex - 1 + currentPlaylist.length) % currentPlaylist.length;
+            const fileName = currentPlaylist[currentTrackIndex];
+            const categoryName = getCurrentCategory();
+            playAudio(fileName, categoryName, currentTrackIndex);
+        }
+
+        // 播放下一首
+        function playNextTrack() {
+            if (currentPlaylist.length === 0) return;
+
+            currentTrackIndex = (currentTrackIndex + 1) % currentPlaylist.length;
+            const fileName = currentPlaylist[currentTrackIndex];
+            const categoryName = getCurrentCategory();
+            playAudio(fileName, categoryName, currentTrackIndex);
+        }
+
+        // 获取当前分类
+        function getCurrentCategory() {
+            const activeItem = document.querySelector('.carousel-item.active');
+            return activeItem ? activeItem.dataset.category : 'Animal sounds';
+        }
+
+        // 定时器功能
+        function startSleepTimer(minutes) {
+            // 清除现有定时器
+            if (sleepTimer) {
+                clearTimeout(sleepTimer);
+                sleepTimer = null;
+            }
+
+            if (minutes === 0) {
+                document.getElementById('timerStatus').textContent = translations[currentLanguage]['timer.inactive'];
+                return;
+            }
+
+            timerStartTime = Date.now();
+            const milliseconds = minutes * 60 * 1000;
+
+            sleepTimer = setTimeout(() => {
+                if (currentAudio && isPlaying) {
+                    currentAudio.pause();
+                    isPlaying = false;
+                    updatePlayPauseButton();
+                }
+                document.getElementById('timerStatus').textContent = translations[currentLanguage]['timer.inactive'];
+            }, milliseconds);
+
+            // 更新定时器显示
+            updateTimerDisplay(minutes);
+        }
+
+        // 更新定时器显示
+        function updateTimerDisplay(totalMinutes) {
+            const updateInterval = setInterval(() => {
+                if (!sleepTimer) {
+                    clearInterval(updateInterval);
+                    return;
+                }
+
+                const elapsed = (Date.now() - timerStartTime) / 60000; // 分钟
+                const remaining = Math.max(0, totalMinutes - elapsed);
+
+                if (remaining <= 0) {
+                    clearInterval(updateInterval);
+                    document.getElementById('timerStatus').textContent = translations[currentLanguage]['timer.inactive'];
+                } else {
+                    const mins = Math.floor(remaining);
+                    const secs = Math.floor((remaining - mins) * 60);
+                    document.getElementById('timerStatus').textContent =
+                        `${translations[currentLanguage]['timer.active']} ${mins}:${secs.toString().padStart(2, '0')}`;
+                }
+            }, 1000);
+        }
+
+        // 更新进度条
+        function updateProgressBar() {
+            if (currentAudio && currentAudio.duration) {
+                const progress = (currentAudio.currentTime / currentAudio.duration) * 100;
+                document.getElementById('progressSlider').value = progress;
+
+                // 更新时间显示
+                document.getElementById('currentTime').textContent = formatTime(currentAudio.currentTime);
+                document.getElementById('totalTime').textContent = formatTime(currentAudio.duration);
+            }
+        }
+
+        // 格式化时间
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // 进度条控制
+        document.getElementById('progressSlider').addEventListener('input', function() {
+            if (currentAudio && currentAudio.duration) {
+                const newTime = (this.value / 100) * currentAudio.duration;
+                currentAudio.currentTime = newTime;
+            }
+        });
+
+        // 音量控制
+        document.getElementById('volumeSlider').addEventListener('input', function() {
+            const volume = this.value;
+            document.getElementById('volumeDisplay').textContent = Math.round(volume * 100) + '%';
+
+            if (currentAudio) {
+                currentAudio.volume = volume;
+            }
+        });
+
+        // 相邻卡片点击支持
+        document.querySelectorAll('.carousel-item').forEach((item, index) => {
+            item.addEventListener('click', (e) => {
+                // 只有在点击非当前卡片时才切换
+                if (index !== currentIndex && !e.target.closest('.play-btn') && !e.target.closest('.track-list')) {
+                    goToSlide(index);
+                }
+            });
+        });
+
+        // 播放按钮点击事件
+        document.querySelectorAll('.play-btn').forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                togglePlaylist(btn);
+            });
+        });
+
+        // 音频文件点击事件现在由动态生成的音轨列表处理
+
+        // 播放控制按钮事件
+        document.getElementById('playPauseBtn')?.addEventListener('click', togglePlayPause);
+        document.getElementById('prevBtn')?.addEventListener('click', playPreviousTrack);
+        document.getElementById('nextBtn')?.addEventListener('click', playNextTrack);
+
+        // 定时器选择事件
+        document.getElementById('timerSelect')?.addEventListener('change', function() {
+            const minutes = parseInt(this.value);
+            startSleepTimer(minutes);
+        });
+
+        // 语言选择器事件
+        document.getElementById('languageBtn')?.addEventListener('click', function() {
+            const dropdown = document.getElementById('languageDropdown');
+            dropdown.classList.toggle('show');
+        });
+
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const lang = this.dataset.lang;
+                updateLanguage(lang);
+                document.getElementById('languageDropdown').classList.remove('show');
+            });
+        });
+
+        // 点击其他地方关闭语言下拉菜单
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.language-selector')) {
+                document.getElementById('languageDropdown').classList.remove('show');
+            }
+        });
+
+        // 触摸/拖拽支持
+        let startX = 0;
+        let isDragging = false;
+
+        carousel.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = false;
+        });
+
+        carousel.addEventListener('touchmove', (e) => {
+            if (!isDragging) {
+                const deltaX = e.touches[0].clientX - startX;
+                if (Math.abs(deltaX) > 30) {
+                    isDragging = true;
+                }
+            }
+        });
+
+        carousel.addEventListener('touchend', (e) => {
+            if (isDragging) {
+                const endX = e.changedTouches[0].clientX;
+                const deltaX = endX - startX;
+
+                if (Math.abs(deltaX) > 80) {
+                    if (deltaX > 0) {
+                        rotateCarousel(-1);
+                    } else {
+                        rotateCarousel(1);
+                    }
+                }
+            }
+            isDragging = false;
+        });
+
+        // 鼠标拖拽支持
+        let isMouseDown = false;
+        let mouseStartX = 0;
+        let hasTriggeredDrag = false;
+
+        carousel.addEventListener('mousedown', (e) => {
+            isMouseDown = true;
+            mouseStartX = e.clientX;
+            hasTriggeredDrag = false;
+            e.preventDefault();
+        });
+
+        document.addEventListener('mouseup', () => {
+            isMouseDown = false;
+            hasTriggeredDrag = false;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isMouseDown || hasTriggeredDrag) return;
+
+            const deltaX = e.clientX - mouseStartX;
+            if (Math.abs(deltaX) > 100) {
+                hasTriggeredDrag = true;
+                if (deltaX > 0) {
+                    rotateCarousel(-1);
+                } else {
+                    rotateCarousel(1);
+                }
+            }
+        });
+
+        // 键盘支持
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                rotateCarousel(-1);
+            } else if (e.key === 'ArrowRight') {
+                rotateCarousel(1);
+            } else if (e.key === ' ') {
+                e.preventDefault();
+                toggleAuto();
+            }
+        });
+
+        // 初始化
+        function initialize() {
+            updateCarouselDisplay();
+
+            // 生成动态音轨列表
+            generateTrackLists();
+
+            // 加载保存的语言设置
+            const savedLanguage = localStorage.getItem('language') || 'zh-CN';
+            updateLanguage(savedLanguage);
+
+            // 设置默认音量显示
+            document.getElementById('volumeDisplay').textContent = '50%';
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', initialize);
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initialize);
+        } else {
+            initialize();
+        }
+    </script>
 </body>
-</html><!-- Trigger deployment 2025年09月11日 22:08:08 -->
+</html>
