@@ -9,6 +9,7 @@ class SoundHealingApp {
         this.performanceMonitor = null;
         this.backgroundSceneManager = null;
         this.natureUI = null; // 新增自然UI控制器
+        this.carouselController = null; // 3D轮播图控制器
         this.isReady = false;
     }
 
@@ -148,6 +149,14 @@ class SoundHealingApp {
                 }
             } else {
                 console.error('NatureUI 类未找到!');
+            }
+
+            // 初始化3D轮播图控制器
+            try {
+                this.carouselController = new CarouselController(this.audioManager);
+                console.log('✅ 3D轮播图控制器初始化成功');
+            } catch (error) {
+                console.error('3D轮播图控制器初始化失败:', error);
             }
             
             this.connectVisualEffects();
