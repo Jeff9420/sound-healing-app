@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>声音疗愈 - 3D播放列表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a2432 0%, #2d3748 30%, #1a202c 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            perspective: 1000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carousel {
+            position: relative;
+            width: 350px;
+            height: 480px;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .carousel-item {
+            position: absolute;
+            width: 350px;
+            height: 480px;
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            padding: 40px 30px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        /* 9个分类的3D布局 - 模拟原网站的效果 */
+        /* 森林栖息地 - Animal sounds */
+        .carousel-item:nth-child(1) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        /* 温暖壁炉 - Fire */
+        .carousel-item:nth-child(2) {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        /* 梦境花园 - hypnosis */
+        .carousel-item:nth-child(3) {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        /* 禅境山谷 - meditation */
+        .carousel-item:nth-child(4) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        /* 雨林圣地 - Rain */
+        .carousel-item:nth-child(5) {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        /* 溪流秘境 - running water */
+        .carousel-item:nth-child(6) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        /* 颂钵圣殿 - Singing bowl sound */
+        .carousel-item:nth-child(7) {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* 能量场域 - Chakra */
+        .carousel-item:nth-child(8) {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        /* 潜识星域 - Subconscious Therapy */
+        .carousel-item:nth-child(9) {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* 3D卡片位置布局 - 只显示3张卡片 */
+        .carousel-item {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(0) rotateY(45deg) scale(0.8);
+        }
+
+        /* 左侧卡片 */
+        .carousel-item.prev {
+            opacity: 0.7;
+            visibility: visible;
+            transform: translateX(-200px) rotateY(45deg) scale(0.85);
+            z-index: 1;
+        }
+
+        /* 中间当前卡片 */
+        .carousel-item.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0) rotateY(0deg) scale(1);
+            z-index: 3;
+        }
+
+        /* 右侧卡片 */
+        .carousel-item.next {
+            opacity: 0.7;
+            visibility: visible;
+            transform: translateX(200px) rotateY(-45deg) scale(0.85);
+            z-index: 1;
+        }
+
+        /* 卡片内容样式 - 模拟原网站设计 */
+        .item-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .item-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .item-title {
+            font-size: 28px;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .track-count {
+            font-size: 18px;
+            color: rgba(255,255,255,0.9);
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+
+        .item-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
+            width: 100%;
+        }
+
+        .play-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 16px 40px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .play-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .play-btn.active {
+            background: rgba(255,255,255,0.4);
+            color: white;
+        }
+
+        /* 展开的播放列表 */
+        .track-list {
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 20px;
+            display: none;
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        .track-list.show {
+            display: block;
+        }
+
+        .track-item {
+            background: rgba(255,255,255,0.1);
+            margin: 4px 0;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.4;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .track-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(4px);
+        }
+
+        /* 控制按钮 */
+        .controls {
+            position: absolute;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .auto-btn.active {
+            background: rgba(76, 175, 80, 0.6);
+            border-color: rgba(76, 175, 80, 0.8);
+        }
+
+        /* 底部圆点导航 */
+        .dots-container {
+            position: absolute;
+            bottom: -140px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: rgba(255,255,255,0.9);
+            transform: scale(1.2);
+        }
+
+        .dot:hover {
+            background: rgba(255,255,255,0.7);
+        }
+
+        /* 滚动条美化 */
+        .track-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .track-list::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+        }
+
+        .track-list::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.3);
+            border-radius: 3px;
+        }
+
+        @media (max-width: 768px) {
+            .carousel-container {
+                width: 250px;
+                height: 160px;
+            }
+
+            .carousel-item {
+                font-size: 16px;
+            }
+
+            .item-title {
+                font-size: 20px;
+            }
+
+            .controls {
+                bottom: -50px;
+            }
+
+            .btn {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="title">🎵 声音疗愈 - 3D播放列表 🎵</div>
+    <div class="carousel-container">
+        <div class="carousel" id="carousel">
+            <!-- 森林栖息地 - Animal sounds -->
+            <div class="carousel-item" data-category="Animal sounds">
+                <div class="item-header">
+                    <div class="item-icon">🦅</div>
+                    <div class="item-title">森林栖息地</div>
+                    <div class="track-count">26 个音频</div>
+                </div>
+                <div class="item-content">
+                    <button class="play-btn">显示播放列表</button>
+                    <div class="track-list">
+                        <div class="track-item">SPA音乐疗馆 1 - 减压疗程 The Curing Shop - For Decompression.mp3</div>
+                        <div class="track-item">【大自然韵律】鸟儿欢快的鸣叫.mp3</div>
+                        <div class="track-item">天籁之音，清脆的鸟鸣【放松减压】.mp3</div>
+                        <div class="track-item">山间清澈的小溪声音伴着清脆的鸟叫（上）.mp3</div>
+                        <div class="track-item">森林里百灵鸟鸣叫.mp3</div>
+                        <div class="track-item">歌唱的小鸟 减压静心 配舒缓音乐（上）.mp3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 温暖壁炉 - Fire -->
+            <div class="carousel-item" data-category="Fire">
+                <div class="item-header">
+                    <div class="item-icon">🔥</div>
+                    <div class="item-title">温暖壁炉</div>
+                    <div class="track-count">3 个音频</div>
+                </div>
+                <div class="item-content">
+                    <button class="play-btn">显示播放列表</button>
+                    <div class="track-list">
+                        <div class="track-item">河边点燃篝火、水声和清脆的鸟鸣01.mp3</div>
+                        <div class="track-item">河边点燃篝火、水声和清脆的鸟鸣02.mp3</div>
+                        <div class="track-item">河边点燃篝火、水声和清脆的鸟鸣03.mp3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 梦境花园 - hypnosis -->
+            <div class="carousel-item" data-category="hypnosis">
+                <div class="item-header">
+                    <div class="item-icon">🌙</div>
+                    <div class="item-title">梦境花园</div>
+                    <div class="track-count">66 个音频</div>
+                </div>
+                <div class="item-content">
+                    <button class="play-btn">显示播放列表</button>
+                    <div class="track-list">
+                        <div class="track-item">Bolo Ram.mp3</div>
+                        <div class="track-item">Om Mani Padme Hum.mp3</div>
+                        <div class="track-item">催眠专用冥想音乐1.mp3</div>
+                        <div class="track-item">催眠音乐10.mp3</div>
+                        <div class="track-item">放松轻音乐1.mp3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 禅境山谷 - meditation -->
+            <div class="carousel-item" data-category="meditation">
+                <div class="item-header">
+                    <div class="item-icon">🧘‍♀️</div>
+                    <div class="item-title">禅境山谷</div>
+                    <div class="track-count">14 个音频</div>
+                </div>
+                <div class="item-content">
+                    <button class="play-btn">显示播放列表</button>
+                    <div class="track-list">
+                        <div class="track-item">冥想 瑜伽必听.mp3</div>
+                        <div class="track-item">减压舒缓放松的神奇音乐.mp3</div>
+                        <div class="track-item">带您进入深层次睡眠.mp3</div>
+                        <div class="track-item">静心 大彻大悟.mp3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 雨林圣地 - Rain -->
+            <div class="carousel-item" data-category="Rain">
+                <div class="item-header">
+                    <div class="item-icon">☔</div>
+                    <div class="item-title">雨林圣地</div>
+                    <div class="track-count">13 个音频</div>
+                </div>
+                <div class="item-content">
+                    <button class="play-btn">显示播放列表</button>
+                    <div class="track-list">
+                        <div class="track-item">一声闷雷，大雨倾盆.mp3</div>
+                        <div class="track-item">小时候打雷下雨-..必备，治愈失眠01.mp3</div>
+                        <div class="track-item">倾听山谷中小雨，净化心灵.mp3</div>
+                        <div class="track-item">身临情景的雨声.mp3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 溪流秘境 - running water -->
+            <div class="carousel-item" data-category="running water">
+                <div class="item-header">
+                    <div class="item-icon">💧</div>
+                    <div class="item-title">溪流秘境</div>
+                    <div class="track-count">5 个音频</div>
+                </div>
+                <div class="item-content">
+                    <button class="play-btn">显示播放列表</button>
+                    <div class="track-list">
+                        <div class="track-item">缓缓流水，温柔的抚摸脸颊，恋人般的感觉（上）.mp3</div>
+                        <div class="track-item">缓缓流水，温柔的抚摸脸颊，恋人般的感觉（下）.mp3</div>
+                        <div class="track-item">河边点燃篝火、水声和清脆的鸟鸣01.mp3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 颂钵圣殿 - Singing bowl sound -->
+            <div class="carousel-item" data-category="Singing bowl sound">
+                <div class="item-header">
+                    <div class="item-icon">🎵</div>
+                    <div class="item-title">颂钵圣殿</div>
+                    <div class="track-count">61 个音频</div>
+                </div>
+                <div class="item-content">
+                    <button class="play-btn">显示播放列表</button>
+                    <div class="track-list">
+                        <div class="track-item">01-Healing Bowls - Instrumental - Jane Winther.mp3</div>
+                        <div class="track-item">颂钵音疗，平躺或，放下身心，全然融入的体会.mp3</div>
+                        <div class="track-item">顶级水晶钵颂音.音疗.mp3</div>
+                        <div class="track-item">钵音+水声+鸟叫自然声 让你平静下来的声音 01.mp3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 能量场域 - Chakra -->
+            <div class="carousel-item" data-category="Chakra">
+                <div class="item-header">
+                    <div class="item-icon">🌈</div>
+                    <div class="item-title">能量场域</div>
+                    <div class="track-count">7 个音频</div>
+                </div>
+                <div class="item-content">
+                    <button class="play-btn">显示播放列表</button>
+                    <div class="track-list">
+                        <div class="track-item">Hals-Chakra 蓝玉莲华(喉轮).mp3</div>
+                        <div class="track-item">Scheitel-Chakra 紫晶莲华(顶轮).mp3</div>
+                        <div class="track-item">Herz-Chakra 綠石蓮華(心輪).mp3</div>
+                        <div class="track-item">Wurzel-Chakra 碧玉莲华(海底轮).mp3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 潜识星域 - Subconscious Therapy -->
+            <div class="carousel-item" data-category="Subconscious Therapy">
+                <div class="item-header">
+                    <div class="item-icon">🌌</div>
+                    <div class="item-title">潜识星域</div>
+                    <div class="track-count">11 个音频</div>
+                </div>
+                <div class="item-content">
+                    <button class="play-btn">显示播放列表</button>
+                    <div class="track-list">
+                        <div class="track-item">全新的开始.mp3</div>
+                        <div class="track-item">梦起始的地方.mp3</div>
+                        <div class="track-item">遇见林间精灵.mp3</div>
+                        <div class="track-item">滴落的星子.mp3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn" onclick="rotateCarousel(-1)">上一个</button>
+            <button class="btn auto-btn" onclick="toggleAuto()" id="autoBtn">自动播放</button>
+            <button class="btn" onclick="rotateCarousel(1)">下一个</button>
+        </div>
+
+        <!-- 圆点导航 -->
+        <div class="dots-container">
+            <div class="dot active" onclick="goToSlide(0)"></div>
+            <div class="dot" onclick="goToSlide(1)"></div>
+            <div class="dot" onclick="goToSlide(2)"></div>
+            <div class="dot" onclick="goToSlide(3)"></div>
+            <div class="dot" onclick="goToSlide(4)"></div>
+            <div class="dot" onclick="goToSlide(5)"></div>
+            <div class="dot" onclick="goToSlide(6)"></div>
+            <div class="dot" onclick="goToSlide(7)"></div>
+            <div class="dot" onclick="goToSlide(8)"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        let isAutoRotating = false;
+        let autoInterval;
+        const carousel = document.getElementById('carousel');
+        const autoBtn = document.getElementById('autoBtn');
+        const totalItems = 9;
+
+        // 更新卡片显示状态 - 模拟原网站3卡片布局
+        function updateCarouselDisplay() {
+            const items = document.querySelectorAll('.carousel-item');
+            const dots = document.querySelectorAll('.dot');
+
+            // 重置所有卡片状态
+            items.forEach((item, index) => {
+                item.classList.remove('active', 'prev', 'next');
+            });
+
+            // 计算前一个、当前、下一个卡片索引
+            const prevIndex = (currentIndex - 1 + totalItems) % totalItems;
+            const nextIndex = (currentIndex + 1) % totalItems;
+
+            // 设置卡片状态
+            items[prevIndex].classList.add('prev');
+            items[currentIndex].classList.add('active');
+            items[nextIndex].classList.add('next');
+
+            // 更新圆点状态
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        // 导航到指定卡片
+        function goToSlide(index) {
+            if (index !== currentIndex) {
+                currentIndex = index;
+                updateCarouselDisplay();
+            }
+        }
+
+        // 旋转轮播图
+        function rotateCarousel(direction) {
+            currentIndex = (currentIndex + direction + totalItems) % totalItems;
+            updateCarouselDisplay();
+        }
+
+        // 自动播放切换
+        function toggleAuto() {
+            isAutoRotating = !isAutoRotating;
+
+            if (isAutoRotating) {
+                autoBtn.textContent = '停止播放';
+                autoBtn.classList.add('active');
+                autoInterval = setInterval(() => {
+                    rotateCarousel(1);
+                }, 3000);
+            } else {
+                autoBtn.textContent = '自动播放';
+                autoBtn.classList.remove('active');
+                clearInterval(autoInterval);
+            }
+        }
+
+        // 播放列表展开/收起
+        function togglePlaylist(btn) {
+            const trackList = btn.nextElementSibling;
+            const isShown = trackList.classList.contains('show');
+
+            // 收起所有其他展开的列表
+            document.querySelectorAll('.track-list.show').forEach(list => {
+                list.classList.remove('show');
+            });
+            document.querySelectorAll('.play-btn.active').forEach(button => {
+                button.classList.remove('active');
+                button.textContent = '显示播放列表';
+            });
+
+            // 切换当前列表
+            if (!isShown) {
+                trackList.classList.add('show');
+                btn.classList.add('active');
+                btn.textContent = '收起列表';
+            }
+        }
+
+        // 相邻卡片点击支持
+        document.querySelectorAll('.carousel-item').forEach((item, index) => {
+            item.addEventListener('click', (e) => {
+                // 只有在点击非当前卡片时才切换
+                if (index !== currentIndex && !e.target.closest('.play-btn') && !e.target.closest('.track-list')) {
+                    goToSlide(index);
+                }
+            });
+        });
+
+        // 播放按钮点击事件
+        document.querySelectorAll('.play-btn').forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                togglePlaylist(btn);
+            });
+        });
+
+        // 音频文件点击事件
+        document.querySelectorAll('.track-item').forEach((item) => {
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const fileName = item.textContent;
+                const categoryName = item.closest('.carousel-item').dataset.category;
+
+                // 高亮选中的音频
+                item.closest('.track-list').querySelectorAll('.track-item').forEach(track => {
+                    track.style.background = 'rgba(255,255,255,0.1)';
+                });
+                item.style.background = 'rgba(255,255,255,0.3)';
+
+                console.log(`播放: ${categoryName} - ${fileName}`);
+            });
+        });
+
+        // 触摸/拖拽支持
+        let startX = 0;
+        let isDragging = false;
+
+        carousel.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = false;
+        });
+
+        carousel.addEventListener('touchmove', (e) => {
+            if (!isDragging) {
+                const deltaX = e.touches[0].clientX - startX;
+                if (Math.abs(deltaX) > 30) {
+                    isDragging = true;
+                }
+            }
+        });
+
+        carousel.addEventListener('touchend', (e) => {
+            if (isDragging) {
+                const endX = e.changedTouches[0].clientX;
+                const deltaX = endX - startX;
+
+                if (Math.abs(deltaX) > 80) {
+                    if (deltaX > 0) {
+                        rotateCarousel(-1);
+                    } else {
+                        rotateCarousel(1);
+                    }
+                }
+            }
+            isDragging = false;
+        });
+
+        // 鼠标拖拽支持
+        let isMouseDown = false;
+        let mouseStartX = 0;
+        let hasTriggeredDrag = false;
+
+        carousel.addEventListener('mousedown', (e) => {
+            isMouseDown = true;
+            mouseStartX = e.clientX;
+            hasTriggeredDrag = false;
+            e.preventDefault();
+        });
+
+        document.addEventListener('mouseup', () => {
+            isMouseDown = false;
+            hasTriggeredDrag = false;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isMouseDown || hasTriggeredDrag) return;
+
+            const deltaX = e.clientX - mouseStartX;
+            if (Math.abs(deltaX) > 100) {
+                hasTriggeredDrag = true;
+                if (deltaX > 0) {
+                    rotateCarousel(-1);
+                } else {
+                    rotateCarousel(1);
+                }
+            }
+        });
+
+        // 键盘支持
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                rotateCarousel(-1);
+            } else if (e.key === 'ArrowRight') {
+                rotateCarousel(1);
+            } else if (e.key === ' ') {
+                e.preventDefault();
+                toggleAuto();
+            }
+        });
+
+        // 初始化
+        updateCarouselDisplay();
+    </script>
+</body>
+</html>

@@ -327,7 +327,7 @@
             border-radius: 3px;
         }
 
-        /* 音频控制器样式 */
+        /* 音频控制器样式 - 可拖拽和收起 */
         .audio-controls {
             position: fixed;
             bottom: 20px;
@@ -341,6 +341,93 @@
             border: 1px solid rgba(255,255,255,0.1);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             z-index: 1000;
+            transition: all 0.3s ease;
+            cursor: grab;
+        }
+
+        .audio-controls.dragging {
+            cursor: grabbing;
+            z-index: 1001;
+        }
+
+        /* 收起状态 */
+        .audio-controls.collapsed {
+            height: 60px;
+            overflow: hidden;
+            padding: 15px;
+        }
+
+        .audio-controls.collapsed .control-content {
+            display: none;
+        }
+
+        /* 拖拽手柄 */
+        .drag-handle {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 30px;
+            height: 20px;
+            cursor: grab;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.1);
+            transition: background 0.2s ease;
+        }
+
+        .drag-handle:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .drag-handle::before {
+            content: '⋯';
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+            transform: rotate(90deg);
+        }
+
+        /* 展开/收起按钮 */
+        .toggle-btn {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            width: 30px;
+            height: 20px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 6px;
+            color: rgba(255,255,255,0.7);
+            cursor: pointer;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .toggle-btn:hover {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        /* 紧凑标题（收起状态下显示） */
+        .compact-title {
+            display: none;
+            font-size: 12px;
+            color: rgba(255,255,255,0.8);
+            margin: 0;
+            text-align: center;
+            padding-top: 5px;
+        }
+
+        .audio-controls.collapsed .compact-title {
+            display: block;
+        }
+
+        .audio-controls.collapsed h4 {
+            display: none;
         }
 
         .audio-controls h4 {
@@ -571,6 +658,30 @@
                 max-width: 280px;
                 padding: 15px;
             }
+
+            .audio-controls.collapsed {
+                height: 50px;
+                padding: 10px;
+            }
+
+            /* 手机端默认收起状态 */
+            .audio-controls {
+                height: 50px;
+                overflow: hidden;
+            }
+
+            .audio-controls .control-content {
+                display: none;
+            }
+
+            .audio-controls.expanded .control-content {
+                display: block;
+            }
+
+            .audio-controls.expanded {
+                height: auto;
+                overflow: visible;
+            }
         }
     </style>
     <script src="assets/js/audio-config.js"></script>
@@ -763,12 +874,22 @@
         </div>
     </div>
 
-    <!-- 音频控制器 - 增强版 -->
-    <div class="audio-controls">
+    <!-- 音频控制器 - 可拖拽和收起版 -->
+    <div class="audio-controls" id="audioControls">
+        <!-- 展开/收起按钮 -->
+        <button class="toggle-btn" id="toggleBtn" title="展开/收起">−</button>
+
+        <!-- 拖拽手柄 -->
+        <div class="drag-handle" id="dragHandle"></div>
+
+        <!-- 紧凑标题（收起时显示） -->
+        <div class="compact-title" id="compactTitle" data-i18n="audioControl.title">🎵 播放控制器</div>
+
         <h4 data-i18n="audioControl.title">🎵 播放控制器</h4>
 
-        <!-- 播放控制按钮 -->
-        <div class="control-row playback-buttons">
+        <div class="control-content">
+            <!-- 播放控制按钮 -->
+            <div class="control-row playback-buttons">
             <button class="control-btn" id="prevBtn" data-i18n-title="controls.previous" title="上一首">⏮</button>
             <button class="control-btn play-pause-btn" id="playPauseBtn" data-i18n-title="controls.playPause" title="播放/暂停">▶️</button>
             <button class="control-btn" id="nextBtn" data-i18n-title="controls.next" title="下一首">⏭</button>
@@ -806,6 +927,7 @@
                 <option value="90" data-i18n="timer.90min">90分钟</option>
             </select>
             <span class="timer-status" id="timerStatus" data-i18n="timer.inactive">未启动</span>
+        </div>
         </div>
     </div>
 
@@ -862,7 +984,12 @@
                 'carousel.auto': '自动播放',
                 'carousel.autoStop': '停止播放',
                 'carousel.next': '下一个',
-                'tracks.count': '个音频'
+                'tracks.count': '个音频',
+                'expand': '展开',
+                'collapse': '收起',
+                'audio.enabled': '音频已启用，可以开始播放了！',
+                'audio.clickToEnable': '点击任意位置启用音频播放',
+                'audio.clickToActivate': '请点击屏幕以启用音频播放'
             },
             'en-US': {
                 'app.title': '🎵 Sound Healing - 3D Playlist 🎵',
@@ -887,7 +1014,12 @@
                 'carousel.auto': 'Auto Play',
                 'carousel.autoStop': 'Stop Auto',
                 'carousel.next': 'Next',
-                'tracks.count': ' tracks'
+                'tracks.count': ' tracks',
+                'expand': 'Expand',
+                'collapse': 'Collapse',
+                'audio.enabled': 'Audio enabled! You can start playing now!',
+                'audio.clickToEnable': 'Click anywhere to enable audio playback',
+                'audio.clickToActivate': 'Please tap screen to activate audio playback'
             },
             'ja-JP': {
                 'app.title': '🎵 サウンドヒーリング - 3Dプレイリスト 🎵',
@@ -912,7 +1044,12 @@
                 'carousel.auto': '自動再生',
                 'carousel.autoStop': '停止',
                 'carousel.next': '次へ',
-                'tracks.count': 'トラック'
+                'tracks.count': 'トラック',
+                'expand': '展開',
+                'collapse': '折りたたみ',
+                'audio.enabled': 'オーディオが有効になりました！再生を開始できます！',
+                'audio.clickToEnable': '任意の場所をクリックしてオーディオ再生を有効にする',
+                'audio.clickToActivate': '画面をタップしてオーディオ再生を有効にしてください'
             },
             'ko-KR': {
                 'app.title': '🎵 사운드 힐링 - 3D 플레이리스트 🎵',
@@ -937,7 +1074,12 @@
                 'carousel.auto': '자동 재생',
                 'carousel.autoStop': '정지',
                 'carousel.next': '다음',
-                'tracks.count': '개 트랙'
+                'tracks.count': '개 트랙',
+                'expand': '펼치기',
+                'collapse': '접기',
+                'audio.enabled': '오디오가 활성화되었습니다! 이제 재생할 수 있습니다!',
+                'audio.clickToEnable': '아무 곳이나 클릭하여 오디오 재생 활성화',
+                'audio.clickToActivate': '화면을 터치하여 오디오 재생을 활성화하세요'
             }
         };
 
@@ -1680,12 +1822,305 @@
             }
         });
 
+        // 音频控制器拖拽和展开/收起功能
+        function initializeAudioController() {
+            const audioControls = document.getElementById('audioControls');
+            const dragHandle = document.getElementById('dragHandle');
+            const toggleBtn = document.getElementById('toggleBtn');
+
+            let isDragging = false;
+            let dragStartX, dragStartY;
+            let controllerStartX, controllerStartY;
+            let isCollapsed = false;
+
+            // 检测是否为移动设备
+            const isMobile = window.innerWidth <= 768;
+
+            // 移动设备默认收起
+            if (isMobile) {
+                audioControls.classList.add('collapsed');
+                isCollapsed = true;
+                toggleBtn.textContent = '+';
+            }
+
+            // 展开/收起功能
+            toggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                isCollapsed = !isCollapsed;
+
+                if (isCollapsed) {
+                    audioControls.classList.add('collapsed');
+                    toggleBtn.textContent = '+';
+                    toggleBtn.title = translations[currentLanguage]['expand'] || '展开';
+                } else {
+                    audioControls.classList.remove('collapsed');
+                    toggleBtn.textContent = '−';
+                    toggleBtn.title = translations[currentLanguage]['collapse'] || '收起';
+                }
+            });
+
+            // 拖拽功能
+            function startDrag(e) {
+                isDragging = true;
+                audioControls.classList.add('dragging');
+
+                const clientX = e.clientX || e.touches[0].clientX;
+                const clientY = e.clientY || e.touches[0].clientY;
+
+                dragStartX = clientX;
+                dragStartY = clientY;
+
+                const rect = audioControls.getBoundingClientRect();
+                controllerStartX = rect.left;
+                controllerStartY = rect.top;
+
+                e.preventDefault();
+            }
+
+            function doDrag(e) {
+                if (!isDragging) return;
+
+                const clientX = e.clientX || e.touches[0].clientX;
+                const clientY = e.clientY || e.touches[0].clientY;
+
+                const deltaX = clientX - dragStartX;
+                const deltaY = clientY - dragStartY;
+
+                let newX = controllerStartX + deltaX;
+                let newY = controllerStartY + deltaY;
+
+                // 限制在屏幕边界内
+                const maxX = window.innerWidth - audioControls.offsetWidth;
+                const maxY = window.innerHeight - audioControls.offsetHeight;
+
+                newX = Math.max(10, Math.min(newX, maxX - 10));
+                newY = Math.max(10, Math.min(newY, maxY - 10));
+
+                audioControls.style.left = newX + 'px';
+                audioControls.style.top = newY + 'px';
+                audioControls.style.right = 'auto';
+                audioControls.style.bottom = 'auto';
+
+                e.preventDefault();
+            }
+
+            function endDrag() {
+                isDragging = false;
+                audioControls.classList.remove('dragging');
+
+                // 保存位置到localStorage
+                const rect = audioControls.getBoundingClientRect();
+                localStorage.setItem('audioControllerPos', JSON.stringify({
+                    left: rect.left,
+                    top: rect.top
+                }));
+            }
+
+            // 桌面端事件
+            dragHandle.addEventListener('mousedown', startDrag);
+            document.addEventListener('mousemove', doDrag);
+            document.addEventListener('mouseup', endDrag);
+
+            // 移动端事件
+            dragHandle.addEventListener('touchstart', startDrag, { passive: false });
+            document.addEventListener('touchmove', doDrag, { passive: false });
+            document.addEventListener('touchend', endDrag);
+
+            // 恢复保存的位置
+            const savedPos = localStorage.getItem('audioControllerPos');
+            if (savedPos) {
+                try {
+                    const pos = JSON.parse(savedPos);
+                    audioControls.style.left = pos.left + 'px';
+                    audioControls.style.top = pos.top + 'px';
+                    audioControls.style.right = 'auto';
+                    audioControls.style.bottom = 'auto';
+                } catch (e) {
+                    console.log('Failed to restore controller position');
+                }
+            }
+
+            // 防止点击控制器时传播到背景
+            audioControls.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        }
+
+        // 移动端音频上下文初始化
+        function initializeMobileAudio() {
+            const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+            if (!isMobile) return;
+
+            let audioContext;
+            let isAudioUnlocked = false;
+
+            // 创建 AudioContext
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            } catch (e) {
+                console.warn('AudioContext not supported:', e);
+                return;
+            }
+
+            // 音频解锁函数
+            function unlockAudio() {
+                if (isAudioUnlocked || audioContext.state === 'running') return;
+
+                // 创建空的音频缓冲区并播放
+                const buffer = audioContext.createBuffer(1, 1, 22050);
+                const source = audioContext.createBufferSource();
+                source.buffer = buffer;
+                source.connect(audioContext.destination);
+
+                if (source.start) {
+                    source.start(0);
+                } else if (source.play) {
+                    source.play(0);
+                } else if (source.noteOn) {
+                    source.noteOn(0);
+                }
+
+                // 恢复音频上下文
+                if (audioContext.resume) {
+                    audioContext.resume().then(() => {
+                        isAudioUnlocked = true;
+                        console.log('🎵 移动端音频上下文已解锁');
+
+                        // 显示成功提示
+                        const message = translations[currentLanguage]['audio.enabled'] || '音频已启用，可以开始播放了！';
+                        showMobileAudioNotification(message, 'success');
+
+                        // 移除事件监听器
+                        removeUnlockListeners();
+                    }).catch(e => {
+                        console.warn('音频上下文恢复失败:', e);
+                    });
+                }
+            }
+
+            // 移动端首次交互时显示音频启用提示
+            function showMobileAudioNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: ${type === 'success' ? '#4CAF50' : '#2196F3'};
+                    color: white;
+                    padding: 12px 20px;
+                    border-radius: 6px;
+                    font-size: 14px;
+                    z-index: 10000;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                    animation: slideInDown 0.3s ease;
+                `;
+
+                notification.textContent = message;
+                document.body.appendChild(notification);
+
+                // 3秒后移除通知
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.style.animation = 'slideOutUp 0.3s ease';
+                        setTimeout(() => notification.remove(), 300);
+                    }
+                }, 3000);
+
+                // 添加动画样式
+                if (!document.getElementById('mobileAudioNotificationStyles')) {
+                    const style = document.createElement('style');
+                    style.id = 'mobileAudioNotificationStyles';
+                    style.textContent = `
+                        @keyframes slideInDown {
+                            from { transform: translate(-50%, -100%); opacity: 0; }
+                            to { transform: translate(-50%, 0); opacity: 1; }
+                        }
+                        @keyframes slideOutUp {
+                            from { transform: translate(-50%, 0); opacity: 1; }
+                            to { transform: translate(-50%, -100%); opacity: 0; }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+            }
+
+            // 移除解锁事件监听器
+            function removeUnlockListeners() {
+                document.removeEventListener('touchstart', unlockAudio, true);
+                document.removeEventListener('touchend', unlockAudio, true);
+                document.removeEventListener('mousedown', unlockAudio, true);
+                document.removeEventListener('click', unlockAudio, true);
+            }
+
+            // 添加各种用户交互事件监听器
+            document.addEventListener('touchstart', unlockAudio, true);
+            document.addEventListener('touchend', unlockAudio, true);
+            document.addEventListener('mousedown', unlockAudio, true);
+            document.addEventListener('click', unlockAudio, true);
+
+            // 检查AudioContext状态
+            function checkAudioContextState() {
+                if (audioContext.state === 'suspended') {
+                    console.log('🎵 音频上下文处于暂停状态，等待用户交互...');
+
+                    // 显示引导提示（只在第一次访问时显示）
+                    if (!localStorage.getItem('audioHintShown')) {
+                        setTimeout(() => {
+                            const message = translations[currentLanguage]['audio.clickToEnable'] || '点击任意位置启用音频播放';
+                            showMobileAudioNotification(message, 'info');
+                        }, 1000);
+                        localStorage.setItem('audioHintShown', 'true');
+                    }
+                } else if (audioContext.state === 'running') {
+                    isAudioUnlocked = true;
+                    removeUnlockListeners();
+                }
+            }
+
+            // 监听AudioContext状态变化
+            audioContext.addEventListener('statechange', checkAudioContextState);
+
+            // 初始检查
+            checkAudioContextState();
+
+            // 增强AudioManager的播放方法
+            if (window.audioManager) {
+                const originalPlayTrack = window.audioManager.playTrack.bind(window.audioManager);
+
+                window.audioManager.playTrack = async function(trackId, categoryName, fileName, resetTime = false) {
+                    // 确保音频上下文已解锁
+                    if (audioContext && audioContext.state === 'suspended') {
+                        try {
+                            await audioContext.resume();
+                            console.log('🎵 音频上下文已恢复');
+                        } catch (e) {
+                            console.warn('音频上下文恢复失败:', e);
+                            const message = translations[currentLanguage]['audio.clickToActivate'] || '请点击屏幕以启用音频播放';
+                            showMobileAudioNotification(message, 'info');
+                            return;
+                        }
+                    }
+
+                    // 调用原始播放方法
+                    return originalPlayTrack(trackId, categoryName, fileName, resetTime);
+                };
+            }
+        }
+
         // 初始化
         function initialize() {
             updateCarouselDisplay();
 
             // 生成动态音轨列表
             generateTrackLists();
+
+            // 初始化音频控制器交互
+            initializeAudioController();
+
+            // 初始化移动端音频支持
+            initializeMobileAudio();
 
             // 加载保存的语言设置
             const savedLanguage = localStorage.getItem('language') || 'zh-CN';
