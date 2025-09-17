@@ -65,7 +65,7 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             border: 1px solid rgba(255,255,255,0.1);
             cursor: pointer;
-            transition: all 0.4s ease;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 40px 30px;
             overflow: hidden;
             backdrop-filter: blur(10px);
@@ -126,10 +126,12 @@
 
         /* 左侧卡片 */
         .carousel-item.prev {
-            opacity: 0.7;
+            opacity: 0.4;
             visibility: visible;
             transform: translateX(-200px) rotateY(45deg) scale(0.85);
             z-index: 1;
+            /* 降低背景饱和度避免颜色冲突 */
+            filter: brightness(0.6) saturate(0.7);
         }
 
         /* 中间当前卡片 */
@@ -138,14 +140,17 @@
             visibility: visible;
             transform: translateX(0) rotateY(0deg) scale(1);
             z-index: 3;
+            filter: none;
         }
 
         /* 右侧卡片 */
         .carousel-item.next {
-            opacity: 0.7;
+            opacity: 0.4;
             visibility: visible;
             transform: translateX(200px) rotateY(-45deg) scale(0.85);
             z-index: 1;
+            /* 降低背景饱和度避免颜色冲突 */
+            filter: brightness(0.6) saturate(0.7);
         }
 
         /* 卡片内容样式 - 模拟原网站设计 */
@@ -646,8 +651,17 @@
             .carousel-item {
                 font-size: 16px;
                 /* 在手机端调整卡片尺寸，确保内容完整显示 */
-                height: 340px;
-                padding: 15px 12px;
+                height: 350px;
+                padding: 12px 10px;
+                /* 调整内容分布，为播放列表留出更多空间 */
+                justify-content: flex-start;
+            }
+
+            .item-content {
+                flex: 1;
+                height: auto;
+                max-height: none;
+                overflow: visible;
             }
 
             .item-title {
@@ -667,11 +681,20 @@
 
             /* 手机端播放列表调整 - 避免被控制按钮遮挡 */
             .track-list {
-                max-height: 200px;
-                /* 手机端适当增加播放列表高度确保完整显示 */
-                margin-top: 10px;
-                padding: 12px;
+                max-height: 160px;
+                /* 手机端播放列表高度，确保在卡片内完整显示 */
+                margin-top: 8px;
+                padding: 8px;
                 box-sizing: border-box;
+                /* 强制显示，确保内容可见 */
+                position: relative;
+                z-index: 10;
+            }
+
+            .track-list.show {
+                display: block !important;
+                opacity: 1;
+                visibility: visible;
             }
 
             .track-item {
