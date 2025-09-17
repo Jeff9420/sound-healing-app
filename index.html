@@ -645,9 +645,9 @@
 
             .carousel-item {
                 font-size: 16px;
-                /* 在手机端缩小卡片高度 */
-                height: 300px;
-                padding: 20px 15px;
+                /* 在手机端调整卡片尺寸，确保内容完整显示 */
+                height: 340px;
+                padding: 15px 12px;
             }
 
             .item-title {
@@ -655,9 +655,9 @@
             }
 
             .controls {
-                bottom: -30px;
-                /* 手机端进一步上移控制按钮 */
-                transform: translateX(-50%) translateY(-15px);
+                bottom: -80px;
+                /* 手机端将控制按钮下移，避免遮挡轮播卡片 */
+                transform: translateX(-50%) translateY(0px);
             }
 
             .btn {
@@ -667,14 +667,22 @@
 
             /* 手机端播放列表调整 - 避免被控制按钮遮挡 */
             .track-list {
-                max-height: 180px;
-                /* 手机端缩小播放列表高度 */
-                margin-top: 15px;
+                max-height: 200px;
+                /* 手机端适当增加播放列表高度确保完整显示 */
+                margin-top: 10px;
+                padding: 12px;
+                box-sizing: border-box;
             }
 
             .track-item {
-                padding: 8px 12px;
+                padding: 10px 12px;
                 font-size: 13px;
+                line-height: 1.6;
+                /* 增加行高确保文字完整显示 */
+                min-height: 20px;
+                overflow: visible;
+                white-space: normal;
+                word-wrap: break-word;
             }
 
             .audio-controls {
