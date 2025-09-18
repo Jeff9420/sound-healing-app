@@ -1,35 +1,58 @@
 # 声音疗愈应用 Robots.txt
-# 允许搜索引擎索引所有内容
+# 优化的搜索引擎爬虫配置
 
 User-agent: *
 Allow: /
 
-# 特别允许的路径
+# 允许索引的重要资源
 Allow: /assets/css/
 Allow: /assets/js/
 Allow: /assets/images/
+Allow: /favicon.ico
+Allow: /manifest.json
 
-# 不希望索引的内容
+# 禁止索引的内容
 Disallow: /assets/audio/
-Disallow: /.netlify/
-Disallow: /monitoring-setup.js
-Disallow: /update-audio-config.py
+Disallow: /.serena/
+Disallow: /.git/
+Disallow: /.vercel/
+Disallow: /CLAUDE.md
+Disallow: /DEPLOYMENT.md
+Disallow: /DOCS-INDEX.md
+Disallow: /FEATURES.md
 
 # 网站地图位置
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://soundflows.app/sitemap.xml
 
-# 爬虫延迟设置（可选）
-Crawl-delay: 1
-
-# 针对特定搜索引擎的设置
+# 针对主要搜索引擎的优化设置
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 0
 
-User-agent: Bingbot  
+User-agent: Bingbot
 Allow: /
 Crawl-delay: 1
 
 User-agent: Baiduspider
 Allow: /
 Crawl-delay: 2
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+# 阻止不良爬虫
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+# 最后更新: 2024-09-18
