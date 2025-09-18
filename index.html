@@ -812,6 +812,102 @@
             background: rgba(255,255,255,0.1);
         }
 
+        /* 广告位样式 */
+        .ad-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 15px 0;
+            min-height: 90px;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+
+        .ad-container:hover {
+            opacity: 1;
+        }
+
+        /* 主页顶部原生广告 */
+        .ad-main-top {
+            max-width: 728px;
+            margin: 10px auto 20px auto;
+            background: rgba(255,255,255,0.02);
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* 轮播下方展示广告 */
+        .ad-carousel-bottom {
+            max-width: 336px;
+            margin: 20px auto;
+            min-height: 280px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* 广告标签样式 */
+        .ad-label {
+            font-size: 10px;
+            color: rgba(255,255,255,0.4);
+            text-align: center;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* 移动端广告适配 */
+        @media (max-width: 768px) {
+            .ad-main-top {
+                max-width: 320px;
+                margin: 10px auto 15px auto;
+            }
+
+            .ad-carousel-bottom {
+                max-width: 300px;
+                min-height: 250px;
+                margin: 15px auto;
+            }
+
+            .ad-container {
+                margin: 10px 0;
+                min-height: 60px;
+            }
+        }
+
+        /* 失眠友好模式下的广告样式 */
+        [data-sleep-theme] .ad-container {
+            opacity: 0.6;
+            filter: brightness(0.7) sepia(0.1);
+        }
+
+        [data-sleep-theme] .ad-container:hover {
+            opacity: 0.8;
+        }
+
+        /* AdSense响应式广告样式 */
+        .adsbygoogle {
+            display: block !important;
+            text-align: center;
+        }
+
+        /* 广告加载失败时的备用样式 */
+        .ad-fallback {
+            background: rgba(116, 165, 212, 0.1);
+            border: 1px dashed rgba(116, 165, 212, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            color: rgba(116, 165, 212, 0.7);
+            font-size: 12px;
+        }
+
+        /* Premium用户隐藏广告 */
+        .premium-user .ad-container {
+            display: none !important;
+        }
+
         @media (max-width: 768px) {
             /* 手机端缩小标题间距 */
             .title {
@@ -978,9 +1074,15 @@
         }
     </style>
     <script src="assets/js/audio-config.js"></script>
+    <script src="assets/js/ad-manager.js"></script>
+    <script src="assets/js/ad-analytics.js"></script>
 </head>
 <body>
     <div class="title" data-i18n="app.title">🎵 声音疗愈 - 3D播放列表 🎵</div>
+
+    <!-- 主页顶部原生广告位 -->
+    <div id="ad-main-top" class="ad-container ad-main-top"></div>
+
     <div class="carousel-container">
         <div class="carousel" id="carousel">
             <!-- 森林栖息地 - Animal sounds -->
@@ -1166,6 +1268,9 @@
             <div class="dot" onclick="goToSlide(8)"></div>
         </div>
     </div>
+
+    <!-- 轮播下方广告位 -->
+    <div id="ad-carousel-bottom" class="ad-container ad-carousel-bottom"></div>
 
     <!-- 音频控制器 - 可拖拽和收起版 -->
     <div class="audio-controls" id="audioControls">

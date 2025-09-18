@@ -9,10 +9,13 @@
 | [FEATURES.md](FEATURES.md) | 完整功能规格书、技术实现规格 | 开发者、产品经理 |
 | [CLAUDE.md](CLAUDE.md) | Claude Code项目指南、开发规范 | Claude AI助手、开发者 |
 
-### 🚀 部署文档
+### 🚀 部署和运营文档
 | 文档 | 说明 | 适用人群 |
 |------|------|----------|
 | [DEPLOYMENT.md](DEPLOYMENT.md) | 完整部署指南、Vercel配置说明 | 运维人员、开发者 |
+| [SEO-OPTIMIZATION.md](SEO-OPTIMIZATION.md) | SEO优化实施报告和策略 | 市场人员、开发者 |
+| [MONETIZATION-STRATEGY.md](MONETIZATION-STRATEGY.md) | 完整变现策略和收入模式 | 产品经理、运营人员 |
+| [ADSENSE-SETUP-GUIDE.md](ADSENSE-SETUP-GUIDE.md) | Google AdSense申请和设置指南 | 运营人员、开发者 |
 
 ### 🌙 失眠友好主题文档
 | 文档 | 说明 | 适用人群 |
@@ -33,11 +36,12 @@
 | [privacy-policy.html](privacy-policy.html) | 隐私政策 | 所有用户 |
 | [terms.html](terms.html) | 使用条款 | 所有用户 |
 
-### 🎮 演示和测试页面
+### 🎮 演示和设置页面
 | 文件 | 说明 | 用途 |
 |------|------|------|
 | [index.html](index.html) | 主应用页面 | 生产环境 |
 | [carrossel-3d.html](carrossel-3d.html) | 3D轮播演示页面 | 功能演示 |
+| [adsense-setup.html](adsense-setup.html) | AdSense申请信息页面 | 广告申请 |
 
 ## 📖 文档阅读指南
 
