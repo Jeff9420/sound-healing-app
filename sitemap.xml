@@ -81,6 +81,13 @@
     <priority>0.5</priority>
   </url>
 
+  <url>
+    <loc>https://www.soundflows.app/faq.html</loc>
+    <lastmod>2024-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- 法律页面 -->
   <url>
     <loc>https://www.soundflows.app/privacy-policy.html</loc>

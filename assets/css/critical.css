@@ -1,0 +1,94 @@
+/**
+ * 关键CSS - 首屏渲染优化
+ * 内联到HTML头部以提高首屏加载速度
+ */
+
+/* 基础重置和字体 */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{height:100%;font-size:16px}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei',system-ui,sans-serif;
+  line-height:1.6;
+  color:#e8f4f8;
+  background:#1a2432;
+  min-height:100vh;
+  position:relative;
+  overflow-x:hidden
+}
+
+/* 布局容器 */
+.app-container{
+  position:relative;
+  z-index:1;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column
+}
+
+/* 背景画布 */
+#backgroundCanvas{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:-1;
+  background:linear-gradient(135deg,#1a2432 0%,#2c3e50 100%)
+}
+
+/* 顶部控制栏 */
+.top-controls{
+  position:fixed;
+  top:20px;
+  right:20px;
+  z-index:1000;
+  display:flex;
+  gap:15px;
+  align-items:center
+}
+
+/* 主要内容区域 */
+.main-content{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  text-align:center
+}
+
+/* 标题样式 */
+.nature-title{
+  font-size:clamp(2rem,8vw,4rem);
+  font-weight:300;
+  margin-bottom:0.5em;
+  color:#7fd969;
+  text-shadow:0 2px 20px rgba(127,217,105,0.3);
+  opacity:0;
+  animation:fadeInUp 1s ease-out 0.5s forwards
+}
+
+/* 加载动画 */
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* 响应式设计 */
+@media (max-width:768px){
+  .top-controls{top:10px;right:10px;gap:10px}
+  .main-content{padding:10px}
+  .nature-title{font-size:clamp(1.5rem,6vw,2.5rem)}
+}
+
+/* 预加载样式防止FOUC */
+.carousel-container,.playlist-container,.control-panel{
+  opacity:0;
+  transition:opacity 0.3s ease
+}
+.loaded .carousel-container,
+.loaded .playlist-container,
+.loaded .control-panel{
+  opacity:1
+}
