@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GA4 集成测试页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+
+        .test-container {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        .test-button {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 12px 24px;
+            margin: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .test-button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 8px;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .success {
+            background: rgba(76, 175, 80, 0.3);
+            border-left: 4px solid #4CAF50;
+        }
+
+        .error {
+            background: rgba(244, 67, 54, 0.3);
+            border-left: 4px solid #f44336;
+        }
+
+        .info {
+            background: rgba(33, 150, 243, 0.3);
+            border-left: 4px solid #2196F3;
+        }
+
+        .console-output {
+            background: rgba(0,0,0,0.5);
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            min-height: 100px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Google Analytics 4 集成测试</h1>
+
+        <div id="initialization-status" class="status info">
+            <strong>初始化状态:</strong> 检查中...
+        </div>
+
+        <h2>🎵 音频事件测试</h2>
+        <button class="test-button" onclick="testAudioPlay()">测试音频播放事件</button>
+        <button class="test-button" onclick="testAudioComplete()">测试音频完成事件</button>
+        <button class="test-button" onclick="testAudioSession()">测试音频会话事件</button>
+
+        <h2>📊 用户行为测试</h2>
+        <button class="test-button" onclick="testUserEngagement()">测试用户参与度</button>
+        <button class="test-button" onclick="testScrollDepth()">测试滚动深度</button>
+        <button class="test-button" onclick="testTimeOnPage()">测试页面停留时间</button>
+
+        <h2>💰 电子商务测试</h2>
+        <button class="test-button" onclick="testValueEvent()">测试价值事件</button>
+        <button class="test-button" onclick="testConversion()">测试转化事件</button>
+        <button class="test-button" onclick="testUserLTV()">测试用户生命周期价值</button>
+
+        <h2>🔧 诊断工具</h2>
+        <button class="test-button" onclick="checkGA4Status()">检查GA4状态</button>
+        <button class="test-button" onclick="validateConfig()">验证配置</button>
+        <button class="test-button" onclick="clearConsole()">清空控制台</button>
+
+        <h2>📋 控制台输出</h2>
+        <div id="console-output" class="console-output">等待测试结果...</div>
+
+        <div class="status info">
+            <strong>使用说明:</strong><br>
+            1. 点击各种测试按钮来验证GA4事件是否正常发送<br>
+            2. 检查控制台输出查看详细信息<br>
+            3. 在GA4实时报告中验证事件是否被接收<br>
+            4. 确保已将测量ID替换为您的实际GA4 ID
+        </div>
+    </div>
+
+    <!-- 包含GA4配置 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4NZR3HR3J1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        // 启用调试模式进行测试
+        gtag('config', 'G-4NZR3HR3J1', {
+            'debug_mode': true,
+            'send_page_view': true
+        });
+    </script>
+
+    <script>
+        // 控制台输出管理
+        let consoleOutput = document.getElementById('console-output');
+        let originalConsoleLog = console.log;
+        let originalConsoleError = console.error;
+        let originalConsoleWarn = console.warn;
+
+        function addToConsole(message, type = 'log') {
+            const timestamp = new Date().toLocaleTimeString();
+            const prefix = {
+                'log': '📝',
+                'error': '❌',
+                'warn': '⚠️',
+                'success': '✅'
+            }[type] || '📝';
+
+            consoleOutput.textContent += `[${timestamp}] ${prefix} ${message}\n`;
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+
+        // 重写console方法以显示在页面上
+        console.log = function(...args) {
+            originalConsoleLog.apply(console, args);
+            addToConsole(args.join(' '), 'log');
+        };
+
+        console.error = function(...args) {
+            originalConsoleError.apply(console, args);
+            addToConsole(args.join(' '), 'error');
+        };
+
+        console.warn = function(...args) {
+            originalConsoleWarn.apply(console, args);
+            addToConsole(args.join(' '), 'warn');
+        };
+
+        // 页面加载完成后检查初始化状态
+        window.addEventListener('load', function() {
+            setTimeout(checkInitialization, 2000);
+        });
+
+        function checkInitialization() {
+            const statusDiv = document.getElementById('initialization-status');
+
+            if (typeof gtag !== 'undefined') {
+                statusDiv.className = 'status success';
+                statusDiv.innerHTML = '<strong>✅ 初始化状态:</strong> GA4已成功加载并初始化';
+                addToConsole('GA4 gtag函数已加载', 'success');
+            } else {
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = '<strong>❌ 初始化状态:</strong> GA4未正确加载';
+                addToConsole('GA4 gtag函数未找到', 'error');
+            }
+        }
+
+        // 音频事件测试
+        function testAudioPlay() {
+            if (typeof gtag === 'undefined') {
+                addToConsole('错误: gtag未加载', 'error');
+                return;
+            }
+
+            gtag('event', 'audio_play', {
+                'event_category': 'audio_interaction',
+                'event_label': 'test_meditation_audio.mp3',
+                'audio_category': 'meditation',
+                'value': 0.1,
+                'custom_parameter_3': 'meditation'
+            });
+
+            addToConsole('已发送音频播放事件: meditation类别', 'success');
+        }
+
+        function testAudioComplete() {
+            if (typeof gtag === 'undefined') {
+                addToConsole('错误: gtag未加载', 'error');
+                return;
+            }
+
+            gtag('event', 'audio_complete', {
+                'event_category': 'audio_interaction',
+                'event_label': 'test_rain_audio.mp3',
+                'audio_category': 'rain',
+                'value': 1.0,
+                'duration': 300,
+                'completion_rate': 100
+            });
+
+            addToConsole('已发送音频完成事件: rain类别, 时长300秒', 'success');
+        }
+
+        function testAudioSession() {
+            if (typeof gtag === 'undefined') {
+                addToConsole('错误: gtag未加载', 'error');
+                return;
+            }
+
+            gtag('event', 'audio_session_complete', {
+                'event_category': 'audio_usage',
+                'event_label': 'chakra',
+                'value': 2.0,
+                'session_duration': 600,
+                'audio_plays': 3,
+                'completion_rate': 85
+            });
+
+            addToConsole('已发送音频会话事件: chakra类别, 会话时长600秒', 'success');
+        }
+
+        // 用户行为测试
+        function testUserEngagement() {
+            if (typeof gtag === 'undefined') {
+                addToConsole('错误: gtag未加载', 'error');
+                return;
+            }
+
+            gtag('event', 'user_engagement', {
+                'event_category': 'engagement',
+                'event_label': 'control_interaction',
+                'value': 1,
+                'engagement_time_msec': 5000
+            });
+
+            addToConsole('已发送用户参与事件: 控制交互, 参与时间5秒', 'success');
+        }
+
+        function testScrollDepth() {
+            if (typeof gtag === 'undefined') {
+                addToConsole('错误: gtag未加载', 'error');
+                return;
+            }
+
+            gtag('event', 'scroll_depth', {
+                'event_category': 'engagement',
+                'event_label': '75%',
+                'value': 75
+            });
+
+            addToConsole('已发送滚动深度事件: 75%', 'success');
+        }
+
+        function testTimeOnPage() {
+            if (typeof gtag === 'undefined') {
+                addToConsole('错误: gtag未加载', 'error');
+                return;
+            }
+
+            gtag('event', 'time_on_page', {
+                'event_category': 'engagement',
+                'event_label': '180s',
+                'value': 180
+            });
+
+            addToConsole('已发送页面停留时间事件: 180秒', 'success');
+        }
+
+        // 电子商务测试
+        function testValueEvent() {
+            if (typeof gtag === 'undefined') {
+                addToConsole('错误: gtag未加载', 'error');
+                return;
+            }
+
+            gtag('event', 'purchase', {
+                'transaction_id': 'test_' + Date.now(),
+                'value': 5.0,
+                'currency': 'USD',
+                'items': [{
+                    'item_id': 'audio_session',
+                    'item_name': '音频会话完成',
+                    'item_category': 'meditation',
+                    'quantity': 1,
+                    'price': 5.0
+                }]
+            });
+
+            addToConsole('已发送价值事件: 价值$5.0的音频会话', 'success');
+        }
+
+        function testConversion() {
+            if (typeof gtag === 'undefined') {
+                addToConsole('错误: gtag未加载', 'error');
+                return;
+            }
+
+            gtag('event', 'conversion', {
+                'event_category': 'conversion',
+                'event_label': 'first_audio_complete',
+                'value': 2.0,
+                'currency': 'USD',
+                'conversion_type': 'first_audio_complete'
+            });
+
+            addToConsole('已发送转化事件: 首次音频完成, 价值$2.0', 'success');
+        }
+
+        function testUserLTV() {
+            if (typeof gtag === 'undefined') {
+                addToConsole('错误: gtag未加载', 'error');
+                return;
+            }
+
+            gtag('event', 'user_ltv_calculated', {
+                'value': 15.0,
+                'currency': 'USD',
+                'user_type': 'loyal',
+                'total_sessions': 8,
+                'total_audio_plays': 25
+            });
+
+            addToConsole('已发送用户LTV事件: 忠实用户, LTV $15.0', 'success');
+        }
+
+        // 诊断工具
+        function checkGA4Status() {
+            addToConsole('=== GA4状态检查 ===', 'log');
+
+            // 检查gtag函数
+            if (typeof gtag !== 'undefined') {
+                addToConsole('✅ gtag函数: 已加载', 'success');
+            } else {
+                addToConsole('❌ gtag函数: 未加载', 'error');
+            }
+
+            // 检查dataLayer
+            if (typeof window.dataLayer !== 'undefined') {
+                addToConsole(`✅ dataLayer: 已初始化, 包含${window.dataLayer.length}个事件`, 'success');
+            } else {
+                addToConsole('❌ dataLayer: 未初始化', 'error');
+            }
+
+            // 检查配置
+            addToConsole('📋 当前页面URL: ' + window.location.href, 'log');
+            addToConsole('📋 页面标题: ' + document.title, 'log');
+            addToConsole('📋 用户代理: ' + navigator.userAgent, 'log');
+        }
+
+        function validateConfig() {
+            addToConsole('=== 配置验证 ===', 'log');
+
+            // 发送测试页面浏览事件
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'page_view', {
+                    'page_title': 'GA4测试页面',
+                    'page_location': window.location.href,
+                    'custom_parameter_1': 'test_user',
+                    'custom_parameter_2': 'test_session_' + Date.now()
+                });
+                addToConsole('✅ 已发送测试页面浏览事件', 'success');
+            }
+
+            // 验证自定义参数
+            setTimeout(() => {
+                addToConsole('📊 请在GA4实时报告中验证以下事件:', 'log');
+                addToConsole('- page_view (页面浏览)', 'log');
+                addToConsole('- audio_play (音频播放)', 'log');
+                addToConsole('- audio_complete (音频完成)', 'log');
+                addToConsole('- conversion (转化)', 'log');
+                addToConsole('- user_engagement (用户参与)', 'log');
+            }, 1000);
+        }
+
+        function clearConsole() {
+            consoleOutput.textContent = '';
+            addToConsole('控制台已清空', 'log');
+        }
+
+        // 自动发送页面浏览事件
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                addToConsole('页面加载完成，开始GA4测试', 'log');
+                addToConsole('请注意: 需要将G-XXXXXXXXXX替换为您的实际测量ID', 'warn');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

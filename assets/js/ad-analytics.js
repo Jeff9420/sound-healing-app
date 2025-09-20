@@ -144,20 +144,13 @@ class AdAnalytics {
 
         // 发送到Google Analytics
         if (typeof gtag !== 'undefined') {
-            gtag('config', 'GA_MEASUREMENT_ID', {
-                page_title: document.title,
-                page_location: window.location.href,
-                custom_map: {
-                    'custom_parameter_1': 'user_segment',
-                    'custom_parameter_2': 'session_id'
-                }
-            });
-
             gtag('event', 'page_view', {
                 page_title: document.title,
                 page_location: window.location.href,
                 user_segment: this.getUserSegmentString(),
-                session_id: this.getSessionId()
+                session_id: this.getSessionId(),
+                custom_parameter_1: this.getUserSegmentString(),
+                custom_parameter_2: this.getSessionId()
             });
         }
     }

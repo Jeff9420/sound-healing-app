@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Post - Meditation Tip Monday</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f0f0f0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .instagram-post {
+            width: 1080px;
+            height: 1080px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 80px 60px;
+            box-sizing: border-box;
+            position: relative;
+            color: white;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 72px;
+            font-weight: bold;
+            line-height: 1.2;
+            margin-bottom: 0;
+        }
+
+        .content {
+            font-size: 48px;
+            line-height: 1.4;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 900px;
+        }
+
+        .content div {
+            margin-bottom: 30px;
+        }
+
+        .brand {
+            font-size: 32px;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-top: 0;
+        }
+
+        .download-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            color: #667eea;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .instructions {
+            position: absolute;
+            bottom: -100px;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            font-size: 14px;
+            color: #333;
+        }
+
+        @media screen and (max-width: 1200px) {
+            .instagram-post {
+                width: 540px;
+                height: 540px;
+                padding: 40px 30px;
+            }
+
+            .title {
+                font-size: 36px;
+            }
+
+            .content {
+                font-size: 24px;
+            }
+
+            .brand {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="instagram-post" id="post">
+        <div class="title">💡 MEDITATION TIP MONDAY</div>
+
+        <div class="content">
+            <div>🧘‍♀️ Start with just 5 minutes</div>
+
+            <div>Your mind WILL wander - that's normal!</div>
+
+            <div>The goal isn't to stop thoughts,<br>
+            but to notice them and gently return<br>
+            to your breath.</div>
+
+            <div>🎧 Try our free guided sounds<br>
+            Link in bio ⬆️</div>
+        </div>
+
+        <div class="brand">SoundFlows.app - Free Sound Therapy</div>
+    </div>
+
+    <div class="instructions">
+        <h3>📸 如何保存为图片：</h3>
+        <p><strong>方法1：</strong> 右键点击图片区域 → "另存为图片" 或 "复制图片"</p>
+        <p><strong>方法2：</strong> 使用截图工具（Windows: Win+Shift+S, Mac: Cmd+Shift+4）</p>
+        <p><strong>方法3：</strong> 按F12打开开发者工具 → 选择图片元素 → 右键 → "截图节点"</p>
+        <p><strong>完美尺寸：</strong> 确保保存的图片是1080x1080像素</p>
+    </div>
+
+    <script>
+        // 添加右键保存功能
+        document.getElementById('post').addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+
+            // 使用html2canvas库会更好，但这里提供简单的提示
+            alert('请使用截图工具保存这个设计为图片\n\nWindows: Win+Shift+S\nMac: Cmd+Shift+4\n\n保存后直接上传到Instagram！');
+        });
+    </script>
+</body>
+</html>

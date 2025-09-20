@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundFlows - Free Sound Therapy & Meditation App | 213+ Premium Audio Tracks</title>
+    <meta name="description" content="Discover 213+ high-quality meditation sounds, sleep music, and stress relief audio - completely free. Experience 3D immersive sound therapy for better sleep, focus, and mental wellness.">
+    <meta name="keywords" content="free meditation app, sound therapy, sleep sounds, stress relief, meditation music, white noise, relaxation app, mindfulness, anxiety relief">
+    <meta name="author" content="SoundFlows Team">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://soundflows.app/en/">
+
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="en" href="https://soundflows.app/en/">
+    <link rel="alternate" hreflang="en-us" href="https://soundflows.app/en/">
+    <link rel="alternate" hreflang="en-gb" href="https://soundflows.app/en/">
+    <link rel="alternate" hreflang="en-au" href="https://soundflows.app/en/">
+    <link rel="alternate" hreflang="zh" href="https://soundflows.app/">
+    <link rel="alternate" hreflang="x-default" href="https://soundflows.app/en/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="SoundFlows - Free Sound Therapy & Meditation App">
+    <meta property="og:description" content="Discover 213+ high-quality meditation sounds, sleep music, and stress relief audio - completely free. Experience 3D immersive sound therapy.">
+    <meta property="og:image" content="https://soundflows.app/assets/images/soundflows-og-en.jpg">
+    <meta property="og:url" content="https://soundflows.app/en/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="SoundFlows">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SoundFlows - Free Sound Therapy & Meditation App">
+    <meta name="twitter:description" content="Discover 213+ high-quality meditation sounds, sleep music, and stress relief audio - completely free.">
+    <meta name="twitter:image" content="https://soundflows.app/assets/images/soundflows-twitter-en.jpg">
+    <meta name="twitter:site" content="@SoundFlowsApp">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "SoundFlows",
+      "alternateName": "SoundFlows Sound Therapy App",
+      "description": "Free sound therapy and meditation app with 213+ premium audio tracks for sleep, relaxation, focus, and stress relief.",
+      "url": "https://soundflows.app/en/",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "1250"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "SoundFlows Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "SoundFlows",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://soundflows.app/assets/images/logo.png"
+        }
+      },
+      "screenshot": "https://soundflows.app/assets/images/app-screenshot.jpg",
+      "featureList": [
+        "213+ High-Quality Audio Tracks",
+        "9 Categories: Nature Sounds, Meditation, Sleep Music",
+        "3D Immersive Interface",
+        "Sleep-Friendly Dark Mode",
+        "No Registration Required",
+        "Completely Free"
+      ]
+    }
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="../assets/css/styles.css" as="style">
+    <link rel="preload" href="../assets/js/app.js" as="script">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+
+    <!-- Additional English-specific styles -->
+    <style>
+        .hero-section {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-bottom: 0;
+        }
+
+        .hero-title {
+            font-size: 3.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            opacity: 0.95;
+        }
+
+        .hero-description {
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-button:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .stats-section {
+            background: #f8f9fa;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 40px auto 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .testimonials-section {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 40px auto 0;
+        }
+
+        .testimonial-card {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            opacity: 0.9;
+        }
+
+        .app-preview-section {
+            padding: 60px 20px;
+            background: white;
+            text-align: center;
+        }
+
+        .language-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 10px 20px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .language-switch a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5em;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2em;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                padding: 40px 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switch -->
+    <div class="language-switch">
+        <a href="../">中文</a> | <a href="#" style="color: #333;">English</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1 class="hero-title">🎧 SoundFlows</h1>
+        <p class="hero-subtitle">Free Sound Therapy & Meditation App</p>
+        <p class="hero-description">
+            Discover 213+ premium-quality audio tracks for meditation, sleep, and stress relief.
+            Experience immersive 3D sound therapy designed to enhance your mental wellness - completely free, no registration required.
+        </p>
+        <a href="#app" class="cta-button">🎵 Start Free Experience</a>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🧘‍♀️</div>
+            <h3 class="feature-title">Science-Based Sound Therapy</h3>
+            <p class="feature-description">
+                Our audio tracks are carefully curated based on neuroscience research to effectively trigger relaxation responses and improve mental wellness.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🎵</div>
+            <h3 class="feature-title">213+ Premium Audio Tracks</h3>
+            <p class="feature-description">
+                Choose from 9 categories including nature sounds, meditation music, sleep sounds, singing bowls, and stress relief audio - all professionally recorded.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🌙</div>
+            <h3 class="feature-title">Sleep-Friendly Design</h3>
+            <p class="feature-description">
+                Our unique sleep-friendly dark mode with gentle animations ensures your experience won't interfere with your natural sleep cycle.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">💻</div>
+            <h3 class="feature-title">Works Everywhere</h3>
+            <p class="feature-description">
+                Access on any device through your web browser - no downloads, no installation, no registration. Perfect for home, office, or travel.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🆓</div>
+            <h3 class="feature-title">Completely Free</h3>
+            <p class="feature-description">
+                Unlike other meditation apps that charge monthly fees, SoundFlows provides all premium features at no cost. No hidden charges, ever.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3 class="feature-title">Multiple Use Cases</h3>
+            <p class="feature-description">
+                Perfect for sleep improvement, work focus, study sessions, meditation practice, stress relief, and creating a peaceful environment.
+            </p>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <h2 style="font-size: 2.5em; margin-bottom: 20px; color: #333;">Trusted by Thousands Worldwide</h2>
+        <p style="font-size: 1.2em; color: #666; max-width: 600px; margin: 0 auto;">
+            Join users from over 50 countries who have improved their sleep, reduced stress, and enhanced focus with SoundFlows.
+        </p>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number">213+</span>
+                <div class="stat-label">Premium Audio Tracks</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">9</span>
+                <div class="stat-label">Specialized Categories</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">24/7</span>
+                <div class="stat-label">Always Available</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">100%</span>
+                <div class="stat-label">Free Forever</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <h2 style="font-size: 2.5em; margin-bottom: 20px; text-align: center;">What Our Users Say</h2>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">
+                    "As a software developer working late nights, SoundFlows has been a game-changer for my sleep quality. The rain sounds help me fall asleep in 10 minutes instead of tossing for hours."
+                </p>
+                <div class="testimonial-author">- Alex M., Software Engineer</div>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-text">
+                    "I love that it's completely free and works on any device. The singing bowl collection is amazing for my daily meditation practice. Better than apps I've paid for!"
+                </p>
+                <div class="testimonial-author">- Sarah L., Yoga Instructor</div>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-text">
+                    "College stress was overwhelming me until I found SoundFlows. The study focus sounds and quick stress relief tracks have literally saved my mental health during finals."
+                </p>
+                <div class="testimonial-author">- Jamie R., University Student</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Preview Section -->
+    <section class="app-preview-section">
+        <h2 style="font-size: 2.5em; margin-bottom: 30px; color: #333;">Experience the Magic of 3D Sound Selection</h2>
+        <p style="font-size: 1.2em; color: #666; max-width: 700px; margin: 0 auto 40px;">
+            Our innovative 3D carousel interface makes discovering the perfect sound an immersive visual experience.
+            Simply click and explore our beautifully organized sound library.
+        </p>
+
+        <!-- App Container -->
+        <div id="app" style="margin: 40px auto; max-width: 900px; min-height: 600px; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.15);">
+            <!-- The main app will be loaded here via JavaScript -->
+            <iframe src="../"
+                    style="width: 100%; height: 600px; border: none; border-radius: 20px;"
+                    title="SoundFlows App Preview">
+            </iframe>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <a href="../" class="cta-button" style="background: #667eea; border-color: #667eea;">
+                🚀 Launch Full App Experience
+            </a>
+        </div>
+    </section>
+
+    <!-- SEO Content Section -->
+    <section style="padding: 60px 20px; background: #f8f9fa;">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <h2 style="text-align: center; font-size: 2.3em; margin-bottom: 40px; color: #333;">
+                Why Choose SoundFlows for Your Wellness Journey?
+            </h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+                <div>
+                    <h3 style="color: #667eea; font-size: 1.4em; margin-bottom: 15px;">🔬 Scientifically Proven Benefits</h3>
+                    <p>Sound therapy has been clinically proven to reduce cortisol levels, lower blood pressure, and improve sleep quality. Our curated audio tracks utilize specific frequencies that naturally induce relaxation responses in your nervous system.</p>
+                </div>
+
+                <div>
+                    <h3 style="color: #667eea; font-size: 1.4em; margin-bottom: 15px;">🎯 Perfect for Modern Lifestyles</h3>
+                    <p>Whether you're dealing with work stress, study pressure, insomnia, or anxiety, SoundFlows adapts to your needs. Use it during lunch breaks, before important meetings, or as part of your bedtime routine.</p>
+                </div>
+
+                <div>
+                    <h3 style="color: #667eea; font-size: 1.4em; margin-bottom: 15px;">🌍 Global Accessibility</h3>
+                    <p>Unlike mobile apps that require downloads and updates, SoundFlows works instantly in any web browser. Perfect for students in dorms, professionals in offices, or anyone who values immediate access to wellness tools.</p>
+                </div>
+
+                <div>
+                    <h3 style="color: #667eea; font-size: 1.4em; margin-bottom: 15px;">💰 No Hidden Costs</h3>
+                    <p>While other meditation apps charge $5-15 monthly, SoundFlows provides all premium features for free. No trial periods, no subscription traps, no premium upsells - just pure value.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 80px 20px; text-align: center; color: white;">
+        <h2 style="font-size: 2.8em; margin-bottom: 20px;">Ready to Transform Your Mental Wellness?</h2>
+        <p style="font-size: 1.3em; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Join thousands of users who have discovered the power of free, high-quality sound therapy.
+            Start your journey to better sleep, reduced stress, and improved focus today.
+        </p>
+        <a href="../" class="cta-button" style="font-size: 1.3em; padding: 20px 50px;">
+            🎧 Start Your Free Experience Now
+        </a>
+        <p style="margin-top: 20px; opacity: 0.9;">No registration required • Works on all devices • 100% Free Forever</p>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: #333; color: white; padding: 40px 20px; text-align: center;">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <h3 style="margin-bottom: 20px;">SoundFlows - Your Free Sound Therapy Companion</h3>
+            <p style="opacity: 0.8; margin-bottom: 20px;">
+                Helping people worldwide achieve better sleep, reduced stress, and improved mental wellness through the power of sound.
+            </p>
+            <div style="margin: 20px 0;">
+                <a href="meditation-guide/" style="color: #667eea; margin: 0 15px;">Meditation Guide</a>
+                <a href="sleep-sounds-guide/" style="color: #667eea; margin: 0 15px;">Sleep Sounds Guide</a>
+                <a href="stress-relief/" style="color: #667eea; margin: 0 15px;">Stress Relief</a>
+                <a href="about/" style="color: #667eea; margin: 0 15px;">About Us</a>
+            </div>
+            <p style="margin-top: 30px; opacity: 0.6;">
+                © 2024 SoundFlows. Made with ❤️ for better mental wellness worldwide.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Analytics and Performance -->
+    <script>
+        // Google Analytics will be added here
+        // Performance monitoring
+        window.addEventListener('load', function() {
+            // Track page load performance
+            if ('performance' in window) {
+                const perfData = performance.getEntriesByType('navigation')[0];
+                console.log('Page load time:', perfData.loadEventEnd - perfData.loadEventStart);
+            }
+        });
+    </script>
+</body>
+</html>

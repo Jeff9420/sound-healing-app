@@ -43,11 +43,11 @@
 
     <!-- Alternative Languages -->
     <link rel="alternate" hreflang="zh-CN" href="https://soundflows.app/">
-    <link rel="alternate" hreflang="en" href="https://soundflows.app/?lang=en">
-    <link rel="alternate" hreflang="ja" href="https://soundflows.app/?lang=ja">
-    <link rel="alternate" hreflang="ko" href="https://soundflows.app/?lang=ko">
-    <link rel="alternate" hreflang="es" href="https://soundflows.app/?lang=es">
-    <link rel="alternate" hreflang="x-default" href="https://soundflows.app/">
+    <link rel="alternate" hreflang="en" href="https://soundflows.app/en/">
+    <link rel="alternate" hreflang="en-us" href="https://soundflows.app/en/">
+    <link rel="alternate" hreflang="en-gb" href="https://soundflows.app/en/">
+    <link rel="alternate" hreflang="en-au" href="https://soundflows.app/en/">
+    <link rel="alternate" hreflang="x-default" href="https://soundflows.app/en/">
 
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -1073,11 +1073,111 @@
             }
         }
     </style>
+    <!-- Google Analytics 4 (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4NZR3HR3J1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        // GA4 Configuration
+        gtag('config', 'G-4NZR3HR3J1', {
+            'page_title': document.title,
+            'page_location': window.location.href,
+            'send_page_view': true,
+            'anonymize_ip': true,
+            'allow_google_signals': true,
+            'allow_ad_personalization_signals': false, // Privacy-focused
+            'cookie_expires': 63072000, // 2 years
+            'cookie_flags': 'SameSite=None;Secure',
+            'custom_map': {
+                'custom_parameter_1': 'user_segment',
+                'custom_parameter_2': 'session_id',
+                'custom_parameter_3': 'audio_category'
+            }
+        });
+
+        // Enhanced Ecommerce for Audio App
+        gtag('config', 'G-4NZR3HR3J1', {
+            'custom_map': {
+                'audio_category': 'custom_parameter_3',
+                'user_type': 'custom_parameter_4',
+                'session_duration': 'custom_parameter_5'
+            }
+        });
+
+        // Audio-specific events setup
+        function trackAudioEvent(action, category, fileName, duration) {
+            gtag('event', action, {
+                'event_category': 'audio_interaction',
+                'event_label': fileName,
+                'audio_category': category,
+                'value': Math.round(duration || 0),
+                'custom_parameter_3': category
+            });
+        }
+
+        // User engagement tracking
+        function trackUserEngagement(engagementType, value) {
+            gtag('event', 'user_engagement', {
+                'event_category': 'engagement',
+                'event_label': engagementType,
+                'value': value,
+                'engagement_time_msec': value
+            });
+        }
+
+        // Privacy-compliant user properties
+        function setUserProperties(userType, language, theme) {
+            gtag('set', 'user_properties', {
+                'user_type': userType,
+                'preferred_language': language,
+                'theme_preference': theme,
+                'app_version': '1.0.0'
+            });
+        }
+
+        // Audio session tracking
+        function trackAudioSession(category, duration, completionRate) {
+            gtag('event', 'audio_session', {
+                'event_category': 'audio_usage',
+                'event_label': category,
+                'value': Math.round(duration),
+                'custom_parameter_3': category,
+                'custom_parameter_5': Math.round(duration),
+                'completion_rate': Math.round(completionRate * 100)
+            });
+        }
+
+        // Performance tracking
+        function trackPerformance(metric, value) {
+            gtag('event', 'performance_metric', {
+                'event_category': 'performance',
+                'event_label': metric,
+                'value': Math.round(value)
+            });
+        }
+
+        // Debug mode for development
+        if (window.location.hostname === 'localhost' || window.location.hostname.includes('127.0.0.1')) {
+            gtag('config', 'G-4NZR3HR3J1', {
+                'debug_mode': true
+            });
+        }
+    </script>
+
     <script src="assets/js/audio-config.js"></script>
+    <script src="assets/js/ga4-config.js"></script>
+    <script src="assets/js/enhanced-ecommerce.js"></script>
     <script src="assets/js/ad-manager.js"></script>
     <script src="assets/js/ad-analytics.js"></script>
 </head>
 <body>
+    <!-- Language Switch -->
+    <div style="position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.9); padding: 10px 20px; border-radius: 25px; backdrop-filter: blur(10px); z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+        <a href="#" style="color: #333; text-decoration: none; font-weight: bold;">中文</a> |
+        <a href="en/" style="color: #667eea; text-decoration: none; font-weight: bold;">English</a>
+    </div>
     <div class="title" data-i18n="app.title">🎵 声音疗愈 - 3D播放列表 🎵</div>
 
     <!-- 主页顶部原生广告位 -->
