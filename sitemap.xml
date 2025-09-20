@@ -5,18 +5,18 @@
 
   <!-- Homepage -->
   <url>
-    <loc>https://soundflows.app/</loc>
-    <lastmod>2024-09-18</lastmod>
+    <loc>https://www.soundflows.app/</loc>
+    <lastmod>2024-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://soundflows.app/" />
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://soundflows.app/?lang=en" />
-    <xhtml:link rel="alternate" hreflang="ja-JP" href="https://soundflows.app/?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://soundflows.app/?lang=ko" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://soundflows.app/?lang=es" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://soundflows.app/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.soundflows.app/" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.soundflows.app/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.soundflows.app/?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://www.soundflows.app/?lang=ko" />
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.soundflows.app/?lang=es" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/" />
     <image:image>
-      <image:loc>https://soundflows.app/assets/images/og-image.jpg</image:loc>
+      <image:loc>https://www.soundflows.app/assets/images/og-image.jpg</image:loc>
       <image:title>声音疗愈 - 免费3D音频冥想应用</image:title>
       <image:caption>213+高质量疗愈音乐，包含冥想、雨声、颂钵等9大分类，失眠友好设计</image:caption>
     </image:image>
@@ -24,58 +24,58 @@
 
   <!-- 多语言版本 -->
   <url>
-    <loc>https://soundflows.app/?lang=en</loc>
-    <lastmod>2024-09-18</lastmod>
+    <loc>https://www.soundflows.app/?lang=en</loc>
+    <lastmod>2024-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://soundflows.app/?lang=ja</loc>
-    <lastmod>2024-09-18</lastmod>
+    <loc>https://www.soundflows.app/?lang=ja</loc>
+    <lastmod>2024-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://soundflows.app/?lang=ko</loc>
-    <lastmod>2024-09-18</lastmod>
+    <loc>https://www.soundflows.app/?lang=ko</loc>
+    <lastmod>2024-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://soundflows.app/?lang=es</loc>
-    <lastmod>2024-09-18</lastmod>
+    <loc>https://www.soundflows.app/?lang=es</loc>
+    <lastmod>2024-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <!-- 3D演示页面 -->
   <url>
-    <loc>https://soundflows.app/carrossel-3d.html</loc>
-    <lastmod>2024-09-18</lastmod>
+    <loc>https://www.soundflows.app/carrossel-3d.html</loc>
+    <lastmod>2024-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- 功能页面 -->
   <url>
-    <loc>https://soundflows.app/about-us.html</loc>
+    <loc>https://www.soundflows.app/about-us.html</loc>
     <lastmod>2024-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://soundflows.app/how-it-works.html</loc>
+    <loc>https://www.soundflows.app/how-it-works.html</loc>
     <lastmod>2024-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://soundflows.app/instagram-post-generator.html</loc>
+    <loc>https://www.soundflows.app/instagram-post-generator.html</loc>
     <lastmod>2024-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -83,79 +83,79 @@
 
   <!-- 法律页面 -->
   <url>
-    <loc>https://soundflows.app/privacy-policy.html</loc>
-    <lastmod>2024-09-18</lastmod>
+    <loc>https://www.soundflows.app/privacy-policy.html</loc>
+    <lastmod>2024-09-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://soundflows.app/terms.html</loc>
-    <lastmod>2024-09-18</lastmod>
+    <loc>https://www.soundflows.app/terms.html</loc>
+    <lastmod>2024-09-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <!-- 音频分类 (虚拟路由) -->
   <url>
-    <loc>https://soundflows.app/#meditation</loc>
-    <lastmod>2024-09-18</lastmod>
+    <loc>https://www.soundflows.app/#meditation</loc>
+    <lastmod>2024-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://soundflows.app/#rain</loc>
-    <lastmod>2024-09-18</lastmod>
+    <loc>https://www.soundflows.app/#rain</loc>
+    <lastmod>2024-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://soundflows.app/#singing-bowl</loc>
-    <lastmod>2024-09-18</lastmod>
+    <loc>https://www.soundflows.app/#singing-bowl</loc>
+    <lastmod>2024-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://soundflows.app/#chakra</loc>
-    <lastmod>2024-09-18</lastmod>
+    <loc>https://www.soundflows.app/#chakra</loc>
+    <lastmod>2024-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://soundflows.app/#hypnosis</loc>
-    <lastmod>2024-09-18</lastmod>
+    <loc>https://www.soundflows.app/#hypnosis</loc>
+    <lastmod>2024-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://soundflows.app/#animal-sounds</loc>
-    <lastmod>2024-09-18</lastmod>
+    <loc>https://www.soundflows.app/#animal-sounds</loc>
+    <lastmod>2024-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://soundflows.app/#fire</loc>
-    <lastmod>2024-09-18</lastmod>
+    <loc>https://www.soundflows.app/#fire</loc>
+    <lastmod>2024-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://soundflows.app/#water-sounds</loc>
-    <lastmod>2024-09-18</lastmod>
+    <loc>https://www.soundflows.app/#water-sounds</loc>
+    <lastmod>2024-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://soundflows.app/#subconscious-therapy</loc>
-    <lastmod>2024-09-18</lastmod>
+    <loc>https://www.soundflows.app/#subconscious-therapy</loc>
+    <lastmod>2024-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
