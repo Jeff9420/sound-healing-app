@@ -395,6 +395,15 @@
             background: rgba(76, 175, 80, 0.5);
         }
 
+        .control-btn.active {
+            background: rgba(255, 193, 7, 0.4);
+            border-color: rgba(255, 193, 7, 0.6);
+        }
+
+        .control-btn.active:hover {
+            background: rgba(255, 193, 7, 0.6);
+        }
+
         .current-track-info {
             text-align: center;
             margin: 15px 0;
@@ -769,9 +778,11 @@
 
         <!-- 播放控制按钮 -->
         <div class="control-row playback-buttons">
+            <button class="control-btn" id="shuffleBtn" data-i18n-title="controls.shuffle" title="随机播放">🔀</button>
             <button class="control-btn" id="prevBtn" data-i18n-title="controls.previous" title="上一首">⏮</button>
             <button class="control-btn play-pause-btn" id="playPauseBtn" data-i18n-title="controls.playPause" title="播放/暂停">▶️</button>
             <button class="control-btn" id="nextBtn" data-i18n-title="controls.next" title="下一首">⏭</button>
+            <button class="control-btn" id="repeatBtn" data-i18n-title="controls.repeat" title="循环播放">🔁</button>
         </div>
 
         <!-- 当前播放信息 -->
@@ -835,6 +846,9 @@
         let currentTrackIndex = 0;
         let sleepTimer = null;
         let timerStartTime = null;
+        let isShuffleActive = false;
+        let isRepeatActive = false;
+        let originalPlaylist = []; // 保存原始播放列表
         let currentLanguage = 'zh-CN';
 
         // 多语言翻译
@@ -842,9 +856,11 @@
             'zh-CN': {
                 'app.title': '🎵 声音疗愈 - 3D播放列表 🎵',
                 'audioControl.title': '🎵 播放控制器',
+                'controls.shuffle': '随机播放',
                 'controls.previous': '上一首',
                 'controls.playPause': '播放/暂停',
                 'controls.next': '下一首',
+                'controls.repeat': '循环播放',
                 'controls.progress': '进度',
                 'controls.volume': '音量',
                 'timer.label': '定时',
@@ -867,9 +883,11 @@
             'en-US': {
                 'app.title': '🎵 Sound Healing - 3D Playlist 🎵',
                 'audioControl.title': '🎵 Playback Controller',
+                'controls.shuffle': 'Shuffle',
                 'controls.previous': 'Previous',
                 'controls.playPause': 'Play/Pause',
                 'controls.next': 'Next',
+                'controls.repeat': 'Repeat',
                 'controls.progress': 'Progress',
                 'controls.volume': 'Volume',
                 'timer.label': 'Timer',
@@ -892,9 +910,11 @@
             'ja-JP': {
                 'app.title': '🎵 サウンドヒーリング - 3Dプレイリスト 🎵',
                 'audioControl.title': '🎵 再生コントローラー',
+                'controls.shuffle': 'シャッフル',
                 'controls.previous': '前へ',
                 'controls.playPause': '再生/一時停止',
                 'controls.next': '次へ',
+                'controls.repeat': 'リピート',
                 'controls.progress': '進行状況',
                 'controls.volume': '音量',
                 'timer.label': 'タイマー',
@@ -917,9 +937,11 @@
             'ko-KR': {
                 'app.title': '🎵 사운드 힐링 - 3D 플레이리스트 🎵',
                 'audioControl.title': '🎵 재생 컨트롤러',
+                'controls.shuffle': '셔플',
                 'controls.previous': '이전',
                 'controls.playPause': '재생/일시정지',
                 'controls.next': '다음',
+                'controls.repeat': '반복',
                 'controls.progress': '진행률',
                 'controls.volume': '볼륨',
                 'timer.label': '타이머',
@@ -1170,6 +1192,11 @@
             // 获取当前播放列表
             currentPlaylist = getCategoryTracks(categoryName);
             currentTrackIndex = trackIndex;
+
+            // 保存原始播放列表（如果没有开启随机播放）
+            if (!isShuffleActive) {
+                originalPlaylist = [...currentPlaylist];
+            }
 
             // 更新播放信息显示
             updateCurrentTrackInfo(fileName, categoryName);
@@ -1450,7 +1477,13 @@
         function playNextTrack() {
             if (currentPlaylist.length === 0) return;
 
-            currentTrackIndex = (currentTrackIndex + 1) % currentPlaylist.length;
+            // 如果循环播放开启且到了列表末尾，从头开始
+            if (isRepeatActive && currentTrackIndex >= currentPlaylist.length - 1) {
+                currentTrackIndex = 0;
+            } else {
+                currentTrackIndex = (currentTrackIndex + 1) % currentPlaylist.length;
+            }
+
             const fileName = currentPlaylist[currentTrackIndex];
             const categoryName = getCurrentCategory();
             playAudio(fileName, categoryName, currentTrackIndex);
@@ -1460,6 +1493,64 @@
         function getCurrentCategory() {
             const activeItem = document.querySelector('.carousel-item.active');
             return activeItem ? activeItem.dataset.category : 'Animal sounds';
+        }
+
+        // 随机播放切换
+        function toggleShuffle() {
+            isShuffleActive = !isShuffleActive;
+            const shuffleBtn = document.getElementById('shuffleBtn');
+
+            if (isShuffleActive) {
+                shuffleBtn.classList.add('active');
+                // 保存原始播放列表并打乱
+                originalPlaylist = [...currentPlaylist];
+                shufflePlaylist();
+            } else {
+                shuffleBtn.classList.remove('active');
+                // 恢复原始播放列表
+                if (originalPlaylist.length > 0) {
+                    currentPlaylist = [...originalPlaylist];
+                    // 重新设置当前播放索引
+                    const currentFileName = originalPlaylist[currentTrackIndex] || '';
+                    currentTrackIndex = currentPlaylist.indexOf(currentFileName);
+                    if (currentTrackIndex === -1) currentTrackIndex = 0;
+                }
+            }
+        }
+
+        // 循环播放切换
+        function toggleRepeat() {
+            isRepeatActive = !isRepeatActive;
+            const repeatBtn = document.getElementById('repeatBtn');
+
+            if (isRepeatActive) {
+                repeatBtn.classList.add('active');
+            } else {
+                repeatBtn.classList.remove('active');
+            }
+        }
+
+        // 打乱播放列表
+        function shufflePlaylist() {
+            if (currentPlaylist.length <= 1) return;
+
+            // Fisher-Yates 洗牌算法
+            for (let i = currentPlaylist.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [currentPlaylist[i], currentPlaylist[j]] = [currentPlaylist[j], currentPlaylist[i]];
+            }
+
+            // 确保当前播放的歌曲在新列表的第一位
+            if (originalPlaylist[currentTrackIndex]) {
+                const currentFileName = originalPlaylist[currentTrackIndex];
+                const currentIndex = currentPlaylist.indexOf(currentFileName);
+                if (currentIndex !== -1) {
+                    // 将当前歌曲移到第一位
+                    currentPlaylist.splice(currentIndex, 1);
+                    currentPlaylist.unshift(currentFileName);
+                    currentTrackIndex = 0;
+                }
+            }
         }
 
         // 定时器功能
@@ -1572,9 +1663,11 @@
         // 音频文件点击事件现在由动态生成的音轨列表处理
 
         // 播放控制按钮事件
+        document.getElementById('shuffleBtn')?.addEventListener('click', toggleShuffle);
         document.getElementById('playPauseBtn')?.addEventListener('click', togglePlayPause);
         document.getElementById('prevBtn')?.addEventListener('click', playPreviousTrack);
         document.getElementById('nextBtn')?.addEventListener('click', playNextTrack);
+        document.getElementById('repeatBtn')?.addEventListener('click', toggleRepeat);
 
         // 定时器选择事件
         document.getElementById('timerSelect')?.addEventListener('change', function() {
