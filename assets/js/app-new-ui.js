@@ -9,14 +9,52 @@ class ErrorHandler {
   setupGlobalHandlers() {
     // 捕获JavaScript错误
     window.addEventListener('error', (event) => {
-      console.error('JavaScript Error:', event.error);
-      this.showUserFriendlyError('应用程序遇到问题', '请刷新页面重试');
+      console.error('JavaScript Error:', {
+        message: event.error?.message || '未知错误',
+        filename: event.filename,
+        lineno: event.lineno,
+        colno: event.colno,
+        stack: event.error?.stack,
+        timestamp: new Date().toISOString()
+      });
+
+      // 根据错误类型提供更具体的建议
+      let userMessage = '应用程序遇到问题';
+      let suggestion = '请刷新页面重试';
+
+      if (event.error?.message?.includes('network')) {
+        userMessage = '网络连接错误';
+        suggestion = '请检查您的网络连接后重试';
+      } else if (event.error?.message?.includes('memory')) {
+        userMessage = '内存不足';
+        suggestion = '请关闭其他标签页后重试';
+      } else if (event.error?.message?.includes('audio')) {
+        userMessage = '音频播放错误';
+        suggestion = '请尝试选择其他音频文件';
+      }
+
+      this.showUserFriendlyError(userMessage, suggestion);
     });
 
     // 捕获Promise未处理的拒绝
     window.addEventListener('unhandledrejection', (event) => {
-      console.error('Unhandled Promise Rejection:', event.reason);
-      this.showUserFriendlyError('网络连接问题', '请检查网络连接');
+      console.error('Unhandled Promise Rejection:', {
+        reason: event.reason,
+        timestamp: new Date().toISOString()
+      });
+
+      let userMessage = '操作失败';
+      let suggestion = '请重试';
+
+      if (event.reason?.message?.includes('fetch')) {
+        userMessage = '数据加载失败';
+        suggestion = '请检查网络连接后刷新页面';
+      } else if (event.reason?.message?.includes('timeout')) {
+        userMessage = '请求超时';
+        suggestion = '网络较慢，请稍后重试';
+      }
+
+      this.showUserFriendlyError(userMessage, suggestion);
       event.preventDefault();
     });
   }
@@ -1104,6 +1142,12 @@ window.addEventListener('DOMContentLoaded', () => {
   resize();
   initParticles();
   window.addEventListener('resize', resize, {passive: true});
+
+  // 清理函数
+  window.addEventListener('beforeunload', () => {
+    window.removeEventListener('resize', resize);
+  }, {once: true});
+
   requestAnimationFrame(draw);
 })();
 
@@ -2402,6 +2446,11 @@ window.addEventListener('DOMContentLoaded', () => {
   setCanvasSize();
   window.addEventListener('resize', setCanvasSize);
 
+  // 清理函数
+  window.addEventListener('beforeunload', () => {
+    window.removeEventListener('resize', setCanvasSize);
+  }, {once: true});
+
   // 振幅数据存储
   const amplitudeData = [];
   const maxDataPoints = 80; // 显示更多数据点
@@ -2531,6 +2580,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // 启动主振幅动画
   renderMainAmplitude();
+
+  // 清理函数
+  window.addEventListener('beforeunload', () => {
+    if (animationId) {
+      cancelAnimationFrame(animationId);
+    }
+  }, {once: true});
 })();
 
 // ========== 增强多语言系统 ==========

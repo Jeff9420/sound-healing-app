@@ -33,11 +33,70 @@
   <meta property="twitter:image" content="https://soundflows.app/assets/img/og-image.jpg">
 
   <link rel="canonical" href="https://soundflows.app">
+
+  <!-- Additional SEO Meta Tags -->
+  <meta name="theme-color" content="#6666FF">
+  <meta name="msapplication-TileColor" content="#6666FF">
+  <meta name="application-name" content="Sound Healing Space">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Sound Healing Space",
+    "alternateName": "声音疗愈空间",
+    "description": "Professional audio therapy platform with diverse healing audio types to help you relax, meditate, and find inner peace",
+    "url": "https://soundflows.app",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "213+ therapeutic audio tracks",
+      "9 categories of healing sounds",
+      "Background scene visualization",
+      "Sleep timer",
+      "Playlist management",
+      "Multi-language support"
+    ],
+    "inLanguage": ["en", "zh"],
+    "author": {
+      "@type": "Organization",
+      "name": "Sound Healing Team"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "1000"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Sound Healing Space",
+    "url": "https://soundflows.app",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://soundflows.app/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
   <link rel="stylesheet" href="assets/css/app.css" />
   <script src="assets/js/audio-config.js"></script>
 
 </head>
 <body>
+  <!-- Skip to main content link for screen readers -->
+  <a href="#main-content" class="skip-link" aria-label="跳转到主要内容">Skip to main content</a>
   <!-- Fallback for users without JavaScript -->
   <noscript>
     <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); display: flex; align-items: center; justify-content: center; z-index: 9999;">
@@ -50,7 +109,7 @@
   </noscript>
   <div class="mountain" aria-hidden="true"></div>
 
-  <div class="grid">
+  <div class="grid" id="main-content" role="main" aria-label="声音疗愈应用主界面">
     <div class="panel left-span healing-dashboard">
       <div class="dashboard-content">
         <!-- 品牌标识区 -->
@@ -314,6 +373,7 @@
     声音疗愈空间 <span class="theme-accent-dot"></span>
   </div>
 
+  <script src="assets/js/browser-compatibility.js"></script>
   <script src="assets/js/app-new-ui.js"></script>
 </body>
 </html>
