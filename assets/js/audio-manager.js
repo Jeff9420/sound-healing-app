@@ -1,9 +1,25 @@
+/**
+ * AudioManager - 音频管理器
+ *
+ * 负责应用程序的所有音频播放功能，包括：
+ * - 音频格式检测和兼容性处理
+ * - 播放列表管理和控制
+ * - 音频实例的生命周期管理
+ * - 音量控制和进度跟踪
+ * - 全局事件系统
+ *
+ * @class
+ * @author Sound Healing Team
+ * @version 1.0.0
+ */
+
 // 防止重复加载和声明
 if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined') {
 
 class AudioManager {
     constructor() {
         this.audioInstances = new Map();
+        this.MAX_AUDIO_INSTANCES = 10; // 限制音频实例数量
         this.isInitialized = false;
         this.globalVolume = 0.5;
         this.categories = {};
@@ -18,14 +34,23 @@ class AudioManager {
         this.currentAudio = null;
         this.currentTrack = null; // 当前播放的音轨信息
         this.progressUpdateInterval = null;
-        
+
         // 检测浏览器支持的音频格式
         this.detectSupportedFormats();
-        
+
         // 初始化音频分类
         this.initializeCategories();
+
+        // 添加页面卸载时的清理事件
+        if (typeof window !== 'undefined') {
+            window.addEventListener('beforeunload', () => this.cleanup(), { once: true });
+        }
     }
 
+    /**
+     * 检测浏览器支持的音频格式
+     * 创建临时音频元素测试各种格式的支持情况
+     */
     detectSupportedFormats() {
         const audio = document.createElement('audio');
         this.supportedFormats = {
@@ -58,30 +83,38 @@ class AudioManager {
         }
     }
 
+    /**
+     * 初始化音频管理器
+     * 等待分类数据加载完成，设置重试机制
+     * @returns {Promise<void>}
+     */
     async initialize() {
         try {
-            // 确保音频配置已加载
+            // 确保音频配置已加载 - 使用指数退避重试机制
             let retryCount = 0;
-            const maxRetries = 50; // 最多等待5秒
-            
+            const maxRetries = 10; // 减少重试次数
+            const baseDelay = 100; // 基础延迟100ms
+
             while ((!this.categories || Object.keys(this.categories).length === 0) && retryCount < maxRetries) {
                 console.log(`AudioManager初始化重试 ${retryCount + 1}/${maxRetries}`);
                 this.initializeCategories();
-                
+
                 if (!this.categories || Object.keys(this.categories).length === 0) {
-                    await new Promise(resolve => setTimeout(resolve, 100));
+                    // 指数退避：延迟时间按指数增长
+                    const delay = baseDelay * Math.pow(2, retryCount);
+                    await new Promise(resolve => setTimeout(resolve, Math.min(delay, 2000))); // 最大延迟2秒
                     retryCount++;
                 } else {
                     break;
                 }
             }
-            
+
             if (!this.categories || Object.keys(this.categories).length === 0) {
                 throw new Error('音频配置加载超时，无法获取分类数据');
             }
-            
+
             console.log('AudioManager: 初始化完成，分类数量:', Object.keys(this.categories).length);
-            
+
             this.isInitialized = true;
             this.loadUserSettings();
             this.eventBus.dispatchEvent(new CustomEvent('initialized'));
@@ -92,27 +125,64 @@ class AudioManager {
         }
     }
 
+    /**
+     * 生成唯一的音轨ID
+     * @param {string} categoryName - 分类名称
+     * @param {string} fileName - 文件名
+     * @returns {string} 唯一的音轨ID
+     */
     generateTrackId(categoryName, fileName) {
         return `${categoryName}__${fileName}`.replace(/[^a-zA-Z0-9\u4e00-\u9fa5_-]/g, '_');
     }
 
+    /**
+     * 创建音频实例
+     * 管理音频实例的生命周期，防止内存泄漏
+     * @param {string} trackId - 音轨ID
+     * @param {string} categoryName - 分类名称
+     * @param {string} fileName - 文件名
+     * @returns {Promise<void>}
+     */
     async createAudioInstance(trackId, categoryName, fileName) {
+        // 检查是否超过最大实例数限制
+        if (this.audioInstances.size >= this.MAX_AUDIO_INSTANCES) {
+            // 清理最旧的已完成或暂停的实例
+            for (const [existingTrackId, instance] of this.audioInstances) {
+                if (!instance.isPlaying && existingTrackId !== this.currentTrack) {
+                    instance.audio.pause();
+                    instance.audio.src = '';
+                    this.audioInstances.delete(existingTrackId);
+                    console.log(`清理音频实例: ${existingTrackId}`);
+                    break;
+                }
+            }
+        }
+
         // 检查文件格式是否受支持
         const fileExtension = fileName.split('.').pop().toLowerCase();
         const isSupported = this.supportedFormats[fileExtension];
-        
+
         if (!isSupported) {
             console.warn(`格式 ${fileExtension} 不受支持，为文件 ${fileName} 创建静默实例`);
             this.createSilentAudioInstance(trackId, categoryName, fileName);
             return Promise.resolve();
         }
-        
+
         const audio = new Audio();
         audio.preload = 'metadata';
-        
+
         // 设置音频路径
         const fullPath = getAudioUrl(categoryName, fileName);
-        
+
+        // 验证URL安全性
+        try {
+            new URL(fullPath);
+        } catch (e) {
+            console.error(`无效的音频URL: ${fullPath}`);
+            this.createSilentAudioInstance(trackId, categoryName, fileName);
+            return Promise.resolve();
+        }
+
         this.loadingStates.set(trackId, true);
         this.eventBus.dispatchEvent(new CustomEvent('loadingStart', { detail: trackId }));
 
@@ -186,7 +256,21 @@ class AudioManager {
     createSilentAudioInstance(trackId, categoryName, fileName) {
         // 创建一个静默的音频实例，避免应用崩溃
         const silentAudio = new Audio();
-        
+
+        // 检查是否超过最大实例数限制
+        if (this.audioInstances.size >= this.MAX_AUDIO_INSTANCES) {
+            // 清理最旧的静音实例
+            for (const [existingTrackId, instance] of this.audioInstances) {
+                if (instance.isSilent && existingTrackId !== trackId) {
+                    instance.audio.pause();
+                    instance.audio.src = '';
+                    this.audioInstances.delete(existingTrackId);
+                    console.log(`清理静音音频实例: ${existingTrackId}`);
+                    break;
+                }
+            }
+        }
+
         this.audioInstances.set(trackId, {
             audio: silentAudio,
             volume: 0,
@@ -196,7 +280,7 @@ class AudioManager {
             isReady: false,
             isSilent: true
         });
-        
+
         console.info(`为 ${fileName} 创建了静默音频实例`);
     }
 

@@ -1,0 +1,39 @@
+{
+  "name": "sound-healing",
+  "version": "1.0.0",
+  "description": "一个免费的在线声音疗愈应用，提供213+高质量音频文件，帮助放松、冥想和改善睡眠质量",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 8000",
+    "build": "echo 'No build step required for static site'",
+    "deploy": "vercel --prod",
+    "deploy:preview": "vercel",
+    "lint": "echo 'Linting not configured'",
+    "format": "echo 'Formatting not configured'",
+    "clean": "rm -rf node_modules/.cache && rm -rf .vercel"
+  },
+  "keywords": [
+    "sound-healing",
+    "meditation",
+    "relaxation",
+    "sleep",
+    "wellness",
+    "therapy",
+    "audio",
+    "mindfulness"
+  ],
+  "author": "Sound Healing Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/sound-healing"
+  },
+  "homepage": "https://soundflows.app",
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "prettier": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
