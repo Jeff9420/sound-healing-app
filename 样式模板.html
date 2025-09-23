@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Desk UI Replica</title>
+  <style>
+    /* ========== 基础与主题 ========== */
+    :root{
+      --bg-url: none; /* 可替换为 url('your-image.jpg') */
+      --bg-tint: rgba(12,16,22,.72);
+      --fg: #e6eef7;
+      --muted: #aab3be;
+      --accent: #8bb4ff;
+      --panel-bg: rgba(255,255,255,.055);
+      --panel-br: 14px;
+      --panel-border: rgba(255,255,255,.14);
+      --panel-border-2: rgba(255,255,255,.06);
+      --shadow: 0 8px 30px rgba(0,0,0,.25);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --round: 12px;
+    }
+
+    *{ box-sizing: border-box; }
+    html, body{ height:100%; }
+    body{
+      margin:0;
+      color:var(--fg);
+      font: 14px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+      background:
+        radial-gradient(1200px 600px at 70% 80%, rgba(0,0,0,.55), transparent 60%),
+        linear-gradient(180deg, rgba(4,8,12,.6), rgba(4,8,12,.95)),
+        var(--bg-tint);
+      /* 可选背景图：把上面 var(--bg-url) 换成实际图片地址并取消注释下一行的 image 层 */
+      /* background-image: var(--bg-url); background-size: cover; background-position: center; */
+    }
+
+    /* 背景山景占位（无图也好看） */
+    .mountain {
+      position: fixed; inset:0; pointer-events: none; z-index:-1;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.6)),
+        url('data:image/svg+xml;utf8,\
+<svg xmlns="http://www.w3.org/2000/svg" width=\\"1600\\" height=\\"900\\">\
+<defs><linearGradient id=\\"g\\" x1=\\"0\\" y1=\\"0\\" x2=\\"0\\" y2=\\"1\\">\
+<stop offset=\\"0\\" stop-color=\\"#0f141b\\"/><stop offset=\\"1\\" stop-color=\\"#0a0e13\\"/></linearGradient></defs>\
+<rect width=\\"100%\\" height=\\"100%\\" fill=\\"url(#g)\\"/>\
+<path d=\\"M0 700 L300 520 L420 580 L580 480 L760 560 L900 460 L1060 540 L1240 480 L1600 680 L1600 900 L0 900 Z\\" fill=\\"#101722\\"/>\
+<path d=\\"M0 760 L260 600 L430 640 L600 560 L760 640 L920 560 L1110 640 L1320 600 L1600 760 L1600 900 L0 900 Z\\" fill=\\"#0c131d\\"/>\
+</svg>');
+      background-size: cover; background-position:center;
+      filter: blur(0.5px) saturate(0.9);
+    }
+
+    /* ========== 顶部状态栏 ========== */
+    .topbar{
+      position: fixed; left:24px; right:24px; top:14px;
+      height:34px; display:flex; align-items:center; justify-content:space-between;
+      padding: 0 12px;
+      color: var(--muted);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      background: rgba(20,24,30,.35);
+      border:1px solid var(--panel-border-2);
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+    }
+    .topbar .left, .topbar .right{ display:flex; gap:14px; align-items:center; }
+    .dot{ width:8px; height:8px; border-radius:50%; display:inline-block; background:#7bd88f; box-shadow:0 0 10px 2px rgba(123,216,143,.35); }
+    .sep{ opacity:.35; }
+
+    /* ========== 面板通用样式 ========== */
+    .grid{
+      position: absolute; inset:64px 24px 24px 24px; /* 顶部留给状态栏 */
+      display:grid; gap:16px;
+      grid-template-columns: 1.05fr 1fr; /* 左稍宽一点，接近截图 */
+      grid-template-rows: 1fr 1fr;
+      align-items: stretch;
+    }
+    .panel{
+      position: relative;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--panel-br);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    /* 玻璃高光与描边 */
+    .panel::before{
+      content:""; position:absolute; inset:0;
+      border-radius: inherit;
+      background: linear-gradient(180deg, rgba(255,255,255,.08), transparent 20%),
+                  linear-gradient(90deg, rgba(255,255,255,.06), transparent 30%),
+                  radial-gradient(80% 100% at 10% -20%, rgba(255,255,255,.18), transparent 40%);
+      pointer-events:none;
+    }
+    .panel .title{
+      position:absolute; top:10px; left:12px;
+      background: rgba(255,255,255,.08);
+      border:1px solid var(--panel-border-2);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font: 12px var(--mono);
+      color: var(--muted);
+    }
+    .panel .chrome{
+      position:absolute; top:10px; right:12px; display:flex; gap:6px;
+    }
+    .panel .chrome i{
+      width:10px; height:10px; border-radius:50%;
+      background: rgba(255,255,255,.2);
+      border:1px solid rgba(255,255,255,.12);
+      display:inline-block;
+    }
+
+    /* 布局区域 */
+    .left-span{ grid-row: 1 / span 2; grid-column: 1; padding:18px 18px 18px 18px; }
+    .right{ grid-column: 2; display:grid; grid-template-rows: 1fr 1fr; gap:16px; }
+    .right-top, .right-bottom{ display:grid; grid-template-columns: 1fr 1fr; gap:16px; }
+
+    /* ========== Fastfetch 风格信息面板 ========== */
+    .fetch{
+      display:grid; gap:14px; grid-template-columns: 1.1fr 1fr;
+      height:100%;
+    }
+    .ascii{
+      font: 12px/1.05 var(--mono);
+      white-space: pre; color:#b7c5d6; opacity:.85;
+      align-self:start;
+      overflow:auto; padding-right:8px;
+    }
+    .kv{
+      font-family: var(--mono);
+      color: var(--muted);
+      font-size: 13px;
+      padding: 6px 8px;
+      border:1px solid var(--panel-border-2);
+      border-radius: 10px;
+      background: rgba(255,255,255,.035);
+      margin-bottom:8px;
+    }
+    .kv b{ color: var(--fg); font-weight:600; }
+
+    /* ========== 矩阵雨 ========== */
+    canvas#matrix{ width:100%; height:100%; display:block; }
+
+    /* ========== 大数字时钟 ========== */
+    .clock{
+      height:100%; display:flex; align-items:center; justify-content:center; position:relative;
+      font-family: var(--mono);
+    }
+    .clock .time{
+      font-size: clamp(36px, 10vw, 84px);
+      letter-spacing:.06em;
+      font-weight:700;
+      color:#cfe5ff;
+      text-shadow: 0 0 16px rgba(139,180,255,.25);
+    }
+    .clock .date{
+      position: absolute; bottom:16px; right:18px;
+      color: var(--muted); font-size:12px; opacity:.9;
+    }
+
+    /* ========== 终端/编辑区 ========== */
+    .term{
+      padding:16px; height:100%; display:flex; flex-direction:column;
+      gap:10px;
+    }
+    .prompt{
+      font: 13px var(--mono);
+      color: var(--muted);
+      background: rgba(255,255,255,.035);
+      border:1px solid var(--panel-border-2);
+      border-radius: 10px; padding:6px 8px; width:max-content;
+    }
+    .editor{
+      flex:1; overflow:auto; border-radius:10px; padding:12px;
+      background: rgba(0,0,0,.22);
+      border:1px solid var(--panel-border-2);
+      font: 13px/1.6 var(--mono);
+      color:#d3dde8;
+      outline:none;
+      white-space: pre;
+    }
+    .hint{ color:#7a8796; font:12px var(--mono); }
+
+    /* 响应式：变为单列 */
+    @media (max-width: 1000px){
+      .grid{ grid-template-columns: 1fr; grid-template-rows: auto; }
+      .left-span{ grid-row:auto; }
+      .right{ grid-column:auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="mountain"></div>
+
+  <!-- 顶部状态栏 -->
+  <div class="topbar">
+    <div class="left">
+      <span id="sysTime">--:--:--</span>
+      <span class="sep">|</span>
+      <span id="wifi">▂▄▆█</span>
+      <span>73%</span>
+      <span class="dot" title="OK"></span>
+    </div>
+    <div class="right">
+      <span class="sep">connected</span>
+      <span id="bt">27%</span>
+    </div>
+  </div>
+
+  <!-- 主布局 -->
+  <div class="grid">
+    <!-- 左侧大面板：fastfetch风格 -->
+    <section class="panel left-span">
+      <div class="title">fastfetch</div>
+      <div class="chrome"><i></i><i></i><i></i></div>
+
+      <div class="fetch">
+        <pre class="ascii">
+   ____   _   _          _
+  / __ \ | \ | |   /\   | |
+ | |  | ||  \| |  /  \  | |__   ___
+ | |  | || . ` | / /\ \ | '_ \ / _ \
+ | |__| || |\  |/ ____ \| |_) |  __/
+  \____/ |_| \_/_/    \_\_.__/ \___|
+
+   (^_^)/  minimal glass desk
+        </pre>
+
+        <div>
+          <div class="kv"><b>OS</b>: Arch-like (custom)</div>
+          <div class="kv"><b>Kernel</b>: 6.10.x</div>
+          <div class="kv"><b>WM</b>: Wayland-ish (mock)</div>
+          <div class="kv"><b>Terminal</b>: Kitty-like</div>
+          <div class="kv"><b>CPU</b>: 12th Gen Intel (mock)</div>
+          <div class="kv"><b>GPU</b>: NVIDIA Mobile (mock)</div>
+          <div class="kv"><b>Memory</b>: 16 GiB</div>
+          <div class="kv"><b>Uptime</b>: <span id="uptime">--</span></div>
+          <div class="hint">以上为示例字段，可按你的机器/视频内容替换。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 右侧：上两块 -->
+    <div class="right">
+      <div class="right-top">
+        <!-- 矩阵雨 -->
+        <section class="panel">
+          <div class="title">matrix</div>
+          <div class="chrome"><i></i><i></i><i></i></div>
+          <canvas id="matrix"></canvas>
+        </section>
+
+        <!-- 数字时钟 -->
+        <section class="panel">
+          <div class="title">clock</div>
+          <div class="chrome"><i></i><i></i><i></i></div>
+          <div class="clock">
+            <div class="time" id="bigClock">--:--</div>
+            <div class="date" id="dateStr">----</div>
+          </div>
+        </section>
+      </div>
+
+      <!-- 右下：两块编辑/终端 -->
+      <div class="right-bottom">
+        <section class="panel">
+          <div class="title">A ▸</div>
+          <div class="chrome"><i></i><i></i><i></i></div>
+          <div class="term">
+            <div class="prompt">$ echo "hello desk"</div>
+            <div class="editor" contenteditable="true">// 这里是可编辑区域
+// 粘贴/书写你视频里的代码片段
+function greet(name){ return `hi, ${name}` }</div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="title">notes</div>
+          <div class="chrome"><i></i><i></i><i></i></div>
+          <div class="term">
+            <div class="prompt">todo.md</div>
+            <div class="editor" contenteditable="true"># 待办
+- [ ] 调整面板的圆角与投影
+- [ ] 替换为视频中的字体与图标
+- [ ] 比例 & 间距对齐</div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ========== 顶部时间/电量等 ========== 
+    function pad(n){return n.toString().padStart(2,'0')}
+    function tickSys(){
+      const d = new Date()
+      let hh = d.getHours(), mm = d.getMinutes(), ss = d.getSeconds()
+      const isPM = hh >= 12
+      const hh12 = hh % 12 || 12
+      document.getElementById('sysTime').textContent = `${pad(hh12)}:${pad(mm)}:${pad(ss)} ${isPM?'PM':'AM'}`
+      document.getElementById('bt').textContent = (27 + (d.getSeconds()%10)) + '%'
+      requestAnimationFrame(()=>{}) // noop,保持刷新
+    }
+    setInterval(tickSys, 1000); tickSys()
+
+    // ========== 大时钟 ========== 
+    function tickClock(){
+      const d = new Date()
+      const hh = pad(d.getHours()), mm = pad(d.getMinutes())
+      const y = d.getFullYear(), m = d.getMonth()+1, day = d.getDate()
+      document.getElementById('bigClock').textContent = `${hh}:${mm}`
+      document.getElementById('dateStr').textContent = `${y}-${pad(m)}-${pad(day)}`
+    }
+    setInterval(tickClock, 1000); tickClock()
+
+    // ========== Uptime 示例（从页面打开时计时） ==========
+    const start = Date.now()
+    setInterval(()=>{
+      const s = Math.floor((Date.now()-start)/1000)
+      const h = Math.floor(s/3600), m = Math.floor((s%3600)/60)
+      document.getElementById('uptime').textContent = `${h} hour, ${m} mins`
+    }, 1000)
+
+    // ========== 矩阵雨 ==========
+    ;(() => {
+      const cvs = document.getElementById('matrix')
+      const ctx = cvs.getContext('2d')
+      let w, h, cols, drops, fontSize
+
+      const resize = () => {
+        const {width, height} = cvs.getBoundingClientRect()
+        const ratio = window.devicePixelRatio || 1
+        cvs.width = Math.floor(width * ratio)
+        cvs.height = Math.floor(height * ratio)
+        ctx.setTransform(ratio, 0, 0, ratio, 0, 0)
+
+        w = width; h = height
+        fontSize = Math.max(12, Math.floor(w / 40))
+        cols = Math.ceil(w / fontSize)
+        drops = Array(cols).fill(0)
+      }
+
+      const chars = 'アカサタナハマヤラワ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+      const draw = () => {
+        ctx.fillStyle = 'rgba(0,0,0,0.18)'
+        ctx.fillRect(0,0,w,h)
+        ctx.fillStyle = '#9fd1ff'
+        ctx.font = `${fontSize}px ${getComputedStyle(document.documentElement).getPropertyValue('--mono') || 'monospace'}`
+        for(let i=0;i<cols;i++){
+          const x = i * fontSize
+          const y = drops[i] * fontSize
+          const text = chars[Math.floor(Math.random()*chars.length)]
+          ctx.fillText(text, x, y)
+          if (y > h && Math.random() > 0.975) drops[i] = 0
+          drops[i]++
+        }
+        requestAnimationFrame(draw)
+      }
+
+      resize()
+      window.addEventListener('resize', resize, {passive:true})
+      requestAnimationFrame(draw)
+    })()
+  </script>
+</body>
+</html>
