@@ -1442,6 +1442,54 @@ window.addEventListener('DOMContentLoaded', () => {
     return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
   };
 
+  // 简单的翻译函数
+  const getTranslation = (key) => {
+    const translations = {
+      'play': '播放',
+      'pause': '暂停',
+      'timer-disabled': '未开启'
+    };
+    return translations[key] || key;
+  };
+
+  // 更新播放/暂停按钮状态
+  const updatePlayPauseButton = () => {
+    if (!playPauseBtn) return;
+
+    const isPlaying = !audio.paused;
+    const playIcon = playPauseBtn.querySelector('.control-icon');
+    const playLabel = playPauseBtn.querySelector('.control-label');
+
+    if (playIcon) {
+      playIcon.textContent = isPlaying ? '⏸️' : '▶️';
+    }
+
+    if (playLabel) {
+      const key = isPlaying ? 'pause' : 'play';
+      playLabel.textContent = getTranslation(key);
+      playLabel.setAttribute('data-i18n', key);
+    }
+
+    // 更新ARIA状态
+    playPauseBtn.setAttribute('aria-pressed', String(isPlaying));
+
+    // 更新按钮样式
+    if (isPlaying) {
+      playPauseBtn.classList.add('playing');
+    } else {
+      playPauseBtn.classList.remove('playing');
+    }
+
+    // 更新状态卡片
+    updatePlaybackStatus(
+      isPlaying ? '正在播放' : '暂停',
+      isPlaying ? '▶️' : '⏸️',
+      isPlaying ? '享受疗愈音乐' : '点击继续播放'
+    );
+
+    console.log(`播放按钮状态更新: ${isPlaying ? '播放中' : '已暂停'}`);
+  };
+
   const sanitizeName = (name) => {
     if (!name) return '';
     let decoded = name;
@@ -1933,6 +1981,22 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // 监听播放状态变化，自动更新按钮状态
+  audio.addEventListener('play', () => {
+    updatePlayPauseButton();
+    console.log('音频开始播放');
+  });
+
+  audio.addEventListener('pause', () => {
+    updatePlayPauseButton();
+    console.log('音频已暂停');
+  });
+
+  audio.addEventListener('ended', () => {
+    updatePlayPauseButton();
+    console.log('音频播放结束');
+  });
+
   audio.addEventListener('ended', () => {
     if (isRepeat) {
       audio.currentTime = 0;
@@ -2040,15 +2104,27 @@ window.addEventListener('DOMContentLoaded', () => {
     playPauseBtn.addEventListener('click', () => {
       ensureCategorySelected();
       if (!currentPlaylist.length) return;
-      if (currentTrackIndex === -1) {
+
+      // 如果没有选中任何音轨，从第一首开始播放
+      if (currentTrackIndex === -1 || !audio.src) {
         playTrack(0);
         return;
       }
+
+      // 播放/暂停切换，保持当前播放位置
       if (audio.paused) {
-        audio.play().catch((error) => console.error('播放失败', error));
+        console.log(`恢复播放: ${formatTime(audio.currentTime)}`);
+        audio.play().catch((error) => {
+          console.error('播放失败:', error);
+          window.soundHealingErrorHandler?.showAudioError('', 'permission');
+        });
       } else {
+        console.log(`暂停播放: ${formatTime(audio.currentTime)}`);
         audio.pause();
       }
+
+      // 更新播放按钮状态
+      updatePlayPauseButton();
     });
   }
 
@@ -2068,13 +2144,18 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 交互式进度条拖拽功能
+  // ========== 增强的交互式进度条拖拽功能 ==========
   const progressContainer = document.getElementById('progressContainer');
   const progressThumb = document.getElementById('progressThumb');
   const progressFill = document.getElementById('progressDisplay');
 
   if (progressContainer && progressThumb && progressFill) {
     let wasPlaying = false;
+    let dragStartTime = 0;
+
+    // 确保进度条容器可以接收焦点和点击
+    progressContainer.style.cursor = 'pointer';
+    progressContainer.setAttribute('title', '点击或拖拽调节播放进度');
 
     // 获取进度条位置百分比
     const getProgressFromMouseX = (mouseX) => {
@@ -2084,48 +2165,89 @@ window.addEventListener('DOMContentLoaded', () => {
       return percentage;
     };
 
-    // 更新进度显示
-    const updateProgressDisplay = (percentage) => {
+    // 更新进度显示和音频时间
+    const updateProgressAndTime = (percentage, updateAudio = false) => {
+      // 更新视觉进度条
       progressFill.style.width = `${percentage}%`;
 
-      // 更新时间显示
       if (audio.duration && Number.isFinite(audio.duration)) {
         const currentTime = (percentage / 100) * audio.duration;
+
+        // 更新时间显示
         const currentTimeEl = document.getElementById('currentTime');
         if (currentTimeEl) {
           currentTimeEl.textContent = formatTime(currentTime);
         }
+
+        // 更新音频实际播放位置
+        if (updateAudio) {
+          audio.currentTime = currentTime;
+
+          // 同步更新隐藏的progressRange
+          if (progressRange) {
+            progressRange.value = String(Math.floor(currentTime));
+          }
+
+          // 通知无障碍功能
+          if (window.soundHealingAccessibility) {
+            window.soundHealingAccessibility.updatePlaybackStatus(
+              currentPlaylist[currentTrackIndex]?.name || '未知音轨',
+              !audio.paused,
+              formatTime(currentTime),
+              formatTime(audio.duration)
+            );
+          }
+        }
       }
     };
 
-    // 鼠标按下开始拖拽
+    // 单击直接跳转
+    const handleClick = (e) => {
+      if (!audio.duration || !Number.isFinite(audio.duration)) return;
+
+      // 防止拖拽时触发点击
+      if (Date.now() - dragStartTime < 200) return;
+
+      const percentage = getProgressFromMouseX(e.clientX);
+      updateProgressAndTime(percentage, true);
+
+      console.log(`进度条点击跳转: ${percentage.toFixed(1)}%`);
+      e.preventDefault();
+      e.stopPropagation();
+    };
+
+    // 开始拖拽
     const startDrag = (e) => {
       if (!audio.duration || !Number.isFinite(audio.duration)) return;
 
       isDragging = true;
       wasPlaying = !audio.paused;
+      dragStartTime = Date.now();
 
       // 暂停播放以便拖拽
       if (wasPlaying) {
         audio.pause();
+        console.log('拖拽开始，暂停播放');
       }
 
       progressContainer.classList.add('dragging');
       progressThumb.classList.add('dragging');
 
-      // 立即更新到点击位置
-      const percentage = getProgressFromMouseX(e.clientX);
-      updateProgressDisplay(percentage);
+      // 立即更新到点击位置（仅视觉，不更新音频）
+      const percentage = getProgressFromMouseX(e.clientX || e.touches?.[0]?.clientX);
+      updateProgressAndTime(percentage, false);
 
       e.preventDefault();
+      e.stopPropagation();
     };
 
     // 拖拽过程中
     const onDrag = (e) => {
       if (!isDragging) return;
 
-      const percentage = getProgressFromMouseX(e.clientX);
-      updateProgressDisplay(percentage);
+      const clientX = e.clientX || e.touches?.[0]?.clientX;
+      const percentage = getProgressFromMouseX(clientX);
+      updateProgressAndTime(percentage, false);
 
       e.preventDefault();
     };
@@ -2134,57 +2256,90 @@ window.addEventListener('DOMContentLoaded', () => {
     const endDrag = (e) => {
       if (!isDragging) return;
 
+      const clientX = e.clientX || e.changedTouches?.[0]?.clientX || e.clientX;
+      const percentage = getProgressFromMouseX(clientX);
+
       isDragging = false;
       progressContainer.classList.remove('dragging');
       progressThumb.classList.remove('dragging');
 
-      // 设置音频时间
-      if (audio.duration && Number.isFinite(audio.duration)) {
-        const percentage = getProgressFromMouseX(e.clientX);
-        const newTime = (percentage / 100) * audio.duration;
-        audio.currentTime = newTime;
+      // 最终更新音频位置
+      updateProgressAndTime(percentage, true);
 
-        // 同步更新隐藏的progressRange（如果存在）
-        if (progressRange) {
-          progressRange.value = String(Math.floor(newTime));
-        }
-
-        // 如果之前在播放，继续播放
-        if (wasPlaying) {
-          audio.play().catch(() => {});
-        }
+      // 如果之前在播放，继续播放
+      if (wasPlaying) {
+        audio.play().catch((error) => {
+          console.error('恢复播放失败:', error);
+          window.soundHealingErrorHandler?.showAudioError('', 'permission');
+        });
+        console.log('拖拽结束，恢复播放');
+        updatePlayPauseButton(); // 更新按钮状态
       }
+
+      console.log(`进度条拖拽完成: ${percentage.toFixed(1)}%`);
     };
 
-    // 添加事件监听器
+    // 鼠标事件
+    progressContainer.addEventListener('click', handleClick);
     progressThumb.addEventListener('mousedown', startDrag);
-    progressContainer.addEventListener('mousedown', startDrag);
+    progressContainer.addEventListener('mousedown', (e) => {
+      // 防止点击和拖拽冲突
+      if (e.target === progressThumb) return;
+
+      const rect = progressContainer.getBoundingClientRect();
+      const isNearThumb = Math.abs(e.clientX - (rect.left + (parseFloat(progressFill.style.width) / 100) * rect.width)) < 20;
+
+      if (isNearThumb) {
+        startDrag(e);
+      } else {
+        handleClick(e);
+      }
+    });
 
     document.addEventListener('mousemove', onDrag);
     document.addEventListener('mouseup', endDrag);
 
-    // 触摸事件支持
-    const getTouchX = (e) => e.touches[0]?.clientX || e.changedTouches[0]?.clientX;
-
-    progressThumb.addEventListener('touchstart', (e) => {
-      startDrag({ clientX: getTouchX(e), preventDefault: () => e.preventDefault() });
-    });
-
+    // 触摸事件
+    progressThumb.addEventListener('touchstart', startDrag, { passive: false });
     progressContainer.addEventListener('touchstart', (e) => {
-      startDrag({ clientX: getTouchX(e), preventDefault: () => e.preventDefault() });
+      if (e.target === progressThumb) return;
+      startDrag(e);
+    }, { passive: false });
+
+    document.addEventListener('touchmove', onDrag, { passive: false });
+    document.addEventListener('touchend', endDrag, { passive: false });
+
+    // 键盘事件支持
+    progressContainer.addEventListener('keydown', (e) => {
+      if (!audio.duration || !Number.isFinite(audio.duration)) return;
+
+      const currentPercentage = (audio.currentTime / audio.duration) * 100;
+      let newPercentage = currentPercentage;
+
+      switch(e.key) {
+        case 'ArrowLeft':
+          newPercentage = Math.max(0, currentPercentage - 5);
+          break;
+        case 'ArrowRight':
+          newPercentage = Math.min(100, currentPercentage + 5);
+          break;
+        case 'Home':
+          newPercentage = 0;
+          break;
+        case 'End':
+          newPercentage = 100;
+          break;
+        default:
+          return;
+      }
+
+      updateProgressAndTime(newPercentage, true);
+      e.preventDefault();
     });
 
-    document.addEventListener('touchmove', (e) => {
-      onDrag({ clientX: getTouchX(e), preventDefault: () => e.preventDefault() });
-    });
-
-    document.addEventListener('touchend', (e) => {
-      endDrag({ clientX: getTouchX(e) });
-    });
-
-    // 防止页面滚动
-    progressContainer.addEventListener('touchstart', (e) => e.preventDefault());
-    progressContainer.addEventListener('touchmove', (e) => e.preventDefault());
+    console.log('✅ 增强的进度条拖拽功能已初始化');
+  } else {
+    console.warn('❌ 进度条元素未找到，无法初始化拖拽功能');
   }
 
   // 保留原有timer-button支持（如果存在）
