@@ -195,6 +195,17 @@ class InternationalizationSystem {
                 'app.title': '声音疗愈',
                 'app.subtitle': '聆听大自然的治愈之声，重归内心宁静',
                 'app.footer': '🎧 使用耳机聆听，获得最佳的自然疗愈体验',
+                'app.ready': '声音疗愈空间已准备就绪！',
+
+                // 加载屏幕
+                'loading.text': '🎵 正在加载声音疗愈空间...',
+                'loading.subtext': '请稍候，正在加载疗愈音频',
+
+                // 模态框
+                'modal.close': '×',
+
+                // 播放列表
+                'playlist.title': '选择音频',
                 
                 // 头部区域
                 'header.title': '声音疗愈',
@@ -211,6 +222,19 @@ class InternationalizationSystem {
                 'player.startJourney': '开始您的自然之旅',
                 'player.noAudioSelected': '未选择音频',
                 'player.playButton': '主播放按钮',
+                'player.notPlaying': '未播放',
+                'player.nowPlaying': '正在播放',
+                'player.playError': '播放失败，请点击播放按钮',
+                'player.shuffle': '随机播放',
+                'player.shuffleOn': '随机播放已开启',
+                'player.shuffleOff': '随机播放已关闭',
+                'player.repeat': '循环播放',
+                'player.repeatSingle': '单曲循环已开启',
+                'player.repeatAll': '循环播放已开启',
+                'player.sleepTimer': '睡眠定时器',
+                'player.minimize': '▲ 收起',
+                'player.expand': '▼ 展开',
+                'player.playbackRate': '播放速度',
                 
                 // 疗愈模式
                 'healing.mode.focus': '专注模式',
@@ -266,7 +290,10 @@ class InternationalizationSystem {
                 
                 // 定时器
                 'timer.none': '无定时',
+                'timer.5min': '5分钟',
+                'timer.10min': '10分钟',
                 'timer.15min': '15分钟',
+                'timer.off': '关闭',
                 'timer.30min': '30分钟',
                 'timer.60min': '60分钟',
                 'timer.90min': '90分钟',
@@ -275,6 +302,11 @@ class InternationalizationSystem {
                 'timer.notStarted': '未启动',
                 'timer.active': '定时器激活',
                 'timer.remaining': '剩余时间',
+                'timer.title': '睡眠定时器',
+                'timer.set': '睡眠定时器已设置为',
+                'timer.minutes': '分钟',
+                'timer.stopped': '睡眠定时器已停止播放',
+                'timer.closed': '睡眠定时器已关闭',
                 
                 // 季节
                 'season.spring': '春',
@@ -435,8 +467,11 @@ class InternationalizationSystem {
                 
                 // Timer
                 'timer.none': 'No Timer',
+                'timer.5min': '5 Minutes',
+                'timer.10min': '10 Minutes',
                 'timer.15min': '15 Minutes',
                 'timer.30min': '30 Minutes',
+                'timer.off': 'Off',
                 'timer.60min': '60 Minutes',
                 'timer.90min': '90 Minutes',
                 'timer.120min': '120 Minutes',
@@ -599,8 +634,11 @@ class InternationalizationSystem {
                 
                 // タイマー
                 'timer.none': 'タイマーなし',
+                'timer.5min': '5分',
+                'timer.10min': '10分',
                 'timer.15min': '15分',
                 'timer.30min': '30分',
+                'timer.off': 'オフ',
                 'timer.60min': '60分',
                 'timer.90min': '90分',
                 'timer.120min': '120分',
@@ -765,8 +803,11 @@ class InternationalizationSystem {
                 
                 // 타이머
                 'timer.none': '타이머 없음',
+                'timer.5min': '5분',
+                'timer.10min': '10분',
                 'timer.15min': '15분',
                 'timer.30min': '30분',
+                'timer.off': '끔',
                 'timer.60min': '60분',
                 'timer.90min': '90분',
                 'timer.120min': '120분',
@@ -931,8 +972,11 @@ class InternationalizationSystem {
                 
                 // Temporizador
                 'timer.none': 'Sin Temporizador',
+                'timer.5min': '5 Minutos',
+                'timer.10min': '10 Minutos',
                 'timer.15min': '15 Minutos',
                 'timer.30min': '30 Minutos',
+                'timer.off': 'Apagado',
                 'timer.60min': '60 Minutos',
                 'timer.90min': '90 Minutos',
                 'timer.120min': '120 Minutos',

@@ -4,10 +4,10 @@ const AUDIO_CONFIG = {
     baseUrl: 'https://archive.org/download/sound-healing-collection/',
     categories: {
         'Animal sounds': {
-            name: '森林栖息地',
             icon: '🦅',
             description: '自然声音疗愈音乐',
             folder: 'animal-sounds',
+            nameKey: 'ecosystem.Animal sounds.name',
             files: [
                 'SPA音乐疗馆 1 - 减压疗程 The Curing Shop - For Decompression.mp3',
                 'SPA音乐疗馆 4 - 冥想疗程 The Curing Shop - For Meditation.mp3',
@@ -38,10 +38,10 @@ const AUDIO_CONFIG = {
             ]
         },
         'Fire': {
-            name: '温暖壁炉',
             icon: '🔥',
             description: '自然声音疗愈音乐',
             folder: 'fire-sounds',
+            nameKey: 'ecosystem.Fire.name',
             files: [
                 '河边点燃篝火、水声和清脆的鸟鸣01.mp3',
                 '河边点燃篝火、水声和清脆的鸟鸣02.mp3',
@@ -49,10 +49,10 @@ const AUDIO_CONFIG = {
             ]
         },
         'hypnosis': {
-            name: '梦境花园',
             icon: '🌙',
             description: '自然声音疗愈音乐',
             folder: 'hypnosis',
+            nameKey: 'ecosystem.hypnosis.name',
             files: [
                 'Bolo Ram.mp3',
                 'Gayatri (Luscious Chill Mix).mp3',
@@ -123,10 +123,10 @@ const AUDIO_CONFIG = {
             ]
         },
         'meditation': {
-            name: '禅境山谷',
             icon: '🧘‍♀️',
             description: '自然声音疗愈音乐',
             folder: 'meditation',
+            nameKey: 'ecosystem.meditation.name',
             files: [
                 '冥想 瑜伽必听.mp3',
                 '冥想引导词，睡前..曲，专治失眠.mp3',
@@ -145,10 +145,10 @@ const AUDIO_CONFIG = {
             ]
         },
         'Rain': {
-            name: '雨林圣地',
             icon: '☔',
             description: '自然声音疗愈音乐',
             folder: 'rain-sounds',
+            nameKey: 'ecosystem.Rain.name',
             files: [
                 '一声闷雷，大雨倾盆.mp3',
                 '倾听山谷中小雨，净化心灵.mp3',
@@ -166,10 +166,10 @@ const AUDIO_CONFIG = {
             ]
         },
         'running water': {
-            name: '溪流秘境',
             icon: '💧',
             description: '自然声音疗愈音乐',
             folder: 'water-sounds',
+            nameKey: 'ecosystem.running water.name',
             files: [
                 '河边点燃篝火、水声和清脆的鸟鸣01.mp3',
                 '河边点燃篝火、水声和清脆的鸟鸣02.mp3',
@@ -179,10 +179,10 @@ const AUDIO_CONFIG = {
             ]
         },
         'Singing bowl sound': {
-            name: '颂钵圣殿',
             icon: '🎵',
             description: '自然声音疗愈音乐',
             folder: 'singing-bowls',
+            nameKey: 'ecosystem.Singing bowl sound.name',
             files: [
                 '01-Healing Bowls - Instrumental - Jane Winther.mp3',
                 '02-Falling Still (Moving Toward Nothingness) - Diane Mandle.mp3',
@@ -248,10 +248,10 @@ const AUDIO_CONFIG = {
             ]
         },
         'Chakra': {
-            name: '能量场域',
             icon: '🌈',
             description: '自然声音疗愈音乐',
             folder: 'chakra',
+            nameKey: 'ecosystem.Chakra.name',
             files: [
                 'Hals-Chakra 蓝玉莲华(喉轮).mp3',
                 'Nabel-Chakra 水晶莲华(太阳神经严).mp3',
@@ -263,10 +263,10 @@ const AUDIO_CONFIG = {
             ]
         },
         'Subconscious Therapy': {
-            name: '潜识星域',
             icon: '🌌',
             description: '自然声音疗愈音乐',
             folder: 'subconscious-therapy',
+            nameKey: 'ecosystem.Subconscious Therapy.name',
             files: [
                 '全新的开始.mp3',
                 '净空.mp3',
