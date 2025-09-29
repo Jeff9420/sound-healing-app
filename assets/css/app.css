@@ -1971,3 +1971,692 @@ input[type=range]::-moz-range-thumb{
 .accessibility-tooltip.visible {
   opacity: 1;
 }
+
+/* ========== 分享功能样式 ========== */
+.share-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  backdrop-filter: blur(4px);
+}
+
+.share-modal-content {
+  background: linear-gradient(135deg, rgba(45,35,65,.98) 0%, rgba(35,25,45,.98) 100%);
+  border: 1px solid rgba(255,215,160,0.3);
+  border-radius: 16px;
+  max-width: 400px;
+  width: 90%;
+  max-height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.share-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid rgba(255,215,160,0.2);
+}
+
+.share-modal-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.share-modal-close {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.share-modal-close:hover {
+  color: #ffffff;
+  background: rgba(255,255,255,0.1);
+}
+
+.share-modal-body {
+  padding: 20px;
+}
+
+.share-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.share-preview-icon {
+  font-size: 40px;
+}
+
+.share-preview-info {
+  flex: 1;
+}
+
+.share-preview-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.share-preview-desc {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+}
+
+.share-links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.share-link-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,215,160,0.2);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.share-link-btn:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,215,160,0.4);
+  transform: translateY(-2px);
+}
+
+.share-icon {
+  font-size: 24px;
+}
+
+.share-text {
+  font-size: 12px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.share-tip {
+  text-align: center;
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  padding: 12px;
+  background: rgba(232,184,109,0.1);
+  border-radius: 8px;
+}
+
+/* 分享成功提示 */
+.share-toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: rgba(45,35,65,.95);
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: 1px solid rgba(232,184,109,0.4);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 10001;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.share-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* 微信分享二维码 */
+.share-qrcode {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  z-index: 10001;
+  display: none;
+}
+
+.share-qrcode canvas {
+  display: block;
+}
+
+.share-qrcode .close-qrcode {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+}
+
+/* ========== 首次访问引导教程 ========== */
+.onboarding-tutorial {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20000;
+  pointer-events: none;
+}
+
+.onboarding-tutorial.active {
+  pointer-events: all;
+}
+
+.tutorial-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.onboarding-tutorial.active .tutorial-overlay {
+  opacity: 1;
+}
+
+.tutorial-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.onboarding-tutorial.active .tutorial-content {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+.tutorial-step {
+  display: none;
+  background: linear-gradient(135deg, rgba(45,35,65,.98) 0%, rgba(35,25,45,.98) 100%);
+  border: 1px solid rgba(255,215,160,0.3);
+  border-radius: 20px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.tutorial-step.active {
+  display: block;
+}
+
+.tutorial-step-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 24px 16px;
+  background: rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,215,160,0.2);
+}
+
+.tutorial-step-number {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #6666FF, #FF6699);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+}
+
+.tutorial-step-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.tutorial-step-body {
+  padding: 24px;
+}
+
+.tutorial-illustration {
+  font-size: 60px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.tutorial-step-body p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.9);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.tutorial-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 0;
+}
+
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.feature-icon {
+  font-size: 24px;
+}
+
+.feature-item span:last-child {
+  font-size: 12px;
+  color: rgba(255,255,255,0.8);
+}
+
+.tutorial-tip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: rgba(232,184,109,0.1);
+  border: 1px solid rgba(232,184,109,0.3);
+  border-radius: 8px;
+  margin: 0;
+}
+
+.tip-icon {
+  font-size: 18px;
+}
+
+.tutorial-controls-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 0;
+}
+
+.control-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+}
+
+.control-icon {
+  font-size: 20px;
+}
+
+.control-item span:last-child {
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+}
+
+.tutorial-benefits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.benefit-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.benefit-icon {
+  font-size: 24px;
+}
+
+.benefit-item span:last-child {
+  font-size: 12px;
+  color: rgba(255,255,255,0.8);
+}
+
+.tutorial-final-tip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: linear-gradient(135deg, rgba(102,102,255,0.2), rgba(255,102,153,0.2));
+  border-radius: 8px;
+  margin: 0;
+}
+
+.tip-star {
+  font-size: 18px;
+}
+
+.tutorial-step-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px 24px;
+  gap: 12px;
+}
+
+.tutorial-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 80px;
+}
+
+.tutorial-btn-primary {
+  background: linear-gradient(135deg, #6666FF, #FF6699);
+  color: white;
+}
+
+.tutorial-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102,102,255,0.4);
+}
+
+.tutorial-btn-secondary {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.8);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.tutorial-btn-secondary:hover {
+  background: rgba(255,255,255,0.15);
+  color: white;
+}
+
+.tutorial-btn-start {
+  background: linear-gradient(135deg, #4CAF50, #8BC34A);
+}
+
+.tutorial-progress {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.progress-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.progress-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.progress-dot.active {
+  width: 24px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #6666FF, #FF6699);
+}
+
+.tutorial-highlight {
+  position: absolute;
+  border: 3px solid #6666FF;
+  border-radius: 8px;
+  box-shadow: 0 0 0 9999px rgba(0,0,0,0.85);
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.5s ease;
+  z-index: 19999;
+}
+
+.tutorial-highlight.show {
+  opacity: 1;
+}
+
+/* 响应式设计 */
+@media (max-width: 720px) {
+  .tutorial-content {
+    width: 95%;
+    max-width: 400px;
+  }
+
+  .tutorial-step-header {
+    padding: 20px 20px 12px;
+  }
+
+  .tutorial-step-title {
+    font-size: 20px;
+  }
+
+  .tutorial-step-body {
+    padding: 20px;
+  }
+
+  .tutorial-illustration {
+    font-size: 48px;
+  }
+
+  .tutorial-features,
+  .tutorial-benefits {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .tutorial-controls-list {
+    grid-template-columns: 1fr;
+  }
+
+  .tutorial-step-footer {
+    padding: 16px 20px 20px;
+    flex-direction: column-reverse;
+  }
+
+  .tutorial-btn {
+    width: 100%;
+  }
+}
+
+/* 动画效果 */
+@keyframes tutorialPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+.tutorial-step-number {
+  animation: tutorialPulse 2s ease-in-out infinite;
+}
+
+/* 高亮动画 */
+@keyframes highlightGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 9999px rgba(0,0,0,0.85), 0 0 20px rgba(102,102,255,0.6);
+  }
+  50% {
+    box-shadow: 0 0 0 9999px rgba(0,0,0,0.85), 0 0 30px rgba(102,102,255,0.8);
+  }
+}
+
+.tutorial-highlight.show {
+  animation: highlightGlow 2s ease-in-out infinite;
+}
+
+/* ========== 精选音频快速播放 ========== */
+.featured-tracks {
+  margin-top: 20px;
+  padding: 16px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255,215,160,0.2);
+}
+
+.featured-header {
+  margin-bottom: 12px;
+}
+
+.featured-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.featured-subtitle {
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+}
+
+.featured-track-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.featured-track-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,215,160,0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.featured-track-btn:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,215,160,0.4);
+  transform: translateX(4px);
+}
+
+.featured-track-btn:active {
+  transform: translateX(2px);
+}
+
+.featured-icon {
+  font-size: 20px;
+  width: 24px;
+  text-align: center;
+}
+
+.featured-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.featured-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.featured-desc {
+  font-size: 10px;
+  color: rgba(255,255,255,0.7);
+}
+
+.featured-track-btn.playing {
+  background: linear-gradient(135deg, rgba(102,102,255,0.3), rgba(255,102,153,0.3));
+  border-color: rgba(255,215,160,0.5);
+  box-shadow: 0 0 12px rgba(102,102,255,0.3);
+}
+
+.featured-track-btn.playing .featured-name {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255,255,255,0.5);
+}
+
+/* 精选音频加载动画 */
+@keyframes featuredPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.featured-track-btn.loading {
+  pointer-events: none;
+  animation: featuredPulse 1.5s ease-in-out infinite;
+}
+
+/* 移动端优化 */
+@media (max-width: 720px) {
+  .featured-tracks {
+    padding: 12px;
+  }
+
+  .featured-track-btn {
+    padding: 8px 10px;
+  }
+
+  .featured-icon {
+    font-size: 18px;
+  }
+
+  .featured-name {
+    font-size: 11px;
+  }
+
+  .featured-desc {
+    font-size: 9px;
+  }
+}
