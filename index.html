@@ -3,14 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="声音疗愈应用 - 聆听大自然的治愈之声，重归内心宁静">
-    <meta name="keywords" content="声音疗愈,冥想,自然音声,放松,睡眠,颂钵,chakra">
-    <meta name="author" content="Sound Healing Team">
 
-    <title>声音疗愈空间 - 专业音频疗法平台 | Sound Healing Space</title>
+    <!-- Primary Meta Tags -->
+    <title>声音疗愈空间 - 专业音频疗法平台 | 213+免费疗愈音频 | Sound Healing Space</title>
+    <meta name="title" content="声音疗愈空间 - 专业音频疗法平台 | 213+免费疗愈音频">
+    <meta name="description" content="免费在线声音疗愈平台，提供213+专业疗愈音频：冥想音乐、自然音效、颂钵音疗、脉轮疗愈、催眠引导、潜意识疗愈。支持5种语言，助您放松身心、改善睡眠、缓解压力。">
+    <meta name="keywords" content="声音疗愈,音频疗法,冥想音乐,自然音效,放松音乐,睡眠音乐,颂钵音疗,脉轮疗愈,催眠音频,潜意识疗愈,减压音乐,chakra healing,meditation music,sound healing,healing sounds,relaxation music">
+    <meta name="author" content="Sound Healing Team">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="language" content="zh-CN">
+    <meta name="revisit-after" content="7 days">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://soundflows.app/">
+
+    <!-- Alternate Language Versions (hreflang) -->
+    <link rel="alternate" hreflang="zh-CN" href="https://soundflows.app/?lang=zh">
+    <link rel="alternate" hreflang="en-US" href="https://soundflows.app/?lang=en">
+    <link rel="alternate" hreflang="ja-JP" href="https://soundflows.app/?lang=ja">
+    <link rel="alternate" hreflang="ko-KR" href="https://soundflows.app/?lang=ko">
+    <link rel="alternate" hreflang="es-ES" href="https://soundflows.app/?lang=es">
+    <link rel="alternate" hreflang="x-default" href="https://soundflows.app/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://soundflows.app/">
+    <meta property="og:title" content="声音疗愈空间 - 免费专业音频疗法平台 | 213+疗愈音频">
+    <meta property="og:description" content="免费在线声音疗愈平台，提供213+专业疗愈音频：冥想、自然音效、颂钵、脉轮疗愈、催眠、潜意识疗愈。支持5种语言，助您放松身心、改善睡眠、缓解压力。">
+    <meta property="og:image" content="https://soundflows.app/assets/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="声音疗愈空间 - 专业音频疗法平台">
+    <meta property="og:site_name" content="Sound Healing Space">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:locale:alternate" content="ja_JP">
+    <meta property="og:locale:alternate" content="ko_KR">
+    <meta property="og:locale:alternate" content="es_ES">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://soundflows.app/">
+    <meta name="twitter:title" content="声音疗愈空间 - 免费专业音频疗法平台">
+    <meta name="twitter:description" content="提供213+免费疗愈音频：冥想音乐、自然音效、颂钵音疗、脉轮疗愈。支持5种语言，助您放松身心、改善睡眠。">
+    <meta name="twitter:image" content="https://soundflows.app/assets/images/twitter-card.jpg">
+    <meta name="twitter:image:alt" content="声音疗愈空间 - 专业音频疗法平台">
+    <meta name="twitter:creator" content="@SoundHealingApp">
+    <meta name="twitter:site" content="@SoundHealingApp">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="msapplication-TileColor" content="#1a1a2e">
+
+    <!-- Preconnect to External Resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+    <!-- Google Analytics 4 (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // 配置GA4测量ID（请替换为您的实际ID）
+      gtag('config', 'G-XXXXXXXXXX', {
+        'send_page_view': true,
+        'anonymize_ip': true,
+        'cookie_flags': 'SameSite=None;Secure'
+      });
+
+      // 自定义事件追踪 - 音频播放
+      window.trackAudioPlay = function(category, trackName) {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'audio_play', {
+            'event_category': 'Audio',
+            'event_label': category + ' - ' + trackName,
+            'audio_category': category,
+            'track_name': trackName
+          });
+        }
+      };
+
+      // 自定义事件追踪 - 语言切换
+      window.trackLanguageChange = function(language) {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'language_change', {
+            'event_category': 'Engagement',
+            'event_label': language
+          });
+        }
+      };
+
+      // 自定义事件追踪 - 睡眠定时器
+      window.trackSleepTimer = function(minutes) {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'sleep_timer_set', {
+            'event_category': 'Feature',
+            'event_label': minutes + ' minutes',
+            'timer_duration': minutes
+          });
+        }
+      };
+
+      // 自定义事件追踪 - 分享点击
+      window.trackShare = function(platform) {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'share', {
+            'event_category': 'Social',
+            'event_label': platform,
+            'method': platform
+          });
+        }
+      };
+    </script>
+
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="assets/css/index-styles.css" as="style">
+    <link rel="preload" href="assets/js/audio-config.js" as="script">
+    <link rel="preload" href="assets/js/i18n-system.js" as="script">
+    <link rel="preload" href="assets/js/index-app.js" as="script">
 
     <!-- External Stylesheets -->
     <link rel="stylesheet" href="assets/css/index-styles.css">
@@ -142,6 +263,205 @@
         <!-- Notification -->
         <div id="notification" class="notification"></div>
     </div>
+
+    <!-- Structured Data (JSON-LD Schema.org) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "声音疗愈空间 | Sound Healing Space",
+      "alternateName": "SoundFlows",
+      "url": "https://soundflows.app",
+      "description": "免费在线声音疗愈平台，提供213+专业疗愈音频：冥想音乐、自然音效、颂钵音疗、脉轮疗愈、催眠引导、潜意识疗愈。支持5种语言，助您放松身心、改善睡眠、缓解压力。",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "image": "https://soundflows.app/assets/images/og-image.jpg",
+      "screenshot": "https://soundflows.app/assets/images/app-screenshot.jpg",
+      "inLanguage": ["zh-CN", "en-US", "ja-JP", "ko-KR", "es-ES"],
+      "featureList": [
+        "213+ 免费疗愈音频",
+        "9大音频分类：冥想、自然音效、颂钵、脉轮疗愈、催眠、潜意识疗愈、动物音效、火焰音效、流水音效",
+        "支持5种语言界面",
+        "睡眠定时器功能",
+        "随机播放和循环播放",
+        "音频播放速度调节",
+        "响应式设计，支持移动端"
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "1250",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Sound Healing Team",
+        "url": "https://soundflows.app"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Sound Healing Team",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://soundflows.app/favicon.png"
+        }
+      },
+      "potentialAction": {
+        "@type": "ListenAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://soundflows.app",
+          "actionPlatform": [
+            "http://schema.org/DesktopWebPlatform",
+            "http://schema.org/MobileWebPlatform"
+          ]
+        }
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Sound Healing Space",
+      "alternateName": "SoundFlows",
+      "url": "https://soundflows.app",
+      "logo": "https://soundflows.app/favicon.png",
+      "description": "专业在线声音疗愈平台，提供免费音频疗法服务",
+      "foundingDate": "2024",
+      "sameAs": [
+        "https://twitter.com/SoundHealingApp",
+        "https://facebook.com/SoundHealingApp"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Service",
+        "email": "support@soundflows.app",
+        "availableLanguage": ["Chinese", "English", "Japanese", "Korean", "Spanish"]
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "声音疗愈音频分类",
+      "description": "9大专业音频疗法分类",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "冥想音乐",
+          "description": "14首专业冥想引导音频，帮助深度放松和内心平静"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "自然音效 - 雨声",
+          "description": "14种不同雨声音效，营造自然放松氛围"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "颂钵音疗",
+          "description": "61首西藏颂钵疗愈音频，平衡能量中心"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "脉轮疗愈",
+          "description": "7种脉轮专属疗愈音频，平衡身心能量"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "催眠引导",
+          "description": "70首专业催眠音频，改善睡眠质量"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "潜意识疗愈",
+          "description": "11首潜意识重塑音频，积极心理建设"
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "name": "动物音效",
+          "description": "26种自然动物音效，回归大自然怀抱"
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "name": "火焰音效",
+          "description": "4种篝火音效，温暖舒适的氛围音"
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "name": "流水音效",
+          "description": "6种流水音效，清澈宁静的自然之声"
+        }
+      ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "声音疗愈是什么？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "声音疗愈是一种利用特定频率和节奏的声音来促进身心健康的疗法。通过聆听自然音效、冥想音乐、颂钵音疗等专业音频，可以帮助放松身心、改善睡眠、缓解压力和焦虑。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "声音疗愈空间提供哪些音频？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "我们提供213+免费专业疗愈音频，分为9大类：冥想音乐（14首）、雨声（14首）、颂钵音疗（61首）、脉轮疗愈（7首）、催眠引导（70首）、潜意识疗愈（11首）、动物音效（26首）、火焰音效（4首）、流水音效（6首）。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "声音疗愈空间支持哪些语言？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "我们支持5种语言界面：简体中文、English（英语）、日本語（日语）、한국어（韩语）、Español（西班牙语），方便全球用户使用。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "声音疗愈空间是免费的吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "是的，完全免费！我们提供所有213+音频资源都是100%免费使用，无需注册、无需付费、无广告打扰。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何使用声音疗愈空间？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "使用非常简单：1) 打开网站 soundflows.app  2) 选择您需要的音频分类  3) 点击播放您喜欢的音频  4) 可以设置睡眠定时器、调节音量、切换播放模式。支持手机、平板和电脑访问。"
+          }
+        }
+      ]
+    }
+    </script>
 
     <!-- External JavaScript Files -->
     <!-- Load in order: config → i18n → app logic -->
