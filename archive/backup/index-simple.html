@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>声音疗愈空间 - 专业音频疗法平台 | Sound Healing Space</title>
+
+    <!-- Website Icons -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgo8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNjY2NkZGO3N0b3Atb3BhY2l0eToxIiAvPgo8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNGRjY2OTk7c3RvcC1vcGFjaXR5OjEiIC8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPGVSBGF0aCBkPSJNMTYgNEMxOC43NjE0IDQgMjEgNi4yMzg2IDIxIDlWMjNDMjEgMjUuNzYxNCAxOC43NjE0IDI4IDE2IDI4QzEzLjIzODYgMjggMTEgMjUuNzYxNCAxMSAyM1Y5QzExIDYuMjM4NiAxMy4yMzg2IDQgMTYgNFoiIGZpbGw9InVybCgjZ3JhZGllbnQpIi8+CjxjaXJjbGUgY3g9IjE2IiBjeT0iMTYiIHI9IjMiIGZpbGw9IndoaXRlIi8+CjxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjIiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjciLz4KPGNpcmNsZSBjeD0iMjIiIGN5PSIyMiIgcj0iMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuNyIvPgo8L3N2Zz4K">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="声音疗愈空间 - 专业音频疗法平台，提供213+种疗愈音频，包括自然声音、冥想音乐、颂钵疗愈等。帮助您放松身心，改善睡眠，减轻压力。">
+    <meta name="keywords" content="声音疗愈,音频疗法,冥想音乐,助眠音乐,放松音乐,自然声音,颂钵疗愈,减压音乐,专注音乐,身心健康">
+    <meta name="author" content="Sound Healing Space">
+
+    <!-- Security: Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://archive.org https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms; style-src 'self' 'unsafe-inline' https://archive.org; media-src 'self' https: data:; connect-src 'self' https://archive.org; img-src 'self' data: https:;">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/mobile-optimization.css">
+    <link rel="stylesheet" href="assets/css/touch-target-optimization.css">
+    <link rel="stylesheet" href="assets/css/color-contrast-enhancement.css">
+
+    <!-- Critical CSS Inlined -->
+    <style>
+        /* Critical CSS for loading */
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #6666FF 0%, #FF6699 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #6666FF 0%, #FF6699 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            color: white;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        /* Main app container */
+        #app {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">
+            🎵 正在加载声音疗愈空间...<br>
+            <small style="opacity: 0.8;">请稍候</small>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="app">
+        <!-- Header -->
+        <header style="padding: 20px; text-align: center; color: white;">
+            <h1 style="margin: 0; font-size: 2.5em;">🎵 声音疗愈空间</h1>
+            <p style="margin: 10px 0; opacity: 0.9;">专业音频疗法平台 - 213+种疗愈音频</p>
+        </header>
+
+        <!-- Main Content Area -->
+        <main style="padding: 20px; max-width: 1200px; margin: 0 auto;">
+            <!-- Category Selection -->
+            <section id="categorySection" style="background: rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; margin-bottom: 30px;">
+                <h2 style="color: white; text-align: center; margin-bottom: 30px;">选择疗愈类别</h2>
+                <div id="categoryGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <!-- Categories will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Playlist Section -->
+            <section id="playlistSection" style="background: rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; margin-bottom: 30px; display: none;">
+                <h2 id="playlistTitle" style="color: white; margin-bottom: 20px;"></h2>
+                <div id="playlistContainer" style="max-height: 400px; overflow-y: auto;">
+                    <!-- Tracks will be loaded here -->
+                </div>
+                <button onclick="backToCategories()" style="margin-top: 20px; background: rgba(255,255,255,0.2); color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer;">← 返回类别</button>
+            </section>
+
+            <!-- Audio Player -->
+            <section id="playerSection" style="background: rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; position: fixed; bottom: 20px; left: 20px; right: 20px; backdrop-filter: blur(10px);">
+                <div id="nowPlaying" style="color: white; margin-bottom: 15px;">
+                    <strong id="trackName">未播放</strong>
+                </div>
+                <audio id="audioPlayer" controls style="width: 100%;"></audio>
+                <div style="margin-top: 15px; text-align: center;">
+                    <button onclick="togglePlayPause()" style="background: #FF6699; color: white; border: none; padding: 10px 20px; border-radius: 25px; margin: 0 10px; cursor: pointer;">播放/暂停</button>
+                    <button onclick="stopAudio()" style="background: #6666FF; color: white; border: none; padding: 10px 20px; border-radius: 25px; margin: 0 10px; cursor: pointer;">停止</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Background Canvas -->
+        <canvas id="backgroundCanvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.3;"></canvas>
+    </div>
+
+    <!-- Security Modules (must load first) -->
+    <script src="assets/js/security-utils.js"></script>
+    <script src="assets/js/csrf-protection.js"></script>
+
+    <!-- Core Application -->
+    <script src="assets/js/audio-config.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <!-- UI Components -->
+    <script src="assets/js/ui-controller.js"></script>
+    <script src="assets/js/playlist-ui.js"></script>
+    <script src="assets/js/audio-manager.js"></script>
+
+    <!-- Background Scenes -->
+    <script src="assets/js/background-scene-manager.js"></script>
+
+    <!-- Security & Accessibility Features -->
+    <script src="assets/js/aria-optimizer.js" defer></script>
+    <script src="assets/js/sri-manager.js" defer></script>
+    <script src="assets/js/gdpr-manager.js" defer></script>
+
+    <script>
+        // Simple app initialization
+        let currentCategory = null;
+        let audioPlayer = document.getElementById('audioPlayer');
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hide loading screen
+            setTimeout(() => {
+                document.getElementById('loadingScreen').style.display = 'none';
+                document.getElementById('app').style.display = 'block';
+
+                // Load categories
+                loadCategories();
+
+                // Initialize background animation
+                initBackgroundAnimation();
+            }, 1000);
+        });
+
+        function loadCategories() {
+            const categoryGrid = document.getElementById('categoryGrid');
+            const categories = window.AUDIO_CONFIG ? Object.keys(window.AUDIO_CONFIG) : [];
+
+            if (categories.length === 0) {
+                // Fallback categories if config not loaded
+                const fallbackCategories = [
+                    { key: 'meditation', name: '冥想音乐', icon: '🧘' },
+                    { key: 'nature', name: '自然声音', icon: '🌿' },
+                    { key: 'rain', name: '雨声', icon: '🌧️' },
+                    { key: 'singing', name: '颂钵', icon: '🕯️' }
+                ];
+
+                fallbackCategories.forEach(cat => {
+                    const categoryEl = createCategoryElement(cat);
+                    categoryGrid.appendChild(categoryEl);
+                });
+            } else {
+                categories.forEach(categoryKey => {
+                    const category = {
+                        key: categoryKey,
+                        name: window.AUDIO_CONFIG[categoryKey].displayName || categoryKey,
+                        icon: getCategoryIcon(categoryKey)
+                    };
+                    const categoryEl = createCategoryElement(category);
+                    categoryGrid.appendChild(categoryEl);
+                });
+            }
+        }
+
+        function createCategoryElement(category) {
+            const div = document.createElement('div');
+            div.className = 'category-card';
+            div.style.cssText = `
+                background: rgba(255,255,255,0.2);
+                border-radius: 15px;
+                padding: 30px;
+                text-align: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                color: white;
+            `;
+
+            div.innerHTML = `
+                <div style="font-size: 3em; margin-bottom: 15px;">${category.icon}</div>
+                <h3 style="margin: 0; font-size: 1.2em;">${category.name}</h3>
+            `;
+
+            div.onclick = () => openCategory(category);
+
+            div.onmouseover = () => {
+                div.style.transform = 'scale(1.05)';
+                div.style.background = 'rgba(255,255,255,0.3)';
+            };
+
+            div.onmouseout = () => {
+                div.style.transform = 'scale(1)';
+                div.style.background = 'rgba(255,255,255,0.2)';
+            };
+
+            return div;
+        }
+
+        function getCategoryIcon(category) {
+            const icons = {
+                'Animal sounds': '🐦',
+                'Chakra': '🕉️',
+                'Fire': '🔥',
+                'hypnosis': '🌀',
+                'meditation': '🧘',
+                'Rain': '🌧️',
+                'running water': '💧',
+                'Singing bowl sound': '🕯️',
+                'Subconscious Therapy': '🌙'
+            };
+            return icons[category] || '🎵';
+        }
+
+        function openCategory(category) {
+            currentCategory = category;
+            document.getElementById('categorySection').style.display = 'none';
+            document.getElementById('playlistSection').style.display = 'block';
+            document.getElementById('playlistTitle').textContent = category.name;
+
+            // Load tracks for this category
+            loadTracks(category);
+        }
+
+        function loadTracks(category) {
+            const container = document.getElementById('playlistContainer');
+            container.innerHTML = '';
+
+            if (window.AUDIO_CONFIG && window.AUDIO_CONFIG[category.key]) {
+                const tracks = window.AUDIO_CONFIG[category.key].tracks || [];
+
+                if (tracks.length === 0) {
+                    container.innerHTML = '<p style="color: white; text-align: center;">该类别暂无音频文件</p>';
+                    return;
+                }
+
+                tracks.forEach((track, index) => {
+                    const trackEl = document.createElement('div');
+                    trackEl.className = 'track-item';
+                    trackEl.style.cssText = `
+                        background: rgba(255,255,255,0.1);
+                        border-radius: 10px;
+                        padding: 15px;
+                        margin-bottom: 10px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        color: white;
+                        display: flex;
+                        align-items: center;
+                        gap: 15px;
+                    `;
+
+                    trackEl.innerHTML = `
+                        <span style="font-size: 1.5em;">🎵</span>
+                        <div style="flex: 1;">
+                            <div style="font-weight: bold;">${track.name || track.fileName}</div>
+                            <div style="font-size: 0.9em; opacity: 0.8;">${formatDuration(track.duration || 0)}</div>
+                        </div>
+                    `;
+
+                    trackEl.onclick = () => playTrack(track, category);
+
+                    trackEl.onmouseover = () => {
+                        trackEl.style.background = 'rgba(255,255,255,0.2)';
+                    };
+
+                    trackEl.onmouseout = () => {
+                        trackEl.style.background = 'rgba(255,255,255,0.1)';
+                    };
+
+                    container.appendChild(trackEl);
+                });
+            } else {
+                // Fallback tracks
+                const fallbackTracks = [
+                    { name: '深度冥想', duration: 600, fileName: 'meditation1.mp3' },
+                    { name: '放松练习', duration: 300, fileName: 'meditation2.mp3' }
+                ];
+
+                fallbackTracks.forEach(track => {
+                    const trackEl = document.createElement('div');
+                    trackEl.className = 'track-item';
+                    trackEl.style.cssText = `
+                        background: rgba(255,255,255,0.1);
+                        border-radius: 10px;
+                        padding: 15px;
+                        margin-bottom: 10px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        color: white;
+                        display: flex;
+                        align-items: center;
+                        gap: 15px;
+                    `;
+
+                    trackEl.innerHTML = `
+                        <span style="font-size: 1.5em;">🎵</span>
+                        <div style="flex: 1;">
+                            <div style="font-weight: bold;">${track.name}</div>
+                            <div style="font-size: 0.9em; opacity: 0.8;">${formatDuration(track.duration)}</div>
+                        </div>
+                    `;
+
+                    trackEl.onclick = () => playTrack(track, category);
+
+                    container.appendChild(trackEl);
+                });
+            }
+        }
+
+        function playTrack(track, category) {
+            const trackName = document.getElementById('trackName');
+            trackName.textContent = track.name || track.fileName;
+
+            // Try to load the audio file
+            let audioUrl = '';
+            if (category.key && track.fileName) {
+                audioUrl = `assets/audio/${category.key}/${track.fileName}`;
+            } else {
+                // Use placeholder audio from archive.org
+                audioUrl = 'https://archive.org/download/sound-healing-collection/meditation/Deep%20Meditation.mp3';
+            }
+
+            audioPlayer.src = audioUrl;
+            audioPlayer.play().catch(e => {
+                console.log('Auto-play failed:', e);
+                showNotification('请点击播放按钮开始播放');
+            });
+        }
+
+        function togglePlayPause() {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+            } else {
+                audioPlayer.pause();
+            }
+        }
+
+        function stopAudio() {
+            audioPlayer.pause();
+            audioPlayer.currentTime = 0;
+        }
+
+        function backToCategories() {
+            document.getElementById('playlistSection').style.display = 'none';
+            document.getElementById('categorySection').style.display = 'block';
+            stopAudio();
+        }
+
+        function formatDuration(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: rgba(0,0,0,0.8);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                z-index: 10000;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        function initBackgroundAnimation() {
+            const canvas = document.getElementById('backgroundCanvas');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const particles = [];
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 3 + 1,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    opacity: Math.random() * 0.5 + 0.2
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                particles.forEach(particle => {
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+
+                    if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+                    if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
+                    ctx.fill();
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+    </script>
+</body>
+</html>

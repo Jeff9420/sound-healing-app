@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sound Healing Blog | SoundFlows</title>
+    <description>Expert guides, practical tips, and deep insights on meditation, mindfulness, and the transformative power of sound therapy</description>
+    <link>https://soundflows.app/content/blog/</link>
+    <atom:link href="https://soundflows.app/content/blog/feed.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Sun, 29 Sep 2025 06:45:00 GMT</lastBuildDate>
+    <ttl>60</ttl>
+
+    <item>
+      <title>Daily Meditation Routine Checklist</title>
+      <description>Build a sustainable meditation practice with this simple daily checklist covering environment setup, intention setting, and post-session reflection.</description>
+      <link>https://soundflows.app/content/blog/meditation-routine-checklist.html</link>
+      <guid isPermaLink="true">https://soundflows.app/content/blog/meditation-routine-checklist.html</guid>
+      <pubDate>Sun, 29 Sep 2025 06:45:00 GMT</pubDate>
+      <category>meditation</category>
+      <category>mindfulness</category>
+      <category>practice-guide</category>
+    </item>
+
+    <item>
+      <title>How to Lead Group Sound Baths</title>
+      <description>Learn the essentials of facilitating transformative group sound bath experiences, from preparation to creating the perfect atmosphere.</description>
+      <link>https://soundflows.app/content/blog/how-to-lead-sound-baths.html</link>
+      <guid isPermaLink="true">https://soundflows.app/content/blog/how-to-lead-sound-baths.html</guid>
+      <pubDate>Sun, 29 Sep 2025 06:45:00 GMT</pubDate>
+      <category>sound-bath</category>
+      <category>group-facilitation</category>
+      <category>practice-guide</category>
+    </item>
+
+    <item>
+      <title>Designing Focus Playlists</title>
+      <description>Create powerful audio playlists that enhance concentration and productivity. Learn about BPM, frequency selection, and audio layering techniques.</description>
+      <link>https://soundflows.app/content/blog/designing-focus-playlists.html</link>
+      <guid isPermaLink="true">https://soundflows.app/content/blog/designing-focus-playlists.html</guid>
+      <pubDate>Sun, 29 Sep 2025 06:45:00 GMT</pubDate>
+      <category>productivity</category>
+      <category>audio-therapy</category>
+      <category>playlist-design</category>
+    </item>
+
+    <item>
+      <title>Create Your Evening Reset Ritual</title>
+      <description>Transform your evenings with a powerful wind-down routine that combines sound therapy, mindfulness, and relaxation techniques.</description>
+      <link>https://soundflows.app/content/blog/create-evening-reset-ritual.html</link>
+      <guid isPermaLink="true">https://soundflows.app/content/blog/create-evening-reset-ritual.html</guid>
+      <pubDate>Sun, 29 Sep 2025 06:45:00 GMT</pubDate>
+      <category>evening-routine</category>
+      <category>sleep</category>
+      <category>wellness</category>
+    </item>
+
+    <item>
+      <title>Chakra Class Sequencing Guide</title>
+      <description>Master the art of sequencing chakra healing sessions with this comprehensive guide to frequencies, durations, and progression.</description>
+      <link>https://soundflows.app/content/blog/chakra-class-sequencing-guide.html</link>
+      <guid isPermaLink="true">https://soundflows.app/content/blog/chakra-class-sequencing-guide.html</guid>
+      <pubDate>Sun, 29 Sep 2025 06:45:00 GMT</pubDate>
+      <category>chakra-healing</category>
+      <category>energy-work</category>
+      <category>advanced-practice</category>
+    </item>
+
+    <item>
+      <title>Best Headphones for Sleep Meditation</title>
+      <description>Discover the most comfortable and effective headphones for overnight meditation and sleep therapy sessions.</description>
+      <link>https://soundflows.app/content/blog/best-headphones-for-sleep.html</link>
+      <guid isPermaLink="true">https://soundflows.app/content/blog/best-headphones-for-sleep.html</guid>
+      <pubDate>Sun, 29 Sep 2025 06:45:00 GMT</pubDate>
+      <category>gear-guide</category>
+      <category>sleep-meditation</category>
+      <category>equipment</category>
+    </item>
+  </channel>
+</rss>

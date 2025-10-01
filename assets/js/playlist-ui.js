@@ -188,23 +188,65 @@ class PlaylistUI {
             // 简化文件名显示
             const displayName = this.formatTrackName(fileName);
             
-            trackItem.innerHTML = `
-                <div class="track-number">${index + 1}</div>
-                <div class="track-info">
-                    <div class="track-name">${displayName}${formatWarning}</div>
-                    <div class="track-file">${fileName}</div>
-                </div>
-                <div class="track-controls">
-                    <button class="track-play-btn" data-track-id="${trackId}" data-category="${categoryKey}" data-file="${fileName}" 
-                            ${!isSupported ? 'disabled title="格式不支持"' : ''}>
-                        <span class="play-icon">${!isSupported ? '⚠️' : '▶️'}</span>
-                    </button>
-                    <div class="track-volume">
-                        <input type="range" class="track-volume-slider" min="0" max="1" step="0.01" value="0.5" 
-                               data-track-id="${trackId}" ${!isSupported ? 'disabled' : ''}>
-                    </div>
-                </div>
-            `;
+            // Create secure DOM elements (prevent XSS)
+            const trackNumberDiv = document.createElement('div');
+            trackNumberDiv.className = 'track-number';
+            trackNumberDiv.textContent = index + 1;
+
+            const trackInfoDiv = document.createElement('div');
+            trackInfoDiv.className = 'track-info';
+
+            const trackNameDiv = document.createElement('div');
+            trackNameDiv.className = 'track-name';
+            trackNameDiv.textContent = SecurityUtils.sanitizeFileName(displayName) + formatWarning;
+
+            const trackFileDiv = document.createElement('div');
+            trackFileDiv.className = 'track-file';
+            trackFileDiv.textContent = SecurityUtils.sanitizeFileName(fileName);
+
+            trackInfoDiv.appendChild(trackNameDiv);
+            trackInfoDiv.appendChild(trackFileDiv);
+
+            const trackControlsDiv = document.createElement('div');
+            trackControlsDiv.className = 'track-controls';
+
+            const playBtn = document.createElement('button');
+            playBtn.className = 'track-play-btn';
+            playBtn.dataset.trackId = trackId;
+            playBtn.dataset.category = categoryKey;
+            playBtn.dataset.file = fileName;
+            if (!isSupported) {
+                playBtn.disabled = true;
+                playBtn.title = '格式不支持';
+            }
+
+            const playIcon = document.createElement('span');
+            playIcon.className = 'play-icon';
+            playIcon.textContent = !isSupported ? '⚠️' : '▶️';
+            playBtn.appendChild(playIcon);
+
+            const trackVolumeDiv = document.createElement('div');
+            trackVolumeDiv.className = 'track-volume';
+
+            const volumeSlider = document.createElement('input');
+            volumeSlider.type = 'range';
+            volumeSlider.className = 'track-volume-slider';
+            volumeSlider.min = '0';
+            volumeSlider.max = '1';
+            volumeSlider.step = '0.01';
+            volumeSlider.value = '0.5';
+            volumeSlider.dataset.trackId = trackId;
+            if (!isSupported) {
+                volumeSlider.disabled = true;
+            }
+
+            trackVolumeDiv.appendChild(volumeSlider);
+            trackControlsDiv.appendChild(playBtn);
+            trackControlsDiv.appendChild(trackVolumeDiv);
+
+            trackItem.appendChild(trackNumberDiv);
+            trackItem.appendChild(trackInfoDiv);
+            trackItem.appendChild(trackControlsDiv);
 
             // 如果格式不支持，添加视觉提示
             if (!isSupported) {

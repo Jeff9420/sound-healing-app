@@ -1,5 +1,5 @@
-
-// ========== 全局错误处理和用户反馈系统 ==========
+﻿
+// ========== 鍏ㄥ眬閿欒澶勭悊鍜岀敤鎴峰弽棣堢郴缁?==========
 class ErrorHandler {
   constructor() {
     this.setupGlobalHandlers();
@@ -7,10 +7,10 @@ class ErrorHandler {
   }
 
   setupGlobalHandlers() {
-    // 捕获JavaScript错误
+    // 鎹曡幏JavaScript閿欒
     window.addEventListener('error', (event) => {
       console.error('JavaScript Error:', {
-        message: event.error?.message || '未知错误',
+        message: event.error?.message || '鏈煡閿欒',
         filename: event.filename,
         lineno: event.lineno,
         colno: event.colno,
@@ -18,40 +18,40 @@ class ErrorHandler {
         timestamp: new Date().toISOString()
       });
 
-      // 根据错误类型提供更具体的建议
-      let userMessage = '应用程序遇到问题';
-      let suggestion = '请刷新页面重试';
+      // 鏍规嵁閿欒绫诲瀷鎻愪緵鏇村叿浣撶殑寤鸿
+      let userMessage = '搴旂敤绋嬪簭閬囧埌闂';
+      let suggestion = '璇峰埛鏂伴〉闈㈤噸璇?;
 
       if (event.error?.message?.includes('network')) {
-        userMessage = '网络连接错误';
-        suggestion = '请检查您的网络连接后重试';
+        userMessage = '缃戠粶杩炴帴閿欒';
+        suggestion = '璇锋鏌ユ偍鐨勭綉缁滆繛鎺ュ悗閲嶈瘯';
       } else if (event.error?.message?.includes('memory')) {
-        userMessage = '内存不足';
-        suggestion = '请关闭其他标签页后重试';
+        userMessage = '鍐呭瓨涓嶈冻';
+        suggestion = '璇峰叧闂叾浠栨爣绛鹃〉鍚庨噸璇?;
       } else if (event.error?.message?.includes('audio')) {
-        userMessage = '音频播放错误';
-        suggestion = '请尝试选择其他音频文件';
+        userMessage = '闊抽鎾斁閿欒';
+        suggestion = '璇峰皾璇曢€夋嫨鍏朵粬闊抽鏂囦欢';
       }
 
       this.showUserFriendlyError(userMessage, suggestion);
     });
 
-    // 捕获Promise未处理的拒绝
+    // 鎹曡幏Promise鏈鐞嗙殑鎷掔粷
     window.addEventListener('unhandledrejection', (event) => {
       console.error('Unhandled Promise Rejection:', {
         reason: event.reason,
         timestamp: new Date().toISOString()
       });
 
-      let userMessage = '操作失败';
-      let suggestion = '请重试';
+      let userMessage = '鎿嶄綔澶辫触';
+      let suggestion = '璇烽噸璇?;
 
       if (event.reason?.message?.includes('fetch')) {
-        userMessage = '数据加载失败';
-        suggestion = '请检查网络连接后刷新页面';
+        userMessage = '鏁版嵁鍔犺浇澶辫触';
+        suggestion = '璇锋鏌ョ綉缁滆繛鎺ュ悗鍒锋柊椤甸潰';
       } else if (event.reason?.message?.includes('timeout')) {
-        userMessage = '请求超时';
-        suggestion = '网络较慢，请稍后重试';
+        userMessage = '璇锋眰瓒呮椂';
+        suggestion = '缃戠粶杈冩參锛岃绋嶅悗閲嶈瘯';
       }
 
       this.showUserFriendlyError(userMessage, suggestion);
@@ -60,7 +60,7 @@ class ErrorHandler {
   }
 
   setupUserNotification() {
-    // 创建通知容器
+    // 鍒涘缓閫氱煡瀹瑰櫒
     if (!document.getElementById('errorNotificationContainer')) {
       const notificationContainer = document.createElement('div');
       notificationContainer.id = 'errorNotificationContainer';
@@ -105,14 +105,14 @@ class ErrorHandler {
         cursor: pointer;
         padding: 4px;
         line-height: 1;
-      ">×</button>
+      ">脳</button>
     `;
 
     const container = document.getElementById('errorNotificationContainer');
     if (container) {
       container.appendChild(notification);
 
-      // 自动移除
+      // 鑷姩绉婚櫎
       setTimeout(() => {
         if (notification.parentNode) {
           notification.style.animation = 'slideOut 0.3s ease-in';
@@ -124,18 +124,18 @@ class ErrorHandler {
 
   showAudioError(audioFile, errorType) {
     const errorMessages = {
-      'format': `音频格式不支持：${audioFile}`,
-      'network': `加载失败：${audioFile}`,
-      'decode': `音频文件损坏：${audioFile}`,
-      'permission': '音频播放被浏览器阻止，请点击播放按钮'
+      'format': `闊抽鏍煎紡涓嶆敮鎸侊細${audioFile}`,
+      'network': `鍔犺浇澶辫触锛?{audioFile}`,
+      'decode': `闊抽鏂囦欢鎹熷潖锛?{audioFile}`,
+      'permission': '闊抽鎾斁琚祻瑙堝櫒闃绘锛岃鐐瑰嚮鎾斁鎸夐挳'
     };
 
-    const message = errorMessages[errorType] || `音频播放出错：${audioFile}`;
-    this.showUserFriendlyError('音频播放问题', message);
+    const message = errorMessages[errorType] || `闊抽鎾斁鍑洪敊锛?{audioFile}`;
+    this.showUserFriendlyError('闊抽鎾斁闂', message);
   }
 }
 
-// ========== 性能监控和内存管理系统 ==========
+// ========== 鎬ц兘鐩戞帶鍜屽唴瀛樼鐞嗙郴缁?==========
 class PerformanceManager {
   constructor() {
     this.activeAnimations = new Set();
@@ -148,7 +148,7 @@ class PerformanceManager {
   }
 
   setupVisibilityHandling() {
-    // 页面可见性变化时暂停/恢复动画
+    // 椤甸潰鍙鎬у彉鍖栨椂鏆傚仠/鎭㈠鍔ㄧ敾
     document.addEventListener('visibilitychange', () => {
       this.isTabVisible = !document.hidden;
 
@@ -161,7 +161,7 @@ class PerformanceManager {
   }
 
   setupPerformanceMonitoring() {
-    // 每30秒检查性能
+    // 姣?0绉掓鏌ユ€ц兘
     this.addInterval(() => {
       this.checkMemoryUsage();
       this.optimizeAnimations();
@@ -173,30 +173,30 @@ class PerformanceManager {
       const memInfo = performance.memory;
       const usedPercent = (memInfo.usedJSHeapSize / memInfo.jsHeapSizeLimit) * 100;
 
-      console.log(`内存使用: ${Math.round(usedPercent)}%`);
+      console.log(`鍐呭瓨浣跨敤: ${Math.round(usedPercent)}%`);
 
       if (usedPercent > 80) {
         this.emergencyCleanup();
         window.soundHealingErrorHandler?.showUserFriendlyError(
-          '内存使用过高',
-          '已自动优化，建议关闭其他标签页'
+          '鍐呭瓨浣跨敤杩囬珮',
+          '宸茶嚜鍔ㄤ紭鍖栵紝寤鸿鍏抽棴鍏朵粬鏍囩椤?
         );
       }
     }
   }
 
   emergencyCleanup() {
-    // 强制垃圾回收和清理
+    // 寮哄埗鍨冨溇鍥炴敹鍜屾竻鐞?
     this.pauseAnimations();
     this.clearOldAudioInstances();
 
-    // 2秒后恢复关键动画
+    // 2绉掑悗鎭㈠鍏抽敭鍔ㄧ敾
     setTimeout(() => {
       this.resumeAnimations();
     }, 2000);
   }
 
-  // 帧率限制的动画管理
+  // 甯х巼闄愬埗鐨勫姩鐢荤鐞?
   createThrottledAnimation(callback, fps = 60) {
     let lastTime = 0;
     const interval = 1000 / fps;
@@ -225,14 +225,14 @@ class PerformanceManager {
   }
 
   resumeAnimations() {
-    // 重新启动关键动画
+    // 閲嶆柊鍚姩鍏抽敭鍔ㄧ敾
     if (window.restartAnimations) {
       window.restartAnimations();
     }
   }
 
   optimizeAnimations() {
-    // 根据设备性能调整动画复杂度
+    // 鏍规嵁璁惧鎬ц兘璋冩暣鍔ㄧ敾澶嶆潅搴?
     const devicePixelRatio = window.devicePixelRatio || 1;
     const isLowEnd = devicePixelRatio < 2 && navigator.hardwareConcurrency < 4;
 
@@ -242,7 +242,7 @@ class PerformanceManager {
   }
 
   reduceAnimationComplexity() {
-    // 降低粒子数量和帧率
+    // 闄嶄綆绮掑瓙鏁伴噺鍜屽抚鐜?
     const particles = document.querySelectorAll('.floating-particles');
     particles.forEach(container => {
       const children = container.children;
@@ -252,7 +252,7 @@ class PerformanceManager {
     });
   }
 
-  // 音频实例管理
+  // 闊抽瀹炰緥绠＄悊
   registerAudioInstance(id, audio) {
     this.audioInstances.set(id, {
       audio,
@@ -262,7 +262,7 @@ class PerformanceManager {
 
   clearOldAudioInstances() {
     const now = Date.now();
-    const maxAge = 300000; // 5分钟
+    const maxAge = 300000; // 5鍒嗛挓
 
     this.audioInstances.forEach((instance, id) => {
       if (now - instance.lastUsed > maxAge && instance.audio.paused) {
@@ -273,7 +273,7 @@ class PerformanceManager {
     });
   }
 
-  // 安全的定时器管理
+  // 瀹夊叏鐨勫畾鏃跺櫒绠＄悊
   addInterval(callback, delay) {
     const id = setInterval(callback, delay);
     this.activeIntervals.add(id);
@@ -290,7 +290,7 @@ class PerformanceManager {
   }
 
   cleanup() {
-    // 清理所有活动的定时器和动画
+    // 娓呯悊鎵€鏈夋椿鍔ㄧ殑瀹氭椂鍣ㄥ拰鍔ㄧ敾
     this.activeAnimations.forEach(id => cancelAnimationFrame(id));
     this.activeIntervals.forEach(id => clearInterval(id));
     this.activeTimeouts.forEach(id => clearTimeout(id));
@@ -299,7 +299,7 @@ class PerformanceManager {
     this.activeIntervals.clear();
     this.activeTimeouts.clear();
 
-    // 清理音频实例
+    // 娓呯悊闊抽瀹炰緥
     this.audioInstances.forEach(instance => {
       instance.audio.pause();
       instance.audio.src = '';
@@ -309,7 +309,7 @@ class PerformanceManager {
   }
 }
 
-// ========== 无障碍功能增强系统 ==========
+// ========== 鏃犻殰纰嶅姛鑳藉寮虹郴缁?==========
 class AccessibilityManager {
   constructor() {
     this.setupKeyboardNavigation();
@@ -319,9 +319,9 @@ class AccessibilityManager {
   }
 
   setupKeyboardNavigation() {
-    // 全局键盘快捷键
+    // 鍏ㄥ眬閿洏蹇嵎閿?
     document.addEventListener('keydown', (event) => {
-      // 防止在输入框中触发快捷键
+      // 闃叉鍦ㄨ緭鍏ユ涓Е鍙戝揩鎹烽敭
       if (event.target.tagName === 'INPUT' || event.target.tagName === 'SELECT') {
         return;
       }
@@ -383,7 +383,7 @@ class AccessibilityManager {
   }
 
   setupAriaLabels() {
-    // 等待DOM加载完成后设置ARIA标签
+    // 绛夊緟DOM鍔犺浇瀹屾垚鍚庤缃瓵RIA鏍囩
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => this.addAriaLabels());
     } else {
@@ -392,37 +392,37 @@ class AccessibilityManager {
   }
 
   addAriaLabels() {
-    // 主要控制按钮
-    this.setAriaLabel('playPauseBtn', '播放/暂停', '按空格键播放或暂停音频');
-    this.setAriaLabel('prevBtn', '上一首', '按Ctrl+左箭头切换到上一首');
-    this.setAriaLabel('nextBtn', '下一首', '按Ctrl+右箭头切换到下一首');
-    this.setAriaLabel('shuffleBtnVisible', '随机播放', '按Ctrl+S切换随机播放模式');
-    this.setAriaLabel('repeatBtnVisible', '循环播放', '按Ctrl+R切换循环播放模式');
+    // 涓昏鎺у埗鎸夐挳
+    this.setAriaLabel('playPauseBtn', '鎾斁/鏆傚仠', '鎸夌┖鏍奸敭鎾斁鎴栨殏鍋滈煶棰?);
+    this.setAriaLabel('prevBtn', '涓婁竴棣?, '鎸塁trl+宸︾澶村垏鎹㈠埌涓婁竴棣?);
+    this.setAriaLabel('nextBtn', '涓嬩竴棣?, '鎸塁trl+鍙崇澶村垏鎹㈠埌涓嬩竴棣?);
+    this.setAriaLabel('shuffleBtnVisible', '闅忔満鎾斁', '鎸塁trl+S鍒囨崲闅忔満鎾斁妯″紡');
+    this.setAriaLabel('repeatBtnVisible', '寰幆鎾斁', '鎸塁trl+R鍒囨崲寰幆鎾斁妯″紡');
 
-    // 滑块控制
-    this.setAriaLabel('volumeRange', '音量控制', '按Ctrl+上下箭头调节音量');
-    this.setAriaLabel('progressRange', '播放进度', '拖动调节播放进度');
+    // 婊戝潡鎺у埗
+    this.setAriaLabel('volumeRange', '闊抽噺鎺у埗', '鎸塁trl+涓婁笅绠ご璋冭妭闊抽噺');
+    this.setAriaLabel('progressRange', '鎾斁杩涘害', '鎷栧姩璋冭妭鎾斁杩涘害');
 
-    // 主题导航
-    this.setAriaLabel('carouselPrev', '上一个主题', '切换到上一个音频主题');
-    this.setAriaLabel('carouselNext', '下一个主题', '切换到下一个音频主题');
+    // 涓婚瀵艰埅
+    this.setAriaLabel('carouselPrev', '涓婁竴涓富棰?, '鍒囨崲鍒颁笂涓€涓煶棰戜富棰?);
+    this.setAriaLabel('carouselNext', '涓嬩竴涓富棰?, '鍒囨崲鍒颁笅涓€涓煶棰戜富棰?);
 
-    // 语言切换
-    this.setAriaLabel('languageToggle', '语言切换', '点击切换界面语言');
+    // 璇█鍒囨崲
+    this.setAriaLabel('languageToggle', '璇█鍒囨崲', '鐐瑰嚮鍒囨崲鐣岄潰璇█');
 
-    // 定时器选择
-    this.setAriaLabel('timerSelect', '定时器设置', '选择音频播放时长');
+    // 瀹氭椂鍣ㄩ€夋嫨
+    this.setAriaLabel('timerSelect', '瀹氭椂鍣ㄨ缃?, '閫夋嫨闊抽鎾斁鏃堕暱');
 
-    // 播放列表
-    this.setAriaLabel('trackList', '音轨列表', '当前主题的音轨列表');
-    this.setAriaLabel('playFirstBtn', '播放全部', '从第一首开始播放当前主题的所有音轨');
-    this.setAriaLabel('togglePlaylistBtn', '切换显示', '切换播放列表的显示方式');
+    // 鎾斁鍒楄〃
+    this.setAriaLabel('trackList', '闊宠建鍒楄〃', '褰撳墠涓婚鐨勯煶杞ㄥ垪琛?);
+    this.setAriaLabel('playFirstBtn', '鎾斁鍏ㄩ儴', '浠庣涓€棣栧紑濮嬫挱鏀惧綋鍓嶄富棰樼殑鎵€鏈夐煶杞?);
+    this.setAriaLabel('togglePlaylistBtn', '鍒囨崲鏄剧ず', '鍒囨崲鎾斁鍒楄〃鐨勬樉绀烘柟寮?);
 
-    // 为进度容器添加可访问性
+    // 涓鸿繘搴﹀鍣ㄦ坊鍔犲彲璁块棶鎬?
     const progressContainer = document.getElementById('progressContainer');
     if (progressContainer) {
       progressContainer.setAttribute('role', 'slider');
-      progressContainer.setAttribute('aria-label', '播放进度控制');
+      progressContainer.setAttribute('aria-label', '鎾斁杩涘害鎺у埗');
       progressContainer.setAttribute('tabindex', '0');
     }
   }
@@ -433,7 +433,7 @@ class AccessibilityManager {
       element.setAttribute('aria-label', label);
       element.setAttribute('title', description);
 
-      // 确保按钮可通过键盘访问
+      // 纭繚鎸夐挳鍙€氳繃閿洏璁块棶
       if (element.tagName === 'BUTTON' && !element.hasAttribute('tabindex')) {
         element.setAttribute('tabindex', '0');
       }
@@ -441,7 +441,7 @@ class AccessibilityManager {
   }
 
   setupScreenReaderSupport() {
-    // 创建屏幕阅读器专用的状态通告区域
+    // 鍒涘缓灞忓箷闃呰鍣ㄤ笓鐢ㄧ殑鐘舵€侀€氬憡鍖哄煙
     const liveRegion = document.createElement('div');
     liveRegion.id = 'sr-live-region';
     liveRegion.className = 'sr-only';
@@ -449,7 +449,7 @@ class AccessibilityManager {
     liveRegion.setAttribute('aria-atomic', 'true');
     document.body.appendChild(liveRegion);
 
-    // 创建紧急通告区域
+    // 鍒涘缓绱ф€ラ€氬憡鍖哄煙
     const assertiveRegion = document.createElement('div');
     assertiveRegion.id = 'sr-assertive-region';
     assertiveRegion.className = 'sr-only';
@@ -463,7 +463,7 @@ class AccessibilityManager {
     const region = document.getElementById(regionId);
     if (region) {
       region.textContent = message;
-      // 清除消息以便下次相同消息能被读出
+      // 娓呴櫎娑堟伅浠ヤ究涓嬫鐩稿悓娑堟伅鑳借璇诲嚭
       setTimeout(() => {
         region.textContent = '';
       }, 1000);
@@ -471,7 +471,7 @@ class AccessibilityManager {
   }
 
   setupFocusManagement() {
-    // 改善焦点可见性
+    // 鏀瑰杽鐒︾偣鍙鎬?
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Tab') {
         document.body.classList.add('keyboard-navigation');
@@ -483,13 +483,13 @@ class AccessibilityManager {
     });
   }
 
-  // 键盘快捷键对应的功能
+  // 閿洏蹇嵎閿搴旂殑鍔熻兘
   togglePlayPause() {
     const playPauseBtn = document.getElementById('playPauseBtn');
     if (playPauseBtn) {
       playPauseBtn.click();
-      const isPlaying = playPauseBtn.querySelector('.control-icon').textContent.includes('⏸');
-      this.announceToScreenReader(isPlaying ? '音频已播放' : '音频已暂停');
+      const isPlaying = playPauseBtn.querySelector('.control-icon').textContent.includes('鈴?);
+      this.announceToScreenReader(isPlaying ? '闊抽宸叉挱鏀? : '闊抽宸叉殏鍋?);
     }
   }
 
@@ -497,7 +497,7 @@ class AccessibilityManager {
     const prevBtn = document.getElementById('prevBtn');
     if (prevBtn) {
       prevBtn.click();
-      this.announceToScreenReader('切换到上一首');
+      this.announceToScreenReader('鍒囨崲鍒颁笂涓€棣?);
     }
   }
 
@@ -505,7 +505,7 @@ class AccessibilityManager {
     const nextBtn = document.getElementById('nextBtn');
     if (nextBtn) {
       nextBtn.click();
-      this.announceToScreenReader('切换到下一首');
+      this.announceToScreenReader('鍒囨崲鍒颁笅涓€棣?);
     }
   }
 
@@ -516,11 +516,11 @@ class AccessibilityManager {
       const newValue = Math.max(0, Math.min(100, currentValue + delta));
       volumeRange.value = newValue;
 
-      // 触发input事件以更新音量
+      // 瑙﹀彂input浜嬩欢浠ユ洿鏂伴煶閲?
       const event = new Event('input', { bubbles: true });
       volumeRange.dispatchEvent(event);
 
-      this.announceToScreenReader(`音量调整为 ${newValue}%`);
+      this.announceToScreenReader(`闊抽噺璋冩暣涓?${newValue}%`);
     }
   }
 
@@ -529,15 +529,15 @@ class AccessibilityManager {
     if (volumeRange) {
       const currentValue = parseInt(volumeRange.value);
       if (currentValue > 0) {
-        // 静音
+        // 闈欓煶
         volumeRange.dataset.previousVolume = currentValue;
         volumeRange.value = 0;
-        this.announceToScreenReader('音频已静音');
+        this.announceToScreenReader('闊抽宸查潤闊?);
       } else {
-        // 恢复音量
+        // 鎭㈠闊抽噺
         const previousVolume = volumeRange.dataset.previousVolume || '50';
         volumeRange.value = previousVolume;
-        this.announceToScreenReader(`音量恢复为 ${previousVolume}%`);
+        this.announceToScreenReader(`闊抽噺鎭㈠涓?${previousVolume}%`);
       }
 
       const event = new Event('input', { bubbles: true });
@@ -550,7 +550,7 @@ class AccessibilityManager {
     if (shuffleBtn) {
       shuffleBtn.click();
       const isActive = shuffleBtn.classList.contains('active');
-      this.announceToScreenReader(isActive ? '随机播放已开启' : '随机播放已关闭');
+      this.announceToScreenReader(isActive ? '闅忔満鎾斁宸插紑鍚? : '闅忔満鎾斁宸插叧闂?);
     }
   }
 
@@ -559,47 +559,47 @@ class AccessibilityManager {
     if (repeatBtn) {
       repeatBtn.click();
       const isActive = repeatBtn.classList.contains('active');
-      this.announceToScreenReader(isActive ? '循环播放已开启' : '循环播放已关闭');
+      this.announceToScreenReader(isActive ? '寰幆鎾斁宸插紑鍚? : '寰幆鎾斁宸插叧闂?);
     }
   }
 
   closeFocusedModal() {
-    // 如果有模态框或下拉菜单打开，关闭它们
+    // 濡傛灉鏈夋ā鎬佹鎴栦笅鎷夎彍鍗曟墦寮€锛屽叧闂畠浠?
     const modals = document.querySelectorAll('.modal, .dropdown-open');
     modals.forEach(modal => {
       if (modal.style.display !== 'none' && modal.offsetParent !== null) {
         modal.style.display = 'none';
-        this.announceToScreenReader('对话框已关闭');
+        this.announceToScreenReader('瀵硅瘽妗嗗凡鍏抽棴');
       }
     });
   }
 
-  // 更新播放状态的无障碍信息
+  // 鏇存柊鎾斁鐘舵€佺殑鏃犻殰纰嶄俊鎭?
   updatePlaybackStatus(trackName, isPlaying, currentTime, totalTime) {
     const statusText = isPlaying
-      ? `正在播放: ${trackName}, ${currentTime} / ${totalTime}`
-      : `暂停: ${trackName}, ${currentTime} / ${totalTime}`;
+      ? `姝ｅ湪鎾斁: ${trackName}, ${currentTime} / ${totalTime}`
+      : `鏆傚仠: ${trackName}, ${currentTime} / ${totalTime}`;
 
-    // 更新播放按钮的状态
+    // 鏇存柊鎾斁鎸夐挳鐨勭姸鎬?
     const playPauseBtn = document.getElementById('playPauseBtn');
     if (playPauseBtn) {
       playPauseBtn.setAttribute('aria-pressed', isPlaying.toString());
     }
 
-    // 定期更新但不过于频繁
+    // 瀹氭湡鏇存柊浣嗕笉杩囦簬棰戠箒
     if (!this.lastStatusUpdate || Date.now() - this.lastStatusUpdate > 5000) {
       this.announceToScreenReader(statusText);
       this.lastStatusUpdate = Date.now();
     }
   }
 
-  // 更新主题切换的无障碍信息
+  // 鏇存柊涓婚鍒囨崲鐨勬棤闅滅淇℃伅
   updateThemeStatus(themeName, trackCount) {
-    this.announceToScreenReader(`主题已切换到: ${themeName}, 共${trackCount}首音轨`);
+    this.announceToScreenReader(`涓婚宸插垏鎹㈠埌: ${themeName}, 鍏?{trackCount}棣栭煶杞╜);
   }
 }
 
-// ========== 音频格式兼容性管理系统 ==========
+// ========== 闊抽鏍煎紡鍏煎鎬х鐞嗙郴缁?==========
 class AudioCompatibilityManager {
   constructor() {
     this.supportedFormats = new Map();
@@ -609,11 +609,11 @@ class AudioCompatibilityManager {
   }
 
   setupFormatFallbacks() {
-    // 设置格式降级方案
+    // 璁剧疆鏍煎紡闄嶇骇鏂规
     this.formatFallbacks.set('mp3', ['mp3', 'wav', 'ogg']);
     this.formatFallbacks.set('wav', ['wav', 'mp3', 'ogg']);
     this.formatFallbacks.set('ogg', ['ogg', 'mp3', 'wav']);
-    this.formatFallbacks.set('wma', ['mp3', 'wav', 'ogg']); // WMA兼容性差，优先降级到mp3
+    this.formatFallbacks.set('wma', ['mp3', 'wav', 'ogg']); // WMA鍏煎鎬у樊锛屼紭鍏堥檷绾у埌mp3
     this.formatFallbacks.set('aac', ['mp3', 'wav', 'ogg']);
     this.formatFallbacks.set('flac', ['wav', 'mp3', 'ogg']);
   }
@@ -634,20 +634,20 @@ class AudioCompatibilityManager {
       const isSupported = canPlay === 'probably' || canPlay === 'maybe';
       this.supportedFormats.set(format, isSupported);
 
-      console.log(`音频格式支持检测 - ${format.toUpperCase()}: ${isSupported ? '支持' : '不支持'} (${canPlay || 'empty'})`);
+      console.log(`闊抽鏍煎紡鏀寔妫€娴?- ${format.toUpperCase()}: ${isSupported ? '鏀寔' : '涓嶆敮鎸?} (${canPlay || 'empty'})`);
     }
 
-    // 输出支持的格式摘要
+    // 杈撳嚭鏀寔鐨勬牸寮忔憳瑕?
     const supportedList = Array.from(this.supportedFormats.entries())
       .filter(([format, supported]) => supported)
       .map(([format]) => format.toUpperCase());
 
-    console.log(`浏览器支持的音频格式: ${supportedList.join(', ')}`);
+    console.log(`娴忚鍣ㄦ敮鎸佺殑闊抽鏍煎紡: ${supportedList.join(', ')}`);
 
     if (supportedList.length === 0) {
       window.soundHealingErrorHandler?.showUserFriendlyError(
-        '音频兼容性问题',
-        '当前浏览器可能不支持音频播放，请尝试更新浏览器'
+        '闊抽鍏煎鎬ч棶棰?,
+        '褰撳墠娴忚鍣ㄥ彲鑳戒笉鏀寔闊抽鎾斁锛岃灏濊瘯鏇存柊娴忚鍣?
       );
     }
   }
@@ -656,7 +656,7 @@ class AudioCompatibilityManager {
     const pathInfo = this.parseAudioPath(originalPath);
     const originalFormat = pathInfo.extension;
 
-    // 如果原格式被支持，直接返回
+    // 濡傛灉鍘熸牸寮忚鏀寔锛岀洿鎺ヨ繑鍥?
     if (this.supportedFormats.get(originalFormat)) {
       return {
         path: originalPath,
@@ -665,7 +665,7 @@ class AudioCompatibilityManager {
       };
     }
 
-    // 查找降级格式
+    // 鏌ユ壘闄嶇骇鏍煎紡
     const fallbacks = this.formatFallbacks.get(originalFormat) || ['mp3', 'wav', 'ogg'];
 
     for (const fallbackFormat of fallbacks) {
@@ -680,7 +680,7 @@ class AudioCompatibilityManager {
       }
     }
 
-    // 如果都不支持，返回null
+    // 濡傛灉閮戒笉鏀寔锛岃繑鍥瀗ull
     return null;
   }
 
@@ -689,7 +689,7 @@ class AudioCompatibilityManager {
     if (lastDotIndex === -1) {
       return {
         basePath: path,
-        extension: 'mp3', // 默认扩展名
+        extension: 'mp3', // 榛樿鎵╁睍鍚?
         fullPath: path
       };
     }
@@ -705,25 +705,25 @@ class AudioCompatibilityManager {
     const compatibilityInfo = this.findCompatibleFormat(originalPath);
 
     if (!compatibilityInfo) {
-      throw new Error(`无法找到兼容的音频格式: ${originalPath}`);
+      throw new Error(`鏃犳硶鎵惧埌鍏煎鐨勯煶棰戞牸寮? ${originalPath}`);
     }
 
     const audio = new Audio();
 
-    // 设置错误处理
+    // 璁剧疆閿欒澶勭悊
     return new Promise((resolve, reject) => {
       const timeout = setTimeout(() => {
-        reject(new Error(`音频加载超时: ${compatibilityInfo.path}`));
-      }, 10000); // 10秒超时
+        reject(new Error(`闊抽鍔犺浇瓒呮椂: ${compatibilityInfo.path}`));
+      }, 10000); // 10绉掕秴鏃?
 
       audio.addEventListener('canplaythrough', () => {
         clearTimeout(timeout);
 
         if (!compatibilityInfo.isOriginal) {
-          console.log(`音频格式降级: ${originalPath} -> ${compatibilityInfo.path}`);
+          console.log(`闊抽鏍煎紡闄嶇骇: ${originalPath} -> ${compatibilityInfo.path}`);
           window.soundHealingErrorHandler?.showUserFriendlyError(
-            '音频格式已自动调整',
-            `已使用兼容格式播放 (${compatibilityInfo.format.toUpperCase()})`,
+            '闊抽鏍煎紡宸茶嚜鍔ㄨ皟鏁?,
+            `宸蹭娇鐢ㄥ吋瀹规牸寮忔挱鏀?(${compatibilityInfo.format.toUpperCase()})`,
             3000
           );
         }
@@ -745,7 +745,7 @@ class AudioCompatibilityManager {
         };
 
         const errorType = errorTypes[audio.error?.code] || 'UNKNOWN_ERROR';
-        const errorMessage = `音频加载失败: ${compatibilityInfo.path} (${errorType})`;
+        const errorMessage = `闊抽鍔犺浇澶辫触: ${compatibilityInfo.path} (${errorType})`;
 
         console.error(errorMessage);
         window.soundHealingErrorHandler?.showAudioError(compatibilityInfo.path, 'format');
@@ -753,14 +753,14 @@ class AudioCompatibilityManager {
         reject(new Error(errorMessage));
       });
 
-      // 尝试加载音频
+      // 灏濊瘯鍔犺浇闊抽
       audio.preload = 'metadata';
       audio.src = compatibilityInfo.path;
       audio.load();
     });
   }
 
-  // 批量检测音频文件是否存在
+  // 鎵归噺妫€娴嬮煶棰戞枃浠舵槸鍚﹀瓨鍦?
   async validateAudioFiles(audioConfig) {
     const validationResults = new Map();
     const checkPromises = [];
@@ -772,12 +772,12 @@ class AudioCompatibilityManager {
           .then(exists => {
             validationResults.set(originalPath, exists);
             if (!exists) {
-              console.warn(`音频文件不存在: ${originalPath}`);
+              console.warn(`闊抽鏂囦欢涓嶅瓨鍦? ${originalPath}`);
             }
           })
           .catch(error => {
             validationResults.set(originalPath, false);
-            console.error(`音频文件检查失败: ${originalPath}`, error);
+            console.error(`闊抽鏂囦欢妫€鏌ュけ璐? ${originalPath}`, error);
           });
 
         checkPromises.push(promise);
@@ -811,7 +811,7 @@ class AudioCompatibilityManager {
     });
   }
 
-  // 获取格式支持报告
+  // 鑾峰彇鏍煎紡鏀寔鎶ュ憡
   getCompatibilityReport() {
     const report = {
       supportedFormats: Array.from(this.supportedFormats.entries())
@@ -825,40 +825,40 @@ class AudioCompatibilityManager {
     };
 
     if (!report.hasBasicSupport) {
-      report.recommendedAction = '建议更新浏览器以获得更好的音频支持';
+      report.recommendedAction = '寤鸿鏇存柊娴忚鍣ㄤ互鑾峰緱鏇村ソ鐨勯煶棰戞敮鎸?;
     } else if (report.supportedFormats.length < 2) {
-      report.recommendedAction = '音频兼容性有限，某些功能可能受影响';
+      report.recommendedAction = '闊抽鍏煎鎬ф湁闄愶紝鏌愪簺鍔熻兘鍙兘鍙楀奖鍝?;
     }
 
     return report;
   }
 }
 
-// 初始化系统
+// 鍒濆鍖栫郴缁?
 window.addEventListener('DOMContentLoaded', () => {
   window.soundHealingErrorHandler = new ErrorHandler();
   window.soundHealingPerformance = new PerformanceManager();
   window.soundHealingAccessibility = new AccessibilityManager();
   window.soundHealingCompatibility = new AudioCompatibilityManager();
 
-  // 输出兼容性报告
+  // 杈撳嚭鍏煎鎬ф姤鍛?
   setTimeout(() => {
     const compatibilityReport = window.soundHealingCompatibility.getCompatibilityReport();
-    console.log('=== 音频兼容性报告 ===');
-    console.log('支持格式:', compatibilityReport.supportedFormats);
-    console.log('不支持格式:', compatibilityReport.unsupportedFormats);
-    console.log('基础支持:', compatibilityReport.hasBasicSupport ? '是' : '否');
+    console.log('=== 闊抽鍏煎鎬ф姤鍛?===');
+    console.log('鏀寔鏍煎紡:', compatibilityReport.supportedFormats);
+    console.log('涓嶆敮鎸佹牸寮?', compatibilityReport.unsupportedFormats);
+    console.log('鍩虹鏀寔:', compatibilityReport.hasBasicSupport ? '鏄? : '鍚?);
     if (compatibilityReport.recommendedAction) {
-      console.log('建议:', compatibilityReport.recommendedAction);
+      console.log('寤鸿:', compatibilityReport.recommendedAction);
       window.soundHealingErrorHandler?.showUserFriendlyError(
-        '音频兼容性提醒',
+        '闊抽鍏煎鎬ф彁閱?,
         compatibilityReport.recommendedAction,
         4000
       );
     }
   }, 1000);
 
-  // 页面卸载时清理资源
+  // 椤甸潰鍗歌浇鏃舵竻鐞嗚祫婧?
   window.addEventListener('beforeunload', () => {
     window.soundHealingPerformance?.cleanup();
   });
@@ -908,7 +908,7 @@ window.addEventListener('DOMContentLoaded', () => {
   setInterval(() => updateUptime(start), 60000);
 })();
 
-// ========== 自然场景动画系统 ==========
+// ========== 鑷劧鍦烘櫙鍔ㄧ敾绯荤粺 ==========
 (() => {
   'use strict';
 
@@ -919,7 +919,7 @@ window.addEventListener('DOMContentLoaded', () => {
   let w, h, particles = [];
   let currentTheme = 'default';
 
-  // 主题场景配置
+  // 涓婚鍦烘櫙閰嶇疆
   const sceneConfigs = {
     'Animal sounds': {
       colors: ['#7ba05b', '#9bb86b', '#6d9a4f', '#8fbc7f'],
@@ -989,7 +989,7 @@ window.addEventListener('DOMContentLoaded', () => {
       this.x += this.speedX;
       this.rotation += this.rotationSpeed;
 
-      // 生命周期透明度变化
+      // 鐢熷懡鍛ㄦ湡閫忔槑搴﹀彉鍖?
       if (this.age < 20) {
         this.opacity = (this.age / 20) * 0.6;
       } else if (this.y > h - 50) {
@@ -1117,14 +1117,14 @@ window.addEventListener('DOMContentLoaded', () => {
   const draw = () => {
     const config = sceneConfigs[currentTheme] || sceneConfigs.default;
 
-    // 清空画布并绘制背景渐变
+    // 娓呯┖鐢诲竷骞剁粯鍒惰儗鏅笎鍙?
     const gradient = ctx.createLinearGradient(0, 0, 0, h);
     gradient.addColorStop(0, config.bgGradient[0]);
     gradient.addColorStop(1, config.bgGradient[1]);
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, w, h);
 
-    // 更新和绘制粒子
+    // 鏇存柊鍜岀粯鍒剁矑瀛?
     particles.forEach(particle => {
       particle.update(config);
       particle.draw();
@@ -1133,7 +1133,7 @@ window.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(draw);
   };
 
-  // 主题切换功能
+  // 涓婚鍒囨崲鍔熻兘
   window.updateNatureScene = (theme) => {
     currentTheme = theme;
     initParticles();
@@ -1143,7 +1143,7 @@ window.addEventListener('DOMContentLoaded', () => {
   initParticles();
   window.addEventListener('resize', resize, {passive: true});
 
-  // 清理函数
+  // 娓呯悊鍑芥暟
   window.addEventListener('beforeunload', () => {
     window.removeEventListener('resize', resize);
   }, {once: true});
@@ -1151,27 +1151,27 @@ window.addEventListener('DOMContentLoaded', () => {
   requestAnimationFrame(draw);
 })();
 
-// ========== 虚拟主题轮播系统 ==========
+// ========== 铏氭嫙涓婚杞挱绯荤粺 ==========
 (() => {
   'use strict';
 
-  // 主题数据
+  // 涓婚鏁版嵁
   const themes = [
-    { key: 'Animal sounds', name: '森林栖息地', icon: '🦅', count: 26 },
-    { key: 'Fire', name: '温暖壁炉', icon: '🔥', count: 3 },
-    { key: 'hypnosis', name: '梦境花园', icon: '🌙', count: 70 },
-    { key: 'meditation', name: '禅境山谷', icon: '🧘‍♀️', count: 14 },
-    { key: 'Rain', name: '雨林圣地', icon: '☔', count: 14 },
-    { key: 'running water', name: '溪流秘境', icon: '💧', count: 6 },
-    { key: 'Singing bowl sound', name: '颂钵圣殿', icon: '🎵', count: 61 },
-    { key: 'Chakra', name: '能量场域', icon: '🌈', count: 7 },
-    { key: 'Subconscious Therapy', name: '潜识星域', icon: '🌌', count: 11 }
+    { key: 'Animal sounds', name: '妫灄鏍栨伅鍦?, icon: '馃', count: 26 },
+    { key: 'Fire', name: '娓╂殩澹佺倝', icon: '馃敟', count: 3 },
+    { key: 'hypnosis', name: '姊﹀鑺卞洯', icon: '馃寵', count: 70 },
+    { key: 'meditation', name: '绂呭灞辫胺', icon: '馃鈥嶁檧锔?, count: 14 },
+    { key: 'Rain', name: '闆ㄦ灄鍦ｅ湴', icon: '鈽?, count: 14 },
+    { key: 'running water', name: '婧祦绉樺', icon: '馃挧', count: 6 },
+    { key: 'Singing bowl sound', name: '棰傞挼鍦ｆ', icon: '馃幍', count: 61 },
+    { key: 'Chakra', name: '鑳介噺鍦哄煙', icon: '馃寛', count: 7 },
+    { key: 'Subconscious Therapy', name: '娼滆瘑鏄熷煙', icon: '馃寣', count: 11 }
   ];
 
   let currentThemeIndex = 0;
   let currentTheme = null;
 
-  // 主题色彩映射
+  // 涓婚鑹插僵鏄犲皠
   const themeColors = {
     'Animal sounds': {
       primary: '#7ba05b',
@@ -1220,59 +1220,59 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // 更新主题色彩
+  // 鏇存柊涓婚鑹插僵
   const updateThemeColors = (themeKey) => {
     const colors = themeColors[themeKey] || themeColors['Singing bowl sound'];
     const root = document.documentElement;
 
-    // 更新CSS自定义属性
+    // 鏇存柊CSS鑷畾涔夊睘鎬?
     root.style.setProperty('--theme-primary', colors.primary);
     root.style.setProperty('--theme-secondary', colors.secondary);
     root.style.setProperty('--theme-accent', colors.accent);
 
-    // 更新界面元素的品牌色彩
+    // 鏇存柊鐣岄潰鍏冪礌鐨勫搧鐗岃壊褰?
     updateBrandElements(colors);
   };
 
-  // 更新品牌元素
+  // 鏇存柊鍝佺墝鍏冪礌
   const updateBrandElements = (colors) => {
-    // 更新当前主题图标颜色
+    // 鏇存柊褰撳墠涓婚鍥炬爣棰滆壊
     const currentThemeIcon = document.getElementById('currentThemeIcon');
     if (currentThemeIcon) {
       currentThemeIcon.style.filter = `hue-rotate(${getHueRotation(colors.primary)}deg)`;
     }
 
-    // 更新仪表盘品牌图标
+    // 鏇存柊浠〃鐩樺搧鐗屽浘鏍?
     const brandIcon = document.querySelector('.brand-icon');
     if (brandIcon) {
       brandIcon.style.filter = `hue-rotate(${getHueRotation(colors.primary)}deg)`;
     }
 
-    // 为状态卡片添加主题色彩提示
+    // 涓虹姸鎬佸崱鐗囨坊鍔犱富棰樿壊褰╂彁绀?
     document.querySelectorAll('.status-card').forEach((card, index) => {
-      if (index === 0) { // 当前主题卡片
+      if (index === 0) { // 褰撳墠涓婚鍗＄墖
         card.style.borderColor = `${colors.primary}40`;
         card.style.background = `${colors.primary}08`;
       }
     });
   };
 
-  // 计算色相旋转角度
+  // 璁＄畻鑹茬浉鏃嬭浆瑙掑害
   const getHueRotation = (color) => {
-    // 简化的色相映射
+    // 绠€鍖栫殑鑹茬浉鏄犲皠
     const colorMap = {
-      '#7ba05b': 60,   // 森林绿
-      '#e8956d': 20,   // 火焰橙
-      '#6db5e8': 200,  // 水蓝
-      '#a56de8': 270,  // 紫色
-      '#8fbc7f': 90,   // 冥想绿
-      '#e8b86d': 40,   // 金色
-      '#9575cd': 250   // 疗愈紫
+      '#7ba05b': 60,   // 妫灄缁?
+      '#e8956d': 20,   // 鐏劙姗?
+      '#6db5e8': 200,  // 姘磋摑
+      '#a56de8': 270,  // 绱壊
+      '#8fbc7f': 90,   // 鍐ユ兂缁?
+      '#e8b86d': 40,   // 閲戣壊
+      '#9575cd': 250   // 鐤楁剤绱?
     };
     return colorMap[color] || 0;
   };
 
-  // 获取DOM元素
+  // 鑾峰彇DOM鍏冪礌
   const prevBtn = document.getElementById('carouselPrev');
   const nextBtn = document.getElementById('carouselNext');
   const activeNameEl = document.getElementById('carouselActiveName');
@@ -1281,45 +1281,45 @@ window.addEventListener('DOMContentLoaded', () => {
   const trackListEl = document.getElementById('trackList');
   const playFirstBtn = document.getElementById('playFirstBtn');
 
-  // 更新主题显示
+  // 鏇存柊涓婚鏄剧ず
   const updateThemeDisplay = () => {
     currentTheme = themes[currentThemeIndex];
 
     if (activeNameEl) activeNameEl.textContent = currentTheme.name;
 
-    // 更新左侧疗愈面板
+    // 鏇存柊宸︿晶鐤楁剤闈㈡澘
     if (currentThemeNameEl) currentThemeNameEl.textContent = currentTheme.name;
-    if (currentThemeCountEl) currentThemeCountEl.textContent = `${currentTheme.count} 首音轨`;
+    if (currentThemeCountEl) currentThemeCountEl.textContent = `${currentTheme.count} 棣栭煶杞╜;
 
-    // 更新场景图标
+    // 鏇存柊鍦烘櫙鍥炬爣
     const sceneIcon = document.getElementById('sceneIcon');
     if (sceneIcon) sceneIcon.textContent = currentTheme.icon;
 
-    // 更新自然场景动画
+    // 鏇存柊鑷劧鍦烘櫙鍔ㄧ敾
     if (typeof window.updateNatureScene === 'function') {
       window.updateNatureScene(currentTheme.key);
     }
 
-    // 更新主题色彩
+    // 鏇存柊涓婚鑹插僵
     updateThemeColors(currentTheme.key);
 
-    // 更新播放列表
+    // 鏇存柊鎾斁鍒楄〃
     updatePlaylist();
   };
 
-  // 更新播放列表
+  // 鏇存柊鎾斁鍒楄〃
   const updatePlaylist = () => {
     if (!trackListEl || !currentTheme) return;
 
-    // 获取音频配置
+    // 鑾峰彇闊抽閰嶇疆
     const config = window.AUDIO_CONFIG;
     if (!config || !config.categories[currentTheme.key]) {
-      trackListEl.innerHTML = '<div style="color: #ffffff; font-weight: 600; text-shadow: 0 2px 4px rgba(0,0,0,0.6), 0 1px 2px rgba(0,0,0,0.8);">音频文件加载中...</div>';
+      trackListEl.innerHTML = '<div style="color: #ffffff; font-weight: 600; text-shadow: 0 2px 4px rgba(0,0,0,0.6), 0 1px 2px rgba(0,0,0,0.8);">闊抽鏂囦欢鍔犺浇涓?..</div>';
       return;
     }
 
     const tracks = config.categories[currentTheme.key].files;
-    let html = `<div style="color: #7ba05b; margin-bottom: 8px; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.6), 0 1px 2px rgba(0,0,0,0.8);">${currentTheme.icon} ${currentTheme.name} (${tracks.length} 首)</div>`;
+    let html = `<div style="color: #7ba05b; margin-bottom: 8px; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.6), 0 1px 2px rgba(0,0,0,0.8);">${currentTheme.icon} ${currentTheme.name} (${tracks.length} 棣?</div>`;
 
     tracks.forEach((track, index) => {
       const trackName = track.replace(/^\d+[-.\s]*/, '').replace(/\.(mp3|wav|ogg)$/i, '');
@@ -1329,7 +1329,7 @@ window.addEventListener('DOMContentLoaded', () => {
     trackListEl.innerHTML = html;
   };
 
-  // 主题切换
+  // 涓婚鍒囨崲
   const switchTheme = (direction) => {
     currentThemeIndex += direction;
     if (currentThemeIndex < 0) currentThemeIndex = themes.length - 1;
@@ -1337,39 +1337,39 @@ window.addEventListener('DOMContentLoaded', () => {
     updateThemeDisplay();
   };
 
-  // 绑定事件
+  // 缁戝畾浜嬩欢
   if (prevBtn) prevBtn.addEventListener('click', () => switchTheme(-1));
   if (nextBtn) nextBtn.addEventListener('click', () => switchTheme(1));
 
-  // 播放全部按钮
+  // 鎾斁鍏ㄩ儴鎸夐挳
   if (playFirstBtn) {
     playFirstBtn.addEventListener('click', () => {
       if (currentTheme) {
-        // 这里应该调用实际的播放功能
-        console.log('播放主题:', currentTheme.name);
-        // 可以触发现有的音频管理器
+        // 杩欓噷搴旇璋冪敤瀹為檯鐨勬挱鏀惧姛鑳?
+        console.log('鎾斁涓婚:', currentTheme.name);
+        // 鍙互瑙﹀彂鐜版湁鐨勯煶棰戠鐞嗗櫒
       }
     });
   }
 
-  // 键盘控制
+  // 閿洏鎺у埗
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') switchTheme(-1);
     if (e.key === 'ArrowRight') switchTheme(1);
   });
 
-  // 全局函数供点击事件使用
+  // 鍏ㄥ眬鍑芥暟渚涚偣鍑讳簨浠朵娇鐢?
   window.selectTrack = (index) => {
     if (currentTheme) {
-      console.log(`选择音轨: ${currentTheme.name} - ${index + 1}`);
-      // 这里可以触发实际的音轨播放
+      console.log(`閫夋嫨闊宠建: ${currentTheme.name} - ${index + 1}`);
+      // 杩欓噷鍙互瑙﹀彂瀹為檯鐨勯煶杞ㄦ挱鏀?
     }
   };
 
-  // 初始化
+  // 鍒濆鍖?
   updateThemeDisplay();
 
-  // 初始化品牌色彩
+  // 鍒濆鍖栧搧鐗岃壊褰?
   updateThemeColors(themes[0].key);
 })();
 
@@ -1388,7 +1388,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const config = resolveConfig();
   if (!config || !config.categories) {
-    console.error('AUDIO_CONFIG 未加载或无分类数据');
+    console.error('AUDIO_CONFIG 鏈姞杞芥垨鏃犲垎绫绘暟鎹?);
     return;
   }
 
@@ -1416,6 +1416,85 @@ window.addEventListener('DOMContentLoaded', () => {
     'Subconscious Therapy': { className: 'theme-cosmic', accent: '#7e57c2' }
   };
 
+  const categorySlugMap = {
+    'Animal sounds': 'animal-sounds',
+    'Fire': 'fire-sounds',
+    'hypnosis': 'hypnosis',
+    'meditation': 'meditation',
+    'Rain': 'rain-sounds',
+    'running water': 'water-sounds',
+    'Singing bowl sound': 'singing-bowls',
+    'Chakra': 'chakra-healing',
+    'Subconscious Therapy': 'subconscious-therapy'
+  };
+
+  const categoryAliases = {
+    'animal': 'Animal sounds',
+    'animals': 'Animal sounds',
+    'animal-sounds': 'Animal sounds',
+    'fire': 'Fire',
+    'fire-sounds': 'Fire',
+    'hypnosis': 'hypnosis',
+    'meditation': 'meditation',
+    'meditate': 'meditation',
+    'rain': 'Rain',
+    'rain-sounds': 'Rain',
+    'rain-sound': 'Rain',
+    'sleep': 'Rain',
+    'water': 'running water',
+    'water-sounds': 'running water',
+    'nature': 'Animal sounds',
+    'nature-sounds': 'Animal sounds',
+    'singing-bowls': 'Singing bowl sound',
+    'singing-bowl': 'Singing bowl sound',
+    'bowls': 'Singing bowl sound',
+    'chakra': 'Chakra',
+    'chakra-healing': 'Chakra',
+    'subconscious': 'Subconscious Therapy',
+    'subconscious-therapy': 'Subconscious Therapy'
+  };
+
+  const resolveCategoryFromInput = (value) => {
+    if (!value) return null;
+    const normalized = value.toString().toLowerCase().trim().replace(/^#/, '');
+    if (!normalized) return null;
+    const direct = themeOrder.find((key) => key.toLowerCase() === normalized);
+    if (direct) return direct;
+    for (const [key, slug] of Object.entries(categorySlugMap)) {
+      if (slug === normalized) return key;
+    }
+    const alias = categoryAliases[normalized];
+    if (alias && themeOrder.includes(alias)) return alias;
+    return null;
+  };
+
+  const getInitialCategoryFromUrl = () => {
+    try {
+      const url = new URL(window.location.href);
+      const queryCategory = resolveCategoryFromInput(url.searchParams.get('category'));
+      if (queryCategory) return queryCategory;
+    } catch (error) {
+      console.warn('URL parsing failed when resolving category', error);
+    }
+    const hashCategory = resolveCategoryFromInput(window.location.hash);
+    if (hashCategory) return hashCategory;
+    return null;
+  };
+
+  const updateUrlForCategory = (categoryKey) => {
+    if (!window.history || typeof window.history.replaceState !== 'function') return;
+    try {
+      const url = new URL(window.location.href);
+      const slug = categorySlugMap[categoryKey] || categoryKey.toLowerCase().replace(/\s+/g, '-');
+      url.searchParams.set('category', slug);
+      url.hash = '';
+      window.history.replaceState({}, '', url.toString());
+    } catch (error) {
+      console.warn('Unable to update URL for category', error);
+    }
+  };
+
+  let suppressUrlSync = false;
   const playlistPanel = document.getElementById('playlistPanel');
   const playlistBackdrop = document.getElementById('playlistBackdrop');
   const currentThemeBadge = document.getElementById('currentThemeBadge');
@@ -1465,7 +1544,7 @@ window.addEventListener('DOMContentLoaded', () => {
   let sleepTimerInterval = null;
   let sleepTimerEnd = null;
   let isUserSeeking = false;
-  let isDragging = false; // 进度条拖拽状态
+  let isDragging = false; // 杩涘害鏉℃嫋鎷界姸鎬?
   let isPlaylistCollapsed = false;
   let carouselIndex = 0;
   let carouselCards = [];
@@ -1486,17 +1565,17 @@ window.addEventListener('DOMContentLoaded', () => {
     return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
   };
 
-  // 简单的翻译函数
+  // 绠€鍗曠殑缈昏瘧鍑芥暟
   const getTranslation = (key) => {
     const translations = {
-      'play': '播放',
-      'pause': '暂停',
-      'timer-disabled': '未开启'
+      'play': '鎾斁',
+      'pause': '鏆傚仠',
+      'timer-disabled': '鏈紑鍚?
     };
     return translations[key] || key;
   };
 
-  // 更新播放/暂停按钮状态
+  // 鏇存柊鎾斁/鏆傚仠鎸夐挳鐘舵€?
   const updatePlayPauseButton = () => {
     if (!playPauseBtn) return;
 
@@ -1505,7 +1584,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const playLabel = playPauseBtn.querySelector('.control-label');
 
     if (playIcon) {
-      playIcon.textContent = isPlaying ? '⏸️' : '▶️';
+      playIcon.textContent = isPlaying ? '鈴革笍' : '鈻讹笍';
     }
 
     if (playLabel) {
@@ -1514,24 +1593,24 @@ window.addEventListener('DOMContentLoaded', () => {
       playLabel.setAttribute('data-i18n', key);
     }
 
-    // 更新ARIA状态
+    // 鏇存柊ARIA鐘舵€?
     playPauseBtn.setAttribute('aria-pressed', String(isPlaying));
 
-    // 更新按钮样式
+    // 鏇存柊鎸夐挳鏍峰紡
     if (isPlaying) {
       playPauseBtn.classList.add('playing');
     } else {
       playPauseBtn.classList.remove('playing');
     }
 
-    // 更新状态卡片
+    // 鏇存柊鐘舵€佸崱鐗?
     updatePlaybackStatus(
-      isPlaying ? '正在播放' : '暂停',
-      isPlaying ? '▶️' : '⏸️',
-      isPlaying ? '享受疗愈音乐' : '点击继续播放'
+      isPlaying ? '姝ｅ湪鎾斁' : '鏆傚仠',
+      isPlaying ? '鈻讹笍' : '鈴革笍',
+      isPlaying ? '浜彈鐤楁剤闊充箰' : '鐐瑰嚮缁х画鎾斁'
     );
 
-    console.log(`播放按钮状态更新: ${isPlaying ? '播放中' : '已暂停'}`);
+    console.log(`鎾斁鎸夐挳鐘舵€佹洿鏂? ${isPlaying ? '鎾斁涓? : '宸叉殏鍋?}`);
   };
 
   const sanitizeName = (name) => {
@@ -1564,7 +1643,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  // 更新播放状态显示
+  // 鏇存柊鎾斁鐘舵€佹樉绀?
   const updatePlaybackStatus = (status, icon, extra) => {
     if (playbackStatus) playbackStatus.textContent = status;
     if (playbackIcon) playbackIcon.textContent = icon;
@@ -1573,7 +1652,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const resetNowPlaying = () => {
     currentTrackIndex = -1;
-    if (nowPlayingTitle) nowPlayingTitle.textContent = '暂未播放';
+    if (nowPlayingTitle) nowPlayingTitle.textContent = '鏆傛湭鎾斁';
     if (currentTimeEl) currentTimeEl.textContent = '00:00';
     if (totalTimeEl) totalTimeEl.textContent = '--:--';
     if (progressRange) {
@@ -1582,14 +1661,14 @@ window.addEventListener('DOMContentLoaded', () => {
       progressRange.disabled = true;
     }
 
-    // 重置视觉进度条
+    // 閲嶇疆瑙嗚杩涘害鏉?
     const progressDisplay = document.getElementById('progressDisplay');
     if (progressDisplay) {
       progressDisplay.style.width = '0%';
     }
 
-    // 更新播放状态
-    updatePlaybackStatus('待机', '⏸️', '准备开始疗愈');
+    // 鏇存柊鎾斁鐘舵€?
+    updatePlaybackStatus('寰呮満', '鈴革笍', '鍑嗗寮€濮嬬枟鎰?);
 
     updateTrackHighlight();
   };
@@ -1612,7 +1691,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (!currentPlaylist.length) {
       const empty = document.createElement('div');
       empty.className = 'empty-placeholder';
-      empty.textContent = '该主题暂未收录音频';
+      empty.textContent = '璇ヤ富棰樻殏鏈敹褰曢煶棰?;
       trackListEl.appendChild(empty);
       return;
     }
@@ -1644,7 +1723,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (trackListEl) trackListEl.classList.toggle('collapsed', collapsed);
     if (playlistPanel) playlistPanel.classList.toggle('collapsed', collapsed);
     if (togglePlaylistBtn) {
-      togglePlaylistBtn.textContent = collapsed ? '展开列表' : '收起列表';
+      togglePlaylistBtn.textContent = collapsed ? '灞曞紑鍒楄〃' : '鏀惰捣鍒楄〃';
       togglePlaylistBtn.setAttribute('aria-expanded', String(!collapsed));
     }
   };
@@ -1661,7 +1740,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (carouselActiveName) {
       const key = themeOrder[carouselIndex] || '';
       const data = key ? config.categories[key] : null;
-      carouselActiveName.textContent = (data && data.name) || key || '请选择主题';
+      carouselActiveName.textContent = (data && data.name) || key || '璇烽€夋嫨涓婚';
     }
   };
 
@@ -1682,9 +1761,9 @@ window.addEventListener('DOMContentLoaded', () => {
       card.type = 'button';
       card.className = ['carousel-card', 'theme-visual', visual.className].filter(Boolean).join(' ');
       card.dataset.category = key;
-      const icon = data.icon || '🎵';
+      const icon = data.icon || '馃幍';
       const title = data.name || key;
-      const subtitle = data.description || '沉浸式声音旅程';
+      const subtitle = data.description || '娌夋蹈寮忓０闊虫梾绋?;
       card.innerHTML = `
         <span class="carousel-card__icon">${icon}</span>
         <span class="carousel-card__title">${title}</span>
@@ -1715,7 +1794,8 @@ window.addEventListener('DOMContentLoaded', () => {
     selectCategory(themeOrder[nextIndex]);
   };
 
-  const selectCategory = (categoryKey) => {
+  const selectCategory = (categoryKey, options = {}) => {
+    const { skipUrlSync = false } = options;
     const data = config.categories[categoryKey];
     if (!data) return;
 
@@ -1736,20 +1816,22 @@ window.addEventListener('DOMContentLoaded', () => {
       currentPlaylist = Array.isArray(data.files) ? data.files.slice() : [];
       renderPlaylist();
 
-      // 只有在音频没有播放时才重置播放器状态
-      // 如果音频正在播放，保持播放状态但更新播放列表
+      // 鍙湁鍦ㄩ煶棰戞病鏈夋挱鏀炬椂鎵嶉噸缃挱鏀惧櫒鐘舵€?
+      // 濡傛灉闊抽姝ｅ湪鎾斁锛屼繚鎸佹挱鏀剧姸鎬佷絾鏇存柊鎾斁鍒楄〃
       if (audio.paused || !audio.src) {
         audio.removeAttribute('src');
         audio.load();
         resetNowPlaying();
         clearSleepTimer({ keepButtons: true });
       }
-      // 如果音频正在播放，保持播放状态，只更新UI显示
+      // 濡傛灉闊抽姝ｅ湪鎾斁锛屼繚鎸佹挱鏀剧姸鎬侊紝鍙洿鏂癠I鏄剧ず
     }
 
-    if (currentThemeBadge) currentThemeBadge.textContent = data.icon || '🎵';
+    if (!skipUrlSync && !suppressUrlSync) updateUrlForCategory(categoryKey);
+
+    if (currentThemeBadge) currentThemeBadge.textContent = data.icon || '馃幍';
     if (currentThemeName) currentThemeName.textContent = data.name || categoryKey;
-    if (currentThemeCount) currentThemeCount.textContent = `${currentPlaylist.length} 首音频`;
+    if (currentThemeCount) currentThemeCount.textContent = `${currentPlaylist.length} 棣栭煶棰慲;
     if (nowPlayingCategory) nowPlayingCategory.textContent = data.name || categoryKey;
   };
 
@@ -1761,37 +1843,37 @@ window.addEventListener('DOMContentLoaded', () => {
     if (!playPauseBtn) return;
     const isPlaying = Boolean(audio.src) && !audio.paused;
 
-    // 更新播放/暂停按钮
+    // 鏇存柊鎾斁/鏆傚仠鎸夐挳
     const playIcon = playPauseBtn.querySelector('.control-icon');
     const playLabel = playPauseBtn.querySelector('.control-label');
-    if (playIcon) playIcon.textContent = isPlaying ? '⏸️' : '▶️';
+    if (playIcon) playIcon.textContent = isPlaying ? '鈴革笍' : '鈻讹笍';
     if (playLabel) {
       if (isPlaying) {
-        playLabel.textContent = window.translate ? window.translate('pause') : '暂停';
+        playLabel.textContent = window.translate ? window.translate('pause') : '鏆傚仠';
       } else {
-        playLabel.textContent = window.translate ? window.translate('play') : '播放';
+        playLabel.textContent = window.translate ? window.translate('play') : '鎾斁';
       }
     }
     playPauseBtn.classList.add('primary');
 
-    // 同步更新播放状态卡片
+    // 鍚屾鏇存柊鎾斁鐘舵€佸崱鐗?
     if (isPlaying) {
       updatePlaybackStatus(
-        window.translate ? window.translate('playing') : '正在播放',
-        '▶️',
-        window.translate ? window.translate('enjoying-music') : '享受疗愈音乐'
+        window.translate ? window.translate('playing') : '姝ｅ湪鎾斁',
+        '鈻讹笍',
+        window.translate ? window.translate('enjoying-music') : '浜彈鐤楁剤闊充箰'
       );
     } else if (audio.src) {
       updatePlaybackStatus(
-        window.translate ? window.translate('paused-status') : '暂停中',
-        '⏸️',
-        window.translate ? window.translate('continue-journey') : '继续疗愈之旅'
+        window.translate ? window.translate('paused-status') : '鏆傚仠涓?,
+        '鈴革笍',
+        window.translate ? window.translate('continue-journey') : '缁х画鐤楁剤涔嬫梾'
       );
     } else {
       updatePlaybackStatus(
-        window.translate ? window.translate('standby') : '待机中',
-        '⏸️',
-        window.translate ? window.translate('ready-to-start') : '准备开始疗愈'
+        window.translate ? window.translate('standby') : '寰呮満涓?,
+        '鈴革笍',
+        window.translate ? window.translate('ready-to-start') : '鍑嗗寮€濮嬬枟鎰?
       );
     }
   };
@@ -1832,7 +1914,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (totalTimeEl) totalTimeEl.textContent = '--:--';
 
     audio.currentTime = 0;
-    audio.play().catch((error) => console.error('播放失败', error));
+    audio.play().catch((error) => console.error('鎾斁澶辫触', error));
 
     const btn = trackButtonList[targetIndex];
     if (btn && btn.scrollIntoView) {
@@ -1860,16 +1942,16 @@ window.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // 到达列表末尾的处理
+    // 鍒拌揪鍒楄〃鏈熬鐨勫鐞?
     if (autoplay && !isRepeat) {
-      // 自动播放结束，且非循环模式，停止播放
+      // 鑷姩鎾斁缁撴潫锛屼笖闈炲惊鐜ā寮忥紝鍋滄鎾斁
       audio.pause();
       audio.currentTime = 0;
       updatePlayButton();
       return;
     }
 
-    // 手动点击或循环模式，回到第一首
+    // 鎵嬪姩鐐瑰嚮鎴栧惊鐜ā寮忥紝鍥炲埌绗竴棣?
     playTrack(0);
   };
 
@@ -1920,13 +2002,13 @@ window.addEventListener('DOMContentLoaded', () => {
     clearSleepTimer({ keepButtons: true, statusText: getTranslation('timer-disabled') });
     sleepTimerEnd = Date.now() + minutes * 60000;
 
-    // 更新timer-button状态（如果存在）
+    // 鏇存柊timer-button鐘舵€侊紙濡傛灉瀛樺湪锛?
     timerButtons.forEach((btn) => {
       const value = Number(btn.dataset.timer || '0');
       btn.classList.toggle('active', value === minutes);
     });
 
-    // 更新下拉框选择
+    // 鏇存柊涓嬫媺妗嗛€夋嫨
     const timerSelect = document.getElementById('timerSelect');
     if (timerSelect) {
       timerSelect.value = String(minutes);
@@ -1940,8 +2022,8 @@ window.addEventListener('DOMContentLoaded', () => {
       }
       const remaining = sleepTimerEnd - Date.now();
       if (remaining <= 0) {
-        timerStatus.textContent = '播放已结束';
-        clearSleepTimer({ keepButtons: false, statusText: '播放已结束' });
+        timerStatus.textContent = '鎾斁宸茬粨鏉?;
+        clearSleepTimer({ keepButtons: false, statusText: '鎾斁宸茬粨鏉? });
         audio.pause();
         audio.currentTime = 0;
         updatePlayButton();
@@ -1950,13 +2032,13 @@ window.addEventListener('DOMContentLoaded', () => {
       const totalSeconds = Math.ceil(remaining / 1000);
       const mins = Math.floor(totalSeconds / 60);
       const secs = totalSeconds % 60;
-      timerStatus.textContent = `剩余 ${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+      timerStatus.textContent = `鍓╀綑 ${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
     };
 
     update();
     sleepTimerInterval = setInterval(update, 1000);
     sleepTimerTimeout = setTimeout(() => {
-      clearSleepTimer({ statusText: '播放已结束' });
+      clearSleepTimer({ statusText: '鎾斁宸茬粨鏉? });
       audio.pause();
       audio.currentTime = 0;
       updatePlayButton();
@@ -2011,13 +2093,13 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   audio.addEventListener('timeupdate', () => {
-    if (isUserSeeking || isDragging) return; // 添加isDragging检查
+    if (isUserSeeking || isDragging) return; // 娣诲姞isDragging妫€鏌?
     if (progressRange && Number.isFinite(audio.currentTime)) {
       progressRange.value = String(Math.floor(audio.currentTime));
     }
     if (currentTimeEl) currentTimeEl.textContent = formatTime(audio.currentTime);
 
-    // 更新视觉进度条
+    // 鏇存柊瑙嗚杩涘害鏉?
     const progressDisplay = document.getElementById('progressDisplay');
     if (progressDisplay && Number.isFinite(audio.currentTime) && Number.isFinite(audio.duration) && audio.duration > 0) {
       const percentage = (audio.currentTime / audio.duration) * 100;
@@ -2025,20 +2107,20 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 监听播放状态变化，自动更新按钮状态
+  // 鐩戝惉鎾斁鐘舵€佸彉鍖栵紝鑷姩鏇存柊鎸夐挳鐘舵€?
   audio.addEventListener('play', () => {
     updatePlayPauseButton();
-    console.log('音频开始播放');
+    console.log('闊抽寮€濮嬫挱鏀?);
   });
 
   audio.addEventListener('pause', () => {
     updatePlayPauseButton();
-    console.log('音频已暂停');
+    console.log('闊抽宸叉殏鍋?);
   });
 
   audio.addEventListener('ended', () => {
     updatePlayPauseButton();
-    console.log('音频播放结束');
+    console.log('闊抽鎾斁缁撴潫');
   });
 
   audio.addEventListener('ended', () => {
@@ -2053,7 +2135,7 @@ window.addEventListener('DOMContentLoaded', () => {
   audio.addEventListener('play', updatePlayButton);
   audio.addEventListener('pause', updatePlayButton);
 
-  // 随机播放模式控制
+  // 闅忔満鎾斁妯″紡鎺у埗
   const shuffleBtnVisible = document.getElementById('shuffleBtnVisible');
   if (shuffleBtnVisible) {
     shuffleBtnVisible.addEventListener('click', () => {
@@ -2061,29 +2143,29 @@ window.addEventListener('DOMContentLoaded', () => {
       shuffleBtnVisible.classList.toggle('active', isShuffle);
       shuffleBtnVisible.setAttribute('aria-pressed', String(isShuffle));
 
-      // 更新图标和标签
+      // 鏇存柊鍥炬爣鍜屾爣绛?
       const icon = shuffleBtnVisible.querySelector('.mode-icon');
       const label = shuffleBtnVisible.querySelector('.mode-label');
-      if (icon) icon.textContent = isShuffle ? '🔀' : '🔀';
+      if (icon) icon.textContent = isShuffle ? '馃攢' : '馃攢';
       if (label) {
         if (isShuffle) {
-          label.textContent = window.translate ? window.translate('shuffle-on') : '随机开';
+          label.textContent = window.translate ? window.translate('shuffle-on') : '闅忔満寮€';
         } else {
-          label.textContent = window.translate ? window.translate('shuffle') : '随机';
+          label.textContent = window.translate ? window.translate('shuffle') : '闅忔満';
         }
       }
 
-      // 同步隐藏按钮状态
+      // 鍚屾闅愯棌鎸夐挳鐘舵€?
       if (shuffleBtn) {
         shuffleBtn.classList.toggle('active', isShuffle);
         shuffleBtn.setAttribute('aria-pressed', String(isShuffle));
       }
 
-      console.log(`随机播放模式: ${isShuffle ? '开启' : '关闭'}`);
+      console.log(`闅忔満鎾斁妯″紡: ${isShuffle ? '寮€鍚? : '鍏抽棴'}`);
     });
   }
 
-  // 循环播放模式控制
+  // 寰幆鎾斁妯″紡鎺у埗
   const repeatBtnVisible = document.getElementById('repeatBtnVisible');
   if (repeatBtnVisible) {
     repeatBtnVisible.addEventListener('click', () => {
@@ -2091,19 +2173,19 @@ window.addEventListener('DOMContentLoaded', () => {
       repeatBtnVisible.classList.toggle('active', isRepeat);
       repeatBtnVisible.setAttribute('aria-pressed', String(isRepeat));
 
-      // 更新图标和标签
+      // 鏇存柊鍥炬爣鍜屾爣绛?
       const icon = repeatBtnVisible.querySelector('.mode-icon');
       const label = repeatBtnVisible.querySelector('.mode-label');
-      if (icon) icon.textContent = isRepeat ? '🔁' : '🔁';
-      if (label) label.textContent = isRepeat ? '循环开' : '循环';
+      if (icon) icon.textContent = isRepeat ? '馃攣' : '馃攣';
+      if (label) label.textContent = isRepeat ? '寰幆寮€' : '寰幆';
 
-      // 同步隐藏按钮状态
+      // 鍚屾闅愯棌鎸夐挳鐘舵€?
       if (repeatBtn) {
         repeatBtn.classList.toggle('active', isRepeat);
         repeatBtn.setAttribute('aria-pressed', String(isRepeat));
       }
 
-      console.log(`循环播放模式: ${isRepeat ? '开启' : '关闭'}`);
+      console.log(`寰幆鎾斁妯″紡: ${isRepeat ? '寮€鍚? : '鍏抽棴'}`);
     });
   }
 
@@ -2139,7 +2221,7 @@ window.addEventListener('DOMContentLoaded', () => {
       if (currentTrackIndex === -1) {
         playTrack(0);
       } else {
-        playNext({ autoplay: false }); // 手动点击，非自动播放
+        playNext({ autoplay: false }); // 鎵嬪姩鐐瑰嚮锛岄潪鑷姩鎾斁
       }
     });
   }
@@ -2149,25 +2231,25 @@ window.addEventListener('DOMContentLoaded', () => {
       ensureCategorySelected();
       if (!currentPlaylist.length) return;
 
-      // 如果没有选中任何音轨，从第一首开始播放
+      // 濡傛灉娌℃湁閫変腑浠讳綍闊宠建锛屼粠绗竴棣栧紑濮嬫挱鏀?
       if (currentTrackIndex === -1 || !audio.src) {
         playTrack(0);
         return;
       }
 
-      // 播放/暂停切换，保持当前播放位置
+      // 鎾斁/鏆傚仠鍒囨崲锛屼繚鎸佸綋鍓嶆挱鏀句綅缃?
       if (audio.paused) {
-        console.log(`恢复播放: ${formatTime(audio.currentTime)}`);
+        console.log(`鎭㈠鎾斁: ${formatTime(audio.currentTime)}`);
         audio.play().catch((error) => {
-          console.error('播放失败:', error);
+          console.error('鎾斁澶辫触:', error);
           window.soundHealingErrorHandler?.showAudioError('', 'permission');
         });
       } else {
-        console.log(`暂停播放: ${formatTime(audio.currentTime)}`);
+        console.log(`鏆傚仠鎾斁: ${formatTime(audio.currentTime)}`);
         audio.pause();
       }
 
-      // 更新播放按钮状态
+      // 鏇存柊鎾斁鎸夐挳鐘舵€?
       updatePlayPauseButton();
     });
   }
@@ -2179,7 +2261,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 定时器选择下拉框事件
+  // 瀹氭椂鍣ㄩ€夋嫨涓嬫媺妗嗕簨浠?
   const timerSelect = document.getElementById('timerSelect');
   if (timerSelect) {
     timerSelect.addEventListener('change', () => {
@@ -2188,7 +2270,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ========== 增强的交互式进度条拖拽功能 ==========
+  // ========== 澧炲己鐨勪氦浜掑紡杩涘害鏉℃嫋鎷藉姛鑳?==========
   const progressContainer = document.getElementById('progressContainer');
   const progressThumb = document.getElementById('progressThumb');
   const progressFill = document.getElementById('progressDisplay');
@@ -2197,11 +2279,11 @@ window.addEventListener('DOMContentLoaded', () => {
     let wasPlaying = false;
     let dragStartTime = 0;
 
-    // 确保进度条容器可以接收焦点和点击
+    // 纭繚杩涘害鏉″鍣ㄥ彲浠ユ帴鏀剁劍鐐瑰拰鐐瑰嚮
     progressContainer.style.cursor = 'pointer';
-    progressContainer.setAttribute('title', '点击或拖拽调节播放进度');
+    progressContainer.setAttribute('title', '鐐瑰嚮鎴栨嫋鎷借皟鑺傛挱鏀捐繘搴?);
 
-    // 获取进度条位置百分比
+    // 鑾峰彇杩涘害鏉′綅缃櫨鍒嗘瘮
     const getProgressFromMouseX = (mouseX) => {
       const rect = progressContainer.getBoundingClientRect();
       const x = mouseX - rect.left;
@@ -2209,33 +2291,33 @@ window.addEventListener('DOMContentLoaded', () => {
       return percentage;
     };
 
-    // 更新进度显示和音频时间
+    // 鏇存柊杩涘害鏄剧ず鍜岄煶棰戞椂闂?
     const updateProgressAndTime = (percentage, updateAudio = false) => {
-      // 更新视觉进度条
+      // 鏇存柊瑙嗚杩涘害鏉?
       progressFill.style.width = `${percentage}%`;
 
       if (audio.duration && Number.isFinite(audio.duration)) {
         const currentTime = (percentage / 100) * audio.duration;
 
-        // 更新时间显示
+        // 鏇存柊鏃堕棿鏄剧ず
         const currentTimeEl = document.getElementById('currentTime');
         if (currentTimeEl) {
           currentTimeEl.textContent = formatTime(currentTime);
         }
 
-        // 更新音频实际播放位置
+        // 鏇存柊闊抽瀹為檯鎾斁浣嶇疆
         if (updateAudio) {
           audio.currentTime = currentTime;
 
-          // 同步更新隐藏的progressRange
+          // 鍚屾鏇存柊闅愯棌鐨刾rogressRange
           if (progressRange) {
             progressRange.value = String(Math.floor(currentTime));
           }
 
-          // 通知无障碍功能
+          // 閫氱煡鏃犻殰纰嶅姛鑳?
           if (window.soundHealingAccessibility) {
             window.soundHealingAccessibility.updatePlaybackStatus(
-              currentPlaylist[currentTrackIndex]?.name || '未知音轨',
+              currentPlaylist[currentTrackIndex]?.name || '鏈煡闊宠建',
               !audio.paused,
               formatTime(currentTime),
               formatTime(audio.duration)
@@ -2245,22 +2327,22 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    // 单击直接跳转
+    // 鍗曞嚮鐩存帴璺宠浆
     const handleClick = (e) => {
       if (!audio.duration || !Number.isFinite(audio.duration)) return;
 
-      // 防止拖拽时触发点击
+      // 闃叉鎷栨嫿鏃惰Е鍙戠偣鍑?
       if (Date.now() - dragStartTime < 200) return;
 
       const percentage = getProgressFromMouseX(e.clientX);
       updateProgressAndTime(percentage, true);
 
-      console.log(`进度条点击跳转: ${percentage.toFixed(1)}%`);
+      console.log(`杩涘害鏉＄偣鍑昏烦杞? ${percentage.toFixed(1)}%`);
       e.preventDefault();
       e.stopPropagation();
     };
 
-    // 开始拖拽
+    // 寮€濮嬫嫋鎷?
     const startDrag = (e) => {
       if (!audio.duration || !Number.isFinite(audio.duration)) return;
 
@@ -2268,16 +2350,16 @@ window.addEventListener('DOMContentLoaded', () => {
       wasPlaying = !audio.paused;
       dragStartTime = Date.now();
 
-      // 暂停播放以便拖拽
+      // 鏆傚仠鎾斁浠ヤ究鎷栨嫿
       if (wasPlaying) {
         audio.pause();
-        console.log('拖拽开始，暂停播放');
+        console.log('鎷栨嫿寮€濮嬶紝鏆傚仠鎾斁');
       }
 
       progressContainer.classList.add('dragging');
       progressThumb.classList.add('dragging');
 
-      // 立即更新到点击位置（仅视觉，不更新音频）
+      // 绔嬪嵆鏇存柊鍒扮偣鍑讳綅缃紙浠呰瑙夛紝涓嶆洿鏂伴煶棰戯級
       const percentage = getProgressFromMouseX(e.clientX || e.touches?.[0]?.clientX);
       updateProgressAndTime(percentage, false);
 
@@ -2285,7 +2367,7 @@ window.addEventListener('DOMContentLoaded', () => {
       e.stopPropagation();
     };
 
-    // 拖拽过程中
+    // 鎷栨嫿杩囩▼涓?
     const onDrag = (e) => {
       if (!isDragging) return;
 
@@ -2296,7 +2378,7 @@ window.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
     };
 
-    // 结束拖拽
+    // 缁撴潫鎷栨嫿
     const endDrag = (e) => {
       if (!isDragging) return;
 
@@ -2307,27 +2389,27 @@ window.addEventListener('DOMContentLoaded', () => {
       progressContainer.classList.remove('dragging');
       progressThumb.classList.remove('dragging');
 
-      // 最终更新音频位置
+      // 鏈€缁堟洿鏂伴煶棰戜綅缃?
       updateProgressAndTime(percentage, true);
 
-      // 如果之前在播放，继续播放
+      // 濡傛灉涔嬪墠鍦ㄦ挱鏀撅紝缁х画鎾斁
       if (wasPlaying) {
         audio.play().catch((error) => {
-          console.error('恢复播放失败:', error);
+          console.error('鎭㈠鎾斁澶辫触:', error);
           window.soundHealingErrorHandler?.showAudioError('', 'permission');
         });
-        console.log('拖拽结束，恢复播放');
-        updatePlayPauseButton(); // 更新按钮状态
+        console.log('鎷栨嫿缁撴潫锛屾仮澶嶆挱鏀?);
+        updatePlayPauseButton(); // 鏇存柊鎸夐挳鐘舵€?
       }
 
-      console.log(`进度条拖拽完成: ${percentage.toFixed(1)}%`);
+      console.log(`杩涘害鏉℃嫋鎷藉畬鎴? ${percentage.toFixed(1)}%`);
     };
 
-    // 鼠标事件
+    // 榧犳爣浜嬩欢
     progressContainer.addEventListener('click', handleClick);
     progressThumb.addEventListener('mousedown', startDrag);
     progressContainer.addEventListener('mousedown', (e) => {
-      // 防止点击和拖拽冲突
+      // 闃叉鐐瑰嚮鍜屾嫋鎷藉啿绐?
       if (e.target === progressThumb) return;
 
       const rect = progressContainer.getBoundingClientRect();
@@ -2343,7 +2425,7 @@ window.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mousemove', onDrag);
     document.addEventListener('mouseup', endDrag);
 
-    // 触摸事件
+    // 瑙︽懜浜嬩欢
     progressThumb.addEventListener('touchstart', startDrag, { passive: false });
     progressContainer.addEventListener('touchstart', (e) => {
       if (e.target === progressThumb) return;
@@ -2353,7 +2435,7 @@ window.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('touchmove', onDrag, { passive: false });
     document.addEventListener('touchend', endDrag, { passive: false });
 
-    // 键盘事件支持
+    // 閿洏浜嬩欢鏀寔
     progressContainer.addEventListener('keydown', (e) => {
       if (!audio.duration || !Number.isFinite(audio.duration)) return;
 
@@ -2381,12 +2463,12 @@ window.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
     });
 
-    console.log('✅ 增强的进度条拖拽功能已初始化');
+    console.log('鉁?澧炲己鐨勮繘搴︽潯鎷栨嫿鍔熻兘宸插垵濮嬪寲');
   } else {
-    console.warn('❌ 进度条元素未找到，无法初始化拖拽功能');
+    console.warn('鉂?杩涘害鏉″厓绱犳湭鎵惧埌锛屾棤娉曞垵濮嬪寲鎷栨嫿鍔熻兘');
   }
 
-  // 保留原有timer-button支持（如果存在）
+  // 淇濈暀鍘熸湁timer-button鏀寔锛堝鏋滃瓨鍦級
   timerButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
       const minutes = Number(btn.dataset.timer || '0');
@@ -2394,12 +2476,23 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 初始化函数
-  const initializeApp = () => {
-    // 设置初始播放状态
-    updatePlaybackStatus('待机中', '⏸️', '准备开始疗愈');
+  // 鍒濆鍖栧嚱鏁?
+  const syncCategoryFromUrl = () => {
+    const category = getInitialCategoryFromUrl();
+    if (category && category !== currentCategory) {
+      suppressUrlSync = true;
+      selectCategory(category, { skipUrlSync: true });
+      suppressUrlSync = false;
+    }
+  };
 
-    // 初始化播放模式按钮状态
+  window.addEventListener('popstate', syncCategoryFromUrl);
+  window.addEventListener('hashchange', syncCategoryFromUrl);
+  const initializeApp = () => {
+    // 璁剧疆鍒濆鎾斁鐘舵€?
+    updatePlaybackStatus('寰呮満涓?, '鈴革笍', '鍑嗗寮€濮嬬枟鎰?);
+
+    // 鍒濆鍖栨挱鏀炬ā寮忔寜閽姸鎬?
     const shuffleBtnVisible = document.getElementById('shuffleBtnVisible');
     const repeatBtnVisible = document.getElementById('repeatBtnVisible');
 
@@ -2415,16 +2508,22 @@ window.addEventListener('DOMContentLoaded', () => {
 
     renderThemeCarousel();
     setPlaylistCollapsed(false);
-    if (themeOrder.length) selectCategory(themeOrder[0]);
+
+    const initialCategory = getInitialCategoryFromUrl();
+    if (initialCategory && themeOrder.includes(initialCategory)) {
+      selectCategory(initialCategory);
+    } else if (themeOrder.length) {
+      selectCategory(themeOrder[0]);
+    }
     updatePlayButton();
   };
 
-  // 启动应用
+  // 鍚姩搴旂敤
   initializeApp();
 })();
 
 
-// ========== 主振幅可视化系统 ==========
+// ========== 涓绘尟骞呭彲瑙嗗寲绯荤粺 ==========
 (() => {
   'use strict';
 
@@ -2434,7 +2533,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const ctx = mainCanvas.getContext('2d');
   const audio = window.__soundDeskAudio;
 
-  // 设置canvas分辨率
+  // 璁剧疆canvas鍒嗚鲸鐜?
   const setCanvasSize = () => {
     const rect = mainCanvas.getBoundingClientRect();
     const dpr = window.devicePixelRatio || 1;
@@ -2446,39 +2545,39 @@ window.addEventListener('DOMContentLoaded', () => {
   setCanvasSize();
   window.addEventListener('resize', setCanvasSize);
 
-  // 清理函数
+  // 娓呯悊鍑芥暟
   window.addEventListener('beforeunload', () => {
     window.removeEventListener('resize', setCanvasSize);
   }, {once: true});
 
-  // 振幅数据存储
+  // 鎸箙鏁版嵁瀛樺偍
   const amplitudeData = [];
-  const maxDataPoints = 80; // 显示更多数据点
+  const maxDataPoints = 80; // 鏄剧ず鏇村鏁版嵁鐐?
   let animationId = null;
   let isPlaying = false;
 
-  // 柔和的心跳节奏算法
+  // 鏌斿拰鐨勫績璺宠妭濂忕畻娉?
   let heartbeatPhase = 0;
   let pulseIntensity = 1;
   const generateAmplitude = () => {
     if (!isPlaying) {
-      // 静态时微弱波动
+      // 闈欐€佹椂寰急娉㈠姩
       return 0.08 + Math.random() * 0.05;
     }
 
-    // 柔和的心跳节奏
-    heartbeatPhase += 0.06; // 减少相位增量，让节奏更慢
+    // 鏌斿拰鐨勫績璺宠妭濂?
+    heartbeatPhase += 0.06; // 鍑忓皯鐩镐綅澧為噺锛岃鑺傚鏇存參
 
-    // 主心跳波形 - 更加柔和
+    // 涓诲績璺虫尝褰?- 鏇村姞鏌斿拰
     const mainPulse = Math.sin(heartbeatPhase) * 0.4 + 0.5;
 
-    // 次级心跳波形 - 减少幅度
+    // 娆＄骇蹇冭烦娉㈠舰 - 鍑忓皯骞呭害
     const secondaryPulse = Math.sin(heartbeatPhase * 1.2) * 0.15;
 
-    // 减少随机变化，让动画更平稳
+    // 鍑忓皯闅忔満鍙樺寲锛岃鍔ㄧ敾鏇村钩绋?
     const randomness = (Math.random() - 0.5) * 0.15;
 
-    // 更缓慢的强度变化
+    // 鏇寸紦鎱㈢殑寮哄害鍙樺寲
     pulseIntensity += (Math.random() - 0.5) * 0.008;
     pulseIntensity = Math.max(0.8, Math.min(1.2, pulseIntensity));
 
@@ -2486,56 +2585,56 @@ window.addEventListener('DOMContentLoaded', () => {
     return Math.max(0.1, Math.min(0.9, amplitude));
   };
 
-  // 渲染主振幅可视化（上下波动样式）
+  // 娓叉煋涓绘尟骞呭彲瑙嗗寲锛堜笂涓嬫尝鍔ㄦ牱寮忥級
   const renderMainAmplitude = () => {
     const width = mainCanvas.getBoundingClientRect().width;
     const height = mainCanvas.getBoundingClientRect().height;
 
-    // 清空画布
+    // 娓呯┖鐢诲竷
     ctx.clearRect(0, 0, width, height);
 
-    // 获取当前振幅值
+    // 鑾峰彇褰撳墠鎸箙鍊?
     const currentAmplitude = generateAmplitude();
 
-    // 绘制黑色背景
+    // 缁樺埗榛戣壊鑳屾櫙
     ctx.fillStyle = 'rgba(20, 25, 35, 0.95)';
     ctx.fillRect(0, 0, width, height);
 
-    // 波形参数
-    const baseY = height - 4; // 底部基准线
-    const maxAmplitude = height * 0.85; // 最大振幅为高度的85%
-    const barCount = 60; // 固定60个条形
+    // 娉㈠舰鍙傛暟
+    const baseY = height - 4; // 搴曢儴鍩哄噯绾?
+    const maxAmplitude = height * 0.85; // 鏈€澶ф尟骞呬负楂樺害鐨?5%
+    const barCount = 60; // 鍥哄畾60涓潯褰?
     const barWidth = (width - (barCount + 1) * 2) / barCount;
     const barSpacing = 2;
 
-    // 绘制垂直向上条形
+    // 缁樺埗鍨傜洿鍚戜笂鏉″舰
     for (let i = 0; i < barCount; i++) {
       const x = i * (barWidth + barSpacing) + barSpacing;
 
-      // 每个条形有略微不同的相位和频率，创造更自然的效果
-      const phaseOffset = (i / barCount) * Math.PI * 4; // 增加相位差，让波动更平缓
-      const frequency = 0.8 + (i % 3) * 0.05; // 降低频率变化，更加柔和
+      // 姣忎釜鏉″舰鏈夌暐寰笉鍚岀殑鐩镐綅鍜岄鐜囷紝鍒涢€犳洿鑷劧鐨勬晥鏋?
+      const phaseOffset = (i / barCount) * Math.PI * 4; // 澧炲姞鐩镐綅宸紝璁╂尝鍔ㄦ洿骞崇紦
+      const frequency = 0.8 + (i % 3) * 0.05; // 闄嶄綆棰戠巼鍙樺寲锛屾洿鍔犳煍鍜?
 
-      // 计算该条形的振幅（基于当前音频振幅加上波动效果）
-      const timePhase = Date.now() * 0.0015; // 大幅降低时间相位速度，让动画更慢更柔和
+      // 璁＄畻璇ユ潯褰㈢殑鎸箙锛堝熀浜庡綋鍓嶉煶棰戞尟骞呭姞涓婃尝鍔ㄦ晥鏋滐級
+      const timePhase = Date.now() * 0.0015; // 澶у箙闄嶄綆鏃堕棿鐩镐綅閫熷害锛岃鍔ㄧ敾鏇存參鏇存煍鍜?
       const smoothWave = Math.abs(Math.sin(timePhase * frequency + phaseOffset));
-      const waveAmplitude = currentAmplitude * (0.5 + 0.5 * smoothWave); // 减少振幅变化范围
+      const waveAmplitude = currentAmplitude * (0.5 + 0.5 * smoothWave); // 鍑忓皯鎸箙鍙樺寲鑼冨洿
 
-      // 条形高度（只向上延伸）
+      // 鏉″舰楂樺害锛堝彧鍚戜笂寤朵几锛?
       const barHeight = waveAmplitude * maxAmplitude;
       const topY = baseY - barHeight;
 
-      // 创建渐变色（从顶部到底部）
+      // 鍒涘缓娓愬彉鑹诧紙浠庨《閮ㄥ埌搴曢儴锛?
       const barGradient = ctx.createLinearGradient(0, topY, 0, baseY);
 
       if (isPlaying) {
-        // 播放时使用亮白色渐变
+        // 鎾斁鏃朵娇鐢ㄤ寒鐧借壊娓愬彉
         const intensity = waveAmplitude;
         barGradient.addColorStop(0, `rgba(255, 255, 255, ${0.4 + intensity * 0.6})`);
         barGradient.addColorStop(0.6, `rgba(220, 220, 220, ${0.7 + intensity * 0.3})`);
         barGradient.addColorStop(1, `rgba(180, 180, 180, ${0.8 + intensity * 0.2})`);
       } else {
-        // 静止时使用暗灰色
+        // 闈欐鏃朵娇鐢ㄦ殫鐏拌壊
         barGradient.addColorStop(0, 'rgba(120, 120, 120, 0.5)');
         barGradient.addColorStop(0.6, 'rgba(100, 100, 100, 0.7)');
         barGradient.addColorStop(1, 'rgba(80, 80, 80, 0.9)');
@@ -2544,14 +2643,14 @@ window.addEventListener('DOMContentLoaded', () => {
       ctx.fillStyle = barGradient;
       ctx.fillRect(x, topY, barWidth, barHeight);
 
-      // 添加顶部高亮
+      // 娣诲姞椤堕儴楂樹寒
       if (waveAmplitude > 0.1) {
         ctx.fillStyle = isPlaying ? 'rgba(255, 255, 255, 0.9)' : 'rgba(150, 150, 150, 0.6)';
         ctx.fillRect(x, topY, barWidth, Math.max(1, barHeight * 0.1));
       }
     }
 
-    // 绘制底部基准线
+    // 缁樺埗搴曢儴鍩哄噯绾?
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
     ctx.lineWidth = 2;
     ctx.beginPath();
@@ -2559,11 +2658,11 @@ window.addEventListener('DOMContentLoaded', () => {
     ctx.lineTo(width, baseY);
     ctx.stroke();
 
-    // 继续动画
+    // 缁х画鍔ㄧ敾
     animationId = requestAnimationFrame(renderMainAmplitude);
   };
 
-  // 监听音频播放状态
+  // 鐩戝惉闊抽鎾斁鐘舵€?
   if (audio) {
     audio.addEventListener('play', () => {
       isPlaying = true;
@@ -2578,10 +2677,10 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 启动主振幅动画
+  // 鍚姩涓绘尟骞呭姩鐢?
   renderMainAmplitude();
 
-  // 清理函数
+  // 娓呯悊鍑芥暟
   window.addEventListener('beforeunload', () => {
     if (animationId) {
       cancelAnimationFrame(animationId);
@@ -2589,20 +2688,20 @@ window.addEventListener('DOMContentLoaded', () => {
   }, {once: true});
 })();
 
-// ========== 增强多语言系统 ==========
+// ========== 澧炲己澶氳瑷€绯荤粺 ==========
 (() => {
   'use strict';
 
-  // 支持的语言列表
+  // 鏀寔鐨勮瑷€鍒楄〃
   const supportedLanguages = [
-    { code: 'en-US', name: 'English', flag: '🇺🇸' },
-    { code: 'zh-CN', name: '中文', flag: '🇨🇳' },
-    { code: 'ja-JP', name: '日本語', flag: '🇯🇵' },
-    { code: 'ko-KR', name: '한국어', flag: '🇰🇷' },
-    { code: 'es-ES', name: 'Español', flag: '🇪🇸' }
+    { code: 'en-US', name: 'English', flag: '馃嚭馃嚫' },
+    { code: 'zh-CN', name: '涓枃', flag: '馃嚚馃嚦' },
+    { code: 'ja-JP', name: '鏃ユ湰瑾?, flag: '馃嚡馃嚨' },
+    { code: 'ko-KR', name: '頃滉淡鞏?, flag: '馃嚢馃嚪' },
+    { code: 'es-ES', name: 'Espa帽ol', flag: '馃嚜馃嚫' }
   ];
 
-  // 翻译数据
+  // 缈昏瘧鏁版嵁
   const translations = {
     'en-US': {
       'amplitude': 'Amplitude',
@@ -2618,7 +2717,7 @@ window.addEventListener('DOMContentLoaded', () => {
       'session-info': 'Session Info',
       'healing-time': 'Focused healing time',
       'sound-amplitude': 'Sound Amplitude',
-      'amplitude-description': 'Higher peaks = louder sound • Lower valleys = softer sound',
+      'amplitude-description': 'Higher peaks = louder sound 鈥?Lower valleys = softer sound',
       'silent': 'Silent',
       'heartbeat-rhythm': 'Heartbeat-like rhythm',
       'headphone-tip': 'Use headphones for the best healing experience',
@@ -2656,175 +2755,175 @@ window.addEventListener('DOMContentLoaded', () => {
     },
     'zh-CN': {
       'amplitude': 'Amplitude',
-      'sound-healing': '声音疗愈',
-      'brand-title': '声音疗愈空间',
-      'brand-subtitle': '让心灵回归宁静',
-      'current-theme': '当前主题',
-      'select-theme': '请选择主题',
-      'start-journey': '开始您的疗愈之旅',
-      'playback-status': '播放状态',
-      'paused': '暂停',
-      'ready-to-heal': '准备开始疗愈',
-      'session-info': '本次会话',
-      'healing-time': '专注疗愈时光',
-      'sound-amplitude': '声音振幅',
-      'amplitude-description': '波峰越高声音越响 • 波谷越低声音越轻',
-      'silent': '静默中',
-      'heartbeat-rhythm': '心跳般的节奏起伏',
-      'headphone-tip': '使用耳机获得最佳疗愈体验',
-      'click-to-switch': '点击切换场景',
-      'not-playing': '暂未播放',
-      'select-theme-to-start': '请选择主题开始疗愈',
-      'previous': '上一首',
-      'play': '播放',
-      'pause': '暂停',
-      'next': '下一首',
-      'shuffle': '随机',
-      'repeat': '循环',
-      'shuffle-on': '随机开',
-      'repeat-on': '循环开',
-      'playing': '正在播放',
-      'paused-status': '暂停中',
-      'standby': '待机中',
-      'enjoying-music': '享受疗愈音乐',
-      'continue-journey': '继续疗愈之旅',
-      'ready-to-start': '准备开始疗愈',
-      'high-amplitude': '高振幅',
-      'medium-amplitude': '中振幅',
-      'low-amplitude': '低振幅',
-      'timer-disabled': '未开启',
-      'timer-enabled': '定时已设置',
-      'select-theme-for-tracklist': '请选择主题查看音轨列表',
-      'theme-scene': '主题场景',
-      'play-all': '播放全部',
-      'toggle-display': '切换显示',
-      'timer-no-limit': '无限制',
-      'timer-15min': '15分钟',
-      'timer-30min': '30分钟',
-      'timer-60min': '60分钟',
-      'timer-90min': '90分钟'
+      'sound-healing': '澹伴煶鐤楁剤',
+      'brand-title': '澹伴煶鐤楁剤绌洪棿',
+      'brand-subtitle': '璁╁績鐏靛洖褰掑畞闈?,
+      'current-theme': '褰撳墠涓婚',
+      'select-theme': '璇烽€夋嫨涓婚',
+      'start-journey': '寮€濮嬫偍鐨勭枟鎰堜箣鏃?,
+      'playback-status': '鎾斁鐘舵€?,
+      'paused': '鏆傚仠',
+      'ready-to-heal': '鍑嗗寮€濮嬬枟鎰?,
+      'session-info': '鏈浼氳瘽',
+      'healing-time': '涓撴敞鐤楁剤鏃跺厜',
+      'sound-amplitude': '澹伴煶鎸箙',
+      'amplitude-description': '娉㈠嘲瓒婇珮澹伴煶瓒婂搷 鈥?娉㈣胺瓒婁綆澹伴煶瓒婅交',
+      'silent': '闈欓粯涓?,
+      'heartbeat-rhythm': '蹇冭烦鑸殑鑺傚璧蜂紡',
+      'headphone-tip': '浣跨敤鑰虫満鑾峰緱鏈€浣崇枟鎰堜綋楠?,
+      'click-to-switch': '鐐瑰嚮鍒囨崲鍦烘櫙',
+      'not-playing': '鏆傛湭鎾斁',
+      'select-theme-to-start': '璇烽€夋嫨涓婚寮€濮嬬枟鎰?,
+      'previous': '涓婁竴棣?,
+      'play': '鎾斁',
+      'pause': '鏆傚仠',
+      'next': '涓嬩竴棣?,
+      'shuffle': '闅忔満',
+      'repeat': '寰幆',
+      'shuffle-on': '闅忔満寮€',
+      'repeat-on': '寰幆寮€',
+      'playing': '姝ｅ湪鎾斁',
+      'paused-status': '鏆傚仠涓?,
+      'standby': '寰呮満涓?,
+      'enjoying-music': '浜彈鐤楁剤闊充箰',
+      'continue-journey': '缁х画鐤楁剤涔嬫梾',
+      'ready-to-start': '鍑嗗寮€濮嬬枟鎰?,
+      'high-amplitude': '楂樻尟骞?,
+      'medium-amplitude': '涓尟骞?,
+      'low-amplitude': '浣庢尟骞?,
+      'timer-disabled': '鏈紑鍚?,
+      'timer-enabled': '瀹氭椂宸茶缃?,
+      'select-theme-for-tracklist': '璇烽€夋嫨涓婚鏌ョ湅闊宠建鍒楄〃',
+      'theme-scene': '涓婚鍦烘櫙',
+      'play-all': '鎾斁鍏ㄩ儴',
+      'toggle-display': '鍒囨崲鏄剧ず',
+      'timer-no-limit': '鏃犻檺鍒?,
+      'timer-15min': '15鍒嗛挓',
+      'timer-30min': '30鍒嗛挓',
+      'timer-60min': '60鍒嗛挓',
+      'timer-90min': '90鍒嗛挓'
     },
     'ja-JP': {
       'amplitude': 'Amplitude',
-      'sound-healing': 'サウンドヒーリング',
-      'brand-title': 'サウンドヒーリング空間',
-      'brand-subtitle': '心を静寂に戻す',
-      'current-theme': '現在のテーマ',
-      'select-theme': 'テーマを選択',
-      'start-journey': 'ヒーリングの旅を始める',
-      'playback-status': '再生状態',
-      'paused': '一時停止',
-      'ready-to-heal': 'ヒーリング準備完了',
-      'session-info': 'セッション情報',
-      'healing-time': '集中ヒーリング時間',
-      'sound-amplitude': '音の振幅',
-      'amplitude-description': '高いピーク = 大きな音 • 低い谷 = 小さな音',
-      'silent': '無音',
-      'heartbeat-rhythm': '心拍のようなリズム',
-      'headphone-tip': '最高のヒーリング体験にはヘッドフォンをご使用ください',
-      'click-to-switch': 'クリックしてシーンを切り替え',
-      'not-playing': '再生していません',
-      'select-theme-to-start': 'ヒーリングを始めるテーマを選択してください',
-      'previous': '前へ',
-      'play': '再生',
-      'pause': '一時停止',
-      'next': '次へ',
-      'shuffle': 'シャッフル',
-      'repeat': 'リピート',
-      'shuffle-on': 'シャッフル オン',
-      'repeat-on': 'リピート オン',
-      'playing': '再生中',
-      'paused-status': '一時停止中',
-      'standby': 'スタンバイ',
-      'enjoying-music': 'ヒーリング音楽を楽しんでいます',
-      'continue-journey': 'ヒーリングの旅を続ける',
-      'ready-to-start': 'ヒーリング開始準備完了',
-      'high-amplitude': '高振幅',
-      'medium-amplitude': '中振幅',
-      'low-amplitude': '低振幅',
-      'timer-disabled': '制限なし',
-      'timer-enabled': 'タイマー設定済み',
-      'select-theme-for-tracklist': 'テーマを選択してトラックリストを表示',
-      'theme-scene': 'テーマシーン',
-      'play-all': '全て再生',
-      'toggle-display': '表示切替',
-      'timer-no-limit': '制限なし',
-      'timer-15min': '15分',
-      'timer-30min': '30分',
-      'timer-60min': '60分',
-      'timer-90min': '90分'
+      'sound-healing': '銈点偊銉炽儔銉掋兗銉兂銈?,
+      'brand-title': '銈点偊銉炽儔銉掋兗銉兂銈扮┖闁?,
+      'brand-subtitle': '蹇冦倰闈欏瘋銇埢銇?,
+      'current-theme': '鐝惧湪銇儐銉笺優',
+      'select-theme': '銉嗐兗銉炪倰閬告姙',
+      'start-journey': '銉掋兗銉兂銈般伄鏃呫倰濮嬨倎銈?,
+      'playback-status': '鍐嶇敓鐘舵厠',
+      'paused': '涓€鏅傚仠姝?,
+      'ready-to-heal': '銉掋兗銉兂銈版簴鍌欏畬浜?,
+      'session-info': '銈汇儍銈枫儳銉虫儏鍫?,
+      'healing-time': '闆嗕腑銉掋兗銉兂銈版檪闁?,
+      'sound-amplitude': '闊炽伄鎸箙',
+      'amplitude-description': '楂樸亜銉斻兗銈?= 澶с亶銇煶 鈥?浣庛亜璋?= 灏忋仌銇煶',
+      'silent': '鐒￠煶',
+      'heartbeat-rhythm': '蹇冩媿銇倛銇嗐仾銉偤銉?,
+      'headphone-tip': '鏈€楂樸伄銉掋兗銉兂銈颁綋楱撱伀銇儤銉冦儔銉曘偐銉炽倰銇斾娇鐢ㄣ亸銇犮仌銇?,
+      'click-to-switch': '銈儶銉冦偗銇椼仸銈枫兗銉炽倰鍒囥倞鏇裤亪',
+      'not-playing': '鍐嶇敓銇椼仸銇勩伨銇涖倱',
+      'select-theme-to-start': '銉掋兗銉兂銈般倰濮嬨倎銈嬨儐銉笺優銈掗伕鎶炪仐銇︺亸銇犮仌銇?,
+      'previous': '鍓嶃伕',
+      'play': '鍐嶇敓',
+      'pause': '涓€鏅傚仠姝?,
+      'next': '娆°伕',
+      'shuffle': '銈枫儯銉冦儠銉?,
+      'repeat': '銉償銉笺儓',
+      'shuffle-on': '銈枫儯銉冦儠銉?銈兂',
+      'repeat-on': '銉償銉笺儓 銈兂',
+      'playing': '鍐嶇敓涓?,
+      'paused-status': '涓€鏅傚仠姝腑',
+      'standby': '銈广偪銉炽儛銈?,
+      'enjoying-music': '銉掋兗銉兂銈伴煶妤姐倰妤姐仐銈撱仹銇勩伨銇?,
+      'continue-journey': '銉掋兗銉兂銈般伄鏃呫倰缍氥亼銈?,
+      'ready-to-start': '銉掋兗銉兂銈伴枊濮嬫簴鍌欏畬浜?,
+      'high-amplitude': '楂樻尟骞?,
+      'medium-amplitude': '涓尟骞?,
+      'low-amplitude': '浣庢尟骞?,
+      'timer-disabled': '鍒堕檺銇仐',
+      'timer-enabled': '銈裤偆銉炪兗瑷畾娓堛伩',
+      'select-theme-for-tracklist': '銉嗐兗銉炪倰閬告姙銇椼仸銉堛儵銉冦偗銉偣銉堛倰琛ㄧず',
+      'theme-scene': '銉嗐兗銉炪偡銉笺兂',
+      'play-all': '鍏ㄣ仸鍐嶇敓',
+      'toggle-display': '琛ㄧず鍒囨浛',
+      'timer-no-limit': '鍒堕檺銇仐',
+      'timer-15min': '15鍒?,
+      'timer-30min': '30鍒?,
+      'timer-60min': '60鍒?,
+      'timer-90min': '90鍒?
     },
     'ko-KR': {
       'amplitude': 'Amplitude',
-      'sound-healing': '사운드 힐링',
-      'brand-title': '사운드 힐링 공간',
-      'brand-subtitle': '마음을 고요함으로 돌려보내다',
-      'current-theme': '현재 테마',
-      'select-theme': '테마 선택',
-      'start-journey': '힐링 여행을 시작하세요',
-      'playback-status': '재생 상태',
-      'paused': '일시정지',
-      'ready-to-heal': '힐링 준비 완료',
-      'session-info': '세션 정보',
-      'healing-time': '집중 힐링 시간',
-      'sound-amplitude': '소리 진폭',
-      'amplitude-description': '높은 피크 = 큰 소리 • 낮은 골 = 작은 소리',
-      'silent': '무음',
-      'heartbeat-rhythm': '심장박동 같은 리듬',
-      'headphone-tip': '최고의 힐링 경험을 위해 헤드폰을 사용하세요',
-      'click-to-switch': '클릭하여 장면 전환',
-      'not-playing': '재생 중이 아님',
-      'select-theme-to-start': '힐링을 시작할 테마를 선택하세요',
-      'previous': '이전',
-      'play': '재생',
-      'pause': '일시정지',
-      'next': '다음',
-      'shuffle': '셔플',
-      'repeat': '반복',
-      'shuffle-on': '셔플 켜짐',
-      'repeat-on': '반복 켜짐',
-      'playing': '재생 중',
-      'paused-status': '일시정지됨',
-      'standby': '대기',
-      'enjoying-music': '힐링 음악 감상 중',
-      'continue-journey': '힐링 여행 계속하기',
-      'ready-to-start': '힐링 시작 준비 완료',
-      'high-amplitude': '높은 진폭',
-      'medium-amplitude': '중간 진폭',
-      'low-amplitude': '낮은 진폭',
-      'timer-disabled': '제한 없음',
-      'timer-enabled': '타이머 설정됨',
-      'select-theme-for-tracklist': '테마를 선택하여 트랙 목록 보기',
-      'theme-scene': '테마 장면',
-      'play-all': '전체 재생',
-      'toggle-display': '표시 전환',
-      'timer-no-limit': '제한 없음',
-      'timer-15min': '15분',
-      'timer-30min': '30분',
-      'timer-60min': '60분',
-      'timer-90min': '90분'
+      'sound-healing': '靷毚霌?頌愲',
+      'brand-title': '靷毚霌?頌愲 瓿店皠',
+      'brand-subtitle': '毵堨潓鞚?瓿犾殧頃溂搿?霃岆牑氤措偞雼?,
+      'current-theme': '順勳灛 韰岆',
+      'select-theme': '韰岆 靹犿儩',
+      'start-journey': '頌愲 鞐枆鞚?鞁滌瀾頃橃劯鞖?,
+      'playback-status': '鞛儩 靸來儨',
+      'paused': '鞚检嫓鞝曥',
+      'ready-to-heal': '頌愲 欷€牍?鞕勲',
+      'session-info': '靹胳厴 鞝曤炒',
+      'healing-time': '歆戩 頌愲 鞁滉皠',
+      'sound-amplitude': '靻岆Μ 歆勴彮',
+      'amplitude-description': '雴掛潃 頂柬伂 = 韥?靻岆Μ 鈥?雮潃 瓿?= 鞛戩潃 靻岆Μ',
+      'silent': '氍挫潓',
+      'heartbeat-rhythm': '鞁灔氚曤彊 臧欖潃 毽摤',
+      'headphone-tip': '斓滉碃鞚?頌愲 瓴巾棙鞚?鞙勴暣 項る摐韽办潉 靷毄頃橃劯鞖?,
+      'click-to-switch': '韥措Ν頃橃棳 鞛ル┐ 鞝勴櫂',
+      'not-playing': '鞛儩 欷戩澊 鞎勲嫎',
+      'select-theme-to-start': '頌愲鞚?鞁滌瀾頃?韰岆毳?靹犿儩頃橃劯鞖?,
+      'previous': '鞚挫爠',
+      'play': '鞛儩',
+      'pause': '鞚检嫓鞝曥',
+      'next': '雼れ潓',
+      'shuffle': '靺旐攲',
+      'repeat': '氚橂车',
+      'shuffle-on': '靺旐攲 旒滌',
+      'repeat-on': '氚橂车 旒滌',
+      'playing': '鞛儩 欷?,
+      'paused-status': '鞚检嫓鞝曥霅?,
+      'standby': '雽€旮?,
+      'enjoying-music': '頌愲 鞚岇晠 臧愳儊 欷?,
+      'continue-journey': '頌愲 鞐枆 瓿勳啀頃橁赴',
+      'ready-to-start': '頌愲 鞁滌瀾 欷€牍?鞕勲',
+      'high-amplitude': '雴掛潃 歆勴彮',
+      'medium-amplitude': '欷戧皠 歆勴彮',
+      'low-amplitude': '雮潃 歆勴彮',
+      'timer-disabled': '鞝滍暅 鞐嗢潓',
+      'timer-enabled': '韮€鞚措ǜ 靹れ爼霅?,
+      'select-theme-for-tracklist': '韰岆毳?靹犿儩頃橃棳 韸鸽灆 氇╇ 氤搓赴',
+      'theme-scene': '韰岆 鞛ル┐',
+      'play-all': '鞝勳泊 鞛儩',
+      'toggle-display': '響滌嫓 鞝勴櫂',
+      'timer-no-limit': '鞝滍暅 鞐嗢潓',
+      'timer-15min': '15攵?,
+      'timer-30min': '30攵?,
+      'timer-60min': '60攵?,
+      'timer-90min': '90攵?
     },
     'es-ES': {
       'amplitude': 'Amplitude',
-      'sound-healing': 'sanación sonora',
-      'brand-title': 'Espacio de Sanación Sonora',
+      'sound-healing': 'sanaci贸n sonora',
+      'brand-title': 'Espacio de Sanaci贸n Sonora',
       'brand-subtitle': 'Devuelve tu mente a la tranquilidad',
       'current-theme': 'Tema Actual',
       'select-theme': 'Seleccionar Tema',
-      'start-journey': 'Comienza tu viaje de sanación',
-      'playback-status': 'Estado de Reproducción',
+      'start-journey': 'Comienza tu viaje de sanaci贸n',
+      'playback-status': 'Estado de Reproducci贸n',
       'paused': 'Pausado',
       'ready-to-heal': 'Listo para sanar',
-      'session-info': 'Información de Sesión',
-      'healing-time': 'Tiempo de sanación concentrada',
+      'session-info': 'Informaci贸n de Sesi贸n',
+      'healing-time': 'Tiempo de sanaci贸n concentrada',
       'sound-amplitude': 'Amplitud de Sonido',
-      'amplitude-description': 'Picos altos = sonido fuerte • Valles bajos = sonido suave',
+      'amplitude-description': 'Picos altos = sonido fuerte 鈥?Valles bajos = sonido suave',
       'silent': 'Silencioso',
-      'heartbeat-rhythm': 'Ritmo como latido del corazón',
-      'headphone-tip': 'Usa auriculares para la mejor experiencia de sanación',
+      'heartbeat-rhythm': 'Ritmo como latido del coraz贸n',
+      'headphone-tip': 'Usa auriculares para la mejor experiencia de sanaci贸n',
       'click-to-switch': 'Haz clic para cambiar escenas',
       'not-playing': 'No reproduciendo',
-      'select-theme-to-start': 'Selecciona un tema para comenzar la sanación',
+      'select-theme-to-start': 'Selecciona un tema para comenzar la sanaci贸n',
       'previous': 'Anterior',
       'play': 'Reproducir',
       'pause': 'Pausar',
@@ -2836,19 +2935,19 @@ window.addEventListener('DOMContentLoaded', () => {
       'playing': 'Reproduciendo',
       'paused-status': 'Pausado',
       'standby': 'En Espera',
-      'enjoying-music': 'Disfrutando música de sanación',
-      'continue-journey': 'Continuar viaje de sanación',
-      'ready-to-start': 'Listo para comenzar sanación',
+      'enjoying-music': 'Disfrutando m煤sica de sanaci贸n',
+      'continue-journey': 'Continuar viaje de sanaci贸n',
+      'ready-to-start': 'Listo para comenzar sanaci贸n',
       'high-amplitude': 'Amplitud Alta',
       'medium-amplitude': 'Amplitud Media',
       'low-amplitude': 'Amplitud Baja',
-      'timer-disabled': 'Sin límite',
+      'timer-disabled': 'Sin l铆mite',
       'timer-enabled': 'Temporizador establecido',
       'select-theme-for-tracklist': 'Selecciona un tema para ver la lista de pistas',
-      'theme-scene': 'Escena Temática',
+      'theme-scene': 'Escena Tem谩tica',
       'play-all': 'Reproducir Todo',
-      'toggle-display': 'Alternar Visualización',
-      'timer-no-limit': 'Sin límite',
+      'toggle-display': 'Alternar Visualizaci贸n',
+      'timer-no-limit': 'Sin l铆mite',
       'timer-15min': '15 minutos',
       'timer-30min': '30 minutos',
       'timer-60min': '60 minutos',
@@ -2856,21 +2955,21 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // 当前语言（默认为英语）
+  // 褰撳墠璇█锛堥粯璁や负鑻辫锛?
   let currentLanguage = 'en-US';
   let currentLanguageIndex = 0;
 
-  // DOM元素
+  // DOM鍏冪礌
   const languageToggle = document.getElementById('languageToggle');
   const currentLanguageDisplay = document.getElementById('currentLanguage');
 
-  // 获取浏览器语言，默认为英语
+  // 鑾峰彇娴忚鍣ㄨ瑷€锛岄粯璁や负鑻辫
   const getBrowserLanguage = () => {
     const lang = navigator.language || navigator.userLanguage || 'en-US';
     return translations[lang] ? lang : 'en-US';
   };
 
-  // 更新所有翻译文本（增强版）
+  // 鏇存柊鎵€鏈夌炕璇戞枃鏈紙澧炲己鐗堬級
   const updateTranslations = () => {
     const elements = document.querySelectorAll('[data-i18n]');
     const currentTranslations = translations[currentLanguage];
@@ -2882,30 +2981,30 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // 更新语言显示
+    // 鏇存柊璇█鏄剧ず
     if (currentLanguageDisplay) {
       const langInfo = supportedLanguages.find(lang => lang.code === currentLanguage);
       currentLanguageDisplay.textContent = langInfo ? langInfo.name : 'English';
     }
 
-    // 实时更新动态生成的内容
+    // 瀹炴椂鏇存柊鍔ㄦ€佺敓鎴愮殑鍐呭
     updateDynamicContent();
 
-    // 保存语言设置
+    // 淇濆瓨璇█璁剧疆
     localStorage.setItem('soundHealing_language', currentLanguage);
 
     console.log(`Language switched to: ${currentLanguage}`);
   };
 
-  // 更新动态内容（解决实时翻译问题）
+  // 鏇存柊鍔ㄦ€佸唴瀹癸紙瑙ｅ喅瀹炴椂缈昏瘧闂锛?
   const updateDynamicContent = () => {
-    // 更新播放控制按钮状态
+    // 鏇存柊鎾斁鎺у埗鎸夐挳鐘舵€?
     const playPauseBtn = document.querySelector('#playPauseBtn .control-label');
     const shuffleLabel = document.querySelector('#shuffleBtnVisible .mode-label');
     const repeatLabel = document.querySelector('#repeatBtnVisible .mode-label');
 
     if (playPauseBtn) {
-      const isPlaying = playPauseBtn.textContent.includes('暂停') || playPauseBtn.textContent.includes('Pause');
+      const isPlaying = playPauseBtn.textContent.includes('鏆傚仠') || playPauseBtn.textContent.includes('Pause');
       playPauseBtn.textContent = t(isPlaying ? 'pause' : 'play');
     }
 
@@ -2919,7 +3018,7 @@ window.addEventListener('DOMContentLoaded', () => {
       repeatLabel.textContent = t(isActive ? 'repeat-on' : 'repeat');
     }
 
-    // 更新状态文本
+    // 鏇存柊鐘舵€佹枃鏈?
     const playbackStatus = document.getElementById('playbackStatus');
     const currentThemeName = document.getElementById('currentThemeName');
     const nowPlayingTitle = document.getElementById('nowPlayingTitle');
@@ -2927,16 +3026,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
     if (playbackStatus && playbackStatus.textContent) {
       const statusMap = {
-        '暂停': 'paused',
+        '鏆傚仠': 'paused',
         'Paused': 'paused',
         'Pausado': 'paused',
-        '일시정지': 'paused',
-        '一時停止': 'paused',
-        '正在播放': 'playing',
+        '鞚检嫓鞝曥': 'paused',
+        '涓€鏅傚仠姝?: 'paused',
+        '姝ｅ湪鎾斁': 'playing',
         'Playing': 'playing',
         'Reproduciendo': 'playing',
-        '재생 중': 'playing',
-        '再生中': 'playing'
+        '鞛儩 欷?: 'playing',
+        '鍐嶇敓涓?: 'playing'
       };
 
       const currentStatus = playbackStatus.textContent;
@@ -2949,52 +3048,52 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // 循环切换语言
+  // 寰幆鍒囨崲璇█
   const toggleLanguage = () => {
     currentLanguageIndex = (currentLanguageIndex + 1) % supportedLanguages.length;
     currentLanguage = supportedLanguages[currentLanguageIndex].code;
     updateTranslations();
   };
 
-  // 获取翻译文本
+  // 鑾峰彇缈昏瘧鏂囨湰
   const t = (key) => {
     return translations[currentLanguage][key] || translations['en-US'][key] || key;
   };
 
-  // 动态翻译函数（供其他模块使用）
+  // 鍔ㄦ€佺炕璇戝嚱鏁帮紙渚涘叾浠栨ā鍧椾娇鐢級
   window.translate = t;
   window.updateTranslations = updateTranslations;
   window.getCurrentLanguage = () => currentLanguage;
 
-  // 初始化语言
+  // 鍒濆鍖栬瑷€
   const initializeLanguage = () => {
-    // 从本地存储获取语言设置，否则使用英语作为默认语言
+    // 浠庢湰鍦板瓨鍌ㄨ幏鍙栬瑷€璁剧疆锛屽惁鍒欎娇鐢ㄨ嫳璇綔涓洪粯璁よ瑷€
     const savedLanguage = localStorage.getItem('soundHealing_language');
     currentLanguage = savedLanguage || 'en-US';
 
-    // 找到对应的语言索引
+    // 鎵惧埌瀵瑰簲鐨勮瑷€绱㈠紩
     currentLanguageIndex = supportedLanguages.findIndex(lang => lang.code === currentLanguage);
     if (currentLanguageIndex === -1) {
-      currentLanguageIndex = 0; // 默认英语
+      currentLanguageIndex = 0; // 榛樿鑻辫
       currentLanguage = 'en-US';
     }
 
     updateTranslations();
   };
 
-  // 事件监听器
+  // 浜嬩欢鐩戝惉鍣?
   if (languageToggle) {
     languageToggle.addEventListener('click', toggleLanguage);
   }
 
-  // 监听其他事件以更新动态内容
+  // 鐩戝惉鍏朵粬浜嬩欢浠ユ洿鏂板姩鎬佸唴瀹?
   document.addEventListener('DOMContentLoaded', () => {
-    // 监听播放状态变化
+    // 鐩戝惉鎾斁鐘舵€佸彉鍖?
     const observer = new MutationObserver(() => {
       setTimeout(updateDynamicContent, 100);
     });
 
-    // 观察可能变化的元素
+    // 瑙傚療鍙兘鍙樺寲鐨勫厓绱?
     const elementsToObserve = [
       'playbackStatus', 'currentThemeName', 'nowPlayingTitle', 'nowPlayingCategory',
       'playPauseBtn', 'shuffleBtnVisible', 'repeatBtnVisible'
@@ -3012,6 +3111,11 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 初始化
+  // 鍒濆鍖?
   initializeLanguage();
 })();
+
+
+
+
+

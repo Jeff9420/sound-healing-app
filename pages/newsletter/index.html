@@ -1,0 +1,80 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sound Healing Sunday Newsletter | Sound Healing Space</title>
+  <meta name="description" content="Join the Sound Healing Sunday newsletter for weekly meditation tips, curated playlists, and community events across the globe." />
+  <link rel="canonical" href="https://soundflows.app/pages/newsletter/" />
+  <link rel="stylesheet" href="../../assets/css/main.css" />
+</head>
+<body style="font-family: 'Inter', system-ui, sans-serif; background: #080f1a; color: #e7f0ff;">
+  <main style="max-width: 760px; margin: 64px auto; padding: 0 20px;">
+    <header style="text-align: center; margin-bottom: 36px;">
+      <p style="letter-spacing: 0.18em; font-size: 0.75rem; color: #7d90ba; text-transform: uppercase;">Weekly Drop</p>
+      <h1 style="font-size: 2.6rem; margin: 12px 0;">Sound Healing Sunday</h1>
+      <p style="color: #aab6d7; line-height: 1.7;">A 5-minute read with fresh playlists, breathing rituals, and event invites. Tailored for practitioners across North America, Europe, and Asia-Pacific.</p>
+    </header>
+
+    <section style="background: linear-gradient(135deg, rgba(106,125,255,0.16), rgba(25,32,59,0.9)); padding: 32px; border-radius: 18px; margin-bottom: 40px;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 12px; color: #dbe4ff;">What You'll Receive</h2>
+      <ul style="line-height: 1.8; color: #c2cfef; padding-left: 20px;">
+        <li>Weekly highlight: new landing page or guided session.</li>
+        <li>Sound therapy insights from global practitioners.</li>
+        <li>Exclusive invites to live sound baths plus collaboration opportunities.</li>
+        <li>Downloadable resources (PDF checklists, class outlines).</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom: 40px;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 12px; color: #dbe4ff;">Join the List</h2>
+      <p style="color: #c2cfef; margin-bottom: 16px;">Connect your preferred email platform (ConvertKit, Mailchimp, etc.) by replacing the form action with your subscribe endpoint.</p>
+      <form id="newsletterForm" method="post" action="https://formsubmit.co/hello@soundflows.app" style="display: grid; gap: 16px;" accept-charset="UTF-8">
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="https://soundflows.app/pages/newsletter/?success=1" />
+        <input type="hidden" name="source" value="soundflows-newsletter" />
+        <label style="display: flex; flex-direction: column; gap: 8px; color: #c2cfef;">
+          <span>Email address</span>
+          <input type="email" name="email" required placeholder="you@example.com" style="padding: 12px 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(12,18,30,0.8); color: #e7f0ff;" />
+        </label>
+        <button type="submit" style="background: #6a7dff; color: #0a1120; padding: 14px 20px; border-radius: 999px; font-weight: 600; border: none; cursor: pointer;">Subscribe</button>
+        <p style="font-size: 0.85rem; color: #8794ba;">We'll send one email per week. Unsubscribe anytime.</p>
+      </form>
+      <div id="newsletterMessage" style="display:none; font-size: 0.9rem; padding: 12px 16px; border-radius: 10px;"></div>
+    </section>
+
+    <section style="margin-bottom: 40px;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 12px; color: #dbe4ff;">Onboarding Flow</h2>
+      <ol style="line-height: 1.8; color: #c2cfef; padding-left: 20px;">
+        <li>Welcome email with meditation starter kit.</li>
+        <li>Day 3 follow-up: sleep reset audio bundle.</li>
+        <li>Day 7: community invite plus live event calendar.</li>
+      </ol>
+    </section>
+
+    <footer style="text-align: center; opacity: 0.65; font-size: 0.85rem;">
+      Sound Healing Space - Stay in tune with weekly sound therapy inspiration
+    </footer>
+  </main>
+
+  <script>
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const messageBox = document.getElementById('newsletterMessage');
+      if (!messageBox) return;
+
+      if (params.get('success') === '1') {
+        messageBox.style.display = 'block';
+        messageBox.style.background = 'rgba(106,125,255,0.14)';
+        messageBox.style.color = '#cfd8ff';
+        messageBox.textContent = 'Thanks for joining Sound Healing Sunday! Please check your inbox for a confirmation email.';
+      } else if (params.get('error')) {
+        messageBox.style.display = 'block';
+        messageBox.style.background = 'rgba(255,92,102,0.12)';
+        messageBox.style.color = '#ffb8c0';
+        messageBox.textContent = 'We could not process your request. Please retry later or contact hello@soundflows.app.';
+      }
+    })();
+  </script>
+</body>
+</html>

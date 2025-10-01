@@ -1,0 +1,584 @@
+{
+  "audienceDefinitions": [
+    {
+      "audienceName": "Highly Engaged Users",
+      "description": "用户经常播放音频，会话持续时间较长",
+      "membershipDurationDays": 30,
+      "conditions": {
+        "operator": "AND",
+        "conditions": [
+          {
+            "type": "event",
+            "eventName": "audio_play",
+            "comparison": ">=",
+            "value": 3,
+            "timeframe": "30_days"
+          },
+          {
+            "type": "session",
+            "metric": "session_duration",
+            "comparison": ">",
+            "value": 300,
+            "timeframe": "30_days"
+          }
+        ]
+      },
+      "exportFormat": "ga4_api",
+      "activationTriggers": [
+        "email_marketing",
+        "in_app_notification",
+        "advertising"
+      ]
+    },
+    {
+      "audienceName": "Featured Track Enthusiasts",
+      "description": "经常播放精选音频的用户",
+      "membershipDurationDays": 14,
+      "conditions": {
+        "operator": "SINGLE",
+        "conditions": [
+          {
+            "type": "event",
+            "eventName": "featured_track_play",
+            "comparison": ">=",
+            "value": 2,
+            "timeframe": "14_days"
+          }
+        ]
+      },
+      "exportFormat": "ga4_api",
+      "activationTriggers": [
+        "content_recommendation",
+        "featured_content_promotion"
+      ]
+    },
+    {
+      "audienceName": "Social Sharers",
+      "description": "主动分享内容的用户",
+      "membershipDurationDays": 90,
+      "conditions": {
+        "operator": "SINGLE",
+        "conditions": [
+          {
+            "type": "event",
+            "eventName": "share",
+            "comparison": ">=",
+            "value": 1,
+            "timeframe": "90_days"
+          }
+        ]
+      },
+      "exportFormat": "ga4_api",
+      "activationTriggers": [
+        "social_campaigns",
+        "referral_program"
+      ]
+    },
+    {
+      "audienceName": "Power Listeners",
+      "description": "长时间聆听的用户",
+      "membershipDurationDays": 30,
+      "conditions": {
+        "operator": "AND",
+        "conditions": [
+          {
+            "type": "event",
+            "eventName": "audio_duration",
+            "comparison": ">",
+            "value": 600,
+            "timeframe": "30_days"
+          },
+          {
+            "type": "user_property",
+            "propertyName": "total_session_count",
+            "comparison": ">=",
+            "value": 5,
+            "timeframe": "lifetime"
+          }
+        ]
+      },
+      "exportFormat": "ga4_api",
+      "activationTriggers": [
+        "premium_content",
+        "exclusive_features"
+      ]
+    },
+    {
+      "audienceName": "New User Explorers",
+      "description": "完成教程的新用户",
+      "membershipDurationDays": 7,
+      "conditions": {
+        "operator": "AND",
+        "conditions": [
+          {
+            "type": "user_property",
+            "propertyName": "first_session_timestamp",
+            "comparison": ">",
+            "value": "7_days_ago",
+            "timeframe": "lifetime"
+          },
+          {
+            "type": "event",
+            "eventName": "tutorial_complete",
+            "comparison": ">=",
+            "value": 1,
+            "timeframe": "7_days"
+          }
+        ]
+      },
+      "exportFormat": "ga4_api",
+      "activationTriggers": [
+        "onboarding_campaign",
+        "feature_discovery"
+      ]
+    },
+    {
+      "audienceName": "Mobile Users",
+      "description": "移动设备用户",
+      "membershipDurationDays": 30,
+      "conditions": {
+        "operator": "SINGLE",
+        "conditions": [
+          {
+            "type": "device_category",
+            "category": "mobile",
+            "timeframe": "30_days"
+          }
+        ]
+      },
+      "exportFormat": "ga4_api",
+      "activationTriggers": [
+        "mobile_optimization",
+        "app_download_campaign"
+      ]
+    },
+    {
+      "audienceName": "Desktop Users",
+      "description": "桌面设备用户",
+      "membershipDurationDays": 30,
+      "conditions": {
+        "operator": "SINGLE",
+        "conditions": [
+          {
+            "type": "device_category",
+            "category": "desktop",
+            "timeframe": "30_days"
+          }
+        ]
+      },
+      "exportFormat": "ga4_api",
+      "activationTriggers": [
+        "desktop_features",
+        "desktop_campaigns"
+      ]
+    },
+    {
+      "audienceName": "Deep Scrollers",
+      "description": "深度阅读内容的用户",
+      "membershipDurationDays": 14,
+      "conditions": {
+        "operator": "SINGLE",
+        "conditions": [
+          {
+            "type": "event",
+            "eventName": "scroll_depth",
+            "comparison": ">=",
+            "value": 90,
+            "timeframe": "14_days"
+          }
+        ]
+      },
+      "exportFormat": "ga4_api",
+      "activationTriggers": [
+        "content_engagement",
+        "educational_content"
+      ]
+    },
+    {
+      "audienceName": "Audio Category Explorers",
+      "description": "探索多个音频类别的用户",
+      "membershipDurationDays": 21,
+      "conditions": {
+        "operator": "OR",
+        "conditions": [
+          {
+            "type": "event",
+            "eventName": "category_switch",
+            "comparison": ">=",
+            "value": 5,
+            "timeframe": "21_days"
+          },
+          {
+            "type": "dimension_combination",
+            "dimensions": [
+              {
+                "name": "audio_category",
+                "operator": "count_unique",
+                "value": ">=",
+                "target": 3
+              }
+            ],
+            "timeframe": "21_days"
+          }
+        ]
+      },
+      "exportFormat": "ga4_api",
+      "activationTriggers": [
+        "category_recommendation",
+        "discovery_campaign"
+      ]
+    },
+    {
+      "audienceName": "Sleep Timer Users",
+      "description": "使用睡眠定时器的用户",
+      "membershipDurationDays": 30,
+      "conditions": {
+        "operator": "SINGLE",
+        "conditions": [
+          {
+            "type": "event",
+            "eventName": "sleep_timer_set",
+            "comparison": ">=",
+            "value": 1,
+            "timeframe": "30_days"
+          }
+        ]
+      },
+      "exportFormat": "ga4_api",
+      "activationTriggers": [
+        "sleep_content",
+        "relaxation_campaign"
+      ]
+    },
+    {
+      "audienceName": "Theme Switchers",
+      "description": "切换主题的用户",
+      "membershipDurationDays": 7,
+      "conditions": {
+        "operator": "SINGLE",
+        "conditions": [
+          {
+            "type": "event",
+            "eventName": "theme_change",
+            "comparison": ">=",
+            "value": 1,
+            "timeframe": "7_days"
+          }
+        ]
+      },
+      "exportFormat": "ga4_api",
+      "activationTriggers": [
+        "personalization",
+        "customization_features"
+      ]
+    },
+    {
+      "audienceName": "Language Switchers",
+      "description": "切换语言的用户",
+      "membershipDurationDays": 14,
+      "conditions": {
+        "operator": "SINGLE",
+        "conditions": [
+          {
+            "type": "event",
+            "eventName": "language_change",
+            "comparison": ">=",
+            "value": 1,
+            "timeframe": "14_days"
+          }
+        ]
+      },
+      "exportFormat": "ga4_api",
+      "activationTriggers": [
+        "multilingual_content",
+        "localization_features"
+      ]
+    },
+    {
+      "audienceName": "Chakra Healing Seekers",
+      "description": "对脉轮疗愈感兴趣的用户",
+      "membershipDurationDays": 30,
+      "conditions": {
+        "operator": "OR",
+        "conditions": [
+          {
+            "type": "event",
+            "eventName": "audio_play",
+            "parameterFilter": {
+              "parameterName": "audio_category",
+              "operator": "contains",
+              "value": "chakra"
+            },
+            "comparison": ">=",
+            "value": 2,
+            "timeframe": "30_days"
+          },
+          {
+            "type": "page_view",
+            "pagePath": "/chakra",
+            "comparison": ">=",
+            "value": 1,
+            "timeframe": "30_days"
+          }
+        ]
+      },
+      "exportFormat": "ga4_api",
+      "activationTriggers": [
+        "chakra_content",
+        "energy_healing_campaign"
+      ]
+    },
+    {
+      "audienceName": "Meditation Practitioners",
+      "description": "冥想练习者",
+      "membershipDurationDays": 21,
+      "conditions": {
+        "operator": "OR",
+        "conditions": [
+          {
+            "type": "event",
+            "eventName": "audio_play",
+            "parameterFilter": {
+              "parameterName": "audio_category",
+              "operator": "contains",
+              "value": "meditation"
+            },
+            "comparison": ">=",
+            "value": 3,
+            "timeframe": "21_days"
+          },
+          {
+            "type": "dimension_combination",
+            "dimensions": [
+              {
+                "name": "audio_category",
+                "operator": "contains",
+                "value": "meditation"
+              }
+            ],
+            "eventFilter": {
+              "eventName": "audio_duration",
+              "comparison": ">",
+              "value": 300
+            },
+            "timeframe": "21_days"
+          }
+        ]
+      },
+      "exportFormat": "ga4_api",
+      "activationTriggers": [
+        "meditation_content",
+        "mindfulness_campaign"
+      ]
+    },
+    {
+      "audienceName": "Nature Sounds Lovers",
+      "description": "自然声音爱好者",
+      "membershipDurationDays": 30,
+      "conditions": {
+        "operator": "OR",
+        "conditions": [
+          {
+            "type": "event",
+            "eventName": "audio_play",
+            "parameterFilter": {
+              "parameterName": "audio_category",
+              "operator": "in",
+              "value": ["rain", "animal_sounds", "running_water"]
+            },
+            "comparison": ">=",
+            "value": 5,
+            "timeframe": "30_days"
+          }
+        ]
+      },
+      "exportFormat": "ga4_api",
+      "activationTriggers": [
+        "nature_content",
+        "ambient_campaign"
+      ]
+    },
+    {
+      "audienceName": "Premium Feature Candidates",
+      "description": "可能付费的高级用户",
+      "membershipDurationDays": 30,
+      "conditions": {
+        "operator": "AND",
+        "conditions": [
+          {
+            "type": "user_property",
+            "propertyName": "session_count",
+            "comparison": ">=",
+            "value": 10,
+            "timeframe": "30_days"
+          },
+          {
+            "type": "event",
+            "eventName": "audio_duration",
+            "comparison": ">",
+            "value": 1200,
+            "timeframe": "30_days"
+          },
+          {
+            "type": "event",
+            "eventName": "category_switch",
+            "comparison": ">=",
+            "value": 3,
+            "timeframe": "30_days"
+          }
+        ]
+      },
+      "exportFormat": "ga4_api",
+      "activationTriggers": [
+        "premium_features",
+        "subscription_campaign"
+      ]
+    }
+  ],
+  "segmentDefinitions": [
+    {
+      "segmentName": "High Value Users",
+      "description": "高价值用户群体",
+      "criteria": {
+        "audienceCombination": {
+          "operator": "OR",
+          "audiences": [
+            "Highly Engaged Users",
+            "Power Listeners",
+            "Premium Feature Candidates"
+          ]
+        }
+      },
+      "businessValue": "high",
+      "recommendedActions": [
+        "premium_upsell",
+        "exclusive_content",
+        "priority_support"
+      ]
+    },
+    {
+      "segmentName": "Growth Potential Users",
+      "description": "具有增长潜力的用户",
+      "criteria": {
+        "audienceCombination": {
+          "operator": "AND",
+          "audiences": [
+            "New User Explorers",
+            "Audio Category Explorers"
+          ]
+        }
+      },
+      "businessValue": "medium",
+      "recommendedActions": [
+        "feature_education",
+        "content_recommendation",
+        "engagement_campaigns"
+      ]
+    },
+    {
+      "segmentName": "Content Enthusiasts",
+      "description": "内容爱好者",
+      "criteria": {
+        "audienceCombination": {
+          "operator": "OR",
+          "audiences": [
+            "Featured Track Enthusiasts",
+            "Deep Scrollers",
+            "Meditation Practitioners",
+            "Nature Sounds Lovers"
+          ]
+        }
+      },
+      "businessValue": "medium",
+      "recommendedActions": [
+        "personalized_content",
+        "community_engagement",
+        "social_sharing_incentives"
+      ]
+    }
+  ],
+  "exportOptions": {
+    "formats": [
+      {
+        "formatName": "Google Analytics API",
+        "formatId": "ga4_api",
+        "fileExtension": ".json",
+        "description": "用于Google Analytics API导入"
+      },
+      {
+        "formatName": "Google Sheets",
+        "formatId": "google_sheets",
+        "fileExtension": ".csv",
+        "description": "用于导入Google Sheets"
+      },
+      {
+        "formatName": "CSV Export",
+        "formatId": "csv",
+        "fileExtension": ".csv",
+        "description": "标准CSV格式"
+      },
+      {
+        "formatName": "Marketing Platforms",
+        "formatId": "marketing",
+        "fileExtension": ".json",
+        "description": "用于营销平台导入"
+      }
+    ],
+    "destinations": [
+      {
+        "platform": "Google Analytics",
+        "apiEndpoint": "https://analyticsadmin.googleapis.com/v1alpha",
+        "authentication": "oauth2",
+        "requiredScopes": ["https://www.googleapis.com/auth/analytics.manage.users"]
+      },
+      {
+        "platform": "Google Ads",
+        "apiEndpoint": "https://googleads.googleapis.com/v16",
+        "authentication": "oauth2",
+        "requiredScopes": ["https://www.googleapis.com/auth/adwords"]
+      },
+      {
+        "platform": "Facebook Ads",
+        "apiEndpoint": "https://graph.facebook.com/v19.0",
+        "authentication": "access_token",
+        "requiredPermissions": ["ads_management"]
+      }
+    ]
+  },
+  "activationSettings": {
+    "emailMarketing": {
+      "enabled": true,
+      "platforms": ["Mailchimp", "SendGrid", "ActiveCampaign"],
+      "triggers": ["user_entered_audience", "user_left_audience"]
+    },
+    "pushNotifications": {
+      "enabled": true,
+      "platforms": ["Firebase", "OneSignal", "PushEngage"],
+      "triggers": ["user_entered_audience", "behavioral_trigger"]
+    },
+    "advertising": {
+      "enabled": true,
+      "platforms": ["Google Ads", "Facebook Ads", "TikTok Ads"],
+      "triggers": ["audience_based_targeting"]
+    },
+    "contentPersonalization": {
+      "enabled": true,
+      "platforms": ["WordPress", "Custom CMS"],
+      "triggers": ["real_time_personalization"]
+    }
+  },
+  "measurementSettings": {
+    "conversionWindows": {
+      "clickThrough": "30_days",
+      "viewThrough": "1_day"
+    },
+    "attributionModel": "data_driven",
+    "dataRetention": "14_months",
+    "crossDeviceTracking": true,
+    "consentManagement": {
+      "enabled": true,
+      "mode": "explicit_consent",
+      "regions": ["GDPR", "CCPA", "PIPL"]
+    }
+  }
+}

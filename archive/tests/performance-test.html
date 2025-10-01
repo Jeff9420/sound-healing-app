@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SoundFlows Performance Test</title>
+
+  <!-- Critical CSS Inlined -->
+  <style>
+    body{margin:0;font-family:system-ui,sans-serif;background:#1a1f2e;color:#fff;padding:20px}
+    .container{max-width:1200px;margin:0 auto}
+    .metric{background:rgba(255,255,255,0.1);padding:15px;border-radius:8px;margin:10px 0}
+    .metric-value{font-size:24px;font-weight:bold;color:#4ade80}
+    .metric-label{font-size:14px;opacity:0.8}
+    .recommendation{background:rgba(251,191,36,0.1);border-left:4px solid #fbbf24;padding:15px;margin:10px 0}
+    .status{padding:10px;border-radius:6px;margin:5px 0}
+    .status.good{background:rgba(74,222,128,0.1);color:#4ade80}
+    .status.warning{background:rgba(251,191,36,0.1);color:#fbbf24}
+    .status.poor{background:rgba(248,113,113,0.1);color:#f87171}
+    button{background:#6666ff;color:white;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;margin:5px}
+    button:hover{opacity:0.9}
+    .loading{display:inline-block;width:20px;height:20px;border:3px solid #f3f3f3;border-top:3px solid #6666ff;border-radius:50%;animation:spin 1s linear infinite}
+    @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🚀 SoundFlows Performance Test</h1>
+
+    <div id="loadingStatus" class="status">
+      <span class="loading"></span> Running performance tests...
+    </div>
+
+    <div id="results" style="display:none;">
+      <h2>📊 Core Web Vitals</h2>
+      <div id="metrics"></div>
+
+      <h2>💡 Recommendations</h2>
+      <div id="recommendations"></div>
+
+      <h2>🔧 Optimization Tests</h2>
+      <button onclick="testAudioPreload()">Test Audio Preload</button>
+      <button onclick="testCachePerformance()">Test Cache Performance</button>
+      <button onclick="testMemoryUsage()">Test Memory Usage</button>
+      <button onclick="generateReport()">Generate Full Report</button>
+
+      <div id="testResults"></div>
+    </div>
+  </div>
+
+  <script>
+    // Performance Test Suite
+    class PerformanceTestSuite {
+      constructor() {
+        this.metrics = {};
+        this.tests = [];
+      }
+
+      async runAllTests() {
+        console.log('🚀 Starting performance test suite...');
+
+        // Test Core Web Vitals
+        await this.testWebVitals();
+
+        // Test resource loading
+        await this.testResourceLoading();
+
+        // Test audio performance
+        await this.testAudioPerformance();
+
+        // Test memory usage
+        await this.testMemoryUsage();
+
+        // Generate recommendations
+        this.generateRecommendations();
+
+        // Display results
+        this.displayResults();
+
+        document.getElementById('loadingStatus').style.display = 'none';
+        document.getElementById('results').style.display = 'block';
+      }
+
+      async testWebVitals() {
+        return new Promise((resolve) => {
+          // Load web-vitals library
+          const script = document.createElement('script');
+          // 使用本地缓存的web-vitals以避免SRI问题
+          script.src = 'assets/js/web-vitals.iife.js';
+          script.onload = () => {
+            const metrics = {};
+
+            let completed = 0;
+            const totalMetrics = 6;
+
+            const checkComplete = () => {
+              completed++;
+              if (completed === totalMetrics) {
+                this.metrics.webVitals = metrics;
+                resolve();
+              }
+            };
+
+            // Collect all metrics
+            webVitals.getFCP(metric => {
+              metrics.FCP = { value: metric.value, rating: this.getRating('FCP', metric.value) };
+              checkComplete();
+            });
+
+            webVitals.getLCP(metric => {
+              metrics.LCP = { value: metric.value, rating: this.getRating('LCP', metric.value) };
+              checkComplete();
+            });
+
+            webVitals.getFID(metric => {
+              metrics.FID = { value: metric.value, rating: this.getRating('FID', metric.value) };
+              checkComplete();
+            });
+
+            webVitals.getCLS(metric => {
+              metrics.CLS = { value: metric.value, rating: this.getRating('CLS', metric.value) };
+              checkComplete();
+            });
+
+            webVitals.getTTFB(metric => {
+              metrics.TTFB = { value: metric.value, rating: this.getRating('TTFB', metric.value) };
+              checkComplete();
+            });
+
+            webVitals.getINP(metric => {
+              metrics.INP = { value: metric.value, rating: this.getRating('INP', metric.value) };
+              checkComplete();
+            });
+          };
+          document.head.appendChild(script);
+        });
+      }
+
+      async testResourceLoading() {
+        const resources = performance.getEntriesByType('resource');
+
+        const resourceMetrics = {
+          totalResources: resources.length,
+          totalSize: 0,
+          loadTime: 0,
+          byType: {}
+        };
+
+        resources.forEach(resource => {
+          const size = resource.transferSize || 0;
+          const type = this.getResourceType(resource.name);
+
+          resourceMetrics.totalSize += size;
+          resourceMetrics.loadTime += resource.duration;
+
+          if (!resourceMetrics.byType[type]) {
+            resourceMetrics.byType[type] = { count: 0, size: 0, time: 0 };
+          }
+
+          resourceMetrics.byType[type].count++;
+          resourceMetrics.byType[type].size += size;
+          resourceMetrics.byType[type].time += resource.duration;
+        });
+
+        this.metrics.resources = resourceMetrics;
+      }
+
+      async testAudioPerformance() {
+        // Test audio loading time
+        const testAudio = new Audio();
+        const startTime = performance.now();
+
+        try {
+          testAudio.src = 'https://archive.org/download/sound-healing-collection/meditation/Deep%20Meditation.mp3';
+          testAudio.preload = 'metadata';
+
+          await new Promise((resolve, reject) => {
+            testAudio.addEventListener('loadedmetadata', resolve);
+            testAudio.addEventListener('error', reject);
+          });
+
+          const loadTime = performance.now() - startTime;
+
+          this.metrics.audio = {
+            loadTime: loadTime,
+            supportedFormats: this.detectAudioFormats(),
+            preloadSupport: 'preload' in testAudio
+          };
+        } catch (error) {
+          this.metrics.audio = {
+            loadTime: null,
+            error: error.message,
+            supportedFormats: this.detectAudioFormats()
+          };
+        }
+      }
+
+      detectAudioFormats() {
+        const audio = document.createElement('audio');
+        return {
+          mp3: audio.canPlayType('audio/mpeg') !== '',
+          wav: audio.canPlayType('audio/wav') !== '',
+          ogg: audio.canPlayType('audio/ogg') !== '',
+          aac: audio.canPlayType('audio/aac') !== ''
+        };
+      }
+
+      async testMemoryUsage() {
+        if (performance.memory) {
+          this.metrics.memory = {
+            used: Math.round(performance.memory.usedJSHeapSize / 1024 / 1024),
+            total: Math.round(performance.memory.totalJSHeapSize / 1024 / 1024),
+            limit: Math.round(performance.memory.jsHeapSizeLimit / 1024 / 1024),
+            percentage: Math.round((performance.memory.usedJSHeapSize / performance.memory.jsHeapSizeLimit) * 100)
+          };
+        } else {
+          this.metrics.memory = {
+            supported: false
+          };
+        }
+      }
+
+      getResourceType(url) {
+        if (url.includes('.css')) return 'css';
+        if (url.includes('.js')) return 'javascript';
+        if (url.includes('.png') || url.includes('.jpg') || url.includes('.svg')) return 'image';
+        if (url.includes('.mp3') || url.includes('.wav')) return 'audio';
+        return 'other';
+      }
+
+      getRating(metric, value) {
+        const thresholds = {
+          FCP: { good: 1800, poor: 3000 },
+          LCP: { good: 2500, poor: 4000 },
+          FID: { good: 100, poor: 300 },
+          CLS: { good: 0.1, poor: 0.25 },
+          TTFB: { good: 600, poor: 1500 },
+          INP: { good: 200, poor: 500 }
+        };
+
+        const t = thresholds[metric];
+        if (!t) return 'unknown';
+
+        if (value <= t.good) return 'good';
+        if (value <= t.poor) return 'needs-improvement';
+        return 'poor';
+      }
+
+      generateRecommendations() {
+        const recommendations = [];
+
+        // Check Web Vitals
+        if (this.metrics.webVitals) {
+          Object.entries(this.metrics.webVitals).forEach(([metric, data]) => {
+            if (data.rating === 'poor') {
+              recommendations.push({
+                priority: 'high',
+                metric: metric,
+                message: this.getRecommendationMessage(metric, 'poor')
+              });
+            } else if (data.rating === 'needs-improvement') {
+              recommendations.push({
+                priority: 'medium',
+                metric: metric,
+                message: this.getRecommendationMessage(metric, 'needs-improvement')
+              });
+            }
+          });
+        }
+
+        // Check resource size
+        if (this.metrics.resources) {
+          const jsSize = this.metrics.resources.byType.javascript?.size || 0;
+          if (jsSize > 100 * 1024) {
+            recommendations.push({
+              priority: 'high',
+              metric: 'JavaScript Size',
+              message: 'JavaScript bundle is too large. Consider code splitting and removing unused code.'
+            });
+          }
+        }
+
+        // Check memory
+        if (this.metrics.memory && this.metrics.memory.supported) {
+          if (this.metrics.memory.percentage > 80) {
+            recommendations.push({
+              priority: 'medium',
+              metric: 'Memory Usage',
+              message: 'High memory usage detected. Check for memory leaks and optimize resource usage.'
+            });
+          }
+        }
+
+        this.recommendations = recommendations;
+      }
+
+      getRecommendationMessage(metric, rating) {
+        const messages = {
+          FCP: {
+            'poor': 'First Contentful Paint is too slow. Inline critical CSS and defer non-critical stylesheets.',
+            'needs-improvement': 'First Contentful Paint needs improvement. Consider optimizing CSS delivery.'
+          },
+          LCP: {
+            'poor': 'Largest Contentful Paint is too slow. Optimize images, preload key resources, and improve server response times.',
+            'needs-improvement': 'Largest Contentful Paint needs improvement. Consider optimizing your largest content element.'
+          },
+          FID: {
+            'poor': 'First Input Delay is too high. Reduce JavaScript execution time and break up long tasks.',
+            'needs-improvement': 'First Input Delay needs improvement. Optimize event handlers and reduce main thread work.'
+          },
+          CLS: {
+            'poor': 'Cumulative Layout Shift is too high. Ensure images have dimensions and avoid inserting content above existing content.',
+            'needs-improvement': 'Cumulative Layout Shift needs improvement. Check for dynamically loaded content without reserved space.'
+          }
+        };
+
+        return messages[metric]?.[rating] || `${metric} needs optimization.`;
+      }
+
+      displayResults() {
+        // Display metrics
+        const metricsContainer = document.getElementById('metrics');
+        metricsContainer.innerHTML = '';
+
+        if (this.metrics.webVitals) {
+          Object.entries(this.metrics.webVitals).forEach(([metric, data]) => {
+            const div = document.createElement('div');
+            div.className = 'metric';
+            div.innerHTML = `
+              <div class="metric-value">${data.value.toFixed(2)}${this.getUnit(metric)}</div>
+              <div class="metric-label">${metric} - <span class="${data.rating}">${data.rating}</span></div>
+            `;
+            metricsContainer.appendChild(div);
+          });
+        }
+
+        // Display recommendations
+        const recContainer = document.getElementById('recommendations');
+        recContainer.innerHTML = '';
+
+        if (this.recommendations && this.recommendations.length > 0) {
+          this.recommendations.forEach(rec => {
+            const div = document.createElement('div');
+            div.className = `recommendation priority-${rec.priority}`;
+            div.innerHTML = `
+              <strong>${rec.metric} (${rec.priority} priority)</strong><br>
+              ${rec.message}
+            `;
+            recContainer.appendChild(div);
+          });
+        } else {
+          recContainer.innerHTML = '<div class="status good">✅ No performance issues detected!</div>';
+        }
+      }
+
+      getUnit(metric) {
+        const units = {
+          FCP: 'ms',
+          LCP: 'ms',
+          FID: 'ms',
+          CLS: '',
+          TTFB: 'ms',
+          INP: 'ms'
+        };
+        return units[metric] || '';
+      }
+    }
+
+    // Test functions for buttons
+    async function testAudioPreload() {
+      const results = document.getElementById('testResults');
+      results.innerHTML = '<div class="status"><span class="loading"></span> Testing audio preload...</div>';
+
+      const audio = new Audio();
+      const startTime = performance.now();
+
+      try {
+        audio.src = 'https://archive.org/download/sound-healing-collection/meditation/Deep%20Meditation.mp3';
+        audio.preload = 'auto';
+
+        await new Promise((resolve, reject) => {
+          audio.addEventListener('canplaythrough', resolve);
+          audio.addEventListener('error', reject);
+        });
+
+        const loadTime = performance.now() - startTime;
+
+        results.innerHTML = `
+          <div class="status good">
+            ✅ Audio loaded in ${loadTime.toFixed(2)}ms
+          </div>
+          <div class="metric">
+            <div class="metric-label">Load Time</div>
+            <div class="metric-value">${loadTime.toFixed(2)}ms</div>
+          </div>
+        `;
+      } catch (error) {
+        results.innerHTML = `
+          <div class="status poor">
+            ❌ Audio preload failed: ${error.message}
+          </div>
+        `;
+      }
+    }
+
+    async function testCachePerformance() {
+      const results = document.getElementById('testResults');
+      results.innerHTML = '<div class="status"><span class="loading"></span> Testing cache performance...</div>';
+
+      // Test if service worker is registered
+      if ('serviceWorker' in navigator) {
+        const registration = await navigator.serviceWorker.getRegistration();
+
+        if (registration) {
+          results.innerHTML = `
+            <div class="status good">
+              ✅ Service Worker is active
+            </div>
+            <div class="metric">
+              <div class="metric-label">Cache Status</div>
+              <div class="metric-value">Active</div>
+            </div>
+          `;
+        } else {
+          results.innerHTML = `
+            <div class="status warning">
+              ⚠️ Service Worker not registered
+            </div>
+          `;
+        }
+      } else {
+        results.innerHTML = `
+          <div class="status poor">
+            ❌ Service Workers not supported
+          </div>
+        `;
+      }
+    }
+
+    function testMemoryUsage() {
+      const results = document.getElementById('testResults');
+
+      if (performance.memory) {
+        const memory = {
+          used: Math.round(performance.memory.usedJSHeapSize / 1024 / 1024),
+          total: Math.round(performance.memory.totalJSHeapSize / 1024 / 1024),
+          limit: Math.round(performance.memory.jsHeapSizeLimit / 1024 / 1024),
+          percentage: Math.round((performance.memory.usedJSHeapSize / performance.memory.jsHeapSizeLimit) * 100)
+        };
+
+        let statusClass = 'good';
+        if (memory.percentage > 80) statusClass = 'poor';
+        else if (memory.percentage > 60) statusClass = 'warning';
+
+        results.innerHTML = `
+          <div class="status ${statusClass}">
+            Memory Usage: ${memory.used}MB / ${memory.limit}MB (${memory.percentage}%)
+          </div>
+        `;
+      } else {
+        results.innerHTML = `
+          <div class="status warning">
+            ⚠️ Memory API not available in this browser
+          </div>
+        `;
+      }
+    }
+
+    function generateReport() {
+      const report = {
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        url: location.href,
+        metrics: window.performanceTestSuite?.metrics || {},
+        recommendations: window.performanceTestSuite?.recommendations || []
+      };
+
+      const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `soundflows-performance-${Date.now()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // Initialize test suite
+    document.addEventListener('DOMContentLoaded', () => {
+      window.performanceTestSuite = new PerformanceTestSuite();
+      window.performanceTestSuite.runAllTests();
+    });
+  </script>
+</body>
+</html>

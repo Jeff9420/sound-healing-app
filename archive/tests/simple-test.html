@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>声音疗愈 - 简化测试版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #6666FF 0%, #FF6699 100%);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .category-card {
+            background: rgba(255,255,255,0.2);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .category-icon {
+            font-size: 4em;
+            margin-bottom: 15px;
+        }
+
+        .category-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .category-desc {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: relative;
+            background: linear-gradient(135deg, #6666FF 0%, #FF6699 100%);
+            margin: 50px auto;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 20px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+        }
+
+        .track-list {
+            margin-top: 20px;
+        }
+
+        .track-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .track-item:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            z-index: 500;
+        }
+
+        .player.show {
+            transform: translateY(0);
+        }
+
+        .player-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: white;
+        }
+
+        .track-info {
+            flex: 1;
+        }
+
+        .track-name {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .track-category {
+            font-size: 0.9em;
+            opacity: 0.7;
+        }
+
+        audio {
+            flex: 2;
+        }
+
+        .close-player {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .minimize-indicator {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 0.8em;
+            opacity: 0.7;
+            cursor: pointer;
+            padding: 5px 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            transition: all 0.2s;
+            display: none;
+        }
+
+        .player.show .minimize-indicator {
+            display: block;
+        }
+
+        .player.minimized {
+            transform: translateY(calc(100% - 50px));
+            cursor: pointer;
+        }
+
+        .player.minimized .player-content {
+            display: none;
+        }
+
+        .minimized-display {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            right: 60px;
+            display: none;
+            color: white;
+        }
+
+        .player.minimized .minimized-display {
+            display: block;
+        }
+
+        .status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            z-index: 10000;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎵 声音疗愈空间</h1>
+            <p class="subtitle">专业音频疗法平台 - 帮您放松身心，找回内心平静</p>
+        </div>
+
+        <div class="categories" id="categoryGrid">
+            <!-- Categories will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Playlist Modal -->
+    <div id="playlistModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePlaylist()">&times;</span>
+            <h2 id="playlistTitle">选择音频</h2>
+            <div id="trackList" class="track-list"></div>
+        </div>
+    </div>
+
+    <!-- Audio Player -->
+    <div id="player" class="player">
+        <div class="minimize-indicator" onclick="toggleMinimize(event)">▲ 收起</div>
+        <div class="minimized-display">
+            <div id="minimizedTrack">未播放</div>
+        </div>
+        <div class="player-content">
+            <div class="track-info">
+                <div class="track-name" id="currentTrack">未播放</div>
+                <div class="track-category" id="currentCategory"></div>
+            </div>
+            <audio id="audioPlayer" controls></audio>
+            <button class="close-player" onclick="closePlayer()">&times;</button>
+        </div>
+    </div>
+
+    <!-- Status Display -->
+    <div id="status" class="status"></div>
+
+    <script>
+        // 简化的音频数据
+        const audioData = {
+            meditation: [
+                { name: '深度冥想引导', url: 'https://archive.org/download/sound-healing-collection/meditation/Deep%20Meditation.mp3' },
+                { name: '呼吸冥想练习', url: 'https://archive.org/download/sound-healing-collection/meditation/Breathing%20Meditation.mp3' },
+                { name: '正念冥想', url: 'https://archive.org/download/sound-healing-collection/meditation/Mindfulness%20Meditation.mp3' }
+            ],
+            nature: [
+                { name: '森林鸟鸣', url: 'https://archive.org/download/sound-healing-collection/nature/Forest%20Birds.mp3' },
+                { name: '海浪声', url: 'https://archive.org/download/sound-healing-collection/nature/Ocean%20Waves.mp3' },
+                { name: '溪流声', url: 'https://archive.org/download/sound-healing-collection/nature/Stream%20Sounds.mp3' }
+            ],
+            rain: [
+                { name: '轻柔雨声', url: 'https://archive.org/download/sound-healing-collection/rain/Gentle%20Rain.mp3' },
+                { name: '雷雨声', url: 'https://archive.org/download/sound-healing-collection/rain/Thunderstorm.mp3' },
+                { name: '雨夜声音', url: 'https://archive.org/download/sound-healing-collection/rain/Rainy%20Night.mp3' }
+            ],
+            singing: [
+                { name: '颂钵冥想', url: 'https://archive.org/download/sound-healing-collection/singing-bowl/Singing%20Bowl%20Meditation.mp3' },
+                { name: 'Tibetan Singing Bowl', url: 'https://archive.org/download/sound-healing-collection/singing-bowl/Tibetan%20Bowl.mp3' },
+                { name: 'Chakra Healing', url: 'https://archive.org/download/sound-healing-collection/singing-bowl/Chakra%20Healing.mp3' }
+            ]
+        };
+
+        const categoryInfo = {
+            meditation: { name: '冥想音乐', icon: '🧘', desc: '深度放松，内心平静' },
+            nature: { name: '自然之声', icon: '🌿', desc: '鸟语花香，流水潺潺' },
+            rain: { name: '雨声系列', icon: '🌧️', desc: '雨打芭蕉，安神入眠' },
+            singing: { name: '颂钵疗愈', icon: '🕯️', desc: '净化能量，平衡身心' }
+        };
+
+        let currentCategory = '';
+        let isMinimized = false;
+
+        // 初始化应用
+        function initApp() {
+            const categoryGrid = document.getElementById('categoryGrid');
+
+            // 加载分类
+            Object.entries(categoryInfo).forEach(([key, info]) => {
+                const card = document.createElement('div');
+                card.className = 'category-card';
+                card.onclick = () => openPlaylist(key, info);
+
+                card.innerHTML = `
+                    <div class="category-icon">${info.icon}</div>
+                    <div class="category-name">${info.name}</div>
+                    <div class="category-desc">${info.desc}</div>
+                `;
+
+                categoryGrid.appendChild(card);
+            });
+
+            showStatus('声音疗愈空间加载成功！');
+        }
+
+        function openPlaylist(categoryKey, info) {
+            currentCategory = categoryKey;
+            document.getElementById('playlistTitle').textContent = info.name;
+            const trackList = document.getElementById('trackList');
+            trackList.innerHTML = '';
+
+            // 显示音轨
+            const tracks = audioData[categoryKey] || [];
+            tracks.forEach((track, index) => {
+                const trackItem = document.createElement('div');
+                trackItem.className = 'track-item';
+                trackItem.onclick = () => playTrack(track, info);
+
+                trackItem.innerHTML = `
+                    <div style="font-size: 1.2em; margin-bottom: 5px;">🎵 ${track.name}</div>
+                `;
+
+                trackList.appendChild(trackItem);
+            });
+
+            document.getElementById('playlistModal').style.display = 'block';
+        }
+
+        function closePlaylist() {
+            document.getElementById('playlistModal').style.display = 'none';
+        }
+
+        function playTrack(track, info) {
+            const player = document.getElementById('player');
+            const currentTrackEl = document.getElementById('currentTrack');
+            const currentCategoryEl = document.getElementById('currentCategory');
+            const minimizedTrackEl = document.getElementById('minimizedTrack');
+            const audioPlayer = document.getElementById('audioPlayer');
+
+            currentTrackEl.textContent = track.name;
+            currentCategoryEl.textContent = info.name;
+            minimizedTrackEl.textContent = `${track.name} - ${info.name}`;
+
+            audioPlayer.src = track.url;
+            audioPlayer.play().catch(e => {
+                showStatus('播放失败，请点击播放按钮');
+            });
+
+            player.classList.add('show');
+            player.classList.remove('minimized');
+            isMinimized = false;
+            closePlaylist();
+        }
+
+        function closePlayer() {
+            const player = document.getElementById('player');
+            player.classList.remove('show');
+            player.classList.remove('minimized');
+            document.getElementById('audioPlayer').pause();
+        }
+
+        function toggleMinimize(event) {
+            if (event) {
+                event.stopPropagation();
+            }
+
+            const player = document.getElementById('player');
+            const indicator = document.querySelector('.minimize-indicator');
+
+            if (isMinimized) {
+                player.classList.remove('minimized');
+                indicator.textContent = '▲ 收起';
+            } else {
+                player.classList.add('minimized');
+                indicator.textContent = '▼ 展开';
+            }
+            isMinimized = !isMinimized;
+        }
+
+        function showStatus(message) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.style.display = 'block';
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 3000);
+        }
+
+        // 点击模态框外部关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('playlistModal');
+            if (event.target === modal) {
+                closePlaylist();
+            }
+        }
+
+        // 点击最小化的播放器展开
+        document.getElementById('player').onclick = function() {
+            if (isMinimized) {
+                toggleMinimize();
+            }
+        }
+
+        // 页面加载完成后初始化
+        window.onload = initApp;
+    </script>
+</body>
+</html>

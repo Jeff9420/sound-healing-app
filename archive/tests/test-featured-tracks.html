@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试精选音频功能</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #1a1a2e;
+            color: white;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+        .test-btn {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .test-btn:hover {
+            background: #45a049;
+        }
+        .test-result {
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .success {
+            color: #4CAF50;
+        }
+        .error {
+            color: #f44336;
+        }
+        .warning {
+            color: #ff9800;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>精选音频功能测试</h1>
+
+        <div class="test-section">
+            <h2>1. 基础模块加载测试</h2>
+            <button class="test-btn" onclick="testModuleLoading()">测试模块加载</button>
+            <div id="moduleResult" class="test-result"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>2. 精选音频按钮测试</h2>
+            <button class="test-btn" onclick="testFeaturedButtons()">测试按钮存在性</button>
+            <div id="buttonResult" class="test-result"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>3. 音频配置匹配测试</h2>
+            <button class="test-btn" onclick="testAudioConfig()">测试音频配置</button>
+            <div id="configResult" class="test-result"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>4. 模拟点击测试</h2>
+            <button class="test-btn" onclick="testSimulatedClick()">模拟点击精选音频</button>
+            <div id="clickResult" class="test-result"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>5. 完整流程测试</h2>
+            <button class="test-btn" onclick="testFullWorkflow()">完整播放流程</button>
+            <div id="workflowResult" class="test-result"></div>
+        </div>
+    </div>
+
+    <!-- 加载主应用的脚本 -->
+    <script src="assets/js/audio-config.js"></script>
+    <script src="assets/js/browser-compatibility.js"></script>
+    <script src="assets/js/featured-tracks.js"></script>
+
+    <script>
+        // 测试结果输出函数
+        function logResult(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            const timestamp = new Date().toLocaleTimeString();
+            const className = type === 'success' ? 'success' :
+                             type === 'error' ? 'error' :
+                             type === 'warning' ? 'warning' : '';
+            element.innerHTML += `<div class="${className}">[${timestamp}] ${message}</div>`;
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+
+        // 1. 测试模块加载
+        function testModuleLoading() {
+            const resultEl = document.getElementById('moduleResult');
+            resultEl.innerHTML = '';
+
+            logResult('moduleResult', '开始测试模块加载...', 'info');
+
+            // 检查 FeaturedTracks 类
+            if (typeof FeaturedTracks !== 'undefined') {
+                logResult('moduleResult', '✅ FeaturedTracks 类已加载', 'success');
+
+                // 检查全局实例
+                setTimeout(() => {
+                    if (window.featuredTracks) {
+                        logResult('moduleResult', '✅ featuredTracks 全局实例已创建', 'success');
+                        logResult('moduleResult', `精选音频数量: ${window.featuredTracks.getFeaturedTracks().length}`, 'info');
+                    } else {
+                        logResult('moduleResult', '❌ featuredTracks 全局实例未找到', 'error');
+                    }
+                }, 1000);
+            } else {
+                logResult('moduleResult', '❌ FeaturedTracks 类未加载', 'error');
+            }
+
+            // 检查依赖
+            if (typeof AUDIO_CONFIG !== 'undefined') {
+                logResult('moduleResult', '✅ AUDIO_CONFIG 已加载', 'success');
+            } else {
+                logResult('moduleResult', '❌ AUDIO_CONFIG 未加载', 'error');
+            }
+        }
+
+        // 2. 测试精选音频按钮
+        function testFeaturedButtons() {
+            const resultEl = document.getElementById('buttonResult');
+            resultEl.innerHTML = '';
+
+            logResult('buttonResult', '开始检查精选音频按钮...', 'info');
+
+            // 创建临时的 DOM 结构来测试
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = `
+                <div class="featured-tracks">
+                    <div class="featured-track-list">
+                        <button class="featured-track-btn" data-category="meditation" data-track="冥想放松 瑜伽舒缓音乐">深度冥想</button>
+                        <button class="featured-track-btn" data-category="Rain" data-track="身临情景的雨声">雨声入眠</button>
+                        <button class="featured-track-btn" data-category="Singing bowl sound" data-track="01-Healing Bowls - Instrumental - Jane Winther">颂钵疗愈</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(tempDiv);
+
+            const buttons = tempDiv.querySelectorAll('.featured-track-btn');
+            if (buttons.length > 0) {
+                logResult('buttonResult', `✅ 找到 ${buttons.length} 个精选音频按钮`, 'success');
+                buttons.forEach((btn, index) => {
+                    const category = btn.dataset.category;
+                    const track = btn.dataset.track;
+                    logResult('buttonResult', `按钮 ${index + 1}: ${category} - ${track}`, 'info');
+                });
+            } else {
+                logResult('buttonResult', '❌ 未找到精选音频按钮', 'error');
+            }
+
+            // 清理临时 DOM
+            setTimeout(() => {
+                document.body.removeChild(tempDiv);
+            }, 5000);
+        }
+
+        // 3. 测试音频配置
+        function testAudioConfig() {
+            const resultEl = document.getElementById('configResult');
+            resultEl.innerHTML = '';
+
+            logResult('configResult', '开始测试音频配置匹配...', 'info');
+
+            const featuredTracks = [
+                { category: 'meditation', track: '冥想放松 瑜伽舒缓音乐' },
+                { category: 'Rain', track: '身临情景的雨声' },
+                { category: 'Singing bowl sound', track: '01-Healing Bowls - Instrumental - Jane Winther' }
+            ];
+
+            featuredTracks.forEach((item, index) => {
+                if (AUDIO_CONFIG.categories[item.category]) {
+                    const category = AUDIO_CONFIG.categories[item.category];
+                    const trackExists = category.files.includes(item.track);
+
+                    if (trackExists) {
+                        logResult('configResult', `✅ 精选 ${index + 1}: "${item.track}" 在分类 "${item.category}" 中找到`, 'success');
+                    } else {
+                        logResult('configResult', `⚠️ 精选 ${index + 1}: "${item.track}" 在分类 "${item.category}" 中未找到`, 'warning');
+                        logResult('configResult', `   可用文件: ${category.files.slice(0, 3).join(', ')}...`, 'info');
+                    }
+                } else {
+                    logResult('configResult', `❌ 精选 ${index + 1}: 分类 "${item.category}" 不存在`, 'error');
+                }
+            });
+        }
+
+        // 4. 模拟点击测试
+        function testSimulatedClick() {
+            const resultEl = document.getElementById('clickResult');
+            resultEl.innerHTML = '';
+
+            logResult('clickResult', '开始模拟点击测试...', 'info');
+
+            // 等待 featuredTracks 初始化
+            setTimeout(() => {
+                if (window.featuredTracks) {
+                    logResult('clickResult', '✅ featuredTracks 实例可用', 'success');
+
+                    // 创建测试按钮
+                    const testBtn = document.createElement('button');
+                    testBtn.className = 'featured-track-btn';
+                    testBtn.dataset.category = 'meditation';
+                    testBtn.dataset.track = '冥想放松 瑜伽舒缓音乐';
+                    testBtn.textContent = '测试深度冥想';
+                    document.body.appendChild(testBtn);
+
+                    // 模拟点击
+                    logResult('clickResult', '模拟点击按钮...', 'info');
+                    testBtn.click();
+
+                    // 检查是否有错误
+                    setTimeout(() => {
+                        logResult('clickResult', '✅ 点击事件已触发（查看控制台是否有错误）', 'success');
+                        document.body.removeChild(testBtn);
+                    }, 1000);
+
+                } else {
+                    logResult('clickResult', '❌ featuredTracks 实例不可用', 'error');
+                }
+            }, 2000);
+        }
+
+        // 5. 完整流程测试
+        function testFullWorkflow() {
+            const resultEl = document.getElementById('workflowResult');
+            resultEl.innerHTML = '';
+
+            logResult('workflowResult', '开始完整流程测试...', 'info');
+
+            // 步骤1: 检查所有必要组件
+            const checks = [
+                { name: 'AUDIO_CONFIG', value: typeof AUDIO_CONFIG !== 'undefined' },
+                { name: 'FeaturedTracks', value: typeof FeaturedTracks !== 'undefined' },
+                { name: 'window.featuredTracks', value: false } // 将在后面检查
+            ];
+
+            checks.forEach(check => {
+                if (check.value) {
+                    logResult('workflowResult', `✅ ${check.name} 可用`, 'success');
+                } else {
+                    logResult('workflowResult', `❌ ${check.name} 不可用`, 'error');
+                }
+            });
+
+            // 步骤2: 等待并检查实例
+            setTimeout(() => {
+                if (window.featuredTracks) {
+                    checks[2].value = true;
+                    logResult('workflowResult', '✅ window.featuredTracks 实例已创建', 'success');
+
+                    // 步骤3: 验证精选音频数据
+                    const tracks = window.featuredTracks.getFeaturedTracks();
+                    logResult('workflowResult', `精选音频数量: ${tracks.length}`, 'info');
+
+                    // 步骤4: 模拟完整播放流程
+                    logResult('workflowResult', '开始模拟播放流程...', 'info');
+
+                    // 这里我们只测试到功能可用性
+                    // 实际播放需要主应用的支持
+                    logResult('workflowResult', '✅ 精选音频功能模块已就绪', 'success');
+                    logResult('workflowResult', 'ℹ️ 实际播放功能需要集成到主应用中', 'info');
+
+                } else {
+                    logResult('workflowResult', '❌ featuredTracks 实例未能创建', 'error');
+                }
+            }, 3000);
+        }
+
+        // 页面加载完成后自动运行基础测试
+        window.addEventListener('load', () => {
+            console.log('页面加载完成，可以开始测试');
+            logResult('moduleResult', '页面已加载，点击按钮开始测试', 'info');
+        });
+    </script>
+</body>
+</html>

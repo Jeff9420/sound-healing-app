@@ -74,52 +74,47 @@ class AudioManager {
     }
 
     initializeCategories() {
-        // 从配置文件加载音频分类 - 添加重试逻辑
+        // 从配置文件加载音频分类
         if (typeof AUDIO_CONFIG !== 'undefined' && AUDIO_CONFIG.categories) {
             this.categories = AUDIO_CONFIG.categories;
-            console.log('AudioManager: 成功从AUDIO_CONFIG加载分类', Object.keys(this.categories).length);
+            console.log('✅ AudioManager: 成功加载音频分类', Object.keys(this.categories).length, '个类别');
         } else {
-            console.warn('AudioManager: AUDIO_CONFIG未就绪，稍后重试...');
+            console.warn('⚠️ AudioManager: AUDIO_CONFIG未定义');
         }
     }
 
     /**
      * 初始化音频管理器
-     * 等待分类数据加载完成，设置重试机制
+     * 简化版 - 移除不必要的重试机制
      * @returns {Promise<void>}
      */
     async initialize() {
         try {
-            // 确保音频配置已加载 - 使用指数退避重试机制
-            let retryCount = 0;
-            const maxRetries = 10; // 减少重试次数
-            const baseDelay = 100; // 基础延迟100ms
-
-            while ((!this.categories || Object.keys(this.categories).length === 0) && retryCount < maxRetries) {
-                console.log(`AudioManager初始化重试 ${retryCount + 1}/${maxRetries}`);
-                this.initializeCategories();
-
-                if (!this.categories || Object.keys(this.categories).length === 0) {
-                    // 指数退避：延迟时间按指数增长
-                    const delay = baseDelay * Math.pow(2, retryCount);
-                    await new Promise(resolve => setTimeout(resolve, Math.min(delay, 2000))); // 最大延迟2秒
-                    retryCount++;
-                } else {
-                    break;
-                }
-            }
-
+            // 简单检查配置是否已加载
             if (!this.categories || Object.keys(this.categories).length === 0) {
-                throw new Error('音频配置加载超时，无法获取分类数据');
+                // 尝试重新加载一次
+                this.initializeCategories();
             }
 
-            console.log('AudioManager: 初始化完成，分类数量:', Object.keys(this.categories).length);
+            // 如果仍然没有数据，等待一个短暂的延迟后再试
+            if (!this.categories || Object.keys(this.categories).length === 0) {
+                console.log('⏳ AudioManager: 等待配置加载...');
+                await new Promise(resolve => setTimeout(resolve, 200));
+                this.initializeCategories();
+            }
+
+            // 最终检查
+            if (!this.categories || Object.keys(this.categories).length === 0) {
+                throw new Error('❌ 音频配置未找到，请确保 audio-config.js 已正确加载');
+            }
+
+            console.log('✅ AudioManager: 初始化完成，共', Object.keys(this.categories).length, '个音频类别');
 
             this.isInitialized = true;
             this.loadUserSettings();
             this.eventBus.dispatchEvent(new CustomEvent('initialized'));
         } catch (error) {
-            console.error('音频管理器初始化失败:', error);
+            console.error('❌ 音频管理器初始化失败:', error);
             this.eventBus.dispatchEvent(new CustomEvent('error', { detail: error }));
             throw error;
         }
@@ -253,6 +248,59 @@ class AudioManager {
         });
     }
 
+    /**
+     * 从预加载的音频创建实例
+     */
+    async createAudioInstanceFromPreloaded(trackId, categoryName, fileName, preloadedAudio) {
+        // 检查是否超过最大实例数限制
+        if (this.audioInstances.size >= this.MAX_AUDIO_INSTANCES) {
+            // 清理最旧的已完成或暂停的实例
+            for (const [existingTrackId, instance] of this.audioInstances) {
+                if (!instance.isPlaying && existingTrackId !== this.currentTrack) {
+                    instance.audio.pause();
+                    instance.audio.src = '';
+                    this.audioInstances.delete(existingTrackId);
+                    console.log(`清理音频实例: ${existingTrackId}`);
+                    break;
+                }
+            }
+        }
+
+        // 使用预加载的音频
+        preloadedAudio.volume = this.globalVolume * 0.5;
+        this.audioInstances.set(trackId, {
+            audio: preloadedAudio,
+            volume: 0.5,
+            isPlaying: false,
+            categoryName: categoryName,
+            fileName: fileName,
+            isReady: true,
+            isPreloaded: true
+        });
+
+        console.log(`✅ 从预加载创建音频实例: ${fileName}`);
+
+        // 添加结束事件监听
+        preloadedAudio.addEventListener('ended', () => {
+            this.onTrackEnded(trackId);
+        });
+
+        return Promise.resolve();
+    }
+
+    /**
+     * 获取音频URL
+     */
+    getAudioUrl(categoryName, fileName) {
+        // 如果是完整URL，直接返回
+        if (fileName.startsWith('http://') || fileName.startsWith('https://')) {
+            return fileName;
+        }
+
+        // 构建本地音频路径
+        return `/assets/audio/${categoryName}/${fileName}`;
+    }
+
     createSilentAudioInstance(trackId, categoryName, fileName) {
         // 创建一个静默的音频实例，避免应用崩溃
         const silentAudio = new Audio();
@@ -287,7 +335,27 @@ class AudioManager {
     async playTrack(trackId, categoryName, fileName, resetTime = false) {
         // 如果音频实例不存在，先创建
         if (!this.audioInstances.has(trackId)) {
-            await this.createAudioInstance(trackId, categoryName, fileName);
+            // 检查是否有预加载的音频
+            let preloadedAudio = null;
+            const audioUrl = this.getAudioUrl(categoryName, fileName);
+
+            if (window.audioPreloader && audioUrl) {
+                preloadedAudio = window.audioPreloader.getPreloadedAudio(audioUrl);
+
+                if (preloadedAudio) {
+                    console.log('🎵 使用预加载的音频:', fileName);
+                    // 使用预加载的音频创建实例
+                    await this.createAudioInstanceFromPreloaded(trackId, categoryName, fileName, preloadedAudio);
+                } else {
+                    // 预加载下一个可能的音频
+                    if (window.audioPreloader && audioUrl) {
+                        window.audioPreloader.preloadNextInCategory(categoryName, audioUrl);
+                    }
+                    await this.createAudioInstance(trackId, categoryName, fileName);
+                }
+            } else {
+                await this.createAudioInstance(trackId, categoryName, fileName);
+            }
         }
         
         const instance = this.audioInstances.get(trackId);

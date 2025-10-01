@@ -1,0 +1,100 @@
+﻿{
+  "name": "SoundFlows - Sound Healing Space",
+  "short_name": "SoundFlows",
+  "description": "Professional audio therapy platform with diverse healing audio types to help you relax, meditate, and find inner peace",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d131f",
+  "theme_color": "#6666ff",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["health", "music", "meditation", "wellness"],
+  "icons": [
+    {
+      "src": "assets/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/screenshots/mobile-home.png",
+      "sizes": "375x667",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "assets/screenshots/mobile-player.png",
+      "sizes": "375x667",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Meditation",
+      "short_name": "Meditate",
+      "description": "Start meditation session",
+      "url": "/?category=meditation",
+      "icons": [{ "src": "assets/icons/meditation-icon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Sleep Sounds",
+      "short_name": "Sleep",
+      "description": "Play sleep sounds",
+      "url": "/?category=rain-sounds",
+      "icons": [{ "src": "assets/icons/sleep-icon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Chakra Healing",
+      "short_name": "Chakra",
+      "description": "Chakra balancing sounds",
+      "url": "/?category=chakra-healing",
+      "icons": [{ "src": "assets/icons/chakra-icon.png", "sizes": "192x192" }]
+    }
+  ]
+}

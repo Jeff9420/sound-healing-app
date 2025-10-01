@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sound Healing Blog | Guides, Tips & Insights</title>
+  <meta name="description" content="Explore our comprehensive collection of sound healing guides, meditation tips, and wellness insights. Discover expert articles on mindfulness, audio therapy, and holistic healing practices." />
+  <link rel="canonical" href="https://soundflows.app/blog/" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://soundflows.app/blog/">
+  <meta property="og:title" content="Sound Healing Blog | Guides, Tips & Insights">
+  <meta property="og:description" content="Explore our comprehensive collection of sound healing guides, meditation tips, and wellness insights.">
+  <meta property="og:image" content="https://soundflows.app/assets/img/og-image.jpg">
+
+  <!-- Twitter Card -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://soundflows.app/blog/">
+  <meta property="twitter:title" content="Sound Healing Blog | Guides, Tips & Insights">
+  <meta property="twitter:description" content="Explore our comprehensive collection of sound healing guides, meditation tips, and wellness insights.">
+
+  <style>
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #0d131f;
+      color: #e4ecff;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    .blog-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .blog-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .blog-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #6666ff 0%, #ff6699 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .blog-subtitle {
+      font-size: 1.25rem;
+      color: #aab8dd;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .blog-nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+    }
+
+    .blog-nav-item {
+      padding: 8px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 999px;
+      text-decoration: none;
+      color: #c7d6ff;
+      transition: all 0.3s ease;
+    }
+
+    .blog-nav-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .blog-nav-item.active {
+      background: #6666ff;
+      color: #ffffff;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 40px;
+      margin-bottom: 80px;
+    }
+
+    .blog-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .blog-card-image {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #6666ff 0%, #ff6699 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .blog-card-content {
+      padding: 30px;
+    }
+
+    .blog-card-category {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #6666ff;
+      margin-bottom: 10px;
+    }
+
+    .blog-card-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #ffffff;
+    }
+
+    .blog-card-excerpt {
+      color: #aab8dd;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .blog-card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.875rem;
+      color: #7b8ab4;
+    }
+
+    .blog-card-readtime {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .blog-card-date {
+      opacity: 0.7;
+    }
+
+    .newsletter-section {
+      background: linear-gradient(135deg, rgba(102, 102, 255, 0.1) 0%, rgba(255, 102, 153, 0.1) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 60px;
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .newsletter-title {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .newsletter-description {
+      color: #aab8dd;
+      margin-bottom: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .newsletter-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #6666ff;
+      color: #ffffff;
+      padding: 15px 30px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .newsletter-button:hover {
+      background: #5555ee;
+      transform: translateY(-2px);
+    }
+
+    .back-to-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #8ea8ff;
+      text-decoration: none;
+      margin-bottom: 40px;
+      transition: all 0.3s ease;
+    }
+
+    .back-to-home:hover {
+      color: #ffffff;
+      transform: translateX(-5px);
+    }
+
+    @media (max-width: 768px) {
+      .blog-title {
+        font-size: 2.5rem;
+      }
+
+      .blog-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .newsletter-section {
+        padding: 40px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="blog-container">
+    <a href="../index.html" class="back-to-home">
+      <span>←</span>
+      <span>Back to Sound Healing Space</span>
+    </a>
+
+    <header class="blog-header">
+      <h1 class="blog-title">Sound Healing Blog</h1>
+      <p class="blog-subtitle">Expert guides, practical tips, and deep insights on meditation, mindfulness, and the transformative power of sound therapy</p>
+    </header>
+
+    <nav class="blog-nav">
+      <a href="#" class="blog-nav-item active">All Articles</a>
+      <a href="#" class="blog-nav-item">Meditation</a>
+      <a href="#" class="blog-nav-item">Sound Therapy</a>
+      <a href="#" class="blog-nav-item">Wellness Tips</a>
+      <a href="#" class="blog-nav-item">Practice Guides</a>
+      <a href="feed.xml" class="blog-nav-item" style="margin-left: auto;">📡 RSS Feed</a>
+    </nav>
+
+    <main class="blog-grid">
+      <article class="blog-card" onclick="window.location.href='meditation-routine-checklist.html'">
+        <div class="blog-card-image">🧘</div>
+        <div class="blog-card-content">
+          <div class="blog-card-category">Practice Toolkit</div>
+          <h2 class="blog-card-title">Daily Meditation Routine Checklist</h2>
+          <p class="blog-card-excerpt">Build a sustainable meditation practice with this simple daily checklist covering environment setup, intention setting, and post-session reflection.</p>
+          <div class="blog-card-meta">
+            <span class="blog-card-readtime">⏱️ 5 min read</span>
+            <span class="blog-card-date">Updated weekly</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card" onclick="window.location.href='how-to-lead-sound-baths.html'">
+        <div class="blog-card-image">🎵</div>
+        <div class="blog-card-content">
+          <div class="blog-card-category">Practice Guides</div>
+          <h2 class="blog-card-title">How to Lead Group Sound Baths</h2>
+          <p class="blog-card-excerpt">Learn the essentials of facilitating transformative group sound bath experiences, from preparation to creating the perfect atmosphere.</p>
+          <div class="blog-card-meta">
+            <span class="blog-card-readtime">⏱️ 8 min read</span>
+            <span class="blog-card-date">For practitioners</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card" onclick="window.location.href='designing-focus-playlists.html'">
+        <div class="blog-card-image">🎧</div>
+        <div class="blog-card-content">
+          <div class="blog-card-category">Audio Therapy</div>
+          <h2 class="blog-card-title">Designing Focus Playlists</h2>
+          <p class="blog-card-excerpt">Create powerful audio playlists that enhance concentration and productivity. Learn about BPM, frequency selection, and audio layering techniques.</p>
+          <div class="blog-card-meta">
+            <span class="blog-card-readtime">⏱️ 6 min read</span>
+            <span class="blog-card-date">Productivity focus</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card" onclick="window.location.href='create-evening-reset-ritual.html'">
+        <div class="blog-card-image">🌅</div>
+        <div class="blog-card-content">
+          <div class="blog-card-category">Wellness Tips</div>
+          <h2 class="blog-card-title">Create Your Evening Reset Ritual</h2>
+          <p class="blog-card-excerpt">Transform your evenings with a powerful wind-down routine that combines sound therapy, mindfulness, and relaxation techniques.</p>
+          <div class="blog-card-meta">
+            <span class="blog-card-readtime">⏱️ 7 min read</span>
+            <span class="blog-card-date">Sleep improvement</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card" onclick="window.location.href='chakra-class-sequencing-guide.html'">
+        <div class="blog-card-image">🕉️</div>
+        <div class="blog-card-content">
+          <div class="blog-card-category">Sound Therapy</div>
+          <h2 class="blog-card-title">Chakra Class Sequencing Guide</h2>
+          <p class="blog-card-excerpt">Master the art of sequencing chakra healing sessions with this comprehensive guide to frequencies, durations, and progression.</p>
+          <div class="blog-card-meta">
+            <span class="blog-card-readtime">⏱️ 10 min read</span>
+            <span class="blog-card-date">Advanced practice</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card" onclick="window.location.href='best-headphones-for-sleep.html'">
+        <div class="blog-card-image">🎧</div>
+        <div class="blog-card-content">
+          <div class="blog-card-category">Gear Guide</div>
+          <h2 class="blog-card-title">Best Headphones for Sleep Meditation</h2>
+          <p class="blog-card-excerpt">Discover the most comfortable and effective headphones for overnight meditation and sleep therapy sessions.</p>
+          <div class="blog-card-meta">
+            <span class="blog-card-readtime">⏱️ 6 min read</span>
+            <span class="blog-card-date">Equipment guide</span>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <section class="newsletter-section">
+      <h2 class="newsletter-title">Stay Connected</h2>
+      <p class="newsletter-description">Join our weekly Sound Healing Sunday digest for exclusive content, new article alerts, and curated playlists from around the world.</p>
+      <a href="../pages/newsletter/" class="newsletter-button">
+        <span>📧</span>
+        <span>Subscribe to Newsletter</span>
+      </a>
+    </section>
+  </div>
+
+  <script>
+    // Track blog views
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'page_view', {
+        'page_title': 'Sound Healing Blog',
+        'page_location': window.location.href,
+        'page_path': '/blog/'
+      });
+    }
+
+    // Track article clicks
+    document.querySelectorAll('.blog-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const title = this.querySelector('.blog-card-title').textContent;
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'blog_article_click', {
+            'event_category': 'Blog Engagement',
+            'event_label': title
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
