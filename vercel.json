@@ -1,4 +1,6 @@
 {
+  "buildCommand": null,
+  "outputDirectory": ".",
   "rewrites": [
     { "source": "/api/audio/animal-sounds/(.*)", "destination": "https://archive.org/download/sound-healing-collection/animal-sounds/$1" },
     { "source": "/api/audio/chakra/(.*)", "destination": "https://archive.org/download/sound-healing-collection/chakra/$1" },
