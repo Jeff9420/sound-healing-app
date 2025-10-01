@@ -1,129 +1,283 @@
 /**
- * 基础Service Worker
- * 声音疗愈应用基础缓存系统（降级方案）
- * 
- * @author Claude Code Performance Optimization
- * @version 1.0
+ * SoundFlows Service Worker - PWA功能支持
+ * 离线缓存、后台同步、推送通知、音频预加载
+ * @version 2.0
  */
 
-const CACHE_NAME = 'sound-healing-basic-v1.0';
-
-// 基础缓存文件
-const CACHE_FILES = [
-    '/',
-    '/index.html',
-    '/assets/css/main.css',
-    '/assets/css/playlist.css',
-    '/assets/js/audio-config.js',
-    '/assets/js/module-loader.js',
-    '/assets/js/i18n-system.js',
-    '/assets/js/audio-manager.js'
+const CACHE_NAME = 'soundflows-v2';
+const STATIC_CACHE_URLS = [
+  '/',
+  '/index.html',
+  '/manifest.json',
+  '/assets/css/main.css',
+  '/assets/css/playlist.css',
+  '/assets/css/mobile-enhancement.css',
+  '/assets/js/audio-config.js',
+  '/assets/js/module-loader.js',
+  '/assets/js/i18n-system.js',
+  '/assets/js/audio-manager.js',
+  '/assets/js/playlist-ui.js',
+  '/assets/js/background-scene-manager.js',
+  '/assets/js/ui-controller.js',
+  '/assets/js/theme-manager.js',
+  '/assets/js/mobile-optimization.js',
+  '/assets/js/performance-monitor.js',
+  '/assets/js/sleep-timer.js',
+  '/assets/icons/icon-192x192.png',
+  '/assets/icons/icon-512x512.png'
 ];
 
-// 安装事件
-self.addEventListener('install', (event) => {
-    console.log('📦 基础SW: Service Worker 安装中...');
-    
-    event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then((cache) => {
-                console.log('📦 基础SW: 开始缓存基础文件...');
-                return cache.addAll(CACHE_FILES);
-            })
-            .then(() => {
-                console.log('✅ 基础SW: 基础缓存完成');
-                return self.skipWaiting();
-            })
-            .catch((error) => {
-                console.warn('⚠️ 基础SW: 部分文件缓存失败，继续运行', error);
-            })
-    );
+// 精选音频文件预加载列表
+const FEATURED_AUDIO = [
+  '/assets/audio/meditation/Deep Meditation.mp3',
+  '/assets/audio/Rain/Gentle Rain.mp3',
+  '/assets/audio/Singing bowl sound/Root Chakra Bowl.mp3'
+];
+
+// 安装Service Worker
+self.addEventListener('install', event => {
+  console.log('📦 SoundFlows SW: 安装中...');
+
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => {
+        console.log('📦 SoundFlows SW: 缓存静态资源...');
+        return cache.addAll(STATIC_CACHE_URLS);
+      })
+      .then(() => {
+        // 检查网络状态，决定是否预加载音频
+        if (navigator.connection) {
+          const connectionType = navigator.connection.effectiveType;
+          const saveData = navigator.connection.saveData;
+
+          if (!saveData && (connectionType === 'wifi' || connectionType === 'ethernet')) {
+            console.log('🎵 SoundFlows SW: WiFi环境下预加载精选音频...');
+            return caches.open('featured-audio-v1')
+              .then(audioCache => {
+                return Promise.allSettled(
+                  FEATURED_AUDIO.map(url =>
+                    fetch(url)
+                      .then(response => {
+                        if (response.ok) return audioCache.put(url, response);
+                      })
+                      .catch(() => console.log(`⚠️ 音频预加载失败: ${url}`))
+                  )
+                );
+              });
+          }
+        }
+      })
+      .then(() => {
+        console.log('✅ SoundFlows SW: 安装完成');
+        return self.skipWaiting();
+      })
+      .catch(error => {
+        console.warn('⚠️ SoundFlows SW: 安装过程中有错误，但继续运行', error);
+      })
+  );
 });
 
-// 激活事件
-self.addEventListener('activate', (event) => {
-    console.log('🔄 基础SW: Service Worker 激活中...');
-    
-    event.waitUntil(
-        caches.keys().then((cacheNames) => {
-            return Promise.all(
-                cacheNames.map((cacheName) => {
-                    if (cacheName !== CACHE_NAME) {
-                        console.log('🧹 基础SW: 清理旧缓存', cacheName);
-                        return caches.delete(cacheName);
-                    }
-                })
-            );
-        }).then(() => {
-            console.log('✅ 基础SW: Service Worker 激活完成');
-            return self.clients.claim();
+// 激活Service Worker
+self.addEventListener('activate', event => {
+  console.log('🔄 SoundFlows SW: 激活中...');
+
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          // 保留当前版本和精选音频缓存
+          if (cacheName !== CACHE_NAME &&
+              cacheName !== 'featured-audio-v1' &&
+              !cacheName.startsWith('dynamic-audio-')) {
+            console.log('🧹 SoundFlows SW: 清理旧缓存', cacheName);
+            return caches.delete(cacheName);
+          }
         })
-    );
+      );
+    }).then(() => {
+      console.log('✅ SoundFlows SW: 激活完成');
+      return self.clients.claim();
+    })
+  );
 });
 
-// 请求拦截
-self.addEventListener('fetch', (event) => {
-    // 只处理GET请求
-    if (event.request.method !== 'GET') {
-        return;
-    }
-    
-    const url = new URL(event.request.url);
-    
-    // 音频文件不缓存（避免占用过多空间）
-    if (url.pathname.includes('/assets/audio/') || url.hostname === 'archive.org') {
-        return;
-    }
-    
-    // 使用网络优先策略
-    event.respondWith(
-        fetch(event.request)
-            .then((response) => {
-                // 如果网络请求成功，缓存静态资源
-                if (response.ok && isStaticResource(url.pathname)) {
-                    const responseClone = response.clone();
-                    caches.open(CACHE_NAME)
-                        .then((cache) => {
-                            cache.put(event.request, responseClone);
-                        })
-                        .catch(() => {
-                            // 缓存失败不影响正常功能
-                        });
-                }
-                return response;
-            })
-            .catch(() => {
-                // 网络失败时尝试从缓存获取
-                return caches.match(event.request)
-                    .then((response) => {
-                        if (response) {
-                            return response;
-                        }
-                        
-                        // 页面请求失败时返回首页
-                        if (event.request.mode === 'navigate') {
-                            return caches.match('/index.html');
-                        }
-                        
-                        throw new Error('缓存中没有找到对应资源');
-                    });
-            })
-    );
+// 智能缓存策略
+self.addEventListener('fetch', event => {
+  const url = new URL(event.request.url);
+
+  // 处理音频文件请求
+  if (url.pathname.endsWith('.mp3') || url.pathname.endsWith('.wav') || url.pathname.endsWith('.ogg')) {
+    event.respondWith(handleAudioRequest(event.request));
+    return;
+  }
+
+  // 处理静态资源请求 - 缓存优先策略
+  if (isStaticResource(url.pathname)) {
+    event.respondWith(handleStaticRequest(event.request));
+    return;
+  }
+
+  // 其他请求使用网络优先策略
+  event.respondWith(
+    fetch(event.request)
+      .catch(() => caches.match(event.request))
+  );
 });
+
+// 处理音频请求
+async function handleAudioRequest(request) {
+  const cache = await caches.open('featured-audio-v1');
+  const cached = await cache.match(request);
+
+  if (cached) {
+    return cached;
+  }
+
+  try {
+    const networkResponse = await fetch(request);
+    if (networkResponse.ok) {
+      // 动态缓存小型音频文件（小于5MB）
+      const contentLength = networkResponse.headers.get('content-length');
+      if (contentLength && parseInt(contentLength) < 5 * 1024 * 1024) {
+        const responseClone = networkResponse.clone();
+        caches.open('dynamic-audio-v1').then(cache => {
+          cache.put(request, responseClone);
+        });
+      }
+    }
+    return networkResponse;
+  } catch (error) {
+    // 网络失败，尝试从动态缓存获取
+    const dynamicCache = await caches.open('dynamic-audio-v1');
+    const fallback = await dynamicCache.match(request);
+    return fallback || new Response('', { status: 404 });
+  }
+}
+
+// 处理静态资源请求
+async function handleStaticRequest(request) {
+  const cached = await caches.match(request);
+
+  if (cached) {
+    // 后台更新缓存
+    fetch(request)
+      .then(response => {
+        if (response.ok) {
+          const cache = caches.open(CACHE_NAME);
+          cache.then(c => c.put(request, response));
+        }
+      })
+      .catch(() => {});
+
+    return cached;
+  }
+
+  try {
+    const networkResponse = await fetch(request);
+    if (networkResponse.ok) {
+      const responseClone = networkResponse.clone();
+      const cache = await caches.open(CACHE_NAME);
+      cache.put(request, responseClone);
+    }
+    return networkResponse;
+  } catch (error) {
+    // 页面请求失败时返回首页
+    if (request.mode === 'navigate') {
+      return caches.match('/index.html');
+    }
+    throw new Error('资源加载失败');
+  }
+}
 
 /**
  * 判断是否为静态资源
  */
 function isStaticResource(pathname) {
-    return pathname.includes('/assets/') || 
-           pathname.endsWith('.css') || 
-           pathname.endsWith('.js') || 
-           pathname.endsWith('.html') ||
-           pathname === '/' ||
-           pathname.endsWith('.png') || 
-           pathname.endsWith('.jpg') || 
-           pathname.endsWith('.svg') || 
-           pathname.endsWith('.ico');
+  return pathname.includes('/assets/') ||
+         pathname.endsWith('.css') ||
+         pathname.endsWith('.js') ||
+         pathname.endsWith('.html') ||
+         pathname === '/' ||
+         pathname.endsWith('.png') ||
+         pathname.endsWith('.jpg') ||
+         pathname.endsWith('.svg') ||
+         pathname.endsWith('.ico') ||
+         pathname.endsWith('.json');
 }
 
-console.log('📦 基础SW: Service Worker 脚本加载完成');
+// 后台同步
+self.addEventListener('sync', event => {
+  if (event.tag === 'background-sync') {
+    event.waitUntil(doBackgroundSync());
+  }
+});
+
+// 推送通知
+self.addEventListener('push', event => {
+  const options = {
+    body: 'Time for your sound healing session',
+    icon: '/assets/icons/icon-192x192.png',
+    badge: '/assets/icons/badge-72x72.png',
+    vibrate: [100, 50, 100],
+    data: {
+      url: '/'
+    },
+    actions: [
+      {
+        action: 'play',
+        title: 'Play Now',
+        icon: '/assets/icons/play-icon.png'
+      },
+      {
+        action: 'dismiss',
+        title: 'Dismiss',
+        icon: '/assets/icons/dismiss-icon.png'
+      }
+    ]
+  };
+
+  event.waitUntil(
+    self.registration.showNotification('SoundFlows Reminder', options)
+  );
+});
+
+// 通知点击处理
+self.addEventListener('notificationclick', event => {
+  event.notification.close();
+
+  if (event.action === 'play') {
+    event.waitUntil(
+      clients.openWindow('/')
+    );
+  }
+});
+
+// 消息处理
+self.addEventListener('message', event => {
+  if (event.data && event.data.type === 'CLEAN_CACHE') {
+    event.waitUntil(
+      caches.keys().then(cacheNames => {
+        return Promise.all(
+          cacheNames.filter(name => name.startsWith('dynamic-'))
+            .map(name => caches.delete(name))
+        );
+      })
+    );
+  }
+});
+
+// 后台同步函数
+async function doBackgroundSync() {
+  try {
+    const clients = await self.clients.matchAll();
+    clients.forEach(client => {
+      client.postMessage({
+        type: 'SYNC_COMPLETE'
+      });
+    });
+  } catch (error) {
+    console.error('Background sync failed:', error);
+  }
+}
+
+console.log('📦 SoundFlows SW: Service Worker 加载完成');

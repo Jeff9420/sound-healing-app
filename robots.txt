@@ -16,7 +16,7 @@ Disallow: /monitoring-setup.js
 Disallow: /update-audio-config.py
 
 # 网站地图位置
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://soundflows.app/sitemap.xml
 
 # 爬虫延迟设置（可选）
 Crawl-delay: 1

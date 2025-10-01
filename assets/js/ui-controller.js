@@ -381,12 +381,20 @@ class UIController {
 
         const overlay = document.createElement('div');
         overlay.className = `message-overlay ${type}`;
-        overlay.innerHTML = `
-            <div class="message-content">
-                <p>${message}</p>
-                <button class="message-close">确定</button>
-            </div>
-        `;
+        // Use textContent for security (prevent XSS)
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'message-content';
+
+        const messageP = document.createElement('p');
+        messageP.textContent = message;
+        contentDiv.appendChild(messageP);
+
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'message-close';
+        closeBtn.textContent = '确定';
+        contentDiv.appendChild(closeBtn);
+
+        overlay.appendChild(contentDiv);
 
         document.body.appendChild(overlay);
 

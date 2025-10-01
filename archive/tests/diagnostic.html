@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>应用诊断页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .diagnostic-panel {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #6666FF;
+            color: white;
+        }
+        pre {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="diagnostic-panel">
+        <h1>🔍 应用诊断工具</h1>
+
+        <div id="diagnosticResults"></div>
+
+        <button onclick="runDiagnostics()">运行完整诊断</button>
+        <button onclick="testAudioConfig()">测试音频配置</button>
+        <button onclick="testAppFiles()">测试应用文件</button>
+        <button onclick="clearResults()">清除结果</button>
+    </div>
+
+    <script>
+        function addResult(message, type = 'info') {
+            const results = document.getElementById('diagnosticResults');
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.innerHTML = message;
+            results.appendChild(div);
+        }
+
+        function clearResults() {
+            document.getElementById('diagnosticResults').innerHTML = '';
+        }
+
+        async function testAppFiles() {
+            addResult('📂 开始检查应用文件...', 'info');
+
+            // Test main files
+            const filesToTest = [
+                'index.html',
+                'assets/js/audio-config.js',
+                'assets/css/style.css'
+            ];
+
+            for (const file of filesToTest) {
+                try {
+                    const response = await fetch(file, { method: 'HEAD' });
+                    if (response.ok) {
+                        addResult(`✅ ${file} - 存在且可访问`, 'success');
+                    } else {
+                        addResult(`❌ ${file} - HTTP ${response.status}`, 'error');
+                    }
+                } catch (error) {
+                    addResult(`❌ ${file} - 无法访问: ${error.message}`, 'error');
+                }
+            }
+        }
+
+        async function testAudioConfig() {
+            addResult('🎵 测试音频配置加载...', 'info');
+
+            // Test if AUDIO_CONFIG loads
+            try {
+                // First check if file exists
+                const response = await fetch('assets/js/audio-config.js');
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                // Check content
+                const content = await response.text();
+                if (content.includes('AUDIO_CONFIG')) {
+                    addResult('✅ audio-config.js 包含 AUDIO_CONFIG', 'success');
+
+                    // Count categories
+                    const categoryMatches = content.match(/categories:\s*\{[^}]*\}/);
+                    if (categoryMatches) {
+                        addResult('📁 找到分类配置', 'info');
+                    }
+
+                    // Try to load and execute
+                    const script = document.createElement('script');
+                    script.src = 'assets/js/audio-config.js?t=' + Date.now();
+
+                    script.onload = () => {
+                        if (typeof AUDIO_CONFIG !== 'undefined') {
+                            addResult('✅ AUDIO_CONFIG 成功加载', 'success');
+                            const categoryCount = Object.keys(AUDIO_CONFIG.categories || {}).length;
+                            addResult(`📊 包含 ${categoryCount} 个分类`, 'info');
+
+                            // Count total files
+                            let totalFiles = 0;
+                            Object.values(AUDIO_CONFIG.categories).forEach(cat => {
+                                totalFiles += cat.files ? cat.files.length : 0;
+                            });
+                            addResult(`🎵 总共 ${totalFiles} 个音频文件`, 'info');
+                        } else {
+                            addResult('❌ AUDIO_CONFIG 加载后未定义', 'error');
+                        }
+                    };
+
+                    script.onerror = () => {
+                        addResult('❌ audio-config.js 执行失败', 'error');
+                    };
+
+                    document.head.appendChild(script);
+
+                } else {
+                    addResult('❌ audio-config.js 格式错误', 'error');
+                }
+            } catch (error) {
+                addResult(`❌ audio-config.js 加载失败: ${error.message}`, 'error');
+            }
+        }
+
+        async function runDiagnostics() {
+            clearResults();
+            addResult('🔍 开始完整诊断...', 'info');
+
+            // Test 1: Basic file structure
+            addResult('<h3>文件结构检查</h3>', 'info');
+            await testAppFiles();
+
+            // Test 2: Audio configuration
+            addResult('<h3>音频配置检查</h3>', 'info');
+            await testAudioConfig();
+
+            // Test 3: Main application loading
+            addResult('<h3>主应用加载测试</h3>', 'info');
+
+            try {
+                // Check if app loads in iframe
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = 'index.html';
+
+                const loadPromise = new Promise((resolve, reject) => {
+                    iframe.onload = () => {
+                        setTimeout(() => {
+                            try {
+                                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                                const loadingScreen = iframeDoc.getElementById('loadingScreen');
+
+                                if (loadingScreen && loadingScreen.style.display !== 'none') {
+                                    resolve('❌ 应用卡在加载界面');
+                                } else {
+                                    resolve('✅ 应用加载成功');
+                                }
+                            } catch (e) {
+                                resolve('⚠️ 无法检测应用状态（跨域限制）');
+                            }
+                            iframe.remove();
+                        }, 3000);
+                    };
+
+                    iframe.onerror = () => {
+                        reject(new Error('iframe加载失败'));
+                    };
+                });
+
+                const timeoutPromise = new Promise((resolve) => {
+                    setTimeout(() => resolve('⏰ 应用加载超时'), 5000);
+                });
+
+                const result = await Promise.race([loadPromise, timeoutPromise]);
+                addResult(result, result.startsWith('✅') ? 'success' : 'error');
+
+                document.body.appendChild(iframe);
+
+            } catch (error) {
+                addResult(`❌ 应用测试失败: ${error.message}`, 'error');
+            }
+
+            // Test 4: Browser compatibility
+            addResult('<h3>浏览器兼容性</h3>', 'info');
+
+            const audio = document.createElement('audio');
+            const canPlayMP3 = audio.canPlayType('audio/mpeg');
+            addResult(`MP3 支持: ${canPlayMP3}`, canPlayMP3 === 'probably' ? 'success' : 'info');
+
+            // Test 5: Network status
+            addResult('<h3>网络状态</h3>', 'info');
+            if (navigator.onLine) {
+                addResult('✅ 在线状态', 'success');
+            } else {
+                addResult('⚠️ 离线状态', 'error');
+            }
+
+            // Test 6: LocalStorage
+            addResult('<h3>本地存储</h3>', 'info');
+            try {
+                localStorage.setItem('test', 'test');
+                localStorage.removeItem('test');
+                addResult('✅ LocalStorage 可用', 'success');
+            } catch (e) {
+                addResult('❌ LocalStorage 不可用', 'error');
+            }
+
+            addResult('<h3>诊断完成</h3>', 'info');
+        }
+    </script>
+</body>
+</html>

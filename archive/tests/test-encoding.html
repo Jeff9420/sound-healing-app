@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>声音疗愈空间 - 测试</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Microsoft YaHei', sans-serif;
+            margin: 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #6666FF 0%, #FF6699 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .feature-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        button {
+            background: #FF6699;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 10px;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 声音疗愈空间</h1>
+        <p style="text-align: center; font-size: 1.2em;">
+            欢迎来到专业的音频疗愈平台，提供213+种疗愈音频，帮助您放松身心。
+        </p>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🌿</div>
+                <h3>自然声音</h3>
+                <p>雨声、海浪、森林等自然音效</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🧘</div>
+                <h3>冥想音乐</h3>
+                <p>专为冥想设计的舒缓音乐</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🕯️</div>
+                <h3>颂钵疗愈</h3>
+                <p>传统颂钵的净化能量</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⏰</div>
+                <h3>睡眠定时</h3>
+                <p>自动停止，安心入眠</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <button onclick="startApp()">开始体验</button>
+            <button onclick="showMore()">了解更多</button>
+        </div>
+    </div>
+
+    <script>
+        function startApp() {
+            alert('正在启动声音疗愈应用...');
+        }
+
+        function showMore() {
+            alert('更多功能正在开发中...');
+        }
+
+        console.log('声音疗愈空间 - 测试页面加载成功');
+    </script>
+</body>
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Analytics Test - SoundFlows</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #1a1a2e;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .test-section {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .test-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .test-btn:hover {
+            background: #45a049;
+        }
+
+        .test-btn.secondary {
+            background: #2196F3;
+        }
+
+        .test-btn.secondary:hover {
+            background: #1976D2;
+        }
+
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .status.success {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4CAF50;
+        }
+
+        .status.error {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid #f44336;
+        }
+
+        .status.warning {
+            background: rgba(255, 152, 0, 0.2);
+            border: 1px solid #ff9800;
+        }
+
+        .status.info {
+            background: rgba(33, 150, 243, 0.2);
+            border: 1px solid #2196F3;
+        }
+
+        .config-display {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+
+        .event-log {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .event-item {
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 13px;
+        }
+
+        .event-time {
+            color: #888;
+            margin-right: 10px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            border: 1px solid #444;
+            background: #2a2a2a;
+            color: white;
+            border-radius: 4px;
+            margin: 5px;
+            width: 200px;
+        }
+
+        label {
+            display: inline-block;
+            width: 150px;
+            margin-right: 10px;
+        }
+
+        .config-form {
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Google Analytics Test Dashboard</h1>
+        <p>Use this page to test Google Analytics integration for SoundFlows</p>
+
+        <!-- Configuration Section -->
+        <div class="test-section">
+            <h2>⚙️ Configuration</h2>
+            <div class="config-form">
+                <div>
+                    <label for="gaId">GA4 Measurement ID:</label>
+                    <input type="text" id="gaId" placeholder="G-XXXXXXXXX">
+                </div>
+                <div>
+                    <label for="clarityId">Clarity Project ID:</label>
+                    <input type="text" id="clarityId" placeholder="XXXXXXXX">
+                </div>
+                <div style="margin-top: 15px;">
+                    <button class="test-btn" onclick="saveConfig()">Save Configuration</button>
+                    <button class="test-btn secondary" onclick="clearConfig()">Clear</button>
+                </div>
+            </div>
+            <div id="configDisplay" class="config-display"></div>
+        </div>
+
+        <!-- Analytics Status -->
+        <div class="test-section">
+            <h2>📊 Analytics Status</h2>
+            <button class="test-btn" onclick="checkStatus()">Check Status</button>
+            <div id="statusDisplay"></div>
+        </div>
+
+        <!-- Event Testing -->
+        <div class="test-section">
+            <h2>🎯 Event Testing</h2>
+            <button class="test-btn" onclick="testPageView()">Test Page View</button>
+            <button class="test-btn" onclick="testAudioEvent()">Test Audio Event</button>
+            <button class="test-btn" onclick="testFeatureEvent()">Test Feature Event</button>
+            <button class="test-btn secondary" onclick="testCustomEvent()">Test Custom Event</button>
+            <div id="eventStatus"></div>
+        </div>
+
+        <!-- Event Log -->
+        <div class="test-section">
+            <h2>📝 Event Log</h2>
+            <div id="eventLog" class="event-log"></div>
+            <button class="test-btn secondary" onclick="clearLog()">Clear Log</button>
+        </div>
+
+        <!-- Debug Tools -->
+        <div class="test-section">
+            <h2>🔧 Debug Tools</h2>
+            <button class="test-btn" onclick="enableDebugMode()">Enable Debug Mode</button>
+            <button class="test-btn" onclick="testDataLayer()">Check DataLayer</button>
+            <button class="test-btn secondary" onclick="resetConsent()">Reset Cookie Consent</button>
+        </div>
+
+        <!-- Instructions -->
+        <div class="test-section">
+            <h2>📖 Instructions</h2>
+            <ol>
+                <li>Enter your GA4 Measurement ID (G-XXXXXXXXX) above</li>
+                <li>Click "Save Configuration" to apply settings</li>
+                <li>Click "Check Status" to verify Analytics is loaded</li>
+                <li>Test various events to ensure tracking works</li>
+                <li>Check Google Analytics Real-Time report to see events</li>
+            </ol>
+            <p><strong>Note:</strong> Make sure your ad blocker is disabled for this site</p>
+        </div>
+    </div>
+
+    <!-- Load Analytics Scripts -->
+    <script src="assets/js/analytics-config.js"></script>
+    <script src="assets/js/analytics.js"></script>
+    <script src="assets/js/cookie-consent.js"></script>
+
+    <script>
+        // Event logging
+        function logEvent(message, type = 'info') {
+            const log = document.getElementById('eventLog');
+            const time = new Date().toLocaleTimeString();
+            const item = document.createElement('div');
+            item.className = 'event-item';
+            item.innerHTML = `<span class="event-time">[${time}]</span> <span class="${type}">${message}</span>`;
+            log.insertBefore(item, log.firstChild);
+        }
+
+        function clearLog() {
+            document.getElementById('eventLog').innerHTML = '';
+            logEvent('Event log cleared');
+        }
+
+        // Configuration
+        function saveConfig() {
+            const gaId = document.getElementById('gaId').value;
+            const clarityId = document.getElementById('clarityId').value;
+
+            if (gaId || clarityId) {
+                // Update configuration
+                window.__ANALYTICS_CONFIG.gaMeasurementId = gaId;
+                window.__ANALYTICS_CONFIG.clarityProjectId = clarityId;
+
+                // Save to localStorage
+                localStorage.setItem('analyticsConfig', JSON.stringify({
+                    gaId: gaId,
+                    clarityId: clarityId
+                }));
+
+                // Reload analytics
+                if (window.soundFlowsAnalytics) {
+                    window.soundFlowsAnalytics = new SoundFlowsAnalytics(gaId, clarityId);
+                }
+
+                logEvent(`Configuration saved - GA: ${gaId}, Clarity: ${clarityId}`, 'success');
+                showConfig();
+            } else {
+                logEvent('Please enter at least one tracking ID', 'error');
+            }
+        }
+
+        function clearConfig() {
+            document.getElementById('gaId').value = '';
+            document.getElementById('clarityId').value = '';
+            localStorage.removeItem('analyticsConfig');
+            logEvent('Configuration cleared', 'warning');
+            showConfig();
+        }
+
+        function showConfig() {
+            const display = document.getElementById('configDisplay');
+            const config = window.__ANALYTICS_CONFIG;
+            display.innerHTML = `
+                <strong>Current Configuration:</strong><br>
+                GA4 ID: ${config.gaMeasurementId || 'Not set'}<br>
+                Clarity ID: ${config.clarityProjectId || 'Not set'}<br>
+                Debug Mode: ${config.options.debugMode ? 'Enabled' : 'Disabled'}
+            `;
+        }
+
+        // Status checking
+        function checkStatus() {
+            const status = document.getElementById('statusDisplay');
+            let html = '';
+
+            // Check GA4
+            if (window.gtag) {
+                html += '<div class="status success">✅ Google Analytics loaded</div>';
+            } else {
+                html += '<div class="status error">❌ Google Analytics not loaded</div>';
+            }
+
+            // Check Clarity
+            if (window.clarity) {
+                html += '<div class="status success">✅ Microsoft Clarity loaded</div>';
+            } else {
+                html += '<div class="status warning">⚠️ Microsoft Clarity not loaded</div>';
+            }
+
+            // Check consent
+            const consent = localStorage.getItem('cookieConsent');
+            if (consent) {
+                html += `<div class="status success">✅ Cookie consent: ${consent}</div>`;
+            } else {
+                html += '<div class="status warning">⚠️ No cookie consent found</div>';
+            }
+
+            status.innerHTML = html;
+            logEvent('Analytics status checked');
+        }
+
+        // Event testing
+        function testPageView() {
+            if (window.gtag) {
+                gtag('event', 'page_view', {
+                    'page_title': 'Test Page',
+                    'page_location': window.location.href,
+                    'page_path': '/test'
+                });
+                logEvent('Page view event sent', 'success');
+                document.getElementById('eventStatus').innerHTML = '<div class="status success">✅ Page view event sent</div>';
+            } else {
+                logEvent('Google Analytics not loaded', 'error');
+                document.getElementById('eventStatus').innerHTML = '<div class="status error">❌ Google Analytics not loaded</div>';
+            }
+        }
+
+        function testAudioEvent() {
+            if (window.trackAudio) {
+                trackAudio('meditation', 'play', 'Deep Meditation', 1);
+                logEvent('Audio play event sent - Category: meditation, Track: Deep Meditation', 'success');
+                document.getElementById('eventStatus').innerHTML = '<div class="status success">✅ Audio event sent</div>';
+            } else {
+                logEvent('Track audio function not available', 'error');
+                document.getElementById('eventStatus').innerHTML = '<div class="status error">❌ Tracking function not available</div>';
+            }
+        }
+
+        function testFeatureEvent() {
+            if (window.trackFeature) {
+                trackFeature('sleep_timer');
+                logEvent('Feature event sent - Feature: sleep_timer', 'success');
+                document.getElementById('eventStatus').innerHTML = '<div class="status success">✅ Feature event sent</div>';
+            } else {
+                logEvent('Track feature function not available', 'error');
+                document.getElementById('eventStatus').innerHTML = '<div class="status error">❌ Tracking function not available</div>';
+            }
+        }
+
+        function testCustomEvent() {
+            if (window.trackEvent) {
+                trackEvent('test_event', {
+                    'event_category': 'test',
+                    'event_label': 'custom_event',
+                    'value': 42
+                });
+                logEvent('Custom event sent with parameters', 'success');
+                document.getElementById('eventStatus').innerHTML = '<div class="status success">✅ Custom event sent</div>';
+            } else {
+                logEvent('Track event function not available', 'error');
+                document.getElementById('eventStatus').innerHTML = '<div class="status error">❌ Tracking function not available</div>';
+            }
+        }
+
+        // Debug tools
+        function enableDebugMode() {
+            if (window.gtag) {
+                gtag('config', window.__ANALYTICS_CONFIG.gaMeasurementId, {
+                    'debug_mode': true
+                });
+                logEvent('Debug mode enabled', 'success');
+            } else {
+                logEvent('Cannot enable debug mode - GA not loaded', 'error');
+            }
+        }
+
+        function testDataLayer() {
+            const dataLayer = window.dataLayer || [];
+            let html = '<div class="status info">📊 DataLayer Contents:</div>';
+            if (dataLayer.length > 0) {
+                html += '<div class="config-display">';
+                dataLayer.slice(-5).forEach((item, index) => {
+                    html += `<div>[${dataLayer.length - 5 + index}]: ${JSON.stringify(item)}</div>`;
+                });
+                html += '</div>';
+            } else {
+                html += '<div class="status warning">No data in DataLayer</div>';
+            }
+            document.getElementById('statusDisplay').innerHTML = html;
+        }
+
+        function resetConsent() {
+            localStorage.removeItem('cookieConsent');
+            if (window.cookieConsent) {
+                window.cookieConsent.reset();
+            }
+            logEvent('Cookie consent reset', 'warning');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load saved configuration
+            const saved = localStorage.getItem('analyticsConfig');
+            if (saved) {
+                const config = JSON.parse(saved);
+                document.getElementById('gaId').value = config.gaId || '';
+                document.getElementById('clarityId').value = config.clarityId || '';
+            }
+
+            showConfig();
+            logEvent('Analytics test page loaded', 'info');
+
+            // Auto-check status after 1 second
+            setTimeout(checkStatus, 1000);
+        });
+
+        // Listen for analytics events
+        document.addEventListener('cookieConsentGiven', (e) => {
+            logEvent(`Cookie consent given: ${e.detail.type}`, 'success');
+        });
+
+        // Custom event listeners for testing
+        document.addEventListener('audioTrackChanged', (e) => {
+            logEvent(`Audio changed: ${e.detail.track} (${e.detail.category})`, 'info');
+        });
+
+        document.addEventListener('featuredTrackPlayed', (e) => {
+            logEvent(`Featured track played: ${e.detail.trackName}`, 'info');
+        });
+    </script>
+</body>
+</html>

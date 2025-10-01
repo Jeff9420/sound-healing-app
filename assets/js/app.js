@@ -14,45 +14,45 @@ class SoundHealingApp {
     }
 
     async initializeAudioManager() {
-        // 等待AudioManager类可用，解决模块加载顺序问题
-        let retryCount = 0;
-        const maxRetries = 100; // 最多等待10秒
-        
-        while (retryCount < maxRetries) {
-            try {
-                // 检查全局AudioManager是否可用
-                if (typeof window !== 'undefined' && window.audioManager) {
-                    console.log('✅ 使用现有的全局AudioManager实例');
-                    this.audioManager = window.audioManager;
-                    return;
-                }
-                
-                // 检查AudioManager类是否可用
-                if (typeof AudioManager !== 'undefined') {
-                    console.log('✅ 创建新的AudioManager实例');
-                    this.audioManager = new AudioManager();
-                    return;
-                }
-                
-                // 检查window.AudioManager是否可用
-                if (typeof window !== 'undefined' && typeof window.AudioManager !== 'undefined') {
-                    console.log('✅ 使用window.AudioManager创建实例');
-                    this.audioManager = new window.AudioManager();
-                    return;
-                }
-                
-                console.log(`AudioManager初始化重试 ${retryCount + 1}/${maxRetries}`);
-                retryCount++;
-                await new Promise(resolve => setTimeout(resolve, 100));
-                
-            } catch (error) {
-                console.warn('AudioManager初始化尝试失败:', error);
-                retryCount++;
-                await new Promise(resolve => setTimeout(resolve, 100));
+        // 简化的AudioManager初始化 - 移除不必要的重试
+        try {
+            // 优先使用全局实例
+            if (typeof window !== 'undefined' && window.audioManager) {
+                console.log('✅ 使用现有的AudioManager实例');
+                this.audioManager = window.audioManager;
+                return;
             }
+
+            // 检查AudioManager类是否可用
+            if (typeof AudioManager !== 'undefined') {
+                console.log('✅ 创建新的AudioManager实例');
+                this.audioManager = new AudioManager();
+                return;
+            }
+
+            // 最后尝试window.AudioManager
+            if (typeof window !== 'undefined' && typeof window.AudioManager !== 'undefined') {
+                console.log('✅ 使用window.AudioManager创建实例');
+                this.audioManager = new window.AudioManager();
+                return;
+            }
+
+            // 如果都失败，等待短暂时间再试一次
+            console.log('⏳ AudioManager未就绪，等待200ms...');
+            await new Promise(resolve => setTimeout(resolve, 200));
+
+            if (typeof AudioManager !== 'undefined') {
+                console.log('✅ AudioManager加载完成，创建实例');
+                this.audioManager = new AudioManager();
+                return;
+            }
+
+            throw new Error('❌ AudioManager类未找到，请确保audio-manager.js已加载');
+
+        } catch (error) {
+            console.error('❌ AudioManager初始化失败:', error);
+            throw error;
         }
-        
-        throw new Error('AudioManager初始化超时 - 模块加载失败');
     }
 
     async initialize() {

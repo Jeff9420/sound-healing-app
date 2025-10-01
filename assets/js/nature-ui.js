@@ -873,14 +873,32 @@ class NatureUI {
             
             const trackId = this.audioManager.generateTrackId(categoryKey, fileName);
             
-            trackItem.innerHTML = `
-                <div class="track-header">
-                    <div class="track-number">${index + 1}</div>
-                    <h4 class="track-title">${this.formatTrackName(fileName)}</h4>
-                    <span class="track-duration">--:--</span>
-                </div>
-                <button class="track-play-btn" data-track-id="${trackId}">▶</button>
-            `;
+            // Create secure DOM elements (prevent XSS)
+            const trackHeader = document.createElement('div');
+            trackHeader.className = 'track-header';
+
+            const trackNumber = document.createElement('div');
+            trackNumber.className = 'track-number';
+            trackNumber.textContent = index + 1;
+
+            const trackTitle = document.createElement('h4');
+            trackTitle.className = 'track-title';
+            trackTitle.textContent = SecurityUtils.sanitizeFileName(this.formatTrackName(fileName));
+
+            const trackDuration = document.createElement('span');
+            trackDuration.className = 'track-duration';
+            trackDuration.textContent = '--:--';
+
+            const playButton = document.createElement('button');
+            playButton.className = 'track-play-btn';
+            playButton.dataset.trackId = trackId;
+            playButton.textContent = '▶';
+
+            trackHeader.appendChild(trackNumber);
+            trackHeader.appendChild(trackTitle);
+            trackHeader.appendChild(trackDuration);
+            trackItem.appendChild(trackHeader);
+            trackItem.appendChild(playButton);
             
             // 点击事件
             trackItem.addEventListener('click', () => {
