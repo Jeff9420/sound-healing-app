@@ -8,12 +8,23 @@ Allow: /
 Allow: /assets/css/
 Allow: /assets/js/
 Allow: /assets/images/
+Allow: /pages/
+Allow: /content/
 
 # 不希望索引的内容
 Disallow: /assets/audio/
 Disallow: /.netlify/
+Disallow: /.vercel/
+Disallow: /.git/
+Disallow: /archive/
+Disallow: /node_modules/
 Disallow: /monitoring-setup.js
 Disallow: /update-audio-config.py
+Disallow: /quick-test.html
+Disallow: /test-*.html
+Disallow: /*.md$
+Disallow: /index-deprecated.html
+Disallow: /index-backup*.html
 
 # 网站地图位置
 Sitemap: https://soundflows.app/sitemap.xml
@@ -26,10 +37,27 @@ User-agent: Googlebot
 Allow: /
 Crawl-delay: 0
 
-User-agent: Bingbot  
+User-agent: Bingbot
 Allow: /
 Crawl-delay: 1
 
 User-agent: Baiduspider
 Allow: /
 Crawl-delay: 2
+
+User-agent: Yandex
+Allow: /
+Crawl-delay: 1
+
+# 屏蔽恶意爬虫
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
