@@ -94,6 +94,27 @@ body {
     transform: translateY(0);
 }
 
+/* 收藏按钮特殊样式 */
+.header-icon-btn.favorite-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.header-icon-btn.favorite-btn.favorited {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: rgba(255, 215, 0, 0.5);
+    animation: favoriteGlow 2s ease-in-out infinite;
+}
+
+@keyframes favoriteGlow {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    }
+}
+
 /* ==========================================================================
    语言选择器
    ========================================================================== */

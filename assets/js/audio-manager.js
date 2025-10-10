@@ -412,6 +412,15 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
                 this.eventBus.dispatchEvent(new CustomEvent('trackPlay', {
                     detail: { trackId, categoryName, fileName }
                 }));
+
+                // 触发音频切换事件（用于收藏按钮等功能）
+                window.dispatchEvent(new CustomEvent('audio:trackChanged', {
+                    detail: {
+                        category: categoryName,
+                        fileName: fileName,
+                        displayName: this.getDisplayName(fileName)
+                    }
+                }));
             } catch (error) {
                 if (error.name === 'NotAllowedError') {
                     throw new Error('浏览器阻止自动播放，请用户手动触发');
