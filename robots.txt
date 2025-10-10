@@ -27,7 +27,7 @@ Disallow: /index-deprecated.html
 Disallow: /index-backup*.html
 
 # 网站地图位置
-Sitemap: https://soundflows.app/sitemap.xml
+Sitemap: https://www.soundflows.app/sitemap.xml
 
 # 爬虫延迟设置（可选）
 Crawl-delay: 1
