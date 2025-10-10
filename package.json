@@ -31,7 +31,9 @@
   "homepage": "https://soundflows.app",
   "devDependencies": {
     "eslint": "^8.0.0",
-    "prettier": "^2.0.0"
+    "playwright": "^1.55.1",
+    "prettier": "^2.0.0",
+    "sharp": "^0.34.4"
   },
   "engines": {
     "node": ">=14.0.0"
