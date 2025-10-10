@@ -451,6 +451,9 @@ function toggleMinimize(event) {
 // ==========================================================================
 
 function showNotification(message, type = 'info') {
+    // Notifications disabled - user preference
+    return;
+
     const notification = document.getElementById('notification');
     if (!notification) return;
 
