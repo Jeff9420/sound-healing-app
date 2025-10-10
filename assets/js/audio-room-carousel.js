@@ -111,7 +111,9 @@ class AudioRoomCarousel {
         // 创建9个房间
         this.selectedCategories.forEach((categoryKey, index) => {
             const categoryData = AUDIO_CONFIG.categories[categoryKey];
-            if (!categoryData) return;
+            if (!categoryData) {
+                return;
+            }
 
             const roomConfig = roomConfigs[categoryKey];
             const audioFiles = categoryData.files || [];
@@ -272,7 +274,9 @@ class AudioRoomCarousel {
 
     // 创建指示器
     createIndicators() {
-        if (!this.indicatorsContainer) return;
+        if (!this.indicatorsContainer) {
+            return;
+        }
 
         this.indicatorsContainer.innerHTML = '';
         this.indicators = [];
@@ -438,7 +442,9 @@ class AudioRoomCarousel {
         };
 
         const handleMouseMove = (e) => {
-            if (!isDragging) return;
+            if (!isDragging) {
+                return;
+            }
 
             currentX = e.clientX;
             const deltaX = currentX - startX;
@@ -451,7 +457,9 @@ class AudioRoomCarousel {
         };
 
         const handleMouseUp = () => {
-            if (!isDragging) return;
+            if (!isDragging) {
+                return;
+            }
 
             isDragging = false;
             document.body.style.userSelect = ''; // 恢复文本选择
@@ -493,7 +501,9 @@ class AudioRoomCarousel {
         };
 
         const handleTouchMove = (e) => {
-            if (!isDragging) return;
+            if (!isDragging) {
+                return;
+            }
             e.preventDefault(); // 防止页面滚动
 
             const currentX = e.touches[0].clientX;
@@ -507,7 +517,9 @@ class AudioRoomCarousel {
         };
 
         const handleTouchEnd = (e) => {
-            if (!isDragging) return;
+            if (!isDragging) {
+                return;
+            }
 
             touchEndX = e.changedTouches[0].clientX;
             isDragging = false;

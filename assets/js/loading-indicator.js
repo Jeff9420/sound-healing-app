@@ -65,7 +65,9 @@ class LoadingIndicator {
     }
 
     injectStyles() {
-        if (document.getElementById('loading-indicator-styles')) return;
+        if (document.getElementById('loading-indicator-styles')) {
+            return;
+        }
 
         const style = document.createElement('style');
         style.id = 'loading-indicator-styles';
@@ -285,7 +287,9 @@ class LoadingIndicator {
         const overlay = document.getElementById('global-loading-overlay');
         const textElement = overlay.querySelector('.loading-text');
 
-        if (textElement) textElement.textContent = message;
+        if (textElement) {
+            textElement.textContent = message;
+        }
         overlay.classList.remove('hidden');
 
         // Auto-hide after 30 seconds as failsafe
@@ -305,8 +309,12 @@ class LoadingIndicator {
         const progressFill = document.querySelector('.progress-fill');
         const progressText = document.querySelector('.progress-text');
 
-        if (progressFill) progressFill.style.width = `${percentage}%`;
-        if (progressText) progressText.textContent = `${Math.round(percentage)}%`;
+        if (progressFill) {
+            progressFill.style.width = `${percentage}%`;
+        }
+        if (progressText) {
+            progressText.textContent = `${Math.round(percentage)}%`;
+        }
     }
 
     // Show category loading bar
@@ -329,7 +337,9 @@ class LoadingIndicator {
 
     // Add loading state to specific track card
     showTrackLoading(trackElement, trackName) {
-        if (!trackElement) return;
+        if (!trackElement) {
+            return;
+        }
 
         trackElement.classList.add('loading');
 
@@ -350,7 +360,9 @@ class LoadingIndicator {
 
     // Remove loading state from track card
     hideTrackLoading(trackElement) {
-        if (!trackElement) return;
+        if (!trackElement) {
+            return;
+        }
 
         trackElement.classList.remove('loading');
 
@@ -418,7 +430,9 @@ class LoadingIndicator {
         let progress = 0;
         const progressInterval = setInterval(() => {
             progress += Math.random() * 15;
-            if (progress > 90) progress = 90; // Don't reach 100% until actually loaded
+            if (progress > 90) {
+                progress = 90;
+            } // Don't reach 100% until actually loaded
 
             this.updateProgress(progress);
 

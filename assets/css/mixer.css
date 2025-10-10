@@ -1,0 +1,496 @@
+/**
+ * Audio Mixer UI Styles
+ * 混音器界面样式
+ */
+
+/* 模态框 */
+.mixer-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(15px);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.mixer-modal.active {
+    opacity: 1;
+}
+
+/* 内容容器 */
+.mixer-content {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 900px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    animation: slideIn 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes slideIn {
+    from {
+        transform: scale(0.95) translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+/* 头部 */
+.mixer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px;
+    background: linear-gradient(135deg, rgba(108, 92, 231, 0.2), rgba(0, 212, 255, 0.2));
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mixer-header h2 {
+    margin: 0;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.mixer-close {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 36px;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.mixer-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(90deg);
+}
+
+/* 预设按钮区域 */
+.mixer-presets {
+    padding: 20px 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mixer-presets label {
+    display: block;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.preset-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.preset-btn {
+    background: linear-gradient(135deg, rgba(108, 92, 231, 0.3), rgba(0, 212, 255, 0.3));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.preset-btn:hover {
+    background: linear-gradient(135deg, rgba(108, 92, 231, 0.5), rgba(0, 212, 255, 0.5));
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+}
+
+/* 音轨列表 */
+.mixer-tracks {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 30px;
+    min-height: 200px;
+}
+
+.mixer-tracks::-webkit-scrollbar {
+    width: 8px;
+}
+
+.mixer-tracks::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.mixer-tracks::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+.mixer-tracks::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* 空状态 */
+.mixer-empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.mixer-empty p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.mixer-hint {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+/* 单个音轨 */
+.mixer-track {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: all 0.3s ease;
+}
+
+.mixer-track:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateX(5px);
+}
+
+.track-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.track-name {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.track-category {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+    padding: 3px 10px;
+    background: rgba(108, 92, 231, 0.2);
+    border-radius: 6px;
+    display: inline-block;
+}
+
+.track-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.track-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.track-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.track-btn-remove:hover {
+    background: rgba(255, 71, 87, 0.4);
+}
+
+.track-volume {
+    width: 150px;
+    height: 6px;
+    border-radius: 3px;
+    outline: none;
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.track-volume::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.5);
+    transition: all 0.2s ease;
+}
+
+.track-volume::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.track-volume-value {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    min-width: 40px;
+    text-align: center;
+}
+
+/* 控制按钮区域 */
+.mixer-controls {
+    display: flex;
+    gap: 10px;
+    padding: 20px 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    flex-wrap: wrap;
+}
+
+.mixer-btn {
+    flex: 1;
+    min-width: 120px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.mixer-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.mixer-btn-add {
+    background: linear-gradient(135deg, rgba(46, 213, 115, 0.3), rgba(0, 184, 148, 0.3));
+    border-color: rgba(46, 213, 115, 0.5);
+}
+
+.mixer-btn-add:hover {
+    background: linear-gradient(135deg, rgba(46, 213, 115, 0.4), rgba(0, 184, 148, 0.4));
+}
+
+.mixer-btn-play {
+    background: linear-gradient(135deg, rgba(108, 92, 231, 0.3), rgba(0, 212, 255, 0.3));
+    border-color: rgba(108, 92, 231, 0.5);
+}
+
+.mixer-btn-play:hover {
+    background: linear-gradient(135deg, rgba(108, 92, 231, 0.4), rgba(0, 212, 255, 0.4));
+}
+
+.mixer-btn-pause {
+    background: linear-gradient(135deg, rgba(253, 203, 110, 0.3), rgba(251, 170, 55, 0.3));
+    border-color: rgba(253, 203, 110, 0.5);
+}
+
+.mixer-btn-pause:hover {
+    background: linear-gradient(135deg, rgba(253, 203, 110, 0.4), rgba(251, 170, 55, 0.4));
+}
+
+.mixer-btn-clear {
+    background: linear-gradient(135deg, rgba(255, 71, 87, 0.3), rgba(231, 76, 60, 0.3));
+    border-color: rgba(255, 71, 87, 0.5);
+}
+
+.mixer-btn-clear:hover {
+    background: linear-gradient(135deg, rgba(255, 71, 87, 0.4), rgba(231, 76, 60, 0.4));
+}
+
+/* 主音量控制 */
+.mixer-master {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 30px;
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mixer-master label {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 15px;
+    font-weight: 500;
+    min-width: 80px;
+}
+
+#masterVolumeSlider {
+    flex: 1;
+    height: 8px;
+    border-radius: 4px;
+    outline: none;
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#masterVolumeSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    cursor: pointer;
+    box-shadow: 0 3px 12px rgba(240, 147, 251, 0.6);
+    transition: all 0.2s ease;
+}
+
+#masterVolumeSlider::-webkit-slider-thumb:hover {
+    transform: scale(1.3);
+}
+
+#masterVolumeValue {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    min-width: 50px;
+    text-align: center;
+}
+
+/* 对话框 */
+.mixer-dialog-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.mixer-dialog {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 15px;
+    padding: 30px;
+    min-width: 300px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mixer-dialog h3 {
+    margin: 0 0 20px 0;
+    color: #fff;
+    font-size: 20px;
+}
+
+.mixer-dialog select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 14px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.mixer-dialog select option {
+    background: #1a1a2e;
+    color: #fff;
+}
+
+.dialog-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .mixer-content {
+        width: 95%;
+        max-height: 95vh;
+    }
+
+    .mixer-header {
+        padding: 20px;
+    }
+
+    .mixer-header h2 {
+        font-size: 20px;
+    }
+
+    .mixer-presets,
+    .mixer-tracks,
+    .mixer-controls,
+    .mixer-master {
+        padding: 15px 20px;
+    }
+
+    .mixer-track {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .track-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .track-volume {
+        flex: 1;
+        min-width: 100px;
+    }
+
+    .mixer-controls {
+        flex-direction: column;
+    }
+
+    .mixer-btn {
+        min-width: auto;
+        width: 100%;
+    }
+
+    .preset-buttons {
+        flex-direction: column;
+    }
+
+    .preset-btn {
+        width: 100%;
+    }
+}

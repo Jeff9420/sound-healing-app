@@ -1,0 +1,37 @@
+# Dependencies
+node_modules
+package-lock.json
+pnpm-lock.yaml
+
+# Build outputs
+dist
+build
+.vercel
+.next
+
+# Archives
+archive
+*.zip
+*.tar.gz
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode
+.idea
+
+# Test coverage
+coverage
+
+# Package docs
+package/docs
+
+# Minified files
+*.min.js
+*.min.css

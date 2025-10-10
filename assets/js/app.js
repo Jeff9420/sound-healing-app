@@ -353,12 +353,12 @@ window.addEventListener('beforeunload', () => {
 window.debugTest = function() {
     console.log('=== 调试测试开始 ===');
     
-    let debugInfo = [];
+    const debugInfo = [];
     
     debugInfo.push('=== 应用状态检查 ===');
-    debugInfo.push(`app 对象: ${!!window.app ? '✅ 存在' : '❌ 不存在'}`);
-    debugInfo.push(`app.natureUI: ${!!window.app?.natureUI ? '✅ 存在' : '❌ 不存在'}`);
-    debugInfo.push(`app.audioManager: ${!!window.app?.audioManager ? '✅ 存在' : '❌ 不存在'}`);
+    debugInfo.push(`app 对象: ${window.app ? '✅ 存在' : '❌ 不存在'}`);
+    debugInfo.push(`app.natureUI: ${window.app?.natureUI ? '✅ 存在' : '❌ 不存在'}`);
+    debugInfo.push(`app.audioManager: ${window.app?.audioManager ? '✅ 存在' : '❌ 不存在'}`);
     
     // 检查音频配置
     debugInfo.push('\n=== 音频配置检查 ===');
@@ -385,11 +385,11 @@ window.debugTest = function() {
     const trackList = document.getElementById('trackList');
     const backBtn = document.getElementById('backToCategories');
     
-    debugInfo.push(`categoriesContainer: ${!!categoriesContainer ? '✅ 存在' : '❌ 不存在'} (${categoriesContainer?.children?.length || 0} 个子元素)`);
-    debugInfo.push(`playlistSection: ${!!playlistSection ? '✅ 存在' : '❌ 不存在'}`);
-    debugInfo.push(`mainContainer: ${!!mainContainer ? '✅ 存在' : '❌ 不存在'}`);
-    debugInfo.push(`trackList: ${!!trackList ? '✅ 存在' : '❌ 不存在'}`);
-    debugInfo.push(`backToCategories按钮: ${!!backBtn ? '✅ 存在' : '❌ 不存在'}`);
+    debugInfo.push(`categoriesContainer: ${categoriesContainer ? '✅ 存在' : '❌ 不存在'} (${categoriesContainer?.children?.length || 0} 个子元素)`);
+    debugInfo.push(`playlistSection: ${playlistSection ? '✅ 存在' : '❌ 不存在'}`);
+    debugInfo.push(`mainContainer: ${mainContainer ? '✅ 存在' : '❌ 不存在'}`);
+    debugInfo.push(`trackList: ${trackList ? '✅ 存在' : '❌ 不存在'}`);
+    debugInfo.push(`backToCategories按钮: ${backBtn ? '✅ 存在' : '❌ 不存在'}`);
     
     // 检查生态系统卡片是否有点击事件
     debugInfo.push('\n=== 生态系统卡片检查 ===');
@@ -402,10 +402,10 @@ window.debugTest = function() {
             
             // 测试点击事件
             if (index === 0 && window.app?.natureUI) {
-                debugInfo.push(`尝试触发第一个卡片的点击事件...`);
+                debugInfo.push('尝试触发第一个卡片的点击事件...');
                 try {
                     card.click();
-                    debugInfo.push(`✅ 第一个卡片点击测试完成`);
+                    debugInfo.push('✅ 第一个卡片点击测试完成');
                 } catch (error) {
                     debugInfo.push(`❌ 第一个卡片点击测试失败: ${error.message}`);
                 }
@@ -463,7 +463,9 @@ window.debugTest = function() {
     
     // 移除之前的调试面板
     const existingPanel = document.getElementById('debug-display');
-    if (existingPanel) existingPanel.remove();
+    if (existingPanel) {
+        existingPanel.remove();
+    }
     
     document.body.appendChild(debugDisplay);
     
@@ -549,9 +551,9 @@ window.forceShowPlaylist = function() {
         }
         
     } else {
-        result += `❌ DOM元素检查:\n`;
-        result += `- mainContainer: ${!!mainContainer ? '存在' : '不存在'}\n`;
-        result += `- playlistSection: ${!!playlistSection ? '存在' : '不存在'}\n`;
+        result += '❌ DOM元素检查:\n';
+        result += `- mainContainer: ${mainContainer ? '存在' : '不存在'}\n`;
+        result += `- playlistSection: ${playlistSection ? '存在' : '不存在'}\n`;
     }
     
     alert('播放列表测试结果:\n\n' + result);
@@ -630,15 +632,15 @@ window.testEcosystemClick = function() {
             const hasContent = trackList && trackList.innerHTML.length > 50; // 有实际内容
             const hasTitle = playlistTitle && playlistTitle.textContent.length > 3;
             
-            let result = `点击测试结果:\n\n`;
-            result += `✅ 卡片点击: 成功\n`;
+            let result = '点击测试结果:\n\n';
+            result += '✅ 卡片点击: 成功\n';
             result += `${isVisible ? '✅' : '❌'} 播放列表显示: ${isVisible ? '已显示' : '未显示'}\n`;
             result += `${hasContent ? '✅' : '❌'} 音频列表内容: ${hasContent ? '有内容' : '无内容'}\n`;
             result += `${hasTitle ? '✅' : '❌'} 播放列表标题: ${hasTitle ? playlistTitle.textContent : '无标题'}\n`;
-            result += `${!!backBtn ? '✅' : '❌'} 返回按钮: ${!!backBtn ? '存在' : '不存在'}\n`;
+            result += `${backBtn ? '✅' : '❌'} 返回按钮: ${backBtn ? '存在' : '不存在'}\n`;
             
             if (isVisible && hasContent && hasTitle && backBtn) {
-                result += `\n🎉 所有功能正常！点击任意生态系统卡片都应该工作了！`;
+                result += '\n🎉 所有功能正常！点击任意生态系统卡片都应该工作了！';
             }
             
             alert(result);
@@ -681,7 +683,7 @@ window.forceReinitialize = function() {
 window.verifyFix = function() {
     console.log('=== 验证修复效果 ===');
     
-    let results = [];
+    const results = [];
     let allPass = true;
     
     // 详细的全局对象检查

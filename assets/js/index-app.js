@@ -23,7 +23,7 @@ let isPlaying = false;
 let isShuffleMode = false;
 let isRepeatMode = false;
 let sleepTimer = null;
-let audio = new Audio();
+const audio = new Audio();
 let tracks = [];
 
 // Initialize audio settings
@@ -138,8 +138,12 @@ function initializeApp() {
         const loadingScreen = document.getElementById('loadingScreen');
         const app = document.getElementById('app');
 
-        if (loadingScreen) loadingScreen.style.display = 'none';
-        if (app) app.style.display = 'block';
+        if (loadingScreen) {
+            loadingScreen.style.display = 'none';
+        }
+        if (app) {
+            app.style.display = 'block';
+        }
 
         // Start background animation
         if (canvas) {
@@ -168,7 +172,9 @@ function resizeCanvas() {
 function loadCategories() {
     console.log('Loading categories...');
     const categoryGrid = document.getElementById('categoryGrid');
-    if (!categoryGrid) return;
+    if (!categoryGrid) {
+        return;
+    }
 
     categoryGrid.innerHTML = '';
 
@@ -236,14 +242,16 @@ function openPlaylist(categoryKey, category) {
     }
 
     const trackList = document.getElementById('trackList');
-    if (!trackList) return;
+    if (!trackList) {
+        return;
+    }
 
     trackList.innerHTML = '';
 
     // Load tracks
     if (category.files && typeof AUDIO_CONFIG !== 'undefined' && AUDIO_CONFIG.baseUrl) {
         tracks = category.files.map((fileName, index) => ({
-            name: fileName.replace(/\.[^/.]+$/, ""),
+            name: fileName.replace(/\.[^/.]+$/, ''),
             fileName: fileName,
             url: AUDIO_CONFIG.baseUrl + category.folder + '/' + fileName
         }));
@@ -298,9 +306,15 @@ function playTrack(index) {
     const currentCategoryElem = document.getElementById('currentCategory');
     const minimizedTrack = document.getElementById('minimizedTrack');
 
-    if (currentTrack) currentTrack.textContent = track.name;
-    if (currentCategoryElem) currentCategoryElem.textContent = category.name || currentCategory.key;
-    if (minimizedTrack) minimizedTrack.textContent = `${track.name} - ${category.name || currentCategory.key}`;
+    if (currentTrack) {
+        currentTrack.textContent = track.name;
+    }
+    if (currentCategoryElem) {
+        currentCategoryElem.textContent = category.name || currentCategory.key;
+    }
+    if (minimizedTrack) {
+        minimizedTrack.textContent = `${track.name} - ${category.name || currentCategory.key}`;
+    }
 
     // Play audio
     audio.src = track.url;
@@ -356,7 +370,9 @@ function previousTrack() {
 }
 
 function nextTrack() {
-    if (tracks.length === 0) return;
+    if (tracks.length === 0) {
+        return;
+    }
 
     if (isShuffleMode) {
         // Random playback
@@ -393,8 +409,12 @@ function updateProgress() {
         const progressFill = document.getElementById('progressFill');
         const currentTime = document.getElementById('currentTime');
 
-        if (progressFill) progressFill.style.width = progress + '%';
-        if (currentTime) currentTime.textContent = formatTime(audio.currentTime);
+        if (progressFill) {
+            progressFill.style.width = progress + '%';
+        }
+        if (currentTime) {
+            currentTime.textContent = formatTime(audio.currentTime);
+        }
     }
 }
 
@@ -414,7 +434,9 @@ function seekTo(event) {
 }
 
 function formatTime(seconds) {
-    if (isNaN(seconds)) return '0:00';
+    if (isNaN(seconds)) {
+        return '0:00';
+    }
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     return `${mins}:${secs.toString().padStart(2, '0')}`;
@@ -434,14 +456,20 @@ function toggleMinimize(event) {
     const player = document.getElementById('audioPlayer');
     const indicator = document.querySelector('.minimize-indicator');
 
-    if (!player) return;
+    if (!player) {
+        return;
+    }
 
     if (isMinimized) {
         player.classList.remove('minimized');
-        if (indicator) indicator.textContent = getText('player.minimize', '▲ 收起');
+        if (indicator) {
+            indicator.textContent = getText('player.minimize', '▲ 收起');
+        }
     } else {
         player.classList.add('minimized');
-        if (indicator) indicator.textContent = getText('player.expand', '▼ 展开');
+        if (indicator) {
+            indicator.textContent = getText('player.expand', '▼ 展开');
+        }
     }
     isMinimized = !isMinimized;
 }
@@ -455,7 +483,9 @@ function showNotification(message, type = 'info') {
     return;
 
     const notification = document.getElementById('notification');
-    if (!notification) return;
+    if (!notification) {
+        return;
+    }
 
     notification.textContent = message;
     notification.className = 'notification ' + type;
@@ -525,7 +555,9 @@ function changeBackgroundScene(scene) {
 }
 
 function animateBackground() {
-    if (!ctx || !canvas) return;
+    if (!ctx || !canvas) {
+        return;
+    }
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -535,10 +567,18 @@ function animateBackground() {
         particle.y += particle.vy;
 
         // Wrap around edges
-        if (particle.x < 0) particle.x = canvas.width;
-        if (particle.x > canvas.width) particle.x = 0;
-        if (particle.y < 0) particle.y = canvas.height;
-        if (particle.y > canvas.height) particle.y = 0;
+        if (particle.x < 0) {
+            particle.x = canvas.width;
+        }
+        if (particle.x > canvas.width) {
+            particle.x = 0;
+        }
+        if (particle.y < 0) {
+            particle.y = canvas.height;
+        }
+        if (particle.y > canvas.height) {
+            particle.y = 0;
+        }
 
         // Draw particle
         ctx.save();
@@ -546,22 +586,22 @@ function animateBackground() {
         ctx.globalAlpha = 0.6;
 
         switch (particle.type) {
-            case 'leaf':
-                ctx.translate(particle.x, particle.y);
-                ctx.rotate(particle.angle);
-                ctx.fillRect(-particle.size, -particle.size/2, particle.size * 2, particle.size);
-                break;
-            case 'energy':
-                const gradient = ctx.createRadialGradient(particle.x, particle.y, 0, particle.x, particle.y, particle.size * 2);
-                gradient.addColorStop(0, particle.color);
-                gradient.addColorStop(1, 'transparent');
-                ctx.fillStyle = gradient;
-                ctx.fillRect(particle.x - particle.size * 2, particle.y - particle.size * 2, particle.size * 4, particle.size * 4);
-                break;
-            default:
-                ctx.beginPath();
-                ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-                ctx.fill();
+        case 'leaf':
+            ctx.translate(particle.x, particle.y);
+            ctx.rotate(particle.angle);
+            ctx.fillRect(-particle.size, -particle.size/2, particle.size * 2, particle.size);
+            break;
+        case 'energy':
+            const gradient = ctx.createRadialGradient(particle.x, particle.y, 0, particle.x, particle.y, particle.size * 2);
+            gradient.addColorStop(0, particle.color);
+            gradient.addColorStop(1, 'transparent');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(particle.x - particle.size * 2, particle.y - particle.size * 2, particle.size * 4, particle.size * 4);
+            break;
+        default:
+            ctx.beginPath();
+            ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            ctx.fill();
         }
 
         ctx.restore();
@@ -603,7 +643,9 @@ function toggleRepeat() {
 
 function toggleSleepTimer() {
     const modal = document.getElementById('sleepTimerModal');
-    if (!modal) return;
+    if (!modal) {
+        return;
+    }
 
     if (modal.style.display === 'none') {
         modal.style.display = 'block';
@@ -628,21 +670,29 @@ function setSleepTimer(minutes) {
             audio.pause();
             isPlaying = false;
             const playPauseBtn = document.getElementById('playPauseBtn');
-            if (playPauseBtn) playPauseBtn.textContent = '▶️';
+            if (playPauseBtn) {
+                playPauseBtn.textContent = '▶️';
+            }
 
             showNotification(getText('timer.stopped', '睡眠定时器已停止播放'), 'success');
 
             const sleepTimerBtn = document.getElementById('sleepTimerBtn');
-            if (sleepTimerBtn) sleepTimerBtn.classList.remove('active');
+            if (sleepTimerBtn) {
+                sleepTimerBtn.classList.remove('active');
+            }
         }, minutes * 60 * 1000);
 
         const sleepTimerBtn = document.getElementById('sleepTimerBtn');
-        if (sleepTimerBtn) sleepTimerBtn.classList.add('active');
+        if (sleepTimerBtn) {
+            sleepTimerBtn.classList.add('active');
+        }
 
         showNotification(`${getText('timer.set', '睡眠定时器已设置为')}${minutes}${getText('timer.minutes', '分钟')}`, 'success');
     } else {
         const sleepTimerBtn = document.getElementById('sleepTimerBtn');
-        if (sleepTimerBtn) sleepTimerBtn.classList.remove('active');
+        if (sleepTimerBtn) {
+            sleepTimerBtn.classList.remove('active');
+        }
 
         showNotification(getText('timer.closed', '睡眠定时器已关闭'), 'success');
     }
@@ -672,7 +722,7 @@ window.onclick = function(event) {
     if (event.target === playlistModal) {
         closePlaylist();
     }
-}
+};
 
 // ==========================================================================
 // 页面加载初始化

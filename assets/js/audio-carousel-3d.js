@@ -61,7 +61,9 @@ class AudioRoomCarousel3D {
 
     updateRotationVariables() {
         const cards = this.carouselInner?.querySelectorAll('.ecosystem-card');
-        if (!cards) return;
+        if (!cards) {
+            return;
+        }
 
         cards.forEach((card, index) => {
             const rotation = index * 40; // 9边形，每个间隔40度
@@ -139,7 +141,9 @@ class AudioRoomCarousel3D {
 
         // 创建卡片
         Object.entries(ecosystemData).forEach(([categoryKey, data], index) => {
-            if (!AUDIO_CONFIG.categories[categoryKey]) return;
+            if (!AUDIO_CONFIG.categories[categoryKey]) {
+                return;
+            }
 
             const count = AUDIO_CONFIG.categories[categoryKey].files?.length || 0;
 
@@ -228,7 +232,9 @@ class AudioRoomCarousel3D {
 
     // 创建指示器
     createIndicators() {
-        if (!this.indicatorsContainer) return;
+        if (!this.indicatorsContainer) {
+            return;
+        }
 
         this.indicatorsContainer.innerHTML = '';
         this.indicators = [];
@@ -342,7 +348,9 @@ class AudioRoomCarousel3D {
         };
 
         const handleMouseMove = (e) => {
-            if (!isDragging) return;
+            if (!isDragging) {
+                return;
+            }
 
             currentX = e.clientX;
             const deltaX = currentX - startX;
@@ -353,7 +361,9 @@ class AudioRoomCarousel3D {
         };
 
         const handleMouseUp = () => {
-            if (!isDragging) return;
+            if (!isDragging) {
+                return;
+            }
 
             isDragging = false;
             const deltaX = currentX - startX;

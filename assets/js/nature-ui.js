@@ -24,7 +24,7 @@ class NatureUI {
             throw error;
         }
         
-            // 监听音频事件
+        // 监听音频事件
         this.audioManager.eventBus.addEventListener('trackPlay', (e) => {
             this.handleAudioStarted(e.detail);
         });
@@ -176,7 +176,9 @@ class NatureUI {
         container.innerHTML = '';
         
         Object.entries(ecosystemData).forEach(([categoryKey, data]) => {
-            if (!categories[categoryKey]) return;
+            if (!categories[categoryKey]) {
+                return;
+            }
             
             const card = document.createElement('div');
             card.className = 'ecosystem-card';
@@ -229,7 +231,7 @@ class NatureUI {
             console.log(`✅ 生态系统卡片已创建: ${data.name} (${categoryKey})`);
             console.log(`   - 数据属性: ${card.dataset.category}`);
             console.log(`   - 点击处理器: ${typeof clickHandler}`);
-            console.log(`   - 卡片元素:`, card);
+            console.log('   - 卡片元素:', card);
         });
         
         console.log('生态系统卡片创建完成，总数:', Object.keys(ecosystemData).length);
@@ -691,11 +693,19 @@ class NatureUI {
         const trackArtist = document.querySelector('.current-track-artist');
         
         if (trackInfo && trackInfo.fileName) {
-            if (trackName) trackName.textContent = this.formatTrackName(trackInfo.fileName);
-            if (trackArtist) trackArtist.textContent = `来自 ${this.getCategoryDisplayName(trackInfo.categoryKey)}`;
+            if (trackName) {
+                trackName.textContent = this.formatTrackName(trackInfo.fileName);
+            }
+            if (trackArtist) {
+                trackArtist.textContent = `来自 ${this.getCategoryDisplayName(trackInfo.categoryKey)}`;
+            }
         } else {
-            if (trackName) trackName.textContent = '选择您的疗愈之声';
-            if (trackArtist) trackArtist.textContent = '开始您的自然之旅';
+            if (trackName) {
+                trackName.textContent = '选择您的疗愈之声';
+            }
+            if (trackArtist) {
+                trackArtist.textContent = '开始您的自然之旅';
+            }
         }
     }
     
@@ -723,7 +733,9 @@ class NatureUI {
     // 创建水波纹效果
     createWaveRipple() {
         const pondPlayer = document.querySelector('.pond-player');
-        if (!pondPlayer) return;
+        if (!pondPlayer) {
+            return;
+        }
         
         const ripple = document.createElement('div');
         ripple.className = 'ripple';
@@ -930,10 +942,14 @@ class NatureUI {
             
             if (trackId === activeTrackId) {
                 item.classList.add('playing');
-                if (playBtn) playBtn.textContent = '⏸';
+                if (playBtn) {
+                    playBtn.textContent = '⏸';
+                }
             } else {
                 item.classList.remove('playing');
-                if (playBtn) playBtn.textContent = '▶';
+                if (playBtn) {
+                    playBtn.textContent = '▶';
+                }
             }
         });
     }

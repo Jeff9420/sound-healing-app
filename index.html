@@ -137,6 +137,9 @@
 
     <!-- External Stylesheets -->
     <link rel="stylesheet" href="assets/css/index-styles.css">
+    <link rel="stylesheet" href="assets/css/history-favorites.css">
+    <link rel="stylesheet" href="assets/css/mixer.css">
+    <link rel="stylesheet" href="assets/css/stats-dashboard.css">
 </head>
 <body>
     <!-- SEO H1 (Hidden for SEO purposes, screen reader accessible) -->
@@ -166,15 +169,30 @@
                         <h1 data-i18n="app.title">🎵 声音疗愈空间</h1>
                         <p class="subtitle" data-i18n="app.subtitle">专业音频疗法平台 - 帮您放松身心，找回内心平静</p>
                     </div>
-                    <!-- Language Selector -->
-                    <div class="language-selector">
-                        <select id="languageSelect" onchange="changeLanguage(this.value)">
-                            <option value="zh-CN">中文</option>
-                            <option value="en-US">English</option>
-                            <option value="ja-JP">日本語</option>
-                            <option value="ko-KR">한국어</option>
-                            <option value="es-ES">Español</option>
-                        </select>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <!-- History & Favorites Buttons -->
+                        <button class="header-icon-btn" onclick="window.historyFavoritesUI && window.historyFavoritesUI.openPanel('history')" title="播放历史">
+                            📜
+                        </button>
+                        <button class="header-icon-btn" onclick="window.historyFavoritesUI && window.historyFavoritesUI.openPanel('favorites')" title="我的收藏">
+                            ⭐
+                        </button>
+                        <button class="header-icon-btn" onclick="window.mixerUI && window.mixerUI.open()" title="音频混音器">
+                            🎚️
+                        </button>
+                        <button class="header-icon-btn" onclick="window.statsDashboard && window.statsDashboard.open()" title="收听统计">
+                            📊
+                        </button>
+                        <!-- Language Selector -->
+                        <div class="language-selector">
+                            <select id="languageSelect" onchange="changeLanguage(this.value)">
+                                <option value="zh-CN">中文</option>
+                                <option value="en-US">English</option>
+                                <option value="ja-JP">日本語</option>
+                                <option value="ko-KR">한국어</option>
+                                <option value="es-ES">Español</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </header>
@@ -474,10 +492,19 @@
     </script>
 
     <!-- External JavaScript Files -->
-    <!-- Load in order: config → i18n → app logic -->
+    <!-- Load in order: config → i18n → user data → metadata → app logic → features → enhancements -->
     <script src="assets/js/audio-config.js"></script>
     <script src="assets/js/i18n-system.js"></script>
+    <script src="assets/js/user-data-manager.js"></script>
+    <script src="assets/js/audio-metadata.js"></script>
+    <script src="assets/js/recommendation-engine.js"></script>
+    <script src="assets/js/history-favorites-ui.js"></script>
+    <script src="assets/js/audio-mixer.js"></script>
+    <script src="assets/js/mixer-ui.js"></script>
+    <script src="assets/js/stats-dashboard.js"></script>
+    <script src="assets/js/pwa-manager.js"></script>
     <script src="assets/js/index-app.js"></script>
     <script src="assets/js/rating-system.js"></script>
+    <script src="assets/js/touch-gestures.js"></script>
 </body>
 </html>

@@ -12,7 +12,9 @@ class PerformanceMonitor {
     }
 
     startMonitoring() {
-        if (this.isMonitoring) return;
+        if (this.isMonitoring) {
+            return;
+        }
         
         this.isMonitoring = true;
         this.monitoringInterval = setInterval(() => {
@@ -129,7 +131,9 @@ class PerformanceMonitor {
     }
 
     getMemoryTrend() {
-        if (this.metrics.memoryUsage.length < 2) return 'stable';
+        if (this.metrics.memoryUsage.length < 2) {
+            return 'stable';
+        }
         
         const recent = this.metrics.memoryUsage.slice(-5);
         const oldAvg = recent.slice(0, 2).reduce((a, b) => a + b.used, 0) / 2;
@@ -137,8 +141,12 @@ class PerformanceMonitor {
         
         const change = (newAvg - oldAvg) / oldAvg;
         
-        if (change > 0.1) return 'increasing';
-        if (change < -0.1) return 'decreasing';
+        if (change > 0.1) {
+            return 'increasing';
+        }
+        if (change < -0.1) {
+            return 'decreasing';
+        }
         return 'stable';
     }
 

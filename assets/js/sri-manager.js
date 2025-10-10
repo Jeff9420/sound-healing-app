@@ -41,7 +41,9 @@ class SRIManager {
      * 初始化SRI管理器
      */
     init() {
-        if (this.initialized) return;
+        if (this.initialized) {
+            return;
+        }
 
         // 监听所有动态加载的资源
         this.setupResourceMonitoring();
@@ -275,11 +277,15 @@ class SRIManager {
      */
     async verifyIntegrity(element, url) {
         const integrity = element.getAttribute('integrity');
-        if (!integrity) return true;
+        if (!integrity) {
+            return true;
+        }
 
         try {
             const response = await fetch(url);
-            if (!response.ok) return false;
+            if (!response.ok) {
+                return false;
+            }
 
             const buffer = await response.arrayBuffer();
             const [algorithm, expectedHash] = integrity.split('-');
@@ -510,9 +516,14 @@ class SRIManager {
             const isExternal = this.isExternalResource(url);
             const hasSRI = !!resource.getAttribute('integrity');
 
-            if (isExternal) report.external++;
-            if (hasSRI) report.withSRI++;
-            else if (isExternal) report.withoutSRI++;
+            if (isExternal) {
+                report.external++;
+            }
+            if (hasSRI) {
+                report.withSRI++;
+            } else if (isExternal) {
+                report.withoutSRI++;
+            }
 
             report.details.push({
                 url,

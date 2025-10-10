@@ -90,7 +90,9 @@ class WarmNightThemeController {
      * 设置基于时间的动态调整
      */
     setupTimeBasedAdjustment() {
-        if (!this.settings.timeBasedAdjustment) return;
+        if (!this.settings.timeBasedAdjustment) {
+            return;
+        }
 
         const updateTimeMode = () => {
             const now = new Date();
@@ -126,16 +128,16 @@ class WarmNightThemeController {
         document.body.classList.remove('evening-mode', 'deep-night-mode');
 
         switch (mode) {
-            case 'evening':
-                document.body.classList.add('evening-mode');
-                console.log('🌆 切换到晚间模式');
-                break;
-            case 'deep-night':
-                document.body.classList.add('deep-night-mode');
-                console.log('🌙 切换到深夜模式');
-                break;
-            default:
-                console.log('🌅 切换到默认模式');
+        case 'evening':
+            document.body.classList.add('evening-mode');
+            console.log('🌆 切换到晚间模式');
+            break;
+        case 'deep-night':
+            document.body.classList.add('deep-night-mode');
+            console.log('🌙 切换到深夜模式');
+            break;
+        default:
+            console.log('🌅 切换到默认模式');
         }
     }
 
@@ -143,7 +145,9 @@ class WarmNightThemeController {
      * 初始化呼吸效果
      */
     initBreathingEffects() {
-        if (!this.settings.breathingEffects) return;
+        if (!this.settings.breathingEffects) {
+            return;
+        }
 
         const breathingElements = document.querySelectorAll('.carrossel-item.active, .lotus-player');
 
@@ -474,11 +478,21 @@ class WarmNightThemeController {
         const intensitySlider = document.querySelector('#themeIntensity');
         const intensityValue = document.querySelector('#intensityValue');
 
-        if (blueLightCheckbox) blueLightCheckbox.checked = this.settings.blueLightFilter;
-        if (breathingCheckbox) breathingCheckbox.checked = this.settings.breathingEffects;
-        if (timeAdjustmentCheckbox) timeAdjustmentCheckbox.checked = this.settings.timeBasedAdjustment;
-        if (intensitySlider) intensitySlider.value = this.settings.intensity;
-        if (intensityValue) intensityValue.textContent = Math.round(this.settings.intensity * 100) + '%';
+        if (blueLightCheckbox) {
+            blueLightCheckbox.checked = this.settings.blueLightFilter;
+        }
+        if (breathingCheckbox) {
+            breathingCheckbox.checked = this.settings.breathingEffects;
+        }
+        if (timeAdjustmentCheckbox) {
+            timeAdjustmentCheckbox.checked = this.settings.timeBasedAdjustment;
+        }
+        if (intensitySlider) {
+            intensitySlider.value = this.settings.intensity;
+        }
+        if (intensityValue) {
+            intensityValue.textContent = Math.round(this.settings.intensity * 100) + '%';
+        }
     }
 
     /**

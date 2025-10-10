@@ -8,8 +8,11 @@
     "build": "echo 'No build step required for static site'",
     "deploy": "vercel --prod",
     "deploy:preview": "vercel",
-    "lint": "echo 'Linting not configured'",
-    "format": "echo 'Formatting not configured'",
+    "lint": "eslint assets/js/**/*.js",
+    "lint:fix": "eslint assets/js/**/*.js --fix",
+    "format": "prettier --write \"assets/**/*.{js,css,html}\"",
+    "format:check": "prettier --check \"assets/**/*.{js,css,html}\"",
+    "convert:webp": "node scripts/convert-images-to-webp.js",
     "clean": "rm -rf node_modules/.cache && rm -rf .vercel"
   },
   "keywords": [

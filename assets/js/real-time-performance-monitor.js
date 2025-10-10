@@ -306,7 +306,9 @@ class RealTimePerformanceMonitor {
      */
     evaluateMetric(metricName, value) {
         const threshold = this.thresholds[metricName];
-        if (!threshold) return;
+        if (!threshold) {
+            return;
+        }
         
         let status = 'good';
         if (value > threshold.needsImprovement) {

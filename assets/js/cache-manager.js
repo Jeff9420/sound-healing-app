@@ -240,7 +240,9 @@ class CacheManager {
      * 预缓存音频文件
      */
     async precacheAudioFiles() {
-        if (!window.AUDIO_CONFIG) return;
+        if (!window.AUDIO_CONFIG) {
+            return;
+        }
         
         // 获取热门分类的音频文件进行预缓存
         const popularCategories = ['Rain', 'meditation', 'Singing bowl sound'];
@@ -379,7 +381,9 @@ class CacheManager {
      * 强制更新Service Worker
      */
     async updateServiceWorker() {
-        if (!this.swRegistration) return;
+        if (!this.swRegistration) {
+            return;
+        }
         
         try {
             await this.swRegistration.update();

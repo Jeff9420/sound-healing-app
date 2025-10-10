@@ -409,9 +409,15 @@ class UserBehaviorLearningSystem {
     getTimeOfDayCategory() {
         const hour = new Date().getHours();
         
-        if (hour >= 6 && hour < 12) return 'morning';
-        if (hour >= 12 && hour < 18) return 'afternoon';  
-        if (hour >= 18 && hour < 22) return 'evening';
+        if (hour >= 6 && hour < 12) {
+            return 'morning';
+        }
+        if (hour >= 12 && hour < 18) {
+            return 'afternoon';
+        }  
+        if (hour >= 18 && hour < 22) {
+            return 'evening';
+        }
         return 'night';
     }
     
@@ -460,19 +466,21 @@ class UserBehaviorLearningSystem {
      */
     trainModel(modelName) {
         const model = this.learningModels[modelName];
-        if (!model) return;
+        if (!model) {
+            return;
+        }
         
         try {
             switch (modelName) {
-                case 'audioPreference':
-                    this.trainAudioPreferenceModel();
-                    break;
-                case 'usagePattern':
-                    this.trainUsagePatternModel();
-                    break;
-                case 'personalityProfile':
-                    this.trainPersonalityModel();
-                    break;
+            case 'audioPreference':
+                this.trainAudioPreferenceModel();
+                break;
+            case 'usagePattern':
+                this.trainUsagePatternModel();
+                break;
+            case 'personalityProfile':
+                this.trainPersonalityModel();
+                break;
             }
             
             model.lastUpdate = Date.now();
@@ -624,9 +632,11 @@ class UserBehaviorLearningSystem {
         // 分析用户行为的重复性
         const recentSessions = this.userData.sessions.slice(-5);
         
-        if (recentSessions.length < 2) return 0.5;
+        if (recentSessions.length < 2) {
+            return 0.5;
+        }
         
-        let similarityScore = 0;
+        const similarityScore = 0;
         const comparisons = [];
         
         for (let i = 0; i < recentSessions.length - 1; i++) {
@@ -675,7 +685,9 @@ class UserBehaviorLearningSystem {
             intervals.push(interval);
         }
         
-        if (intervals.length === 0) return 0.5;
+        if (intervals.length === 0) {
+            return 0.5;
+        }
         
         const avgInterval = intervals.reduce((a, b) => a + b, 0) / intervals.length;
         return Math.min(avgInterval / 5000, 1.0); // 5秒为满耐心
@@ -688,7 +700,9 @@ class UserBehaviorLearningSystem {
         // 分析用户偏好的一致性和稳定性
         const sessions = this.userData.sessions.slice(-10); // 最近10个会话
         
-        if (sessions.length < 3) return 0.5; // 数据不足时返回中性值
+        if (sessions.length < 3) {
+            return 0.5;
+        } // 数据不足时返回中性值
         
         // 分析音频类别选择的稳定性
         const categoryPreferences = {};
@@ -701,7 +715,9 @@ class UserBehaviorLearningSystem {
         });
         
         const categories = Object.keys(categoryPreferences);
-        if (categories.length === 0) return 0.5;
+        if (categories.length === 0) {
+            return 0.5;
+        }
         
         // 计算偏好分布的稳定性（熵的倒数）
         const total = Object.values(categoryPreferences).reduce((a, b) => a + b, 0);
@@ -783,7 +799,7 @@ class UserBehaviorLearningSystem {
                 recommendations.push({
                     category: category,
                     score: finalScore,
-                    reason: `基于您的偏好和当前时间段`
+                    reason: '基于您的偏好和当前时间段'
                 });
             }
         });

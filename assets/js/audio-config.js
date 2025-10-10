@@ -34,7 +34,7 @@ const AUDIO_CONFIG = {
                 '海鸥的叫声，海浪的声音（上）.mp3',
                 '海鸥的叫声，海浪的声音（下）.mp3',
                 '蜜蜂与小鸟对唱.mp3',
-                '非常难得的清脆鸟叫，深山里录制.mp3',
+                '非常难得的清脆鸟叫，深山里录制.mp3'
             ]
         },
         'Fire': {
@@ -45,7 +45,7 @@ const AUDIO_CONFIG = {
             files: [
                 '河边点燃篝火、水声和清脆的鸟鸣01.mp3',
                 '河边点燃篝火、水声和清脆的鸟鸣02.mp3',
-                '河边点燃篝火、水声和清脆的鸟鸣03.mp3',
+                '河边点燃篝火、水声和清脆的鸟鸣03.mp3'
             ]
         },
         'hypnosis': {
@@ -119,7 +119,7 @@ const AUDIO_CONFIG = {
                 '催眠音乐9.mp3',
                 '催眠音乐43.mp3',
                 '催眠音乐44.mp3',
-                '放松轻音乐1.mp3',
+                '放松轻音乐1.mp3'
             ]
         },
         'meditation': {
@@ -141,7 +141,7 @@ const AUDIO_CONFIG = {
                 '盘坐冥想，空灵放松.mp3',
                 '空怀虚谷.mp3',
                 '美妙的音乐，打坐冥想，帮助睡眠，.mp3',
-                '静心 大彻大悟.mp3',
+                '静心 大彻大悟.mp3'
             ]
         },
         'Rain': {
@@ -162,7 +162,7 @@ const AUDIO_CONFIG = {
                 '记住乡愁打雷下雨-..必备，治愈失眠09.mp3',
                 '记住乡愁打雷下雨-必备，治愈失眠07.mp3',
                 '记住乡愁雷雨过后-..必备，治愈失眠08.mp3',
-                '身临情景的雨声.mp3',
+                '身临情景的雨声.mp3'
             ]
         },
         'running water': {
@@ -175,7 +175,7 @@ const AUDIO_CONFIG = {
                 '河边点燃篝火、水声和清脆的鸟鸣02.mp3',
                 '河边点燃篝火、水声和清脆的鸟鸣03.mp3',
                 '缓缓流水，温柔的抚摸脸颊，恋人般的感觉（上）.mp3',
-                '缓缓流水，温柔的抚摸脸颊，恋人般的感觉（下）.mp3',
+                '缓缓流水，温柔的抚摸脸颊，恋人般的感觉（下）.mp3'
             ]
         },
         'Singing bowl sound': {
@@ -244,7 +244,7 @@ const AUDIO_CONFIG = {
                 '音愈：钵音水泡，治疗睡眠不足.mp3',
                 '顶级水晶钵颂音.音疗.mp3',
                 '颂钵音疗，平躺或，放下身心，全然融入的体会.mp3',
-                '高效放松冥想，林中翠鸟与溪水.mp3',
+                '高效放松冥想，林中翠鸟与溪水.mp3'
             ]
         },
         'Chakra': {
@@ -259,7 +259,7 @@ const AUDIO_CONFIG = {
                 'Stirn-Chakra 石英莲华(眉轮).mp3',
                 'Wurzel-Chakra 碧玉莲华(海底轮).mp3',
                 'Herz-Chakra 綠石蓮華(心輪).mp3',
-                'Milz-Chakra 玛瑙莲华(脐轮).mp3',
+                'Milz-Chakra 玛瑙莲华(脐轮).mp3'
             ]
         },
         'Subconscious Therapy': {
@@ -278,16 +278,18 @@ const AUDIO_CONFIG = {
                 '滴落的星子.mp3',
                 '生机无限.mp3',
                 '薄纱之舞.mp3',
-                '遇见林间精灵.mp3',
+                '遇见林间精灵.mp3'
             ]
-        },
+        }
     }
 };
 
 // Helper function to get full URL for a file
 function getAudioUrl(categoryKey, filename) {
     const category = AUDIO_CONFIG.categories[categoryKey];
-    if (!category) return null;
+    if (!category) {
+        return null;
+    }
 
     const folderName = category.folder || categoryKey.toLowerCase().replace(/\s+/g, '-');
     return `${AUDIO_CONFIG.baseUrl}${folderName}/${encodeURIComponent(filename)}`;

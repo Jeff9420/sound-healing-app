@@ -202,7 +202,9 @@ class PaymentManager {
      * 添加支付弹窗样式
      */
     addPaymentModalStyles() {
-        if (document.querySelector('#payment-modal-styles')) return;
+        if (document.querySelector('#payment-modal-styles')) {
+            return;
+        }
         
         const styles = document.createElement('style');
         styles.id = 'payment-modal-styles';
@@ -407,7 +409,9 @@ class PaymentManager {
     getLocalPremiumStatus() {
         try {
             const data = localStorage.getItem('premium_status');
-            if (!data) return { isPremium: false };
+            if (!data) {
+                return { isPremium: false };
+            }
             
             const premiumData = JSON.parse(data);
             

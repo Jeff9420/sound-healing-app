@@ -86,7 +86,9 @@ class VisualEffects {
 
     startEffect(soundId, volume = 0.5) {
         const effect = this.soundBasedEffects.get(soundId);
-        if (!effect) return;
+        if (!effect) {
+            return;
+        }
 
         const particleCount = Math.floor(effect.particleCount * volume);
         
@@ -133,7 +135,9 @@ class VisualEffects {
     }
 
     animate() {
-        if (!this.isActive) return;
+        if (!this.isActive) {
+            return;
+        }
 
         this.clearCanvas();
         this.updateParticles();
@@ -147,28 +151,28 @@ class VisualEffects {
             particle.life -= particle.decay;
             
             switch (particle.direction) {
-                case 'down':
-                    particle.y += particle.speed;
-                    particle.x += Math.sin(particle.y * 0.01) * 0.5;
-                    break;
-                case 'up':
-                    particle.y -= particle.speed;
-                    particle.x += Math.sin(particle.y * 0.02) * 0.8;
-                    break;
-                case 'flow':
-                    particle.x += particle.vx;
-                    particle.y += particle.vy * 0.5;
-                    break;
-                case 'wave':
-                    particle.x += Math.sin(particle.angle) * particle.speed;
-                    particle.y += Math.cos(particle.angle * 0.5) * 0.5;
-                    particle.angle += 0.02;
-                    break;
-                case 'float':
-                    particle.x += Math.sin(particle.angle) * 0.5;
-                    particle.y += Math.cos(particle.angle) * 0.3;
-                    particle.angle += 0.03;
-                    break;
+            case 'down':
+                particle.y += particle.speed;
+                particle.x += Math.sin(particle.y * 0.01) * 0.5;
+                break;
+            case 'up':
+                particle.y -= particle.speed;
+                particle.x += Math.sin(particle.y * 0.02) * 0.8;
+                break;
+            case 'flow':
+                particle.x += particle.vx;
+                particle.y += particle.vy * 0.5;
+                break;
+            case 'wave':
+                particle.x += Math.sin(particle.angle) * particle.speed;
+                particle.y += Math.cos(particle.angle * 0.5) * 0.5;
+                particle.angle += 0.02;
+                break;
+            case 'float':
+                particle.x += Math.sin(particle.angle) * 0.5;
+                particle.y += Math.cos(particle.angle) * 0.3;
+                particle.angle += 0.03;
+                break;
             }
 
             return particle.life > 0 && 

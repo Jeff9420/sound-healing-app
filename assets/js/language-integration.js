@@ -47,7 +47,9 @@ class LanguageIntegrationController {
      * 初始化语言切换控制器
      */
     init() {
-        if (this.isInitialized) return;
+        if (this.isInitialized) {
+            return;
+        }
         
         try {
             this.initializeElements();
@@ -162,7 +164,9 @@ class LanguageIntegrationController {
      * 更新语言显示
      */
     updateLanguageDisplay() {
-        if (!this.i18nSystem) return;
+        if (!this.i18nSystem) {
+            return;
+        }
         
         const currentLang = this.i18nSystem.getCurrentLanguage();
         const langInfo = this.i18nSystem.supportedLanguages[currentLang];
@@ -178,7 +182,9 @@ class LanguageIntegrationController {
      * 更新下拉菜单中的激活选项
      */
     updateActiveOption() {
-        if (!this.i18nSystem || !this.languageDropdown) return;
+        if (!this.i18nSystem || !this.languageDropdown) {
+            return;
+        }
         
         const currentLang = this.i18nSystem.getCurrentLanguage();
         const options = this.languageDropdown.querySelectorAll('.language-option');
@@ -199,7 +205,9 @@ class LanguageIntegrationController {
      * 切换语言
      */
     async changeLanguage(langCode) {
-        if (!this.i18nSystem || !langCode) return;
+        if (!this.i18nSystem || !langCode) {
+            return;
+        }
         
         try {
             // 显示切换动画
@@ -259,32 +267,32 @@ class LanguageIntegrationController {
         const currentIndex = options.findIndex(option => document.activeElement === option);
         
         switch (e.key) {
-            case 'ArrowDown':
-                e.preventDefault();
-                const nextIndex = (currentIndex + 1) % options.length;
-                options[nextIndex].focus();
-                break;
+        case 'ArrowDown':
+            e.preventDefault();
+            const nextIndex = (currentIndex + 1) % options.length;
+            options[nextIndex].focus();
+            break;
                 
-            case 'ArrowUp':
-                e.preventDefault();
-                const prevIndex = currentIndex > 0 ? currentIndex - 1 : options.length - 1;
-                options[prevIndex].focus();
-                break;
+        case 'ArrowUp':
+            e.preventDefault();
+            const prevIndex = currentIndex > 0 ? currentIndex - 1 : options.length - 1;
+            options[prevIndex].focus();
+            break;
                 
-            case 'Enter':
-            case ' ':
-                e.preventDefault();
-                if (currentIndex >= 0) {
-                    const langCode = options[currentIndex].getAttribute('data-lang');
-                    this.changeLanguage(langCode);
-                }
-                break;
+        case 'Enter':
+        case ' ':
+            e.preventDefault();
+            if (currentIndex >= 0) {
+                const langCode = options[currentIndex].getAttribute('data-lang');
+                this.changeLanguage(langCode);
+            }
+            break;
                 
-            case 'Escape':
-                e.preventDefault();
-                this.closeDropdown();
-                this.languageToggle.focus();
-                break;
+        case 'Escape':
+            e.preventDefault();
+            this.closeDropdown();
+            this.languageToggle.focus();
+            break;
         }
     }
     
@@ -322,7 +330,9 @@ class LanguageIntegrationController {
      * 获取当前语言信息
      */
     getCurrentLanguageInfo() {
-        if (!this.i18nSystem) return null;
+        if (!this.i18nSystem) {
+            return null;
+        }
         
         const currentLang = this.i18nSystem.getCurrentLanguage();
         return {

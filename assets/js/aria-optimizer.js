@@ -96,7 +96,9 @@ class ARIAOptimizer {
      * 初始化ARIA优化器
      */
     init() {
-        if (this.initialized) return;
+        if (this.initialized) {
+            return;
+        }
 
         // 等待DOM加载完成
         if (document.readyState === 'loading') {
@@ -274,7 +276,9 @@ class ARIAOptimizer {
             // 确保每个输入都有关联的标签
             if (!this.hasAssociatedLabel(input)) {
                 const id = input.id || this.generateUniqueId();
-                if (!input.id) input.id = id;
+                if (!input.id) {
+                    input.id = id;
+                }
 
                 // 尝试从placeholder创建标签
                 const placeholder = input.getAttribute('placeholder');
@@ -317,7 +321,9 @@ class ARIAOptimizer {
                 const title = form.querySelector('legend, h1, h2, h3, h4, h5, h6');
                 if (title) {
                     const id = title.id || this.generateUniqueId();
-                    if (!title.id) title.id = id;
+                    if (!title.id) {
+                        title.id = id;
+                    }
                     form.setAttribute('aria-labelledby', id);
                 } else {
                     form.setAttribute('aria-label', '表单');
@@ -475,7 +481,9 @@ class ARIAOptimizer {
                 }
                 if (!button.getAttribute('aria-controls')) {
                     const contentId = content.id || this.generateUniqueId();
-                    if (!content.id) content.id = contentId;
+                    if (!content.id) {
+                        content.id = contentId;
+                    }
                     button.setAttribute('aria-controls', contentId);
                 }
 
@@ -959,16 +967,30 @@ class ARIAOptimizer {
         const classes = Array.from(img.classList);
 
         // 根据类名判断
-        if (classes.some(cls => cls.includes('logo'))) return '网站标志';
-        if (classes.some(cls => cls.includes('avatar'))) return '用户头像';
-        if (classes.some(cls => cls.includes('banner'))) return '横幅图片';
-        if (classes.some(cls => cls.includes('thumbnail'))) return '缩略图';
+        if (classes.some(cls => cls.includes('logo'))) {
+            return '网站标志';
+        }
+        if (classes.some(cls => cls.includes('avatar'))) {
+            return '用户头像';
+        }
+        if (classes.some(cls => cls.includes('banner'))) {
+            return '横幅图片';
+        }
+        if (classes.some(cls => cls.includes('thumbnail'))) {
+            return '缩略图';
+        }
 
         // 根据文件名判断
         const filename = src.split('/').pop();
-        if (filename.includes('cover')) return '封面图片';
-        if (filename.includes('background')) return '背景图片';
-        if (filename.includes('icon')) return '图标';
+        if (filename.includes('cover')) {
+            return '封面图片';
+        }
+        if (filename.includes('background')) {
+            return '背景图片';
+        }
+        if (filename.includes('icon')) {
+            return '图标';
+        }
 
         return '图片';
     }
@@ -993,10 +1015,18 @@ class ARIAOptimizer {
      */
     generateNavLabel(nav) {
         const classes = Array.from(nav.classList);
-        if (classes.some(cls => cls.includes('main'))) return '主导航';
-        if (classes.some(cls => cls.includes('footer'))) return '底部导航';
-        if (classes.some(cls => cls.includes('side'))) return '侧边导航';
-        if (classes.some(cls => cls.includes('breadcrumb'))) return '面包屑导航';
+        if (classes.some(cls => cls.includes('main'))) {
+            return '主导航';
+        }
+        if (classes.some(cls => cls.includes('footer'))) {
+            return '底部导航';
+        }
+        if (classes.some(cls => cls.includes('side'))) {
+            return '侧边导航';
+        }
+        if (classes.some(cls => cls.includes('breadcrumb'))) {
+            return '面包屑导航';
+        }
         return '导航菜单';
     }
 
@@ -1010,9 +1040,15 @@ class ARIAOptimizer {
         }
 
         const classes = Array.from(modal.classList);
-        if (classes.some(cls => cls.includes('login'))) return '登录对话框';
-        if (classes.some(cls => cls.includes('signup'))) return '注册对话框';
-        if (classes.some(cls => cls.includes('settings'))) return '设置对话框';
+        if (classes.some(cls => cls.includes('login'))) {
+            return '登录对话框';
+        }
+        if (classes.some(cls => cls.includes('signup'))) {
+            return '注册对话框';
+        }
+        if (classes.some(cls => cls.includes('settings'))) {
+            return '设置对话框';
+        }
 
         return '对话框';
     }

@@ -144,7 +144,9 @@ class HealingStatusController {
      * 更新会话时间显示
      */
     updateSessionTime() {
-        if (!this.isSessionActive || !this.sessionStartTime) return;
+        if (!this.isSessionActive || !this.sessionStartTime) {
+            return;
+        }
         
         const elapsed = Date.now() - this.sessionStartTime;
         const minutes = Math.floor(elapsed / 60000);

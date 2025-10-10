@@ -10,11 +10,13 @@
  * @returns {string} 转义后的安全字符串
  */
 function escapeHtml(str) {
-  if (!str) return '';
+    if (!str) {
+        return '';
+    }
 
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
 }
 
 /**
@@ -24,7 +26,7 @@ function escapeHtml(str) {
  * @param {string} content - 要设置的内容
  */
 function setSafeContent(element, content) {
-  element.textContent = content;
+    element.textContent = content;
 }
 
 /**
@@ -35,14 +37,14 @@ function setSafeContent(element, content) {
  * @returns {HTMLElement} 创建的元素
  */
 function createSafeElement(tagName, text, attributes = {}) {
-  const element = document.createElement(tagName);
-  element.textContent = text;
+    const element = document.createElement(tagName);
+    element.textContent = text;
 
-  for (const [key, value] of Object.entries(attributes)) {
-    element.setAttribute(key, value);
-  }
+    for (const [key, value] of Object.entries(attributes)) {
+        element.setAttribute(key, value);
+    }
 
-  return element;
+    return element;
 }
 
 /**
@@ -52,13 +54,15 @@ function createSafeElement(tagName, text, attributes = {}) {
  * @returns {string} 安全化的文件名
  */
 function sanitizeFileName(fileName) {
-  if (!fileName) return '';
+    if (!fileName) {
+        return '';
+    }
 
-  // 移除HTML特殊字符和控制字符
-  return fileName
-    .replace(/[<>"'&]/g, '')
-    .replace(/[\x00-\x1F\x7F]/g, '')
-    .trim();
+    // 移除HTML特殊字符和控制字符
+    return fileName
+        .replace(/[<>"'&]/g, '')
+        .replace(/[\x00-\x1F\x7F]/g, '')
+        .trim();
 }
 
 /**
@@ -67,27 +71,29 @@ function sanitizeFileName(fileName) {
  * @returns {boolean} 是否安全
  */
 function isFileNameSafe(fileName) {
-  if (!fileName || typeof fileName !== 'string') return false;
+    if (!fileName || typeof fileName !== 'string') {
+        return false;
+    }
 
-  // 检查是否包含HTML特殊字符或控制字符
-  return !/[<>"'&\x00-\x1F\x7F]/.test(fileName);
+    // 检查是否包含HTML特殊字符或控制字符
+    return !/[<>"'&\x00-\x1F\x7F]/.test(fileName);
 }
 
 // 导出模块
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = {
-    escapeHtml,
-    setSafeContent,
-    createSafeElement,
-    sanitizeFileName,
-    isFileNameSafe
-  };
+    module.exports = {
+        escapeHtml,
+        setSafeContent,
+        createSafeElement,
+        sanitizeFileName,
+        isFileNameSafe
+    };
 } else if (typeof window !== 'undefined') {
-  window.SecurityUtils = {
-    escapeHtml,
-    setSafeContent,
-    createSafeElement,
-    sanitizeFileName,
-    isFileNameSafe
-  };
+    window.SecurityUtils = {
+        escapeHtml,
+        setSafeContent,
+        createSafeElement,
+        sanitizeFileName,
+        isFileNameSafe
+    };
 }

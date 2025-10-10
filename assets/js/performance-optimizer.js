@@ -296,7 +296,9 @@ class PerformanceOptimizer {
      * 内联关键CSS
      */
     inlineCriticalCSS() {
-        if (this.optimizations.has('criticalCSS')) return;
+        if (this.optimizations.has('criticalCSS')) {
+            return;
+        }
         
         const criticalCSS = `
             body { font-family: Georgia, serif; background: #4a6741; color: #f7f4e9; }

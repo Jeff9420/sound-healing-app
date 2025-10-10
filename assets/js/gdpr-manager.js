@@ -4,52 +4,54 @@
  */
 
 class GDPRManager {
-  constructor() {
-    this.dataTypes = {
-      preferences: 'user_preferences',
-      analytics: 'analytics_data',
-      consent: 'consent_records',
-      usage: 'usage_data'
-    };
+    constructor() {
+        this.dataTypes = {
+            preferences: 'user_preferences',
+            analytics: 'analytics_data',
+            consent: 'consent_records',
+            usage: 'usage_data'
+        };
 
-    this.retentionPeriods = {
-      preferences: 365, // 1年
-      analytics: 180,  // 6个月
-      consent: 2555, // 7年（法律要求）
-      usage: 90      // 3个月
-    };
+        this.retentionPeriods = {
+            preferences: 365, // 1年
+            analytics: 180,  // 6个月
+            consent: 2555, // 7年（法律要求）
+            usage: 90      // 3个月
+        };
 
-    this.init();
-  }
+        this.init();
+    }
 
-  /**
+    /**
    * 初始化GDPR管理器
    */
-  init() {
+    init() {
     // 创建用户权利界面
-    this.createUserRightsUI();
+        this.createUserRightsUI();
 
-    // 监听数据主体权利请求
-    this.setupDataSubjectRequests();
+        // 监听数据主体权利请求
+        this.setupDataSubjectRequests();
 
-    // 自动数据清理
-    this.setupAutomaticDataCleanup();
+        // 自动数据清理
+        this.setupAutomaticDataCleanup();
 
-    console.log('🛡️ GDPR用户权利管理器已启动');
-  }
+        console.log('🛡️ GDPR用户权利管理器已启动');
+    }
 
-  /**
+    /**
    * 创建用户权利界面
    */
-  createUserRightsUI() {
+    createUserRightsUI() {
     // 检查是否已有GDPR界面
-    if (document.getElementById('gdprRightsPanel')) return;
+        if (document.getElementById('gdprRightsPanel')) {
+            return;
+        }
 
-    // 创建GDPR权利面板
-    const panel = document.createElement('div');
-    panel.id = 'gdprRightsPanel';
-    panel.className = 'gdpr-panel';
-    panel.innerHTML = `
+        // 创建GDPR权利面板
+        const panel = document.createElement('div');
+        panel.id = 'gdprRightsPanel';
+        panel.className = 'gdpr-panel';
+        panel.innerHTML = `
       <div class="gdpr-panel-header">
         <h3>您的数据权利</h3>
         <button class="gdpr-close-btn" onclick="this.closest('.gdpr-panel').remove()">×</button>
@@ -102,42 +104,44 @@ class GDPRManager {
       <div id="gdprDataDisplay" class="gdpr-data-display"></div>
     `;
 
-    // 添加样式
-    this.addGDPRStyles();
+        // 添加样式
+        this.addGDPRStyles();
 
-    // 添加到页面
-    document.body.appendChild(panel);
+        // 添加到页面
+        document.body.appendChild(panel);
 
-    // 创建入口按钮
-    this.createGDPROpenButton();
-  }
+        // 创建入口按钮
+        this.createGDPROpenButton();
+    }
 
-  /**
+    /**
    * 创建GDPR入口按钮
    */
-  createGDPROpenButton() {
-    const button = document.createElement('button');
-    button.id = 'gdprRightsButton';
-    button.className = 'gdpr-trigger-btn';
-    button.innerHTML = '🛡️ 隐私权利';
-    button.onclick = () => {
-      document.getElementById('gdprRightsPanel').style.display = 'block';
-    };
+    createGDPROpenButton() {
+        const button = document.createElement('button');
+        button.id = 'gdprRightsButton';
+        button.className = 'gdpr-trigger-btn';
+        button.innerHTML = '🛡️ 隐私权利';
+        button.onclick = () => {
+            document.getElementById('gdprRightsPanel').style.display = 'block';
+        };
 
-    // 添加到设置或页脚
-    const footer = document.querySelector('footer') || document.body;
-    footer.appendChild(button);
-  }
+        // 添加到设置或页脚
+        const footer = document.querySelector('footer') || document.body;
+        footer.appendChild(button);
+    }
 
-  /**
+    /**
    * 添加GDPR样式
    */
-  addGDPRStyles() {
-    if (document.getElementById('gdprStyles')) return;
+    addGDPRStyles() {
+        if (document.getElementById('gdprStyles')) {
+            return;
+        }
 
-    const style = document.createElement('style');
-    style.id = 'gdprStyles';
-    style.textContent = `
+        const style = document.createElement('style');
+        style.id = 'gdprStyles';
+        style.textContent = `
       .gdpr-panel {
         position: fixed;
         top: 50%;
@@ -259,162 +263,172 @@ class GDPRManager {
       }
     `;
 
-    document.head.appendChild(style);
-  }
+        document.head.appendChild(style);
+    }
 
-  /**
+    /**
    * 数据访问权
    */
-  async accessData() {
-    const display = document.getElementById('gdprDataDisplay');
-    display.style.display = 'block';
-    display.innerHTML = '<p>正在收集您的数据...</p>';
+    async accessData() {
+        const display = document.getElementById('gdprDataDisplay');
+        display.style.display = 'block';
+        display.innerHTML = '<p>正在收集您的数据...</p>';
 
-    try {
-      const userData = await this.collectAllUserData();
+        try {
+            const userData = await this.collectAllUserData();
 
-      display.innerHTML = `
+            display.innerHTML = `
         <h4>我们持有的关于您的数据：</h4>
         <pre>${JSON.stringify(userData, null, 2)}</pre>
         <button onclick="this.parentElement.style.display='none'" class="btn-primary">关闭</button>
       `;
-    } catch (error) {
-      display.innerHTML = `
+        } catch (error) {
+            display.innerHTML = `
         <p>数据获取失败：${error.message}</p>
         <button onclick="this.parentElement.style.display='none'" class="btn-primary">关闭</button>
       `;
+        }
     }
-  }
 
-  /**
+    /**
    * 收集所有用户数据
    */
-  async collectAllUserData() {
-    const userData = {
-      collectedAt: new Date().toISOString(),
-      dataSummary: {}
-    };
+    async collectAllUserData() {
+        const userData = {
+            collectedAt: new Date().toISOString(),
+            dataSummary: {}
+        };
 
-    // 收集偏好设置
-    const preferences = this.getUserPreferences();
-    if (Object.keys(preferences).length > 0) {
-      userData.dataSummary.preferences = preferences;
+        // 收集偏好设置
+        const preferences = this.getUserPreferences();
+        if (Object.keys(preferences).length > 0) {
+            userData.dataSummary.preferences = preferences;
+        }
+
+        // 收集同意记录
+        const consent = this.getConsentRecords();
+        if (consent.length > 0) {
+            userData.dataSummary.consent = consent;
+        }
+
+        // 收集使用数据
+        const usage = this.getUsageData();
+        if (Object.keys(usage).length > 0) {
+            userData.dataSummary.usage = usage;
+        }
+
+        // 收集分析数据（如果有）
+        const analytics = this.getAnalyticsData();
+        if (analytics) {
+            userData.dataSummary.analytics = analytics;
+        }
+
+        return userData;
     }
 
-    // 收集同意记录
-    const consent = this.getConsentRecords();
-    if (consent.length > 0) {
-      userData.dataSummary.consent = consent;
-    }
-
-    // 收集使用数据
-    const usage = this.getUsageData();
-    if (Object.keys(usage).length > 0) {
-      userData.dataSummary.usage = usage;
-    }
-
-    // 收集分析数据（如果有）
-    const analytics = this.getAnalyticsData();
-    if (analytics) {
-      userData.dataSummary.analytics = analytics;
-    }
-
-    return userData;
-  }
-
-  /**
+    /**
    * 获取用户偏好
    */
-  getUserPreferences() {
-    const preferences = {};
+    getUserPreferences() {
+        const preferences = {};
 
-    // 主题设置
-    const theme = localStorage.getItem('theme');
-    if (theme) preferences.theme = theme;
+        // 主题设置
+        const theme = localStorage.getItem('theme');
+        if (theme) {
+            preferences.theme = theme;
+        }
 
-    // 语言设置
-    const language = localStorage.getItem('language');
-    if (language) preferences.language = language;
+        // 语言设置
+        const language = localStorage.getItem('language');
+        if (language) {
+            preferences.language = language;
+        }
 
-    // 音量设置
-    const volume = localStorage.getItem('volume');
-    if (volume) preferences.volume = volume;
+        // 音量设置
+        const volume = localStorage.getItem('volume');
+        if (volume) {
+            preferences.volume = volume;
+        }
 
-    // 播放设置
-    const autoplay = localStorage.getItem('autoplay');
-    if (autoplay) preferences.autoplay = autoplay;
+        // 播放设置
+        const autoplay = localStorage.getItem('autoplay');
+        if (autoplay) {
+            preferences.autoplay = autoplay;
+        }
 
-    return preferences;
-  }
+        return preferences;
+    }
 
-  /**
+    /**
    * 获取同意记录
    */
-  getConsentRecords() {
-    const consent = localStorage.getItem('cookieConsent');
-    return consent ? [JSON.parse(consent)] : [];
-  }
+    getConsentRecords() {
+        const consent = localStorage.getItem('cookieConsent');
+        return consent ? [JSON.parse(consent)] : [];
+    }
 
-  /**
+    /**
    * 获取使用数据
    */
-  getUsageData() {
-    const usage = {};
+    getUsageData() {
+        const usage = {};
 
-    // 最后播放
-    const lastPlayed = localStorage.getItem('lastPlayed');
-    if (lastPlayed) usage.lastPlayed = lastPlayed;
+        // 最后播放
+        const lastPlayed = localStorage.getItem('lastPlayed');
+        if (lastPlayed) {
+            usage.lastPlayed = lastPlayed;
+        }
 
-    // 播放历史
-    const playHistory = localStorage.getItem('playHistory');
-    if (playHistory) {
-      try {
-        usage.playHistory = JSON.parse(playHistory);
-      } catch (e) {
-        // 忽略解析错误
-      }
+        // 播放历史
+        const playHistory = localStorage.getItem('playHistory');
+        if (playHistory) {
+            try {
+                usage.playHistory = JSON.parse(playHistory);
+            } catch (e) {
+                // 忽略解析错误
+            }
+        }
+
+        // 收藏
+        const favorites = localStorage.getItem('favorites');
+        if (favorites) {
+            try {
+                usage.favorites = JSON.parse(favorites);
+            } catch (e) {
+                // 忽略解析错误
+            }
+        }
+
+        return usage;
     }
 
-    // 收藏
-    const favorites = localStorage.getItem('favorites');
-    if (favorites) {
-      try {
-        usage.favorites = JSON.parse(favorites);
-      } catch (e) {
-        // 忽略解析错误
-      }
-    }
-
-    return usage;
-  }
-
-  /**
+    /**
    * 获取分析数据
    */
-  getAnalyticsData() {
+    getAnalyticsData() {
     // 如果有Google Analytics，获取客户端ID
-    if (window.ga && window.ga.getAll) {
-      try {
-        const tracker = window.ga.getAll()[0];
-        return {
-          clientId: tracker.get('clientId'),
-          measurementId: window.__ANALYTICS_CONFIG?.gaMeasurementId
-        };
-      } catch (e) {
+        if (window.ga && window.ga.getAll) {
+            try {
+                const tracker = window.ga.getAll()[0];
+                return {
+                    clientId: tracker.get('clientId'),
+                    measurementId: window.__ANALYTICS_CONFIG?.gaMeasurementId
+                };
+            } catch (e) {
+                return null;
+            }
+        }
         return null;
-      }
     }
-    return null;
-  }
 
-  /**
+    /**
    * 数据更正权
    */
-  showDataCorrectionForm() {
-    const display = document.getElementById('gdprDataDisplay');
-    display.style.display = 'block';
+    showDataCorrectionForm() {
+        const display = document.getElementById('gdprDataDisplay');
+        display.style.display = 'block';
 
-    display.innerHTML = `
+        display.innerHTML = `
       <h4>更正您的数据</h4>
       <form id="dataCorrectionForm" onsubmit="return false;">
         <div class="form-group">
@@ -442,67 +456,67 @@ class GDPRManager {
       </form>
     `;
 
-    // 绑定事件
-    const form = document.getElementById('dataCorrectionForm');
-    const dataTypeSelect = document.getElementById('correctDataType');
-    const currentValueTextarea = document.getElementById('currentValue');
+        // 绑定事件
+        const form = document.getElementById('dataCorrectionForm');
+        const dataTypeSelect = document.getElementById('correctDataType');
+        const currentValueTextarea = document.getElementById('currentValue');
 
-    dataTypeSelect.addEventListener('change', (e) => {
-      const dataType = e.target.value;
-      let currentValue = '';
+        dataTypeSelect.addEventListener('change', (e) => {
+            const dataType = e.target.value;
+            let currentValue = '';
 
-      switch (dataType) {
-        case 'preferences':
-          currentValue = JSON.stringify(this.getUserPreferences(), null, 2);
-          break;
-        case 'usage':
-          currentValue = JSON.stringify(this.getUsageData(), null, 2);
-          break;
-      }
+            switch (dataType) {
+            case 'preferences':
+                currentValue = JSON.stringify(this.getUserPreferences(), null, 2);
+                break;
+            case 'usage':
+                currentValue = JSON.stringify(this.getUsageData(), null, 2);
+                break;
+            }
 
-      currentValueTextarea.value = currentValue;
-    });
+            currentValueTextarea.value = currentValue;
+        });
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      this.correctData(dataTypeSelect.value, document.getElementById('correctedValue').value);
-    });
-  }
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.correctData(dataTypeSelect.value, document.getElementById('correctedValue').value);
+        });
+    }
 
-  /**
+    /**
    * 执行数据更正
    */
-  correctData(dataType, newValue) {
-    try {
-      switch (dataType) {
-        case 'preferences':
-          const prefs = JSON.parse(newValue);
-          Object.keys(prefs).forEach(key => {
-            localStorage.setItem(key, prefs[key]);
-          });
-          break;
+    correctData(dataType, newValue) {
+        try {
+            switch (dataType) {
+            case 'preferences':
+                const prefs = JSON.parse(newValue);
+                Object.keys(prefs).forEach(key => {
+                    localStorage.setItem(key, prefs[key]);
+                });
+                break;
 
-        case 'usage':
-          const usage = JSON.parse(newValue);
-          localStorage.setItem('usage', JSON.stringify(usage));
-          break;
-      }
+            case 'usage':
+                const usage = JSON.parse(newValue);
+                localStorage.setItem('usage', JSON.stringify(usage));
+                break;
+            }
 
-      this.showNotification('数据已成功更正', 'success');
-      document.getElementById('gdprDataDisplay').style.display = 'none';
-    } catch (error) {
-      this.showNotification('数据更正失败：' + error.message, 'error');
+            this.showNotification('数据已成功更正', 'success');
+            document.getElementById('gdprDataDisplay').style.display = 'none';
+        } catch (error) {
+            this.showNotification('数据更正失败：' + error.message, 'error');
+        }
     }
-  }
 
-  /**
+    /**
    * 数据删除权
    */
-  requestDataDeletion() {
-    const display = document.getElementById('gdprDataDisplay');
-    display.style.display = 'block';
+    requestDataDeletion() {
+        const display = document.getElementById('gdprDataDisplay');
+        display.style.display = 'block';
 
-    display.innerHTML = `
+        display.innerHTML = `
       <div class="deletion-confirmation">
         <h4>⚠️ 确认删除数据</h4>
         <p>您确定要删除所有个人数据吗？此操作不可逆转。</p>
@@ -530,89 +544,89 @@ class GDPRManager {
         </div>
       </div>
     `;
-  }
+    }
 
-  /**
+    /**
    * 执行数据删除
    */
-  executeDataDeletion() {
-    const deletePrefs = document.getElementById('deletePreferences').checked;
-    const deleteUsage = document.getElementById('deleteUsage').checked;
-    const deleteConsent = document.getElementById('deleteConsent').checked;
+    executeDataDeletion() {
+        const deletePrefs = document.getElementById('deletePreferences').checked;
+        const deleteUsage = document.getElementById('deleteUsage').checked;
+        const deleteConsent = document.getElementById('deleteConsent').checked;
 
-    if (deletePrefs) {
-      // 删除偏好设置
-      localStorage.removeItem('theme');
-      localStorage.removeItem('language');
-      localStorage.removeItem('volume');
-      localStorage.removeItem('autoplay');
+        if (deletePrefs) {
+            // 删除偏好设置
+            localStorage.removeItem('theme');
+            localStorage.removeItem('language');
+            localStorage.removeItem('volume');
+            localStorage.removeItem('autoplay');
+        }
+
+        if (deleteUsage) {
+            // 删除使用数据
+            localStorage.removeItem('lastPlayed');
+            localStorage.removeItem('playHistory');
+            localStorage.removeItem('favorites');
+        }
+
+        if (deleteConsent) {
+            // 注意：根据法律要求，同意记录可能需要保留
+            localStorage.removeItem('cookieConsent');
+        }
+
+        this.showNotification('数据已删除', 'success');
+        document.getElementById('gdprDataDisplay').style.display = 'none';
     }
 
-    if (deleteUsage) {
-      // 删除使用数据
-      localStorage.removeItem('lastPlayed');
-      localStorage.removeItem('playHistory');
-      localStorage.removeItem('favorites');
-    }
-
-    if (deleteConsent) {
-      // 注意：根据法律要求，同意记录可能需要保留
-      localStorage.removeItem('cookieConsent');
-    }
-
-    this.showNotification('数据已删除', 'success');
-    document.getElementById('gdprDataDisplay').style.display = 'none';
-  }
-
-  /**
+    /**
    * 数据携带权
    */
-  async exportData() {
-    const display = document.getElementById('gdprDataDisplay');
-    display.style.display = 'block';
-    display.innerHTML = '<p>正在准备数据导出...</p>';
+    async exportData() {
+        const display = document.getElementById('gdprDataDisplay');
+        display.style.display = 'block';
+        display.innerHTML = '<p>正在准备数据导出...</p>';
 
-    try {
-      const userData = await this.collectAllUserData();
+        try {
+            const userData = await this.collectAllUserData();
 
-      // 创建JSON文件
-      const dataStr = JSON.stringify(userData, null, 2);
-      const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            // 创建JSON文件
+            const dataStr = JSON.stringify(userData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
 
-      // 创建下载链接
-      const url = URL.createObjectURL(dataBlob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `soundflows-data-export-${new Date().toISOString().split('T')[0]}.json`;
+            // 创建下载链接
+            const url = URL.createObjectURL(dataBlob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `soundflows-data-export-${new Date().toISOString().split('T')[0]}.json`;
 
-      display.innerHTML = `
+            display.innerHTML = `
         <h4>您的数据已准备就绪</h4>
         <p>点击下方按钮下载您的个人数据</p>
         <button onclick="this.click()" class="btn-primary">下载数据</button>
         <button onclick="this.parentElement.style.display='none'" class="btn-secondary">关闭</button>
       `;
 
-      display.querySelector('button').onclick = () => {
-        a.click();
-        URL.revokeObjectURL(url);
-        this.showNotification('数据导出成功', 'success');
-      };
-    } catch (error) {
-      display.innerHTML = `
+            display.querySelector('button').onclick = () => {
+                a.click();
+                URL.revokeObjectURL(url);
+                this.showNotification('数据导出成功', 'success');
+            };
+        } catch (error) {
+            display.innerHTML = `
         <p>数据导出失败：${error.message}</p>
         <button onclick="this.parentElement.style.display='none'" class="btn-primary">关闭</button>
       `;
+        }
     }
-  }
 
-  /**
+    /**
    * 处理限制权
    */
-  limitProcessing() {
-    const display = document.getElementById('gdprDataDisplay');
-    display.style.display = 'block';
+    limitProcessing() {
+        const display = document.getElementById('gdprDataDisplay');
+        display.style.display = 'block';
 
-    display.innerHTML = `
+        display.innerHTML = `
       <h4>限制数据处理</h4>
       <p>您可以限制以下数据处理活动：</p>
 
@@ -638,40 +652,40 @@ class GDPRManager {
         <button onclick="this.closest('.gdpr-data-display').style.display='none'" class="btn-secondary">取消</button>
       </div>
     `;
-  }
-
-  /**
-   * 应用处理限制
-   */
-  applyProcessingLimits() {
-    const limits = {
-      analytics: document.getElementById('limitAnalytics').checked,
-      usage: document.getElementById('limitUsage').checked,
-      personalization: document.getElementById('limitPersonalization').checked
-    };
-
-    localStorage.setItem('processingLimits', JSON.stringify(limits));
-
-    // 立即应用限制
-    if (limits.analytics) {
-      // 禁用分析
-      if (window.cookieConsent) {
-        window.cookieConsent.disableAnalytics();
-      }
     }
 
-    this.showNotification('处理限制已应用', 'success');
-    document.getElementById('gdprDataDisplay').style.display = 'none';
-  }
+    /**
+   * 应用处理限制
+   */
+    applyProcessingLimits() {
+        const limits = {
+            analytics: document.getElementById('limitAnalytics').checked,
+            usage: document.getElementById('limitUsage').checked,
+            personalization: document.getElementById('limitPersonalization').checked
+        };
 
-  /**
+        localStorage.setItem('processingLimits', JSON.stringify(limits));
+
+        // 立即应用限制
+        if (limits.analytics) {
+            // 禁用分析
+            if (window.cookieConsent) {
+                window.cookieConsent.disableAnalytics();
+            }
+        }
+
+        this.showNotification('处理限制已应用', 'success');
+        document.getElementById('gdprDataDisplay').style.display = 'none';
+    }
+
+    /**
    * 撤回同意
    */
-  withdrawConsent() {
-    const display = document.getElementById('gdprDataDisplay');
-    display.style.display = 'block';
+    withdrawConsent() {
+        const display = document.getElementById('gdprDataDisplay');
+        display.style.display = 'block';
 
-    display.innerHTML = `
+        display.innerHTML = `
       <div class="withdraw-consent">
         <h4>撤回同意</h4>
         <p>您可以撤回以下同意：</p>
@@ -694,47 +708,47 @@ class GDPRManager {
         </div>
       </div>
     `;
-  }
-
-  /**
-   * 执行同意撤回
-   */
-  executeConsentWithdrawal() {
-    const withdrawAnalytics = document.getElementById('withdrawAnalytics').checked;
-    const withdrawMarketing = document.getElementById('withdrawMarketing').checked;
-
-    if (withdrawAnalytics) {
-      // 更新同意记录
-      const consent = {
-        type: 'necessary',
-        date: new Date().toISOString(),
-        version: '1.0',
-        withdrawn: {
-          analytics: true,
-          date: new Date().toISOString()
-        }
-      };
-
-      localStorage.setItem('cookieConsent', JSON.stringify(consent));
-
-      // 禁用分析
-      if (window.cookieConsent) {
-        window.cookieConsent.disableAnalytics();
-      }
     }
 
-    this.showNotification('同意已撤回', 'success');
-    document.getElementById('gdprDataDisplay').style.display = 'none';
-  }
+    /**
+   * 执行同意撤回
+   */
+    executeConsentWithdrawal() {
+        const withdrawAnalytics = document.getElementById('withdrawAnalytics').checked;
+        const withdrawMarketing = document.getElementById('withdrawMarketing').checked;
 
-  /**
+        if (withdrawAnalytics) {
+            // 更新同意记录
+            const consent = {
+                type: 'necessary',
+                date: new Date().toISOString(),
+                version: '1.0',
+                withdrawn: {
+                    analytics: true,
+                    date: new Date().toISOString()
+                }
+            };
+
+            localStorage.setItem('cookieConsent', JSON.stringify(consent));
+
+            // 禁用分析
+            if (window.cookieConsent) {
+                window.cookieConsent.disableAnalytics();
+            }
+        }
+
+        this.showNotification('同意已撤回', 'success');
+        document.getElementById('gdprDataDisplay').style.display = 'none';
+    }
+
+    /**
    * 显示投诉信息
    */
-  showComplaintInfo() {
-    const display = document.getElementById('gdprDataDisplay');
-    display.style.display = 'block';
+    showComplaintInfo() {
+        const display = document.getElementById('gdprDataDisplay');
+        display.style.display = 'block';
 
-    display.innerHTML = `
+        display.innerHTML = `
       <div class="complaint-info">
         <h4>投诉权利</h4>
         <p>如果您认为我们的数据处理违反了GDPR，您有权向监管机构投诉。</p>
@@ -762,115 +776,115 @@ class GDPRManager {
         <button onclick="this.closest('.gdpr-data-display').style.display='none'" class="btn-primary">关闭</button>
       </div>
     `;
-  }
+    }
 
-  /**
+    /**
    * 设置数据主体请求监听
    */
-  setupDataSubjectRequests() {
+    setupDataSubjectRequests() {
     // 监听来自外部系统的数据主体请求
-    window.addEventListener('message', (event) => {
-      if (event.data.type === 'GDPR_REQUEST') {
-        this.handleDataSubjectRequest(event.data);
-      }
-    });
-  }
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'GDPR_REQUEST') {
+                this.handleDataSubjectRequest(event.data);
+            }
+        });
+    }
 
-  /**
+    /**
    * 处理数据主体请求
    */
-  async handleDataSubjectRequest(request) {
-    const { action, dataType, requestId } = request;
+    async handleDataSubjectRequest(request) {
+        const { action, dataType, requestId } = request;
 
-    try {
-      let result;
+        try {
+            let result;
 
-      switch (action) {
-        case 'ACCESS':
-          result = await this.collectAllUserData();
-          break;
+            switch (action) {
+            case 'ACCESS':
+                result = await this.collectAllUserData();
+                break;
 
-        case 'DELETE':
-          this.executeDataDeletion();
-          result = { success: true };
-          break;
+            case 'DELETE':
+                this.executeDataDeletion();
+                result = { success: true };
+                break;
 
-        case 'EXPORT':
-          const userData = await this.collectAllUserData();
-          result = { data: userData };
-          break;
+            case 'EXPORT':
+                const userData = await this.collectAllUserData();
+                result = { data: userData };
+                break;
 
-        default:
-          throw new Error('未知的请求类型');
-      }
+            default:
+                throw new Error('未知的请求类型');
+            }
 
-      // 发送响应
-      window.postMessage({
-        type: 'GDPR_RESPONSE',
-        requestId,
-        success: true,
-        result
-      }, '*');
-    } catch (error) {
-      window.postMessage({
-        type: 'GDPR_RESPONSE',
-        requestId,
-        success: false,
-        error: error.message
-      }, '*');
+            // 发送响应
+            window.postMessage({
+                type: 'GDPR_RESPONSE',
+                requestId,
+                success: true,
+                result
+            }, '*');
+        } catch (error) {
+            window.postMessage({
+                type: 'GDPR_RESPONSE',
+                requestId,
+                success: false,
+                error: error.message
+            }, '*');
+        }
     }
-  }
 
-  /**
+    /**
    * 设置自动数据清理
    */
-  setupAutomaticDataCleanup() {
+    setupAutomaticDataCleanup() {
     // 每天检查一次过期数据
-    setInterval(() => {
-      this.cleanupExpiredData();
-    }, 24 * 60 * 60 * 1000);
+        setInterval(() => {
+            this.cleanupExpiredData();
+        }, 24 * 60 * 60 * 1000);
 
-    // 页面加载时也检查
-    this.cleanupExpiredData();
-  }
+        // 页面加载时也检查
+        this.cleanupExpiredData();
+    }
 
-  /**
+    /**
    * 清理过期数据
    */
-  cleanupExpiredData() {
-    const now = new Date();
+    cleanupExpiredData() {
+        const now = new Date();
 
-    // 检查使用数据
-    const usageData = localStorage.getItem('playHistory');
-    if (usageData) {
-      try {
-        const data = JSON.parse(usageData);
-        if (data.lastUpdated) {
-          const lastUpdated = new Date(data.lastUpdated);
-          const daysOld = (now - lastUpdated) / (1000 * 60 * 60 * 24);
+        // 检查使用数据
+        const usageData = localStorage.getItem('playHistory');
+        if (usageData) {
+            try {
+                const data = JSON.parse(usageData);
+                if (data.lastUpdated) {
+                    const lastUpdated = new Date(data.lastUpdated);
+                    const daysOld = (now - lastUpdated) / (1000 * 60 * 60 * 24);
 
-          if (daysOld > this.retentionPeriods.usage) {
-            localStorage.removeItem('playHistory');
-            console.log('🧹 已清理过期的使用数据');
-          }
+                    if (daysOld > this.retentionPeriods.usage) {
+                        localStorage.removeItem('playHistory');
+                        console.log('🧹 已清理过期的使用数据');
+                    }
+                }
+            } catch (e) {
+                // 忽略错误
+            }
         }
-      } catch (e) {
-        // 忽略错误
-      }
-    }
 
     // 检查其他数据...
     // 可以根据需要添加更多数据清理逻辑
-  }
+    }
 
-  /**
+    /**
    * 显示通知
    */
-  showNotification(message, type = 'info') {
-    const notification = document.createElement('div');
-    notification.className = `gdpr-notification ${type}`;
-    notification.textContent = message;
-    notification.style.cssText = `
+    showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `gdpr-notification ${type}`;
+        notification.textContent = message;
+        notification.style.cssText = `
       position: fixed;
       top: 20px;
       right: 20px;
@@ -883,40 +897,46 @@ class GDPRManager {
       animation: slideIn 0.3s ease;
     `;
 
-    document.body.appendChild(notification);
+        document.body.appendChild(notification);
 
-    setTimeout(() => {
-      notification.style.animation = 'slideOut 0.3s ease';
-      setTimeout(() => notification.remove(), 300);
-    }, 3000);
-  }
+        setTimeout(() => {
+            notification.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }
 
-  /**
+    /**
    * 销毁GDPR管理器
    */
-  destroy() {
-    const panel = document.getElementById('gdprRightsPanel');
-    if (panel) panel.remove();
+    destroy() {
+        const panel = document.getElementById('gdprRightsPanel');
+        if (panel) {
+            panel.remove();
+        }
 
-    const button = document.getElementById('gdprRightsButton');
-    if (button) button.remove();
+        const button = document.getElementById('gdprRightsButton');
+        if (button) {
+            button.remove();
+        }
 
-    const styles = document.getElementById('gdprStyles');
-    if (styles) styles.remove();
-  }
+        const styles = document.getElementById('gdprStyles');
+        if (styles) {
+            styles.remove();
+        }
+    }
 }
 
 // 初始化GDPR管理器
 if (typeof window !== 'undefined') {
-  window.addEventListener('DOMContentLoaded', () => {
-    window.gdprManager = new GDPRManager();
-  });
+    window.addEventListener('DOMContentLoaded', () => {
+        window.gdprManager = new GDPRManager();
+    });
 
-  // 导出到全局命名空间
-  window.GDPRManager = GDPRManager;
+    // 导出到全局命名空间
+    window.GDPRManager = GDPRManager;
 }
 
 // 导出模块
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = GDPRManager;
+    module.exports = GDPRManager;
 }

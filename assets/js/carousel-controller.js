@@ -265,17 +265,17 @@ class CarouselController {
         // 键盘事件
         document.addEventListener('keydown', (e) => {
             if (document.querySelector('.carousel-3d-container:hover')) {
-                switch(e.key) {
-                    case 'ArrowLeft':
-                        this.rotate(-1);
-                        break;
-                    case 'ArrowRight':
-                        this.rotate(1);
-                        break;
-                    case ' ':
-                        e.preventDefault();
-                        this.toggleAutoRotation();
-                        break;
+                switch (e.key) {
+                case 'ArrowLeft':
+                    this.rotate(-1);
+                    break;
+                case 'ArrowRight':
+                    this.rotate(1);
+                    break;
+                case ' ':
+                    e.preventDefault();
+                    this.toggleAutoRotation();
+                    break;
                 }
             }
         });
@@ -379,10 +379,14 @@ class CarouselController {
 
         if (this.isAutoRotating) {
             this.startAutoRotation();
-            if (this.autoBtn) this.autoBtn.innerHTML = '⏸️';
+            if (this.autoBtn) {
+                this.autoBtn.innerHTML = '⏸️';
+            }
         } else {
             this.stopAutoRotation();
-            if (this.autoBtn) this.autoBtn.innerHTML = '▶️';
+            if (this.autoBtn) {
+                this.autoBtn.innerHTML = '▶️';
+            }
         }
     }
 

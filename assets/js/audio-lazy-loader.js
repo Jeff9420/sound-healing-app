@@ -29,7 +29,9 @@ class AudioLazyLoader {
      */
     detectNetworkSpeed() {
         const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-        if (!connection) return 'unknown';
+        if (!connection) {
+            return 'unknown';
+        }
         
         const speed = connection.effectiveType;
         console.log(`🌐 网络状况检测: ${speed}`);
@@ -208,10 +210,14 @@ class AudioLazyLoader {
      * 后台预加载逻辑
      */
     async backgroundPreload(categoryKey, startIndex) {
-        if (this.isLoading) return; // 避免并发加载
+        if (this.isLoading) {
+            return;
+        } // 避免并发加载
         
         const category = AUDIO_CONFIG.categories[categoryKey];
-        if (!category) return;
+        if (!category) {
+            return;
+        }
         
         const files = category.files || [];
         const remainingFiles = files.slice(startIndex);

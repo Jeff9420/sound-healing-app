@@ -294,7 +294,9 @@ AUDIO_CONFIG.categories['Chakra'].folder = 'chakra';
 // Helper function to get full URL for a file
 function getAudioUrl(categoryKey, filename) {
     const category = AUDIO_CONFIG.categories[categoryKey];
-    if (!category) return null;
+    if (!category) {
+        return null;
+    }
     
     const folderName = category.folder || categoryKey.toLowerCase().replace(/\s+/g, '-');
     return `${AUDIO_CONFIG.baseUrl}${folderName}/${encodeURIComponent(filename)}`;

@@ -105,7 +105,9 @@ class SceneVisualizer {
     }
 
     animate() {
-        if (!this.isActive) return;
+        if (!this.isActive) {
+            return;
+        }
 
         this.animationFrame++;
         this.drawScene();
@@ -122,35 +124,35 @@ class SceneVisualizer {
                       { type: 'default', colors: ['#3b82f6', '#60a5fa'], particles: 'dots' };
         
         switch (config.type) {
-            case 'rain':
-                this.drawRainScene(width, height, config.colors);
-                break;
-            case 'fire':
-                this.drawFireScene(width, height, config.colors);
-                break;
-            case 'water':
-                this.drawWaterScene(width, height, config.colors);
-                break;
-            case 'forest':
-                this.drawForestScene(width, height, config.colors);
-                break;
-            case 'energy':
-                this.drawEnergyScene(width, height, config.colors);
-                break;
-            case 'cosmic':
-                this.drawCosmicScene(width, height, config.colors);
-                break;
-            case 'zen':
-                this.drawZenScene(width, height, config.colors);
-                break;
-            case 'tibetan':
-                this.drawTibetanScene(width, height, config.colors);
-                break;
-            case 'therapy':
-                this.drawTherapyScene(width, height, config.colors);
-                break;
-            default:
-                this.drawDefaultScene(width, height, config.colors);
+        case 'rain':
+            this.drawRainScene(width, height, config.colors);
+            break;
+        case 'fire':
+            this.drawFireScene(width, height, config.colors);
+            break;
+        case 'water':
+            this.drawWaterScene(width, height, config.colors);
+            break;
+        case 'forest':
+            this.drawForestScene(width, height, config.colors);
+            break;
+        case 'energy':
+            this.drawEnergyScene(width, height, config.colors);
+            break;
+        case 'cosmic':
+            this.drawCosmicScene(width, height, config.colors);
+            break;
+        case 'zen':
+            this.drawZenScene(width, height, config.colors);
+            break;
+        case 'tibetan':
+            this.drawTibetanScene(width, height, config.colors);
+            break;
+        case 'therapy':
+            this.drawTherapyScene(width, height, config.colors);
+            break;
+        default:
+            this.drawDefaultScene(width, height, config.colors);
         }
     }
     

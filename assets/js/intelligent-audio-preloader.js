@@ -180,9 +180,15 @@ class IntelligentAudioPreloader {
     getTimeOfDayCategory(timestamp) {
         const hour = new Date(timestamp).getHours();
         
-        if (hour >= 6 && hour < 12) return 'morning';
-        if (hour >= 12 && hour < 18) return 'afternoon';
-        if (hour >= 18 && hour < 22) return 'evening';
+        if (hour >= 6 && hour < 12) {
+            return 'morning';
+        }
+        if (hour >= 12 && hour < 18) {
+            return 'afternoon';
+        }
+        if (hour >= 18 && hour < 22) {
+            return 'evening';
+        }
         return 'night';
     }
     
@@ -411,10 +417,18 @@ class IntelligentAudioPreloader {
     generatePredictionReason(data) {
         const reasons = [];
         
-        if (data.frequency > 0.2) reasons.push('高频播放');
-        if (data.recencyScore > 0.8) reasons.push('最近常听');
-        if (data.timeWeight > 0.5) reasons.push('时间段偏好');
-        if (data.sequenceWeight > 0.6) reasons.push('播放序列模式');
+        if (data.frequency > 0.2) {
+            reasons.push('高频播放');
+        }
+        if (data.recencyScore > 0.8) {
+            reasons.push('最近常听');
+        }
+        if (data.timeWeight > 0.5) {
+            reasons.push('时间段偏好');
+        }
+        if (data.sequenceWeight > 0.6) {
+            reasons.push('播放序列模式');
+        }
         
         return reasons.join(', ') || '综合分析';
     }

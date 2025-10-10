@@ -177,7 +177,9 @@ class BackgroundSceneManager {
     }
 
     animate(currentTime) {
-        if (!this.isActive) return;
+        if (!this.isActive) {
+            return;
+        }
 
         // 帧率控制
         if (currentTime - this.lastFrameTime < this.frameInterval) {
@@ -208,35 +210,35 @@ class BackgroundSceneManager {
         
         // 根据场景类型绘制特效
         switch (config.type) {
-            case 'rain':
-                this.drawRainScene(width, height, config);
-                break;
-            case 'fire':
-                this.drawFireScene(width, height, config);
-                break;
-            case 'water':
-                this.drawWaterScene(width, height, config);
-                break;
-            case 'forest':
-                this.drawForestScene(width, height, config);
-                break;
-            case 'energy':
-                this.drawEnergyScene(width, height, config);
-                break;
-            case 'cosmic':
-                this.drawCosmicScene(width, height, config);
-                break;
-            case 'zen':
-                this.drawZenScene(width, height, config);
-                break;
-            case 'tibetan':
-                this.drawTibetanScene(width, height, config);
-                break;
-            case 'therapy':
-                this.drawTherapyScene(width, height, config);
-                break;
-            default:
-                this.drawDefaultScene(width, height, config);
+        case 'rain':
+            this.drawRainScene(width, height, config);
+            break;
+        case 'fire':
+            this.drawFireScene(width, height, config);
+            break;
+        case 'water':
+            this.drawWaterScene(width, height, config);
+            break;
+        case 'forest':
+            this.drawForestScene(width, height, config);
+            break;
+        case 'energy':
+            this.drawEnergyScene(width, height, config);
+            break;
+        case 'cosmic':
+            this.drawCosmicScene(width, height, config);
+            break;
+        case 'zen':
+            this.drawZenScene(width, height, config);
+            break;
+        case 'tibetan':
+            this.drawTibetanScene(width, height, config);
+            break;
+        case 'therapy':
+            this.drawTherapyScene(width, height, config);
+            break;
+        default:
+            this.drawDefaultScene(width, height, config);
         }
     }
 
@@ -258,7 +260,9 @@ class BackgroundSceneManager {
 
             // 使用缓存的颜色值
             const colorIndex = i % config.colors.length;
-            if (!this.rainColors) this.rainColors = [];
+            if (!this.rainColors) {
+                this.rainColors = [];
+            }
             if (!this.rainColors[colorIndex]) {
                 this.rainColors[colorIndex] = config.colors[colorIndex] + '9F';
             }
@@ -300,7 +304,9 @@ class BackgroundSceneManager {
                 const alpha = Math.max(0, 1 - progress / height);
                 // 使用预计算的颜色
                 const colorIndex = i % config.colors.length;
-                if (!this.fireColors) this.fireColors = [];
+                if (!this.fireColors) {
+                    this.fireColors = [];
+                }
                 const alphaKey = Math.floor(alpha * 255).toString(16).padStart(2, '0');
                 const colorKey = colorIndex + alphaKey;
                 if (!this.fireColors[colorKey]) {

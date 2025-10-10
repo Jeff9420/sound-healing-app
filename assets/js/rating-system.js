@@ -27,7 +27,9 @@ class RatingSystem {
 
     renderRatingWidget() {
         const container = document.getElementById('rating-widget');
-        if (!container) return;
+        if (!container) {
+            return;
+        }
 
         const { average, total } = this.ratings.overall;
 
