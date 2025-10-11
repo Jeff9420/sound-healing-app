@@ -361,11 +361,29 @@
     opacity: 0.8;
 }
 
+/* 收藏按钮 */
+.track-favorite-btn {
+    background: transparent;
+    border: none;
+    color: var(--nature-mint, #b8e6b8);
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.3rem 0.5rem;
+    transition: all 0.3s ease;
+    opacity: 0.6;
+}
+
+.track-favorite-btn:hover {
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+.track-favorite-btn.favorited {
+    color: var(--nature-gold, #daa520);
+    opacity: 1;
+}
+
 .track-play-btn {
-    position: absolute;
-    top: 50%;
-    right: 1rem;
-    transform: translateY(-50%);
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -377,16 +395,11 @@
     align-items: center;
     justify-content: center;
     font-size: 0.8rem;
-    opacity: 0;
     transition: all 0.3s ease;
 }
 
-.track-item:hover .track-play-btn {
-    opacity: 1;
-}
-
 .track-play-btn:hover {
-    transform: translateY(-50%) scale(1.1);
+    transform: scale(1.1);
     background: var(--nature-mint, #b8e6b8);
     color: var(--nature-dark, #1a2e1a);
 }

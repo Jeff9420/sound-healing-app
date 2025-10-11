@@ -219,10 +219,11 @@ if (typeof window !== 'undefined') {
 
     // 等待依赖加载后初始化
     const initFavoriteButton = () => {
-        if (window.userDataManager && window.audioManager) {
+        if (window.userDataManager) {
+            // audioManager可能不存在，但我们仍然可以初始化
             window.favoriteButtonController = new FavoriteButtonController(
                 window.userDataManager,
-                window.audioManager
+                window.audioManager || null
             );
         }
     };
@@ -234,4 +235,9 @@ if (typeof window !== 'undefined') {
     } else {
         setTimeout(initFavoriteButton, 500);
     }
+
+    // 也监听userDataManager准备就绪事件
+    window.addEventListener('userData:ready', () => {
+        setTimeout(initFavoriteButton, 100);
+    });
 }

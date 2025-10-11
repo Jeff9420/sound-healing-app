@@ -210,6 +210,19 @@ class PlaylistUI {
             const trackControlsDiv = document.createElement('div');
             trackControlsDiv.className = 'track-controls';
 
+            // 收藏按钮
+            const favoriteBtn = document.createElement('button');
+            favoriteBtn.className = 'track-favorite-btn';
+            favoriteBtn.dataset.trackId = trackId;
+            favoriteBtn.dataset.category = categoryKey;
+            favoriteBtn.dataset.file = fileName;
+            favoriteBtn.title = '收藏';
+
+            // 检查是否已收藏
+            const isFavorited = window.userDataManager && window.userDataManager.isFavorite(trackId);
+            favoriteBtn.innerHTML = isFavorited ? '⭐' : '☆';
+            favoriteBtn.classList.toggle('favorited', isFavorited);
+
             const playBtn = document.createElement('button');
             playBtn.className = 'track-play-btn';
             playBtn.dataset.trackId = trackId;
@@ -241,6 +254,7 @@ class PlaylistUI {
             }
 
             trackVolumeDiv.appendChild(volumeSlider);
+            trackControlsDiv.appendChild(favoriteBtn);
             trackControlsDiv.appendChild(playBtn);
             trackControlsDiv.appendChild(trackVolumeDiv);
 
@@ -252,6 +266,26 @@ class PlaylistUI {
             if (!isSupported) {
                 trackItem.classList.add('unsupported-format');
             }
+
+            // 收藏按钮事件
+            const favBtn = trackItem.querySelector('.track-favorite-btn');
+            favBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (window.userDataManager) {
+                    const trackData = {
+                        category: categoryKey,
+                        fileName: fileName,
+                        displayName: displayName
+                    };
+                    const isFavorited = window.userDataManager.toggleFavorite(trackData);
+                    favBtn.innerHTML = isFavorited ? '⭐' : '☆';
+                    favBtn.classList.toggle('favorited', isFavorited);
+                    favBtn.title = isFavorited ? '取消收藏' : '收藏';
+
+                    // 显示提示
+                    this.showToast(isFavorited ? `已收藏《${displayName}》` : `已取消收藏《${displayName}》`);
+                }
+            });
 
             // 播放按钮事件
             const playBtn = trackItem.querySelector('.track-play-btn');
@@ -487,6 +521,56 @@ class PlaylistUI {
             if (errorDiv.parentNode) {
                 errorDiv.parentNode.removeChild(errorDiv);
             }
+        }, 3000);
+    }
+
+    showToast(message) {
+        // 检查是否已有toast容器
+        let toastContainer = document.getElementById('playlistToastContainer');
+
+        if (!toastContainer) {
+            toastContainer = document.createElement('div');
+            toastContainer.id = 'playlistToastContainer';
+            toastContainer.style.cssText = `
+                position: fixed;
+                top: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 10000;
+                pointer-events: none;
+            `;
+            document.body.appendChild(toastContainer);
+        }
+
+        // 创建toast元素
+        const toast = document.createElement('div');
+        toast.className = 'playlist-toast';
+        toast.textContent = message;
+        toast.style.cssText = `
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        `;
+
+        toastContainer.appendChild(toast);
+
+        // 显示动画
+        setTimeout(() => {
+            toast.style.opacity = '1';
+        }, 10);
+
+        // 3秒后淡出并移除
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => {
+                toast.remove();
+            }, 300);
         }, 3000);
     }
 }
