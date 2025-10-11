@@ -28,11 +28,8 @@ const STATIC_CACHE_URLS = [
 ];
 
 // 精选音频文件预加载列表
-const FEATURED_AUDIO = [
-  '/assets/audio/meditation/Deep Meditation.mp3',
-  '/assets/audio/Rain/Gentle Rain.mp3',
-  '/assets/audio/Singing bowl sound/Root Chakra Bowl.mp3'
-];
+// 注意：所有音频已迁移至Archive.org CDN，无需预加载本地文件
+const FEATURED_AUDIO = [];
 
 // 安装Service Worker
 self.addEventListener('install', event => {
@@ -45,27 +42,8 @@ self.addEventListener('install', event => {
         return cache.addAll(STATIC_CACHE_URLS);
       })
       .then(() => {
-        // 检查网络状态，决定是否预加载音频
-        if (navigator.connection) {
-          const connectionType = navigator.connection.effectiveType;
-          const saveData = navigator.connection.saveData;
-
-          if (!saveData && (connectionType === 'wifi' || connectionType === 'ethernet')) {
-            console.log('🎵 SoundFlows SW: WiFi环境下预加载精选音频...');
-            return caches.open('featured-audio-v1')
-              .then(audioCache => {
-                return Promise.allSettled(
-                  FEATURED_AUDIO.map(url =>
-                    fetch(url)
-                      .then(response => {
-                        if (response.ok) return audioCache.put(url, response);
-                      })
-                      .catch(() => console.log(`⚠️ 音频预加载失败: ${url}`))
-                  )
-                );
-              });
-          }
-        }
+        // 音频预加载已禁用 - 所有音频使用Archive.org CDN
+        console.log('ℹ️ SoundFlows SW: 音频预加载已禁用（使用CDN）');
       })
       .then(() => {
         console.log('✅ SoundFlows SW: 安装完成');

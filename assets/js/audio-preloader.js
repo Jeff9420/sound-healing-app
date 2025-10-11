@@ -32,87 +32,14 @@ class AudioPreloader {
 
     /**
    * 加载精选音频列表
+   * 注意：所有音频已迁移至Archive.org CDN，无需预加载本地文件
    */
     loadFeaturedAudioList() {
-    // 精选音频列表 - 每个类别选择最常用的1-2个文件
-        this.featuredAudio = [
-            // 冥想类
-            {
-                url: '/assets/audio/meditation/Deep Meditation.mp3',
-                category: 'meditation',
-                priority: 1,
-                size: 3200000 // 预估大小
-            },
-            {
-                url: '/assets/audio/meditation/Mindfulness Practice.mp3',
-                category: 'meditation',
-                priority: 2,
-                size: 2800000
-            },
+        // 清空预加载列表 - 所有音频使用Archive.org CDN
+        this.featuredAudio = [];
 
-            // 雨声类
-            {
-                url: '/assets/audio/Rain/Gentle Rain.mp3',
-                category: 'rain',
-                priority: 1,
-                size: 4500000
-            },
-            {
-                url: '/assets/audio/Rain/Heavy Rain Thunder.mp3',
-                category: 'rain',
-                priority: 2,
-                size: 5200000
-            },
-
-            // 颂钵类
-            {
-                url: '/assets/audio/Singing bowl sound/Root Chakra Bowl.mp3',
-                category: 'Singing bowl sound',
-                priority: 1,
-                size: 3800000
-            },
-            {
-                url: '/assets/audio/Singing bowl sound/Third Eye Chakra Bowl.mp3',
-                category: 'Singing bowl sound',
-                priority: 2,
-                size: 4200000
-            },
-
-            // 自然声音
-            {
-                url: '/assets/audio/Animal sounds/Night Birds.mp3',
-                category: 'Animal sounds',
-                priority: 1,
-                size: 3600000
-            },
-
-            // 流水声
-            {
-                url: '/assets/audio/running water/Forest Stream.mp3',
-                category: 'running water',
-                priority: 1,
-                size: 4100000
-            },
-
-            // 火焰声
-            {
-                url: '/assets/audio/Fire/Campfire Crackle.mp3',
-                category: 'fire',
-                priority: 1,
-                size: 3900000
-            },
-
-            // 催眠类
-            {
-                url: '/assets/audio/hypnosis/Deep Sleep Hypnosis.mp3',
-                category: 'hypnosis',
-                priority: 1,
-                size: 8500000
-            }
-        ];
-
-        // 根据优先级排序
-        this.featuredAudio.sort((a, b) => a.priority - b.priority);
+        console.log('🎵 音频预加载已禁用 - 使用Archive.org CDN提供音频服务');
+        console.log('ℹ️ Archive.org自带CDN加速，无需额外预加载');
     }
 
     /**
