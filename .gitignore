@@ -148,6 +148,16 @@ quick-performance-fixes.js
 .node_repl_history
 .yarn-integrity
 
+# 音频文件（托管在 Archive.org CDN）
+assets/audio/**/*.mp3
+assets/audio/**/*.wav
+assets/audio/**/*.ogg
+assets/audio/**/*.wma
+assets/audio/**/*.m4a
+assets/audio/**/*.flac
+# 保留音频文件夹的 README 说明
+!assets/audio/**/README.md
+
 # 项目特定临时文件
 %USERPROFILE%.configclaude-code
 .claude/
