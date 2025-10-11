@@ -380,6 +380,36 @@
     }
 }
 
+/* Canvas可视化图表 */
+.visual-charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.chart-container {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+}
+
+.chart-container h4 {
+    margin: 0 0 15px 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.chart-container canvas {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    border-radius: 8px;
+}
+
 /* 暗色/亮色主题支持 */
 [data-theme="light"] .stats-content {
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -404,4 +434,13 @@
 [data-theme="light"] .chart-label,
 [data-theme="light"] .achievement-desc {
     color: #636e72;
+}
+
+[data-theme="light"] .chart-container {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .chart-container h4 {
+    color: #2d3436;
 }

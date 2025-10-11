@@ -102,10 +102,14 @@ class StatsDashboard {
 
         container.innerHTML = `
             ${this.renderOverview(stats, history, favorites)}
+            ${this.renderVisualCharts(stats, history)}
             ${this.renderCategoryChart(stats)}
             ${this.renderTimeChart(history)}
             ${this.renderAchievements(stats)}
         `;
+
+        // 渲染Canvas图表
+        this.renderCanvasCharts(stats, history);
     }
 
     /**
@@ -367,6 +371,67 @@ class StatsDashboard {
         const month = date.getMonth() + 1;
         const day = date.getDate();
         return `${month}/${day}`;
+    }
+
+    /**
+     * 渲染可视化图表区域
+     */
+    renderVisualCharts(stats, history) {
+        return `
+            <div class="stats-section">
+                <h3>📈 <span data-i18n="stats.visualAnalysis">可视化分析</span></h3>
+                <div class="visual-charts-grid">
+                    <div class="chart-container">
+                        <h4>分类占比</h4>
+                        <canvas id="categoryPieChart" width="300" height="300"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h4>趋势分析</h4>
+                        <canvas id="trendLineChart" width="400" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    /**
+     * 渲染Canvas图表
+     */
+    renderCanvasCharts(stats, history) {
+        if (!window.chartVisualizer) {
+            console.warn('ChartVisualizer not loaded');
+            return;
+        }
+
+        // 1. 分类占比饼图
+        const categoryData = Object.entries(stats.categoryStats || {})
+            .sort((a, b) => b[1].plays - a[1].plays)
+            .slice(0, 5)
+            .map(([category, data]) => ({
+                label: category,
+                value: data.plays
+            }));
+
+        if (categoryData.length > 0) {
+            window.chartVisualizer.createPieChart('categoryPieChart', categoryData);
+        }
+
+        // 2. 趋势折线图
+        const dailyStats = this.getDailyStats(history);
+        const last7Days = Object.entries(dailyStats).slice(-7);
+
+        if (last7Days.length > 0) {
+            const trendData = last7Days.map(([date, count]) => ({
+                label: this.formatDate(date),
+                value: count
+            }));
+
+            window.chartVisualizer.createLineChart('trendLineChart', trendData, {
+                lineColor: '#6666FF',
+                fill: true,
+                fillColor: 'rgba(102, 102, 255, 0.3)'
+            });
+        }
     }
 }
 
