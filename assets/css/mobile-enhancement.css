@@ -55,25 +55,10 @@ body {
   -ms-text-size-adjust: 100%;
 }
 
-/* 防止iOS橡皮筋效果 */
+/* 防止iOS橡皮筋效果 (现代方案) */
 body {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  overflow: hidden;
-}
-
-/* 创建可滚动区域 */
-.scrollable-content {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: none; /* 防止过度滚动 */
+  -webkit-overflow-scrolling: touch; /* iOS平滑滚动 */
 }
 
 /* =============================================
