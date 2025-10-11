@@ -1,1 +1,153 @@
+# ============================================
+# 声音疗愈应用 - Git忽略配置
+# ============================================
+
+# 依赖包
+node_modules/
+package/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 构建输出
+dist/
+build/
+.next/
+out/
+
+# 环境变量
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE 配置
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# 部署平台
+.vercel/
 .vercel
+.netlify/
+
+# 临时文件
+*.log
+*.tmp
+*.temp
+nul
+*.bak
+*.old
+
+# 操作系统
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# 测试覆盖率
+coverage/
+.nyc_output/
+*.lcov
+
+# 文档截图和临时图片
+docs/images/*.png
+docs/screenshots/*.png
+*.png
+!assets/**/*.png
+!favicon.png
+!apple-touch-icon.png
+!android-chrome-*.png
+
+# 压缩包和安装包
+*.zip
+*.tar.gz
+*.rar
+*.7z
+*.msi
+*.exe
+*.dmg
+
+# Python 相关
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+.eggs/
+*.egg
+
+# 备份文件
+*-backup.*
+*-deprecated.*
+*-old.*
+index-backup*.html
+
+# 临时测试文件
+test-*.html
+quick-test.html
+browser-test.html
+audio-debug.html
+*-test.html
+
+# 文档临时文件（已整理到docs/）
+*.md
+!README.md
+!CLAUDE.md
+!docs/**/*.md
+
+# 自动生成的文件
+sitemap-*.xml
+!sitemap.xml
+
+# 监控和自动化脚本
+monitoring-setup.js
+automate-*.js
+auto-*.js
+*-automation/
+
+# Archive 归档目录
+archive/
+
+# 部署日志
+deploy.log
+deployment.log
+vercel-*.log
+
+# 社交媒体临时文件
+tweet_*.png
+auto-*.png
+twitter_*.py
+facebook_*.py
+social-media-*.html
+
+# 配置文件临时版本
+complete-seo-config.js
+quick-performance-fixes.js
+
+# Node.js 包管理器缓存
+.npm/
+.eslintcache
+.node_repl_history
+.yarn-integrity
+
+# 项目特定临时文件
+%USERPROFILE%.configclaude-code
+.claude/

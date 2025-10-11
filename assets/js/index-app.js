@@ -69,6 +69,13 @@ let particles = [];
 let currentScene = 'default';
 let animationId;
 
+// Performance optimization variables
+let isPageVisible = true;
+let lastFrameTime = 0;
+let frameCount = 0;
+let fps = 60;
+const targetFrameTime = 1000 / 30; // Target 30 FPS for better performance
+
 // ==========================================================================
 // 国际化系统初始化
 // ==========================================================================
@@ -115,6 +122,9 @@ function initializeApp() {
         window.addEventListener('resize', resizeCanvas);
     }
 
+    // Initialize Page Visibility API for performance
+    setupPageVisibilityListener();
+
     // Load categories
     loadCategories();
 
@@ -157,6 +167,46 @@ function initializeApp() {
 // ==========================================================================
 // Canvas 相关函数
 // ==========================================================================
+
+/**
+ * 设置页面可见性监听器 - 优化性能
+ */
+function setupPageVisibilityListener() {
+    // Check for browser support
+    let hidden, visibilityChange;
+
+    if (typeof document.hidden !== 'undefined') {
+        hidden = 'hidden';
+        visibilityChange = 'visibilitychange';
+    } else if (typeof document.msHidden !== 'undefined') {
+        hidden = 'msHidden';
+        visibilityChange = 'msvisibilitychange';
+    } else if (typeof document.webkitHidden !== 'undefined') {
+        hidden = 'webkitHidden';
+        visibilityChange = 'webkitvisibilitychange';
+    }
+
+    if (typeof document[hidden] !== 'undefined') {
+        document.addEventListener(visibilityChange, function() {
+            isPageVisible = !document[hidden];
+
+            if (isPageVisible) {
+                console.log('📱 Page visible - resuming animations');
+                // Resume animations when page becomes visible
+                if (canvas && !animationId) {
+                    animateBackground();
+                }
+            } else {
+                console.log('📱 Page hidden - pausing animations');
+                // Cancel animation when page is hidden to save resources
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                    animationId = null;
+                }
+            }
+        }, false);
+    }
+}
 
 function resizeCanvas() {
     if (canvas) {
@@ -478,22 +528,11 @@ function toggleMinimize(event) {
 // 通知系统
 // ==========================================================================
 
-function showNotification(message, type = 'info') {
-    // Notifications disabled - user preference
-    return;
-
-    const notification = document.getElementById('notification');
-    if (!notification) {
-        return;
+function showNotification(message, type = 'info', category = 'general') {
+    // 使用通知偏好管理器
+    if (typeof window.showNotification === 'function') {
+        window.showNotification(message, type, category);
     }
-
-    notification.textContent = message;
-    notification.className = 'notification ' + type;
-    notification.style.display = 'block';
-
-    setTimeout(() => {
-        notification.style.display = 'none';
-    }, 3000);
 }
 
 // ==========================================================================
@@ -554,59 +593,108 @@ function changeBackgroundScene(scene) {
     }
 }
 
-function animateBackground() {
+/**
+ * 优化的背景动画函数
+ * - 帧率限制到30 FPS
+ * - 页面不可见时自动暂停
+ * - 批量渲染优化
+ */
+function animateBackground(currentTime = 0) {
     if (!ctx || !canvas) {
         return;
     }
 
+    // Skip if page is not visible
+    if (!isPageVisible) {
+        return;
+    }
+
+    // Throttle to target frame rate (30 FPS)
+    const elapsed = currentTime - lastFrameTime;
+
+    if (elapsed < targetFrameTime) {
+        animationId = requestAnimationFrame(animateBackground);
+        return;
+    }
+
+    // Update last frame time
+    lastFrameTime = currentTime - (elapsed % targetFrameTime);
+
+    // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    particles.forEach(particle => {
+    // Pre-calculate canvas dimensions for performance
+    const canvasWidth = canvas.width;
+    const canvasHeight = canvas.height;
+
+    // Set global alpha once for all particles
+    ctx.globalAlpha = 0.6;
+
+    // Update and render particles in a single loop
+    for (let i = 0; i < particles.length; i++) {
+        const particle = particles[i];
+
         // Update position
         particle.x += particle.vx;
         particle.y += particle.vy;
 
-        // Wrap around edges
-        if (particle.x < 0) {
-            particle.x = canvas.width;
-        }
-        if (particle.x > canvas.width) {
-            particle.x = 0;
-        }
-        if (particle.y < 0) {
-            particle.y = canvas.height;
-        }
-        if (particle.y > canvas.height) {
-            particle.y = 0;
-        }
+        // Wrap around edges (optimized with fewer condition checks)
+        if (particle.x < 0) particle.x = canvasWidth;
+        else if (particle.x > canvasWidth) particle.x = 0;
 
-        // Draw particle
-        ctx.save();
+        if (particle.y < 0) particle.y = canvasHeight;
+        else if (particle.y > canvasHeight) particle.y = 0;
+
+        // Draw particle based on type
         ctx.fillStyle = particle.color;
-        ctx.globalAlpha = 0.6;
 
         switch (particle.type) {
         case 'leaf':
+            ctx.save();
             ctx.translate(particle.x, particle.y);
             ctx.rotate(particle.angle);
-            ctx.fillRect(-particle.size, -particle.size/2, particle.size * 2, particle.size);
+            ctx.fillRect(-particle.size, -particle.size / 2, particle.size * 2, particle.size);
+            ctx.restore();
+            particle.angle += 0.01; // Slow rotation
             break;
+
         case 'energy':
-            const gradient = ctx.createRadialGradient(particle.x, particle.y, 0, particle.x, particle.y, particle.size * 2);
+            // Cache gradients or use simpler rendering
+            ctx.save();
+            const gradient = ctx.createRadialGradient(
+                particle.x, particle.y, 0,
+                particle.x, particle.y, particle.size * 2
+            );
             gradient.addColorStop(0, particle.color);
             gradient.addColorStop(1, 'transparent');
             ctx.fillStyle = gradient;
-            ctx.fillRect(particle.x - particle.size * 2, particle.y - particle.size * 2, particle.size * 4, particle.size * 4);
+            ctx.fillRect(
+                particle.x - particle.size * 2,
+                particle.y - particle.size * 2,
+                particle.size * 4,
+                particle.size * 4
+            );
+            ctx.restore();
             break;
+
         default:
+            // Circle rendering (most common case)
             ctx.beginPath();
             ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
             ctx.fill();
         }
+    }
 
-        ctx.restore();
-    });
+    // Reset global alpha
+    ctx.globalAlpha = 1.0;
 
+    // Track FPS for debugging
+    frameCount++;
+    if (frameCount % 60 === 0) {
+        fps = Math.round(1000 / elapsed);
+    }
+
+    // Request next frame
     animationId = requestAnimationFrame(animateBackground);
 }
 

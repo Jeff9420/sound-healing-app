@@ -26,7 +26,6 @@
     <link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/">
 
     <!-- Open Graph / Facebook -->
-    <meta property="fb:app_id" content="1234567890">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.soundflows.app/">
     <meta property="og:title" content="Free Meditation Music & Rain Sounds for Sleeping | 213+ Healing Sounds">
@@ -50,8 +49,6 @@
     <meta name="twitter:description" content="Free sound healing platform: meditation music, rain sounds, white noise, nature sounds. Perfect for relaxation, sleep & stress relief. 免费声音疗愈">
     <meta name="twitter:image" content="https://www.soundflows.app/assets/images/twitter-card.jpg">
     <meta name="twitter:image:alt" content="声音疗愈空间 - 专业音频疗法平台">
-    <meta name="twitter:creator" content="@SoundHealingApp">
-    <meta name="twitter:site" content="@SoundHealingApp">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
@@ -140,6 +137,8 @@
     <link rel="stylesheet" href="assets/css/history-favorites.css">
     <link rel="stylesheet" href="assets/css/mixer.css">
     <link rel="stylesheet" href="assets/css/stats-dashboard.css">
+    <link rel="stylesheet" href="assets/css/accessibility.css">
+    <link rel="stylesheet" href="assets/css/notification-preferences.css">
 </head>
 <body>
     <!-- SEO H1 (Hidden for SEO purposes, screen reader accessible) -->
@@ -182,6 +181,9 @@
                         </button>
                         <button class="header-icon-btn" onclick="window.statsDashboard && window.statsDashboard.open()" title="收听统计">
                             📊
+                        </button>
+                        <button class="header-icon-btn" onclick="window.notificationPreferences && window.notificationPreferences.openSettings()" title="通知设置">
+                            🔔
                         </button>
                         <!-- Language Selector -->
                         <div class="language-selector">
@@ -320,13 +322,6 @@
         "音频播放速度调节",
         "响应式设计，支持移动端"
       ],
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "ratingCount": "1250",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
       "author": {
         "@type": "Organization",
         "name": "Sound Healing Team",
@@ -364,10 +359,6 @@
       "logo": "https://www.soundflows.app/favicon.png",
       "description": "专业在线声音疗愈平台，提供免费音频疗法服务",
       "foundingDate": "2024",
-      "sameAs": [
-        "https://twitter.com/SoundHealingApp",
-        "https://facebook.com/SoundHealingApp"
-      ],
       "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "Customer Service",
@@ -492,7 +483,8 @@
     </script>
 
     <!-- External JavaScript Files -->
-    <!-- Load in order: config → i18n → user data → metadata → app logic → features → enhancements -->
+    <!-- Load in order: error handler → config → i18n → user data → metadata → app logic → features → enhancements -->
+    <script src="assets/js/global-error-handler.js"></script>
     <script src="assets/js/audio-config.js"></script>
     <script src="assets/js/i18n-system.js"></script>
     <script src="assets/js/user-data-manager.js"></script>
@@ -504,8 +496,10 @@
     <script src="assets/js/stats-dashboard.js"></script>
     <script src="assets/js/favorite-button-controller.js"></script>
     <script src="assets/js/pwa-manager.js"></script>
+    <script src="assets/js/notification-preferences.js"></script>
     <script src="assets/js/index-app.js"></script>
     <script src="assets/js/rating-system.js"></script>
     <script src="assets/js/touch-gestures.js"></script>
+    <script src="assets/js/accessibility-enhancements.js"></script>
 </body>
 </html>

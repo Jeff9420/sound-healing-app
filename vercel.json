@@ -2,18 +2,15 @@
   "buildCommand": null,
   "outputDirectory": ".",
   "rewrites": [
-    { "source": "/api/audio/animal-sounds/(.*)", "destination": "https://archive.org/download/sound-healing-collection/animal-sounds/$1" },
-    { "source": "/api/audio/chakra/(.*)", "destination": "https://archive.org/download/sound-healing-collection/chakra/$1" },
-    { "source": "/api/audio/fire-sounds/(.*)", "destination": "https://archive.org/download/sound-healing-collection/fire-sounds/$1" },
-    { "source": "/api/audio/hypnosis/(.*)", "destination": "https://archive.org/download/sound-healing-collection/hypnosis/$1" },
-    { "source": "/api/audio/meditation/(.*)", "destination": "https://archive.org/download/sound-healing-collection/meditation/$1" },
-    { "source": "/api/audio/rain-sounds/(.*)", "destination": "https://archive.org/download/sound-healing-collection/rain-sounds/$1" },
-    { "source": "/api/audio/water-sounds/(.*)", "destination": "https://archive.org/download/sound-healing-collection/water-sounds/$1" },
-    { "source": "/api/audio/singing-bowls/(.*)", "destination": "https://archive.org/download/sound-healing-collection/singing-bowls/$1" },
-    { "source": "/api/audio/subconscious-therapy/(.*)", "destination": "https://archive.org/download/sound-healing-collection/subconscious-therapy/$1" },
-    { "source": "/((?!assets|api|sw|manifest|robots|sitemap|.*\\..*).*)", "destination": "/index.html" }
+    { "source": "/((?!assets|sw|manifest|robots|sitemap|.*\\..*).*)", "destination": "/index.html" }
   ],
   "headers": [
+    { "source": "/assets/audio/(.*)", "headers": [
+      { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" },
+      { "key": "Access-Control-Allow-Origin", "value": "*" },
+      { "key": "Access-Control-Allow-Methods", "value": "GET, HEAD, OPTIONS" },
+      { "key": "Access-Control-Allow-Headers", "value": "Range, Accept, Content-Type" }
+    ]},
     { "source": "/api/audio/(.*)", "headers": [
       { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" },
       { "key": "Access-Control-Allow-Origin", "value": "*" },

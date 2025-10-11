@@ -1,0 +1,293 @@
+/**
+ * 通知偏好设置样式
+ */
+
+/* 通知设置模态框 */
+.notification-settings-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    backdrop-filter: blur(5px);
+}
+
+.notification-settings-content {
+    background: linear-gradient(135deg, #1a1f2e 0%, #2a2f3e 100%);
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(102, 102, 255, 0.3);
+}
+
+.notification-settings-content h2 {
+    color: #6666ff;
+    margin: 0 0 20px 0;
+    font-size: 24px;
+}
+
+.close-notification-settings {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 32px;
+    cursor: pointer;
+    padding: 5px 10px;
+    line-height: 1;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.close-notification-settings:hover {
+    color: #6666ff;
+    transform: rotate(90deg);
+}
+
+/* 设置区块 */
+.settings-section {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.settings-section:last-of-type {
+    border-bottom: none;
+}
+
+.settings-section h3 {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+    margin: 0 0 15px 0;
+    font-weight: 600;
+}
+
+/* 设置项 */
+.setting-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+.setting-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    cursor: pointer;
+    accent-color: #6666ff;
+}
+
+.setting-item input[type="range"] {
+    accent-color: #6666ff;
+}
+
+.setting-item span {
+    color: rgba(255, 255, 255, 0.85);
+    flex: 1;
+}
+
+.setting-item select {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.setting-item select:focus {
+    outline: 2px solid #6666ff;
+    outline-offset: 2px;
+}
+
+/* 设置按钮 */
+.settings-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.save-settings-btn,
+.test-notification-btn {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.save-settings-btn {
+    background: #6666ff;
+    color: white;
+}
+
+.save-settings-btn:hover {
+    background: #5555ee;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 102, 255, 0.4);
+}
+
+.test-notification-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.test-notification-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* 通知位置样式 */
+.notification {
+    position: fixed;
+    padding: 15px 25px;
+    border-radius: 8px;
+    background: rgba(26, 31, 46, 0.95);
+    color: white;
+    z-index: 9999;
+    min-width: 250px;
+    max-width: 400px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    border-left: 4px solid #6666ff;
+    backdrop-filter: blur(10px);
+    animation: slideIn 0.3s ease-out;
+}
+
+.notification.top-right {
+    top: 20px;
+    right: 20px;
+}
+
+.notification.top-left {
+    top: 20px;
+    left: 20px;
+}
+
+.notification.bottom-right {
+    bottom: 20px;
+    right: 20px;
+}
+
+.notification.bottom-left {
+    bottom: 20px;
+    left: 20px;
+}
+
+/* 通知类型样式 */
+.notification.success {
+    border-left-color: #4caf50;
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(26, 31, 46, 0.95));
+}
+
+.notification.error {
+    border-left-color: #f44336;
+    background: linear-gradient(135deg, rgba(244, 67, 54, 0.2), rgba(26, 31, 46, 0.95));
+}
+
+.notification.warning {
+    border-left-color: #ff9800;
+    background: linear-gradient(135deg, rgba(255, 152, 0, 0.2), rgba(26, 31, 46, 0.95));
+}
+
+.notification.info {
+    border-left-color: #2196f3;
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.2), rgba(26, 31, 46, 0.95));
+}
+
+/* 动画 */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 设置按钮（添加到头部） */
+.notification-settings-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.notification-settings-btn:hover {
+    background: rgba(102, 102, 255, 0.2);
+    border-color: #6666ff;
+    transform: translateY(-2px);
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .notification-settings-content {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .notification {
+        min-width: 200px;
+        max-width: 90%;
+        left: 5% !important;
+        right: 5% !important;
+    }
+
+    .notification.top-right,
+    .notification.top-left {
+        top: 10px;
+    }
+
+    .notification.bottom-right,
+    .notification.bottom-left {
+        bottom: 10px;
+    }
+
+    .settings-actions {
+        flex-direction: column;
+    }
+}
+
+/* 滚动条样式 */
+.notification-settings-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.notification-settings-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.notification-settings-content::-webkit-scrollbar-thumb {
+    background: rgba(102, 102, 255, 0.5);
+    border-radius: 4px;
+}
+
+.notification-settings-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(102, 102, 255, 0.7);
+}

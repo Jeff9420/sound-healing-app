@@ -35,6 +35,15 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
             this.currentTrack = null; // 当前播放的音轨信息
             this.progressUpdateInterval = null;
 
+            // 音频加载重试配置
+            this.retryConfig = {
+                maxRetries: 3,
+                initialDelay: 1000, // 1秒
+                maxDelay: 10000, // 10秒
+                backoffMultiplier: 2
+            };
+            this.retryAttempts = new Map(); // 跟踪每个音频的重试次数
+
             // 检测浏览器支持的音频格式
             this.detectSupportedFormats();
 
@@ -140,6 +149,78 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
         }
 
         /**
+     * 计算重试延迟（指数退避）
+     * @param {number} attemptNumber - 当前重试次数
+     * @returns {number} 延迟时间（毫秒）
+     */
+        calculateRetryDelay(attemptNumber) {
+            const delay = this.retryConfig.initialDelay * Math.pow(this.retryConfig.backoffMultiplier, attemptNumber);
+            return Math.min(delay, this.retryConfig.maxDelay);
+        }
+
+        /**
+     * 等待指定的时间
+     * @param {number} ms - 等待时间（毫秒）
+     * @returns {Promise<void>}
+     */
+        sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        /**
+     * 加载音频并带有重试机制
+     * @param {HTMLAudioElement} audio - 音频元素
+     * @param {string} fullPath - 音频URL
+     * @param {string} fileName - 文件名
+     * @param {string} trackId - 音轨ID
+     * @returns {Promise<void>}
+     */
+        async loadAudioWithRetry(audio, fullPath, fileName, trackId) {
+            const attemptNumber = this.retryAttempts.get(trackId) || 0;
+
+            return new Promise((resolve, reject) => {
+                const timeout = setTimeout(() => {
+                    audio.removeEventListener('canplaythrough', onCanPlay);
+                    audio.removeEventListener('error', onError);
+
+                    if (attemptNumber < this.retryConfig.maxRetries) {
+                        console.warn(`⏳ 音频加载超时，准备重试 (${attemptNumber + 1}/${this.retryConfig.maxRetries}): ${fileName}`);
+                        reject(new Error('TIMEOUT'));
+                    } else {
+                        console.error(`❌ 音频加载超时，已达到最大重试次数: ${fileName}`);
+                        reject(new Error(`音频加载超时: ${fileName}`));
+                    }
+                }, 15000);
+
+                const onCanPlay = () => {
+                    clearTimeout(timeout);
+                    audio.removeEventListener('error', onError);
+                    this.retryAttempts.delete(trackId); // 成功后清除重试记录
+                    console.log(`✅ 音频加载成功: ${fileName}`);
+                    resolve();
+                };
+
+                const onError = (error) => {
+                    clearTimeout(timeout);
+                    audio.removeEventListener('canplaythrough', onCanPlay);
+
+                    if (attemptNumber < this.retryConfig.maxRetries) {
+                        console.warn(`⚠️ 音频加载失败，准备重试 (${attemptNumber + 1}/${this.retryConfig.maxRetries}): ${fileName}`, error);
+                        reject(new Error('LOAD_ERROR'));
+                    } else {
+                        console.error(`❌ 音频加载失败，已达到最大重试次数: ${fileName}`, error);
+                        reject(new Error(`音频文件加载失败: ${fileName}`));
+                    }
+                };
+
+                audio.addEventListener('canplaythrough', onCanPlay, { once: true });
+                audio.addEventListener('error', onError, { once: true });
+
+                audio.src = fullPath;
+            });
+        }
+
+        /**
      * 创建音频实例
      * 管理音频实例的生命周期，防止内存泄漏
      * @param {string} trackId - 音轨ID
@@ -195,21 +276,36 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
                 window.loadingIndicator.showExternalAudioLoading(fileName);
             }
 
-            return new Promise((resolve, reject) => {
-                const timeout = setTimeout(() => {
-                    this.loadingStates.set(trackId, false);
-                    this.eventBus.dispatchEvent(new CustomEvent('loadingEnd', { detail: trackId }));
+            // 使用重试机制加载音频
+            let attemptNumber = 0;
+            while (attemptNumber <= this.retryConfig.maxRetries) {
+                try {
+                    // 更新重试次数
+                    this.retryAttempts.set(trackId, attemptNumber);
 
-                    // Show timeout error in loading indicator
-                    if (typeof window.loadingIndicator !== 'undefined') {
-                        window.loadingIndicator.showError(`音频加载超时: ${fileName}\n网络连接较慢，请检查网络或稍后重试`);
+                    // 如果不是第一次尝试，等待一段时间后再重试
+                    if (attemptNumber > 0) {
+                        const delay = this.calculateRetryDelay(attemptNumber - 1);
+                        console.log(`⏳ 等待 ${delay}ms 后重试...`);
+
+                        // 更新加载指示器显示重试信息
+                        if (typeof window.loadingIndicator !== 'undefined') {
+                            window.loadingIndicator.showExternalAudioLoading(
+                                `${fileName} (重试 ${attemptNumber}/${this.retryConfig.maxRetries})`
+                            );
+                        }
+
+                        await this.sleep(delay);
+
+                        // 重新创建音频元素以清除之前的错误状态
+                        audio = new Audio();
+                        audio.preload = 'metadata';
                     }
 
-                    reject(new Error(`音频加载超时: ${fileName}`));
-                }, 15000);
+                    // 尝试加载音频
+                    await this.loadAudioWithRetry(audio, fullPath, fileName, trackId);
 
-                const onCanPlay = () => {
-                    clearTimeout(timeout);
+                    // 加载成功
                     this.loadingStates.set(trackId, false);
                     this.eventBus.dispatchEvent(new CustomEvent('loadingEnd', { detail: trackId }));
 
@@ -217,7 +313,7 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
                     if (typeof window.loadingIndicator !== 'undefined') {
                         window.loadingIndicator.completeLoading();
                     }
-                
+
                     audio.volume = this.globalVolume * 0.5;
                     this.audioInstances.set(trackId, {
                         audio: audio,
@@ -227,34 +323,45 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
                         fileName: fileName,
                         isReady: true
                     });
-                    resolve();
-                };
 
-                const onError = (error) => {
-                    clearTimeout(timeout);
-                    console.error(`音频文件加载失败: ${fileName}`, error);
-                    this.loadingStates.set(trackId, false);
-                    this.eventBus.dispatchEvent(new CustomEvent('loadingEnd', { detail: trackId }));
+                    // 添加结束事件监听
+                    audio.addEventListener('ended', () => {
+                        this.onTrackEnded(trackId);
+                    });
 
-                    // Show error in loading indicator
-                    if (typeof window.loadingIndicator !== 'undefined') {
-                        window.loadingIndicator.showError(`音频加载失败: ${fileName}\n正在创建静默实例以保持应用运行`);
+                    return Promise.resolve();
+
+                } catch (error) {
+                    if (error.message === 'TIMEOUT' || error.message === 'LOAD_ERROR') {
+                        // 可重试的错误
+                        attemptNumber++;
+                        if (attemptNumber > this.retryConfig.maxRetries) {
+                            // 达到最大重试次数
+                            console.error(`❌ 音频加载失败，已达到最大重试次数: ${fileName}`);
+                            break;
+                        }
+                        // 继续下一次重试
+                        continue;
+                    } else {
+                        // 不可重试的错误
+                        console.error(`❌ 音频加载出现不可重试的错误: ${fileName}`, error);
+                        break;
                     }
+                }
+            }
 
-                    this.createSilentAudioInstance(trackId, categoryName, fileName);
-                    resolve();
-                };
+            // 所有重试都失败，创建静默实例
+            this.loadingStates.set(trackId, false);
+            this.eventBus.dispatchEvent(new CustomEvent('loadingEnd', { detail: trackId }));
 
-                audio.addEventListener('canplaythrough', onCanPlay, { once: true });
-                audio.addEventListener('error', onError, { once: true });
-            
-                // 添加结束事件监听
-                audio.addEventListener('ended', () => {
-                    this.onTrackEnded(trackId);
-                });
+            if (typeof window.loadingIndicator !== 'undefined') {
+                window.loadingIndicator.showError(
+                    `音频加载失败: ${fileName}\n已重试 ${this.retryConfig.maxRetries} 次，创建静默实例`
+                );
+            }
 
-                audio.src = fullPath;
-            });
+            this.createSilentAudioInstance(trackId, categoryName, fileName);
+            return Promise.resolve();
         }
 
         /**
@@ -794,14 +901,46 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
         }
 
         cleanup() {
+            console.log('🧹 AudioManager: 开始清理资源...');
+
+            // 停止进度更新
             this.stopProgressUpdate();
+
+            // 清理所有音频实例
             for (const [trackId, instance] of this.audioInstances) {
-                instance.audio.pause();
-                instance.audio.src = '';
-                instance.audio.remove();
+                try {
+                    // 暂停播放
+                    instance.audio.pause();
+
+                    // 移除事件监听器
+                    instance.audio.removeEventListener('ended', this.onTrackEnded);
+                    instance.audio.removeEventListener('error', () => {});
+                    instance.audio.removeEventListener('canplaythrough', () => {});
+
+                    // 清空音频源
+                    instance.audio.src = '';
+
+                    // 调用 load() 释放资源
+                    instance.audio.load();
+
+                    console.log(`✅ 清理音频实例: ${trackId}`);
+                } catch (error) {
+                    console.warn(`清理音频实例失败: ${trackId}`, error);
+                }
             }
+
+            // 清空所有实例映射
             this.audioInstances.clear();
+            this.loadingStates.clear();
+
+            // 重置状态
+            this.currentAudio = null;
+            this.currentTrack = null;
+            this.currentPlaylist = null;
             this.isInitialized = false;
+            this.isPlaylistMode = false;
+
+            console.log('✅ AudioManager: 资源清理完成');
         }
     }
 
