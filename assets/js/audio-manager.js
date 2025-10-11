@@ -356,7 +356,16 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
 
             if (typeof window.loadingIndicator !== 'undefined') {
                 window.loadingIndicator.showError(
-                    `音频加载失败: ${fileName}\n已重试 ${this.retryConfig.maxRetries} 次，创建静默实例`
+                    `音频加载失败: ${fileName}\n已重试 ${this.retryConfig.maxRetries} 次`
+                );
+            }
+
+            // 使用通知系统提示用户
+            if (typeof window.showNotification === 'function') {
+                window.showNotification(
+                    `⚠️ 音频加载失败\n\n"${this.getDisplayName(fileName)}" 无法加载，可能原因：\n1. 网络连接问题\n2. CDN 暂时不可用\n\n建议：请检查网络连接或稍后重试`,
+                    'warning',
+                    'error'
                 );
             }
 
