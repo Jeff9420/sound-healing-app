@@ -11,6 +11,7 @@ class GlobalErrorHandler {
         this.errors = [];
         this.maxErrors = 50; // 最多保存50个错误
         this.isInitialized = false;
+        this.isHandlingError = false; // 防止递归调用
     }
 
     /**
@@ -67,20 +68,34 @@ class GlobalErrorHandler {
      * 处理JavaScript错误
      */
     handleError(errorInfo) {
-        console.error('🔴 全局错误:', errorInfo);
+        // 防止递归调用导致栈溢出
+        if (this.isHandlingError) {
+            return;
+        }
 
-        // 保存错误信息
-        this.saveError(errorInfo);
+        try {
+            this.isHandlingError = true;
 
-        // 上报到分析服务
-        this.reportToAnalytics('javascript_error', errorInfo);
+            console.error('🔴 全局错误:', errorInfo);
 
-        // 对于严重错误，显示用户友好的提示
-        if (this.isCriticalError(errorInfo)) {
-            this.showUserNotification(
-                '应用遇到了一个问题，我们正在努力修复。请刷新页面重试。',
-                'error'
-            );
+            // 保存错误信息
+            this.saveError(errorInfo);
+
+            // 上报到分析服务
+            this.reportToAnalytics('javascript_error', errorInfo);
+
+            // 对于严重错误，显示用户友好的提示
+            if (this.isCriticalError(errorInfo)) {
+                this.showUserNotification(
+                    '应用遇到了一个问题，我们正在努力修复。请刷新页面重试。',
+                    'error'
+                );
+            }
+        } catch (e) {
+            // 错误处理过程中出错，只记录到控制台
+            console.error('[ErrorHandler] Failed to handle error:', e);
+        } finally {
+            this.isHandlingError = false;
         }
     }
 
@@ -169,15 +184,24 @@ class GlobalErrorHandler {
         }
 
         try {
+            // 安全获取错误描述
+            let description = 'Unknown error';
+            try {
+                description = this.getErrorDescription(errorInfo);
+            } catch (e) {
+                description = 'Error description unavailable';
+            }
+
             gtag('event', 'exception', {
-                description: this.getErrorDescription(errorInfo),
+                description: description,
                 fatal: this.isCriticalError(errorInfo),
                 error_type: errorType,
                 error_location: errorInfo.filename || 'unknown',
                 error_line: errorInfo.line || 0
             });
         } catch (e) {
-            console.warn('无法上报错误到Analytics:', e);
+            // 静默失败，不要抛出新错误
+            // console.warn('无法上报错误到Analytics:', e);
         }
     }
 
