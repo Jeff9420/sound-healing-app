@@ -3,10 +3,10 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   
-  <!-- Homepage -->
+  <!-- Homepage - www -->
   <url>
     <loc>https://www.soundflows.app/</loc>
-    <lastmod>2025-10-10</lastmod>
+    <lastmod>2025-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en-US" href="https://www.soundflows.app/" />
@@ -17,6 +17,25 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/" />
     <image:image>
       <image:loc>https://www.soundflows.app/assets/images/app-hero.jpg</image:loc>
+      <image:title>Free Sound Healing Music App</image:title>
+      <image:caption>213+ premium healing sounds for meditation and relaxation</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Homepage - non-www -->
+  <url>
+    <loc>https://soundflows.app/</loc>
+    <lastmod>2025-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://soundflows.app/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://soundflows.app/?lang=zh" />
+    <xhtml:link rel="alternate" hreflang="ja-JP" href="https://soundflows.app/?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://soundflows.app/?lang=ko" />
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://soundflows.app/?lang=es" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://soundflows.app/" />
+    <image:image>
+      <image:loc>https://soundflows.app/assets/images/app-hero.jpg</image:loc>
       <image:title>Free Sound Healing Music App</image:title>
       <image:caption>213+ premium healing sounds for meditation and relaxation</image:caption>
     </image:image>
