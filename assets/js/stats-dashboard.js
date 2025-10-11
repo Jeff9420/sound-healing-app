@@ -108,8 +108,10 @@ class StatsDashboard {
             ${this.renderAchievements(stats)}
         `;
 
-        // 渲染Canvas图表
-        this.renderCanvasCharts(stats, history);
+        // 渲染Canvas图表 - 使用requestAnimationFrame确保DOM已渲染
+        requestAnimationFrame(() => {
+            this.renderCanvasCharts(stats, history);
+        });
     }
 
     /**
