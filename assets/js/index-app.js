@@ -160,7 +160,7 @@ function initializeApp() {
             animateBackground();
         }
 
-        showNotification(getText('app.ready', '声音疗愈空间已准备就绪！'), 'success');
+        window.showNotification(getText('app.ready', '声音疗愈空间已准备就绪！'), 'success');
     }, 1500);
 }
 
@@ -369,7 +369,7 @@ function playTrack(index) {
     // Play audio
     audio.src = track.url;
     audio.play().catch(e => {
-        showNotification(getText('player.playError', '播放失败，请点击播放按钮'), 'error');
+        window.showNotification(getText('player.playError', '播放失败，请点击播放按钮'), 'error');
     });
 
     isPlaying = true;
@@ -383,7 +383,7 @@ function playTrack(index) {
     }
 
     closePlaylist();
-    showNotification(`${getText('player.nowPlaying', '正在播放')}: ${track.name}`, 'success');
+    window.showNotification(`${getText('player.nowPlaying', '正在播放')}: ${track.name}`, 'success');
 }
 
 function togglePlayPause() {
@@ -392,7 +392,7 @@ function togglePlayPause() {
         isPlaying = false;
     } else {
         audio.play().catch(e => {
-            showNotification('播放失败', 'error');
+            window.showNotification('播放失败', 'error');
         });
         isPlaying = true;
     }
@@ -528,12 +528,8 @@ function toggleMinimize(event) {
 // 通知系统
 // ==========================================================================
 
-function showNotification(message, type = 'info', category = 'general') {
-    // 使用通知偏好管理器
-    if (typeof window.showNotification === 'function') {
-        window.showNotification(message, type, category);
-    }
-}
+// 通知函数由 notification-preferences.js 提供
+// 使用 window.showNotification(message, type, category)
 
 // ==========================================================================
 // 背景场景管理
@@ -716,7 +712,7 @@ function toggleShuffle() {
     if (btn) {
         btn.classList.toggle('active', isShuffleMode);
     }
-    showNotification(getText(isShuffleMode ? 'player.shuffleOn' : 'player.shuffleOff', isShuffleMode ? '随机播放已开启' : '随机播放已关闭'));
+    window.showNotification(getText(isShuffleMode ? 'player.shuffleOn' : 'player.shuffleOff', isShuffleMode ? '随机播放已开启' : '随机播放已关闭'));
 }
 
 function toggleRepeat() {
@@ -726,7 +722,7 @@ function toggleRepeat() {
         btn.classList.toggle('active', isRepeatMode);
         btn.textContent = isRepeatMode ? '🔂' : '🔁';
     }
-    showNotification(getText(isRepeatMode ? 'player.repeatSingle' : 'player.repeatAll', isRepeatMode ? '单曲循环已开启' : '循环播放已开启'));
+    window.showNotification(getText(isRepeatMode ? 'player.repeatSingle' : 'player.repeatAll', isRepeatMode ? '单曲循环已开启' : '循环播放已开启'));
 }
 
 function toggleSleepTimer() {
@@ -762,7 +758,7 @@ function setSleepTimer(minutes) {
                 playPauseBtn.textContent = '▶️';
             }
 
-            showNotification(getText('timer.stopped', '睡眠定时器已停止播放'), 'success');
+            window.showNotification(getText('timer.stopped', '睡眠定时器已停止播放'), 'success');
 
             const sleepTimerBtn = document.getElementById('sleepTimerBtn');
             if (sleepTimerBtn) {
@@ -775,20 +771,20 @@ function setSleepTimer(minutes) {
             sleepTimerBtn.classList.add('active');
         }
 
-        showNotification(`${getText('timer.set', '睡眠定时器已设置为')}${minutes}${getText('timer.minutes', '分钟')}`, 'success');
+        window.showNotification(`${getText('timer.set', '睡眠定时器已设置为')}${minutes}${getText('timer.minutes', '分钟')}`, 'success');
     } else {
         const sleepTimerBtn = document.getElementById('sleepTimerBtn');
         if (sleepTimerBtn) {
             sleepTimerBtn.classList.remove('active');
         }
 
-        showNotification(getText('timer.closed', '睡眠定时器已关闭'), 'success');
+        window.showNotification(getText('timer.closed', '睡眠定时器已关闭'), 'success');
     }
 }
 
 function changePlaybackRate(rate) {
     audio.playbackRate = parseFloat(rate);
-    showNotification(`${getText('player.playbackRate', '播放速度')}: ${rate}x`, 'info');
+    window.showNotification(`${getText('player.playbackRate', '播放速度')}: ${rate}x`, 'info');
 }
 
 // ==========================================================================
