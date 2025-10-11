@@ -79,22 +79,19 @@
       "name": "Meditation",
       "short_name": "Meditate",
       "description": "Start meditation session",
-      "url": "/?category=meditation",
-      "icons": [{ "src": "assets/icons/meditation-icon.png", "sizes": "192x192" }]
+      "url": "/?category=meditation"
     },
     {
       "name": "Sleep Sounds",
       "short_name": "Sleep",
       "description": "Play sleep sounds",
-      "url": "/?category=rain-sounds",
-      "icons": [{ "src": "assets/icons/sleep-icon.png", "sizes": "192x192" }]
+      "url": "/?category=rain-sounds"
     },
     {
       "name": "Chakra Healing",
       "short_name": "Chakra",
       "description": "Chakra balancing sounds",
-      "url": "/?category=chakra-healing",
-      "icons": [{ "src": "assets/icons/chakra-icon.png", "sizes": "192x192" }]
+      "url": "/?category=chakra-healing"
     }
   ]
 }
