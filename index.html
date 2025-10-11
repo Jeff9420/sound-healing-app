@@ -147,6 +147,9 @@
     <link rel="stylesheet" href="assets/css/mobile-optimized.css">
     <link rel="stylesheet" href="assets/css/mobile-enhancement.css">
     <link rel="stylesheet" href="assets/css/touch-target-optimization.css">
+
+    <!-- 主题系统CSS -->
+    <link rel="stylesheet" href="assets/css/theme-system.css">
 </head>
 <body>
     <!-- SEO H1 (Hidden for SEO purposes, screen reader accessible) -->
@@ -192,6 +195,10 @@
                         </button>
                         <button class="header-icon-btn" onclick="window.notificationPreferences && window.notificationPreferences.openSettings()" title="通知设置">
                             🔔
+                        </button>
+                        <!-- Theme Toggle Button -->
+                        <button id="themeToggle" class="header-icon-btn theme-toggle-btn" title="切换主题">
+                            <span class="theme-icon">🌙</span>
                         </button>
                         <!-- Language Selector -->
                         <div class="language-selector">
@@ -505,9 +512,19 @@
     <script src="assets/js/favorite-button-controller.js"></script>
     <script src="assets/js/pwa-manager.js"></script>
     <script src="assets/js/notification-preferences.js"></script>
+    <script src="assets/js/theme-manager.js"></script>
     <script src="assets/js/index-app.js"></script>
     <script src="assets/js/rating-system.js"></script>
     <script src="assets/js/touch-gestures.js"></script>
     <script src="assets/js/accessibility-enhancements.js"></script>
+
+    <!-- 初始化主题管理器 -->
+    <script>
+        // 在DOM加载后初始化主题管理器
+        window.addEventListener('DOMContentLoaded', () => {
+            window.themeManager = new ThemeManager();
+            console.log('✅ 主题管理器已初始化');
+        });
+    </script>
 </body>
 </html>

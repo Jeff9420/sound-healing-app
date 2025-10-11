@@ -1,0 +1,376 @@
+/**
+ * 主题系统 - Theme System
+ * 支持明暗主题切换
+ */
+
+/* ==========================================================================
+   CSS变量定义 - Dark Theme (默认)
+   ========================================================================== */
+
+:root {
+    /* 主色调 */
+    --primary-bg: #1a1a2e;
+    --primary-bg-gradient-start: #1a1a2e;
+    --primary-bg-gradient-mid: #16213e;
+    --primary-bg-gradient-end: #0f3460;
+
+    /* 文字颜色 */
+    --text-primary: #eee;
+    --text-secondary: rgba(255, 255, 255, 0.9);
+    --text-tertiary: rgba(255, 255, 255, 0.7);
+
+    /* 卡片和组件背景 */
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --card-bg-hover: rgba(255, 255, 255, 0.1);
+    --card-border: rgba(255, 255, 255, 0.1);
+
+    /* 按钮 */
+    --button-bg: rgba(255, 255, 255, 0.1);
+    --button-bg-hover: rgba(255, 255, 255, 0.2);
+    --button-border: rgba(255, 255, 255, 0.3);
+
+    /* 播放器 */
+    --player-bg: rgba(0, 0, 0, 0.95);
+    --player-border: rgba(255, 255, 255, 0.1);
+
+    /* 进度条和滑块 */
+    --progress-bg: rgba(255, 255, 255, 0.3);
+    --progress-fill: #FF6699;
+
+    /* 模态框 */
+    --modal-bg: linear-gradient(135deg, #6666FF 0%, #FF6699 100%);
+    --modal-overlay: rgba(0, 0, 0, 0.8);
+
+    /* 通知 */
+    --notification-bg: rgba(0, 0, 0, 0.8);
+
+    /* 阴影 */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 5px 15px rgba(108, 92, 231, 0.3);
+    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+    /* 主题色 */
+    --theme-color: #6666ff;
+    --theme-accent: #FF6699;
+}
+
+/* ==========================================================================
+   Light Theme (亮色主题)
+   ========================================================================== */
+
+[data-theme="light"] {
+    /* 主色调 */
+    --primary-bg: #f8fafc;
+    --primary-bg-gradient-start: #f8fafc;
+    --primary-bg-gradient-mid: #e2e8f0;
+    --primary-bg-gradient-end: #cbd5e1;
+
+    /* 文字颜色 */
+    --text-primary: #1a202c;
+    --text-secondary: #2d3748;
+    --text-tertiary: #4a5568;
+
+    /* 卡片和组件背景 */
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --card-bg-hover: rgba(255, 255, 255, 0.95);
+    --card-border: rgba(0, 0, 0, 0.1);
+
+    /* 按钮 */
+    --button-bg: rgba(0, 0, 0, 0.05);
+    --button-bg-hover: rgba(0, 0, 0, 0.1);
+    --button-border: rgba(0, 0, 0, 0.15);
+
+    /* 播放器 */
+    --player-bg: rgba(255, 255, 255, 0.98);
+    --player-border: rgba(0, 0, 0, 0.1);
+
+    /* 进度条和滑块 */
+    --progress-bg: rgba(0, 0, 0, 0.2);
+    --progress-fill: #6666FF;
+
+    /* 模态框 */
+    --modal-bg: linear-gradient(135deg, #8888FF 0%, #FF88BB 100%);
+    --modal-overlay: rgba(0, 0, 0, 0.5);
+
+    /* 通知 */
+    --notification-bg: rgba(255, 255, 255, 0.95);
+
+    /* 阴影 */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 5px 15px rgba(102, 102, 255, 0.15);
+    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+
+    /* 主题色 */
+    --theme-color: #6666ff;
+    --theme-accent: #FF6699;
+}
+
+/* ==========================================================================
+   应用主题变量到现有样式
+   ========================================================================== */
+
+body {
+    background: var(--primary-bg);
+    background-image: linear-gradient(
+        135deg,
+        var(--primary-bg-gradient-start) 0%,
+        var(--primary-bg-gradient-mid) 50%,
+        var(--primary-bg-gradient-end) 100%
+    );
+    color: var(--text-primary);
+}
+
+.loading-screen {
+    background: var(--primary-bg);
+    background-image: linear-gradient(
+        135deg,
+        var(--primary-bg-gradient-start) 0%,
+        var(--primary-bg-gradient-mid) 50%,
+        var(--primary-bg-gradient-end) 100%
+    );
+}
+
+/* Header Icon Buttons */
+.header-icon-btn {
+    background: var(--button-bg);
+    border: 1px solid var(--button-border);
+    color: var(--text-primary);
+}
+
+.header-icon-btn:hover {
+    background: var(--button-bg-hover);
+    box-shadow: var(--shadow-md);
+}
+
+/* Language Selector */
+.language-selector select {
+    background: var(--button-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--button-border);
+}
+
+.language-selector select:hover {
+    background: var(--button-bg-hover);
+}
+
+.language-selector option {
+    background: var(--primary-bg);
+    color: var(--text-primary);
+}
+
+/* Category Cards */
+.category-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--text-primary);
+}
+
+.category-card:hover {
+    background: var(--card-bg-hover);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Playlist Modal */
+.modal-content {
+    background: var(--modal-bg);
+}
+
+.playlist-modal {
+    background: var(--modal-overlay);
+}
+
+/* Audio Player */
+.audio-player {
+    background: var(--player-bg);
+    border-top: 1px solid var(--player-border);
+    color: var(--text-primary);
+}
+
+.control-btn {
+    color: var(--text-primary);
+}
+
+.control-btn:hover {
+    background: var(--button-bg-hover);
+}
+
+/* Progress Bar */
+.progress-bar {
+    background: var(--progress-bg);
+}
+
+.progress-fill {
+    background: var(--progress-fill);
+}
+
+/* Volume Slider */
+.volume-slider {
+    background: var(--progress-bg);
+}
+
+.volume-slider::-webkit-slider-thumb {
+    background: var(--progress-fill);
+}
+
+/* Playback Rate */
+.playback-rate {
+    background: var(--button-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--button-border);
+}
+
+.playback-rate option {
+    background: var(--primary-bg);
+}
+
+/* Timer Modal */
+.timer-modal {
+    background: var(--player-bg);
+    border: 1px solid var(--player-border);
+}
+
+.timer-content h3 {
+    color: var(--text-primary);
+}
+
+.timer-options button {
+    background: var(--button-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--button-border);
+}
+
+.timer-options button:hover {
+    background: var(--button-bg-hover);
+}
+
+/* Notification */
+.notification {
+    background: var(--notification-bg);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-lg);
+}
+
+[data-theme="light"] .notification {
+    color: var(--text-primary);
+    border: 1px solid var(--card-border);
+}
+
+/* Track Items */
+.track-item {
+    background: var(--card-bg);
+    color: var(--text-primary);
+}
+
+.track-item:hover {
+    background: var(--card-bg-hover);
+}
+
+/* Minimized Display */
+.minimized-text {
+    color: var(--text-primary);
+}
+
+.minimize-indicator {
+    background: var(--button-bg);
+    color: var(--text-primary);
+}
+
+.minimize-indicator:hover {
+    background: var(--button-bg-hover);
+}
+
+/* ==========================================================================
+   主题切换按钮样式
+   ========================================================================== */
+
+.theme-toggle-btn {
+    position: relative;
+    background: var(--button-bg);
+    border: 1px solid var(--button-border);
+    color: var(--text-primary);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+}
+
+.theme-toggle-btn:hover {
+    background: var(--button-bg-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.theme-toggle-btn:active {
+    transform: translateY(0);
+}
+
+.theme-icon {
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle-btn:hover .theme-icon {
+    transform: rotate(20deg);
+}
+
+/* 主题切换动画 */
+@keyframes themeSwitch {
+    0% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(0.95) rotate(180deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+[data-theme-transitioning] * {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+}
+
+/* ==========================================================================
+   亮色主题特殊调整
+   ========================================================================== */
+
+[data-theme="light"] h1,
+[data-theme="light"] .subtitle {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .loading-spinner {
+    border-color: rgba(0, 0, 0, 0.2);
+    border-top-color: var(--theme-color);
+}
+
+[data-theme="light"] #shuffleBtn.active,
+[data-theme="light"] #repeatBtn.active,
+[data-theme="light"] #sleepTimerBtn.active {
+    color: var(--theme-color);
+    background: rgba(102, 102, 255, 0.2);
+}
+
+[data-theme="light"] #backgroundCanvas {
+    opacity: 0.4;
+}
+
+/* ==========================================================================
+   响应式调整
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .theme-toggle-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1.1em;
+    }
+}
