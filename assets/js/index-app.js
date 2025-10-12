@@ -325,8 +325,9 @@ function openPlaylist(categoryKey, category) {
         trackList.appendChild(trackItem);
     });
 
-    // Change background scene
-    changeBackgroundScene(categoryKey);
+    // ❌ 移除这行，避免重复触发事件
+    // changeBackgroundScene(categoryKey);
+    // ✅ 视频切换将在 playTrack() 时统一触发
 
     // Show modal
     const playlistModal = document.getElementById('playlistModal');
@@ -346,10 +347,21 @@ function closePlaylist() {
 // 音频播放控制
 // ==========================================================================
 
-function playTrack(index) {
+async function playTrack(index) {  // ✅ 改为async函数
     currentTrackIndex = index;
     const track = tracks[index];
     const category = categoryInfo[currentCategory.key] || currentCategory;
+
+    // ✅ 检测并处理Autoplay策略
+    if (window.autoplayDetector) {
+        const isAllowed = await window.autoplayDetector.detectAutoplay();
+
+        if (!isAllowed && !window.autoplayDetector.hasUserInteracted) {
+            console.log('⚠️ 需要用户交互才能播放');
+            // 等待用户交互
+            await window.autoplayDetector.waitForInteraction();
+        }
+    }
 
     // Update UI
     const currentTrack = document.getElementById('currentTrack');
@@ -373,11 +385,59 @@ function playTrack(index) {
         }));
     }
 
+    // ✅ 检查是否有预加载的音频
+    let audioToPlay = audio;
+
+    if (window.audioPreloader) {
+        const cachedAudio = window.audioPreloader.getCachedAudio(track.url);
+        if (cachedAudio) {
+            console.log('⚡ 使用预加载音频，立即播放');
+            // 使用预加载的audio对象
+            audioToPlay = cachedAudio;
+            // 更新全局audio引用（注意：这可能需要重新绑定事件）
+            audio = cachedAudio;
+
+            // 重新绑定事件
+            audio.addEventListener('timeupdate', updateProgress);
+            audio.addEventListener('ended', handleTrackEnd);
+            audio.addEventListener('loadedmetadata', updateDuration);
+        }
+    }
+
     // Play audio（视频已经开始预加载）
-    audio.src = track.url;
-    audio.play().catch(e => {
-        window.showNotification(getText('player.playError', '播放失败，请点击播放按钮'), 'error');
-    });
+    if (audioToPlay.src !== track.url) {
+        audioToPlay.src = track.url;
+    }
+
+    // ✅ 改进的错误处理
+    try {
+        await audioToPlay.play();
+        console.log('✅ 音频播放成功');
+    } catch (error) {
+        console.error('❌ 音频播放失败:', error);
+
+        // 如果是DOMException（通常是autoplay阻止）
+        if (error.name === 'NotAllowedError') {
+            window.showNotification(
+                '请点击播放按钮开始播放',
+                'warning'
+            );
+
+            // 显示明显的播放按钮提示
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            if (playPauseBtn) {
+                playPauseBtn.style.animation = 'pulse 1s infinite';
+                playPauseBtn.style.boxShadow = '0 0 20px rgba(102, 126, 234, 0.8)';
+            }
+        } else {
+            window.showNotification(
+                getText('player.playError', '播放失败，请检查网络连接'),
+                'error'
+            );
+        }
+
+        return; // 播放失败，提前返回
+    }
 
     isPlaying = true;
     updatePlayPauseButton();
@@ -396,6 +456,11 @@ function playTrack(index) {
 
     closePlaylist();
     window.showNotification(`${getText('player.nowPlaying', '正在播放')}: ${track.name}`, 'success');
+
+    // ✅ 预加载下一首音频
+    if (window.audioPreloader && tracks.length > 1) {
+        window.audioPreloader.preloadNext(tracks, currentTrackIndex, isShuffleMode);
+    }
 }
 
 function togglePlayPause() {
@@ -559,10 +624,9 @@ function changeBackgroundScene(scene) {
     }
     currentScene = scene;
 
-    // 🎥 2.0 新增: 触发视频背景切换事件
-    window.dispatchEvent(new CustomEvent('categoryChanged', {
-        detail: { category: scene }
-    }));
+    // ❌ 移除视频事件触发，统一由 playTrack() 处理
+    // 这里只处理Canvas粒子动画
+
     particles = [];
 
     // Scene configurations

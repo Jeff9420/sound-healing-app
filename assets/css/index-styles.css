@@ -589,3 +589,17 @@ canvas {
     z-index: -1;
     opacity: 0.3;
 }
+
+/* ==========================================================================
+   Autoplay按钮脉冲动画 (2.0 新增)
+   ========================================================================== */
+
+/* Pulse animation for play button when autoplay is blocked */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
