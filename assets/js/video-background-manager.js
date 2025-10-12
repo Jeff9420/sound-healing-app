@@ -109,17 +109,19 @@ class VideoBackgroundManager {
      * 预加载首个视频
      */
     preloadInitialVideo() {
-        // 预加载最常用的几个分类视频
-        const initialCategories = ['meditation', 'Rain', 'Animal sounds'];
+        // ✅ 优化：只预加载最常用的1个视频，减少初始加载压力
+        const initialCategories = ['meditation'];
 
-        initialCategories.forEach((category, index) => {
-            const url = this.getVideoUrl(category);
-            if (url) {
-                setTimeout(() => {
+        // 延迟3秒后才开始预加载，让页面其他资源先加载
+        setTimeout(() => {
+            initialCategories.forEach((category) => {
+                const url = this.getVideoUrl(category);
+                if (url) {
+                    console.log(`🔮 后台预加载初始视频: ${category}`);
                     this.preloadVideoInBackground(url);
-                }, index * 1000); // 错开预加载时间，避免同时加载
-            }
-        });
+                }
+            });
+        }, 3000);
     }
 
     /**
@@ -221,6 +223,7 @@ class VideoBackgroundManager {
         }
 
         console.log(`🎬 切换视频背景: ${category}`);
+        console.log(`   可用分类:`, Object.keys(this.videoConfig.categories));
         const startTime = performance.now();
 
         this.isTransitioning = true;
@@ -231,10 +234,13 @@ class VideoBackgroundManager {
             const videoUrl = this.getVideoUrl(category);
 
             if (!videoUrl) {
-                console.warn(`⚠️ 未找到分类 ${category} 的视频配置`);
+                console.error(`❌ 未找到分类 "${category}" 的视频配置`);
+                console.error(`   可用的分类:`, Object.keys(this.videoConfig.categories));
                 this.fallbackToCanvas();
                 return;
             }
+
+            console.log(`   视频URL: ${videoUrl}`);
 
             // 如果视频已缓存，立即开始切换；否则先加载
             const isCached = this.preloadedVideos.has(videoUrl);

@@ -386,32 +386,20 @@ async function playTrack(index) {  // ✅ 改为async函数
     }
 
     // ✅ 检查是否有预加载的音频
-    let audioToPlay = audio;
-
-    if (window.audioPreloader) {
-        const cachedAudio = window.audioPreloader.getCachedAudio(track.url);
-        if (cachedAudio) {
-            console.log('⚡ 使用预加载音频，立即播放');
-            // 使用预加载的audio对象
-            audioToPlay = cachedAudio;
-            // 更新全局audio引用（注意：这可能需要重新绑定事件）
-            audio = cachedAudio;
-
-            // 重新绑定事件
-            audio.addEventListener('timeupdate', updateProgress);
-            audio.addEventListener('ended', handleTrackEnd);
-            audio.addEventListener('loadedmetadata', updateDuration);
-        }
+    // 注意：不能替换全局audio对象(const)，只设置src让浏览器使用缓存
+    if (window.audioPreloader && window.audioPreloader.isCached(track.url)) {
+        console.log('⚡ 音频已缓存，使用浏览器缓存加速加载');
     }
 
     // Play audio（视频已经开始预加载）
-    if (audioToPlay.src !== track.url) {
-        audioToPlay.src = track.url;
+    // 直接设置src，浏览器会从缓存加载（如果已预加载）
+    if (audio.src !== track.url) {
+        audio.src = track.url;
     }
 
     // ✅ 改进的错误处理
     try {
-        await audioToPlay.play();
+        await audio.play();
         console.log('✅ 音频播放成功');
     } catch (error) {
         console.error('❌ 音频播放失败:', error);
