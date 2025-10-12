@@ -99,7 +99,27 @@ class VideoBackgroundManager {
         // 监听音频分类切换事件
         this.listenToCategoryChanges();
 
+        // 预加载首个视频（通常是meditation分类）
+        this.preloadInitialVideo();
+
         console.log('✅ 视频背景系统初始化完成');
+    }
+
+    /**
+     * 预加载首个视频
+     */
+    preloadInitialVideo() {
+        // 预加载最常用的几个分类视频
+        const initialCategories = ['meditation', 'Rain', 'Animal sounds'];
+
+        initialCategories.forEach((category, index) => {
+            const url = this.getVideoUrl(category);
+            if (url) {
+                setTimeout(() => {
+                    this.preloadVideoInBackground(url);
+                }, index * 1000); // 错开预加载时间，避免同时加载
+            }
+        });
     }
 
     /**
@@ -154,7 +174,7 @@ class VideoBackgroundManager {
         video.loop = true;
         video.playsInline = true;
         video.autoplay = false;
-        video.preload = 'metadata';
+        video.preload = 'auto'; // 改为auto积极预加载，减少播放延迟
 
         // 添加多种视频格式支持
         video.innerHTML = `
@@ -216,7 +236,13 @@ class VideoBackgroundManager {
                 return;
             }
 
-            // 预加载视频
+            // 如果视频已缓存，立即开始切换；否则先加载
+            const isCached = this.preloadedVideos.has(videoUrl);
+            if (isCached) {
+                console.log('⚡ 使用缓存视频，立即切换');
+            }
+
+            // 预加载视频（如已缓存会立即返回）
             await this.loadVideo(this.nextVideo, videoUrl);
 
             // 平滑切换
@@ -257,6 +283,7 @@ class VideoBackgroundManager {
             if (this.preloadedVideos.has(url)) {
                 const cachedVideo = this.preloadedVideos.get(url);
                 videoElement.src = cachedVideo.src;
+                console.log('🎬 使用缓存的视频:', url);
                 resolve();
                 return;
             }
@@ -266,14 +293,17 @@ class VideoBackgroundManager {
 
             videoElement.load();
 
-            // 设置超时
+            // 设置超时（增加到15秒，考虑Archive.org速度）
             const timeout = setTimeout(() => {
                 reject(new Error('视频加载超时'));
-            }, 10000); // 10秒超时
+            }, 15000);
 
-            videoElement.addEventListener('loadeddata', () => {
+            // 使用canplay事件而非loadeddata，更早触发
+            videoElement.addEventListener('canplay', () => {
                 clearTimeout(timeout);
-                this.preloadedVideos.set(url, videoElement.cloneNode(true));
+                // 缓存视频元素的src，而不是克隆整个元素
+                this.preloadedVideos.set(url, { src: url, ready: true });
+                console.log('✅ 视频可播放:', url);
                 resolve();
             }, { once: true });
 
@@ -370,11 +400,14 @@ class VideoBackgroundManager {
     preloadVideoInBackground(url) {
         const tempVideo = document.createElement('video');
         tempVideo.preload = 'auto';
+        tempVideo.muted = true;
+        tempVideo.playsInline = true;
         tempVideo.src = url;
         tempVideo.load();
 
-        tempVideo.addEventListener('loadeddata', () => {
-            this.preloadedVideos.set(url, tempVideo);
+        // 使用canplay事件，比loadeddata更早触发
+        tempVideo.addEventListener('canplay', () => {
+            this.preloadedVideos.set(url, { src: url, ready: true });
             console.log(`✅ 预加载视频完成: ${url}`);
         }, { once: true });
 

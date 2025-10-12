@@ -254,7 +254,7 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
             }
 
             const audio = new Audio();
-            audio.preload = 'metadata';
+            audio.preload = 'auto'; // 改为auto积极预加载，减少播放延迟
 
             // 设置音频路径
             const fullPath = getAudioUrl(categoryName, fileName);
@@ -299,7 +299,7 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
 
                         // 重新创建音频元素以清除之前的错误状态
                         audio = new Audio();
-                        audio.preload = 'metadata';
+                        audio.preload = 'auto'; // 改为auto积极预加载
                     }
 
                     // 尝试加载音频

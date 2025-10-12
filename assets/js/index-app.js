@@ -366,7 +366,14 @@ function playTrack(index) {
         minimizedTrack.textContent = `${track.name} - ${category.name || currentCategory.key}`;
     }
 
-    // Play audio
+    // 🎥 2.0 优化: 先触发视频背景切换，让视频和音频同时开始加载
+    if (currentCategory && currentCategory.key) {
+        window.dispatchEvent(new CustomEvent('categoryChanged', {
+            detail: { category: currentCategory.key }
+        }));
+    }
+
+    // Play audio（视频已经开始预加载）
     audio.src = track.url;
     audio.play().catch(e => {
         window.showNotification(getText('player.playError', '播放失败，请点击播放按钮'), 'error');
@@ -380,13 +387,6 @@ function playTrack(index) {
     if (player) {
         player.classList.add('show');
         player.classList.remove('minimized');
-    }
-
-    // 🎥 2.0 新增: 触发视频背景切换事件
-    if (currentCategory && currentCategory.key) {
-        window.dispatchEvent(new CustomEvent('categoryChanged', {
-            detail: { category: currentCategory.key }
-        }));
     }
 
     // 🎯 2.0 新增: 触发音频状态变化事件（用于专注模式）
