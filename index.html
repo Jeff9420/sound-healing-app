@@ -150,6 +150,10 @@
 
     <!-- 主题系统CSS -->
     <link rel="stylesheet" href="assets/css/theme-system.css">
+
+    <!-- 视频背景系统CSS (2.0 新增) -->
+    <link rel="stylesheet" href="assets/css/video-background.css">
+    <link rel="stylesheet" href="assets/css/focus-mode.css">
 </head>
 <body>
     <!-- SEO H1 (Hidden for SEO purposes, screen reader accessible) -->
@@ -195,6 +199,10 @@
                         </button>
                         <button class="header-icon-btn" onclick="window.notificationPreferences && window.notificationPreferences.openSettings()" title="通知设置">
                             🔔
+                        </button>
+                        <!-- Focus Mode Toggle (2.0 新增) -->
+                        <button id="focusModeToggle" class="header-icon-btn" onclick="window.focusModeController && window.focusModeController.toggle()" title="专注模式">
+                            🎯
                         </button>
                         <!-- Theme Toggle Button -->
                         <button id="themeToggle" class="header-icon-btn theme-toggle-btn" title="切换主题">
@@ -498,10 +506,13 @@
     </script>
 
     <!-- External JavaScript Files -->
-    <!-- Load in order: error handler → config → i18n → user data → metadata → app logic → features → enhancements -->
+    <!-- Load in order: error handler → config → i18n → user data → metadata → video background → app logic → features → enhancements -->
     <script src="assets/js/global-error-handler.js"></script>
     <script src="assets/js/audio-config.js"></script>
     <script src="assets/js/i18n-system.js"></script>
+    <!-- 视频背景系统 (2.0 新增) -->
+    <script src="assets/js/video-background-manager.js"></script>
+    <script src="assets/js/focus-mode-controller.js"></script>
     <script src="assets/js/user-data-manager.js"></script>
     <script src="assets/js/audio-metadata.js"></script>
     <script src="assets/js/recommendation-engine.js"></script>

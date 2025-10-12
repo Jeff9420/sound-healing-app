@@ -382,6 +382,18 @@ function playTrack(index) {
         player.classList.remove('minimized');
     }
 
+    // 🎥 2.0 新增: 触发视频背景切换事件
+    if (currentCategory && currentCategory.key) {
+        window.dispatchEvent(new CustomEvent('categoryChanged', {
+            detail: { category: currentCategory.key }
+        }));
+    }
+
+    // 🎯 2.0 新增: 触发音频状态变化事件（用于专注模式）
+    window.dispatchEvent(new CustomEvent('audioStateChange', {
+        detail: { isPlaying: true, track: track }
+    }));
+
     closePlaylist();
     window.showNotification(`${getText('player.nowPlaying', '正在播放')}: ${track.name}`, 'success');
 }
@@ -397,6 +409,11 @@ function togglePlayPause() {
         isPlaying = true;
     }
     updatePlayPauseButton();
+
+    // 🎯 2.0 新增: 触发音频状态变化事件（用于专注模式）
+    window.dispatchEvent(new CustomEvent('audioStateChange', {
+        detail: { isPlaying: isPlaying }
+    }));
 }
 
 function updatePlayPauseButton() {
@@ -541,6 +558,11 @@ function changeBackgroundScene(scene) {
         return;
     }
     currentScene = scene;
+
+    // 🎥 2.0 新增: 触发视频背景切换事件
+    window.dispatchEvent(new CustomEvent('categoryChanged', {
+        detail: { category: scene }
+    }));
     particles = [];
 
     // Scene configurations
