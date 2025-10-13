@@ -75,20 +75,21 @@ class CacheManager {
             
             if (existingRegistration) {
                 console.log('🔄 缓存管理器：发现现有Service Worker，准备升级...');
-                
-                // 注册新版本
-                this.swRegistration = await navigator.serviceWorker.register('/sw-enhanced.js', {
+
+                // ✅ 修复: 使用正确的Service Worker文件名 sw.js (v2.2.0)
+                this.swRegistration = await navigator.serviceWorker.register('/sw.js', {
                     scope: '/',
                     updateViaCache: 'none' // 强制检查更新
                 });
-                
+
                 console.log('🔄 缓存管理器：Service Worker升级完成');
             } else {
                 // 首次注册
-                this.swRegistration = await navigator.serviceWorker.register('/sw-enhanced.js', {
+                // ✅ 修复: 使用正确的Service Worker文件名 sw.js (v2.2.0)
+                this.swRegistration = await navigator.serviceWorker.register('/sw.js', {
                     scope: '/'
                 });
-                
+
                 console.log('📦 缓存管理器：首次注册Service Worker');
             }
             
