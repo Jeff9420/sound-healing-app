@@ -14,9 +14,9 @@
 
 class VideoBackgroundManager {
     constructor() {
-        // 视频配置 - Archive.org 托管
+        // 视频配置 - 本地优化版本（2-9MB，比Archive.org快）
         this.videoConfig = {
-            baseUrl: 'https://archive.org/download/zen-bamboo/',
+            baseUrl: '/videos/optimized/',
             categories: {
                 'Animal sounds': {
                     filename: 'forest-birds.mp4',

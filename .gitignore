@@ -160,9 +160,8 @@ assets/audio/**/*.flac
 # 保留音频文件夹的 README 说明
 !assets/audio/**/README.md
 
-# 视频文件临时备份和优化版本
+# 视频文件临时备份（双重扩展名）
 videos/*.mp4.mp4
-videos/optimized/
 
 # 项目特定临时文件
 %USERPROFILE%.configclaude-code
