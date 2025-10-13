@@ -1,10 +1,10 @@
 /**
  * SoundFlows Service Worker - PWA功能支持
  * 离线缓存、后台同步、推送通知、音频预加载
- * @version 2.0
+ * @version 2.2.0 - 修复Response.clone()错误
  */
 
-const CACHE_NAME = 'soundflows-v2';
+const CACHE_NAME = 'soundflows-v2.2';
 const STATIC_CACHE_URLS = [
   '/',
   '/index.html',
@@ -114,14 +114,18 @@ async function handleAudioRequest(request) {
   try {
     const networkResponse = await fetch(request);
     if (networkResponse.ok) {
-      // 动态缓存小型音频文件（小于5MB）
+      // ✅ 修复: 先clone再使用，避免Response body already used错误
       const contentLength = networkResponse.headers.get('content-length');
       if (contentLength && parseInt(contentLength) < 5 * 1024 * 1024) {
+        // Clone BEFORE reading the response
         const responseClone = networkResponse.clone();
-        caches.open('dynamic-audio-v1').then(cache => {
-          cache.put(request, responseClone);
+        // 使用await确保缓存操作完成
+        const dynamicCache = await caches.open('dynamic-audio-v1');
+        await dynamicCache.put(request, responseClone).catch(err => {
+          console.warn('⚠️ 音频缓存失败:', err);
         });
       }
+      return networkResponse;
     }
     return networkResponse;
   } catch (error) {
@@ -137,12 +141,17 @@ async function handleStaticRequest(request) {
   const cached = await caches.match(request);
 
   if (cached) {
-    // 后台更新缓存
+    // ✅ 后台更新缓存 - 修复clone时序问题
     fetch(request)
       .then(response => {
         if (response.ok) {
-          const cache = caches.open(CACHE_NAME);
-          cache.then(c => c.put(request, response));
+          // Clone BEFORE using the response
+          const responseClone = response.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(request, responseClone).catch(err => {
+              console.warn('⚠️ 后台缓存更新失败:', err);
+            });
+          });
         }
       })
       .catch(() => {});
@@ -153,9 +162,12 @@ async function handleStaticRequest(request) {
   try {
     const networkResponse = await fetch(request);
     if (networkResponse.ok) {
+      // ✅ Clone BEFORE using the response
       const responseClone = networkResponse.clone();
       const cache = await caches.open(CACHE_NAME);
-      cache.put(request, responseClone);
+      await cache.put(request, responseClone).catch(err => {
+        console.warn('⚠️ 静态资源缓存失败:', err);
+      });
     }
     return networkResponse;
   } catch (error) {

@@ -892,6 +892,11 @@ if (document.readyState === 'loading') {
         initI18n();
         initializeApp();
 
+        // ✅ 修复: 在Canvas初始化后才调用changeBackgroundScene
+        if (canvas && ctx) {
+            changeBackgroundScene('default');
+        }
+
         // Listen for language change events
         document.addEventListener('languageChange', function() {
             loadCategories();
@@ -903,12 +908,14 @@ if (document.readyState === 'loading') {
     initI18n();
     initializeApp();
 
+    // ✅ 修复: 在Canvas初始化后才调用changeBackgroundScene
+    if (canvas && ctx) {
+        changeBackgroundScene('default');
+    }
+
     // Listen for language change events
     document.addEventListener('languageChange', function() {
         loadCategories();
         updateStaticText();
     });
 }
-
-// Initialize default background
-changeBackgroundScene('default');
