@@ -106,6 +106,8 @@ quick-test.html
 browser-test.html
 audio-debug.html
 *-test.html
+tmp_*.js
+tmp_*.html
 
 # 文档临时文件（已整理到docs/）
 *.md
@@ -157,6 +159,10 @@ assets/audio/**/*.m4a
 assets/audio/**/*.flac
 # 保留音频文件夹的 README 说明
 !assets/audio/**/README.md
+
+# 视频文件临时备份和优化版本
+videos/*.mp4.mp4
+videos/optimized/
 
 # 项目特定临时文件
 %USERPROFILE%.configclaude-code
