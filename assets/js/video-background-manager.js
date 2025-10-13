@@ -282,21 +282,20 @@ class VideoBackgroundManager {
 
     /**
      * 加载视频
+     * ✅ 修复: 即使命中缓存也等待canplay事件，避免黑屏
      */
     loadVideo(videoElement, url) {
         return new Promise((resolve, reject) => {
-            // 检查是否已预加载
+            // 设置视频源
             if (this.preloadedVideos.has(url)) {
-                const cachedVideo = this.preloadedVideos.get(url);
-                videoElement.src = cachedVideo.src;
                 console.log('🎬 使用缓存的视频:', url);
-                resolve();
-                return;
+                videoElement.src = url; // 使用URL而不是克隆src
+            } else {
+                const source = videoElement.querySelector('source[type="video/mp4"]');
+                source.src = url;
             }
 
-            const source = videoElement.querySelector('source[type="video/mp4"]');
-            source.src = url;
-
+            // 加载视频
             videoElement.load();
 
             // 设置超时（增加到15秒，考虑Archive.org速度）
@@ -304,14 +303,27 @@ class VideoBackgroundManager {
                 reject(new Error('视频加载超时'));
             }, 15000);
 
-            // 使用canplay事件而非loadeddata，更早触发
-            videoElement.addEventListener('canplay', () => {
+            // ✅ 关键修复: 无论是否缓存都等待canplay，确保readyState >= HAVE_FUTURE_DATA
+            const onCanPlay = () => {
                 clearTimeout(timeout);
-                // 缓存视频元素的src，而不是克隆整个元素
-                this.preloadedVideos.set(url, { src: url, ready: true });
-                console.log('✅ 视频可播放:', url);
-                resolve();
-            }, { once: true });
+
+                // 检查视频readyState
+                if (videoElement.readyState >= 3) { // HAVE_FUTURE_DATA
+                    console.log(`✅ 视频可播放: ${url} (readyState: ${videoElement.readyState})`);
+                    this.preloadedVideos.set(url, { src: url, ready: true });
+                    resolve();
+                } else {
+                    console.warn(`⚠️ 视频readyState不足: ${videoElement.readyState}，继续等待...`);
+                    // 继续等待loadeddata
+                    videoElement.addEventListener('loadeddata', () => {
+                        console.log('✅ 视频数据加载完成');
+                        this.preloadedVideos.set(url, { src: url, ready: true });
+                        resolve();
+                    }, { once: true });
+                }
+            };
+
+            videoElement.addEventListener('canplay', onCanPlay, { once: true });
 
             videoElement.addEventListener('error', (e) => {
                 clearTimeout(timeout);

@@ -65,6 +65,9 @@
     <!-- Preconnect to External Resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- ✅ Archive.org CDN预连接 - 优化音频/视频加载速度 -->
+    <link rel="preconnect" href="https://archive.org">
+    <link rel="dns-prefetch" href="https://archive.org">
 
     <!-- DNS Prefetch -->
     <link rel="dns-prefetch" href="https://www.google-analytics.com">
@@ -531,6 +534,8 @@
     <script src="assets/js/audio-preloader.js"></script>
 
     <script src="assets/js/index-app.js"></script>
+    <!-- ✅ AudioManager兼容层 - 为旧模块提供window.audioManager -->
+    <script src="assets/js/audioManager-compat.js"></script>
     <script src="assets/js/rating-system.js"></script>
     <script src="assets/js/touch-gestures.js"></script>
     <script src="assets/js/accessibility-enhancements.js"></script>
