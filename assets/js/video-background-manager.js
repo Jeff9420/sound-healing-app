@@ -8,8 +8,8 @@
  * 4. 性能优化和内存管理
  * 5. 降级方案（Canvas动画）
  *
- * @version 2.0.0
- * @date 2025-10-12
+ * @version 2.0.1
+ * @date 2025-10-17
  */
 
 class VideoBackgroundManager {
