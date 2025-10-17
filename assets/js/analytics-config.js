@@ -14,7 +14,7 @@ window.__ANALYTICS_CONFIG = {
 
     // Amplitude Workspace API Key
     // Format: a long string from https://analytics.amplitude.com (Project Settings → General → API key)
-    amplitudeApiKey: '', // TODO: Replace with your Amplitude API Key
+    amplitudeApiKey: 'b6c4ebe3ec4d16c8f5fd258d29653cfc', // SoundFlows Amplitude Project
 
     // Amplitude specific options
     amplitudeOptions: {
