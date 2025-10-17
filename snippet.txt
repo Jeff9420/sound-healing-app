@@ -1,0 +1,44 @@
+<header class="header">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <div>
+                        <h1 data-i18n="app.title">🎵 声音疗愈空间</h1>
+                        <p class="subtitle" data-i18n="app.subtitle">专业音频疗法平台 - 帮您放松身心，找回内心平�?/p>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <!-- History & Favorites Buttons -->
+                        <button class="header-icon-btn" onclick="window.historyFavoritesUI && window.historyFavoritesUI.openPanel('history')" title="播放历史">
+                            📜
+                        </button>
+                        <button class="header-icon-btn" onclick="window.historyFavoritesUI && window.historyFavoritesUI.openPanel('favorites')" title="我的收藏">
+                            &#10084;                        </button>
+                        <button class="header-icon-btn" onclick="window.mixerUI && window.mixerUI.open()" title="音频混音�?>
+                            🎚�?                        </button>
+                        <button class="header-icon-btn" onclick="window.statsDashboard && window.statsDashboard.open()" title="收听统计">
+                            📊
+                        </button>
+                        <button class="header-icon-btn" onclick="window.notificationPreferences && window.notificationPreferences.openSettings()" title="通知设置">
+                            🔔
+                        </button>
+                        <!-- Focus Mode Toggle (2.0 新增) -->
+                        <button id="focusModeToggle" class="header-icon-btn" onclick="window.focusModeController && window.focusModeController.toggle()" title="专注模式">
+                            🎯
+                        </button>
+                        <!-- Theme Toggle Button -->
+                        <button id="themeToggle" class="header-icon-btn theme-toggle-btn" title="切换主题">
+                            <span class="theme-icon">🌙</span>
+                        </button>
+                        <!-- Language Selector -->
+                        <div class="language-selector">
+                            <select id="languageSelect" onchange="changeLanguage(this.value)">
+                                <option value="zh-CN">中文</option>
+                                <option value="en-US">English</option>
+                                <option value="ja-JP">日本�?/option>
+                                <option value="ko-KR">한국�?/option>
+                                <option value="es-ES">Español</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            

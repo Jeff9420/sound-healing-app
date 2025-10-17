@@ -1,0 +1,254 @@
+{
+  "language": "zh-CN",
+  "generated_at": "2025-10-14T00:40:11.006Z",
+  "hero": {
+    "headline": "文档资源中心",
+    "description": "集中管理带有 Front Matter 的知识文档，统一生成 HTML 页面与 JSON 数据源，方便多语言站点调用。"
+  },
+  "sections": [
+    {
+      "id": "reports",
+      "title": "数据报告",
+      "description": "用于跟踪内容漏斗表现的分析指南。",
+      "items": [
+        {
+          "title": "Amplitude 漏斗分析手册",
+          "summary": "记录如何在 Amplitude 中构建并维护内容转化漏斗，以及团队的例行复盘节奏。",
+          "href": "reports/amplitude-funnel-playbook.html",
+          "slug": "amplitude-funnel-playbook",
+          "lang": "zh-CN",
+          "tags": [
+            "analytics",
+            "funnel",
+            "amplitude"
+          ],
+          "updated": "2025-10-13",
+          "source_path": "reports/AMPLITUDE-FUNNEL-PLAYBOOK.md"
+        }
+      ]
+    },
+    {
+      "id": "blog",
+      "title": "Blog",
+      "description": "",
+      "items": [
+        {
+          "title": "打造专属声景工作流",
+          "summary": "根据任务类型选择声音组合，让创意与效率并存。",
+          "href": "blog/blog-soundscapes.html",
+          "slug": "blog-soundscapes",
+          "lang": "zh-CN",
+          "tags": [],
+          "updated": "2025-10-13",
+          "source_path": "resources/blog-soundscapes.md"
+        },
+        {
+          "title": "睡眠科学与声音疗愈",
+          "summary": "解析睡眠分期与声波频率的关系，帮助挑选合适声景。",
+          "href": "blog/blog-sleep-science.html",
+          "slug": "blog-sleep-science",
+          "lang": "zh-CN",
+          "tags": [],
+          "updated": "2025-10-13",
+          "source_path": "resources/blog-sleep-science.md"
+        },
+        {
+          "title": "团队冥想：办公室的节奏 Reset",
+          "summary": "三种 10 分钟共练形式，让团队快速 reset。",
+          "href": "blog/blog-mindful-work.html",
+          "slug": "blog-mindful-work",
+          "lang": "zh-CN",
+          "tags": [],
+          "updated": "2025-10-13",
+          "source_path": "resources/blog-mindful-work.md"
+        }
+      ]
+    },
+    {
+      "id": "downloads",
+      "title": "Downloads",
+      "description": "",
+      "items": [
+        {
+          "title": "声音疗愈企业部署指南",
+          "summary": "帮助团队、课堂、活动部署声音疗愈的实用手册。",
+          "href": "downloads/download-enterprise-guide.html",
+          "slug": "download-enterprise-guide",
+          "lang": "zh-CN",
+          "tags": [],
+          "updated": "2025-10-13",
+          "source_path": "resources/download-enterprise-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "endorsements",
+      "title": "Endorsements",
+      "description": "",
+      "items": [
+        {
+          "title": "品牌背书：慧生活科技的员工冥想项目",
+          "summary": "慧生活科技分享声音疗愈如何成为员工关怀的长期方案。",
+          "href": "endorsements/endorsement-huilife.html",
+          "slug": "endorsement-huilife",
+          "lang": "zh-CN",
+          "tags": [],
+          "updated": "2025-10-13",
+          "source_path": "resources/endorsement-huilife.md"
+        },
+        {
+          "title": "品牌背书：静心疗愈中心的声音疗程",
+          "summary": "静心疗愈中心以案例数据说明声音疗法的专业背书。",
+          "href": "endorsements/endorsement-serenity-center.html",
+          "slug": "endorsement-serenity-center",
+          "lang": "zh-CN",
+          "tags": [],
+          "updated": "2025-10-13",
+          "source_path": "resources/endorsement-serenity-center.md"
+        }
+      ]
+    },
+    {
+      "id": "experts",
+      "title": "Experts",
+      "description": "",
+      "items": [
+        {
+          "title": "访谈：冥想导师林岚的专注仪式",
+          "summary": "林岚导师分享如何为忙碌职场人设计 10 分钟声音冥想仪式，并给出练习清单。",
+          "href": "experts/expert-lin-lan.html",
+          "slug": "expert-lin-lan",
+          "lang": "zh-CN",
+          "tags": [],
+          "updated": "2025-10-13",
+          "source_path": "resources/expert-lin-lan.md"
+        },
+        {
+          "title": "访谈：心理师陈扬谈声音与睡眠障碍",
+          "summary": "陈扬心理师分享声音疗法在临床睡眠障碍患者中的应用流程与案例。",
+          "href": "experts/expert-chen-yang.html",
+          "slug": "expert-chen-yang",
+          "lang": "zh-CN",
+          "tags": [],
+          "updated": "2025-10-13",
+          "source_path": "resources/expert-chen-yang.md"
+        }
+      ]
+    },
+    {
+      "id": "guides",
+      "title": "Guides",
+      "description": "",
+      "items": [
+        {
+          "title": "30 分钟睡前音疗步骤",
+          "summary": "按照“缓和呼吸 → 白噪预热 → 深度冥想”的三段结构，帮助大脑自然进入深层睡眠。",
+          "href": "guides/sleep-routine.html",
+          "slug": "sleep-routine",
+          "lang": "zh-CN",
+          "tags": [],
+          "updated": "2025-10-13",
+          "source_path": "resources/sleep-routine.md"
+        },
+        {
+          "title": "7 日压力排毒计划",
+          "summary": "通过每日声音练习，逐步释放焦虑与身体紧绷。",
+          "href": "guides/stress-detox.html",
+          "slug": "stress-detox",
+          "lang": "zh-CN",
+          "tags": [],
+          "updated": "2025-10-13",
+          "source_path": "resources/stress-detox.md"
+        },
+        {
+          "title": "工作日专注力加油站",
+          "summary": "15 分钟声音 + 呼吸组合，让午间心智状态快速 reset。",
+          "href": "guides/focus-booster.html",
+          "slug": "focus-booster",
+          "lang": "zh-CN",
+          "tags": [],
+          "updated": "2025-10-13",
+          "source_path": "resources/focus-booster.md"
+        }
+      ]
+    },
+    {
+      "id": "stories",
+      "title": "Stories",
+      "description": "",
+      "items": [
+        {
+          "title": "故事：教师林老师的课堂情绪管理",
+          "summary": "课堂前 5 分钟声音仪式让学生更专注、课堂氛围更稳定。",
+          "href": "stories/case-teacher-lin.html",
+          "slug": "case-teacher-lin",
+          "lang": "zh-CN",
+          "tags": [],
+          "updated": "2025-10-13",
+          "source_path": "resources/case-teacher-lin.md"
+        },
+        {
+          "title": "故事：跑者伟伟的训练恢复",
+          "summary": "真实用户伟伟结合声音疗愈让训练后的身体恢复时间缩短 30%。",
+          "href": "stories/case-runner-wei.html",
+          "slug": "case-runner-wei",
+          "lang": "zh-CN",
+          "tags": [],
+          "updated": "2025-10-13",
+          "source_path": "resources/case-runner-wei.md"
+        },
+        {
+          "title": "故事：设计师小安的晨间冥想",
+          "summary": "真实用户小安通过 7 日音疗计划把晨间焦虑指数降低 45%。",
+          "href": "stories/case-designer-an.html",
+          "slug": "case-designer-an",
+          "lang": "zh-CN",
+          "tags": [],
+          "updated": "2025-10-13",
+          "source_path": "resources/case-designer-an.md"
+        }
+      ]
+    },
+    {
+      "id": "videos",
+      "title": "Videos",
+      "description": "",
+      "items": [
+        {
+          "title": "3 分钟快速入睡呼吸法",
+          "summary": "配合柔和海浪声，学习 4-7-8 呼吸法舒缓身心。",
+          "href": "videos/video-sleep-breath.html",
+          "slug": "video-sleep-breath",
+          "lang": "zh-CN",
+          "tags": [],
+          "updated": "2025-10-13",
+          "source_path": "resources/video-sleep-breath.md"
+        },
+        {
+          "title": "清晨提振冥想",
+          "summary": "晨光声景搭配引导语音，唤醒一天的觉察与正念。",
+          "href": "videos/video-morning-meditation.html",
+          "slug": "video-morning-meditation",
+          "lang": "zh-CN",
+          "tags": [],
+          "updated": "2025-10-13",
+          "source_path": "resources/video-morning-meditation.md"
+        },
+        {
+          "title": "雨声 + 颂钵混音实操",
+          "summary": "混音台示范如何调和两种声线，让午后专注更稳定。",
+          "href": "videos/video-rain-bowl.html",
+          "slug": "video-rain-bowl",
+          "lang": "zh-CN",
+          "tags": [],
+          "updated": "2025-10-13",
+          "source_path": "resources/video-rain-bowl.md"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "sections": 8,
+    "documents": 18
+  }
+}

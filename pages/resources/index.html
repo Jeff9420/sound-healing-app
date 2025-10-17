@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>声音疗愈资源枢纽 | 声音疗愈空间</title>
+    <meta name="description" content="浏览精选的声音疗愈指南、短视频、案例与专家访谈，每周更新且完全免费，帮助你把声景练习嵌入日常。">
+    <link rel="stylesheet" href="../../assets/css/resources.css">
+</head>
+<body>
+    <div class="resources-wrapper">
+        <a class="back-link" href="../../index.html">← 返回首页</a>
+        <section class="resources-hero" id="resourcesHero">
+            <h1></h1>
+            <p class="hero-desc"></p>
+            <div class="hero-actions"></div>
+            <form class="hero-subscribe" id="resourceSubscribeForm" novalidate>
+                <input type="email" name="email" placeholder="请输入邮箱，接收每周精选练习" required>
+                <button type="submit" data-track="resources-subscribe">订阅每周精选</button>
+            </form>
+            <p class="hero-subscribe__note">完全免费，无需信用卡。订阅成功后你可在任何邮件底部取消订阅。</p>
+        </section>
+
+        <div id="resourcesSections"></div>
+
+        <section class="resources-footer-cta" id="resourcesFooterCta">
+            <h2></h2>
+            <p></p>
+            <div class="cta-actions"></div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const subscribeForm = document.getElementById("resourceSubscribeForm");
+            if (!subscribeForm) {
+                return;
+            }
+            const submitBtn = subscribeForm.querySelector('button[type="submit"]');
+
+            subscribeForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+                const email = (subscribeForm.email.value || "").trim();
+                if (!email) {
+                    alert("请输入有效的邮箱地址。");
+                    return;
+                }
+
+                const emailDomain = email.includes("@") ? email.split("@")[1] : "";
+                const payload = {
+                    email,
+                    email_domain: emailDomain,
+                    form_id: "resources-subscribe-form",
+                    funnel_step: "resources_subscribe",
+                    source: "resources-hero"
+                };
+
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = "Submitting...";
+                }
+
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({ event: "resources_subscribe", ...payload });
+
+                if (typeof window.trackContentEngagement === "function") {
+                    window.trackContentEngagement("content_subscribe_submit", Object.assign({
+                        category: "hero",
+                        stage: "consideration",
+                        content_category: "hero",
+                        content_title: document.querySelector("#resourcesHero h1")?.textContent || ""
+                    }, payload));
+                }
+
+                const siteConfig = window.SITE_CONFIG || {};
+                const emailAutomationPromise = window.emailAutomation && typeof window.emailAutomation.subscribe === "function"
+                    ? window.emailAutomation.subscribe(email, {
+                        tags: ["resources-hub"],
+                        mergeFields: {
+                            source: "resources-hero"
+                        }
+                    })
+                    : Promise.resolve({ skipped: true });
+
+                const crmSender = window.crmBridge && typeof window.crmBridge.sendToCrm === "function"
+                    ? window.crmBridge.sendToCrm(siteConfig.subscribeEndpoint, Object.assign({ event: "resources_subscribe" }, payload))
+                    : Promise.resolve({ skipped: true });
+
+                crmSender.then(() => {
+                    return emailAutomationPromise.then(() => {
+                        window.dataLayer.push({
+                            event: "resources_subscribe_automation_success",
+                            automation_status: "success",
+                            ...payload
+                        });
+                    }).catch((automationError) => {
+                        console.error("Email automation failed", automationError);
+                        window.dataLayer.push({
+                            event: "resources_subscribe_automation_error",
+                            automation_status: "error",
+                            error_message: automationError?.message || "unknown_error",
+                            ...payload
+                        });
+                    });
+                }).then(() => {
+                    if (window.soundFlowsAnalytics && typeof window.soundFlowsAnalytics.trackConversion === "function") {
+                        window.soundFlowsAnalytics.trackConversion("resources_subscribe", "hero_form", {
+                            source: "resources-hero",
+                            content_stage: "conversion",
+                            email_domain: emailDomain,
+                            cta_id: "resources-subscribe-form",
+                            crm_status: "success"
+                        });
+                    }
+                    window.dataLayer.push({
+                        event: "resources_subscribe_success",
+                        crm_status: "success",
+                        ...payload
+                    });
+                    alert("我们已收到订阅请求，精选内容将发送至您的邮箱。");
+                    subscribeForm.reset();
+                }).catch((error) => {
+                    console.error("CRM subscription failed", error);
+                    window.dataLayer.push({
+                        event: "resources_subscribe_error",
+                        crm_status: "error",
+                        error_message: error?.message || "unknown_error",
+                        ...payload
+                    });
+                    alert("抱歉，提交失败，请稍后再试。");
+                }).finally(() => {
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = "订阅更新";
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="../../assets/js/crm-bridge.js"></script>
+    <script src="../../assets/js/email-automation.js"></script>
+    <script src="../../assets/js/gtm-events.js"></script>
+    <script src="../../assets/js/resources-page.js"></script>
+</body>
+</html>

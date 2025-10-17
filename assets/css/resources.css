@@ -1,0 +1,333 @@
+﻿body {
+    font-family: "Inter", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #0b0f1f;
+    color: #ffffff;
+    margin: 0;
+}
+
+.resources-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+}
+
+.resources-hero {
+    background: linear-gradient(160deg, rgba(120, 136, 255, 0.25), rgba(91, 205, 255, 0.22));
+    border-radius: 28px;
+    padding: 48px 42px;
+    box-shadow: 0 32px 70px rgba(7, 15, 45, 0.45);
+    margin-bottom: 48px;
+}
+
+.resources-hero h1 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    margin: 0 0 16px;
+}
+
+.resources-hero p {
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.6;
+    margin: 0 0 24px;
+}
+
+.resources-hero .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.hero-btn-primary,
+.hero-btn-secondary {
+    border-radius: 999px;
+    padding: 12px 26px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.hero-btn-primary {
+    background: linear-gradient(135deg, #7a8dff, #66e0ff);
+    color: #0b0f1f;
+}
+
+.hero-btn-secondary {
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.86);
+}
+
+.resources-section {
+    margin-bottom: 56px;
+}
+
+.resources-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.resources-section p {
+    color: rgba(255, 255, 255, 0.72);
+    margin-bottom: 22px;
+}
+
+.resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.resource-card {
+    background: rgba(15, 20, 40, 0.72);
+    border-radius: 20px;
+    padding: 22px 20px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.resource-card span {
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(141, 232, 255, 0.8);
+}
+
+.resource-card h3 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.resource-card p {
+    color: rgba(255, 255, 255, 0.78);
+    line-height: 1.6;
+    flex: 1 1 auto;
+}
+
+.resource-card a {
+    align-self: flex-start;
+    font-weight: 600;
+    text-decoration: none;
+    color: #8de8ff;
+    border-bottom: 1px solid rgba(141, 232, 255, 0.6);
+    padding-bottom: 4px;
+}
+
+.resources-section .section-footer {
+    margin-top: 18px;
+}
+
+.resources-section .section-footer a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+}
+
+.resources-footer-cta {
+    background: rgba(15, 20, 40, 0.85);
+    border-radius: 24px;
+    padding: 36px;
+    text-align: center;
+    box-shadow: 0 24px 60px rgba(6, 10, 30, 0.45);
+}
+
+.resources-footer-cta h2 {
+    margin-bottom: 12px;
+}
+
+.resources-footer-cta p {
+    color: rgba(255, 255, 255, 0.76);
+}
+
+.doc-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.doc-tags span {
+    background: rgba(96, 169, 255, 0.16);
+    border: 1px solid rgba(96, 169, 255, 0.38);
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.doc-meta,
+.doc-updated {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.58);
+}
+
+.stats-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 32px 0;
+}
+
+.stat-card {
+    background: rgba(96, 169, 255, 0.12);
+    border: 1px solid rgba(96, 169, 255, 0.24);
+    border-radius: 16px;
+    padding: 20px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.stat-card strong {
+    font-size: 1.6rem;
+}
+
+.resources-footer-cta .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 22px;
+}
+
+.resources-footer-cta a {
+    padding: 10px 22px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.resources-footer-cta .cta-primary {
+    background: linear-gradient(135deg, #7a8dff, #66e0ff);
+    color: #0b0f1f;
+}
+
+.resources-footer-cta .cta-secondary {
+    background: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+}
+
+@media (max-width: 720px) {
+    .resources-hero {
+        padding: 36px 28px;
+    }
+
+    .resources-footer-cta {
+        padding: 30px;
+    }
+}
+
+.hero-subscribe {
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.hero-subscribe input {
+    flex: 1 1 260px;
+    padding: 12px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(8, 10, 22, 0.6);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-subscribe button {
+    padding: 12px 22px;
+    border-radius: 999px;
+    border: none;
+    font-weight: 600;
+    color: #0b0f1f;
+    background: linear-gradient(135deg, #7a8dff, #66e0ff);
+    cursor: pointer;
+}
+
+.hero-subscribe__note {
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 0.92rem;
+    margin-top: 12px;
+}
+
+@media (max-width: 640px) {
+    .hero-subscribe {
+        flex-direction: column;
+    }
+
+    .hero-subscribe button {
+        width: 100%;
+    }
+}
+
+
+.resource-category {
+    display: inline-block;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(141, 232, 255, 0.8);
+    margin-bottom: 12px;
+}
+
+.resource-content,
+.resource-actions,
+.resource-related {
+    background: rgba(15, 20, 40, 0.68);
+    border-radius: 24px;
+    padding: 32px 28px;
+    margin-bottom: 32px;
+    box-shadow: 0 12px 32px rgba(5, 8, 20, 0.3);
+}
+
+.resource-actions .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.resource-actions .cta-primary,
+.resource-actions .cta-secondary {
+    padding: 10px 24px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.resource-actions .cta-primary {
+    background: linear-gradient(135deg, #7a8dff, #66e0ff);
+    color: #0b0f1f;
+}
+
+.resource-actions .cta-secondary {
+    background: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.resource-related ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 12px;
+}
+
+.resource-related a {
+    color: rgba(141, 232, 255, 0.9);
+    text-decoration: none;
+}
+
+@media (max-width: 720px) {
+    .resource-actions .cta-actions {
+        flex-direction: column;
+    }
+}
+

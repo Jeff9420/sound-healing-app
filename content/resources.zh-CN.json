@@ -1,0 +1,183 @@
+{
+  "hero": {
+    "headline": "声音疗愈资源枢纽 · 精选练习随时取用",
+    "description": "每周更新操作手册、短视频与真实故事，全部免费，帮助你在团队或个人节奏里落地声音疗愈。",
+    "primary_cta": {
+      "label": "填写需求表单",
+      "href": "../../index.html#conversionOffer",
+      "id": "resources-plan"
+    },
+    "secondary_cta": {
+      "label": "查看实践案例",
+      "href": "../../index.html#impactProof",
+      "id": "resources-impact"
+    }
+  },
+  "sections": [
+    {
+      "id": "guides",
+      "title": "实践指南",
+      "description": "循序渐进的操作手册，把冥想、睡眠、解压按步骤落地。",
+      "items": [
+        {
+          "tag": "指南",
+          "title": "工作日专注力加油站",
+          "summary": "15 分钟声音 + 呼吸组合，让午间心智状态快速 reset。",
+          "href": "focus-booster.html"
+        },
+        {
+          "tag": "指南",
+          "title": "30 分钟睡前音疗步骤",
+          "summary": "按照“缓和呼吸 → 白噪预热 → 深度冥想”的三段结构，帮助大脑自然进入深层睡眠。",
+          "href": "sleep-routine.html"
+        },
+        {
+          "tag": "指南",
+          "title": "7 日压力排毒计划",
+          "summary": "通过每日声音练习，逐步释放焦虑与身体紧绷。",
+          "href": "stress-detox.html"
+        }
+      ]
+    },
+    {
+      "id": "videos",
+      "title": "短视频课堂",
+      "description": "用 1-3 分钟的实操视频，随时打开练习。",
+      "items": [
+        {
+          "tag": "视频",
+          "title": "清晨提振冥想",
+          "summary": "晨光声景搭配引导语音，唤醒一天的觉察与正念。",
+          "href": "video-morning-meditation.html"
+        },
+        {
+          "tag": "视频",
+          "title": "雨声 + 颂钵混音实操",
+          "summary": "混音台示范如何调和两种声线，让午后专注更稳定。",
+          "href": "video-rain-bowl.html"
+        },
+        {
+          "tag": "视频",
+          "title": "3 分钟快速入睡呼吸法",
+          "summary": "配合柔和海浪声，学习 4-7-8 呼吸法舒缓身心。",
+          "href": "video-sleep-breath.html"
+        }
+      ]
+    },
+    {
+      "id": "stories",
+      "title": "真实用户故事",
+      "description": "真实用户如何把声音疗愈融入生活与职场，提供可执行灵感。",
+      "items": [
+        {
+          "tag": "故事",
+          "title": "故事：设计师小安的晨间冥想",
+          "summary": "真实用户小安通过 7 日音疗计划把晨间焦虑指数降低 45%。",
+          "href": "case-designer-an.html"
+        },
+        {
+          "tag": "故事",
+          "title": "故事：跑者伟伟的训练恢复",
+          "summary": "真实用户伟伟结合声音疗愈让训练后的身体恢复时间缩短 30%。",
+          "href": "case-runner-wei.html"
+        },
+        {
+          "tag": "故事",
+          "title": "故事：教师林老师的课堂情绪管理",
+          "summary": "课堂前 5 分钟声音仪式让学生更专注、课堂氛围更稳定。",
+          "href": "case-teacher-lin.html"
+        }
+      ]
+    },
+    {
+      "id": "experts",
+      "title": "疗愈专家访谈",
+      "description": "和临床心理师、冥想导师对话，了解声音疗愈的专业视角。",
+      "items": [
+        {
+          "tag": "访谈",
+          "title": "访谈：心理师陈扬谈声音与睡眠障碍",
+          "summary": "陈扬心理师分享声音疗法在临床睡眠障碍患者中的应用流程与案例。",
+          "href": "expert-chen-yang.html"
+        },
+        {
+          "tag": "访谈",
+          "title": "访谈：冥想导师林岚的专注仪式",
+          "summary": "林岚导师分享如何为忙碌职场人设计 10 分钟声音冥想仪式，并给出练习清单。",
+          "href": "expert-lin-lan.html"
+        }
+      ]
+    },
+    {
+      "id": "endorsements",
+      "title": "品牌背书",
+      "description": "合作企业与机构的推荐，展示声音疗愈方案的可信背书。",
+      "items": [
+        {
+          "tag": "背书",
+          "title": "品牌背书：慧生活科技的员工冥想项目",
+          "summary": "慧生活科技分享声音疗愈如何成为员工关怀的长期方案。",
+          "href": "endorsement-huilife.html"
+        },
+        {
+          "tag": "背书",
+          "title": "品牌背书：静心疗愈中心的声音疗程",
+          "summary": "静心疗愈中心以案例数据说明声音疗法的专业背书。",
+          "href": "endorsement-serenity-center.html"
+        }
+      ]
+    },
+    {
+      "id": "blog",
+      "title": "博客文章",
+      "description": "从科学、生活方式到工作技巧，让声音疗愈体系化。",
+      "items": [
+        {
+          "tag": "博客",
+          "title": "团队冥想：办公室的节奏 Reset",
+          "summary": "三种 10 分钟共练形式，让团队快速 reset。",
+          "href": "blog-mindful-work.html"
+        },
+        {
+          "tag": "博客",
+          "title": "睡眠科学与声音疗愈",
+          "summary": "解析睡眠分期与声波频率的关系，帮助挑选合适声景。",
+          "href": "blog-sleep-science.html"
+        },
+        {
+          "tag": "博客",
+          "title": "打造专属声景工作流",
+          "summary": "根据任务类型选择声音组合，让创意与效率并存。",
+          "href": "blog-soundscapes.html"
+        }
+      ]
+    },
+    {
+      "id": "downloads",
+      "title": "下载资料",
+      "description": "可直接应用的方案和表格，帮你快速落地声音疗愈。",
+      "items": [
+        {
+          "tag": "下载",
+          "title": "声音疗愈企业部署指南",
+          "summary": "帮助团队、课堂、活动部署声音疗愈的实用手册。",
+          "href": "download-enterprise-guide.html"
+        }
+      ]
+    }
+  ],
+  "footer_cta": {
+    "title": "想把声音疗愈推广给团队或学员？",
+    "description": "先填写需求表，我们会在 1 个工作日内回访；也可直接下载部署指南，先行自助试用。",
+    "primary": {
+      "label": "提交练习需求",
+      "href": "../../index.html#conversionOffer",
+      "id": "resources-book-demo"
+    },
+    "secondary": {
+      "label": "下载部署指南",
+      "href": "download-enterprise-guide.html",
+      "id": "resources-download-guide"
+    }
+  }
+}
