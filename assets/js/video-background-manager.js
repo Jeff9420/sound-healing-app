@@ -8,8 +8,9 @@
  * 4. 性能优化和内存管理
  * 5. 降级方案（Canvas动画）
  *
- * @version 2.0.1
+ * @version 2.0.2
  * @date 2025-10-17
+ * @update Force Vercel redeployment for Archive.org CDN
  */
 
 class VideoBackgroundManager {
