@@ -1,47 +1,47 @@
-﻿{
-    "name":  "sound-healing",
-    "version":  "1.0.0",
-    "description":  "涓€涓厤璐圭殑鍦ㄧ嚎澹伴煶鐤楁剤搴旂敤锛屾彁渚?13+楂樿川閲忛煶棰戞枃浠讹紝甯姪鏀炬澗銆佸啣鎯冲拰鏀瑰杽鐫＄湢璐ㄩ噺",
-    "main":  "index.html",
-    "scripts":  {
-                    "dev":  "python -m http.server 8000",
-                    "build":  "echo \u0027No build step required for static site\u0027",
-                    "deploy":  "vercel --prod",
-                    "deploy:preview":  "vercel",
-                    "lint":  "eslint assets/js/**/*.js",
-                    "lint:fix":  "eslint assets/js/**/*.js --fix",
-                    "format":  "prettier --write \"assets/**/*.{js,css,html}\"",
-                    "format:check":  "prettier --check \"assets/**/*.{js,css,html}\"",
-                    "convert:webp":  "node scripts/convert-images-to-webp.js",
-                    "clean":  "rm -rf node_modules/.cache \u0026\u0026 rm -rf .vercel",
-                    "build:resources":  "node scripts/build-resources.js",
-                    "build:docs":  "node scripts/build-docs.js"
-                },
-    "keywords":  [
-                     "sound-healing",
-                     "meditation",
-                     "relaxation",
-                     "sleep",
-                     "wellness",
-                     "therapy",
-                     "audio",
-                     "mindfulness"
-                 ],
-    "author":  "Sound Healing Team",
-    "license":  "MIT",
-    "repository":  {
-                       "type":  "git",
-                       "url":  "https://github.com/username/sound-healing"
-                   },
-    "homepage":  "https://soundflows.app",
-    "devDependencies":  {
-                            "eslint":  "^8.0.0",
-                            "playwright":  "^1.55.1",
-                            "prettier":  "^2.0.0",
-                            "sharp":  "^0.34.4",
-                            "marked":  "^11.1.1"
-                        },
-    "engines":  {
-                    "node":  "\u003e=14.0.0"
-                }
+{
+    "name": "sound-healing",
+    "version": "1.0.0",
+    "description": "一个免费的在线声音疗愈应用，提供213+高质量音频文件，帮助放松、冥想和改善睡眠质量",
+    "main": "index.html",
+    "scripts": {
+        "dev": "python -m http.server 8000",
+        "build": "echo 'No build step required for static site'",
+        "deploy": "vercel --prod",
+        "deploy:preview": "vercel",
+        "lint": "eslint assets/js/**/*.js",
+        "lint:fix": "eslint assets/js/**/*.js --fix",
+        "format": "prettier --write \"assets/**/*.{js,css,html}\"",
+        "format:check": "prettier --check \"assets/**/*.{js,css,html}\"",
+        "convert:webp": "node scripts/convert-images-to-webp.js",
+        "clean": "rm -rf node_modules/.cache && rm -rf .vercel",
+        "build:resources": "node scripts/build-resources.js",
+        "build:docs": "node scripts/build-docs.js"
+    },
+    "keywords": [
+        "sound-healing",
+        "meditation",
+        "relaxation",
+        "sleep",
+        "wellness",
+        "therapy",
+        "audio",
+        "mindfulness"
+    ],
+    "author": "Sound Healing Team",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/username/sound-healing"
+    },
+    "homepage": "https://soundflows.app",
+    "devDependencies": {
+        "eslint": "^8.0.0",
+        "playwright": "^1.55.1",
+        "prettier": "^2.0.0",
+        "sharp": "^0.34.4",
+        "marked": "^11.1.1"
+    },
+    "engines": {
+        "node": ">=14.0.0"
+    }
 }
