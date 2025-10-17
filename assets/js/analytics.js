@@ -5,14 +5,22 @@
     const config = window.__ANALYTICS_CONFIG || {};
     const gaId = (config.gaMeasurementId || '').trim();
     const clarityId = (config.clarityProjectId || '').trim();
+    const amplitudeApiKey = (config.amplitudeApiKey || '').trim();
+    const amplitudeOptions = config.amplitudeOptions || {};
 
     // Analytics Management Class
-    class SoundFlowsAnalytics {
-        constructor(gaId, clarityId) {
+class SoundFlowsAnalytics {
+        constructor({ gaId, clarityId, amplitudeApiKey, amplitudeOptions }) {
             this.gaId = gaId;
             this.clarityId = clarityId;
+            this.amplitudeApiKey = amplitudeApiKey;
+            this.amplitudeOptions = amplitudeOptions || {};
             this.isInitialized = false;
             this.audioEvents = {};
+            this.amplitudeReady = false;
+            this.amplitudeQueue = [];
+            this.amplitudePromise = null;
+            this.amplitudeLoading = false;
             this.init();
         }
 
@@ -72,21 +80,22 @@
         }
 
         loadAnalytics() {
-            if (this.isInitialized) {
-                return;
+            const needsBaseInit = !this.isInitialized;
+            if (needsBaseInit) {
+                if (this.gaId) {
+                    this.loadGoogleAnalytics();
+                }
+
+                if (this.clarityId) {
+                    this.loadClarity();
+                }
+
+                this.isInitialized = true;
             }
 
-            // Load Google Analytics
-            if (this.gaId) {
-                this.loadGoogleAnalytics();
+            if (this.amplitudeApiKey && !this.amplitudePromise) {
+                this.loadAmplitude();
             }
-
-            // Load Microsoft Clarity
-            if (this.clarityId) {
-                this.loadClarity();
-            }
-
-            this.isInitialized = true;
         }
 
         loadGoogleAnalytics() {
@@ -142,6 +151,111 @@
             })(window, document, 'clarity', 'script', this.clarityId);
 
             console.log('Microsoft Clarity loaded');
+        }
+
+        loadAmplitude() {
+            if (!this.amplitudeApiKey) {
+                return;
+            }
+
+            if (this.amplitudeReady || this.amplitudeLoading) {
+                return;
+            }
+
+            const initAmplitude = () => {
+                try {
+                    const instance = window.amplitude && typeof window.amplitude.getInstance === 'function'
+                        ? window.amplitude.getInstance()
+                        : window.amplitude;
+
+                    if (!instance || typeof instance.init !== 'function') {
+                        throw new Error('Amplitude instance not available');
+                    }
+
+                    const baseOptions = {
+                        defaultTracking: {
+                            pageViews: true,
+                            sessions: true
+                        }
+                    };
+
+                    const providedOptions = this.amplitudeOptions || {};
+                    if (providedOptions.defaultTracking) {
+                        baseOptions.defaultTracking = Object.assign(
+                            {},
+                            baseOptions.defaultTracking,
+                            providedOptions.defaultTracking
+                        );
+                    }
+
+                    const mergedOptions = Object.assign({}, baseOptions, providedOptions);
+
+                    const initResult = instance.init(this.amplitudeApiKey, undefined, mergedOptions);
+                    const promiseCandidate = initResult && initResult.promise
+                        ? initResult.promise
+                        : (initResult && typeof initResult.then === 'function'
+                            ? initResult
+                            : Promise.resolve());
+
+                    this.amplitudeInstance = instance;
+                    this.amplitudePromise = promiseCandidate;
+
+                    promiseCandidate.then(() => {
+                        this.amplitudeReady = true;
+                        this.flushAmplitudeQueue();
+                        console.log('Amplitude initialized');
+                    }).catch((error) => {
+                        console.error('Amplitude initialization failed', error);
+                    });
+                } catch (error) {
+                    console.error('Amplitude failed to initialize', error);
+                }
+            };
+
+            if (window.amplitude && typeof window.amplitude.init === 'function') {
+                initAmplitude();
+                return;
+            }
+
+            this.amplitudeLoading = true;
+            const script = document.createElement('script');
+            script.src = 'https://cdn.amplitude.com/libs/analytics-browser-2.11.0-min.js.gz';
+            script.async = true;
+            script.onload = () => {
+                this.amplitudeLoading = false;
+                initAmplitude();
+            };
+            script.onerror = (error) => {
+                this.amplitudeLoading = false;
+                console.error('Amplitude script failed to load', error);
+            };
+            document.head.appendChild(script);
+        }
+
+        amplitudeTrack(eventName, properties = {}) {
+            if (!this.amplitudeApiKey) {
+                return;
+            }
+
+            if (this.amplitudeReady && window.amplitude && typeof window.amplitude.track === 'function') {
+                window.amplitude.track(eventName, properties);
+            } else {
+                this.amplitudeQueue.push({ eventName, properties });
+            }
+        }
+
+        flushAmplitudeQueue() {
+            if (!this.amplitudeReady || !window.amplitude || typeof window.amplitude.track !== 'function') {
+                return;
+            }
+            while (this.amplitudeQueue.length > 0) {
+                const item = this.amplitudeQueue.shift();
+                try {
+                    window.amplitude.track(item.eventName, item.properties);
+                } catch (error) {
+                    console.warn('Failed to flush Amplitude event', item, error);
+                }
+            }
         }
 
         setupEventListeners() {
@@ -358,10 +472,36 @@
         }
 
         // Generic event tracking
-        event(eventName, parameters = {}) {
+        buildAmplitudeProperties(parameters = {}, originalEventName, amplitudeEventName) {
+            const props = Object.assign({
+                event_source: 'web',
+                original_event: originalEventName
+            }, parameters || {});
+
+            if (amplitudeEventName && typeof props.amp_event_name === 'undefined') {
+                props.amp_event_name = amplitudeEventName;
+            }
+
+            const metadata = this.amplitudeOptions && this.amplitudeOptions.ingestionMetadata;
+            if (metadata && typeof metadata === 'object') {
+                Object.entries(metadata).forEach(([key, value]) => {
+                    if (typeof props[key] === 'undefined') {
+                        props[key] = value;
+                    }
+                });
+            }
+
+            return props;
+        }
+
+        event(eventName, parameters = {}, amplitudeEventName = null) {
             if (window.gtag) {
                 window.gtag('event', eventName, parameters);
             }
+
+            const ampName = amplitudeEventName || eventName;
+            const amplitudeProperties = this.buildAmplitudeProperties(parameters, eventName, ampName);
+            this.amplitudeTrack(ampName, amplitudeProperties);
         }
 
         // Custom methods for specific tracking
@@ -370,6 +510,46 @@
                 'event_category': 'feature',
                 'event_label': featureName
             });
+        }
+
+        trackContentEngagement(eventName, payload = {}) {
+            const params = Object.assign({}, payload);
+            params.event_category = params.event_category || 'content';
+            if (!params.content_category && params.category) {
+                params.content_category = params.category;
+            }
+            if (!params.content_slug && params.slug) {
+                params.content_slug = params.slug;
+            }
+            if (!params.content_title && params.title) {
+                params.content_title = params.title;
+            }
+            if (!params.content_stage && params.stage) {
+                params.content_stage = params.stage;
+            }
+            if (!params.cta_id && params.ctaId) {
+                params.cta_id = params.ctaId;
+            }
+            if (!params.source) {
+                params.source = 'resources';
+            }
+            if (!params.content_stage) {
+                params.content_stage = 'discover';
+            }
+
+            ['category', 'slug', 'title', 'stage', 'ctaId'].forEach((key) => {
+                if (key in params) {
+                    delete params[key];
+                }
+            });
+
+            Object.keys(params).forEach((key) => {
+                if (params[key] === null || typeof params[key] === 'undefined') {
+                    delete params[key];
+                }
+            });
+
+            this.event(eventName, params);
         }
 
         trackAudio(category, action, label = '', value = null) {
@@ -384,26 +564,34 @@
             this.event(`audio_${action}`, params);
         }
 
-        trackConversion(conversionType, label = '') {
-            this.event('conversion', {
+        trackConversion(conversionType, label = '', metadata = {}) {
+            const params = Object.assign({
                 'event_category': 'conversion',
                 'event_label': conversionType,
+                'conversion_label': label,
                 'value': 1
-            });
+            }, metadata || {});
+
+            this.event('conversion', params, 'content_conversion');
         }
     }
 
     // Initialize analytics if IDs are provided
     let analyticsInstance = null;
-    if (gaId || clarityId) {
-        analyticsInstance = new SoundFlowsAnalytics(gaId, clarityId);
+    if (gaId || clarityId || amplitudeApiKey) {
+        analyticsInstance = new SoundFlowsAnalytics({
+            gaId,
+            clarityId,
+            amplitudeApiKey,
+            amplitudeOptions
+        });
         window.soundFlowsAnalytics = analyticsInstance;
     }
 
     // Export to global scope for manual tracking
-    window.trackEvent = function(eventName, params) {
+    window.trackEvent = function(eventName, params, amplitudeEventName) {
         if (analyticsInstance) {
-            analyticsInstance.event(eventName, params);
+            analyticsInstance.event(eventName, params, amplitudeEventName);
         }
     };
 
@@ -424,14 +612,17 @@
         console.log('Analytics Status:', {
             gaId: gaId,
             clarityId: clarityId,
+            amplitudeApiKey: amplitudeApiKey ? '[configured]' : '',
             initialized: analyticsInstance ? analyticsInstance.isInitialized : false,
             hasGtag: typeof window.gtag !== 'undefined',
-            hasClarity: typeof window.clarity !== 'undefined'
+            hasClarity: typeof window.clarity !== 'undefined',
+            hasAmplitude: typeof window.amplitude !== 'undefined',
+            amplitudeReady: analyticsInstance ? analyticsInstance.amplitudeReady : false
         });
     };
 })();
-
-
-
-
-
+    window.trackContentEngagement = function(eventName, payload) {
+        if (analyticsInstance) {
+            analyticsInstance.trackContentEngagement(eventName, payload);
+        }
+    };

@@ -1,86 +1,66 @@
 /**
- * FavoriteButtonController - 收藏按钮控制器
+ * FavoriteButtonController - 管理播放器收藏按钮
  *
- * 在播放器UI中添加收藏按钮，让用户可以随时收藏正在播放的音频
- *
- * @class
- * @version 1.0.0
+ * 重新实现兼容层，避免因为编码问题导致图标不可见。
+ * 按钮会在播放器展开后显示，点击即可收藏/取消收藏当前曲目。
  */
 
 class FavoriteButtonController {
     constructor(userDataManager, audioManager) {
         this.userDataManager = userDataManager;
         this.audioManager = audioManager;
-        this.currentTrack = null;
+
         this.favoriteBtn = null;
+        this.currentTrack = null;
 
         this.init();
     }
 
-    /**
-     * 初始化
-     */
     init() {
         this.createFavoriteButton();
         this.setupEventListeners();
         console.log('✅ FavoriteButtonController 已初始化');
     }
 
-    /**
-     * 创建收藏按钮
-     */
     createFavoriteButton() {
-        // 查找播放器控制区域
         const playerControls = document.querySelector('.player-controls');
         const headerControls = document.querySelector('.header-controls');
         const controlsContainer = playerControls || headerControls;
 
         if (!controlsContainer) {
-            console.warn('未找到播放器控制区域，将在首次播放时创建收藏按钮');
+            console.warn('FavoriteButtonController: 未找到播放器控制区域');
             return;
         }
 
-        // 创建收藏按钮
         this.favoriteBtn = document.createElement('button');
         this.favoriteBtn.id = 'favoriteCurrentTrack';
         this.favoriteBtn.className = 'header-icon-btn favorite-btn';
-        this.favoriteBtn.title = '收藏当前音频';
-        this.favoriteBtn.innerHTML = '☆';
-        this.favoriteBtn.style.display = 'none'; // 初始隐藏
-        this.favoriteBtn.onclick = () => this.toggleFavorite();
+        this.favoriteBtn.type = 'button';
+        this.favoriteBtn.style.display = 'none';
+        this.favoriteBtn.textContent = '♡';
+        this.favoriteBtn.title = 'Add to favorites';
+        this.favoriteBtn.setAttribute('aria-label', 'Add to favorites');
+        this.favoriteBtn.addEventListener('click', () => this.toggleFavorite());
 
-        // 插入到控制区域
         controlsContainer.appendChild(this.favoriteBtn);
     }
 
-    /**
-     * 设置事件监听
-     */
     setupEventListeners() {
-        // 监听音频开始播放
-        window.addEventListener('audio:trackChanged', (e) => {
-            this.handleTrackChange(e.detail);
+        window.addEventListener('audio:trackChanged', (event) => {
+            this.handleTrackChange(event.detail);
         });
 
-        // 监听收藏状态变化
         window.addEventListener('userData:favoritesUpdated', () => {
             this.updateButtonState();
         });
 
-        // 如果audioManager存在，监听其播放事件
-        if (this.audioManager) {
-            // 尝试通过不同方式监听播放事件
-            if (this.audioManager.eventBus) {
-                this.audioManager.eventBus.addEventListener('trackStarted', (e) => {
-                    this.handleTrackChange(e.detail);
-                });
-            }
+        if (this.audioManager && this.audioManager.eventBus) {
+            this.audioManager.eventBus.addEventListener('trackStarted', (event) => {
+                this.handleTrackChange(event.detail);
+            });
         }
     }
 
-    /**
-     * 处理音频切换
-     */
     handleTrackChange(trackInfo) {
         if (!trackInfo || !trackInfo.category || !trackInfo.fileName) {
             this.hideButton();
@@ -97,54 +77,42 @@ class FavoriteButtonController {
         this.updateButtonState();
     }
 
-    /**
-     * 切换收藏状态
-     */
     toggleFavorite() {
-        if (!this.currentTrack) {
+        if (!this.currentTrack || !this.userDataManager) {
             return;
         }
 
-        const isFavorited = this.userDataManager.toggleFavorite(this.currentTrack);
+        const added = this.userDataManager.toggleFavorite(this.currentTrack);
 
-        // 显示提示
-        this.showToast(
-            isFavorited ?
-            `已收藏《${this.currentTrack.displayName}》` :
-            `已取消收藏《${this.currentTrack.displayName}》`
-        );
+        const message = added
+            ? `Added "${this.currentTrack.displayName}" to favorites`
+            : `Removed "${this.currentTrack.displayName}" from favorites`;
+        this.showToast(message);
 
         this.updateButtonState();
     }
 
-    /**
-     * 更新按钮状态
-     */
     updateButtonState() {
-        if (!this.favoriteBtn || !this.currentTrack) {
+        if (!this.favoriteBtn || !this.currentTrack || !this.userDataManager) {
             return;
         }
 
         const trackId = `${this.currentTrack.category}_${this.currentTrack.fileName}`;
         const isFavorited = this.userDataManager.isFavorite(trackId);
 
-        this.favoriteBtn.innerHTML = isFavorited ? '⭐' : '☆';
-        this.favoriteBtn.title = isFavorited ? '取消收藏' : '收藏当前音频';
+        this.favoriteBtn.textContent = isFavorited ? '❤' : '♡';
+        const title = isFavorited ? 'Remove from favorites' : 'Add to favorites';
+        this.favoriteBtn.title = title;
+        this.favoriteBtn.setAttribute('aria-label', title);
         this.favoriteBtn.classList.toggle('favorited', isFavorited);
     }
 
-    /**
-     * 显示按钮
-     */
     showButton() {
         if (this.favoriteBtn) {
             this.favoriteBtn.style.display = 'flex';
         }
     }
 
-    /**
-     * 隐藏按钮
-     */
     hideButton() {
         if (this.favoriteBtn) {
             this.favoriteBtn.style.display = 'none';
@@ -152,18 +120,11 @@ class FavoriteButtonController {
         this.currentTrack = null;
     }
 
-    /**
-     * 获取显示名称
-     */
     getDisplayName(fileName) {
         return fileName.replace(/\.(mp3|wav|ogg|m4a|wma|flac|aac)$/i, '');
     }
 
-    /**
-     * 显示提示消息
-     */
     showToast(message) {
-        // 检查是否已有toast容器
         let toastContainer = document.getElementById('favoriteToastContainer');
 
         if (!toastContainer) {
@@ -180,7 +141,6 @@ class FavoriteButtonController {
             document.body.appendChild(toastContainer);
         }
 
-        // 创建toast元素
         const toast = document.createElement('div');
         toast.className = 'favorite-toast';
         toast.textContent = message;
@@ -198,29 +158,26 @@ class FavoriteButtonController {
 
         toastContainer.appendChild(toast);
 
-        // 显示动画
-        setTimeout(() => {
+        requestAnimationFrame(() => {
             toast.style.opacity = '1';
-        }, 10);
+        });
 
-        // 3秒后淡出并移除
         setTimeout(() => {
             toast.style.opacity = '0';
-            setTimeout(() => {
-                toast.remove();
-            }, 300);
+            setTimeout(() => toast.remove(), 300);
         }, 3000);
     }
 }
 
-// 创建全局实例
 if (typeof window !== 'undefined') {
     window.FavoriteButtonController = FavoriteButtonController;
 
-    // 等待依赖加载后初始化
-    const initFavoriteButton = () => {
-        if (window.userDataManager) {
-            // audioManager可能不存在，但我们仍然可以初始化
+    const initialize = () => {
+        if (!window.userDataManager) {
+            return;
+        }
+
+        if (!window.favoriteButtonController) {
             window.favoriteButtonController = new FavoriteButtonController(
                 window.userDataManager,
                 window.audioManager || null
@@ -230,14 +187,13 @@ if (typeof window !== 'undefined') {
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(initFavoriteButton, 500);
+            setTimeout(initialize, 300);
         });
     } else {
-        setTimeout(initFavoriteButton, 500);
+        setTimeout(initialize, 300);
     }
 
-    // 也监听userDataManager准备就绪事件
     window.addEventListener('userData:ready', () => {
-        setTimeout(initFavoriteButton, 100);
+        setTimeout(initialize, 100);
     });
 }

@@ -16,7 +16,7 @@ class VideoBackgroundManager {
     constructor() {
         // 视频配置 - 本地优化版本（2-9MB，比Archive.org快）
         this.videoConfig = {
-            baseUrl: '/videos/optimized/',
+            baseUrl: 'https://archive.org/download/zen-bamboo/',
             categories: {
                 'Animal sounds': {
                     filename: 'forest-birds.mp4',
@@ -282,53 +282,77 @@ class VideoBackgroundManager {
 
     /**
      * 加载视频
-     * ✅ 修复: 即使命中缓存也等待canplay事件，避免黑屏
+     * 改进：命中缓存时同样等待 canplay，避免过早淡入黑屏
      */
     loadVideo(videoElement, url) {
         return new Promise((resolve, reject) => {
-            // 设置视频源
-            if (this.preloadedVideos.has(url)) {
-                console.log('🎬 使用缓存的视频:', url);
-                videoElement.src = url; // 使用URL而不是克隆src
-            } else {
-                const source = videoElement.querySelector('source[type="video/mp4"]');
-                source.src = url;
+            const isCached = this.preloadedVideos.has(url);
+            const cachedEntry = this.preloadedVideos.get(url);
+
+            if (isCached) {
+                console.log('🎬 使用缓存视频资源:', url);
+                if (cachedEntry) {
+                    cachedEntry.ready = true;
+                    cachedEntry.lastUsed = Date.now();
+                }
             }
 
-            // 加载视频
-            videoElement.load();
+            const source = videoElement.querySelector('source[type="video/mp4"]');
+            if (!source) {
+                reject(new Error('未找到 video/mp4 source 元素'));
+                return;
+            }
 
-            // 设置超时（增加到15秒，考虑Archive.org速度）
-            const timeout = setTimeout(() => {
-                reject(new Error('视频加载超时'));
-            }, 15000);
+            const timeoutMs = isCached ? 5000 : 15000;
+            let timeoutId = null;
 
-            // ✅ 关键修复: 无论是否缓存都等待canplay，确保readyState >= HAVE_FUTURE_DATA
-            const onCanPlay = () => {
-                clearTimeout(timeout);
-
-                // 检查视频readyState
-                if (videoElement.readyState >= 3) { // HAVE_FUTURE_DATA
-                    console.log(`✅ 视频可播放: ${url} (readyState: ${videoElement.readyState})`);
-                    this.preloadedVideos.set(url, { src: url, ready: true });
-                    resolve();
-                } else {
-                    console.warn(`⚠️ 视频readyState不足: ${videoElement.readyState}，继续等待...`);
-                    // 继续等待loadeddata
-                    videoElement.addEventListener('loadeddata', () => {
-                        console.log('✅ 视频数据加载完成');
-                        this.preloadedVideos.set(url, { src: url, ready: true });
-                        resolve();
-                    }, { once: true });
+            const cleanup = () => {
+                if (timeoutId) {
+                    clearTimeout(timeoutId);
                 }
+                videoElement.removeEventListener('canplay', onReady);
+                videoElement.removeEventListener('error', onError);
             };
 
-            videoElement.addEventListener('canplay', onCanPlay, { once: true });
+            const onReady = () => {
+                cleanup();
 
-            videoElement.addEventListener('error', (e) => {
-                clearTimeout(timeout);
-                reject(new Error(`视频加载失败: ${e.message}`));
-            }, { once: true });
+                if (!isCached) {
+                    this.preloadedVideos.set(url, { src: url, ready: true, lastUsed: Date.now() });
+                    console.log('✅ 视频可播放:', url);
+                } else {
+                    console.log('✅ 缓存视频已就绪:', url);
+                }
+
+                resolve();
+            };
+
+            const onError = (event) => {
+                cleanup();
+                const mediaError = event?.target?.error;
+                const message = mediaError?.message || event?.message || '未知错误';
+                reject(new Error(`视频加载失败: ${message}`));
+            };
+
+            source.src = url;
+            videoElement.load();
+
+            const haveCurrentData = typeof HTMLMediaElement !== 'undefined'
+                ? HTMLMediaElement.HAVE_CURRENT_DATA
+                : 2;
+
+            if (videoElement.readyState >= haveCurrentData) {
+                onReady();
+                return;
+            }
+
+            videoElement.addEventListener('canplay', onReady, { once: true });
+            videoElement.addEventListener('error', onError, { once: true });
+
+            timeoutId = setTimeout(() => {
+                cleanup();
+                reject(new Error('视频加载超时'));
+            }, timeoutMs);
         });
     }
 
@@ -425,7 +449,7 @@ class VideoBackgroundManager {
 
         // 使用canplay事件，比loadeddata更早触发
         tempVideo.addEventListener('canplay', () => {
-            this.preloadedVideos.set(url, { src: url, ready: true });
+            this.preloadedVideos.set(url, { src: url, ready: true, lastUsed: Date.now() });
             console.log(`✅ 预加载视频完成: ${url}`);
         }, { once: true });
 
@@ -555,3 +579,4 @@ if (document.readyState === 'loading') {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = VideoBackgroundManager;
 }
+

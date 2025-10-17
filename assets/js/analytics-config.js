@@ -12,6 +12,29 @@ window.__ANALYTICS_CONFIG = {
     // Get this from: https://clarity.microsoft.com
     clarityProjectId: '', // TODO: Replace with your Clarity ID
 
+    // Amplitude Workspace API Key
+    // Format: a long string from https://analytics.amplitude.com (Project Settings → General → API key)
+    amplitudeApiKey: '', // TODO: Replace with your Amplitude API Key
+
+    // Amplitude specific options
+    amplitudeOptions: {
+        defaultTracking: {
+            pageViews: true,
+            sessions: true,
+            fileDownloads: false,
+            formInteractions: true
+        },
+        ingestionMetadata: {
+            source: 'soundflows-web',
+            commit: 'manual'
+        },
+        funnel: {
+            discoveryEvent: 'content_detail_click',
+            engagementEvent: 'content_cta_click',
+            conversionEvent: 'content_conversion'
+        }
+    },
+
     // Additional configuration options
     options: {
     // Enable debug mode for development

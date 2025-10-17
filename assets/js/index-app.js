@@ -29,6 +29,7 @@ let tracks = [];
 // Initialize audio settings
 audio.volume = 0.7; // Default volume
 audio.playbackRate = 1.0; // Default playback speed
+audio.preload = 'auto';
 
 console.log('Variables declared successfully');
 
@@ -347,23 +348,20 @@ function closePlaylist() {
 // 音频播放控制
 // ==========================================================================
 
-async function playTrack(index) {  // ✅ 改为async函数
+async function playTrack(index) {
     currentTrackIndex = index;
     const track = tracks[index];
     const category = categoryInfo[currentCategory.key] || currentCategory;
 
-    // ✅ 检测并处理Autoplay策略
     if (window.autoplayDetector) {
         const isAllowed = await window.autoplayDetector.detectAutoplay();
 
         if (!isAllowed && !window.autoplayDetector.hasUserInteracted) {
             console.log('⚠️ 需要用户交互才能播放');
-            // 等待用户交互
             await window.autoplayDetector.waitForInteraction();
         }
     }
 
-    // Update UI
     const currentTrack = document.getElementById('currentTrack');
     const currentCategoryElem = document.getElementById('currentCategory');
     const minimizedTrack = document.getElementById('minimizedTrack');
@@ -378,40 +376,46 @@ async function playTrack(index) {  // ✅ 改为async函数
         minimizedTrack.textContent = `${track.name} - ${category.name || currentCategory.key}`;
     }
 
-    // 🎥 2.0 优化: 先触发视频背景切换，让视频和音频同时开始加载
     if (currentCategory && currentCategory.key) {
         window.dispatchEvent(new CustomEvent('categoryChanged', {
             detail: { category: currentCategory.key }
         }));
     }
 
-    // ✅ 检查是否有预加载的音频
-    // 注意：不能替换全局audio对象(const)，只设置src让浏览器使用缓存
     if (window.audioPreloader && window.audioPreloader.isCached(track.url)) {
-        console.log('⚡ 音频已缓存，使用浏览器缓存加速加载');
+        console.log('🎧 音频已缓存，使用浏览器缓存加速加载');
     }
 
-    // Play audio（视频已经开始预加载）
-    // 直接设置src，浏览器会从缓存加载（如果已预加载）
-    if (audio.src !== track.url) {
+    const sourceChanged = audio.src !== track.url;
+
+    if (sourceChanged) {
         audio.src = track.url;
+        audio.currentTime = 0;
+    } else {
+        audio.pause();
+        audio.currentTime = 0;
     }
 
-    // ✅ 改进的错误处理
     try {
-        await audio.play();
+        const playPromise = audio.play();
+        if (playPromise && typeof playPromise.then === 'function') {
+            await playPromise;
+        }
         console.log('✅ 音频播放成功');
     } catch (error) {
+        if (error?.name === 'AbortError') {
+            console.warn('音频播放被中断（可能因快速切换）');
+            return;
+        }
+
         console.error('❌ 音频播放失败:', error);
 
-        // 如果是DOMException（通常是autoplay阻止）
-        if (error.name === 'NotAllowedError') {
+        if (error?.name === 'NotAllowedError') {
             window.showNotification(
                 '请点击播放按钮开始播放',
                 'warning'
             );
 
-            // 显示明显的播放按钮提示
             const playPauseBtn = document.getElementById('playPauseBtn');
             if (playPauseBtn) {
                 playPauseBtn.style.animation = 'pulse 1s infinite';
@@ -424,28 +428,34 @@ async function playTrack(index) {  // ✅ 改为async函数
             );
         }
 
-        return; // 播放失败，提前返回
+        return;
     }
 
     isPlaying = true;
     updatePlayPauseButton();
 
-    // Show player
     const player = document.getElementById('audioPlayer');
     if (player) {
         player.classList.add('show');
         player.classList.remove('minimized');
     }
 
-    // 🎯 2.0 新增: 触发音频状态变化事件（用于专注模式）
     window.dispatchEvent(new CustomEvent('audioStateChange', {
         detail: { isPlaying: true, track: track }
+    }));
+
+    window.dispatchEvent(new CustomEvent('audio:trackChanged', {
+        detail: {
+            category: window.currentCategory?.key || null,
+            fileName: track.fileName || track.url?.split('/').pop() || null,
+            displayName: track.name || track.displayName || '',
+            url: track.url || null
+        }
     }));
 
     closePlaylist();
     window.showNotification(`${getText('player.nowPlaying', '正在播放')}: ${track.name}`, 'success');
 
-    // ✅ 预加载下一首音频
     if (window.audioPreloader && tracks.length > 1) {
         window.audioPreloader.preloadNext(tracks, currentTrackIndex, isShuffleMode);
     }

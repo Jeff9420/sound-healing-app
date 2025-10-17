@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿                        <div class="mega-menu__layout">
+                        <div class="mega-menu" id="megaMenuPersona">
+﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -7,8 +9,8 @@
     <!-- Primary Meta Tags -->
     <title>Free Meditation Music & Rain Sounds for Sleeping | 213+ Healing Sounds, White Noise, Nature Sounds | 声音疗愈空间</title>
     <meta name="title" content="声音疗愈空间 - 专业音频疗法平台 | 213+免费疗愈音频">
-    <meta name="description" content="Free online sound healing platform with 213+ audio tracks: meditation music, rain sounds for sleeping, white noise, nature sounds, chakra healing, singing bowls, hypnosis. Perfect for relaxation, sleep, stress relief & focus. 5 languages supported. 免费声音疗愈平台，213+音频助您放松睡眠">
-    <meta name="keywords" content="meditation music,rain sounds for sleeping,white noise,nature sounds,sleep sounds,free meditation music,guided meditation,sleep meditation,chakra healing,healing sounds,sound healing,relaxation music,stress relief music,singing bowl,hypnosis audio,ambient sounds,fireplace sounds,water sounds,声音疗愈,冥想音乐,雨声睡眠,白噪音,自然音效,睡眠音乐,放松音乐,减压音乐,颂钵音疗,脉轮疗愈,催眠音频,潜意识疗愈">
+    <meta name="description" content="Free online sound healing platform with 213+ audio tracks: meditation music, rain sounds for sleeping, white noise, nature sounds, chakra healing, singing bowls, hypnosis. Perfect for relaxation, sleep, stress relief & focus. 5 languages supported. 免费声音疗愈平台�?13+音频助您放松睡眠">
+    <meta name="keywords" content="meditation music,rain sounds for sleeping,white noise,nature sounds,sleep sounds,free meditation music,guided meditation,sleep meditation,chakra healing,healing sounds,sound healing,relaxation music,stress relief music,singing bowl,hypnosis audio,ambient sounds,fireplace sounds,water sounds,声音疗愈,冥想音乐,雨声睡眠,白噪�?自然音效,睡眠音乐,放松音乐,减压音乐,颂钵音疗,脉轮疗愈,催眠音频,潜意识疗�?>
     <meta name="author" content="Sound Healing Team">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="language" content="zh-CN">
@@ -65,7 +67,7 @@
     <!-- Preconnect to External Resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- ✅ Archive.org CDN预连接 - 优化音频/视频加载速度 -->
+    <!-- �?Archive.org CDN预连�?- 优化音频/视频加载速度 -->
     <link rel="preconnect" href="https://archive.org">
     <link rel="dns-prefetch" href="https://archive.org">
 
@@ -87,7 +89,7 @@
         'cookie_flags': 'SameSite=None;Secure'
       });
 
-      // 自定义事件追踪 - 音频播放
+      // 自定义事件追�?- 音频播放
       window.trackAudioPlay = function(category, trackName) {
         if (typeof gtag !== 'undefined') {
           gtag('event', 'audio_play', {
@@ -99,7 +101,7 @@
         }
       };
 
-      // 自定义事件追踪 - 语言切换
+      // 自定义事件追�?- 语言切换
       window.trackLanguageChange = function(language) {
         if (typeof gtag !== 'undefined') {
           gtag('event', 'language_change', {
@@ -109,8 +111,7 @@
         }
       };
 
-      // 自定义事件追踪 - 睡眠定时器
-      window.trackSleepTimer = function(minutes) {
+      // 自定义事件追�?- 睡眠定时�?      window.trackSleepTimer = function(minutes) {
         if (typeof gtag !== 'undefined') {
           gtag('event', 'sleep_timer_set', {
             'event_category': 'Feature',
@@ -120,7 +121,7 @@
         }
       };
 
-      // 自定义事件追踪 - 分享点击
+      // 自定义事件追�?- 分享点击
       window.trackShare = function(platform) {
         if (typeof gtag !== 'undefined') {
           gtag('event', 'share', {
@@ -181,20 +182,46 @@
         <!-- Header -->
         <div class="container">
             <header class="header">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <div>
-                        <h1 data-i18n="app.title">🎵 声音疗愈空间</h1>
-                        <p class="subtitle" data-i18n="app.subtitle">专业音频疗法平台 - 帮您放松身心，找回内心平静</p>
+                <div class="header__inner">
+                    <div class="header__brand">
+                        <span class="header__icon" aria-hidden="true">🎵</span>
+                        <div class="header__brand-text">
+                            <span class="header__title" data-i18n="app.title">声音疗愈空间</span>
+                            <span class="header__tagline">Soundflows · 数字音疗工作室</span>
+                        </div>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 15px;">
+                    <button class="header__persona-toggle" data-menu="persona" aria-controls="personaMenu" aria-expanded="false">使用目标</button>
+                    <nav class="header__persona-nav" id="personaMenu" aria-label="使用目标" aria-hidden="true">
+                        <div class="mega-menu__layout">
+                            <a class="mega-menu__item" data-cta="persona-meditation" href="pages/meditation/index.html">
+                                <span class="mega-menu__title">冥想专注</span>
+                                <span class="mega-menu__desc">晨间正念与全天专注练习</span>
+                            </a>
+                            <a class="mega-menu__item" data-cta="persona-sleep" href="pages/rain-sounds/index.html">
+                                <span class="mega-menu__title">深度睡眠</span>
+                                <span class="mega-menu__desc">雨声与白噪声音引导快速入睡</span>
+                            </a>
+                            <a class="mega-menu__item" data-cta="persona-balance" href="pages/chakra-healing/index.html">
+                                <span class="mega-menu__title">能量平衡</span>
+                                <span class="mega-menu__desc">脉轮共振与气场净化</span>
+                            </a>
+                            <a class="mega-menu__item" data-cta="persona-emotion" href="pages/subconscious-therapy/index.html">
+                                <span class="mega-menu__title">情绪疗愈</span>
+                                <span class="mega-menu__desc">潜意识疗愈与压力释放</span>
+                            </a>
+                        </div>
+                    </nav>
+                    <a class="header__nav-link" href="pages/resources/index.html" data-cta="nav-resources">资源中心</a>
+                    <div class="header__menu">
+                        <nav class="header__actions" aria-label="快捷功能">
                         <!-- History & Favorites Buttons -->
                         <button class="header-icon-btn" onclick="window.historyFavoritesUI && window.historyFavoritesUI.openPanel('history')" title="播放历史">
                             📜
                         </button>
                         <button class="header-icon-btn" onclick="window.historyFavoritesUI && window.historyFavoritesUI.openPanel('favorites')" title="我的收藏">
-                            ⭐
+                            &#10084;
                         </button>
-                        <button class="header-icon-btn" onclick="window.mixerUI && window.mixerUI.open()" title="音频混音器">
+                        <button class="header-icon-btn" onclick="window.mixerUI && window.mixerUI.open()" title="音频混音台">
                             🎚️
                         </button>
                         <button class="header-icon-btn" onclick="window.statsDashboard && window.statsDashboard.open()" title="收听统计">
@@ -221,11 +248,204 @@
                                 <option value="es-ES">Español</option>
                             </select>
                         </div>
+                    </nav>
                     </div>
                 </div>
             </header>
 
+            <section class="hero-intro" id="heroIntro">
+                <div class="hero-intro__content">
+                    <p class="hero-intro__eyebrow">专业声音疗愈 · 5 种语言随时可用</p>
+                    <h2 class="hero-intro__headline">213+ 沉浸式疗愈音频，帮你在 5 分钟内放松、睡眠与重启专注</h2>
+                    <p class="hero-intro__description">
+                        从雨林白噪到脉轮共振，一键进入专属音疗空间。个性化播放、混音、统计与离线缓存，让每一次呼吸都被疗愈。
+                    </p>
+                                        <div class="hero-intro__cta-group">
+                        <button class="hero-intro__cta-primary" data-cta="start-experience"
+                            onclick="document.getElementById('categoryGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });">
+                            立即开启沉浸体验
+                        </button>
+                        <a class="hero-intro__cta-secondary" data-cta="view-highlights" href="#featureHighlights">
+                            查看核心亮点
+                        </a>
+                        <button type="button" class="hero-intro__cta-secondary hero-intro__cta-plan" data-track="plan-open" data-scroll-target="#conversionOffer">
+                            获取定制冥想计划
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-intro__stats">
+                    <div class="hero-intro__stat">
+                        <span class="hero-intro__stat-number">213+</span>
+                        <span class="hero-intro__stat-label">疗愈音频与白噪合集</span>
+                    </div>
+                    <div class="hero-intro__stat">
+                        <span class="hero-intro__stat-number">9</span>
+                        <span class="hero-intro__stat-label">场景主题随情绪切换</span>
+                    </div>
+                    <div class="hero-intro__stat">
+                        <span class="hero-intro__stat-number">5</span>
+                        <span class="hero-intro__stat-label">语言界面全球同步</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="feature-summary" id="featureHighlights">
+                <div class="feature-summary__heading">
+                    <h3>为什么选择声音疗愈空间？</h3>
+                    <p>我们把专业音疗体验压缩进一个浏览器，在任何设备上都能获取科学、柔和且富有仪式感的放松流程。</p>
+                    <button type="button" class="feature-summary__cta" data-track="stats-open" data-cta="feature-summary">了解专业音疗统计</button>
+                </div>
+                <div class="feature-summary__grid">
+                    <article class="feature-card">
+                        <h4>沉浸场景秒匹配</h4>
+                        <p>根据分类智能切换视频背景与氛围动画，自然进入与情绪相匹配的疗愈空间。</p>
+                    </article>
+                    <article class="feature-card">
+                        <h4>个性混音与收藏</h4>
+                        <p>混合雨声、白噪、颂钵等元素，保存个人配方并跨设备同步历史记录。</p>
+                    </article>
+                    <article class="feature-card">
+                        <h4>专注模式与睡眠定时</h4>
+                        <p>全屏专注视图与智能睡眠定时器，让冥想、午休与夜间睡眠都更轻松。</p>
+                    </article>
+                    <article class="feature-card">
+                        <h4>数据可视化洞察</h4>
+                        <p>内置统计面板记录播放频率、时长与偏好，帮助你建立持续的自我照护节奏。</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="journey-showcase" id="journeyShowcase">
+                <div class="journey-showcase__heading">
+                    <h3>选择与你状态匹配的疗愈旅程</h3>
+                    <p>按目标切换专属声景，立即开始更聚焦的冥想、睡眠或情绪舒缓流程。</p>
+                </div>
+                <div class="journey-showcase__grid">
+                    <article class="journey-card">
+                        <div class="journey-card__label">冥想专注</div>
+                        <h4>晨间冥想 & 日常正念</h4>
+                        <p>精选颂钵与呼吸声景，配合轻引导帮助你在 10 分钟内回到觉察与平静。</p>
+                        <a class="journey-card__cta" href="pages/meditation/index.html">进入冥想旅程 →</a>
+                    </article>
+                    <article class="journey-card">
+                        <div class="journey-card__label">深度睡眠</div>
+                        <h4>夜间放松 & 快速入睡</h4>
+                        <p>组合雨声、白噪与定时器，温柔覆盖夜晚每个阶段，让思绪慢慢沉静。</p>
+                        <a class="journey-card__cta" href="pages/rain-sounds/index.html">打开心流睡眠 →</a>
+                    </article>
+                    <article class="journey-card">
+                        <div class="journey-card__label">能量平衡</div>
+                        <h4>脉轮疗愈 & 气场净化</h4>
+                        <p>七大脉轮共振与水晶音浴，帮助身体与情绪重新找回内部秩序。</p>
+                        <a class="journey-card__cta" href="pages/chakra-healing/index.html">感受能量复位 →</a>
+                    </article>
+                    <article class="journey-card">
+                        <div class="journey-card__label">情绪疗愈</div>
+                        <h4>释放焦虑与压力</h4>
+                        <p>潜意识疗愈与引导式放松，陪你走过日常压力、告别负面循环。</p>
+                        <a class="journey-card__cta" href="pages/subconscious-therapy/index.html">开始情绪舒缓 →</a>
+                    </article>
+                </div>
+            </section>
+
+            <section class="conversion-offer" id="conversionOffer">
+                <div class="conversion-offer__content">
+                    <h3>领取你的 7 日定制冥想计划</h3>
+                    <p>告诉我们你当前的状态，我们会组合合适的声景、冥想练习与睡眠建议，发送一份结构化的 7 日音疗安排。</p>
+                    <ul>
+                        <li>每日 2 份推荐音频与练习提示</li>
+                        <li>结合睡眠或专注目标的提醒计划</li>
+                        <li>个性化混音建议与进度跟踪指引</li>
+                    </ul>
+                </div>
+                <div class="conversion-offer__form">
+                    <form id="planRequestForm" novalidate>
+                        <div class="conversion-offer__field">
+                            <label for="planName">你的昵称</label>
+                            <input id="planName" name="name" type="text" placeholder="如：小觉" required>
+                        </div>
+                        <div class="conversion-offer__field">
+                            <label for="planEmail">联系邮箱</label>
+                            <input id="planEmail" name="email" type="email" placeholder="your@email.com" required>
+                        </div>
+                        <div class="conversion-offer__field">
+                            <label for="planGoal">当前最想改善的目标</label>
+                            <select id="planGoal" name="goal" required>
+                                <option value="">请选择</option>
+                                <option value="sleep">提升睡眠质量</option>
+                                <option value="focus">提升专注效率</option>
+                                <option value="stress">缓解焦虑与压力</option>
+                                <option value="mindfulness">建立规律冥想习惯</option>
+                            </select>
+                        </div>
+                        <div class="conversion-offer__field">
+                            <label for="planTime">每日可投入的时长</label>
+                            <select id="planTime" name="time" required>
+                                <option value="">请选择</option>
+                                <option value="5-10">5-10 分钟</option>
+                                <option value="10-20">10-20 分钟</option>
+                                <option value="20-30">20-30 分钟</option>
+                                <option value="30+">30 分钟以上</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="conversion-offer__submit" data-track="plan-submit">领取定制计划</button>
+                    </form>
+                    <div class="conversion-offer__success" aria-live="polite">
+                        ✅ 计划申请成功！我们会在 5 分钟内将定制冥想安排发送至你的邮箱，请注意查收。
+                    </div>
+                </div>
+            </section>
+
             <!-- Category Section -->
+            <section class="content-hub" id="contentHub">
+                <div class="content-hub__intro">
+                    <h3>疗愈知识库 · 每天 10 分钟提升身心觉察</h3>
+                    <p>精选文章、实践指南与短视频，结合音疗技巧与真实案例，让“听”与“做”更有结构。</p>
+                    <a class="content-hub__cta" href="pages/resources/index.html">访问全部内容 →</a>
+                </div>
+                <div class="content-hub__grid">
+                    <article class="content-card">
+                        <div class="content-card__tag">指南</div>
+                        <h4>30 分钟睡前音疗步骤</h4>
+                        <p>按照“缓和呼吸 → 白噪预热 → 深度冥想”的三段结构，快速进入深层睡眠。</p>
+                        <a class="content-card__link" href="pages/resources/sleep-routine.html">阅读指南 →</a>
+                    </article>
+                    <article class="content-card">
+                        <div class="content-card__tag">视频</div>
+                        <h4>雨声 + 颂钵混音实操</h4>
+                        <p>1 分钟学会在混音台里叠加雨声与颂钵，让午后专注更稳定。</p>
+                        <button class="content-card__link" data-track="content-video" data-video="videos/rain-bowl-demo.mp4">即刻观看 →</button>
+                    </article>
+                    <article class="content-card">
+                        <div class="content-card__tag">案例</div>
+                        <h4>设计师小安的晨间冥想</h4>
+                        <p>看看她如何用 7 日音疗计划缓解焦虑，并保持每周 5 次冥想的习惯。</p>
+                        <a class="content-card__link" href="pages/resources/case-designer-an.html">查看故事 →</a>
+                    </article>
+                    <article class="content-card">
+                        <div class="content-card__tag">音疗笔记</div>
+                        <h4>脉轮共振与情绪释放</h4>
+                        <p>从颜色、频率到身体对应部位，了解脉轮疗愈的科学基础与入门练习。</p>
+                        <a class="content-card__link" href="pages/resources/chakra-cheatsheet.html">下载笔记 →</a>
+                    </article>
+                </div>
+            </section>
+
+            <section class="impact-proof" id="impactProof">
+                <div class="impact-proof__grid">
+                    <article class="impact-card impact-card--stats">
+                        <h4>38% 用户完成 7 日引导疗程</h4>
+                        <p>基于 2025 年匿名数据，持续使用混音 + 冥想方案的用户中，有 38% 成功完成我们推荐的深度疗愈课程。</p>
+                        <button type="button" class="impact-card__cta" data-track="stats-open" data-cta="impact-stats">查看详细数据面板</button>
+                    </article>
+                    <article class="impact-card impact-card--story">
+                        <h4>用户故事 · 设计师小安的转变</h4>
+                        <p>通过 7 日音疗计划，她将晨间焦虑指数降低 45%，并把 15 分钟冥想融入日常通勤前的仪式。</p>
+                        <a class="impact-card__link" href="pages/resources/case-designer-an.html">阅读完整故事 →</a>
+                    </article>
+                </div>
+            </section>
+
             <section class="category-section">
                 <div id="categoryGrid" class="category-grid">
                     <!-- Categories will be loaded here by JavaScript -->
@@ -244,13 +464,13 @@
 
         <!-- Audio Player -->
         <div id="audioPlayer" class="audio-player" onclick="if(isMinimized) toggleMinimize()">
-            <div class="minimize-indicator" onclick="toggleMinimize(event)" data-i18n="player.minimize">▲ 收起</div>
+            <div class="minimize-indicator" onclick="toggleMinimize(event)" data-i18n="player.minimize">�?收起</div>
             <div class="minimized-display">
-                <div class="minimized-text" id="minimizedTrack" data-i18n="player.notPlaying">未播放</div>
+                <div class="minimized-text" id="minimizedTrack" data-i18n="player.notPlaying">未播�?/div>
             </div>
             <div class="player-content">
                 <div class="now-playing">
-                    <div id="currentTrack" class="track-title" data-i18n="player.notPlaying">未播放</div>
+                    <div id="currentTrack" class="track-title" data-i18n="player.notPlaying">未播�?/div>
                     <div id="currentCategory" class="track-category"></div>
                 </div>
 
@@ -274,7 +494,7 @@
                     <div class="control-group">
                         <button class="control-btn" id="shuffleBtn" onclick="toggleShuffle()" data-i18n-title="player.shuffle">🔀</button>
                         <button class="control-btn" id="repeatBtn" onclick="toggleRepeat()" data-i18n-title="player.repeat">🔁</button>
-                        <button class="control-btn" id="sleepTimerBtn" onclick="toggleSleepTimer()" data-i18n-title="player.sleepTimer">⏰</button>
+                        <button class="control-btn" id="sleepTimerBtn" onclick="toggleSleepTimer()" data-i18n-title="player.sleepTimer">�?/button>
                     </div>
 
                     <div class="control-group">
@@ -284,7 +504,7 @@
                     </div>
 
                     <div class="control-group">
-                        <span style="margin-right: 10px;">⚡</span>
+                        <span style="margin-right: 10px;">�?/span>
                         <select id="playbackRate" class="playback-rate" onchange="changePlaybackRate(this.value)">
                             <option value="0.5">0.5x</option>
                             <option value="0.75">0.75x</option>
@@ -299,7 +519,7 @@
                 <!-- Sleep Timer Modal -->
                 <div id="sleepTimerModal" class="timer-modal" style="display: none;">
                     <div class="timer-content">
-                        <h3 data-i18n="timer.title">睡眠定时器</h3>
+                        <h3 data-i18n="timer.title">睡眠定时�?/h3>
                         <div class="timer-options">
                             <button onclick="setSleepTimer(5)" data-i18n="timer.5min">5分钟</button>
                             <button onclick="setSleepTimer(10)" data-i18n="timer.10min">10分钟</button>
@@ -328,7 +548,7 @@
       "name": "声音疗愈空间 | Sound Healing Space",
       "alternateName": "SoundFlows",
       "url": "https://www.soundflows.app",
-      "description": "免费在线声音疗愈平台，提供213+专业疗愈音频：冥想音乐、自然音效、颂钵音疗、脉轮疗愈、催眠引导、潜意识疗愈。支持5种语言，助您放松身心、改善睡眠、缓解压力。",
+      "description": "免费在线声音疗愈平台，提�?13+专业疗愈音频：冥想音乐、自然音效、颂钵音疗、脉轮疗愈、催眠引导、潜意识疗愈。支�?种语言，助您放松身心、改善睡眠、缓解压力�?,
       "applicationCategory": "HealthApplication",
       "operatingSystem": "Web Browser",
       "offers": {
@@ -341,12 +561,12 @@
       "inLanguage": ["zh-CN", "en-US", "ja-JP", "ko-KR", "es-ES"],
       "featureList": [
         "213+ 免费疗愈音频",
-        "9大音频分类：冥想、自然音效、颂钵、脉轮疗愈、催眠、潜意识疗愈、动物音效、火焰音效、流水音效",
+        "9大音频分类：冥想、自然音效、颂钵、脉轮疗愈、催眠、潜意识疗愈、动物音效、火焰音效、流水音�?,
         "支持5种语言界面",
-        "睡眠定时器功能",
-        "随机播放和循环播放",
+        "睡眠定时器功�?,
+        "随机播放和循环播�?,
         "音频播放速度调节",
-        "响应式设计，支持移动端"
+        "响应式设计，支持移动�?
       ],
       "author": {
         "@type": "Organization",
@@ -383,7 +603,7 @@
       "alternateName": "SoundFlows",
       "url": "https://www.soundflows.app",
       "logo": "https://www.soundflows.app/favicon.png",
-      "description": "专业在线声音疗愈平台，提供免费音频疗法服务",
+      "description": "专业在线声音疗愈平台，提供免费音频疗法服�?,
       "foundingDate": "2024",
       "contactPoint": {
         "@type": "ContactPoint",
@@ -399,19 +619,19 @@
       "@context": "https://schema.org",
       "@type": "ItemList",
       "name": "声音疗愈音频分类",
-      "description": "9大专业音频疗法分类",
+      "description": "9大专业音频疗法分�?,
       "itemListElement": [
         {
           "@type": "ListItem",
           "position": 1,
           "name": "冥想音乐",
-          "description": "14首专业冥想引导音频，帮助深度放松和内心平静"
+          "description": "14首专业冥想引导音频，帮助深度放松和内心平�?
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "自然音效 - 雨声",
-          "description": "14种不同雨声音效，营造自然放松氛围"
+          "description": "14种不同雨声音效，营造自然放松氛�?
         },
         {
           "@type": "ListItem",
@@ -434,26 +654,26 @@
         {
           "@type": "ListItem",
           "position": 6,
-          "name": "潜意识疗愈",
-          "description": "11首潜意识重塑音频，积极心理建设"
+          "name": "潜意识疗�?,
+          "description": "11首潜意识重塑音频，积极心理建�?
         },
         {
           "@type": "ListItem",
           "position": 7,
           "name": "动物音效",
-          "description": "26种自然动物音效，回归大自然怀抱"
+          "description": "26种自然动物音效，回归大自然怀�?
         },
         {
           "@type": "ListItem",
           "position": 8,
           "name": "火焰音效",
-          "description": "4种篝火音效，温暖舒适的氛围音"
+          "description": "4种篝火音效，温暖舒适的氛围�?
         },
         {
           "@type": "ListItem",
           "position": 9,
           "name": "流水音效",
-          "description": "6种流水音效，清澈宁静的自然之声"
+          "description": "6种流水音效，清澈宁静的自然之�?
         }
       ]
     }
@@ -469,23 +689,23 @@
           "name": "声音疗愈是什么？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "声音疗愈是一种利用特定频率和节奏的声音来促进身心健康的疗法。通过聆听自然音效、冥想音乐、颂钵音疗等专业音频，可以帮助放松身心、改善睡眠、缓解压力和焦虑。"
+            "text": "声音疗愈是一种利用特定频率和节奏的声音来促进身心健康的疗法。通过聆听自然音效、冥想音乐、颂钵音疗等专业音频，可以帮助放松身心、改善睡眠、缓解压力和焦虑�?
           }
         },
         {
           "@type": "Question",
-          "name": "声音疗愈空间提供哪些音频？",
+          "name": "声音疗愈空间提供哪些音频�?,
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "我们提供213+免费专业疗愈音频，分为9大类：冥想音乐（14首）、雨声（14首）、颂钵音疗（61首）、脉轮疗愈（7首）、催眠引导（70首）、潜意识疗愈（11首）、动物音效（26首）、火焰音效（4首）、流水音效（6首）。"
+            "text": "我们提供213+免费专业疗愈音频，分�?大类：冥想音乐（14首）、雨声（14首）、颂钵音疗（61首）、脉轮疗愈（7首）、催眠引导（70首）、潜意识疗愈�?1首）、动物音效（26首）、火焰音效（4首）、流水音效（6首）�?
           }
         },
         {
           "@type": "Question",
-          "name": "声音疗愈空间支持哪些语言？",
+          "name": "声音疗愈空间支持哪些语言�?,
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "我们支持5种语言界面：简体中文、English（英语）、日本語（日语）、한국어（韩语）、Español（西班牙语），方便全球用户使用。"
+            "text": "我们支持5种语言界面：简体中文、English（英语）、日本語（日语）、한국어（韩语）、Español（西班牙语），方便全球用户使用�?
           }
         },
         {
@@ -493,15 +713,15 @@
           "name": "声音疗愈空间是免费的吗？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "是的，完全免费！我们提供所有213+音频资源都是100%免费使用，无需注册、无需付费、无广告打扰。"
+            "text": "是的，完全免费！我们提供所�?13+音频资源都是100%免费使用，无需注册、无需付费、无广告打扰�?
           }
         },
         {
           "@type": "Question",
-          "name": "如何使用声音疗愈空间？",
+          "name": "如何使用声音疗愈空间�?,
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "使用非常简单：1) 打开网站 soundflows.app  2) 选择您需要的音频分类  3) 点击播放您喜欢的音频  4) 可以设置睡眠定时器、调节音量、切换播放模式。支持手机、平板和电脑访问。"
+            "text": "使用非常简单：1) 打开网站 soundflows.app  2) 选择您需要的音频分类  3) 点击播放您喜欢的音频  4) 可以设置睡眠定时器、调节音量、切换播放模式。支持手机、平板和电脑访问�?
           }
         }
       ]
@@ -509,7 +729,7 @@
     </script>
 
     <!-- External JavaScript Files -->
-    <!-- Load in order: error handler → config → i18n → user data → metadata → video background → app logic → features → enhancements -->
+    <!-- Load in order: error handler �?config �?i18n �?user data �?metadata �?video background �?app logic �?features �?enhancements -->
     <script src="assets/js/global-error-handler.js"></script>
     <script src="assets/js/audio-config.js"></script>
     <script src="assets/js/i18n-system.js"></script>
@@ -533,8 +753,237 @@
     <script src="assets/js/autoplay-detector.js"></script>
     <script src="assets/js/audio-preloader.js"></script>
 
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const planButtons = document.querySelectorAll('[data-track="plan-open"]');
+            const statsButtons = document.querySelectorAll('[data-track="stats-open"]');
+            const personaToggle = document.querySelector('.header__persona-toggle');
+            const personaNav = document.getElementById('personaMenu');
+            const personaLinks = personaNav ? personaNav.querySelectorAll('.mega-menu__item') : [];
+            const conversionSection = document.querySelector('#conversionOffer');
+            const form = document.getElementById('planRequestForm');
+            const successNotice = document.querySelector('.conversion-offer__success');
+            const submitBtn = form ? form.querySelector('button[type="submit"]') : null;
+            const mobileToast = document.getElementById('mobileToast');
+            const toastCta = mobileToast ? mobileToast.querySelector('.mobile-toast__cta') : null;
+            const toastClose = mobileToast ? mobileToast.querySelector('.mobile-toast__close') : null;
+            const toastKey = 'planToastDismissed';
+
+            const pushEvent = (name, detail = {}) => {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({ event: name, ...detail });
+                if (typeof gtag === 'function') {
+                    gtag('event', name, detail);
+                }
+            };
+
+            planButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const target = btn.dataset.scrollTarget ? document.querySelector(btn.dataset.scrollTarget) : conversionSection;
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                    pushEvent('plan_interest', {
+                        cta_source: btn.dataset.cta || 'hero'
+                    });
+                    if (mobileToast) {
+                        mobileToast.classList.remove('is-visible');
+                        localStorage.setItem(toastKey, '1');
+                    }
+                });
+            });
+
+            statsButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    pushEvent('stats_open', {
+                        cta_source: btn.dataset.cta || 'feature-summary'
+                    });
+                    if (window.statsDashboard && typeof window.statsDashboard.open === 'function') {
+                        window.statsDashboard.open();
+                    }
+                });
+            });
+
+            if (personaToggle && personaNav) {
+                const closePersona = () => {
+                    personaNav.classList.remove('is-open');
+                    personaToggle.setAttribute('aria-expanded', 'false');
+                    personaNav.setAttribute('aria-hidden', 'true');
+                };
+
+                personaToggle.addEventListener('click', () => {
+                    const isOpen = personaNav.classList.toggle('is-open');
+                    personaToggle.setAttribute('aria-expanded', String(isOpen));
+                    personaNav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+                    if (isOpen) {
+                        pushEvent('persona_open', {});
+                    }
+                });
+
+                personaLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        pushEvent('persona_select', {
+                            persona: link.dataset.cta || link.textContent.trim()
+                        });
+                        closePersona();
+                    });
+                });
+
+                document.addEventListener('click', (evt) => {
+                    if (!personaNav.contains(evt.target) && evt.target !== personaToggle) {
+                        if (personaNav.classList.contains('is-open')) {
+                            closePersona();
+                        }
+                    }
+                });
+
+                const mq = window.matchMedia('(min-width: 1024px)');
+                const handleMQ = (e) => {
+                    if (e.matches) {
+                        personaNav.classList.remove('is-open');
+                        personaToggle.setAttribute('aria-expanded', 'false');
+                        personaNav.setAttribute('aria-hidden', 'false');
+                    } else {
+                        personaNav.setAttribute('aria-hidden', 'true');
+                    }
+                };
+                mq.addEventListener('change', handleMQ);
+                handleMQ(mq);
+            }
+
+            if (mobileToast) {
+                const showToast = () => {
+                    if (!mobileToast.classList.contains('is-visible')) {
+                        mobileToast.classList.add('is-visible');
+                    }
+                };
+
+                const scheduleToast = () => {
+                    if (window.matchMedia('(max-width: 767px)').matches && !localStorage.getItem(toastKey)) {
+                        setTimeout(() => {
+                            if (!localStorage.getItem(toastKey)) {
+                                showToast();
+                            }
+                        }, 8000);
+                    }
+                };
+
+                scheduleToast();
+                window.matchMedia('(max-width: 767px)').addEventListener('change', (mq) => {
+                    if (mq.matches) {
+                        scheduleToast();
+                    } else {
+                        mobileToast.classList.remove('is-visible');
+                    }
+                });
+
+                if (toastCta) {
+                    toastCta.addEventListener('click', () => {
+                        mobileToast.classList.remove('is-visible');
+                        localStorage.setItem(toastKey, '1');
+                    });
+                }
+
+                if (toastClose) {
+                    toastClose.addEventListener('click', () => {
+                        mobileToast.classList.remove('is-visible');
+                        localStorage.setItem(toastKey, '1');
+                    });
+                }
+            }
+
+            if (form) {
+                form.addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    const siteConfig = window.SITE_CONFIG || {};
+                    if (!form.reportValidity()) {
+                        pushEvent('plan_validation_error', {
+                            reason: 'invalid_fields',
+                            form_id: 'planRequestForm'
+                        });
+                        return;
+                    }
+
+                    if (successNotice) {
+                        successNotice.classList.remove('is-visible');
+                    }
+
+                    const formData = new FormData(form);
+                    const payload = {
+                        name: (formData.get('name') || '').toString().trim(),
+                        email: (formData.get('email') || '').toString().trim(),
+                        goal: formData.get('goal') || '',
+                        time: formData.get('time') || '',
+                        form_id: 'planRequestForm',
+                        funnel_step: 'plan_submit',
+                        source: 'plan-request'
+                    };
+
+                    if (submitBtn) {
+                        submitBtn.disabled = true;
+                        submitBtn.textContent = 'Submitting...';
+                    }
+
+                    pushEvent('plan_submit', payload);
+
+                    const emailAutomationPromise = window.emailAutomation && typeof window.emailAutomation.emitEvent === 'function'
+                        ? window.emailAutomation.emitEvent('plan_submit', Object.assign({}, payload))
+                        : Promise.resolve({ skipped: true });
+
+                    const crmSender = window.crmBridge && typeof window.crmBridge.sendToCrm === 'function'
+                        ? window.crmBridge.sendToCrm(siteConfig.planEndpoint, Object.assign({ event: 'plan_submit', form_name: 'conversionOffer' }, payload))
+                        : Promise.resolve({ skipped: true });
+
+                    crmSender.then(() => {
+                        return emailAutomationPromise.then(() => {
+                            pushEvent('plan_automation_success', Object.assign({
+                                automation_status: 'success'
+                            }, payload));
+                        }).catch((automationError) => {
+                            console.error('Plan email automation failed', automationError);
+                            pushEvent('plan_automation_error', Object.assign({
+                                automation_status: 'error',
+                                error_message: automationError && automationError.message ? automationError.message : 'unknown_error'
+                            }, payload));
+                        });
+                    }).then(() => {
+                        if (successNotice) {
+                            successNotice.classList.add('is-visible');
+                        }
+                        if (window.soundFlowsAnalytics && typeof window.soundFlowsAnalytics.trackConversion === 'function') {
+                            window.soundFlowsAnalytics.trackConversion('plan_submit', payload.goal || '', {
+                                source: 'plan-request',
+                                crm_status: 'success',
+                                form_id: 'planRequestForm'
+                            });
+                        }
+                        pushEvent('plan_submit_success', Object.assign({ crm_status: 'success' }, payload));
+                        form.reset();
+                    }).catch((error) => {
+                        console.error('Plan submission failed', error);
+                        pushEvent('plan_submit_error', Object.assign({
+                            crm_status: 'error',
+                            error_message: error && error.message ? error.message : 'unknown_error'
+                        }, payload));
+                        alert('提交失败，请稍后再试。');
+                    }).finally(() => {
+                        if (submitBtn) {
+                            submitBtn.disabled = false;
+                            submitBtn.textContent = 'Get Custom Plan';
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+
+    <script src="assets/js/crm-bridge.js"></script>
+    <script src="assets/js/email-automation.js"></script>
+    <script src="assets/js/gtm-events.js"></script>
+    <script src="assets/js/content-hub.js"></script>
+    <script src="assets/js/config.js"></script>
     <script src="assets/js/index-app.js"></script>
-    <!-- ✅ AudioManager兼容层 - 为旧模块提供window.audioManager -->
+    <!-- �?AudioManager兼容�?- 为旧模块提供window.audioManager -->
     <script src="assets/js/audioManager-compat.js"></script>
     <script src="assets/js/rating-system.js"></script>
     <script src="assets/js/touch-gestures.js"></script>
@@ -542,11 +991,18 @@
 
     <!-- 初始化主题管理器 -->
     <script>
-        // 在DOM加载后初始化主题管理器
-        window.addEventListener('DOMContentLoaded', () => {
+        // 在DOM加载后初始化主题管理�?        window.addEventListener('DOMContentLoaded', () => {
             window.themeManager = new ThemeManager();
-            console.log('✅ 主题管理器已初始化');
+            console.log('�?主题管理器已初始�?);
         });
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
