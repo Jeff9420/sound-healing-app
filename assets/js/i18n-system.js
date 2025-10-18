@@ -54,9 +54,9 @@ class InternationalizationSystem {
             }
         };
         
-        // 当前语言
+        // 当前语言 - 默认英语
         this.currentLanguage = 'en-US';
-        this.fallbackLanguage = 'zh-CN';
+        this.fallbackLanguage = 'en-US';
         
         // 翻译数据存储
         this.translations = new Map();
