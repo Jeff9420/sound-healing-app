@@ -23,15 +23,13 @@ window.SITE_CONFIG = window.SITE_CONFIG || {
      * - 自定义后端 API
      */
 
-    // 资源订阅表单提交端点
-    // 示例 (HubSpot): "https://api.hsforms.com/submissions/v3/integration/submit/12345678/form-guid-here"
-    // 示例 (Zapier): "https://hooks.zapier.com/hooks/catch/12345/abcde/"
-    subscribeEndpoint: "https://api.hsforms.com/submissions/v3/integration/submit/244150644/ec666460-ee7c-4057-97a6-d6f1fdd9c061",
+    // 资源订阅表单提交端点 (SoundFlows - 资源订阅)
+    // HubSpot Form GUID: ce1bb1ff-0230-4f9b-bf4c-ea92ca4962f4
+    subscribeEndpoint: "https://api.hsforms.com/submissions/v3/integration/submit/244150644/ce1bb1ff-0230-4f9b-bf4c-ea92ca4962f4",
 
     // 7日冥想计划表单提交端点
-    // 示例 (HubSpot): "https://api.hsforms.com/submissions/v3/integration/submit/12345678/form-guid-here"
-    // 示例 (Zapier): "https://hooks.zapier.com/hooks/catch/12345/fghij/"
-    // 注意: 目前使用与订阅表单相同的端点，待第二个表单创建后再更新
+    // HubSpot Form GUID: ec666460-ee7c-4057-97a6-d6f1fdd9c061
+    // 包含自定义字段: meditation_goal, preferred_time
     planEndpoint: "https://api.hsforms.com/submissions/v3/integration/submit/244150644/ec666460-ee7c-4057-97a6-d6f1fdd9c061",
 
     /**
