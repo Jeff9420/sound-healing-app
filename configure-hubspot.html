@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HubSpot 配置助手 - SoundFlows</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .step {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .step:last-child {
+            border-bottom: none;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .step-title {
+            font-size: 20px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #444;
+            font-size: 14px;
+        }
+
+        .label-help {
+            font-weight: normal;
+            color: #777;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            font-family: monospace;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .hint {
+            margin-top: 5px;
+            font-size: 12px;
+            color: #777;
+            line-height: 1.4;
+        }
+
+        .code-box {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 13px;
+            line-height: 1.6;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .code-box code {
+            color: #f8f8f2;
+        }
+
+        .keyword {
+            color: #ff79c6;
+        }
+
+        .string {
+            color: #50fa7b;
+        }
+
+        .comment {
+            color: #6272a4;
+        }
+
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        button.primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        button.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        button.success {
+            background: #4caf50;
+            color: white;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .alert.info {
+            background: #e3f2fd;
+            color: #1976d2;
+            border-left: 4px solid #1976d2;
+        }
+
+        .alert.success {
+            background: #e8f5e9;
+            color: #388e3c;
+            border-left: 4px solid #388e3c;
+        }
+
+        .alert.warning {
+            background: #fff3e0;
+            color: #f57c00;
+            border-left: 4px solid #f57c00;
+        }
+
+        .output {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .output.show {
+            display: block;
+        }
+
+        .copy-button {
+            background: #4caf50;
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        .copy-button:hover {
+            background: #45a049;
+        }
+
+        .instructions {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+
+        .instructions h4 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .highlight {
+            background: #fff59d;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧙 HubSpot 配置助手</h1>
+            <p>一步步完成 SoundFlows 的 CRM 集成配置</p>
+        </div>
+
+        <div class="content">
+            <!-- Step 1: Portal ID -->
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <h2 class="step-title">输入你的 Portal ID</h2>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        HubSpot Portal ID
+                        <span class="label-help">(在 HubSpot → Settings → Account Defaults 中找到)</span>
+                    </label>
+                    <input type="text" id="portalId" placeholder="例如: 12345678">
+                    <p class="hint">
+                        📍 获取方式：登录 HubSpot → 点击右上角设置图标 → Account Setup → Account Defaults → 找到 "HubSpot Account ID"
+                    </p>
+                </div>
+            </div>
+
+            <!-- Step 2: Subscribe Form GUID -->
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <h2 class="step-title">输入"资源订阅"表单 GUID</h2>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        资源订阅表单 GUID
+                        <span class="label-help">(刚才创建的表单的 GUID)</span>
+                    </label>
+                    <input type="text" id="subscribeFormGuid" placeholder="例如: abcd-1234-5678-efgh">
+                    <p class="hint">
+                        📍 获取方式：HubSpot → Marketing → Forms → 点击你的表单 → 在 URL 中找到（格式: .../forms/12345678/<span class="highlight">这里就是GUID</span>/edit）<br>
+                        或点击 "Embed" → 在嵌入代码中找到 <code>formId: "GUID"</code>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Step 3: Plan Form Instructions -->
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <h2 class="step-title">创建"7 日冥想计划"表单</h2>
+                </div>
+
+                <div class="alert info">
+                    <strong>📝 现在去 HubSpot 创建第二个表单</strong><br>
+                    完成后回到这里输入 Form GUID
+                </div>
+
+                <div class="instructions">
+                    <h4>📋 创建步骤：</h4>
+                    <ol>
+                        <li>HubSpot → <strong>Marketing</strong> → <strong>Forms</strong></li>
+                        <li>点击 <strong>Create form</strong> → <strong>Embedded form</strong> → <strong>Blank template</strong></li>
+                        <li>表单名称: <span class="highlight">SoundFlows - 7 日冥想计划</span></li>
+                        <li>添加以下字段 (按顺序):
+                            <ul style="margin-top: 10px;">
+                                <li><strong>First name</strong> (Single-line text, Required)</li>
+                                <li><strong>Last name</strong> (Single-line text, Optional)</li>
+                                <li><strong>Email</strong> (默认已有, Required)</li>
+                                <li><strong>+ Add new field</strong> → <strong>Dropdown select</strong>
+                                    <ul>
+                                        <li>Label: <code>Meditation Goal</code></li>
+                                        <li>Internal name: <code>meditation_goal</code></li>
+                                        <li>Options (每行一个):
+<pre style="margin: 5px 0; background: #fff; padding: 8px; border-radius: 4px;">stress-relief | 压力缓解
+better-sleep | 改善睡眠
+emotional-balance | 情绪平衡
+focus | 专注力提升
+general-wellness | 整体健康</pre>
+                                        </li>
+                                        <li>Required: Yes</li>
+                                    </ul>
+                                </li>
+                                <li><strong>+ Add new field</strong> → <strong>Dropdown select</strong>
+                                    <ul>
+                                        <li>Label: <code>Preferred Time</code></li>
+                                        <li>Internal name: <code>preferred_time</code></li>
+                                        <li>Options:
+<pre style="margin: 5px 0; background: #fff; padding: 8px; border-radius: 4px;">morning | 早晨 (6-9 AM)
+midday | 中午 (12-2 PM)
+evening | 晚间 (6-9 PM)
+flexible | 灵活安排</pre>
+                                        </li>
+                                        <li>Required: Yes</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>点击 <strong>Options</strong> 标签</li>
+                        <li>"What should happen after form submission?" 选择 <strong>Display a thank you message</strong></li>
+                        <li>输入成功消息: <code>✅ 感谢加入！我们已为你定制了 7 日声音疗愈计划。你将在几分钟内收到欢迎邮件。</code></li>
+                        <li>点击右上角 <strong>Publish</strong></li>
+                        <li>复制 Form GUID 并在下方输入</li>
+                    </ol>
+                </div>
+
+                <div class="form-group" style="margin-top: 20px;">
+                    <label>
+                        7 日冥想计划表单 GUID
+                        <span class="label-help">(刚才创建的第二个表单的 GUID)</span>
+                    </label>
+                    <input type="text" id="planFormGuid" placeholder="例如: wxyz-9876-5432-abcd">
+                </div>
+            </div>
+
+            <!-- Step 4: Generate Configuration -->
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <h2 class="step-title">生成配置代码</h2>
+                </div>
+
+                <button class="primary" onclick="generateConfig()">
+                    🔧 生成配置代码
+                </button>
+
+                <div id="configOutput" class="output">
+                    <div class="alert success">
+                        ✅ 配置代码已生成！请按照下方步骤更新配置文件。
+                    </div>
+
+                    <h3 style="margin: 20px 0 10px 0; color: #333;">📝 更新步骤：</h3>
+                    <ol style="margin-left: 20px; line-height: 1.8; font-size: 14px;">
+                        <li>打开文件: <code>assets/js/config.js</code></li>
+                        <li>找到 <code>subscribeEndpoint: "",</code> 和 <code>planEndpoint: "",</code></li>
+                        <li>将下方生成的代码替换原来的空字符串</li>
+                        <li>保存文件</li>
+                    </ol>
+
+                    <h4 style="margin: 20px 0 10px 0; color: #333;">替换为以下代码：</h4>
+                    <div class="code-box" id="generatedCode"></div>
+                    <button class="copy-button" onclick="copyConfig()">📋 复制配置代码</button>
+
+                    <div class="alert info" style="margin-top: 20px;">
+                        <strong>🧪 下一步：测试配置</strong><br>
+                        保存后，打开 <code>crm-test.html</code> 测试表单提交是否成功！
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function generateConfig() {
+            const portalId = document.getElementById('portalId').value.trim();
+            const subscribeGuid = document.getElementById('subscribeFormGuid').value.trim();
+            const planGuid = document.getElementById('planFormGuid').value.trim();
+
+            // Validation
+            if (!portalId || !subscribeGuid || !planGuid) {
+                alert('⚠️ 请填写所有必填字段！\n\n需要：Portal ID、两个表单的 GUID');
+                return;
+            }
+
+            // Generate config code
+            const configCode = `<span class="comment">// HubSpot CRM 集成配置</span>
+<span class="keyword">subscribeEndpoint:</span> <span class="string">"https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${subscribeGuid}"</span>,
+<span class="keyword">planEndpoint:</span> <span class="string">"https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${planGuid}"</span>,`;
+
+            // Display generated code
+            document.getElementById('generatedCode').innerHTML = configCode;
+            document.getElementById('configOutput').classList.add('show');
+
+            // Store for copy function
+            window.generatedConfigText = `subscribeEndpoint: "https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${subscribeGuid}",
+planEndpoint: "https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${planGuid}",`;
+
+            // Scroll to output
+            document.getElementById('configOutput').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function copyConfig() {
+            if (!window.generatedConfigText) {
+                alert('⚠️ 请先生成配置代码！');
+                return;
+            }
+
+            navigator.clipboard.writeText(window.generatedConfigText).then(() => {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '✅ 已复制！';
+                button.style.background = '#45a049';
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#4caf50';
+                }, 2000);
+            }).catch(err => {
+                alert('复制失败，请手动复制代码');
+                console.error('Copy failed:', err);
+            });
+        }
+    </script>
+</body>
+</html>
