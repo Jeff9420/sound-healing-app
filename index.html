@@ -386,47 +386,47 @@
 
             <section class="conversion-offer" id="conversionOffer">
                 <div class="conversion-offer__content">
-                    <h3>领取你的 7 日定制冥想计划</h3>
-                    <p>告诉我们你当前的状态，我们会组合合适的声景、冥想练习与睡眠建议，发送一份结构化的 7 日音疗安排。</p>
+                    <h3 data-i18n="form.plan.title">领取你的 7 日定制冥想计划</h3>
+                    <p data-i18n="form.plan.description">告诉我们你当前的状态，我们会组合合适的声景、冥想练习与睡眠建议，发送一份结构化的 7 日音疗安排。</p>
                     <ul>
-                        <li>每日 2 份推荐音频与练习提示</li>
-                        <li>结合睡眠或专注目标的提醒计划</li>
-                        <li>个性化混音建议与进度跟踪指引</li>
+                        <li data-i18n="form.plan.benefit1">每日 2 份推荐音频与练习提示</li>
+                        <li data-i18n="form.plan.benefit2">结合睡眠或专注目标的提醒计划</li>
+                        <li data-i18n="form.plan.benefit3">个性化混音建议与进度跟踪指引</li>
                     </ul>
                 </div>
                 <div class="conversion-offer__form">
                     <form id="planRequestForm" novalidate>
                         <div class="conversion-offer__field">
-                            <label for="planName">你的昵称</label>
-                            <input id="planName" name="name" type="text" placeholder="如：小觉" required>
+                            <label for="planName" data-i18n="form.plan.label.name">你的昵称</label>
+                            <input id="planName" name="name" type="text" data-i18n-placeholder="form.plan.placeholder.name" placeholder="如：小觉" required>
                         </div>
                         <div class="conversion-offer__field">
-                            <label for="planEmail">联系邮箱</label>
-                            <input id="planEmail" name="email" type="email" placeholder="your@email.com" required>
+                            <label for="planEmail" data-i18n="form.plan.label.email">联系邮箱</label>
+                            <input id="planEmail" name="email" type="email" data-i18n-placeholder="form.plan.placeholder.email" placeholder="your@email.com" required>
                         </div>
                         <div class="conversion-offer__field">
-                            <label for="planGoal">当前最想改善的目标</label>
+                            <label for="planGoal" data-i18n="form.plan.label.goal">当前最想改善的目标</label>
                             <select id="planGoal" name="goal" required>
-                                <option value="">请选择</option>
-                                <option value="sleep">提升睡眠质量</option>
-                                <option value="focus">提升专注效率</option>
-                                <option value="stress">缓解焦虑与压力</option>
-                                <option value="mindfulness">建立规律冥想习惯</option>
+                                <option value="" data-i18n="form.plan.goal.select">请选择</option>
+                                <option value="sleep" data-i18n="form.plan.goal.sleep">提升睡眠质量</option>
+                                <option value="focus" data-i18n="form.plan.goal.focus">提升专注效率</option>
+                                <option value="stress" data-i18n="form.plan.goal.stress">缓解焦虑与压力</option>
+                                <option value="mindfulness" data-i18n="form.plan.goal.mindfulness">建立规律冥想习惯</option>
                             </select>
                         </div>
                         <div class="conversion-offer__field">
-                            <label for="planTime">每日可投入的时长</label>
+                            <label for="planTime" data-i18n="form.plan.label.time">每日可投入的时长</label>
                             <select id="planTime" name="time" required>
-                                <option value="">请选择</option>
-                                <option value="5-10">5-10 分钟</option>
-                                <option value="10-20">10-20 分钟</option>
-                                <option value="20-30">20-30 分钟</option>
-                                <option value="30+">30 分钟以上</option>
+                                <option value="" data-i18n="form.plan.time.select">请选择</option>
+                                <option value="5-10" data-i18n="form.plan.time.5-10">5-10 分钟</option>
+                                <option value="10-20" data-i18n="form.plan.time.10-20">10-20 分钟</option>
+                                <option value="20-30" data-i18n="form.plan.time.20-30">20-30 分钟</option>
+                                <option value="30+" data-i18n="form.plan.time.30+">30 分钟以上</option>
                             </select>
                         </div>
-                        <button type="submit" class="conversion-offer__submit" data-track="plan-submit">领取定制计划</button>
+                        <button type="submit" class="conversion-offer__submit" data-track="plan-submit" data-i18n="form.plan.submit">领取定制计划</button>
                     </form>
-                    <div class="conversion-offer__success" aria-live="polite">
+                    <div class="conversion-offer__success" aria-live="polite" data-i18n="form.plan.success">
                         ✅ 计划申请成功！我们会在 5 分钟内将定制冥想安排发送至你的邮箱，请注意查收。
                     </div>
                 </div>
