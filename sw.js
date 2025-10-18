@@ -1,10 +1,10 @@
 /**
  * SoundFlows Service Worker - PWA功能支持
  * 离线缓存、后台同步、推送通知、音频预加载
- * @version 2.2.0 - 修复Response.clone()错误
+ * @version 2.3.0 - 修复 CSP 阻止 HubSpot API 调用
  */
 
-const CACHE_NAME = 'soundflows-v2.2';
+const CACHE_NAME = 'soundflows-v2.3';
 const STATIC_CACHE_URLS = [
   '/',
   '/index.html',
@@ -82,6 +82,22 @@ self.addEventListener('activate', event => {
 // 智能缓存策略
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
+
+  // ✅ 跳过外部 API 请求（HubSpot, Zapier, Analytics 等）
+  // 让这些请求直接通过，不经过 Service Worker 拦截
+  const skipDomains = [
+    'api.hsforms.com',
+    'hooks.zapier.com',
+    'googletagmanager.com',
+    'google-analytics.com',
+    'clarity.ms',
+    'amplitude.com'
+  ];
+
+  if (skipDomains.some(domain => url.hostname.includes(domain))) {
+    // 直接返回，不拦截
+    return;
+  }
 
   // 处理音频文件请求
   if (url.pathname.endsWith('.mp3') || url.pathname.endsWith('.wav') || url.pathname.endsWith('.ogg')) {
