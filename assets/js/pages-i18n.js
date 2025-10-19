@@ -72,7 +72,30 @@ class PagesI18n {
                 'resources.subscribe.note': 'Completely free, no credit card required. You can unsubscribe anytime from the email footer.',
                 'resources.footer.title': 'Ready to Start Your Sound Healing Journey?',
                 'resources.footer.desc': 'Explore 213+ professional sound healing tracks in the main app',
-                'resources.footer.cta': 'Start Free Experience'
+                'resources.footer.cta': 'Start Free Experience',
+
+                // Resource detail pages
+                'detail.category.guide': 'Practice Guide',
+                'detail.category.video': 'Video Tutorial',
+                'detail.category.story': 'User Story',
+                'detail.category.interview': 'Expert Interview',
+                'detail.category.endorsement': 'Brand Endorsement',
+                'detail.category.blog': 'Blog Article',
+                'detail.category.download': 'Download',
+                'detail.cta.plan': 'Fill Needs Form',
+                'detail.cta.impact': 'View Case Studies',
+                'detail.content.preview': 'Content Preview',
+                'detail.content.preparing': 'We are currently preparing the complete content for this guide.',
+                'detail.highlights.title': 'Highlights',
+                'detail.highlight.one': 'Highlight 1: Combining sound with breathing techniques',
+                'detail.highlight.two': 'Highlight 2: Ready-to-use daily routines',
+                'detail.highlight.three': 'Highlight 3: Recommended audio tracks and exercises',
+                'detail.content.coming': 'Please stay tuned for the complete version, which will be published shortly after review.',
+                'detail.actions.title': 'Next Steps',
+                'detail.actions.submit': 'Submit My Practice Needs',
+                'detail.actions.subscribe': 'Subscribe to Weekly Selection',
+                'detail.related.title': 'Related Reading',
+                'detail.related.more': 'Explore More Healing Scenarios →'
             },
 
             'zh-CN': {
@@ -95,7 +118,30 @@ class PagesI18n {
                 'resources.subscribe.note': '完全免费，无需信用卡。订阅成功后你可在任何邮件底部取消订阅。',
                 'resources.footer.title': '准备开始你的声音疗愈之旅？',
                 'resources.footer.desc': '在主应用中探索213+专业声音疗愈音轨',
-                'resources.footer.cta': '开始免费体验'
+                'resources.footer.cta': '开始免费体验',
+
+                // Resource detail pages
+                'detail.category.guide': '实践指南',
+                'detail.category.video': '视频教程',
+                'detail.category.story': '用户故事',
+                'detail.category.interview': '专家访谈',
+                'detail.category.endorsement': '品牌背书',
+                'detail.category.blog': '博客文章',
+                'detail.category.download': '下载资源',
+                'detail.cta.plan': '填写需求表单',
+                'detail.cta.impact': '查看实践案例',
+                'detail.content.preview': '内容预告',
+                'detail.content.preparing': '我们正在整理本指南的完整内容。',
+                'detail.highlights.title': '亮点',
+                'detail.highlight.one': '亮点一：结合声音与呼吸的实用技巧',
+                'detail.highlight.two': '亮点二：可直接应用的日常流程',
+                'detail.highlight.three': '亮点三：推荐音频与配套练习',
+                'detail.content.coming': '敬请期待完整版，我们会在完成审核后第一时间发布。',
+                'detail.actions.title': '下一步行动',
+                'detail.actions.submit': '提交我的练习需求',
+                'detail.actions.subscribe': '订阅每周精选',
+                'detail.related.title': '延伸阅读',
+                'detail.related.more': '探索更多疗愈场景 →'
             },
 
             'ja-JP': {
@@ -118,7 +164,30 @@ class PagesI18n {
                 'resources.subscribe.note': '完全無料、クレジットカード不要。メールフッターからいつでも購読解除できます。',
                 'resources.footer.title': 'サウンドヒーリングの旅を始める準備はできましたか？',
                 'resources.footer.desc': 'メインアプリで213+のプロフェッショナルなサウンドヒーリングトラックを探索',
-                'resources.footer.cta': '無料体験を開始'
+                'resources.footer.cta': '無料体験を開始',
+
+                // Resource detail pages
+                'detail.category.guide': '実践ガイド',
+                'detail.category.video': 'ビデオチュートリアル',
+                'detail.category.story': 'ユーザーストーリー',
+                'detail.category.interview': '専門家インタビュー',
+                'detail.category.endorsement': 'ブランド推薦',
+                'detail.category.blog': 'ブログ記事',
+                'detail.category.download': 'ダウンロード',
+                'detail.cta.plan': 'ニーズフォームに記入',
+                'detail.cta.impact': 'ケーススタディを見る',
+                'detail.content.preview': 'コンテンツプレビュー',
+                'detail.content.preparing': 'このガイドの完全なコンテンツを現在準備中です。',
+                'detail.highlights.title': 'ハイライト',
+                'detail.highlight.one': 'ハイライト1：音と呼吸を組み合わせたテクニック',
+                'detail.highlight.two': 'ハイライト2：すぐに使える日常ルーチン',
+                'detail.highlight.three': 'ハイライト3：推奨オーディオトラックとエクササイズ',
+                'detail.content.coming': '完全版の公開をお待ちください。レビュー後すぐに公開されます。',
+                'detail.actions.title': '次のステップ',
+                'detail.actions.submit': '私の実践ニーズを提出',
+                'detail.actions.subscribe': '週刊セレクションを購読',
+                'detail.related.title': '関連記事',
+                'detail.related.more': 'さらに癒しのシナリオを探索 →'
             },
 
             'ko-KR': {
@@ -141,7 +210,30 @@ class PagesI18n {
                 'resources.subscribe.note': '완전 무료, 신용카드 불필요. 이메일 하단에서 언제든지 구독 취소할 수 있습니다.',
                 'resources.footer.title': '사운드 힐링 여정을 시작할 준비가 되셨나요?',
                 'resources.footer.desc': '메인 앱에서 213+ 전문 사운드 힐링 트랙 탐색',
-                'resources.footer.cta': '무료 체험 시작'
+                'resources.footer.cta': '무료 체험 시작',
+
+                // Resource detail pages
+                'detail.category.guide': '실천 가이드',
+                'detail.category.video': '비디오 튜토리얼',
+                'detail.category.story': '사용자 스토리',
+                'detail.category.interview': '전문가 인터뷰',
+                'detail.category.endorsement': '브랜드 추천',
+                'detail.category.blog': '블로그 기사',
+                'detail.category.download': '다운로드',
+                'detail.cta.plan': '필요 양식 작성',
+                'detail.cta.impact': '사례 연구 보기',
+                'detail.content.preview': '콘텐츠 미리보기',
+                'detail.content.preparing': '이 가이드의 완전한 콘텐츠를 현재 준비 중입니다.',
+                'detail.highlights.title': '하이라이트',
+                'detail.highlight.one': '하이라이트 1: 소리와 호흡을 결합한 기술',
+                'detail.highlight.two': '하이라이트 2: 바로 사용 가능한 일상 루틴',
+                'detail.highlight.three': '하이라이트 3: 추천 오디오 트랙 및 운동',
+                'detail.content.coming': '완전판을 기대해 주세요. 검토 후 곧 게시됩니다.',
+                'detail.actions.title': '다음 단계',
+                'detail.actions.submit': '내 실천 필요 제출',
+                'detail.actions.subscribe': '주간 셀렉션 구독',
+                'detail.related.title': '관련 읽기',
+                'detail.related.more': '더 많은 힐링 시나리오 탐색 →'
             },
 
             'es-ES': {
@@ -164,7 +256,30 @@ class PagesI18n {
                 'resources.subscribe.note': 'Completamente gratis, no se requiere tarjeta de crédito. Puede darse de baja en cualquier momento desde el pie de página del correo.',
                 'resources.footer.title': '¿Listo para Comenzar tu Viaje de Sanación con Sonido?',
                 'resources.footer.desc': 'Explora 213+ pistas profesionales de sanación con sonido en la aplicación principal',
-                'resources.footer.cta': 'Comenzar Experiencia Gratuita'
+                'resources.footer.cta': 'Comenzar Experiencia Gratuita',
+
+                // Resource detail pages
+                'detail.category.guide': 'Guía Práctica',
+                'detail.category.video': 'Tutorial en Video',
+                'detail.category.story': 'Historia de Usuario',
+                'detail.category.interview': 'Entrevista de Experto',
+                'detail.category.endorsement': 'Recomendación de Marca',
+                'detail.category.blog': 'Artículo de Blog',
+                'detail.category.download': 'Descarga',
+                'detail.cta.plan': 'Completar Formulario de Necesidades',
+                'detail.cta.impact': 'Ver Estudios de Caso',
+                'detail.content.preview': 'Vista Previa del Contenido',
+                'detail.content.preparing': 'Actualmente estamos preparando el contenido completo de esta guía.',
+                'detail.highlights.title': 'Aspectos Destacados',
+                'detail.highlight.one': 'Aspecto 1: Combinando sonido con técnicas de respiración',
+                'detail.highlight.two': 'Aspecto 2: Rutinas diarias listas para usar',
+                'detail.highlight.three': 'Aspecto 3: Pistas de audio recomendadas y ejercicios',
+                'detail.content.coming': 'Por favor, esté atento a la versión completa, que se publicará en breve después de la revisión.',
+                'detail.actions.title': 'Próximos Pasos',
+                'detail.actions.submit': 'Enviar Mis Necesidades de Práctica',
+                'detail.actions.subscribe': 'Suscribirse a Selección Semanal',
+                'detail.related.title': 'Lectura Relacionada',
+                'detail.related.more': 'Explorar Más Escenarios de Sanación →'
             }
         };
     }
