@@ -1,0 +1,184 @@
+{
+  "runAt": "2025-10-19T12:14:35.636Z",
+  "target": "https://soundflows.app/",
+  "vercel": {
+    "statusCode": 307,
+    "headers": {
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-type": "text/plain",
+      "date": "Sun, 19 Oct 2025 12:14:01 GMT",
+      "location": "https://www.soundflows.app/",
+      "server": "Vercel",
+      "strict-transport-security": "max-age=63072000",
+      "x-vercel-id": "sfo1::4cdqf-1760876041261-688c479a5e0b",
+      "transfer-encoding": "chunked"
+    }
+  },
+  "vercelWww": {
+    "statusCode": 200,
+    "headers": {
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "age": "1299",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-disposition": "inline",
+      "content-length": "57096",
+      "content-security-policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://archive.org https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://cdn.amplitude.com https://*.amplitude.com; style-src 'self' 'unsafe-inline' https://archive.org; img-src 'self' data: https://archive.org https://*.archive.org https://*.vercel.app https://www.google-analytics.com https://www.googletagmanager.com; media-src 'self' https://archive.org https://*.archive.org; connect-src 'self' https://archive.org https://*.archive.org https://*.vercel.app https://www.googletagmanager.com https://www.google-analytics.com https://stats.g.doubleclick.net https://www.clarity.ms https://cdn.amplitude.com https://api.amplitude.com https://api2.amplitude.com https://*.amplitude.com https://api.hsforms.com https://*.hubspot.com https://hooks.zapier.com; font-src 'self' data:; frame-src https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self';",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Sun, 19 Oct 2025 12:14:02 GMT",
+      "etag": "\"1b478bafff8d9fdbf6af7dd786cb6d14\"",
+      "last-modified": "Sun, 19 Oct 2025 11:52:22 GMT",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "server": "Vercel",
+      "strict-transport-security": "max-age=63072000",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY",
+      "x-vercel-cache": "HIT",
+      "x-vercel-id": "sfo1::m5vmc-1760876042455-dd37a52ab9a5",
+      "x-xss-protection": "1; mode=block"
+    }
+  },
+  "desktop": {
+    "categories": [
+      {
+        "category": "Animal sounds",
+        "currentCategory": "Animal sounds",
+        "src": "https://archive.org/download/zen-bamboo/forest-birds.mp4",
+        "loop": true,
+        "paused": false,
+        "useCanvas": false,
+        "performanceMetrics": {
+          "loadTime": 0,
+          "switchTime": 1187.7999999970198,
+          "errorCount": 0
+        }
+      },
+      {
+        "category": "Chakra",
+        "currentCategory": "Chakra",
+        "src": "https://archive.org/download/zen-bamboo/energy-chakra.mp4",
+        "loop": true,
+        "paused": false,
+        "useCanvas": false,
+        "performanceMetrics": {
+          "loadTime": 0,
+          "switchTime": 1010.7000000029802,
+          "errorCount": 0
+        }
+      },
+      {
+        "category": "Fire",
+        "currentCategory": "Fire",
+        "src": "https://archive.org/download/zen-bamboo/campfire-flames.mp4",
+        "loop": true,
+        "paused": false,
+        "useCanvas": false,
+        "performanceMetrics": {
+          "loadTime": 0,
+          "switchTime": 1005.3999999910593,
+          "errorCount": 0
+        }
+      },
+      {
+        "category": "hypnosis",
+        "currentCategory": "hypnosis",
+        "src": "https://archive.org/download/zen-bamboo/cosmic-stars.mp4",
+        "loop": true,
+        "paused": false,
+        "useCanvas": false,
+        "performanceMetrics": {
+          "loadTime": 0,
+          "switchTime": 1011.6999999880791,
+          "errorCount": 0
+        }
+      },
+      {
+        "category": "meditation",
+        "currentCategory": "meditation",
+        "src": "https://archive.org/download/zen-bamboo/zen-bamboo.mp4",
+        "loop": true,
+        "paused": false,
+        "useCanvas": false,
+        "performanceMetrics": {
+          "loadTime": 0,
+          "switchTime": 1008.9000000059605,
+          "errorCount": 0
+        }
+      },
+      {
+        "category": "Rain",
+        "currentCategory": "Rain",
+        "src": "https://archive.org/download/zen-bamboo/rain-drops.mp4",
+        "loop": true,
+        "paused": false,
+        "useCanvas": false,
+        "performanceMetrics": {
+          "loadTime": 0,
+          "switchTime": 1009.8999999910593,
+          "errorCount": 0
+        }
+      },
+      {
+        "category": "running water",
+        "currentCategory": "running water",
+        "src": "https://archive.org/download/zen-bamboo/flowing-stream.mp4",
+        "loop": true,
+        "paused": false,
+        "useCanvas": false,
+        "performanceMetrics": {
+          "loadTime": 0,
+          "switchTime": 1008.8999999910593,
+          "errorCount": 0
+        }
+      },
+      {
+        "category": "Singing bowl sound",
+        "currentCategory": "Singing bowl sound",
+        "src": "https://archive.org/download/zen-bamboo/temple-golden.mp4",
+        "loop": true,
+        "paused": false,
+        "useCanvas": false,
+        "performanceMetrics": {
+          "loadTime": 0,
+          "switchTime": 1009.6000000089407,
+          "errorCount": 0
+        }
+      },
+      {
+        "category": "Subconscious Therapy",
+        "currentCategory": "Subconscious Therapy",
+        "src": "https://archive.org/download/zen-bamboo/dreamy-clouds.mp4",
+        "loop": true,
+        "paused": false,
+        "useCanvas": false,
+        "performanceMetrics": {
+          "loadTime": 0,
+          "switchTime": 1009.2999999970198,
+          "errorCount": 0
+        }
+      }
+    ],
+    "metrics": {
+      "loadTime": 0,
+      "switchTime": 1009.2999999970198,
+      "errorCount": 0,
+      "cacheSize": 9,
+      "isVideoMode": true
+    }
+  },
+  "mobile": {
+    "isVideoMode": true,
+    "viewport": {
+      "width": 390,
+      "height": 664
+    },
+    "currentCategory": "meditation",
+    "src": "https://archive.org/download/zen-bamboo/zen-bamboo.mp4"
+  },
+  "fallback": {
+    "useCanvas": true,
+    "videoSupported": false,
+    "canvasDisplayed": true
+  }
+}

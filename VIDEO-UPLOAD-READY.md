@@ -1,4 +1,4 @@
-# ✅ 视频优化完成 - 准备上传
+﻿# ✅ 视频优化完成 - 准备上传
 
 ## 🎉 状态：已完成优化，等待上传到Archive.org
 
@@ -150,15 +150,15 @@ C:\Users\MI\Desktop\声音疗愈\videos\
 - [x] 视频规格统一 (1920x1080, 30fps, H.264)
 - [x] 文件大小合理 (总共52MB)
 - [x] 视频时长适合循环 (10-20秒)
-- [ ] **上传到Archive.org**
-- [ ] **更新代码中的baseUrl**
-- [ ] **提交代码到GitHub**
-- [ ] **验证Vercel自动部署**
+- [x] **上传到Archive.org**（Archive Item: zen-bamboo，tools/video-background-qa.js & qa-video-functional-results.json 验证 302→200）
+- [x] **更新代码中的baseUrl**（assets/js/video-background-manager.js 指向 https://archive.org/download/zen-bamboo/）
+- [x] **提交代码到GitHub**（commit ccac00c）
+- [x] **验证Vercel自动部署**（qa-video-functional-results.json.vercel / vercelWww）
 - [x] **测试https://soundflows.app视频功能**（tools/video-background-qa.js + qa-video-results.json 自动验证 URL 可用）
 
 ---
 
 **优化完成时间**: 2025-10-12 17:11
 **优化工具**: FFmpeg 8.0
-**当前状态**: ✅ 已完成优化，等待上传
-**下一步**: 上传到Archive.org
+**当前状态**: ✅ 已完成优化，已上传并验证生产环境
+**下一步**: ⏳ 关注后续运营与监控（Amplitude/GTM/性能巡检）
