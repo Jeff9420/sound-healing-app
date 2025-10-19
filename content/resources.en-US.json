@@ -1,0 +1,183 @@
+{
+  "hero": {
+    "headline": "Sound Healing Resource Hub · Curated Practices On Demand",
+    "description": "Weekly updated guides, short videos and real stories - completely free to help you implement sound healing in your team or personal routine.",
+    "primary_cta": {
+      "label": "Fill Needs Form",
+      "href": "../../index.html#conversionOffer",
+      "id": "resources-plan"
+    },
+    "secondary_cta": {
+      "label": "View Case Studies",
+      "href": "../../index.html#impactProof",
+      "id": "resources-impact"
+    }
+  },
+  "sections": [
+    {
+      "id": "guides",
+      "title": "Practice Guides",
+      "description": "Step-by-step guides to implement meditation, sleep, and stress relief practices.",
+      "items": [
+        {
+          "tag": "Guide",
+          "title": "Workday Focus Booster",
+          "summary": "15-minute sound + breathing combo to quickly reset your mental state during lunch break.",
+          "href": "focus-booster.html"
+        },
+        {
+          "tag": "Guide",
+          "title": "30-Minute Bedtime Sound Therapy Routine",
+          "summary": "Follow the 3-step structure: gentle breathing → white noise warmup → deep meditation to help your brain naturally enter deep sleep.",
+          "href": "sleep-routine.html"
+        },
+        {
+          "tag": "Guide",
+          "title": "7-Day Stress Detox Plan",
+          "summary": "Gradually release anxiety and physical tension through daily sound practices.",
+          "href": "stress-detox.html"
+        }
+      ]
+    },
+    {
+      "id": "videos",
+      "title": "Video Tutorials",
+      "description": "1-3 minute practical videos you can start anytime.",
+      "items": [
+        {
+          "tag": "Video",
+          "title": "Morning Meditation Boost",
+          "summary": "Morning soundscapes with guided voice to awaken daily awareness and mindfulness.",
+          "href": "video-morning-meditation.html"
+        },
+        {
+          "tag": "Video",
+          "title": "Rain + Singing Bowl Mixing Tutorial",
+          "summary": "Mixer demonstration showing how to blend two sound layers for more stable afternoon focus.",
+          "href": "video-rain-bowl.html"
+        },
+        {
+          "tag": "Video",
+          "title": "3-Minute Quick Sleep Breathing Technique",
+          "summary": "Learn the 4-7-8 breathing method with gentle ocean sounds to relax body and mind.",
+          "href": "video-sleep-breath.html"
+        }
+      ]
+    },
+    {
+      "id": "stories",
+      "title": "Real User Stories",
+      "description": "See how real users integrate sound healing into life and work for actionable inspiration.",
+      "items": [
+        {
+          "tag": "Story",
+          "title": "Story: Designer An's Morning Meditation",
+          "summary": "Real user An reduced morning anxiety by 45% through a 7-day sound therapy plan.",
+          "href": "case-designer-an.html"
+        },
+        {
+          "tag": "Story",
+          "title": "Story: Runner Wei's Training Recovery",
+          "summary": "Real user Wei shortened post-training recovery time by 30% combining sound healing.",
+          "href": "case-runner-wei.html"
+        },
+        {
+          "tag": "Story",
+          "title": "Story: Teacher Lin's Classroom Mood Management",
+          "summary": "5-minute pre-class sound ritual improved student focus and classroom atmosphere.",
+          "href": "case-teacher-lin.html"
+        }
+      ]
+    },
+    {
+      "id": "experts",
+      "title": "Expert Interviews",
+      "description": "Conversations with clinical psychologists and meditation instructors about professional perspectives on sound healing.",
+      "items": [
+        {
+          "tag": "Interview",
+          "title": "Interview: Psychologist Chen Yang on Sound & Sleep Disorders",
+          "summary": "Psychologist Chen Yang shares clinical application protocols and cases of sound therapy for sleep disorder patients.",
+          "href": "expert-chen-yang.html"
+        },
+        {
+          "tag": "Interview",
+          "title": "Interview: Meditation Instructor Lin Lan's Focus Rituals",
+          "summary": "Instructor Lin Lan shares how to design 10-minute sound meditation rituals for busy professionals, with practice checklists.",
+          "href": "expert-lin-lan.html"
+        }
+      ]
+    },
+    {
+      "id": "endorsements",
+      "title": "Brand Endorsements",
+      "description": "Recommendations from partner companies and institutions showcasing credible endorsements of sound healing solutions.",
+      "items": [
+        {
+          "tag": "Endorsement",
+          "title": "Brand: HuiLife Tech's Employee Meditation Program",
+          "summary": "HuiLife Tech shares how sound healing became a long-term employee wellness solution.",
+          "href": "endorsement-huilife.html"
+        },
+        {
+          "tag": "Endorsement",
+          "title": "Brand: Serenity Healing Center's Sound Therapy Programs",
+          "summary": "Serenity Healing Center demonstrates professional endorsement of sound therapy with case data.",
+          "href": "endorsement-serenity-center.html"
+        }
+      ]
+    },
+    {
+      "id": "blog",
+      "title": "Blog Articles",
+      "description": "From science to lifestyle and work techniques - systematize your sound healing practice.",
+      "items": [
+        {
+          "tag": "Blog",
+          "title": "Team Meditation: Office Rhythm Reset",
+          "summary": "Three 10-minute group practice formats for quick team reset.",
+          "href": "blog-mindful-work.html"
+        },
+        {
+          "tag": "Blog",
+          "title": "Sleep Science & Sound Healing",
+          "summary": "Analyze the relationship between sleep stages and sound wave frequencies to help select appropriate soundscapes.",
+          "href": "blog-sleep-science.html"
+        },
+        {
+          "tag": "Blog",
+          "title": "Creating Your Custom Soundscape Workflow",
+          "summary": "Choose sound combinations based on task types for both creativity and efficiency.",
+          "href": "blog-soundscapes.html"
+        }
+      ]
+    },
+    {
+      "id": "downloads",
+      "title": "Downloads",
+      "description": "Ready-to-use solutions and templates to quickly implement sound healing.",
+      "items": [
+        {
+          "tag": "Download",
+          "title": "Sound Healing Enterprise Deployment Guide",
+          "summary": "Practical guide to help teams, classrooms, and events deploy sound healing.",
+          "href": "download-enterprise-guide.html"
+        }
+      ]
+    }
+  ],
+  "footer_cta": {
+    "title": "Want to bring sound healing to your team or students?",
+    "description": "Fill out the needs form for a response within 1 business day, or download the deployment guide to try it yourself first.",
+    "primary": {
+      "label": "Submit Practice Needs",
+      "href": "../../index.html#conversionOffer",
+      "id": "resources-book-demo"
+    },
+    "secondary": {
+      "label": "Download Deployment Guide",
+      "href": "download-enterprise-guide.html",
+      "id": "resources-download-guide"
+    }
+  }
+}

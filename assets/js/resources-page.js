@@ -1,5 +1,5 @@
 ﻿(function(){
-    const pageLang = document.documentElement.lang || "zh-CN";
+    const pageLang = document.documentElement.lang || "en-US";
     const candidateUrls = [
         `../../content/resources.${pageLang}.json`,
         "../../content/resources.json"
@@ -81,12 +81,12 @@
         const titleEl = heroSection.querySelector("h1");
         const descEl = heroSection.querySelector(".hero-desc");
         const actionsEl = heroSection.querySelector(".hero-actions");
-        if (titleEl) titleEl.textContent = hero.headline || "声音疗愈资源枢纽";
-        if (descEl) descEl.textContent = hero.description || "精选指南、短视频与真实故事，每周更新一次。";
+        if (titleEl) titleEl.textContent = hero.headline || "Sound Healing Resource Hub";
+        if (descEl) descEl.textContent = hero.description || "Curated guides, videos and stories, updated weekly.";
         if (actionsEl){
             actionsEl.innerHTML = "";
-            const primary = createCtaButton(hero.primary_cta?.label || "填写需求表单", hero.primary_cta?.href, hero.primary_cta?.id, "hero-btn-primary");
-            const secondary = createCtaButton(hero.secondary_cta?.label || "查看实践案例", hero.secondary_cta?.href, hero.secondary_cta?.id, "hero-btn-secondary");
+            const primary = createCtaButton(hero.primary_cta?.label || "Fill Needs Form", hero.primary_cta?.href, hero.primary_cta?.id, "hero-btn-primary");
+            const secondary = createCtaButton(hero.secondary_cta?.label || "View Case Studies", hero.secondary_cta?.href, hero.secondary_cta?.id, "hero-btn-secondary");
             if (primary) {
                 actionsEl.appendChild(primary);
                 attachCtaTracking(primary, () => ({
@@ -119,7 +119,7 @@
         sections.forEach(section => {
             const secEl = createElement("section", "resources-section");
             secEl.id = section.id || "section";
-            const h2 = createElement("h2", null, section.title || "精选资源");
+            const h2 = createElement("h2", null, section.title || "Curated Resources");
             secEl.appendChild(h2);
             if (section.description){
                 secEl.appendChild(createElement("p", null, section.description));
@@ -131,7 +131,7 @@
                 card.appendChild(createElement("h3", null, item.title || "Resource"));
                 if (item.summary) card.appendChild(createElement("p", null, item.summary));
                 if (item.href){
-                    const link = createElement("a", null, item.cta || "查看详情");
+                    const link = createElement("a", null, item.cta || "View Details");
                     link.href = item.href;
                     link.dataset.cta = `resource-${section.id || 'section'}`;
                     link.dataset.track = `resource-${section.id || 'section'}`;
@@ -156,7 +156,7 @@
             secEl.appendChild(grid);
             if (section.view_all){
                 const footer = createElement("div", "section-footer");
-                const more = createElement("a", null, "查看更多");
+                const more = createElement("a", null, "View More");
                 more.href = section.view_all;
                 more.dataset.cta = `resource-${section.id || 'section'}-viewall`;
                 more.dataset.track = more.dataset.cta;
@@ -186,12 +186,12 @@
         const title = footerEl.querySelector("h2");
         const desc = footerEl.querySelector("p");
         const actions = footerEl.querySelector(".cta-actions");
-        if (title) title.textContent = footer.title || "下一步计划";
-        if (desc) desc.textContent = footer.description || "了解如何把声音疗愈快速落地。";
+        if (title) title.textContent = footer.title || "Next Steps";
+        if (desc) desc.textContent = footer.description || "Learn how to quickly implement sound healing.";
         if (actions){
             actions.innerHTML = "";
-            const primary = createCtaButton(footer.primary?.label || "提交练习需求", footer.primary?.href, footer.primary?.id, "cta-primary");
-            const secondary = createCtaButton(footer.secondary?.label || "下载部署指南", footer.secondary?.href, footer.secondary?.id, "cta-secondary");
+            const primary = createCtaButton(footer.primary?.label || "Submit Practice Needs", footer.primary?.href, footer.primary?.id, "cta-primary");
+            const secondary = createCtaButton(footer.secondary?.label || "Download Deployment Guide", footer.secondary?.href, footer.secondary?.id, "cta-secondary");
             if (primary) {
                 actions.appendChild(primary);
                 attachCtaTracking(primary, () => ({
