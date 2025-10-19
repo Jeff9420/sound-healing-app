@@ -422,7 +422,11 @@ class InternationalizationSystem {
 
                 // 提交按钮和成功消息
                 'form.plan.submit': '领取定制计划',
-                'form.plan.success': '✅ 计划申请成功！我们会在 5 分钟内将定制冥想安排发送至你的邮箱，请注意查收。'
+                'form.plan.success': '✅ 计划申请成功！我们会在 5 分钟内将定制冥想安排发送至你的邮箱，请注意查收。',
+
+                // SEO Meta 标签
+                'seo.title': '声音疗愈 - 213+ 免费冥想音乐、助眠白噪音、自然疗愈声音',
+                'seo.description': '免费在线声音疗愈平台，提供 213+ 高品质音频：冥想音乐、雨声助眠、白噪音、自然声景。专为放松、睡眠、减压设计的声音疗愈工具。'
             },
             
             'en-US': {
@@ -629,7 +633,11 @@ class InternationalizationSystem {
 
                 // Submit Button & Success Message
                 'form.plan.submit': 'Get Custom Plan',
-                'form.plan.success': '✅ Plan request successful! We\'ll send your custom meditation schedule to your inbox within 5 minutes. Please check your email.'
+                'form.plan.success': '✅ Plan request successful! We\'ll send your custom meditation schedule to your inbox within 5 minutes. Please check your email.',
+
+                // SEO Meta Tags (Keyword Optimized)
+                'seo.title': 'Free Meditation Music & Rain Sounds for Sleeping | 213+ Healing Sounds',
+                'seo.description': 'Free online sound healing platform with 213+ audio tracks: meditation music, rain sounds for sleeping, white noise, nature sounds. Perfect for relaxation, sleep & stress relief.'
             },
             
             'ja-JP': {
@@ -831,7 +839,11 @@ class InternationalizationSystem {
 
                 // 送信ボタンと成功メッセージ
                 'form.plan.submit': 'カスタムプランを取得',
-                'form.plan.success': '✅ プランリクエスト成功！5分以内にカスタム瞑想スケジュールをメールでお送りします。メールをご確認ください。'
+                'form.plan.success': '✅ プランリクエスト成功！5分以内にカスタム瞑想スケジュールをメールでお送りします。メールをご確認ください。',
+
+                // SEO Meta タグ
+                'seo.title': '無料瞑想音楽＆睡眠用雨音 | 213+以上のヒーリングサウンド',
+                'seo.description': '213+以上のオーディオトラックを提供する無料オンライン音響療法プラットフォーム：瞑想音楽、睡眠用雨音、ホワイトノイズ、自然音。リラクゼーション、睡眠、ストレス解消に最適。'
             },
             
             'ko-KR': {
@@ -1035,7 +1047,11 @@ class InternationalizationSystem {
 
                 // 제출 버튼 및 성공 메시지
                 'form.plan.submit': '맞춤 계획 받기',
-                'form.plan.success': '✅ 계획 요청 성공! 5분 이내에 맞춤 명상 일정을 이메일로 보내드립니다. 이메일을 확인하세요.'
+                'form.plan.success': '✅ 계획 요청 성공! 5분 이내에 맞춤 명상 일정을 이메일로 보내드립니다. 이메일을 확인하세요.',
+
+                // SEO Meta 태그
+                'seo.title': '무료 명상 음악 & 수면 빗소리 | 213+ 힐링 사운드',
+                'seo.description': '213+개의 오디오 트랙을 제공하는 무료 온라인 사운드 힐링 플랫폼: 명상 음악, 수면용 빗소리, 백색 소음, 자연 소리. 릴렉스, 수면 및 스트레스 해소에 완벽합니다.'
             },
             
             'es-ES': {
@@ -1239,7 +1255,11 @@ class InternationalizationSystem {
 
                 // Botón de Envío y Mensaje de Éxito
                 'form.plan.submit': 'Obtener Plan Personalizado',
-                'form.plan.success': '✅ ¡Solicitud de plan exitosa! Enviaremos tu horario de meditación personalizado a tu bandeja de entrada en 5 minutos. Por favor revisa tu correo electrónico.'
+                'form.plan.success': '✅ ¡Solicitud de plan exitosa! Enviaremos tu horario de meditación personalizado a tu bandeja de entrada en 5 minutos. Por favor revisa tu correo electrónico.',
+
+                // SEO Meta Etiquetas
+                'seo.title': 'Música de Meditación Gratuita y Sonidos de Lluvia para Dormir | 213+ Sonidos Curativos',
+                'seo.description': 'Plataforma gratuita de sanación con sonido con más de 213 pistas de audio: música de meditación, sonidos de lluvia para dormir, ruido blanco, sonidos de la naturaleza. Perfecto para relajación, sueño y alivio del estrés.'
             }
         };
         
@@ -1366,11 +1386,62 @@ class InternationalizationSystem {
         
         // 更新文字方向（RTL/LTR）
         document.documentElement.dir = langConfig.rtl ? 'rtl' : 'ltr';
-        
+
+        // 更新 SEO Meta 标签
+        this.updateSEOMetaTags();
+
         // 更新页面内容
         this.updatePageContent();
     }
-    
+
+    /**
+     * 更新 SEO Meta 标签
+     */
+    updateSEOMetaTags() {
+        const title = this.getTranslation('seo.title');
+        const description = this.getTranslation('seo.description');
+
+        // 更新 <title> 标签
+        if (title && title !== 'seo.title') {
+            document.title = title;
+        }
+
+        // 更新标准 meta 标签
+        const titleMeta = document.querySelector('meta[name="title"]');
+        if (titleMeta && title && title !== 'seo.title') {
+            titleMeta.content = title;
+        }
+
+        const descMeta = document.querySelector('meta[name="description"]');
+        if (descMeta && description && description !== 'seo.description') {
+            descMeta.content = description;
+        }
+
+        // 更新 Open Graph meta 标签
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        if (ogTitle && title && title !== 'seo.title') {
+            ogTitle.content = title;
+        }
+
+        const ogDesc = document.querySelector('meta[property="og:description"]');
+        if (ogDesc && description && description !== 'seo.description') {
+            ogDesc.content = description;
+        }
+
+        // 更新 Twitter Card meta 标签
+        const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+        if (twitterTitle && title && title !== 'seo.title') {
+            twitterTitle.content = title;
+        }
+
+        const twitterDesc = document.querySelector('meta[name="twitter:description"]');
+        if (twitterDesc && description && description !== 'seo.description') {
+            twitterDesc.content = description;
+        }
+
+        console.log(`🔍 SEO Meta 标签已更新: ${this.currentLanguage}`);
+    }
+
     /**
      * 更新页面内容
      */
