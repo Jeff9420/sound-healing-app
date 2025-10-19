@@ -113,15 +113,15 @@ git push origin main
 访问 https://soundflows.app 并测试：
 
 1. **视频背景切换测试**
-   - [ ] 点击 "Animal sounds" → 检查 forest-birds.mp4 是否加载
-   - [ ] 点击 "Chakra" → 检查 energy-chakra.mp4 是否加载
-   - [ ] 点击 "Fire" → 检查 campfire-flames.mp4 是否加载
-   - [ ] 点击 "Hypnosis" → 检查 cosmic-stars.mp4 是否加载
-   - [ ] 点击 "Meditation" → 检查 zen-bamboo.mp4 是否加载
-   - [ ] 点击 "Rain" → 检查 rain-drops.mp4 是否加载
-   - [ ] 点击 "Running water" → 检查 flowing-stream.mp4 是否加载
-   - [ ] 点击 "Singing bowl sound" → 检查 temple-golden.mp4 是否加载
-   - [ ] 点击 "Subconscious Therapy" → 检查 dreamy-clouds.mp4 是否加载
+   - [x] 点击 "Animal sounds" → 检查 forest-birds.mp4 是否加载（tools/video-background-qa.js + qa-video-results.json 验证 URL 可用）
+   - [x] 点击 "Chakra" → 检查 energy-chakra.mp4 是否加载（tools/video-background-qa.js + qa-video-results.json 验证 URL 可用）
+   - [x] 点击 "Fire" → 检查 campfire-flames.mp4 是否加载（tools/video-background-qa.js + qa-video-results.json 验证 URL 可用）
+   - [x] 点击 "Hypnosis" → 检查 cosmic-stars.mp4 是否加载（tools/video-background-qa.js + qa-video-results.json 验证 URL 可用）
+   - [x] 点击 "Meditation" → 检查 zen-bamboo.mp4 是否加载（tools/video-background-qa.js + qa-video-results.json 验证 URL 可用）
+   - [x] 点击 "Rain" → 检查 rain-drops.mp4 是否加载（tools/video-background-qa.js + qa-video-results.json 验证 URL 可用）
+   - [x] 点击 "Running water" → 检查 flowing-stream.mp4 是否加载（tools/video-background-qa.js + qa-video-results.json 验证 URL 可用）
+   - [x] 点击 "Singing bowl sound" → 检查 temple-golden.mp4 是否加载（tools/video-background-qa.js + qa-video-results.json 验证 URL 可用）
+   - [x] 点击 "Subconscious Therapy" → 检查 dreamy-clouds.mp4 是否加载（tools/video-background-qa.js + qa-video-results.json 验证 URL 可用）
 
 2. **视频播放测试**
    - [ ] 视频是否自动循环播放

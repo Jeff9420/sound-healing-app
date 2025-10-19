@@ -154,7 +154,7 @@ C:\Users\MI\Desktop\声音疗愈\videos\
 - [ ] **更新代码中的baseUrl**
 - [ ] **提交代码到GitHub**
 - [ ] **验证Vercel自动部署**
-- [ ] **测试https://soundflows.app视频功能**
+- [x] **测试https://soundflows.app视频功能**（tools/video-background-qa.js + qa-video-results.json 自动验证 URL 可用）
 
 ---
 
