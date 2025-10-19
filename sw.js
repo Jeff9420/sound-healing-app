@@ -1,10 +1,10 @@
 /**
  * SoundFlows Service Worker - PWA功能支持
  * 离线缓存、后台同步、推送通知、音频预加载
- * @version 2.4.0 - 增强离线缓存和隐私合规
+ * @version 2.5.0 - 添加pages多语言支持
  */
 
-const CACHE_NAME = 'soundflows-v2.4';
+const CACHE_NAME = 'soundflows-v2.5';
 const STATIC_CACHE_URLS = [
   '/',
   '/index.html',
@@ -21,6 +21,7 @@ const STATIC_CACHE_URLS = [
   '/assets/js/cookie-consent.js',
   '/assets/js/social-share.js',
   '/assets/js/gdpr-compliance.js',
+  '/assets/js/pages-i18n.js',
   '/assets/js/audio-manager.js',
   '/assets/js/playlist-ui.js',
   '/assets/js/background-scene-manager.js',
