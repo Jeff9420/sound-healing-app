@@ -1,20 +1,26 @@
 /**
  * SoundFlows Service Worker - PWA功能支持
  * 离线缓存、后台同步、推送通知、音频预加载
- * @version 2.3.0 - 修复 CSP 阻止 HubSpot API 调用
+ * @version 2.4.0 - 增强离线缓存和隐私合规
  */
 
-const CACHE_NAME = 'soundflows-v2.3';
+const CACHE_NAME = 'soundflows-v2.4';
 const STATIC_CACHE_URLS = [
   '/',
   '/index.html',
   '/manifest.json',
+  '/privacy-policy.html',
   '/assets/css/main.css',
   '/assets/css/playlist.css',
   '/assets/css/mobile-enhancement.css',
+  '/assets/css/index-styles.css',
   '/assets/js/audio-config.js',
   '/assets/js/module-loader.js',
   '/assets/js/i18n-system.js',
+  '/assets/js/i18n-translations-addon.js',
+  '/assets/js/cookie-consent.js',
+  '/assets/js/social-share.js',
+  '/assets/js/gdpr-compliance.js',
   '/assets/js/audio-manager.js',
   '/assets/js/playlist-ui.js',
   '/assets/js/background-scene-manager.js',
@@ -23,6 +29,7 @@ const STATIC_CACHE_URLS = [
   '/assets/js/mobile-optimization.js',
   '/assets/js/performance-monitor.js',
   '/assets/js/sleep-timer.js',
+  '/assets/js/pwa-manager.js',
   '/assets/icons/icon-192x192.png',
   '/assets/icons/icon-512x512.png'
 ];

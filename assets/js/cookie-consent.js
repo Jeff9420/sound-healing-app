@@ -102,36 +102,36 @@ class CookieConsent {
         this.banner.innerHTML = `
       <div class="cookie-banner">
         <div class="cookie-content">
-          <h3>🍪 Cookie Preferences</h3>
-          <p>We use cookies to enhance your experience and analyze our traffic.
+          <h3 data-i18n="cookie.title">🍪 Cookie Preferences</h3>
+          <p data-i18n="cookie.description">We use cookies to enhance your experience and analyze our traffic.
           By clicking "Accept All", you consent to our use of cookies.</p>
 
           <div class="cookie-options">
             <label class="cookie-option">
               <input type="radio" name="cookieConsent" value="accepted" checked>
-              <span>Accept All</span>
-              <small>Enables analytics for better experience</small>
+              <span data-i18n="cookie.acceptAll">Accept All</span>
+              <small data-i18n="cookie.acceptAllDesc">Enables analytics for better experience</small>
             </label>
 
             <label class="cookie-option">
               <input type="radio" name="cookieConsent" value="necessary">
-              <span>Necessary Only</span>
-              <small>Essential cookies only</small>
+              <span data-i18n="cookie.necessaryOnly">Necessary Only</span>
+              <small data-i18n="cookie.necessaryOnlyDesc">Essential cookies only</small>
             </label>
 
             <label class="cookie-option">
               <input type="radio" name="cookieConsent" value="denied">
-              <span>Deny All</span>
-              <small>No cookies except essentials</small>
+              <span data-i18n="cookie.denyAll">Deny All</span>
+              <small data-i18n="cookie.denyAllDesc">No cookies except essentials</small>
             </label>
           </div>
 
           <div class="cookie-actions">
-            <button id="cookiePreferences" class="btn-secondary">Preferences</button>
-            <button id="cookieAccept" class="btn-primary">Accept Selected</button>
+            <button id="cookiePreferences" class="btn-secondary" data-i18n="cookie.preferences">Preferences</button>
+            <button id="cookieAccept" class="btn-primary" data-i18n="cookie.acceptSelected">Accept Selected</button>
           </div>
 
-          <a href="#" id="privacyPolicyLink" class="privacy-link">Privacy Policy</a>
+          <a href="/privacy-policy.html" id="privacyPolicyLink" class="privacy-link" data-i18n="cookie.privacyPolicy" target="_blank">Privacy Policy</a>
         </div>
       </div>
     `;
@@ -171,8 +171,8 @@ class CookieConsent {
         const privacyLink = this.banner.querySelector('#privacyPolicyLink');
         privacyLink.addEventListener('click', (e) => {
             e.preventDefault();
-            // TODO: Open privacy policy modal or page
-            console.log('Privacy policy clicked');
+            // Open privacy policy page
+            window.open('/privacy-policy.html', '_blank');
         });
     }
 
