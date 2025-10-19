@@ -1,0 +1,36 @@
+﻿name: Weekly SEO Report
+
+on:
+  schedule:
+    - cron: "0 2 * * MON"
+  workflow_dispatch:
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: |
+          if [ -f package.json ]; then
+            npm install
+          fi
+
+      - name: Generate weekly SEO report
+        run: node tools/seo-weekly-report.js
+
+      - name: Find generated report file
+        run: echo "REPORT_FILE=$(ls docs/reports/SEO-WEEKLY-REPORT-*.md | sort | tail -n 1)" >> $GITHUB_ENV
+
+      - name: Upload report artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: seo-weekly-report
+          path: ${{ env.REPORT_FILE }}
