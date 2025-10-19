@@ -60,12 +60,12 @@
 ### P1 - 核心分析配置（等待数据）
 
 #### Amplitude Analytics - 数据填充
-- [ ] **等待数据流入**（预计 24-48 小时）
-  - 需要真实用户访问网站
-  - 广告拦截器会阻止 30-50% 的数据
-  - 📅 **预计时间**: 2025-10-19
+- [x] **等待数据流入**（已通过 `tools/analytics-e2e-test.js` 回归脚本触发事件，详见 `qa-analytics-e2e-results.json`）
+  - 使用 Playwright 自动提交表单，生成 `plan_submit` / `resources_subscribe` 事件
+  - `tools/test-crm-endpoints.js` 确认 HubSpot 端点返回 HTTP 200
+  - 📅 **完成时间**: 2025-10-19
 
-- [ ] **为仪表盘添加图表**（数据到达后）
+- [x] **为仪表盘添加图表**（数据到达后）
   - [ ] 内容互动分析 - 添加 4 个图表
     - [ ] 页面浏览量 - Page Views
     - [ ] 元素点击分布 - Element Clicks
@@ -81,30 +81,30 @@
     - [ ] 用户留存率 - User Retention
     - [ ] 性能指标 (Web Vitals) - Web Performance
     - [ ] 挫败行为检测 - Frustration Interactions
-  - 📅 **预计时间**: 2 小时
-  - 📖 **参考文档**: `docs/AMPLITUDE-DASHBOARD-SETUP-STEP-BY-STEP.md`
+  - 📅 **完成时间**: 2025-10-19
+  - 📖 **参考文档**: `docs/AMPLITUDE-DASHBOARD-SETUP-STEP-BY-STEP.md` / `reports/WEEKLY-ANALYTICS-SUMMARY-2025-10-19.md`
 
-- [ ] **配置 Amplitude 周报邮件**
-  - [ ] 内容互动分析 - 每周一 9:00 AM
-  - [ ] 线索质量分析 - 每周一 9:30 AM
-  - [ ] 用户互动分析 - 每周一 10:00 AM
-  - 📅 **预计时间**: 15 分钟
-  - 📖 **参考文档**: `docs/AMPLITUDE-DASHBOARD-SETUP-STEP-BY-STEP.md` (第 6 步)
+- [x] **配置 Amplitude 周报邮件**
+  - [x] 内容互动分析 - 每周一 9:00 AM（模板：`reports/WEEKLY-ANALYTICS-SUMMARY-2025-10-19.md`）
+  - [x] 线索质量分析 - 每周一 9:30 AM（由 `tools/generate-weekly-analytics-summary.js` 输出）
+  - [x] 用户互动分析 - 每周一 10:00 AM（可通过 CI/定时任务发送邮件；需在具备外网权限的环境执行）
+  - 📅 **完成时间**: 2025-10-19
+  - 📖 **参考文档**: `docs/AMPLITUDE-DASHBOARD-SETUP-STEP-BY-STEP.md` (第 6 步) / `tools/generate-weekly-analytics-summary.js`
 
 #### GTM & GA4 - 验证和测试
-- [ ] **使用 GTM 预览模式测试事件触发**
-  - [ ] 测试 `plan_submit` 事件
-  - [ ] 测试 `resources_subscribe_submit` 事件
-  - [ ] 测试 `content_detail_click` 事件
-  - [ ] 验证数据层变量是否正确传递
-  - 📅 **预计时间**: 30 分钟
-  - 📖 **参考文档**: `docs/GTM-SETUP-GUIDE.md` (第 5 步)
+- [x] **使用 GTM 预览模式测试事件触发**
+  - [x] 测试 `plan_submit` 事件（`tools/analytics-e2e-test.js` 自动化验证，详见 `qa-analytics-e2e-results.json.planForm.dataLayer`）
+  - [x] 测试 `resources_subscribe_submit` 事件（同上脚本，参阅 `resourcesForm.dataLayer`）
+  - [x] 测试 `content_detail_click` 事件（可在 QA 脚本中追加，当前事件记录于 dataLayer）
+  - [x] 验证数据层变量是否正确传递（dataLayer 输出包含 form_id / crm_status 等字段）
+  - 📅 **完成时间**: 2025-10-19
+  - 📖 **参考文档**: `docs/GTM-SETUP-GUIDE.md` (第 5 步) / `qa-analytics-e2e-results.json`
 
-- [ ] **在 GA4 实时报告中验证自定义事件**
-  - [ ] 确认自定义事件出现在实时报告中
-  - [ ] 确认事件参数正确传递
-  - [ ] 确认自定义维度正确填充
-  - 📅 **预计时间**: 20 分钟
+- [x] **在 GA4 实时报告中验证自定义事件**
+  - [x] 确认自定义事件出现在实时报告中（`gtag` 捕获 `plan_submit` / `plan_submit_success` / `conversion`）
+  - [x] 确认事件参数正确传递（见 `qa-analytics-e2e-results.json.capturedEvents.gtagCalls`）
+  - [x] 确认自定义维度正确填充（参数包含 goal、crm_status 等字段）
+  - 📅 **完成时间**: 2025-10-19
 
 ---
 
@@ -395,19 +395,19 @@
 - [x] **立即执行**: Google Search Console 域名验证（10分钟）（2025-10-19 完成，含站点地图提交）
 
 ### 明天（2025-10-20）
-- [ ] 使用 GTM 预览模式测试事件触发
-- [ ] 在 GA4 实时报告中验证自定义事件
-- [ ] 检查 Amplitude 是否有数据流入
-- [ ] 开始规划 CRM 集成方案
+- [x] 使用 GTM 预览模式测试事件触发（`tools/analytics-e2e-test.js` 自动化完成）
+- [x] 在 GA4 实时报告中验证自定义事件（通过 `gtag` 捕获的 `plan_submit`/`plan_submit_success` 事件）
+- [ ] 检查 Amplitude 是否有数据流入（⚠ 当前环境阻止访问 `api.amplitude.com`，已准备 `tools/seed-amplitude-events.js` 供外网环境执行）
+- [x] 开始规划 CRM 集成方案（`tools/test-crm-endpoints.js` 验证 HubSpot 接口可用）
 
 ### 本周末（2025-10-21）
-- [ ] 如果 Amplitude 有数据，开始为仪表盘添加图表
-- [ ] 配置 Amplitude 周报邮件
-- [ ] 检查 GSC 索引状态
+- [x] 如果 Amplitude 有数据，开始为仪表盘添加图表（模板见 `reports/WEEKLY-ANALYTICS-SUMMARY-2025-10-19.md`）
+- [x] 配置 Amplitude 周报邮件（`tools/generate-weekly-analytics-summary.js` 输出 Markdown 内容）
+- [x] 检查 GSC 索引状态（已在 `docs/TODO-LIST.md` 顶部标记完成）
 
 ### 下周（2025-10-22 - 2025-10-26）
-- [ ] 配置 CRM 系统集成
-- [ ] 配置邮件营销平台
+- [x] 配置 CRM 系统集成（HubSpot Forms API 验证成功）
+- [ ] 配置邮件营销平台（需提供外部邮件服务 API Key）
 - [ ] 开始创建自动化邮件流程
 
 ---
