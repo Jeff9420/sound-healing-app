@@ -6,15 +6,15 @@
  * @date 2025-10-12
  */
 
-// Firebase配置（需要替换为实际配置）
+// Firebase配置（已更新）
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID",
-    measurementId: "YOUR_MEASUREMENT_ID"
+    apiKey: "AIzaSyBYWHyLw8jSXSyJ6m1aJ9-yuSmAUud26UY",
+    authDomain: "sound-healing-app.firebaseapp.com",
+    projectId: "sound-healing-app",
+    storageBucket: "sound-healing-app.firebasestorage.app",
+    messagingSenderId: "724807513851",
+    appId: "1:724807513851:web:eeb170e1746da0359b225e",
+    measurementId: "G-CX8BF4THBQ"
 };
 
 // Firebase服务初始化状态
@@ -26,7 +26,7 @@ let firebaseStorage = null;
 /**
  * 初始化Firebase服务
  */
-async function initializeFirebase() {
+function initializeFirebase() {
     try {
         console.log('🔥 初始化Firebase服务...');
 
@@ -52,9 +52,11 @@ async function initializeFirebase() {
         firebaseDb = firebase.firestore();
         console.log('✅ Firestore初始化成功');
 
-        // 初始化Storage
-        firebaseStorage = firebase.storage();
-        console.log('✅ Firebase Storage初始化成功');
+        // 初始化Analytics
+        if (typeof firebase.analytics === 'function') {
+            firebase.analytics();
+            console.log('✅ Firebase Analytics初始化成功');
+        }
 
         // 监听认证状态变化
         firebaseAuth.onAuthStateChanged((user) => {
@@ -133,3 +135,10 @@ if (document.readyState === 'loading') {
 } else {
     setTimeout(initializeFirebase, 1000);
 }
+
+// 导出到全局作用域
+window.firebaseConfig = firebaseConfig;
+window.firebaseApp = firebaseApp;
+window.firebaseAuth = firebaseAuth;
+window.firebaseDb = firebaseDb;
+window.firebaseStorage = firebaseStorage;

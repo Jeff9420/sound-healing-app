@@ -252,6 +252,11 @@
                     <a class="header__nav-link" href="pages/resources/index.html" data-cta="nav-resources" data-i18n="nav.resources">资源中心</a>
                     <div class="header__menu">
                         <nav class="header__actions" aria-label="快捷功能">
+                        <!-- Login Button -->
+                        <button id="loginBtn" class="header-icon-btn" onclick="window.firebaseAuthManager && window.firebaseAuthManager.openAuthDialog()" title="登录/注册">
+                            👤
+                        </button>
+
                         <!-- History & Favorites Buttons -->
                         <button class="header-icon-btn" onclick="window.historyFavoritesUI && window.historyFavoritesUI.openPanel('history')" title="播放历史">
                             📜
@@ -574,6 +579,68 @@
         <!-- User Rating Widget -->
         <div id="rating-widget"></div>
 
+        <!-- Firebase Authentication Dialog -->
+        <div id="authDialog" class="auth-dialog" style="display: none;">
+            <div class="auth-modal-content">
+                <div class="auth-header">
+                    <h2>登录 / 注册</h2>
+                    <button class="auth-close" onclick="window.firebaseAuthManager && window.firebaseAuthManager.closeAuthDialog()">&times;</button>
+                </div>
+
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="switchAuthTab('login')">登录</button>
+                    <button class="auth-tab" onclick="switchAuthTab('signup')">注册</button>
+                    <button class="auth-tab" onclick="switchAuthTab('reset')">重置密码</button>
+                </div>
+
+                <!-- Login Form -->
+                <div id="loginForm" class="auth-form active">
+                    <div class="form-group">
+                        <label>邮箱地址</label>
+                        <input type="email" id="loginEmail" placeholder="请输入邮箱">
+                    </div>
+                    <div class="form-group">
+                        <label>密码</label>
+                        <input type="password" id="loginPassword" placeholder="请输入密码">
+                    </div>
+                    <button class="auth-btn primary" onclick="handleLogin()">登录</button>
+                    <button class="auth-btn secondary" onclick="handleGoogleLogin()">使用 Google 登录</button>
+                    <button class="auth-btn secondary" onclick="handleAnonymousLogin()">匿名登录</button>
+                </div>
+
+                <!-- Signup Form -->
+                <div id="signupForm" class="auth-form">
+                    <div class="form-group">
+                        <label>显示名称</label>
+                        <input type="text" id="signupName" placeholder="请输入您的昵称">
+                    </div>
+                    <div class="form-group">
+                        <label>邮箱地址</label>
+                        <input type="email" id="signupEmail" placeholder="请输入邮箱">
+                    </div>
+                    <div class="form-group">
+                        <label>密码</label>
+                        <input type="password" id="signupPassword" placeholder="至少6位字符">
+                    </div>
+                    <button class="auth-btn primary" onclick="handleSignup()">注册</button>
+                </div>
+
+                <!-- Reset Form -->
+                <div id="resetForm" class="auth-form">
+                    <div class="form-group">
+                        <label>邮箱地址</label>
+                        <input type="email" id="resetEmail" placeholder="请输入注册时使用的邮箱">
+                    </div>
+                    <button class="auth-btn primary" onclick="handlePasswordReset()">发送重置邮件</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Profile Display -->
+        <div id="userProfile" class="user-profile" style="display: none;">
+            <!-- 用户信息将在这里动态显示 -->
+        </div>
+
         <!-- Notification -->
         <div id="notification" class="notification"></div>
     </div>
@@ -765,6 +832,16 @@
       ]
     }
     </script>
+
+    <!-- Firebase SDK (v9 Compat 版本) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics-compat.js"></script>
+
+    <!-- Firebase 模块 -->
+    <script src="assets/js/firebase-config.js"></script>
+    <script src="assets/js/firebase-auth-ui.js"></script>
 
     <!-- External JavaScript Files -->
     <!-- Load in order: error handler �?config �?i18n �?user data �?metadata �?video background �?app logic �?features �?enhancements -->
@@ -1032,6 +1109,172 @@
     <script src="assets/js/rating-system.js"></script>
     <script src="assets/js/touch-gestures.js"></script>
     <script src="assets/js/accessibility-enhancements.js"></script>
+
+    <!-- Firebase 登录表单处理函数 -->
+    <script>
+        // 切换认证标签
+        function switchAuthTab(tabName) {
+            // 隐藏所有表单
+            document.getElementById('loginForm').classList.remove('active');
+            document.getElementById('signupForm').classList.remove('active');
+            document.getElementById('resetForm').classList.remove('active');
+
+            // 移除所有标签的active类
+            document.querySelectorAll('.auth-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // 显示选中的表单并激活标签
+            switch(tabName) {
+                case 'login':
+                    document.getElementById('loginForm').classList.add('active');
+                    document.querySelectorAll('.auth-tab')[0].classList.add('active');
+                    break;
+                case 'signup':
+                    document.getElementById('signupForm').classList.add('active');
+                    document.querySelectorAll('.auth-tab')[1].classList.add('active');
+                    break;
+                case 'reset':
+                    document.getElementById('resetForm').classList.add('active');
+                    document.querySelectorAll('.auth-tab')[2].classList.add('active');
+                    break;
+            }
+        }
+
+        // 处理登录
+        async function handleLogin() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (!email || !password) {
+                alert('请填写邮箱和密码');
+                return;
+            }
+
+            if (window.firebaseAuthManager) {
+                const result = await window.firebaseAuthManager.signInWithEmail(email, password);
+                if (result) {
+                    // 登录成功，关闭对话框
+                    window.firebaseAuthManager.closeAuthDialog();
+                    // 清空表单
+                    document.getElementById('loginEmail').value = '';
+                    document.getElementById('loginPassword').value = '';
+                }
+            } else {
+                console.error('Firebase Auth Manager 未初始化');
+            }
+        }
+
+        // 处理注册
+        async function handleSignup() {
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+
+            if (!name || !email || !password) {
+                alert('请填写所有字段');
+                return;
+            }
+
+            if (password.length < 6) {
+                alert('密码至少需要6位字符');
+                return;
+            }
+
+            if (window.firebaseAuthManager) {
+                const result = await window.firebaseAuthManager.signUpWithEmail(email, password, name);
+                if (result) {
+                    // 注册成功，关闭对话框
+                    window.firebaseAuthManager.closeAuthDialog();
+                    // 清空表单
+                    document.getElementById('signupName').value = '';
+                    document.getElementById('signupEmail').value = '';
+                    document.getElementById('signupPassword').value = '';
+                }
+            } else {
+                console.error('Firebase Auth Manager 未初始化');
+            }
+        }
+
+        // 处理Google登录
+        async function handleGoogleLogin() {
+            if (window.firebaseAuthManager) {
+                const result = await window.firebaseAuthManager.signInWithGoogle();
+                if (result) {
+                    window.firebaseAuthManager.closeAuthDialog();
+                }
+            } else {
+                console.error('Firebase Auth Manager 未初始化');
+            }
+        }
+
+        // 处理匿名登录
+        async function handleAnonymousLogin() {
+            if (window.firebaseAuthManager) {
+                const result = await window.firebaseAuthManager.signInAnonymously();
+                if (result) {
+                    window.firebaseAuthManager.closeAuthDialog();
+                }
+            } else {
+                console.error('Firebase Auth Manager 未初始化');
+            }
+        }
+
+        // 处理密码重置
+        async function handlePasswordReset() {
+            const email = document.getElementById('resetEmail').value;
+
+            if (!email) {
+                alert('请输入邮箱地址');
+                return;
+            }
+
+            if (window.firebaseAuthManager) {
+                const result = await window.firebaseAuthManager.sendPasswordResetEmail(email);
+                if (result) {
+                    // 重置邮件发送成功
+                    alert('密码重置邮件已发送，请检查您的邮箱');
+                    window.firebaseAuthManager.closeAuthDialog();
+                    document.getElementById('resetEmail').value = '';
+                }
+            } else {
+                console.error('Firebase Auth Manager 未初始化');
+            }
+        }
+
+        // 监听Enter键提交表单
+        document.addEventListener('DOMContentLoaded', () => {
+            // 登录表单
+            const loginPassword = document.getElementById('loginPassword');
+            if (loginPassword) {
+                loginPassword.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        handleLogin();
+                    }
+                });
+            }
+
+            // 注册表单
+            const signupPassword = document.getElementById('signupPassword');
+            if (signupPassword) {
+                signupPassword.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        handleSignup();
+                    }
+                });
+            }
+
+            // 重置表单
+            const resetEmail = document.getElementById('resetEmail');
+            if (resetEmail) {
+                resetEmail.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        handlePasswordReset();
+                    }
+                });
+            }
+        });
+    </script>
 
     <!-- 初始化主题管理器 -->
     <script>
