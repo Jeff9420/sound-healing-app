@@ -54,6 +54,17 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
             if (typeof window !== 'undefined') {
                 window.addEventListener('beforeunload', () => this.cleanup(), { once: true });
             }
+
+            // 增强的内存管理
+            this.audioPool = []; // 音频对象池，重用Audio实例
+            this.poolSize = 5; // 池大小，减少对象创建/销毁
+            this.memoryCleanupTimer = null; // 定期内存清理定时器
+            this.lastCleanupTime = Date.now();
+            this.memoryUsageThreshold = 100 * 1024 * 1024; // 100MB内存阈值
+
+            // 初始化对象池和内存监控
+            this.initializeAudioPool();
+            this.startMemoryMonitoring();
         }
 
         /**
@@ -253,7 +264,8 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
                 return Promise.resolve();
             }
 
-            const audio = new Audio();
+            // 从对象池获取音频实例，减少内存分配
+            const audio = this.getAudioFromPool();
             audio.preload = 'auto'; // 改为auto积极预加载，减少播放延迟
 
             // 设置音频路径
@@ -321,7 +333,8 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
                         isPlaying: false,
                         categoryName: categoryName,
                         fileName: fileName,
-                        isReady: true
+                        isReady: true,
+                        lastUsedTime: Date.now() // 添加最后使用时间
                     });
 
                     // 添加结束事件监听
@@ -1071,6 +1084,237 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
             }
         }
 
+        /**
+         * 初始化音频对象池
+         * 预创建Audio实例以减少运行时开销
+         */
+        initializeAudioPool() {
+            console.log('🔄 AudioManager: 初始化音频对象池...');
+            for (let i = 0; i < this.poolSize; i++) {
+                const audio = new Audio();
+                audio.preload = 'none'; // 池中实例不预加载
+                this.audioPool.push({
+                    audio: audio,
+                    inUse: false,
+                    lastUsed: Date.now()
+                });
+            }
+            console.log(`✅ AudioManager: 音频对象池已创建，包含 ${this.poolSize} 个实例`);
+        }
+
+        /**
+         * 从对象池获取音频实例
+         * @returns {Object} 音频实例对象
+         */
+        getAudioFromPool() {
+            // 查找可用的池实例
+            let poolItem = this.audioPool.find(item => !item.inUse);
+
+            if (poolItem) {
+                poolItem.inUse = true;
+                poolItem.lastUsed = Date.now();
+                console.log('🎵 从对象池获取音频实例');
+                return poolItem.audio;
+            }
+
+            // 如果池中没有可用实例，创建新的
+            console.log('⚠️ 对象池已满，创建新音频实例');
+            const newAudio = new Audio();
+            newAudio.preload = 'auto';
+            return newAudio;
+        }
+
+        /**
+         * 将音频实例返回到对象池
+         * @param {HTMLAudioElement} audio - 要回收的音频实例
+         */
+        returnAudioToPool(audio) {
+            // 查找该音频是否属于池中的实例
+            const poolItem = this.audioPool.find(item => item.audio === audio);
+
+            if (poolItem) {
+                // 重置音频状态
+                audio.pause();
+                audio.currentTime = 0;
+                audio.src = '';
+                audio.removeAttribute('src');
+
+                poolItem.inUse = false;
+                poolItem.lastUsed = Date.now();
+                console.log('🔄 音频实例已返回到对象池');
+            } else {
+                // 不属于池的实例，直接清理
+                audio.pause();
+                audio.src = '';
+                audio.load();
+                console.log('🗑️ 清理非池音频实例');
+            }
+        }
+
+        /**
+         * 启动内存监控
+         * 定期检查内存使用情况并执行清理
+         */
+        startMemoryMonitoring() {
+            // 每30秒检查一次内存使用情况
+            this.memoryCleanupTimer = setInterval(() => {
+                this.performMemoryCleanup();
+            }, 30000);
+
+            // 监听页面可见性变化，页面隐藏时释放资源
+            if (typeof document !== 'undefined') {
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden) {
+                        console.log('📱 页面隐藏，执行内存清理');
+                        this.performMemoryCleanup();
+                    }
+                });
+            }
+        }
+
+        /**
+         * 执行内存清理
+         * 清理未使用的音频实例和对象池
+         */
+        performMemoryCleanup() {
+            const now = Date.now();
+            const timeSinceLastCleanup = now - this.lastCleanupTime;
+
+            // 如果距离上次清理不到2分钟，跳过
+            if (timeSinceLastCleanup < 120000) {
+                return;
+            }
+
+            console.log('🧹 AudioManager: 执行内存清理...');
+            let cleanedInstances = 0;
+            let cleanedPoolItems = 0;
+
+            // 1. 清理未播放的音频实例（超过5分钟未使用）
+            for (const [trackId, instance] of this.audioInstances) {
+                if (!instance.isPlaying && trackId !== this.currentTrack?.trackId) {
+                    const audioElement = instance.audio;
+                    const hasActiveTimer = audioElement.dataset.hasActiveTimer === 'true';
+
+                    // 检查是否有活跃的定时器或事件监听器
+                    if (!hasActiveTimer && (now - instance.lastUsedTime > 300000)) {
+                        console.log(`🗑️ 清理长期未使用的实例: ${trackId}`);
+                        this.cleanupAudioInstance(instance);
+                        this.audioInstances.delete(trackId);
+                        cleanedInstances++;
+                    }
+                }
+            }
+
+            // 2. 清理对象池中长期未使用的实例
+            for (const poolItem of this.audioPool) {
+                if (!poolItem.inUse && (now - poolItem.lastUsed > 600000)) {
+                    // 重置池实例
+                    poolItem.audio.pause();
+                    poolItem.audio.src = '';
+                    poolItem.audio.load();
+                    poolItem.lastUsed = now;
+                    cleanedPoolItems++;
+                }
+            }
+
+            // 3. 强制垃圾回收提示（如果浏览器支持）
+            if (typeof window !== 'undefined' && window.gc) {
+                try {
+                    window.gc();
+                    console.log('🗑️ 手动触发垃圾回收');
+                } catch (e) {
+                    // 忽略错误
+                }
+            }
+
+            // 4. 检查并报告内存使用情况
+            this.reportMemoryUsage();
+
+            this.lastCleanupTime = now;
+            console.log(`✅ 内存清理完成: 清理 ${cleanedInstances} 个实例, ${cleanedPoolItems} 个池项`);
+        }
+
+        /**
+         * 清理单个音频实例
+         * @param {Object} instance - 音频实例对象
+         */
+        cleanupAudioInstance(instance) {
+            try {
+                const audio = instance.audio;
+
+                // 标记为正在清理，避免重复处理
+                audio.dataset.hasActiveTimer = 'false';
+
+                // 清理所有事件监听器
+                audio.removeEventListener('ended', instance.onEnded);
+                audio.removeEventListener('error', instance.onError);
+                audio.removeEventListener('loadstart', instance.onLoadStart);
+                audio.removeEventListener('canplay', instance.onCanPlay);
+                audio.removeEventListener('timeupdate', instance.onTimeUpdate);
+
+                // 暂停并重置
+                if (!audio.paused) {
+                    audio.pause();
+                }
+
+                audio.currentTime = 0;
+                audio.src = '';
+                audio.removeAttribute('src');
+
+                // 释放媒体资源
+                if (audio.src) {
+                    audio.load();
+                }
+
+                // 清理引用
+                instance.audio = null;
+                instance.onEnded = null;
+                instance.onError = null;
+
+            } catch (error) {
+                console.warn('清理音频实例时出错:', error);
+            }
+        }
+
+        /**
+         * 报告当前内存使用情况
+         */
+        reportMemoryUsage() {
+            const activeInstances = this.audioInstances.size;
+            const poolUsage = this.audioPool.filter(item => item.inUse).length;
+            const totalMemoryEstimate = (activeInstances + poolUsage) * 10; // 估算每个实例约10MB
+
+            console.log(`📊 内存使用报告:`);
+            console.log(`  - 活跃音频实例: ${activeInstances}/${this.MAX_AUDIO_INSTANCES}`);
+            console.log(`  - 对象池使用: ${poolUsage}/${this.poolSize}`);
+            console.log(`  - 估算内存使用: ${(totalMemoryEstimate / 1024).toFixed(2)} MB`);
+
+            // 如果估算内存超过阈值，执行强制清理
+            if (totalMemoryEstimate > this.memoryUsageThreshold) {
+                console.warn('⚠️ 内存使用超过阈值，执行强制清理');
+                this.performMemoryCleanup();
+            }
+
+            // 触发内存使用事件
+            this.eventBus.dispatchEvent(new CustomEvent('memoryUsageReport', {
+                detail: {
+                    activeInstances,
+                    poolUsage,
+                    estimatedMemoryMB: totalMemoryEstimate / 1024
+                }
+            }));
+        }
+
+        /**
+         * 停止内存监控
+         */
+        stopMemoryMonitoring() {
+            if (this.memoryCleanupTimer) {
+                clearInterval(this.memoryCleanupTimer);
+                this.memoryCleanupTimer = null;
+            }
+        }
+
         cleanup() {
             console.log('🧹 AudioManager: 开始清理资源...');
 
@@ -1100,6 +1344,23 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
                 }
             }
 
+            // 停止内存监控
+            this.stopMemoryMonitoring();
+
+            // 清理对象池
+            for (const poolItem of this.audioPool) {
+                try {
+                    if (poolItem.audio) {
+                        poolItem.audio.pause();
+                        poolItem.audio.src = '';
+                        poolItem.audio.load();
+                    }
+                } catch (error) {
+                    console.warn('清理对象池实例失败:', error);
+                }
+            }
+            this.audioPool = [];
+
             // 清空所有实例映射
             this.audioInstances.clear();
             this.loadingStates.clear();
@@ -1111,7 +1372,7 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
             this.isInitialized = false;
             this.isPlaylistMode = false;
 
-            console.log('✅ AudioManager: 资源清理完成');
+            console.log('✅ AudioManager: 资源清理完成（包含对象池和内存监控）');
         }
     }
 
