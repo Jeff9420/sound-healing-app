@@ -6,6 +6,42 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a **声音疗愈 (Sound Healing)** web application - a local audio player with immersive background scenes and playlist functionality. The app features 213+ audio files across 9 categories (Animal sounds, Chakra, Fire, Hypnosis, Meditation, Rain, Running water, Singing bowl sound, Subconscious Therapy) with full-screen animated backgrounds that automatically match the playing audio type.
 
+## Multilingual System (i18n)
+
+### Language Configuration
+- **Default Language**: English (`en-US`) - All new users see English interface by default
+- **Supported Languages**: 5 languages with complete translations
+  - English (`en-US`) - Default, fallback language
+  - Chinese (`zh-CN`) - Simplified Chinese with full interface support
+  - Japanese (`ja-JP`) - Japanese with proper typography support
+  - Korean (`ko-KR`) - Korean with native font support
+  - Spanish (`es-ES`) - Spanish with locale-specific formatting
+
+### Core Files
+- **`assets/js/i18n-system.js`** - Main internationalization system with language detection, translation loading, and dynamic content updates
+- **`assets/js/i18n-translations-addon.js`** - Extended translation data for authentication interface and additional features
+- **Translation System**: Maps `data-i18n` attributes in HTML to translated text content
+
+### Language Detection Priority
+1. **localStorage** - User's saved language preference
+2. **Browser Language** - Auto-detect from `navigator.language`
+3. **Default Fallback** - English (`en-US`)
+
+### Development Commands for Language Updates
+```bash
+# Test multilingual functionality
+# Open browser developer tools and verify:
+# 1. All data-i18n elements are translated
+# 2. Language switching works correctly
+# 3. localStorage saves language preference
+# 4. SEO meta tags update dynamically
+
+# Add new translations:
+# 1. Update translation data in i18n-system.js getTranslationData()
+# 2. Add new keys to all 5 language sections
+# 3. Test with: window.i18n.changeLanguage('en-US')
+```
+
 ## Core Architecture
 
 ### Audio System (3-Layer Architecture)

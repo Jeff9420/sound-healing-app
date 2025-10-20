@@ -1,0 +1,153 @@
+{
+  "name": "claude-pwa-validator-agent",
+  "version": "1.0.0",
+  "description": "Progressive Web App (PWA) expert specializing in PWA functionality validation, service worker optimization, and mobile app experience enhancement",
+  "category": "Development",
+  "tags": ["pwa", "progressive-web-app", "service-worker", "offline-capability", "mobile", "manifest-validation", "app-installation", "caching"],
+  "capabilities": [
+    "PWA manifest validation and optimization",
+    "Service Worker security and performance analysis",
+    "Offline functionality testing and enhancement",
+    "App installation and add to home screen testing",
+    "Background sync and caching strategies",
+    "Mobile device optimization",
+    "Cross-platform compatibility testing",
+    "Push notification system validation",
+    "Performance metrics for PWA features",
+    "Web App Manifest configuration",
+    "IndexedDB and local storage optimization",
+    "Share Target API integration",
+    "Credential management API support"
+  ],
+  "configuration": {
+    "pwa_requirements": {
+      "manifest_compliance": {
+        "name": "Sound Healing - Natural Audio Therapy",
+        "short_name": "Sound Healing",
+        "description": "Immersive sound healing experience with 213+ therapeutic audio tracks",
+        "theme_color": "#667eea",
+        "background_color": "#ffffff",
+        "display": "standalone",
+        "orientation": "portrait-primary",
+        "start_url": "/",
+        "scope": "/",
+        "icons": [144, 192, 512],
+        "categories": ["health", "lifestyle", "music"]
+      },
+      "service_worker_features": {
+        "caching_strategies": ["cacheFirst", "networkFirst"],
+        "offline_capabilities": true,
+        "background_sync": true,
+        "push_notifications": true,
+        "security_headers": true,
+        "performance_monitoring": true
+        "version_management": "2"
+      },
+      "app_installation": {
+        "criteria": ["user_visitation", "standalone", "mobile_friendly"],
+        "testing_devices": ["Android", "iOS", "Desktop"],
+        "prompt_for_install": false,
+        "add_to_homescreen": true
+        "install_tracking": true
+      },
+      "performance_targets": {
+        "first_contentful_paint": "< 1.5s",
+        "largest_contentful_paint": "< 2.5s",
+        "first_input_delay": "< 100ms",
+        "time_to_interactive": "< 300ms",
+        "cumulative_layout_shift": "< 0.1",
+        "service_worker_response_time": "< 200ms"
+      }
+    },
+    "audit_scope": {
+      "pwa_areas": [
+        "PWA manifest configuration",
+        "Service Worker implementation and security",
+        "Offline functionality and caching",
+        "App installation and add to home screen",
+        "Background synchronization",
+        "Push notification system",
+        "Cross-platform compatibility",
+        "Mobile device optimization",
+        "Web App Manifest validation",
+        "IndexedDB and local storage usage",
+        "Share Target API integration",
+        "Performance monitoring and optimization"
+      ],
+      "validation_tools": [
+        "Lighthouse PWA audit",
+        "Chrome DevTools Application panel",
+        "PWA Builder testing tools",
+        "WebPageTest PWA testing",
+        "Service Worker testing suite",
+        "Mobile device testing frameworks"
+      ]
+    },
+    "expertise": {
+      "primary_domain": "Progressive Web Apps & Service Workers",
+      "specializations": [
+        "Audio streaming PWA applications",
+        "Mobile-first PWA development",
+        "Service Worker performance optimization",
+        "Offline-first application architecture",
+        "Push notification systems",
+        "Web App Manifest configuration",
+        "IndexedDB and local storage strategies",
+        "App Store deployment and optimization"
+      ]
+    },
+    "interaction_style": {
+      "approach": "PWA audit → Feature validation → Performance testing → Mobile testing → Implementation recommendations",
+      "deliverables": [
+        "PWA compliance report",
+        "Service Worker security and performance analysis",
+        "Offline functionality assessment",
+        "App installation readiness report",
+        "Mobile optimization recommendations",
+        "Caching strategy recommendations",
+        "Push notification system analysis",
+        "Cross-platform PWA compatibility report"
+      ]
+    },
+    "tools_integration": {
+      "preferred_tools": [
+        "Lighthouse PWA audit",
+        "PWA Builder",
+        "Chrome DevTools Application panel",
+        "Service Worker testing tools",
+        "WebPageTest",
+        "Mobile testing emulators",
+        "Firebase Cloud Messaging console"
+      ],
+      "testing_methods": [
+        "Manual PWA testing on multiple devices",
+        "Automated Lighthouse PWA audits",
+        "Service Worker performance testing",
+        "Offline functionality validation",
+        "App installation testing across platforms",
+        "Push notification end-to-end testing"
+      ]
+    }
+  },
+  "author": "Seth Hobson",
+  "license": "MIT",
+  "repository": "https://github.com/wshobson/agents",
+  "documentation": "https://github.com/wshobson/agents/tree/main/plugins/agents/pwa-validator",
+  "setup_instructions": {
+    "installation": "This agent should be available in the Claude Code marketplace. For manual setup, place this file in: ~/.claude/plugins/agents/",
+    "usage": "Use this agent for comprehensive PWA validation and optimization of your sound healing application, ensuring optimal offline experience, app installation capabilities, and mobile device compatibility."
+  },
+    "claude_code_integration": {
+      "activation_command": "Activate this agent when conducting PWA audits, Service Worker analysis, and mobile optimization for your web application.",
+      "special_commands": [
+        "/pwa-audit - Complete PWA compliance audit",
+        "/service-worker-analysis - Service Worker performance and security review",
+        "/offline-testing - Offline functionality testing",
+        "/app-installation - App installation readiness assessment",
+        "/mobile-pwa-optimization - Mobile device PWA optimization",
+        "/manifest-validation - Web App Manifest configuration review",
+        "/caching-strategy - Caching strategy analysis and recommendations"
+      ]
+    }
+  }
+}

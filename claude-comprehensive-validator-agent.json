@@ -1,0 +1,123 @@
+{
+  "name": "claude-comprehensive-validator-agent",
+  "version": "1.0.0",
+  "description": "Comprehensive validation agent combining all aspects - security, performance, accessibility, PWA, multilingual, and code quality for complete application health assessment",
+  "category": "Development",
+  "tags": ["validation", "security", "performance", "accessibility", "pwa", "i18n", "code-quality", "testing", "audit"],
+  "capabilities": [
+    "Integrated multi-domain validation system",
+    "Automated comprehensive testing workflows",
+    "Security vulnerability scanning and penetration testing",
+    "Performance benchmarking and optimization",
+    "Accessibility compliance auditing (WCAG 2.1)",
+    "PWA functionality validation",
+    "Multilingual system validation",
+    "Code quality assessment",
+    "Cross-browser compatibility testing",
+    "Mobile device testing",
+    "SEO and meta tag validation",
+    "User experience testing",
+    "Progressive Web App validation",
+    "API integration testing",
+    "Load testing and stress testing",
+    "Data privacy and compliance validation"
+  ],
+  "configuration": {
+    "validation_framework": {
+      "standards": ["OWASP Top 10", "WCAG 2.1 AA", "ISO 25010", "GDPR", "PCI-DSS", "Section 508"],
+      "compliance_levels": {
+        "security": "OWASP ASVS Level 2",
+        "performance": "Lighthouse Performance Score 90+",
+        "accessibility": "WCAG 2.1 AA",
+        "pwa": "Baseline PWA 100%",
+        "seo": "A+ SEO Score"
+      },
+      "test_environments": ["Chrome", "Firefox", "Safari", "Edge", "Mobile Safari", "Android Chrome"],
+      "automation_tools": ["Selenium", "Playwright", "Cypress", "Puppeteer", "Lighthouse CI"]
+    },
+    "audit_scope": {
+      "comprehensive_areas": [
+        "Security vulnerability assessment",
+        "Authentication and authorization systems",
+        "Data protection and privacy compliance",
+        "Performance optimization analysis",
+        "Accessibility compliance validation",
+        "PWA functionality review",
+        "Multilingual system validation",
+        "Code quality assessment",
+        "Cross-platform compatibility testing",
+        "Mobile responsiveness testing",
+        "SEO optimization validation",
+        "User experience and usability testing",
+        "Audio system performance validation",
+        "Service Worker security and performance",
+        "Offline functionality testing",
+        "Integration security validation"
+      ]
+    },
+    "expertise": {
+      "primary_domain": "Comprehensive Web Application Validation",
+      "specializations": [
+        "Audio streaming application validation",
+        "Progressive Web App validation",
+        "Firebase integration security",
+        "Real-time performance monitoring",
+        "Security penetration testing",
+        "Accessibility compliance expertise",
+        "Performance optimization specialist",
+        "Multilingual application validation"
+      ]
+    },
+    "workflow_integration": {
+      "comprehensive_commands": [
+        "/full-audit - Complete comprehensive validation",
+        "/security-pentestration - Security penetration testing",
+        "/performance-benchmark - Performance benchmarking and optimization",
+        "/accessibility-compliance - Full accessibility audit",
+        "/pwa-validation - PWA functionality review",
+        "/multilingual-validation - i18n system validation",
+        "/mobile-testing - Mobile device comprehensive testing",
+        "/seo-audit - SEO and meta tag validation"
+      ],
+      "reporting_system": {
+        "automated_reports": true,
+        "real_time_monitoring": true,
+        "remediation_tracking": true,
+        "compliance_dashboard": true
+        "risk_scoring": true
+        "integration_with_github": true
+      }
+    },
+    "tools_integration": {
+      "enterprise_tools": ["Burp Suite", "Nessus Professional", "Acunetix", "Checkmarx"],
+      "open_source": ["OWASP ZAP", "Metasploit Framework", "Nuclei"],
+      "performance_tools": ["Lighthouse", "GTmetrix", "WebPageTest", "SpeedCurve"],
+      "accessibility_tools": ["axe-core", "JAWS", "WAVE", "pa11y", "SortSite", "Tota11y"],
+      "mobile_testing": ["BrowserStack", "Sauce Labs", "Perfecto", "Kobiton"],
+      "seo_tools": ["Screaming Frog", "Ahrefs", "SEMrush", "Google PageSpeed Insights"],
+      "ci_cd_integration": ["GitHub Actions", "GitLab CI", "Jenkins", "Azure DevOps"]
+    }
+  },
+  "author": "Seth Hobson",
+  "license": "MIT",
+  "repository": "https://github.com/wshobson/agents",
+  "documentation": "Comprehensive integration of all available agents and their capabilities",
+  "setup_instructions": {
+    "installation": "This agent orchestrates all available specialized agents for complete application validation. For manual setup, place this file in: ~/.claude/plugins/agents/",
+    "usage": "Use this agent as the primary entry point for comprehensive validation and testing of your sound healing application, orchestrating security, performance, accessibility, PWA, and multilingual audits with integrated reporting."
+  },
+    "claude_code_integration": {
+      "activation_command": "Activate this agent to initiate comprehensive validation workflow",
+      "special_commands": [
+        "/orchestrate-audit - Orchestrate all specialized agents for complete validation",
+        "/comprehensive-security-audit - Comprehensive security assessment",
+        "/comprehensive-performance-audit - Complete performance analysis",
+        "/comprehensive-accessibility-audit - Full accessibility validation",
+        "/comprehensive-pwa-validation - Complete PWA functionality review",
+        "/comprehensive-i18n-validation - Complete multilingual system validation",
+        "/risk-assessment - Comprehensive risk scoring and recommendations"
+        "/compliance-reporting - Generate compliance dashboard"
+      ]
+    }
+  }
+}

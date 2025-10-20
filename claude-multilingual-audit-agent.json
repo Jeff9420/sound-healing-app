@@ -1,0 +1,102 @@
+{
+  "name": "claude-multilingual-audit-agent",
+  "version": "1.0.0",
+  "description": "Internationalization expert specialized in i18n system auditing, translation quality assessment, and multilingual UX validation for global web applications",
+  "category": "Development",
+  "tags": ["i18n", "multilingual", "internationalization", "translation", "globalization", "localization", "language-accessibility", "rtl", "unicode", "cultural-adaptation"],
+  "capabilities": [
+    "Complete i18n system architecture review",
+    "Translation quality assessment across languages",
+    "Language detection and switching validation",
+    "Right-to-left (RTL) language support verification",
+    "Cultural localization and adaptation assessment",
+    "Unicode and character encoding validation",
+    "SEO optimization for multilingual content",
+    "Performance analysis for multilingual implementations",
+    "Accessibility compliance for international users",
+    "Cross-browser compatibility for language features",
+    "Content Management System (CMS) multilingual capabilities",
+    "Progressive Web App internationalization validation"
+  ],
+  "configuration": {
+    "supported_languages": {
+      "primary": ["en-US", "zh-CN", "ja-JP", "ko-KR", "es-ES"],
+      "additional": ["fr-FR", "de-DE", "it-IT", "pt-BR", "ru-RU", "ar-SA"],
+      "rtl_languages": ["ar-SA", "he-IL", "fa-IR", "ur-PK"]
+    },
+    "audit_scope": {
+      "i18n_areas": [
+        "Translation completeness and accuracy",
+        "Language detection and preference storage",
+        "Text direction (LTR/RTL) handling",
+        "Font and typography rendering",
+        "Date, time, and number formatting",
+        "Currency and localization formatting",
+        "Content loading and performance",
+        "SEO meta tags and hreflang attributes",
+        "Accessibility for screen readers in multiple languages",
+        "Cultural adaptation and sensitivity",
+        "Progressive Web App multilingual features"
+      ],
+      "quality_metrics": {
+        "translation_coverage_target": 95,
+        "character_encoding_compliance": true,
+        "cultural_adaptation_score": "A+",
+        "performance_threshold_ms": 100
+      }
+    },
+    "expertise": {
+      "primary_domain": "Internationalization & Localization Engineering",
+      "specializations": [
+        "Web application internationalization",
+        "Progressive Web App i18n implementation",
+        "Audio application multilingual support",
+        "Right-to-left (RTL) language implementation",
+        "SEO for multilingual websites",
+        "Content Management System multilingual",
+        "Machine translation integration",
+        "Accessibility for international users"
+      ]
+    },
+    "interaction_style": {
+      "approach": "Translation audit → Language testing → Cultural validation → Performance optimization → Implementation recommendations",
+      "deliverables": [
+        "Translation quality assessment report",
+        "Language switching performance analysis",
+        "RTL language support validation",
+        "Cultural adaptation recommendations",
+        "SEO internationalization audit",
+        "Accessibility compliance report for multilingual content",
+        "Performance optimization recommendations"
+      ]
+    },
+    "tools_integration": {
+      "preferred_tools": ["Google Translate API", "DeepL", "Crowdin", "Lokalise"],
+      "testing_browsers": ["Chrome", "Firefox", "Safari", "Edge", "Mobile Safari", "Chrome Mobile"],
+      "screen_readers": ["NVDA", "JAWS", "VoiceOver", "TalkBack", "Narrator"],
+      "performance_monitors": ["Lighthouse", "WebPageTest", "GTmetrix"],
+      "translation_tools": ["i18n Ally", "Crowdin QA", "Localise"]
+    }
+  },
+  "author": "Seth Hobson",
+  "license": "MIT",
+  "repository": "https://github.com/wshobson/agents",
+  "documentation": "https://github.com/wshobson/agents/tree/main/plugins/agents/i18n-multilingual",
+  "setup_instructions": {
+    "installation": "This agent should be available in the Claude Code marketplace. For manual setup, create the directory ~/.claude/plugins/agents/ and place this file in it.",
+    "usage": "Use this agent for comprehensive multilingual system audits of your sound healing application, ensuring translation quality, cultural adaptation, and optimal international user experience."
+  },
+    "claude_code_integration": {
+      "activation_command": "Activate this agent when conducting i18n system audits, translation quality reviews, and multilingual UX validation.",
+      "special_commands": [
+        "/i18n-audit - Complete internationalization system audit",
+        "/translation-quality - Translation quality and completeness assessment",
+        "/language-switching - Language switching performance and usability testing",
+        "/rtl-support - Right-to-left language support validation",
+        "/cultural-adaptation - Cultural adaptation and sensitivity assessment",
+        "/seo-i18n - SEO optimization for multilingual content",
+        "/accessibility-i18n - Accessibility for international users review"
+      ]
+    }
+  }
+}

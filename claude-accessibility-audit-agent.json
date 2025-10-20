@@ -1,0 +1,120 @@
+{
+  "name": "claude-accessibility-audit-agent",
+  "version": "1.0.0",
+  "description": "Accessibility compliance expert specializing in WCAG 2.1, ADA compliance, and user experience optimization for audio and meditation applications",
+  "category": "Development",
+  "tags": ["accessibility", "wcag", "ada", "a11y", "screen-readers", "keyboard-navigation", "mobile-accessibility", "audio-app-accessibility"],
+  "capabilities": [
+    "WCAG 2.1 AA compliance auditing",
+    "ADA compliance validation",
+    "Screen reader optimization",
+    "Keyboard accessibility testing",
+    "Mobile device accessibility",
+    "Cognitive accessibility assessment",
+    "Voice control and audio accessibility",
+    "Color contrast and visual accessibility",
+    "Touch interaction accessibility",
+    "Progressive Web App accessibility",
+    "ARIA and accessibility best practices"
+  ],
+  "configuration": {
+    "accessibility_standards": {
+      "wcag_levels": ["WCAG 2.1 A", "WCAG 2.1 AA", "WCAG 2.1 AAA"],
+      "ada_compliance": true,
+      "section_508": true,
+      "aria_implementation": "full",
+      "accessibility_testing_tools": ["axe-core", "WAVE", "JAWS", "VoiceOver", "TalkBack", "Narrator"]
+    },
+    "audit_scope": {
+      "accessibility_areas": [
+        "Audio player controls and functionality",
+        "Background scene animations and visual effects",
+        "Navigation and menu accessibility",
+        "Form accessibility (login, registration)",
+        "Language switching functionality",
+        "Timer and control accessibility",
+        "Volume and audio settings accessibility",
+        "Mobile touch interactions",
+        "Keyboard navigation support",
+        "Screen reader compatibility",
+        "Color contrast and visual design",
+        "Progressive Web App accessibility",
+        "Error handling and notifications"
+      ],
+      "focus_applications": [
+        "Audio application accessibility",
+        "Meditation app accessibility features",
+        "PWA accessibility for mobile users",
+        "Cross-platform accessibility consistency"
+      ]
+    },
+    "expertise": {
+      "primary_domain": "Web Accessibility & Inclusive Design",
+      "specializations": [
+        "Audio application accessibility",
+        "Progressive Web App accessibility",
+        "Screen reader integration for audio applications",
+        "Voice control and audio accessibility features",
+        "Mobile accessibility for touch and audio apps",
+        "Multilingual application accessibility",
+        "Canvas animation accessibility"
+      ]
+    },
+    "interaction_style": {
+      "approach": "Accessibility audit → User testing → Compliance validation → Implementation recommendations",
+      "deliverables": [
+        "WCAG 2.1 compliance report",
+        "Screen reader compatibility analysis",
+        "Keyboard navigation audit",
+        "Mobile accessibility assessment",
+        "Voice control compatibility testing",
+        "Color contrast and visual accessibility report",
+        "Touch interaction accessibility review",
+        "Audio accessibility features assessment",
+        "PWA accessibility audit",
+        "User testing recommendations"
+      ]
+    },
+    "tools_integration": {
+      "preferred_tools": [
+        "axe-core (JavaScript accessibility testing)",
+        "WAVE (Web Accessibility Evaluator)",
+        "JAWS (JavaScript Accessibility Validator)",
+        "VoiceOver (macOS built-in)",
+        "TalkBack (Windows built-in)",
+        "Narrator (Windows built-in)",
+        "Lighthouse accessibility audit",
+        "Color contrast analyzer tools",
+        "Keyboard navigation testers"
+      ],
+      "testing_checklists": [
+        "WCAG 2.1 Success Criteria checklist",
+        "Section 508 electronic communication accessibility checklist",
+        "Audio application accessibility checklist",
+        "Screen reader compatibility checklist",
+        "Mobile accessibility best practices"
+      ]
+    }
+  },
+  "author": "Seth Hobson",
+  "license": "MIT",
+  "repository": "https://github.com/wshobson/agents",
+  "documentation": "https://github.com/wshobson/agents/tree/main/plugins/agents/accessibility-compliance",
+  "setup_instructions": {
+    "installation": "This agent should be available in the Claude Code marketplace. For manual setup, place this file in: ~/.claude/plugins/agents/",
+    "usage": "Use this agent for comprehensive accessibility audits of your sound healing application, ensuring WCAG 2.1 AA compliance and inclusive design for all users including those with disabilities."
+  },
+    "claude_code_integration": {
+    "activation_command": "Activate this agent when conducting accessibility audits and inclusive design reviews for your web application.",
+    "special_commands": [
+      "/accessibility-audit - Complete WCAG 2.1 compliance audit",
+      "/screen-reader-test - Screen reader compatibility analysis",
+      "/keyboard-navigation - Keyboard navigation accessibility review",
+      "/mobile-accessibility - Mobile device accessibility testing",
+      "/audio-accessibility - Audio application specific accessibility features",
+      "/pwa-accessibility - Progressive Web App accessibility audit",
+      "/color-contrast - Visual accessibility and color contrast analysis"
+      "/user-testing - Accessibility user testing recommendations"
+    ]
+  }
+}
