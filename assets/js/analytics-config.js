@@ -10,7 +10,7 @@ window.__ANALYTICS_CONFIG = {
 
     // Microsoft Clarity Project ID
     // Get this from: https://clarity.microsoft.com
-    clarityProjectId: '', // TODO: Replace with your Clarity ID
+    clarityProjectId: 'pztgefgrwg', // Microsoft Clarity Project ID for SoundFlows
 
     // Amplitude Workspace API Key
     // Format: a long string from https://analytics.amplitude.com (Project Settings → General → API key)

@@ -665,12 +665,22 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
                 throw new Error(`分类不存在: ${categoryName}`);
             }
 
+            // 保存原始轨道顺序
+            const originalTracks = [...category.files];
+
             this.currentPlaylist = {
                 categoryName: categoryName,
-                tracks: category.files,
+                originalTracks: originalTracks,  // 保存原始顺序
+                tracks: originalTracks,         // 当前播放顺序（初始化为原始顺序）
+                shuffleOrder: [],               // 随机顺序映射
                 currentIndex: startIndex
             };
             this.isPlaylistMode = true;
+
+            // 如果随机模式已启用，生成随机顺序
+            if (this.shuffleMode) {
+                this.generateShuffleOrder();
+            }
 
             await this.playCurrentTrack();
         }
@@ -694,14 +704,25 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
             }
 
             const { tracks } = this.currentPlaylist;
-            let nextIndex = this.currentPlaylist.currentIndex + 1;
+            let nextIndex;
 
-            if (nextIndex >= tracks.length) {
-                if (this.repeatMode === 'all') {
-                    nextIndex = 0;
-                } else {
+            if (this.shuffleMode && this.currentPlaylist.shuffleOrder.length > 0) {
+                // 随机播放模式
+                nextIndex = this.getNextShuffleIndex(this.currentPlaylist.currentIndex);
+                if (nextIndex === -1) {
                     this.isPlaylistMode = false;
                     return;
+                }
+            } else {
+                // 正常播放模式
+                nextIndex = this.currentPlaylist.currentIndex + 1;
+                if (nextIndex >= tracks.length) {
+                    if (this.repeatMode === 'all') {
+                        nextIndex = 0;
+                    } else {
+                        this.isPlaylistMode = false;
+                        return;
+                    }
                 }
             }
 
@@ -714,9 +735,27 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
                 return;
             }
 
-            let prevIndex = this.currentPlaylist.currentIndex - 1;
-            if (prevIndex < 0) {
-                prevIndex = this.currentPlaylist.tracks.length - 1;
+            const { tracks } = this.currentPlaylist;
+            let prevIndex;
+
+            if (this.shuffleMode && this.currentPlaylist.shuffleOrder.length > 0) {
+                // 随机播放模式
+                prevIndex = this.getPreviousShuffleIndex(this.currentPlaylist.currentIndex);
+                if (prevIndex === -1) {
+                    // 没有上一首，保持当前曲目
+                    return;
+                }
+            } else {
+                // 正常播放模式
+                prevIndex = this.currentPlaylist.currentIndex - 1;
+                if (prevIndex < 0) {
+                    if (this.repeatMode === 'all') {
+                        prevIndex = tracks.length - 1;
+                    } else {
+                        // 没有上一首，保持当前曲目
+                        return;
+                    }
+                }
             }
 
             this.currentPlaylist.currentIndex = prevIndex;
@@ -747,11 +786,134 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
 
         setShuffleMode(enabled) {
             this.shuffleMode = enabled;
-        // TODO: 实现随机播放逻辑
+
+            if (this.currentPlaylist) {
+                if (enabled) {
+                    // 启用随机播放 - 生成随机顺序
+                    this.generateShuffleOrder();
+                    console.log('🔀 随机播放已启用');
+                } else {
+                    // 禁用随机播放 - 恢复原始顺序
+                    this.restoreOriginalOrder();
+                    console.log('📋 随机播放已禁用，恢复原始顺序');
+                }
+
+                // 触发模式变更事件
+                this.eventBus.dispatchEvent(new CustomEvent('shuffleModeChanged', {
+                    detail: { enabled }
+                }));
+            }
         }
 
         setRepeatMode(mode) {
             this.repeatMode = mode; // 'none', 'one', 'all'
+        }
+
+        /**
+         * 生成随机播放顺序
+         */
+        generateShuffleOrder() {
+            if (!this.currentPlaylist) {
+                return;
+            }
+
+            const { originalTracks, currentIndex } = this.currentPlaylist;
+            const trackCount = originalTracks.length;
+
+            // 生成随机顺序数组（包含所有轨道的索引）
+            let shuffleOrder = Array.from({ length: trackCount }, (_, i) => i);
+
+            // Fisher-Yates 洗牌算法
+            for (let i = shuffleOrder.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffleOrder[i], shuffleOrder[j]] = [shuffleOrder[j], shuffleOrder[i]];
+            }
+
+            // 确保当前播放的曲目的随机位置正确
+            const currentTrackInShuffle = shuffleOrder.indexOf(currentIndex);
+            if (currentTrackInShuffle !== 0) {
+                // 将当前曲目移到随机顺序的第一位
+                [shuffleOrder[0], shuffleOrder[currentTrackInShuffle]] =
+                [shuffleOrder[currentTrackInShuffle], shuffleOrder[0]];
+            }
+
+            // 更新播放列表的随机顺序和当前轨道顺序
+            this.currentPlaylist.shuffleOrder = shuffleOrder;
+            this.currentPlaylist.tracks = shuffleOrder.map(index => originalTracks[index]);
+
+            // 更新当前索引（在随机顺序中的位置）
+            this.currentPlaylist.currentIndex = 0;
+
+            console.log('🔀 随机播放顺序已生成:', this.currentPlaylist.tracks.map(t => this.getDisplayName(t)));
+        }
+
+        /**
+         * 恢复原始播放顺序
+         */
+        restoreOriginalOrder() {
+            if (!this.currentPlaylist) {
+                return;
+            }
+
+            const { originalTracks, tracks, currentIndex } = this.currentPlaylist;
+
+            // 找到当前播放的曲目在原始顺序中的位置
+            const currentTrack = tracks[currentIndex];
+            const originalIndex = originalTracks.indexOf(currentTrack);
+
+            // 恢复原始顺序
+            this.currentPlaylist.tracks = [...originalTracks];
+            this.currentPlaylist.currentIndex = originalIndex;
+            this.currentPlaylist.shuffleOrder = [];
+
+            console.log('📋 已恢复原始播放顺序');
+        }
+
+        /**
+         * 获取随机播放模式下的下一个索引
+         */
+        getNextShuffleIndex(currentIndex) {
+            if (!this.currentPlaylist || !this.currentPlaylist.shuffleOrder.length) {
+                return currentIndex + 1;
+            }
+
+            const { shuffleOrder } = this.currentPlaylist;
+            const currentShuffleIndex = shuffleOrder[currentIndex];
+
+            // 找到当前曲目在随机顺序中的位置
+            const currentPosInShuffle = shuffleOrder.indexOf(currentShuffleIndex);
+
+            // 返回下一个位置
+            if (currentPosInShuffle < shuffleOrder.length - 1) {
+                return currentIndex + 1;
+            } else if (this.repeatMode === 'all') {
+                // 循环播放，回到随机顺序的开头
+                return 0;
+            } else {
+                // 没有更多曲目
+                return -1;
+            }
+        }
+
+        /**
+         * 获取随机播放模式下的上一个索引
+         */
+        getPreviousShuffleIndex(currentIndex) {
+            if (!this.currentPlaylist || !this.currentPlaylist.shuffleOrder.length) {
+                return currentIndex - 1;
+            }
+
+            const { shuffleOrder } = this.currentPlaylist;
+
+            if (currentIndex > 0) {
+                return currentIndex - 1;
+            } else if (this.repeatMode === 'all') {
+                // 循环播放，回到随机顺序的末尾
+                return shuffleOrder.length - 1;
+            } else {
+                // 没有上一首
+                return -1;
+            }
         }
 
         fadeIn(trackId, duration = 1000) {
