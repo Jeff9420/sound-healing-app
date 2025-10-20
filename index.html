@@ -156,6 +156,7 @@
     <link rel="stylesheet" href="assets/css/stats-dashboard.css">
     <link rel="stylesheet" href="assets/css/accessibility.css">
     <link rel="stylesheet" href="assets/css/notification-preferences.css">
+    <link rel="stylesheet" href="assets/css/color-contrast-fixes.css">
 
     <!-- 移动端优化CSS -->
     <link rel="stylesheet" href="assets/css/mobile-optimized.css">
@@ -219,17 +220,17 @@
 
         <!-- Header -->
         <div class="container">
-            <header class="header">
+            <header class="header" role="banner">
                 <div class="header__inner">
                     <div class="header__brand">
                         <span class="header__icon" aria-hidden="true">🎵</span>
                         <div class="header__brand-text">
-                            <span class="header__title" data-i18n="app.title">声音疗愈空间</span>
+                            <h1 class="header__title" data-i18n="app.title">声音疗愈空间</h1>
                             <span class="header__tagline" data-i18n="header.tagline">Soundflows · 数字音疗工作室</span>
                         </div>
                     </div>
-                    <button class="header__persona-toggle" data-menu="persona" aria-controls="personaMenu" aria-expanded="false" data-i18n="nav.persona.toggle">使用目标</button>
-                    <nav class="header__persona-nav" id="personaMenu" aria-label="使用目标" aria-hidden="true">
+                    <button class="header__persona-toggle" data-menu="persona" aria-controls="personaMenu" aria-expanded="false" data-i18n="nav.persona.toggle" role="button" tabindex="0">使用目标</button>
+                    <nav class="header__persona-nav" id="personaMenu" aria-label="使用目标" aria-hidden="true" role="navigation">
                         <div class="mega-menu__layout">
                             <a class="mega-menu__item" data-cta="persona-meditation" href="pages/meditation/index.html">
                                 <span class="mega-menu__title" data-i18n="nav.persona.meditation.title">冥想专注</span>
@@ -249,41 +250,50 @@
                             </a>
                         </div>
                     </nav>
-                    <a class="header__nav-link" href="pages/resources/index.html" data-cta="nav-resources" data-i18n="nav.resources">资源中心</a>
+                    <a class="header__nav-link" href="pages/resources/index.html" data-cta="nav-resources" data-i18n="nav.resources" role="button" tabindex="0">资源中心</a>
                     <div class="header__menu">
-                        <nav class="header__actions" aria-label="快捷功能">
+                        <nav class="header__actions" aria-label="快捷功能" role="navigation">
                         <!-- Login Button -->
-                        <button id="loginBtn" class="header-icon-btn" onclick="window.firebaseAuthManager && window.firebaseAuthManager.openAuthDialog()" title="登录/注册">
-                            👤
+                        <button id="loginBtn" class="header-icon-btn" onclick="window.firebaseAuthManager && window.firebaseAuthManager.openAuthDialog()"
+                                aria-label="Login or register" title="登录/注册" tabindex="0">
+                            <span aria-hidden="true">👤</span>
                         </button>
 
                         <!-- History & Favorites Buttons -->
-                        <button class="header-icon-btn" onclick="window.historyFavoritesUI && window.historyFavoritesUI.openPanel('history')" title="播放历史">
-                            📜
+                        <button class="header-icon-btn" onclick="window.historyFavoritesUI && window.historyFavoritesUI.openPanel('history')"
+                                aria-label="View play history" title="播放历史" tabindex="0">
+                            <span aria-hidden="true">📜</span>
                         </button>
-                        <button class="header-icon-btn" onclick="window.historyFavoritesUI && window.historyFavoritesUI.openPanel('favorites')" title="我的收藏">
-                            &#10084;
+                        <button class="header-icon-btn" onclick="window.historyFavoritesUI && window.historyFavoritesUI.openPanel('favorites')"
+                                aria-label="View my favorites" title="我的收藏" tabindex="0">
+                            <span aria-hidden="true">&#10084;</span>
                         </button>
-                        <button class="header-icon-btn" onclick="window.mixerUI && window.mixerUI.open()" title="音频混音台">
-                            🎚️
+                        <button class="header-icon-btn" onclick="window.mixerUI && window.mixerUI.open()"
+                                aria-label="Open audio mixer" title="音频混音台" tabindex="0">
+                            <span aria-hidden="true">🎚️</span>
                         </button>
-                        <button class="header-icon-btn" onclick="window.statsDashboard && window.statsDashboard.open()" title="收听统计">
-                            📊
+                        <button class="header-icon-btn" onclick="window.statsDashboard && window.statsDashboard.open()"
+                                aria-label="View listening statistics" title="收听统计" tabindex="0">
+                            <span aria-hidden="true">📊</span>
                         </button>
-                        <button class="header-icon-btn" onclick="window.notificationPreferences && window.notificationPreferences.openSettings()" title="通知设置">
-                            🔔
+                        <button class="header-icon-btn" onclick="window.notificationPreferences && window.notificationPreferences.openSettings()"
+                                aria-label="Notification settings" title="通知设置" tabindex="0">
+                            <span aria-hidden="true">🔔</span>
                         </button>
                         <!-- Focus Mode Toggle (2.0 新增) -->
-                        <button id="focusModeToggle" class="header-icon-btn" onclick="window.focusModeController && window.focusModeController.toggle()" title="专注模式">
-                            🎯
+                        <button id="focusModeToggle" class="header-icon-btn" onclick="window.focusModeController && window.focusModeController.toggle()"
+                                aria-label="Toggle focus mode" title="专注模式" tabindex="0" aria-pressed="false">
+                            <span aria-hidden="true">🎯</span>
                         </button>
                         <!-- Theme Toggle Button -->
-                        <button id="themeToggle" class="header-icon-btn theme-toggle-btn" title="切换主题">
-                            <span class="theme-icon">🌙</span>
+                        <button id="themeToggle" class="header-icon-btn theme-toggle-btn"
+                                aria-label="Toggle theme" title="切换主题" tabindex="0" aria-pressed="false">
+                            <span class="theme-icon" aria-hidden="true">🌙</span>
                         </button>
                         <!-- Language Selector -->
-                        <div class="language-selector">
-                            <select id="languageSelect" onchange="changeLanguage(this.value)">
+                        <div class="language-selector" role="group" aria-label="Language selection">
+                            <select id="languageSelect" onchange="changeLanguage(this.value)"
+                                    aria-label="Select language" tabindex="0">
                                 <option value="zh-CN">中文</option>
                                 <option value="en-US" selected>English</option>
                                 <option value="ja-JP">日本語</option>
@@ -296,22 +306,25 @@
                 </div>
             </header>
 
-            <section class="hero-intro" id="heroIntro">
+            <section class="hero-intro" id="heroIntro" role="main" aria-labelledby="heroHeadline">
                 <div class="hero-intro__content">
                     <p class="hero-intro__eyebrow" data-i18n="hero.eyebrow">专业声音疗愈 · 5 种语言随时可用</p>
-                    <h2 class="hero-intro__headline" data-i18n="hero.headline">213+ 沉浸式疗愈音频，帮你在 5 分钟内放松、睡眠与重启专注</h2>
+                    <h2 id="heroHeadline" class="hero-intro__headline" data-i18n="hero.headline">213+ 沉浸式疗愈音频，帮你在 5 分钟内放松、睡眠与重启专注</h2>
                     <p class="hero-intro__description" data-i18n="hero.description">
                         从雨林白噪到脉轮共振，一键进入专属音疗空间。个性化播放、混音、统计与离线缓存，让每一次呼吸都被疗愈。
                     </p>
-                                        <div class="hero-intro__cta-group">
+                                        <div class="hero-intro__cta-group" role="group" aria-label="Main actions">
                         <button class="hero-intro__cta-primary" data-cta="start-experience" data-i18n="hero.cta.primary"
-                            onclick="document.getElementById('categoryGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });">
+                            onclick="document.getElementById('categoryGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });"
+                            aria-label="Start immersive experience" tabindex="0">
                             立即开启沉浸体验
                         </button>
-                        <a class="hero-intro__cta-secondary" data-cta="view-highlights" data-i18n="hero.cta.secondary" href="#featureHighlights">
+                        <a class="hero-intro__cta-secondary" data-cta="view-highlights" data-i18n="hero.cta.secondary" href="#featureHighlights"
+                           role="button" tabindex="0">
                             查看核心亮点
                         </a>
-                        <button type="button" class="hero-intro__cta-secondary hero-intro__cta-plan" data-track="plan-open" data-scroll-target="#conversionOffer" data-i18n="hero.cta.plan">
+                        <button type="button" class="hero-intro__cta-secondary hero-intro__cta-plan" data-track="plan-open" data-scroll-target="#conversionOffer" data-i18n="hero.cta.plan"
+                                aria-label="Get custom meditation plan" tabindex="0">
                             获取定制冥想计划
                         </button>
                     </div>
@@ -332,11 +345,12 @@
                 </div>
             </section>
 
-            <section class="feature-summary" id="featureHighlights">
+            <section class="feature-summary" id="featureHighlights" role="region" aria-labelledby="featuresTitle">
                 <div class="feature-summary__heading">
-                    <h3 data-i18n="features.heading.title">为什么选择声音疗愈空间？</h3>
+                    <h3 id="featuresTitle" data-i18n="features.heading.title">为什么选择声音疗愈空间？</h3>
                     <p data-i18n="features.heading.desc">我们把专业音疗体验压缩进一个浏览器，在任何设备上都能获取科学、柔和且富有仪式感的放松流程。</p>
-                    <button type="button" class="feature-summary__cta" data-track="stats-open" data-cta="feature-summary" data-i18n="features.heading.cta">了解专业音疗统计</button>
+                    <button type="button" class="feature-summary__cta" data-track="stats-open" data-cta="feature-summary" data-i18n="features.heading.cta"
+                            aria-label="Learn about professional sound therapy statistics" tabindex="0">了解专业音疗统计</button>
                 </div>
                 <div class="feature-summary__grid">
                     <article class="feature-card">
@@ -489,66 +503,86 @@
                 </div>
             </section>
 
-            <section class="category-section">
-                <div id="categoryGrid" class="category-grid">
+            <section class="category-section" id="mainContent">
+                <h2 class="sr-only">Audio Categories</h2>
+                <div id="categoryGrid" class="category-grid" role="grid" aria-label="Audio categories">
                     <!-- Categories will be loaded here by JavaScript -->
                 </div>
             </section>
         </div>
 
         <!-- Playlist Modal -->
-        <div id="playlistModal" class="playlist-modal">
+        <div id="playlistModal" class="playlist-modal" style="display: none;" role="dialog" aria-labelledby="playlistTitle" aria-modal="true">
             <div class="modal-content">
-                <span class="close" onclick="closePlaylist()" data-i18n="modal.close">&times;</span>
+                <button class="close" onclick="closePlaylist()" data-i18n="modal.close" aria-label="Close playlist" tabindex="0">&times;</button>
                 <h2 id="playlistTitle" data-i18n="playlist.title">选择音频</h2>
-                <div id="trackList" class="track-list"></div>
+                <div id="trackList" class="track-list" role="list" aria-label="Audio tracks"></div>
             </div>
         </div>
 
+        <!-- Skip to main content link for screen readers -->
+        <a href="#mainContent" class="skip-link">Skip to main content</a>
+
+        <!-- Live region for screen reader announcements -->
+        <div id="ariaLiveRegion" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+        <div id="ariaAlertRegion" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
+
         <!-- Audio Player -->
-        <div id="audioPlayer" class="audio-player" onclick="if(isMinimized) toggleMinimize()">
-            <div class="minimize-indicator" onclick="toggleMinimize(event)" data-i18n="player.minimize">▼收起</div>
+        <div id="audioPlayer" class="audio-player" role="region" aria-label="Audio player controls" tabindex="-1" onclick="if(isMinimized) toggleMinimize()">
+            <div class="minimize-indicator" onclick="toggleMinimize(event)" data-i18n="player.minimize" role="button" tabindex="0" aria-label="Minimize player" aria-expanded="true">▼收起</div>
             <div class="minimized-display">
-                <div class="minimized-text" id="minimizedTrack" data-i18n="player.notPlaying">未播放</div>
+                <div class="minimized-text" id="minimizedTrack" data-i18n="player.notPlaying" aria-live="polite">未播放</div>
             </div>
             <div class="player-content">
-                <div class="now-playing">
-                    <div id="currentTrack" class="track-title" data-i18n="player.notPlaying">未播放</div>
-                    <div id="currentCategory" class="track-category"></div>
+                <!-- Now Playing Section -->
+                <div class="now-playing" role="status" aria-live="polite">
+                    <div id="currentTrack" class="track-title" data-i18n="player.notPlaying" aria-label="Currently playing track">未播放</div>
+                    <div id="currentCategory" class="track-category" aria-label="Current track category"></div>
                 </div>
 
-                <div class="player-controls">
-                    <button class="control-btn" onclick="previousTrack()">⏮️</button>
-                    <button id="playPauseBtn" class="control-btn play-btn" onclick="togglePlayPause()">▶️</button>
-                    <button class="control-btn" onclick="nextTrack()">⏭️</button>
-                    <button class="control-btn" onclick="stopAudio()">⏹️</button>
+                <!-- Main Playback Controls -->
+                <div class="player-controls" role="group" aria-label="Playback controls">
+                    <button class="control-btn" onclick="previousTrack()" aria-label="Previous track" tabindex="0">⏮️</button>
+                    <button id="playPauseBtn" class="control-btn play-btn" onclick="togglePlayPause()" aria-label="Play or pause audio" tabindex="0">▶️</button>
+                    <button class="control-btn" onclick="nextTrack()" aria-label="Next track" tabindex="0">⏭️</button>
+                    <button class="control-btn" onclick="stopAudio()" aria-label="Stop audio playback" tabindex="0">⏹️</button>
                 </div>
 
-                <div class="progress-container">
-                    <span id="currentTime" class="time-display">0:00</span>
-                    <div class="progress-bar" onclick="seekTo(event)">
-                        <div id="progressFill" class="progress-fill"></div>
+                <!-- Progress Bar -->
+                <div class="progress-container" role="group" aria-label="Audio progress">
+                    <span id="currentTime" class="time-display" aria-label="Current time">0:00</span>
+                    <div class="progress-bar" onclick="seekTo(event)" role="slider" tabindex="0"
+                         aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+                         aria-valuetext="0 percent played">
+                        <div id="progressFill" class="progress-fill" aria-hidden="true"></div>
                     </div>
-                    <span id="duration" class="time-display">0:00</span>
+                    <span id="duration" class="time-display" aria-label="Total duration">0:00</span>
                 </div>
 
                 <!-- Additional Controls -->
-                <div class="extra-controls">
-                    <div class="control-group">
-                        <button class="control-btn" id="shuffleBtn" onclick="toggleShuffle()" data-i18n-title="player.shuffle">🔀</button>
-                        <button class="control-btn" id="repeatBtn" onclick="toggleRepeat()" data-i18n-title="player.repeat">🔁</button>
-                        <button class="control-btn" id="sleepTimerBtn" onclick="toggleSleepTimer()" data-i18n-title="player.sleepTimer">⏰</button>
+                <div class="extra-controls" role="group" aria-label="Audio settings">
+                    <div class="control-group" role="group" aria-label="Playback modes">
+                        <button class="control-btn" id="shuffleBtn" onclick="toggleShuffle()"
+                                data-i18n-title="player.shuffle" aria-label="Toggle shuffle mode" aria-pressed="false" tabindex="0">🔀</button>
+                        <button class="control-btn" id="repeatBtn" onclick="toggleRepeat()"
+                                data-i18n-title="player.repeat" aria-label="Toggle repeat mode" aria-pressed="false" tabindex="0">🔁</button>
+                        <button class="control-btn" id="sleepTimerBtn" onclick="toggleSleepTimer()"
+                                data-i18n-title="player.sleepTimer" aria-label="Sleep timer" aria-expanded="false" tabindex="0">⏰</button>
                     </div>
 
-                    <div class="control-group">
-                        <span style="margin-right: 10px;">🔊</span>
-                        <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="70" onchange="changeVolume(this.value)">
-                        <span id="volumeValue" style="margin-left: 10px; min-width: 35px;">70%</span>
+                    <div class="control-group" role="group" aria-label="Volume control">
+                        <span style="margin-right: 10px;" aria-hidden="true">🔊</span>
+                        <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="70"
+                               onchange="changeVolume(this.value)"
+                               aria-label="Volume control" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70"
+                               aria-valuetext="70 percent volume" tabindex="0">
+                        <span id="volumeValue" style="margin-left: 10px; min-width: 35px;" aria-live="polite" aria-label="Volume percentage">70%</span>
                     </div>
 
-                    <div class="control-group">
-                        <span style="margin-right: 10px;">⏱️</span>
-                        <select id="playbackRate" class="playback-rate" onchange="changePlaybackRate(this.value)">
+                    <div class="control-group" role="group" aria-label="Playback speed">
+                        <span style="margin-right: 10px;" aria-hidden="true">⏱️</span>
+                        <select id="playbackRate" class="playback-rate" onchange="changePlaybackRate(this.value)"
+                                aria-label="Playback speed" tabindex="0">
                             <option value="0.5">0.5x</option>
                             <option value="0.75">0.75x</option>
                             <option value="1" selected>1x</option>
@@ -560,16 +594,16 @@
                 </div>
 
                 <!-- Sleep Timer Modal -->
-                <div id="sleepTimerModal" class="timer-modal" style="display: none;">
+                <div id="sleepTimerModal" class="timer-modal" style="display: none;" role="dialog" aria-labelledby="sleepTimerTitle" aria-modal="true">
                     <div class="timer-content">
-                        <h3 data-i18n="timer.title">睡眠定时器</h3>
-                        <div class="timer-options">
-                            <button onclick="setSleepTimer(5)" data-i18n="timer.5min">5分钟</button>
-                            <button onclick="setSleepTimer(10)" data-i18n="timer.10min">10分钟</button>
-                            <button onclick="setSleepTimer(15)" data-i18n="timer.15min">15分钟</button>
-                            <button onclick="setSleepTimer(30)" data-i18n="timer.30min">30分钟</button>
-                            <button onclick="setSleepTimer(60)" data-i18n="timer.60min">60分钟</button>
-                            <button onclick="setSleepTimer(0)" data-i18n="timer.off">关闭</button>
+                        <h3 id="sleepTimerTitle" data-i18n="timer.title">睡眠定时器</h3>
+                        <div class="timer-options" role="group" aria-label="Sleep timer options">
+                            <button onclick="setSleepTimer(5)" data-i18n="timer.5min" aria-label="Set sleep timer for 5 minutes" tabindex="0">5分钟</button>
+                            <button onclick="setSleepTimer(10)" data-i18n="timer.10min" aria-label="Set sleep timer for 10 minutes" tabindex="0">10分钟</button>
+                            <button onclick="setSleepTimer(15)" data-i18n="timer.15min" aria-label="Set sleep timer for 15 minutes" tabindex="0">15分钟</button>
+                            <button onclick="setSleepTimer(30)" data-i18n="timer.30min" aria-label="Set sleep timer for 30 minutes" tabindex="0">30分钟</button>
+                            <button onclick="setSleepTimer(60)" data-i18n="timer.60min" aria-label="Set sleep timer for 60 minutes" tabindex="0">60分钟</button>
+                            <button onclick="setSleepTimer(0)" data-i18n="timer.off" aria-label="Turn off sleep timer" tabindex="0">关闭</button>
                         </div>
                     </div>
                 </div>
@@ -580,58 +614,73 @@
         <div id="rating-widget"></div>
 
         <!-- Firebase Authentication Dialog -->
-        <div id="authDialog" class="auth-dialog" style="display: none;">
+        <div id="authDialog" class="auth-dialog" style="display: none;" role="dialog" aria-labelledby="authTitle" aria-modal="true">
             <div class="auth-modal-content">
                 <div class="auth-header">
-                    <h2 data-i18n="auth.title">登录 / 注册</h2>
-                    <button class="auth-close" onclick="window.firebaseAuthManager && window.firebaseAuthManager.closeAuthDialog()">&times;</button>
+                    <h2 id="authTitle" data-i18n="auth.title">登录 / 注册</h2>
+                    <button class="auth-close" onclick="window.firebaseAuthManager && window.firebaseAuthManager.closeAuthDialog()"
+                            aria-label="Close authentication dialog" tabindex="0">&times;</button>
                 </div>
 
-                <div class="auth-tabs">
-                    <button class="auth-tab active" onclick="switchAuthTab('login')" data-i18n="auth.login">登录</button>
-                    <button class="auth-tab" onclick="switchAuthTab('signup')" data-i18n="auth.signup">注册</button>
-                    <button class="auth-tab" onclick="switchAuthTab('reset')" data-i18n="auth.reset">重置密码</button>
+                <div class="auth-tabs" role="tablist" aria-label="Authentication options">
+                    <button class="auth-tab active" role="tab" aria-selected="true" aria-controls="loginPanel"
+                            onclick="switchAuthTab('login')" data-i18n="auth.login" tabindex="0">登录</button>
+                    <button class="auth-tab" role="tab" aria-selected="false" aria-controls="signupPanel"
+                            onclick="switchAuthTab('signup')" data-i18n="auth.signup" tabindex="0">注册</button>
+                    <button class="auth-tab" role="tab" aria-selected="false" aria-controls="resetPanel"
+                            onclick="switchAuthTab('reset')" data-i18n="auth.reset" tabindex="0">重置密码</button>
                 </div>
 
                 <!-- Login Form -->
-                <div id="loginForm" class="auth-form active">
+                <div id="loginForm" class="auth-form active" role="tabpanel" id="loginPanel" aria-labelledby="login-tab">
                     <div class="form-group">
-                        <label data-i18n="auth.email">邮箱地址</label>
-                        <input type="email" id="loginEmail" data-i18n-placeholder="auth.emailPlaceholder" placeholder="请输入邮箱">
+                        <label for="loginEmail" data-i18n="auth.email">邮箱地址</label>
+                        <input type="email" id="loginEmail" data-i18n-placeholder="auth.emailPlaceholder" placeholder="请输入邮箱"
+                               aria-required="true" autocomplete="email" tabindex="0">
                     </div>
                     <div class="form-group">
-                        <label data-i18n="auth.password">密码</label>
-                        <input type="password" id="loginPassword" data-i18n-placeholder="auth.passwordPlaceholder" placeholder="请输入密码">
+                        <label for="loginPassword" data-i18n="auth.password">密码</label>
+                        <input type="password" id="loginPassword" data-i18n-placeholder="auth.passwordPlaceholder" placeholder="请输入密码"
+                               aria-required="true" autocomplete="current-password" tabindex="0">
                     </div>
-                    <button class="auth-btn primary" onclick="handleLogin()" data-i18n="auth.loginButton">登录</button>
-                    <button class="auth-btn secondary" onclick="handleGoogleLogin()" data-i18n="auth.googleLogin">使用 Google 登录</button>
-                    <button class="auth-btn secondary" onclick="handleAnonymousLogin()" data-i18n="auth.anonymousLogin">匿名登录</button>
+                    <button class="auth-btn primary" onclick="handleLogin()" data-i18n="auth.loginButton"
+                            aria-label="Login to your account" tabindex="0">登录</button>
+                    <button class="auth-btn secondary" onclick="handleGoogleLogin()" data-i18n="auth.googleLogin"
+                            aria-label="Login with Google account" tabindex="0">使用 Google 登录</button>
+                    <button class="auth-btn secondary" onclick="handleAnonymousLogin()" data-i18n="auth.anonymousLogin"
+                            aria-label="Continue without account" tabindex="0">匿名登录</button>
                 </div>
 
                 <!-- Signup Form -->
-                <div id="signupForm" class="auth-form">
+                <div id="signupForm" class="auth-form" role="tabpanel" id="signupPanel" aria-labelledby="signup-tab" hidden>
                     <div class="form-group">
-                        <label data-i18n="auth.displayName">显示名称</label>
-                        <input type="text" id="signupName" data-i18n-placeholder="auth.displayNamePlaceholder" placeholder="请输入您的昵称">
+                        <label for="signupName" data-i18n="auth.displayName">显示名称</label>
+                        <input type="text" id="signupName" data-i18n-placeholder="auth.displayNamePlaceholder" placeholder="请输入您的昵称"
+                               aria-required="true" autocomplete="name" tabindex="0">
                     </div>
                     <div class="form-group">
-                        <label data-i18n="auth.email">邮箱地址</label>
-                        <input type="email" id="signupEmail" data-i18n-placeholder="auth.emailPlaceholder" placeholder="请输入邮箱">
+                        <label for="signupEmail" data-i18n="auth.email">邮箱地址</label>
+                        <input type="email" id="signupEmail" data-i18n-placeholder="auth.emailPlaceholder" placeholder="请输入邮箱"
+                               aria-required="true" autocomplete="email" tabindex="0">
                     </div>
                     <div class="form-group">
-                        <label data-i18n="auth.password">密码</label>
-                        <input type="password" id="signupPassword" data-i18n-placeholder="auth.passwordPlaceholder" placeholder="至少6位字符">
+                        <label for="signupPassword" data-i18n="auth.password">密码</label>
+                        <input type="password" id="signupPassword" data-i18n-placeholder="auth.passwordPlaceholder" placeholder="至少6位字符"
+                               aria-required="true" autocomplete="new-password" tabindex="0" minlength="6">
                     </div>
-                    <button class="auth-btn primary" onclick="handleSignup()" data-i18n="auth.signupButton">注册</button>
+                    <button class="auth-btn primary" onclick="handleSignup()" data-i18n="auth.signupButton"
+                            aria-label="Create new account" tabindex="0">注册</button>
                 </div>
 
                 <!-- Reset Form -->
-                <div id="resetForm" class="auth-form">
+                <div id="resetForm" class="auth-form" role="tabpanel" id="resetPanel" aria-labelledby="reset-tab" hidden>
                     <div class="form-group">
-                        <label data-i18n="auth.email">邮箱地址</label>
-                        <input type="email" id="resetEmail" data-i18n-placeholder="auth.emailPlaceholder" placeholder="请输入注册时使用的邮箱">
+                        <label for="resetEmail" data-i18n="auth.email">邮箱地址</label>
+                        <input type="email" id="resetEmail" data-i18n-placeholder="auth.emailPlaceholder" placeholder="请输入注册时使用的邮箱"
+                               aria-required="true" autocomplete="email" tabindex="0">
                     </div>
-                    <button class="auth-btn primary" onclick="handlePasswordReset()" data-i18n="auth.resetButton">发送重置邮件</button>
+                    <button class="auth-btn primary" onclick="handlePasswordReset()" data-i18n="auth.resetButton"
+                            aria-label="Send password reset email" tabindex="0">发送重置邮件</button>
                 </div>
             </div>
         </div>
@@ -1109,6 +1158,14 @@
     <script src="assets/js/rating-system.js"></script>
     <script src="assets/js/touch-gestures.js"></script>
     <script src="assets/js/accessibility-enhancements.js"></script>
+    <!-- Keyboard Navigation and Screen Reader Support -->
+    <script src="assets/js/accessibility-keyboard-navigation.js"></script>
+    <!-- Accessibility Testing and Validation -->
+    <script src="assets/js/accessibility-validator.js"></script>
+    <!-- Performance Monitor for Canvas Animations -->
+    <script src="assets/js/performance-monitor-overlay.js"></script>
+    <!-- Color Contrast Validator for WCAG AA Compliance -->
+    <script src="assets/js/color-contrast-validator.js"></script>
 
     <!-- Firebase 登录表单处理函数 -->
     <script>

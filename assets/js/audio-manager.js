@@ -254,7 +254,7 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
                 }
             }
 
-            // 检查文件格式是否受支持
+            // 检查文件格式是否受支持（现在只支持MP3）
             const fileExtension = fileName.split('.').pop().toLowerCase();
             const isSupported = this.supportedFormats[fileExtension];
 
@@ -262,6 +262,11 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
                 console.warn(`格式 ${fileExtension} 不受支持，为文件 ${fileName} 创建静默实例`);
                 this.createSilentAudioInstance(trackId, categoryName, fileName);
                 return Promise.resolve();
+            }
+
+            // 验证音频文件确实存在（通过Archive.org CDN）
+            if (!fileExtension.match(/^(mp3)$/)) {
+                console.warn(`文件格式 ${fileExtension} 不被支持，考虑转换为MP3格式: ${fileName}`);
             }
 
             // 从对象池获取音频实例，减少内存分配

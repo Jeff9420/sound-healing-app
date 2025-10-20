@@ -179,6 +179,287 @@ body.keyboard-mode .keyboard-hint {
     opacity: 1;
 }
 
+/* 键盘模式焦点样式增强 */
+body.keyboard-mode {
+    /* 启用键盘模式指示器 */
+}
+
+body.keyboard-mode *:focus {
+    outline: 3px solid #6666ff !important;
+    outline-offset: 2px;
+}
+
+body.keyboard-mode button:focus,
+body.keyboard-mode .control-btn:focus,
+body.keyboard-mode .header-icon-btn:focus,
+body.keyboard-mode input:focus,
+body.keyboard-mode select:focus,
+body.keyboard-mode textarea:focus,
+body.keyboard-mode [role="button"]:focus {
+    outline: 3px solid #6666ff !important;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(102, 102, 255, 0.2);
+    z-index: 9999;
+}
+
+/* 高对比度焦点指示器 */
+@media (prefers-contrast: high) {
+    *:focus-visible {
+        outline: 4px solid #ffffff !important;
+        outline-offset: 2px;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* 进度条增强焦点样式 */
+.progress-bar:focus {
+    position: relative;
+    outline: 3px solid #6666ff;
+    outline-offset: 2px;
+    cursor: pointer;
+}
+
+.progress-bar:focus::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: var(--thumb-position, 0);
+    width: 16px;
+    height: 16px;
+    background: #6666ff;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 0 3px rgba(102, 102, 255, 0.3);
+}
+
+/* 音量滑块增强焦点样式 */
+.volume-slider:focus {
+    outline: 3px solid #6666ff;
+    outline-offset: 2px;
+}
+
+.volume-slider:focus::-webkit-slider-thumb {
+    width: 16px;
+    height: 16px;
+    background: #6666ff;
+    border: 2px solid white;
+    box-shadow: 0 0 0 3px rgba(102, 102, 255, 0.3);
+}
+
+.volume-slider:focus::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #6666ff;
+    border: 2px solid white;
+    box-shadow: 0 0 0 3px rgba(102, 102, 255, 0.3);
+}
+
+/* 分类卡片键盘焦点增强 */
+.category-card:focus {
+    outline: 3px solid #6666ff;
+    outline-offset: 2px;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(102, 102, 255, 0.3);
+    position: relative;
+    z-index: 10;
+}
+
+.category-card:focus::before {
+    content: '▶';
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    font-size: 1.5em;
+    color: white;
+    z-index: 1;
+}
+
+/* 音轨项键盘焦点增强 */
+.track-item:focus {
+    outline: 3px solid #6666ff;
+    outline-offset: 2px;
+    background: rgba(102, 102, 255, 0.2);
+    position: relative;
+}
+
+.track-item:focus::before {
+    content: '▶';
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2em;
+    color: white;
+}
+
+/* 模态框焦点管理 */
+.modal-content:focus-within {
+    outline: 3px solid #6666ff;
+    outline-offset: 2px;
+}
+
+/* 按钮状态样式 */
+[aria-pressed="true"] {
+    background-color: rgba(102, 102, 255, 0.3);
+    border-color: #6666ff;
+}
+
+[aria-expanded="true"] {
+    background-color: rgba(102, 102, 255, 0.2);
+}
+
+[aria-selected="true"] {
+    background-color: rgba(102, 102, 255, 0.3);
+    color: white;
+    font-weight: bold;
+}
+
+/* 标签页焦点管理 */
+[role="tab"]:focus {
+    outline: 3px solid #6666ff;
+    outline-offset: 2px;
+}
+
+[role="tabpanel"]:focus {
+    outline: 2px solid #6666ff;
+    outline-offset: 1px;
+}
+
+/* 表单输入增强焦点样式 */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #6666ff !important;
+    box-shadow: 0 0 0 3px rgba(102, 102, 255, 0.2) !important;
+    outline: none !important;
+}
+
+/* 错误状态可访问性 */
+.form-group input:invalid:focus,
+.form-group input[aria-invalid="true"]:focus {
+    border-color: #ff4444 !important;
+    box-shadow: 0 0 0 3px rgba(255, 68, 68, 0.2) !important;
+}
+
+/* 加载状态可访问性增强 */
+[aria-busy="true"] {
+    cursor: wait;
+    opacity: 0.6;
+    position: relative;
+}
+
+[aria-busy="true"]::after {
+    content: 'Loading...';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    z-index: 9999;
+}
+
+/* 禁用状态增强 */
+[disabled],
+[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(50%);
+}
+
+/* 隐藏内容但保持可访问性 */
+.visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* 键盘导航指示器 */
+.keyboard-indicator {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: rgba(102, 102, 255, 0.9);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+body.keyboard-mode .keyboard-indicator {
+    opacity: 1;
+}
+
+/* 屏幕阅读器专用样式 */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* 焦点陷阱样式 */
+.focus-trap {
+    outline: none !important;
+}
+
+/* 高对比度模式增强 */
+@media (prefers-contrast: high) {
+    .category-card,
+    .track-item,
+    .control-btn,
+    .header-icon-btn {
+        border: 2px solid #ffffff;
+    }
+
+    .category-card:focus,
+    .track-item:focus,
+    .control-btn:focus,
+    .header-icon-btn:focus {
+        border-color: #6666ff;
+        background-color: rgba(102, 102, 255, 0.2);
+    }
+
+    body {
+        background: #000000;
+        color: #ffffff;
+    }
+
+    .modal-content {
+        border: 2px solid #ffffff;
+    }
+}
+
+/* 大字体偏好支持 */
+@media (prefers-reduced-data: reduce) {
+    /* 减少动画和复杂视觉效果 */
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 /* 无障碍文本大小 */
 @media (min-width: 768px) {
     .category-name {

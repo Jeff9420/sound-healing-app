@@ -8,87 +8,15 @@ class BackgroundSceneManager {
         this.animationId = null;
         this.animationFrame = 0;
 
-        // 性能优化：帧率控制
-        this.targetFPS = 30;
-        this.frameInterval = 1000 / this.targetFPS;
-        this.lastFrameTime = 0;
+        // 检测设备性能 - 改进版
+        this.deviceProfile = this.detectDevicePerformance();
+        this.isLowEndDevice = this.deviceProfile.isLowEnd;
+        this.performanceLevel = this.deviceProfile.level;
 
-        // 性能优化：粒子对象池
-        this.particlePool = [];
-        this.maxParticles = 200;
+        // 根据设备性能设置参数
+        this.setPerformanceParameters();
 
-        // 检测设备性能
-        this.isLowEndDevice = this.detectDevicePerformance();
-
-        // 根据设备性能调整粒子数量
-        this.performanceMultiplier = this.isLowEndDevice ? 0.5 : 1;
-
-        // Scene configurations with enhanced effects
-        this.sceneConfigs = {
-            'Animal sounds': {
-                type: 'forest',
-                colors: ['#1a4d1a', '#2d5a3d', '#3d7c3d', '#4d8c4d', '#6da06d'],
-                particles: 'leaves',
-                particleCount: Math.floor(40 * this.performanceMultiplier),
-                bgGradient: ['#0f2027', '#203a43', '#2c5364']
-            },
-            'Chakra': { 
-                type: 'energy', 
-                colors: ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#4B0082', '#9400D3'], 
-                particles: 'energy',
-                particleCount: 30,
-                bgGradient: ['#000000', '#1a0033', '#330066']
-            },
-            'Fire': {
-                type: 'fire',
-                colors: ['#FF4500', '#FF6347', '#FFD700', '#FFA500', '#DC143C', '#B22222'],
-                particles: 'sparks',
-                particleCount: Math.floor(60 * this.performanceMultiplier),
-                bgGradient: ['#2C1810', '#3D2817', '#4A2C17']
-            },
-            'hypnosis': {
-                type: 'cosmic',
-                colors: ['#4B0082', '#8A2BE2', '#9370DB', '#BA55D3', '#DA70D6'],
-                particles: 'stars',
-                particleCount: Math.floor(100 * this.performanceMultiplier),
-                bgGradient: ['#0B0B2B', '#1B1B3B', '#2B2B4B']
-            },
-            'meditation': { 
-                type: 'zen', 
-                colors: ['#E0F6FF', '#B0E0E6', '#87CEEB', '#87CEFA', '#B0C4DE'], 
-                particles: 'petals',
-                particleCount: 25,
-                bgGradient: ['#E6F3FF', '#CCE7FF', '#B3DBFF']
-            },
-            'Rain': {
-                type: 'rain',
-                colors: ['#4682B4', '#5F9EA0', '#87CEEB', '#B0C4DE', '#708090'],
-                particles: 'drops',
-                particleCount: Math.floor(80 * this.performanceMultiplier),
-                bgGradient: ['#2C3E50', '#34495E', '#455A64']
-            },
-            'running water': { 
-                type: 'water', 
-                colors: ['#00CED1', '#48D1CC', '#40E0D0', '#AFEEEE', '#7FDBDA'], 
-                particles: 'bubbles',
-                particleCount: 50,
-                bgGradient: ['#006064', '#00838F', '#0097A7']
-            },
-            'Singing bowl sound': { 
-                type: 'tibetan', 
-                colors: ['#DAA520', '#FFD700', '#FFA500', '#CD853F', '#DEB887'], 
-                particles: 'ripples',
-                particleCount: 20,
-                bgGradient: ['#3E2723', '#5D4037', '#6D4C41']
-            },
-            'Subconscious Therapy': { 
-                type: 'therapy', 
-                colors: ['#DDA0DD', '#EE82EE', '#DA70D6', '#BA55D3', '#C8A8C8'], 
-                particles: 'waves',
-                particleCount: 35,
-                bgGradient: ['#F3E5F5', '#E1BEE7', '#CE93D8']
-            }
-        };
+        this.setupSceneConfigs();
         
         this.setupCanvas();
         this.setupEventListeners();
@@ -99,17 +27,219 @@ class BackgroundSceneManager {
         window.addEventListener('resize', () => this.resizeCanvas());
     }
 
+    setPerformanceParameters() {
+        // 根据设备性能级别设置参数
+        switch (this.performanceLevel) {
+            case 'very-low':
+                this.targetFPS = 15;
+                this.frameInterval = 1000 / this.targetFPS;
+                this.performanceMultiplier = 0.25;
+                this.maxParticles = 50;
+                this.enableEffects = false;
+                this.useSimpleRendering = true;
+                break;
+            case 'low':
+                this.targetFPS = 20;
+                this.frameInterval = 1000 / this.targetFPS;
+                this.performanceMultiplier = 0.4;
+                this.maxParticles = 80;
+                this.enableEffects = false;
+                this.useSimpleRendering = false;
+                break;
+            case 'medium':
+                this.targetFPS = 30;
+                this.frameInterval = 1000 / this.targetFPS;
+                this.performanceMultiplier = 0.6;
+                this.maxParticles = 120;
+                this.enableEffects = true;
+                this.useSimpleRendering = false;
+                break;
+            case 'high':
+            default:
+                this.targetFPS = 60;
+                this.frameInterval = 1000 / this.targetFPS;
+                this.performanceMultiplier = 1;
+                this.maxParticles = 200;
+                this.enableEffects = true;
+                this.useSimpleRendering = false;
+                break;
+        }
+
+        // 性能优化：粒子对象池
+        this.particlePool = [];
+
+        console.log(`设备性能: ${this.performanceLevel}, FPS: ${this.targetFPS}, 倍数: ${this.performanceMultiplier}`);
+    }
+
     detectDevicePerformance() {
-        // 检测设备性能
+        // 综合设备性能检测
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const isTablet = /iPad|Android(?!.*Mobile)|Tablet/i.test(navigator.userAgent);
         const isOldBrowser = !window.requestAnimationFrame || !window.Promise;
 
-        // 简单的硬件性能检测
+        // 硬件性能指标
         const memoryLimit = navigator.deviceMemory || 4;
         const hardwareConcurrency = navigator.hardwareConcurrency || 4;
+        const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        const effectiveType = connection ? connection.effectiveType : '4g';
 
-        // 如果是移动设备或旧浏览器或低内存设备，认为是低端设备
-        return isMobile || isOldBrowser || memoryLimit < 4 || hardwareConcurrency < 4;
+        // Canvas性能检测
+        const canvasTest = document.createElement('canvas');
+        const gl = canvasTest.getContext('webgl') || canvasTest.getContext('experimental-webgl');
+        const rendererInfo = gl ? gl.getExtension('WEBGL_debug_renderer_info') : null;
+
+        // 性能评分系统
+        let performanceScore = 0;
+
+        // 内存评分 (0-30分)
+        if (memoryLimit >= 8) performanceScore += 30;
+        else if (memoryLimit >= 4) performanceScore += 20;
+        else if (memoryLimit >= 2) performanceScore += 10;
+        else performanceScore += 0;
+
+        // CPU评分 (0-25分)
+        if (hardwareConcurrency >= 8) performanceScore += 25;
+        else if (hardwareConcurrency >= 4) performanceScore += 15;
+        else if (hardwareConcurrency >= 2) performanceScore += 8;
+        else performanceScore += 0;
+
+        // 网络评分 (0-15分)
+        switch (effectiveType) {
+            case '4g': performanceScore += 15; break;
+            case '3g': performanceScore += 10; break;
+            case '2g': performanceScore += 5; break;
+            case 'slow-2g': performanceScore += 0; break;
+            default: performanceScore += 12; break;
+        }
+
+        // 设备类型评分 (0-20分)
+        if (!isMobile && !isTablet) performanceScore += 20; // Desktop
+        else if (isTablet) performanceScore += 15; // Tablet
+        else performanceScore += 5; // Mobile
+
+        // 浏览器评分 (0-10分)
+        if (!isOldBrowser) performanceScore += 10;
+        else performanceScore += 0;
+
+        // 确定性能级别
+        let level, isLowEnd;
+        if (performanceScore >= 80) {
+            level = 'high';
+            isLowEnd = false;
+        } else if (performanceScore >= 60) {
+            level = 'medium';
+            isLowEnd = false;
+        } else if (performanceScore >= 40) {
+            level = 'low';
+            isLowEnd = true;
+        } else {
+            level = 'very-low';
+            isLowEnd = true;
+        }
+
+        return {
+            level: level,
+            isLowEnd: isLowEnd,
+            score: performanceScore,
+            memory: memoryLimit,
+            cpu: hardwareConcurrency,
+            connection: effectiveType,
+            isMobile: isMobile,
+            isTablet: isTablet
+        };
+    }
+
+    setupSceneConfigs() {
+        // 基础场景配置
+        const baseConfigs = {
+            'Animal sounds': {
+                type: 'forest',
+                colors: ['#1a4d1a', '#2d5a3d', '#3d7c3d', '#4d8c4d', '#6da06d'],
+                particles: 'leaves',
+                baseParticleCount: 40,
+                bgGradient: ['#0f2027', '#203a43', '#2c5364']
+            },
+            'Chakra': {
+                type: 'energy',
+                colors: ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#4B0082', '#9400D3'],
+                particles: 'energy',
+                baseParticleCount: 30,
+                bgGradient: ['#000000', '#1a0033', '#330066']
+            },
+            'Fire': {
+                type: 'fire',
+                colors: ['#FF4500', '#FF6347', '#FFD700', '#FFA500', '#DC143C', '#B22222'],
+                particles: 'sparks',
+                baseParticleCount: 60,
+                bgGradient: ['#2C1810', '#3D2817', '#4A2C17']
+            },
+            'hypnosis': {
+                type: 'cosmic',
+                colors: ['#4B0082', '#8A2BE2', '#9370DB', '#BA55D3', '#DA70D6'],
+                particles: 'stars',
+                baseParticleCount: 100,
+                bgGradient: ['#0B0B2B', '#1B1B3B', '#2B2B4B']
+            },
+            'meditation': {
+                type: 'zen',
+                colors: ['#E0F6FF', '#B0E0E6', '#87CEEB', '#87CEFA', '#B0C4DE'],
+                particles: 'petals',
+                baseParticleCount: 25,
+                bgGradient: ['#E6F3FF', '#CCE7FF', '#B3DBFF']
+            },
+            'Rain': {
+                type: 'rain',
+                colors: ['#4682B4', '#5F9EA0', '#87CEEB', '#B0C4DE', '#708090'],
+                particles: 'drops',
+                baseParticleCount: 80,
+                bgGradient: ['#2C3E50', '#34495E', '#455A64']
+            },
+            'running water': {
+                type: 'water',
+                colors: ['#00CED1', '#48D1CC', '#40E0D0', '#AFEEEE', '#7FDBDA'],
+                particles: 'bubbles',
+                baseParticleCount: 50,
+                bgGradient: ['#006064', '#00838F', '#0097A7']
+            },
+            'Singing bowl sound': {
+                type: 'tibetan',
+                colors: ['#DAA520', '#FFD700', '#FFA500', '#CD853F', '#DEB887'],
+                particles: 'ripples',
+                baseParticleCount: 20,
+                bgGradient: ['#3E2723', '#5D4037', '#6D4C41']
+            },
+            'Subconscious Therapy': {
+                type: 'therapy',
+                colors: ['#DDA0DD', '#EE82EE', '#DA70D6', '#BA55D3', '#C8A8C8'],
+                particles: 'waves',
+                baseParticleCount: 35,
+                bgGradient: ['#F3E5F5', '#E1BEE7', '#CE93D8']
+            }
+        };
+
+        // 根据性能级别动态调整配置
+        this.sceneConfigs = {};
+        for (const [categoryName, baseConfig] of Object.entries(baseConfigs)) {
+            this.sceneConfigs[categoryName] = {
+                ...baseConfig,
+                particleCount: Math.floor(baseConfig.baseParticleCount * this.performanceMultiplier),
+                // 低端设备减少复杂效果
+                complexEffects: this.enableEffects,
+                // 简化渲染模式
+                simpleMode: this.useSimpleRendering
+            };
+        }
+
+        // 默认场景配置
+        this.sceneConfigs.default = {
+            type: 'default',
+            colors: ['#3b82f6', '#60a5fa'],
+            particles: 'dots',
+            particleCount: Math.floor(20 * this.performanceMultiplier),
+            bgGradient: ['#1e3a8a', '#3b82f6'],
+            complexEffects: this.enableEffects,
+            simpleMode: this.useSimpleRendering
+        };
     }
 
     resizeCanvas() {
@@ -181,14 +311,23 @@ class BackgroundSceneManager {
             return;
         }
 
-        // 帧率控制
+        // 自适应帧率控制
         if (currentTime - this.lastFrameTime < this.frameInterval) {
             this.animationId = requestAnimationFrame((time) => this.animate(time));
             return;
         }
 
+        // 性能监控：如果帧率过低，自动降低质量
+        if (this.frameCount && this.frameCount % 60 === 0) {
+            const actualFPS = 1000 / (currentTime - this.lastFrameTime);
+            if (actualFPS < this.targetFPS * 0.7 && this.performanceLevel !== 'very-low') {
+                this.adaptPerformanceLevel();
+            }
+        }
+
         this.lastFrameTime = currentTime;
         this.animationFrame++;
+        this.frameCount = (this.frameCount || 0) + 1;
         this.drawScene();
 
         this.animationId = requestAnimationFrame((time) => this.animate(time));
@@ -252,6 +391,23 @@ class BackgroundSceneManager {
     }
     
     drawRainScene(width, height, config) {
+        // 简化模式：只画基础雨滴
+        if (config.simpleMode) {
+            for (let i = 0; i < Math.floor(config.particleCount * 0.5); i++) {
+                const x = (i * 37 + this.animationFrame * 2) % (width + 50);
+                const y = (this.animationFrame * 3 + i * 23) % (height + 30);
+                const length = 10;
+
+                this.ctx.strokeStyle = config.colors[0] + '80';
+                this.ctx.lineWidth = 1;
+                this.ctx.beginPath();
+                this.ctx.moveTo(x, y);
+                this.ctx.lineTo(x - 2, y + length);
+                this.ctx.stroke();
+            }
+            return;
+        }
+
         // 使用对象池优化雨滴效果
         for (let i = 0; i < config.particleCount; i++) {
             const x = (i * 23 + this.animationFrame * 3) % (width + 100);
@@ -275,23 +431,49 @@ class BackgroundSceneManager {
             this.ctx.stroke();
         }
 
-        // 地面水花效果 - 减少数量
-        const splashCount = this.isLowEndDevice ? 5 : 10;
-        for (let i = 0; i < splashCount; i++) {
-            const x = (this.animationFrame * 2 + i * 80) % width;
-            const y = height - 20 - Math.random() * 10;
-            const size = Math.random() * 3 + 1;
+        // 地面水花效果 - 根据性能级别调整
+        if (config.complexEffects) {
+            const splashCount = this.performanceLevel === 'very-low' ? 3 :
+                               this.performanceLevel === 'low' ? 5 : 10;
+            for (let i = 0; i < splashCount; i++) {
+                const x = (this.animationFrame * 2 + i * 80) % width;
+                const y = height - 20 - Math.random() * 10;
+                const size = Math.random() * 3 + 1;
 
-            this.ctx.fillStyle = config.colors[0] + '60';
-            this.ctx.beginPath();
-            this.ctx.arc(x, y, size, 0, Math.PI * 2);
-            this.ctx.fill();
+                this.ctx.fillStyle = config.colors[0] + '60';
+                this.ctx.beginPath();
+                this.ctx.arc(x, y, size, 0, Math.PI * 2);
+                this.ctx.fill();
+            }
         }
     }
     
     drawFireScene(width, height, config) {
-        // 火焰粒子 - 优化低端设备
-        const particleCount = this.isLowEndDevice ? Math.floor(config.particleCount * 0.6) : config.particleCount;
+        // 简化模式：只画基础火焰
+        if (config.simpleMode) {
+            const simplifiedCount = Math.floor(config.particleCount * 0.3);
+            for (let i = 0; i < simplifiedCount; i++) {
+                const baseX = width * 0.3 + (i % 5) * (width * 0.4 / 5);
+                const x = baseX + Math.sin(this.animationFrame * 0.03 + i) * 20;
+                const progress = (this.animationFrame * 1.5 + i * 20) % height;
+                const y = height - progress;
+                const size = Math.max(1, 8 - progress / 60);
+
+                if (progress < height && size > 0) {
+                    const alpha = Math.max(0, 1 - progress / height);
+                    this.ctx.fillStyle = config.colors[0] + Math.floor(alpha * 128).toString(16).padStart(2, '0');
+                    this.ctx.beginPath();
+                    this.ctx.arc(x, y, size, 0, Math.PI * 2);
+                    this.ctx.fill();
+                }
+            }
+            return;
+        }
+
+        // 性能优化：根据级别调整粒子数量
+        const particleCount = this.performanceLevel === 'very-low' ? Math.floor(config.particleCount * 0.4) :
+                             this.performanceLevel === 'low' ? Math.floor(config.particleCount * 0.6) :
+                             config.particleCount;
 
         for (let i = 0; i < particleCount; i++) {
             const baseX = width * 0.2 + (i % 10) * (width * 0.6 / 10);
@@ -320,14 +502,15 @@ class BackgroundSceneManager {
             }
         }
 
-        // 火焰光晕效果 - 低端设备跳过
-        if (!this.isLowEndDevice) {
+        // 火焰光晕效果 - 根据性能级别决定
+        if (config.complexEffects && this.performanceLevel !== 'very-low') {
             const glowGradient = this.ctx.createRadialGradient(
                 width/2, height, 0,
                 width/2, height, width/2
             );
-            glowGradient.addColorStop(0, 'rgba(255, 69, 0, 0.3)');
-            glowGradient.addColorStop(0.5, 'rgba(255, 140, 0, 0.1)');
+            const glowIntensity = this.performanceLevel === 'low' ? 0.15 : 0.3;
+            glowGradient.addColorStop(0, `rgba(255, 69, 0, ${glowIntensity})`);
+            glowGradient.addColorStop(0.5, `rgba(255, 140, 0, ${glowIntensity * 0.3})`);
             glowGradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
             this.ctx.fillStyle = glowGradient;
             this.ctx.fillRect(0, 0, width, height);
@@ -587,7 +770,51 @@ class BackgroundSceneManager {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
+    adaptPerformanceLevel() {
+        console.log('性能自动调整：降低质量以提高帧率');
+
+        // 降低性能级别
+        if (this.performanceLevel === 'high') {
+            this.performanceLevel = 'medium';
+        } else if (this.performanceLevel === 'medium') {
+            this.performanceLevel = 'low';
+        } else if (this.performanceLevel === 'low') {
+            this.performanceLevel = 'very-low';
+        }
+
+        // 重新设置参数
+        this.setPerformanceParameters();
+
+        // 重新配置场景
+        this.setupSceneConfigs();
+
+        console.log(`性能已自动调整为: ${this.performanceLevel} (${this.targetFPS} FPS)`);
+    }
+
+    getPerformanceInfo() {
+        return {
+            level: this.performanceLevel,
+            targetFPS: this.targetFPS,
+            particleMultiplier: this.performanceMultiplier,
+            maxParticles: this.maxParticles,
+            effectsEnabled: this.enableEffects,
+            simpleMode: this.useSimpleRendering,
+            deviceProfile: this.deviceProfile
+        };
+    }
+
     cleanup() {
         this.stop();
+
+        // 清理颜色缓存
+        if (this.rainColors) {
+            this.rainColors = [];
+        }
+        if (this.fireColors) {
+            this.fireColors = [];
+        }
+
+        // 清理粒子池
+        this.particlePool = [];
     }
 }
