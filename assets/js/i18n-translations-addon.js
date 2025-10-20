@@ -368,7 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Re-apply current language to update Cookie banner
-        if (window.i18n.currentLanguage) {
+        if (window.i18n.currentLanguage && typeof window.i18n.updateDOM === 'function') {
             window.i18n.updateDOM();
         }
 
