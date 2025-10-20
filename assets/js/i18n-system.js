@@ -54,9 +54,9 @@ class InternationalizationSystem {
             }
         };
         
-        // 当前语言 - 默认中文
-        this.currentLanguage = 'zh-CN';
-        this.fallbackLanguage = 'zh-CN';
+        // 当前语言 - 默认英文
+        this.currentLanguage = 'en-US';
+        this.fallbackLanguage = 'en-US';
         
         // 翻译数据存储
         this.translations = new Map();
@@ -104,8 +104,8 @@ class InternationalizationSystem {
             
         } catch (error) {
             console.error('❌ 国际化系统启动失败:', error);
-            // 降级到中文
-            this.currentLanguage = 'zh-CN';
+            // 降级到英文
+            this.currentLanguage = 'en-US';
         }
     }
     
@@ -113,7 +113,7 @@ class InternationalizationSystem {
      * 检测用户语言偏好
      */
     detectUserLanguage() {
-        // 优先级：本地存储 > 浏览器语言 > 默认英语
+        // 优先级：本地存储 > 浏览器语言 > 默认英文
         const savedLanguage = localStorage.getItem('sound_healing_language');
         if (savedLanguage && this.supportedLanguages[savedLanguage]) {
             this.currentLanguage = savedLanguage;
@@ -1698,7 +1698,7 @@ class InternationalizationSystem {
             }
         };
 
-        return translations[langCode] || translations['zh-CN'];
+        return translations[langCode] || translations['en-US'];
     }
     
     /**

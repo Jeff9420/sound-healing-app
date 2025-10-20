@@ -583,55 +583,55 @@
         <div id="authDialog" class="auth-dialog" style="display: none;">
             <div class="auth-modal-content">
                 <div class="auth-header">
-                    <h2>登录 / 注册</h2>
+                    <h2 data-i18n="auth.title">登录 / 注册</h2>
                     <button class="auth-close" onclick="window.firebaseAuthManager && window.firebaseAuthManager.closeAuthDialog()">&times;</button>
                 </div>
 
                 <div class="auth-tabs">
-                    <button class="auth-tab active" onclick="switchAuthTab('login')">登录</button>
-                    <button class="auth-tab" onclick="switchAuthTab('signup')">注册</button>
-                    <button class="auth-tab" onclick="switchAuthTab('reset')">重置密码</button>
+                    <button class="auth-tab active" onclick="switchAuthTab('login')" data-i18n="auth.login">登录</button>
+                    <button class="auth-tab" onclick="switchAuthTab('signup')" data-i18n="auth.signup">注册</button>
+                    <button class="auth-tab" onclick="switchAuthTab('reset')" data-i18n="auth.reset">重置密码</button>
                 </div>
 
                 <!-- Login Form -->
                 <div id="loginForm" class="auth-form active">
                     <div class="form-group">
-                        <label>邮箱地址</label>
-                        <input type="email" id="loginEmail" placeholder="请输入邮箱">
+                        <label data-i18n="auth.email">邮箱地址</label>
+                        <input type="email" id="loginEmail" data-i18n-placeholder="auth.emailPlaceholder" placeholder="请输入邮箱">
                     </div>
                     <div class="form-group">
-                        <label>密码</label>
-                        <input type="password" id="loginPassword" placeholder="请输入密码">
+                        <label data-i18n="auth.password">密码</label>
+                        <input type="password" id="loginPassword" data-i18n-placeholder="auth.passwordPlaceholder" placeholder="请输入密码">
                     </div>
-                    <button class="auth-btn primary" onclick="handleLogin()">登录</button>
-                    <button class="auth-btn secondary" onclick="handleGoogleLogin()">使用 Google 登录</button>
-                    <button class="auth-btn secondary" onclick="handleAnonymousLogin()">匿名登录</button>
+                    <button class="auth-btn primary" onclick="handleLogin()" data-i18n="auth.loginButton">登录</button>
+                    <button class="auth-btn secondary" onclick="handleGoogleLogin()" data-i18n="auth.googleLogin">使用 Google 登录</button>
+                    <button class="auth-btn secondary" onclick="handleAnonymousLogin()" data-i18n="auth.anonymousLogin">匿名登录</button>
                 </div>
 
                 <!-- Signup Form -->
                 <div id="signupForm" class="auth-form">
                     <div class="form-group">
-                        <label>显示名称</label>
-                        <input type="text" id="signupName" placeholder="请输入您的昵称">
+                        <label data-i18n="auth.displayName">显示名称</label>
+                        <input type="text" id="signupName" data-i18n-placeholder="auth.displayNamePlaceholder" placeholder="请输入您的昵称">
                     </div>
                     <div class="form-group">
-                        <label>邮箱地址</label>
-                        <input type="email" id="signupEmail" placeholder="请输入邮箱">
+                        <label data-i18n="auth.email">邮箱地址</label>
+                        <input type="email" id="signupEmail" data-i18n-placeholder="auth.emailPlaceholder" placeholder="请输入邮箱">
                     </div>
                     <div class="form-group">
-                        <label>密码</label>
-                        <input type="password" id="signupPassword" placeholder="至少6位字符">
+                        <label data-i18n="auth.password">密码</label>
+                        <input type="password" id="signupPassword" data-i18n-placeholder="auth.passwordPlaceholder" placeholder="至少6位字符">
                     </div>
-                    <button class="auth-btn primary" onclick="handleSignup()">注册</button>
+                    <button class="auth-btn primary" onclick="handleSignup()" data-i18n="auth.signupButton">注册</button>
                 </div>
 
                 <!-- Reset Form -->
                 <div id="resetForm" class="auth-form">
                     <div class="form-group">
-                        <label>邮箱地址</label>
-                        <input type="email" id="resetEmail" placeholder="请输入注册时使用的邮箱">
+                        <label data-i18n="auth.email">邮箱地址</label>
+                        <input type="email" id="resetEmail" data-i18n-placeholder="auth.emailPlaceholder" placeholder="请输入注册时使用的邮箱">
                     </div>
-                    <button class="auth-btn primary" onclick="handlePasswordReset()">发送重置邮件</button>
+                    <button class="auth-btn primary" onclick="handlePasswordReset()" data-i18n="auth.resetButton">发送重置邮件</button>
                 </div>
             </div>
         </div>
@@ -1147,7 +1147,7 @@
             const password = document.getElementById('loginPassword').value;
 
             if (!email || !password) {
-                alert('请填写邮箱和密码');
+                alert(window.getI18nText('auth.filledEmail'));
                 return;
             }
 
@@ -1172,12 +1172,12 @@
             const password = document.getElementById('signupPassword').value;
 
             if (!name || !email || !password) {
-                alert('请填写所有字段');
+                alert(window.getI18nText('auth.filledEmail'));
                 return;
             }
 
             if (password.length < 6) {
-                alert('密码至少需要6位字符');
+                alert(window.getI18nText('auth.passwordMinLength'));
                 return;
             }
 
@@ -1225,7 +1225,7 @@
             const email = document.getElementById('resetEmail').value;
 
             if (!email) {
-                alert('请输入邮箱地址');
+                alert(window.getI18nText('auth.filledEmail'));
                 return;
             }
 
@@ -1233,7 +1233,7 @@
                 const result = await window.firebaseAuthManager.sendPasswordResetEmail(email);
                 if (result) {
                     // 重置邮件发送成功
-                    alert('密码重置邮件已发送，请检查您的邮箱');
+                    alert(window.getI18nText('auth.resetEmailSent'));
                     window.firebaseAuthManager.closeAuthDialog();
                     document.getElementById('resetEmail').value = '';
                 }

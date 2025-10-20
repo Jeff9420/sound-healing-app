@@ -39,17 +39,30 @@ class FirebaseAuthManager {
      */
     waitForFirebaseInit() {
         const checkInit = () => {
-            if (window.firebaseAuth && typeof window.firebaseAuth.onAuthStateChanged === 'function') {
-                this.auth = window.firebaseAuth;
-                this.currentUser = this.auth.currentUser;
-                console.log('✅ Firebase认证管理器初始化完成');
+            // 检查Firebase SDK和配置是否加载
+            if (typeof window.firebase !== 'undefined' && window.firebaseConfig) {
+                // 检查Firebase是否已经初始化
+                if (window.firebase && window.firebase.apps && window.firebase.apps.length > 0) {
+                    try {
+                        // 直接获取Firebase Auth实例，不依赖window.firebaseAuth
+                        this.auth = window.firebase.auth();
+                        this.currentUser = this.auth.currentUser;
+                        console.log('✅ Firebase认证管理器初始化完成');
 
-                // 设置认证状态监听
-                this.auth.onAuthStateChanged((user) => {
-                    this.currentUser = user;
-                    this.updateUI(user);
-                });
+                        // 设置认证状态监听
+                        this.auth.onAuthStateChanged((user) => {
+                            this.currentUser = user;
+                            this.updateUI(user);
+                        });
+                    } catch (error) {
+                        console.warn('⚠️ Firebase Auth初始化失败，使用匿名模式:', error);
+                    }
+                } else {
+                    // Firebase还未初始化，继续等待
+                    setTimeout(checkInit, 100);
+                }
             } else {
+                // Firebase SDK还未加载，继续等待
                 setTimeout(checkInit, 100);
             }
         };
@@ -273,6 +286,9 @@ class FirebaseAuthManager {
         const dialog = document.getElementById('authDialog');
         if (dialog) {
             dialog.style.display = 'flex';
+
+            // 手动更新认证对话框的多语言文本
+            this.updateAuthDialogTranslations();
         }
     }
 
@@ -291,6 +307,62 @@ class FirebaseAuthManager {
      */
     getCurrentUser() {
         return this.currentUser;
+    }
+
+    /**
+     * 更新认证对话框的多语言文本
+     */
+    updateAuthDialogTranslations() {
+        if (!window.getI18nText) return;
+
+        // 更新所有带data-i18n属性的元素
+        const elementsToUpdate = [
+            // 标题和按钮
+            { selector: '[data-i18n="auth.title"]', key: 'auth.title' },
+            { selector: '[data-i18n="auth.login"]', key: 'auth.login' },
+            { selector: '[data-i18n="auth.signup"]', key: 'auth.signup' },
+            { selector: '[data-i18n="auth.reset"]', key: 'auth.reset' },
+            { selector: '[data-i18n="auth.close"]', key: 'auth.close' },
+
+            // 表单标签
+            { selector: '[data-i18n="auth.email"]', key: 'auth.email' },
+            { selector: '[data-i18n="auth.password"]', key: 'auth.password' },
+            { selector: '[data-i18n="auth.displayName"]', key: 'auth.displayName' },
+
+            // 表单按钮
+            { selector: '[data-i18n="auth.loginButton"]', key: 'auth.loginButton' },
+            { selector: '[data-i18n="auth.signupButton"]', key: 'auth.signupButton' },
+            { selector: '[data-i18n="auth.googleLogin"]', key: 'auth.googleLogin' },
+            { selector: '[data-i18n="auth.anonymousLogin"]', key: 'auth.anonymousLogin' },
+            { selector: '[data-i18n="auth.resetButton"]', key: 'auth.resetButton' }
+        ];
+
+        elementsToUpdate.forEach(({ selector, key }) => {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(element => {
+                const translatedText = window.getI18nText(key);
+                if (translatedText && element.textContent !== translatedText) {
+                    element.textContent = translatedText;
+                }
+            });
+        });
+
+        // 更新placeholder属性
+        const placeholderElements = [
+            { selector: '[data-i18n-placeholder="auth.emailPlaceholder"]', key: 'auth.emailPlaceholder' },
+            { selector: '[data-i18n-placeholder="auth.passwordPlaceholder"]', key: 'auth.passwordPlaceholder' },
+            { selector: '[data-i18n-placeholder="auth.displayNamePlaceholder"]', key: 'auth.displayNamePlaceholder' }
+        ];
+
+        placeholderElements.forEach(({ selector, key }) => {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(element => {
+                const translatedText = window.getI18nText(key);
+                if (translatedText && element.placeholder !== translatedText) {
+                    element.placeholder = translatedText;
+                }
+            });
+        });
     }
 
     /**
