@@ -17,19 +17,29 @@ class StatsDashboard {
         this.userDataManager = userDataManager;
         this.modal = null;
 
-        // 成就定义
-        this.achievements = {
-            'first_play': { name: '初次体验', desc: '播放第一首音频', icon: '🎵' },
-            'play_10': { name: '音乐爱好者', desc: '累计播放10次', icon: '🎧' },
-            'play_50': { name: '疗愈达人', desc: '累计播放50次', icon: '🌟' },
-            'play_100': { name: '声音大师', desc: '累计播放100次', icon: '👑' },
-            'hour_1': { name: '入门疗愈', desc: '累计收听1小时', icon: '⏰' },
-            'hour_10': { name: '疗愈爱好者', desc: '累计收听10小时', icon: '⭐' },
-            'hour_50': { name: '疗愈专家', desc: '累计收听50小时', icon: '🏆' },
-            'daily_streak_7': { name: '7天坚持', desc: '连续7天收听', icon: '🔥' },
-            'favorite_10': { name: '收藏家', desc: '收藏10个音频', icon: '💝' },
-            'explorer': { name: '探索者', desc: '收听所有分类', icon: '🗺️' }
+        // 成就定义 - 图标定义，名称和描述通过 i18n 获取
+        this.achievementIcons = {
+            'first_play': '🎵',
+            'play_10': '🎧',
+            'play_50': '🌟',
+            'play_100': '👑',
+            'hour_1': '⏰',
+            'hour_10': '⭐',
+            'hour_50': '🏆',
+            'daily_streak_7': '🔥',
+            'favorite_10': '💝',
+            'explorer': '🗺️'
         };
+    }
+
+    /**
+     * 获取翻译文本 (使用 i18n 系统)
+     */
+    t(key, fallback = '') {
+        if (window.i18n && typeof window.i18n.t === 'function') {
+            return window.i18n.t(key) || fallback;
+        }
+        return fallback;
     }
 
     /**
@@ -111,6 +121,10 @@ class StatsDashboard {
         // 渲染Canvas图表 - 使用requestAnimationFrame确保DOM已渲染
         requestAnimationFrame(() => {
             this.renderCanvasCharts(stats, history);
+            // 更新 i18n 翻译
+            if (window.i18n && typeof window.i18n.updateDOM === 'function') {
+                window.i18n.updateDOM();
+            }
         });
     }
 
@@ -156,7 +170,7 @@ class StatsDashboard {
             .slice(0, 5);
 
         if (categories.length === 0) {
-            return '<div class="stats-section"><p class="stats-empty">暂无分类数据</p></div>';
+            return `<div class="stats-section"><p class="stats-empty">${this.t('stats.noData', '暂无分类数据')}</p></div>`;
         }
 
         const maxPlays = Math.max(...categories.map(c => c[1].plays));
@@ -170,7 +184,7 @@ class StatsDashboard {
                     <div class="chart-label">${category}</div>
                     <div class="chart-bar-container">
                         <div class="chart-bar" style="width: ${percentage}%">
-                            <span class="chart-value">${data.plays}次 (${hours}h)</span>
+                            <span class="chart-value">${data.plays}${this.t('stats.plays', '次')} (${hours}h)</span>
                         </div>
                     </div>
                 </div>
@@ -235,16 +249,19 @@ class StatsDashboard {
     renderAchievements(stats) {
         const unlockedAchievements = this.getUnlockedAchievements(stats);
 
-        const achievementsHtml = Object.entries(this.achievements).map(([key, achievement]) => {
+        const achievementsHtml = Object.keys(this.achievementIcons).map(key => {
             const unlocked = unlockedAchievements.includes(key);
             const className = unlocked ? 'achievement unlocked' : 'achievement locked';
+            const icon = this.achievementIcons[key];
+            const name = this.t(`achievement.${key}.name`, key);
+            const desc = this.t(`achievement.${key}.desc`, '');
 
             return `
                 <div class="${className}">
-                    <div class="achievement-icon">${achievement.icon}</div>
+                    <div class="achievement-icon">${icon}</div>
                     <div class="achievement-info">
-                        <div class="achievement-name">${achievement.name}</div>
-                        <div class="achievement-desc">${achievement.desc}</div>
+                        <div class="achievement-name">${name}</div>
+                        <div class="achievement-desc">${desc}</div>
                     </div>
                     ${unlocked ? '<div class="achievement-badge">✓</div>' : ''}
                 </div>
@@ -253,7 +270,7 @@ class StatsDashboard {
 
         return `
             <div class="stats-section">
-                <h3>🏆 <span data-i18n="stats.achievements">成就系统</span> (${unlockedAchievements.length}/${Object.keys(this.achievements).length})</h3>
+                <h3>🏆 <span data-i18n="stats.achievements">成就系统</span> (${unlockedAchievements.length}/${Object.keys(this.achievementIcons).length})</h3>
                 <div class="achievements-grid">
                     ${achievementsHtml}
                 </div>
@@ -384,11 +401,11 @@ class StatsDashboard {
                 <h3>📈 <span data-i18n="stats.visualAnalysis">可视化分析</span></h3>
                 <div class="visual-charts-grid">
                     <div class="chart-container">
-                        <h4>分类占比</h4>
+                        <h4><span data-i18n="stats.categoryDistribution">分类占比</span></h4>
                         <canvas id="categoryPieChart" width="300" height="300"></canvas>
                     </div>
                     <div class="chart-container">
-                        <h4>趋势分析</h4>
+                        <h4><span data-i18n="stats.trendAnalysis">趋势分析</span></h4>
                         <canvas id="trendLineChart" width="400" height="300"></canvas>
                     </div>
                 </div>
