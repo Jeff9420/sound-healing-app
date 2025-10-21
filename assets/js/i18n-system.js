@@ -684,6 +684,7 @@ class InternationalizationSystem {
                 'message.timerSet': 'Timer set to {duration} minutes',
                 'message.loading': 'Loading...',
                 'message.error': 'An error occurred',
+                'message.readyToListen': 'Ready to listen? Your healing journey is about to begin',
                 
                 // Smart recommendations
                 'recommendation.morning': 'Morning time, awaken inner peace and focus',
@@ -1035,6 +1036,7 @@ class InternationalizationSystem {
                 'message.timerSet': 'タイマーを{duration}分に設定しました',
                 'message.loading': '読み込み中...',
                 'message.error': 'エラーが発生しました',
+                'message.readyToListen': '聴く準備はできましたか？癒しの旅が始まります',
                 
                 // スマート推薦
                 'recommendation.morning': '朝の時間、内なる平穏と集中を目覚めさせる',
@@ -1330,6 +1332,7 @@ class InternationalizationSystem {
                 'message.timerSet': '타이머가 {duration}분으로 설정되었습니다',
                 'message.loading': '로딩 중...',
                 'message.error': '오류가 발생했습니다',
+                'message.readyToListen': '듣을 준비가 되셨나요? 힐링 여정이 시작됩니다',
                 
                 // 스마트 추천
                 'recommendation.morning': '아침 시간, 내면의 평화와 집중력을 깨워보세요',
@@ -1625,6 +1628,7 @@ class InternationalizationSystem {
                 'message.timerSet': 'Temporizador configurado a {duration} minutos',
                 'message.loading': 'Cargando...',
                 'message.error': 'Ocurrió un error',
+                'message.readyToListen': '¿Listo para escuchar? Tu viaje de sanación está por comenzar',
                 
                 // Recomendaciones inteligentes
                 'recommendation.morning': 'Tiempo matutino, despierta la paz interior y la concentración',
