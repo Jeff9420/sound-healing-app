@@ -1,4 +1,4 @@
-/**
+﻿/**
  * VideoBackgroundManager - 视频背景管理系统
  *
  * 功能：
@@ -17,42 +17,42 @@ class VideoBackgroundManager {
     constructor() {
         // 视频配置 - 本地优化版本（2-9MB，比Archive.org快）
         this.videoConfig = {
-            baseUrl: 'https://archive.org/cors/zen-bamboo/',
+            baseUrl: 'https://media.soundflows.app/',
             categories: {
                 'Animal sounds': {
-                    filename: 'forest-birds.mp4',
+                    filename: 'forest-birds.ia.mp4',
                     fallbackColor: '#2d5016'
                 },
                 'Chakra': {
-                    filename: 'energy-chakra.mp4',
+                    filename: 'energy-chakra.ia.mp4',
                     fallbackColor: '#8b5cf6'
                 },
                 'Fire': {
-                    filename: 'campfire-flames.mp4',
+                    filename: 'campfire-flames.ia.mp4',
                     fallbackColor: '#dc2626'
                 },
                 'hypnosis': {
-                    filename: 'cosmic-stars.mp4',
+                    filename: 'cosmic-stars.ia.mp4',
                     fallbackColor: '#6b21a8'
                 },
                 'meditation': {
-                    filename: 'zen-bamboo.mp4',
+                    filename: 'zen-bamboo.ia.mp4',
                     fallbackColor: '#065f46'
                 },
                 'Rain': {
-                    filename: 'rain-drops.mp4',
+                    filename: 'rain-drops.ia.mp4',
                     fallbackColor: '#1e3a8a'
                 },
                 'running water': {
-                    filename: 'flowing-stream.mp4',
+                    filename: 'flowing-stream.ia.mp4',
                     fallbackColor: '#0e7490'
                 },
                 'Singing bowl sound': {
-                    filename: 'temple-golden.mp4',
+                    filename: 'temple-golden.ia.mp4',
                     fallbackColor: '#b45309'
                 },
                 'Subconscious Therapy': {
-                    filename: 'dreamy-clouds.mp4',
+                    filename: 'dreamy-clouds.ia.mp4',
                     fallbackColor: '#7c3aed'
                 }
             }

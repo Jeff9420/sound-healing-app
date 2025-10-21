@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 国际化(i18n)系统 - 声音疗愈应用多语言支持
  * 支持中文、英语、日语、韩语、西班牙语等多种语言
  * 目标：提供流畅的多语言切换体验
@@ -600,6 +600,8 @@ class InternationalizationSystem {
                 'player.noAudioSelected': 'No Audio Selected',
                 'player.notPlaying': 'Nothing is playing right now',
                 'player.playButton': 'Main Play Button',
+                'player.nowPlaying': 'Now Playing',
+                'player.expand': 'Expand player',
                 'player.minimize': 'Minimize player',
                 
                 // Healing modes
