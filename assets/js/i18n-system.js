@@ -83,25 +83,29 @@ class InternationalizationSystem {
      */
     async initializeSystem() {
         console.log('🌍 启动国际化系统...');
-        
+
         try {
-            // 检测用户语言偏好
-            this.detectUserLanguage();
-            
-            // 加载翻译数据
-            await this.loadTranslations();
-            
+            // 强制设置默认语言为英语
+            this.currentLanguage = 'en-US';
+            this.fallbackLanguage = 'en-US';
+
+            // 保存到本地存储
+            localStorage.setItem('sound_healing_language', 'en-US');
+
+            // 立即加载英语翻译数据
+            await this.loadLanguageData('en-US');
+
             // 初始化格式化器
             this.initializeFormatters();
-            
-            // 应用当前语言
-            await this.applyLanguage(this.currentLanguage);
-            
+
+            // 立即应用英语
+            await this.applyLanguage('en-US');
+
             // 设置初始化完成标志
             this.isInitialized = true;
-            
+
             console.log(`✅ 国际化系统启动完成，当前语言: ${this.currentLanguage}`);
-            
+
         } catch (error) {
             console.error('❌ 国际化系统启动失败:', error);
             // 降级到英文
@@ -383,15 +387,62 @@ class InternationalizationSystem {
                 'common.ok': '确定',
                 'common.cancel': '取消',
                 'common.close': '关闭',
-                'common.save': '保存',
-                'common.reset': '重置',
-                
+                'common.save': 'Save',
+                'common.reset': 'Reset',
+
+                // Authentication
+                'auth.title': 'Login / Register',
+                'auth.login': 'Login',
+                'auth.signup': 'Register',
+                'auth.reset': 'Reset Password',
+                'auth.close': 'Close',
+                'auth.email': 'Email Address',
+                'auth.password': 'Password',
+                'auth.displayName': 'Display Name',
+                'auth.loginButton': 'Login',
+                'auth.signupButton': 'Create Account',
+                'auth.googleLogin': 'Login with Google',
+                'auth.anonymousLogin': 'Continue Anonymously',
+                'auth.resetButton': 'Send Reset Email',
+                'auth.emailPlaceholder': 'Enter your email',
+                'auth.passwordPlaceholder': 'Enter your password',
+                'auth.displayNamePlaceholder': 'Enter your name',
+                'auth.filledEmail': 'Please fill in all fields',
+                'auth.passwordMinLength': 'Password must be at least 6 characters',
+                'auth.resetEmailSent': 'Password reset email has been sent',
+
                 // 应用页脚
-                'app.footer': '🎧 使用耳机聆听，获得最佳的自然疗愈体验',
+                'app.footer': '🎧 Use headphones for best natural healing experience',
 
                 // 表单：7日定制冥想计划
-                'form.plan.title': '领取你的 7 日定制冥想计划',
-                'form.plan.description': '告诉我们你当前的状态，我们会组合合适的声景、冥想练习与睡眠建议，发送一份结构化的 7 日音疗安排。',
+                'form.plan.title': 'Get Your 7-Day Custom Meditation Plan',
+                'form.plan.description': 'Tell us your current state, and we\'ll create a structured 7-day audio therapy program combining soundscapes, meditation practices, and sleep suggestions.',
+                'form.plan.benefit1': '2 daily audio recommendations with practice tips',
+                'form.plan.benefit2': 'Reminder schedules aligned with sleep or focus goals',
+                'form.plan.benefit3': 'Personalized mixing suggestions and progress tracking guide',
+
+                // Authentication
+                'auth.title': 'Login / Register',
+                'auth.login': 'Login',
+                'auth.signup': 'Register',
+                'auth.reset': 'Reset Password',
+                'auth.close': 'Close',
+                'auth.email': 'Email Address',
+                'auth.password': 'Password',
+                'auth.displayName': 'Display Name',
+                'auth.loginButton': 'Login',
+                'auth.signupButton': 'Create Account',
+                'auth.googleLogin': 'Login with Google',
+                'auth.anonymousLogin': 'Continue Anonymously',
+                'auth.resetButton': 'Send Reset Email',
+                'auth.emailPlaceholder': 'Enter your email',
+                'auth.passwordPlaceholder': 'Enter your password',
+                'auth.displayNamePlaceholder': 'Enter your name',
+                'auth.filledEmail': 'Please fill in all fields',
+                'auth.passwordMinLength': 'Password must be at least 6 characters',
+                'auth.resetEmailSent': 'Password reset email has been sent',
+
+                // 表单：7日定制冥想计划
                 'form.plan.benefit1': '每日 2 份推荐音频与练习提示',
                 'form.plan.benefit2': '结合睡眠或专注目标的提醒计划',
                 'form.plan.benefit3': '个性化混音建议与进度跟踪指引',
@@ -684,6 +735,35 @@ class InternationalizationSystem {
                 'common.save': 'Save',
                 'common.reset': 'Reset',
                 
+                // Authentication
+                'auth.title': 'Login / Register',
+                'auth.login': 'Login',
+                'auth.signup': 'Register',
+                'auth.reset': 'Reset Password',
+                'auth.email': 'Email Address',
+                'auth.password': 'Password',
+                'auth.displayName': 'Display Name',
+                'auth.filledEmail': 'Please enter email address',
+                'auth.passwordMinLength': 'Password must be at least 6 characters',
+                'auth.loginButton': 'Login',
+                'auth.signupButton': 'Register',
+                'auth.resetButton': 'Send Reset Email',
+                'auth.googleLogin': 'Login with Google',
+                'auth.emailLogin': 'Email Login',
+                'auth.phoneLogin': 'Phone Login',
+                'auth.anonymousLogin': 'Use Anonymously',
+                'auth.resetEmailSent': 'Password reset email sent',
+                'auth.logout': 'Logout',
+                'auth.welcome': 'Welcome to Sound Healing Space',
+                'auth.resetInstructions': 'Enter your email address and we will send you a reset link',
+
+                // User menu
+                'user.welcome': 'Welcome to Sound Healing Space',
+                'nav.history': 'Play History',
+                'nav.favorites': 'My Favorites',
+                'nav.stats': 'Listening Statistics',
+                'nav.settings': 'Settings',
+
                 // App footer
                 'app.footer': '🎧 Use headphones for the best natural healing experience',
 
@@ -811,7 +891,36 @@ class InternationalizationSystem {
 
                 // SEO Meta Tags (Keyword Optimized)
                 'seo.title': 'Free Meditation Music & Rain Sounds for Sleeping | 213+ Healing Sounds',
-                'seo.description': 'Free online sound healing platform with 213+ audio tracks: meditation music, rain sounds for sleeping, white noise, nature sounds. Perfect for relaxation, sleep & stress relief.'
+                'seo.description': 'Free online sound healing platform with 213+ audio tracks: meditation music, rain sounds for sleeping, white noise, nature sounds. Perfect for relaxation, sleep & stress relief.',
+
+                // Authentication Dialog - Firebase Auth UI
+                'auth.title': 'Login / Register',
+                'auth.login': 'Login',
+                'auth.signup': 'Register',
+                'auth.reset': 'Reset Password',
+                'auth.close': 'Close',
+
+                // Form Labels
+                'auth.email': 'Email Address',
+                'auth.password': 'Password',
+                'auth.displayName': 'Display Name',
+
+                // Form Placeholders
+                'auth.emailPlaceholder': 'Enter your email',
+                'auth.passwordPlaceholder': 'Enter your password',
+                'auth.displayNamePlaceholder': 'Enter your name',
+
+                // Form Buttons
+                'auth.loginButton': 'Login',
+                'auth.signupButton': 'Create Account',
+                'auth.googleLogin': 'Login with Google',
+                'auth.anonymousLogin': 'Continue Anonymously',
+                'auth.resetButton': 'Send Reset Email',
+
+                // Form Messages
+                'auth.filledEmail': 'Please fill in all fields',
+                'auth.passwordMinLength': 'Password must be at least 6 characters',
+                'auth.resetEmailSent': 'Password reset email has been sent'
             },
             
             'ja-JP': {
@@ -1770,35 +1879,83 @@ class InternationalizationSystem {
             console.warn(`🌍 不支持的语言: ${langCode}`);
             return false;
         }
-        
+
         if (langCode === this.currentLanguage) {
             return true; // 已经是当前语言
         }
-        
+
         console.log(`🌍 切换语言: ${this.currentLanguage} -> ${langCode}`);
-        
+
+        // 立即显示加载指示器
+        this.showLoadingIndicator();
+
         try {
-            // 加载新语言数据
-            await this.loadLanguageData(langCode);
-            
-            // 更新当前语言
+            // 如果语言数据未加载，先加载
+            if (!this.loadedLanguages.has(langCode)) {
+                await this.loadLanguageData(langCode);
+            }
+
+            // 立即更新当前语言
             this.currentLanguage = langCode;
-            
+
             // 保存语言偏好
             localStorage.setItem('sound_healing_language', langCode);
-            
-            // 应用语言
+
+            // 立即应用语言
             await this.applyLanguage(langCode);
-            
+
             // 通知语言变更
             this.notifyLanguageChange(langCode);
-            
+
+            // 隐藏加载指示器
+            this.hideLoadingIndicator();
+
             console.log(`✅ 语言切换完成: ${langCode}`);
             return true;
-            
+
         } catch (error) {
+            this.hideLoadingIndicator();
             console.error(`❌ 语言切换失败: ${langCode}`, error);
             return false;
+        }
+    }
+
+    /**
+     * 显示加载指示器
+     */
+    showLoadingIndicator() {
+        let indicator = document.getElementById('language-loading-indicator');
+        if (!indicator) {
+            indicator = document.createElement('div');
+            indicator.id = 'language-loading-indicator';
+            indicator.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(0, 0, 0, 0.8);
+                color: white;
+                padding: 10px 20px;
+                border-radius: 5px;
+                z-index: 10001;
+                font-size: 14px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            `;
+            indicator.innerHTML = '🌍 Switching language...';
+            document.body.appendChild(indicator);
+        }
+        indicator.style.display = 'flex';
+    }
+
+    /**
+     * 隐藏加载指示器
+     */
+    hideLoadingIndicator() {
+        const indicator = document.getElementById('language-loading-indicator');
+        if (indicator) {
+            indicator.style.display = 'none';
         }
     }
     

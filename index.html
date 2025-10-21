@@ -253,11 +253,71 @@
                     <a class="header__nav-link" href="pages/resources/index.html" data-cta="nav-resources" data-i18n="nav.resources" role="button" tabindex="0">资源中心</a>
                     <div class="header__menu">
                         <nav class="header__actions" aria-label="快捷功能" role="navigation">
-                        <!-- Login Button -->
-                        <button id="loginBtn" class="header-icon-btn" onclick="window.firebaseAuthManager && window.firebaseAuthManager.openAuthDialog()"
-                                aria-label="Login or register" title="登录/注册" tabindex="0">
-                            <span aria-hidden="true">👤</span>
-                        </button>
+                        <!-- Login/User Dropdown -->
+                        <div class="user-dropdown" id="userDropdown">
+                            <button class="header-icon-btn user-dropdown-toggle" id="userDropdownToggle"
+                                    aria-label="User menu" title="用户菜单" tabindex="0" aria-expanded="false" aria-haspopup="true">
+                                <span class="user-avatar" id="userAvatar" style="display: none;">👤</span>
+                                <span class="login-icon" id="loginIcon">👤</span>
+                            </button>
+                            <div class="user-dropdown-menu" id="userDropdownMenu" role="menu" aria-hidden="true">
+                                <!-- Guest User Menu -->
+                                <div class="guest-menu" id="guestMenu">
+                                    <div class="dropdown-header" data-i18n="user.welcome">欢迎来到声音疗愈空间</div>
+                                    <button class="dropdown-item" onclick="handleGoogleLogin()" role="menuitem">
+                                        <span class="dropdown-icon">🔵</span>
+                                        <span data-i18n="auth.googleLogin">使用 Google 登录</span>
+                                    </button>
+                                    <button class="dropdown-item" onclick="showEmailLogin()" role="menuitem">
+                                        <span class="dropdown-icon">📧</span>
+                                        <span data-i18n="auth.emailLogin">邮箱登录</span>
+                                    </button>
+                                    <button class="dropdown-item" onclick="showPhoneLogin()" role="menuitem">
+                                        <span class="dropdown-icon">📱</span>
+                                        <span data-i18n="auth.phoneLogin">手机登录</span>
+                                    </button>
+                                    <div class="dropdown-divider"></div>
+                                    <button class="dropdown-item" onclick="handleAnonymousLogin()" role="menuitem">
+                                        <span class="dropdown-icon">👤</span>
+                                        <span data-i18n="auth.anonymousLogin">匿名使用</span>
+                                    </button>
+                                </div>
+                                <!-- Logged In User Menu -->
+                                <div class="logged-in-menu" id="loggedInMenu" style="display: none;">
+                                    <div class="dropdown-header">
+                                        <div class="user-info">
+                                            <div class="user-avatar-large" id="userAvatarLarge">👤</div>
+                                            <div class="user-details">
+                                                <div class="user-name" id="userName">用户</div>
+                                                <div class="user-email" id="userEmail">user@example.com</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-divider"></div>
+                                    <button class="dropdown-item" onclick="window.historyFavoritesUI && window.historyFavoritesUI.openPanel('history')" role="menuitem">
+                                        <span class="dropdown-icon">📜</span>
+                                        <span data-i18n="nav.history">播放历史</span>
+                                    </button>
+                                    <button class="dropdown-item" onclick="window.historyFavoritesUI && window.historyFavoritesUI.openPanel('favorites')" role="menuitem">
+                                        <span class="dropdown-icon">❤️</span>
+                                        <span data-i18n="nav.favorites">我的收藏</span>
+                                    </button>
+                                    <button class="dropdown-item" onclick="window.statsDashboard && window.statsDashboard.open()" role="menuitem">
+                                        <span class="dropdown-icon">📊</span>
+                                        <span data-i18n="nav.stats">收听统计</span>
+                                    </button>
+                                    <div class="dropdown-divider"></div>
+                                    <button class="dropdown-item" onclick="showSettings()" role="menuitem">
+                                        <span class="dropdown-icon">⚙️</span>
+                                        <span data-i18n="nav.settings">设置</span>
+                                    </button>
+                                    <button class="dropdown-item logout" onclick="handleLogout()" role="menuitem">
+                                        <span class="dropdown-icon">🚪</span>
+                                        <span data-i18n="auth.logout">退出登录</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- History & Favorites Buttons -->
                         <button class="header-icon-btn" onclick="window.historyFavoritesUI && window.historyFavoritesUI.openPanel('history')"
@@ -613,74 +673,88 @@
         <!-- User Rating Widget -->
         <div id="rating-widget"></div>
 
-        <!-- Firebase Authentication Dialog -->
-        <div id="authDialog" class="auth-dialog" style="display: none;" role="dialog" aria-labelledby="authTitle" aria-modal="true">
-            <div class="auth-modal-content">
-                <div class="auth-header">
-                    <h2 id="authTitle" data-i18n="auth.title">登录 / 注册</h2>
-                    <button class="auth-close" onclick="window.firebaseAuthManager && window.firebaseAuthManager.closeAuthDialog()"
-                            aria-label="Close authentication dialog" tabindex="0">&times;</button>
+        <!-- Compact Login Modal -->
+        <div id="compactLoginModal" class="compact-login-modal" style="display: none;" role="dialog" aria-labelledby="compactLoginTitle" aria-modal="true">
+            <div class="compact-modal-overlay" onclick="closeCompactLogin()"></div>
+            <div class="compact-modal-content">
+                <div class="compact-modal-header">
+                    <h3 id="compactLoginTitle" data-i18n="auth.welcome">欢迎回来</h3>
+                    <button class="compact-modal-close" onclick="closeCompactLogin()" aria-label="Close login modal">&times;</button>
                 </div>
 
-                <div class="auth-tabs" role="tablist" aria-label="Authentication options">
-                    <button class="auth-tab active" role="tab" aria-selected="true" aria-controls="loginPanel"
-                            onclick="switchAuthTab('login')" data-i18n="auth.login" tabindex="0">登录</button>
-                    <button class="auth-tab" role="tab" aria-selected="false" aria-controls="signupPanel"
-                            onclick="switchAuthTab('signup')" data-i18n="auth.signup" tabindex="0">注册</button>
-                    <button class="auth-tab" role="tab" aria-selected="false" aria-controls="resetPanel"
-                            onclick="switchAuthTab('reset')" data-i18n="auth.reset" tabindex="0">重置密码</button>
+                <!-- Email Login Form -->
+                <div id="emailLoginForm" class="compact-login-form">
+                    <div class="form-group">
+                        <input type="email" id="compactEmail" placeholder="邮箱地址" autocomplete="email" tabindex="0">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="compactPassword" placeholder="密码" autocomplete="current-password" tabindex="0">
+                    </div>
+                    <button class="compact-login-btn primary" onclick="handleCompactLogin()" tabindex="0">登录</button>
+                    <div class="compact-login-options">
+                        <button class="compact-link" onclick="showCompactSignup()">还没有账号？注册</button>
+                        <button class="compact-link" onclick="showCompactReset()">忘记密码？</button>
+                    </div>
                 </div>
 
-                <!-- Login Form -->
-                <div id="loginForm" class="auth-form active" role="tabpanel" id="loginPanel" aria-labelledby="login-tab">
+                <!-- Email Signup Form -->
+                <div id="emailSignupForm" class="compact-login-form" style="display: none;">
                     <div class="form-group">
-                        <label for="loginEmail" data-i18n="auth.email">邮箱地址</label>
-                        <input type="email" id="loginEmail" data-i18n-placeholder="auth.emailPlaceholder" placeholder="请输入邮箱"
-                               aria-required="true" autocomplete="email" tabindex="0">
+                        <input type="text" id="compactName" placeholder="昵称" autocomplete="name" tabindex="0">
                     </div>
                     <div class="form-group">
-                        <label for="loginPassword" data-i18n="auth.password">密码</label>
-                        <input type="password" id="loginPassword" data-i18n-placeholder="auth.passwordPlaceholder" placeholder="请输入密码"
-                               aria-required="true" autocomplete="current-password" tabindex="0">
+                        <input type="email" id="compactSignupEmail" placeholder="邮箱地址" autocomplete="email" tabindex="0">
                     </div>
-                    <button class="auth-btn primary" onclick="handleLogin()" data-i18n="auth.loginButton"
-                            aria-label="Login to your account" tabindex="0">登录</button>
-                    <button class="auth-btn secondary" onclick="handleGoogleLogin()" data-i18n="auth.googleLogin"
-                            aria-label="Login with Google account" tabindex="0">使用 Google 登录</button>
-                    <button class="auth-btn secondary" onclick="handleAnonymousLogin()" data-i18n="auth.anonymousLogin"
-                            aria-label="Continue without account" tabindex="0">匿名登录</button>
+                    <div class="form-group">
+                        <input type="password" id="compactSignupPassword" placeholder="密码 (至少6位)" autocomplete="new-password" tabindex="0" minlength="6">
+                    </div>
+                    <button class="compact-login-btn primary" onclick="handleCompactSignup()" tabindex="0">注册</button>
+                    <div class="compact-login-options">
+                        <button class="compact-link" onclick="showCompactLogin()">已有账号？登录</button>
+                    </div>
                 </div>
 
-                <!-- Signup Form -->
-                <div id="signupForm" class="auth-form" role="tabpanel" id="signupPanel" aria-labelledby="signup-tab" hidden>
+                <!-- Password Reset Form -->
+                <div id="passwordResetForm" class="compact-login-form" style="display: none;">
+                    <p data-i18n="auth.resetInstructions">输入您的邮箱地址，我们将发送重置链接</p>
                     <div class="form-group">
-                        <label for="signupName" data-i18n="auth.displayName">显示名称</label>
-                        <input type="text" id="signupName" data-i18n-placeholder="auth.displayNamePlaceholder" placeholder="请输入您的昵称"
-                               aria-required="true" autocomplete="name" tabindex="0">
+                        <input type="email" id="compactResetEmail" placeholder="邮箱地址" autocomplete="email" tabindex="0">
                     </div>
-                    <div class="form-group">
-                        <label for="signupEmail" data-i18n="auth.email">邮箱地址</label>
-                        <input type="email" id="signupEmail" data-i18n-placeholder="auth.emailPlaceholder" placeholder="请输入邮箱"
-                               aria-required="true" autocomplete="email" tabindex="0">
+                    <button class="compact-login-btn primary" onclick="handleCompactReset()" tabindex="0">发送重置邮件</button>
+                    <div class="compact-login-options">
+                        <button class="compact-link" onclick="showCompactLogin()">返回登录</button>
                     </div>
-                    <div class="form-group">
-                        <label for="signupPassword" data-i18n="auth.password">密码</label>
-                        <input type="password" id="signupPassword" data-i18n-placeholder="auth.passwordPlaceholder" placeholder="至少6位字符"
-                               aria-required="true" autocomplete="new-password" tabindex="0" minlength="6">
-                    </div>
-                    <button class="auth-btn primary" onclick="handleSignup()" data-i18n="auth.signupButton"
-                            aria-label="Create new account" tabindex="0">注册</button>
                 </div>
 
-                <!-- Reset Form -->
-                <div id="resetForm" class="auth-form" role="tabpanel" id="resetPanel" aria-labelledby="reset-tab" hidden>
+                <!-- Phone Login Form -->
+                <div id="phoneLoginForm" class="compact-login-form" style="display: none;">
                     <div class="form-group">
-                        <label for="resetEmail" data-i18n="auth.email">邮箱地址</label>
-                        <input type="email" id="resetEmail" data-i18n-placeholder="auth.emailPlaceholder" placeholder="请输入注册时使用的邮箱"
-                               aria-required="true" autocomplete="email" tabindex="0">
+                        <input type="tel" id="compactPhone" placeholder="手机号码 (+86 138 0000 0000)" autocomplete="tel" tabindex="0">
                     </div>
-                    <button class="auth-btn primary" onclick="handlePasswordReset()" data-i18n="auth.resetButton"
-                            aria-label="Send password reset email" tabindex="0">发送重置邮件</button>
+                    <div class="form-group phone-code-group">
+                        <input type="text" id="compactVerificationCode" placeholder="验证码" autocomplete="one-time-code" tabindex="0">
+                        <button class="send-code-btn" onclick="sendVerificationCode()" tabindex="0">发送验证码</button>
+                    </div>
+                    <button class="compact-login-btn primary" onclick="handlePhoneLogin()" tabindex="0">登录</button>
+                    <div class="compact-login-options">
+                        <button class="compact-link" onclick="showCompactLogin()">使用邮箱登录</button>
+                    </div>
+                </div>
+
+                <div class="compact-modal-divider">
+                    <span>或</span>
+                </div>
+
+                <!-- Quick Login Options -->
+                <div class="compact-quick-login">
+                    <button class="compact-option-btn google" onclick="handleGoogleLogin()" tabindex="0">
+                        <span class="btn-icon">🔵</span>
+                        Google
+                    </button>
+                    <button class="compact-option-btn anonymous" onclick="handleAnonymousLogin()" tabindex="0">
+                        <span class="btn-icon">👤</span>
+                        匿名使用
+                    </button>
                 </div>
             </div>
         </div>
@@ -899,6 +973,7 @@
     <script src="assets/js/i18n-system.js"></script>
     <script src="assets/js/i18n-translations-addon.js"></script>
     <script src="assets/js/cookie-consent.js"></script>
+    <script src="assets/js/dropdown-login-system.js"></script>
     <script src="assets/js/social-share.js"></script>
     <script src="assets/js/gdpr-compliance.js"></script>
     <!-- 视频背景系统 (2.0 新增) -->

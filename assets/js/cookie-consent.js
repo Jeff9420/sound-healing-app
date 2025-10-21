@@ -106,24 +106,9 @@ class CookieConsent {
           <p data-i18n="cookie.description">We use cookies to enhance your experience and analyze our traffic.
           By clicking "Accept All", you consent to our use of cookies.</p>
 
-          <div class="cookie-options">
-            <label class="cookie-option">
-              <input type="radio" name="cookieConsent" value="accepted" checked>
-              <span data-i18n="cookie.acceptAll">Accept All</span>
-              <small data-i18n="cookie.acceptAllDesc">Enables analytics for better experience</small>
-            </label>
-
-            <label class="cookie-option">
-              <input type="radio" name="cookieConsent" value="necessary">
-              <span data-i18n="cookie.necessaryOnly">Necessary Only</span>
-              <small data-i18n="cookie.necessaryOnlyDesc">Essential cookies only</small>
-            </label>
-
-            <label class="cookie-option">
-              <input type="radio" name="cookieConsent" value="denied">
-              <span data-i18n="cookie.denyAll">Deny All</span>
-              <small data-i18n="cookie.denyAllDesc">No cookies except essentials</small>
-            </label>
+          <div class="cookie-actions">
+            <button id="cookieAccept" class="btn-primary" data-i18n="cookie.acceptSelected">Accept & Continue</button>
+            <button id="cookieSettings" class="btn-secondary" data-i18n="cookie.preferences">Settings</button>
           </div>
 
           <div class="cookie-actions">
@@ -273,37 +258,53 @@ class CookieConsent {
       }
 
       .cookie-banner {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 30px 20px;
+        display: none; /* Hide by default, show with JavaScript */
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(8px);
+        color: #333;
+        padding: 8px 16px;
+        border-bottom: 1px solid #e0e0e0;
+        z-index: 9999;
+        font-size: 13px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        transform: translateY(-100%);
+        transition: all 0.3s ease;
+      }
+
+      .cookie-banner.show {
+        transform: translateY(0);
       }
 
       .cookie-content h3 {
-        margin: 0 0 15px 0;
-        font-size: 20px;
+        margin: 0 0 8px 0;
+        font-size: 16px;
         font-weight: 600;
       }
 
       .cookie-content p {
-        margin: 0 0 20px 0;
-        font-size: 14px;
-        line-height: 1.6;
+        margin: 0 0 15px 0;
+        font-size: 13px;
+        line-height: 1.5;
         opacity: 0.9;
       }
 
       .cookie-options {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 15px;
-        margin-bottom: 25px;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+        margin-bottom: 15px;
       }
 
       .cookie-option {
         cursor: pointer;
-        padding: 15px;
+        padding: 12px;
         background: rgba(255, 255, 255, 0.05);
         border: 2px solid rgba(255, 255, 255, 0.1);
-        border-radius: 8px;
+        border-radius: 6px;
         transition: all 0.3s ease;
       }
 
@@ -331,17 +332,17 @@ class CookieConsent {
 
       .cookie-actions {
         display: flex;
-        gap: 15px;
+        gap: 10px;
         justify-content: flex-end;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
       }
 
       .btn-primary,
       .btn-secondary {
-        padding: 10px 20px;
+        padding: 8px 16px;
         border: none;
-        border-radius: 5px;
-        font-size: 14px;
+        border-radius: 4px;
+        font-size: 13px;
         font-weight: 500;
         cursor: pointer;
         transition: all 0.3s ease;
@@ -495,23 +496,54 @@ class CookieConsent {
       /* Mobile Responsive */
       @media (max-width: 768px) {
         .cookie-banner {
-          padding: 20px 15px;
+          padding: 12px 15px;
+        }
+
+        .cookie-content h3 {
+          font-size: 14px;
+          margin-bottom: 5px;
+        }
+
+        .cookie-content p {
+          font-size: 12px;
+          margin-bottom: 10px;
         }
 
         .cookie-options {
           grid-template-columns: 1fr;
+          gap: 8px;
+          margin-bottom: 12px;
+        }
+
+        .cookie-option {
+          padding: 8px;
         }
 
         .cookie-actions {
-          flex-direction: column;
+          flex-direction: row;
+          gap: 8px;
+          margin-bottom: 10px;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+          padding: 6px 12px;
+          font-size: 12px;
         }
 
         .modal-content {
-          padding: 20px;
+          padding: 15px;
         }
       }
     `;
         document.head.appendChild(style);
+    }
+
+    // Make banner globally accessible
+    show() {
+        if (!this.consentGiven) {
+            this.createBanner();
+        }
     }
 
     // Public methods

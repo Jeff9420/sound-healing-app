@@ -22,53 +22,43 @@ class FirebaseAuthManager {
         console.log('🔐 初始化Firebase认证管理器...');
 
         try {
-            // 检查Firebase是否已初始化
-            if (typeof window.firebase !== 'undefined' && window.firebaseConfig) {
-                // 等待Firebase初始化完成
-                this.waitForFirebaseInit();
-            } else {
-                console.warn('⚠️ Firebase未加载，使用匿名模式');
-            }
+            // 等待一秒钟确保Firebase模块加载
+            setTimeout(() => {
+                // 尝试导入Firebase Auth
+                import('./firebase-auth.js').then(({ auth, onAuthStateChanged }) => {
+                    this.auth = auth;
+                    console.log('✅ Firebase Auth模块加载成功');
+
+                    // 设置认证状态监听
+                    onAuthStateChanged((user) => {
+                        this.currentUser = user;
+                        console.log('🔐 认证状态更新:', user ? '已登录' : '未登录');
+                        this.updateUI(user);
+                    });
+
+                }).catch(error => {
+                    console.warn('⚠️ Firebase Auth模块加载失败，使用匿名模式:', error);
+                    this.setupAnonymousMode();
+                });
+            }, 1000);
+
         } catch (error) {
-            console.warn('⚠️ Firebase Auth不可用，使用匿名模式:', error);
+            console.warn('⚠️ Firebase Auth初始化失败，使用匿名模式:', error);
+            this.setupAnonymousMode();
         }
     }
 
     /**
-     * 等待Firebase初始化
+     * 设置匿名模式
      */
-    waitForFirebaseInit() {
-        const checkInit = () => {
-            // 检查Firebase SDK和配置是否加载
-            if (typeof window.firebase !== 'undefined' && window.firebaseConfig) {
-                // 检查Firebase是否已经初始化
-                if (window.firebase && window.firebase.apps && window.firebase.apps.length > 0) {
-                    try {
-                        // 直接获取Firebase Auth实例，不依赖window.firebaseAuth
-                        this.auth = window.firebase.auth();
-                        this.currentUser = this.auth.currentUser;
-                        console.log('✅ Firebase认证管理器初始化完成');
-
-                        // 设置认证状态监听
-                        this.auth.onAuthStateChanged((user) => {
-                            this.currentUser = user;
-                            this.updateUI(user);
-                        });
-                    } catch (error) {
-                        console.warn('⚠️ Firebase Auth初始化失败，使用匿名模式:', error);
-                    }
-                } else {
-                    // Firebase还未初始化，继续等待
-                    setTimeout(checkInit, 100);
-                }
-            } else {
-                // Firebase SDK还未加载，继续等待
-                setTimeout(checkInit, 100);
-            }
-        };
-        checkInit();
+    setupAnonymousMode() {
+        this.currentUser = null;
+        console.log('🔐 使用匿名模式');
+        // 隐藏登录相关UI或显示简化版本
+        this.updateUI(null);
     }
 
+    
     /**
      * Google登录
      */
@@ -78,10 +68,12 @@ class FirebaseAuthManager {
                 throw new Error('Firebase Auth 未初始化');
             }
 
-            const provider = new firebase.auth.GoogleAuthProvider();
-            const result = await this.auth.signInWithPopup(provider);
+            // 动态导入所需的函数
+            const { signInWithPopup, GoogleAuthProvider } = await import('./firebase-auth.js');
+            const provider = new GoogleAuthProvider();
+            const result = await signInWithPopup(this.auth, provider);
 
-            window.showNotification('✅ 登录成功！', 'success');
+            window.showNotification('✅ Login successful!', 'success');
 
             // 跟踪事件
             if (typeof gtag !== 'undefined') {
@@ -92,8 +84,8 @@ class FirebaseAuthManager {
 
             return result.user;
         } catch (error) {
-            console.error('❌ Google登录失败:', error);
-            window.showNotification('登录失败: ' + error.message, 'error');
+            console.error('❌ Google login failed:', error);
+            window.showNotification('Login failed: ' + error.message, 'error');
             return null;
         }
     }
@@ -107,8 +99,10 @@ class FirebaseAuthManager {
                 throw new Error('Firebase Auth 未初始化');
             }
 
-            const result = await this.auth.signInWithEmailAndPassword(email, password);
-            window.showNotification('✅ 登录成功！', 'success');
+            // 动态导入所需的函数
+            const { signInWithEmailAndPassword } = await import('./firebase-auth.js');
+            const result = await signInWithEmailAndPassword(this.auth, email, password);
+            window.showNotification('✅ Login successful!', 'success');
 
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'login', {
@@ -118,8 +112,8 @@ class FirebaseAuthManager {
 
             return result.user;
         } catch (error) {
-            console.error('❌ 邮箱登录失败:', error);
-            window.showNotification('登录失败: ' + error.message, 'error');
+            console.error('❌ Email login failed:', error);
+            window.showNotification('Login failed: ' + error.message, 'error');
             return null;
         }
     }
@@ -133,7 +127,9 @@ class FirebaseAuthManager {
                 throw new Error('Firebase Auth 未初始化');
             }
 
-            const result = await this.auth.createUserWithEmailAndPassword(email, password);
+            // 动态导入所需的函数
+            const { createUserWithEmailAndPassword } = await import('./firebase-auth.js');
+            const result = await createUserWithEmailAndPassword(this.auth, email, password);
 
             // 更新用户名
             if (displayName) {
@@ -142,7 +138,7 @@ class FirebaseAuthManager {
                 });
             }
 
-            window.showNotification('✅ 注册成功！', 'success');
+            window.showNotification('✅ Registration successful!', 'success');
 
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'sign_up', {
@@ -152,8 +148,8 @@ class FirebaseAuthManager {
 
             return result.user;
         } catch (error) {
-            console.error('❌ 注册失败:', error);
-            window.showNotification('注册失败: ' + error.message, 'error');
+            console.error('❌ Registration failed:', error);
+            window.showNotification('Registration failed: ' + error.message, 'error');
             return null;
         }
     }
@@ -185,15 +181,17 @@ class FirebaseAuthManager {
                 throw new Error('Firebase Auth 未初始化');
             }
 
-            await this.auth.signOut();
-            window.showNotification('✅ 已退出登录', 'success');
+            // 动态导入所需的函数
+            const { signOut } = await import('./firebase-auth.js');
+            await signOut(this.auth);
+            window.showNotification('✅ Logged out successfully', 'success');
 
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'logout');
             }
         } catch (error) {
-            console.error('❌ 登出失败:', error);
-            window.showNotification('登出失败: ' + error.message, 'error');
+            console.error('❌ Logout failed:', error);
+            window.showNotification('Logout failed: ' + error.message, 'error');
         }
     }
 
@@ -206,12 +204,14 @@ class FirebaseAuthManager {
                 throw new Error('Firebase Auth 未初始化');
             }
 
-            await this.auth.sendPasswordResetEmail(email);
-            window.showNotification('✅ 密码重置邮件已发送', 'success');
+            // 动态导入所需的函数
+            const { sendPasswordResetEmail } = await import('./firebase-auth.js');
+            await sendPasswordResetEmail(this.auth, email);
+            window.showNotification('✅ Password reset email sent', 'success');
             return true;
         } catch (error) {
-            console.error('❌ 发送重置邮件失败:', error);
-            window.showNotification('发送失败: ' + error.message, 'error');
+            console.error('❌ Password reset failed:', error);
+            window.showNotification('Reset failed: ' + error.message, 'error');
             return false;
         }
     }
