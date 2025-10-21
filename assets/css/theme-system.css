@@ -15,30 +15,30 @@
     --primary-bg-gradient-end: #0f3460;
 
     /* 文字颜色 */
-    --text-primary: #eee;
-    --text-secondary: rgba(255, 255, 255, 0.9);
+    --text-primary: #f8fafc;
+    --text-secondary: rgba(226, 232, 240, 0.9);
     --text-tertiary: rgba(255, 255, 255, 0.7);
 
     /* 卡片和组件背景 */
-    --card-bg: rgba(255, 255, 255, 0.05);
-    --card-bg-hover: rgba(255, 255, 255, 0.1);
-    --card-border: rgba(255, 255, 255, 0.1);
+    --card-bg: rgba(13, 19, 48, 0.92);
+    --card-bg-hover: rgba(30, 41, 99, 0.95);
+    --card-border: rgba(99, 102, 241, 0.5);
 
     /* 按钮 */
-    --button-bg: rgba(255, 255, 255, 0.1);
-    --button-bg-hover: rgba(255, 255, 255, 0.2);
-    --button-border: rgba(255, 255, 255, 0.3);
+    --button-bg: rgba(20, 31, 68, 0.88);
+    --button-bg-hover: rgba(79, 70, 229, 0.85);
+    --button-border: rgba(99, 102, 241, 0.45);
 
     /* 播放器 */
-    --player-bg: rgba(0, 0, 0, 0.95);
-    --player-border: rgba(255, 255, 255, 0.1);
+    --player-bg: rgba(11, 16, 36, 0.95);
+    --player-border: rgba(99, 102, 241, 0.35);
 
     /* 进度条和滑块 */
-    --progress-bg: rgba(255, 255, 255, 0.3);
-    --progress-fill: #FF6699;
+    --progress-bg: rgba(148, 163, 255, 0.35);
+    --progress-fill: #60a5fa;
 
     /* 模态框 */
-    --modal-bg: linear-gradient(135deg, #6666FF 0%, #FF6699 100%);
+    --modal-bg: linear-gradient(135deg, #5560ff 0%, #7c3aed 100%);
     --modal-overlay: rgba(0, 0, 0, 0.8);
 
     /* 通知 */
@@ -46,12 +46,12 @@
 
     /* 阴影 */
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-    --shadow-md: 0 5px 15px rgba(108, 92, 231, 0.3);
-    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 8px 18px rgba(79, 70, 229, 0.35);
+    --shadow-lg: 0 18px 36px rgba(15, 23, 42, 0.45);
 
     /* 主题色 */
     --theme-color: #6666ff;
-    --theme-accent: #FF6699;
+    --theme-accent: #38bdf8;
 }
 
 /* ==========================================================================
@@ -71,22 +71,22 @@
     --text-tertiary: #4a5568;
 
     /* 卡片和组件背景 */
-    --card-bg: rgba(255, 255, 255, 0.8);
-    --card-bg-hover: rgba(255, 255, 255, 0.95);
-    --card-border: rgba(0, 0, 0, 0.1);
+    --card-bg: #ffffff;
+    --card-bg-hover: #f8fafc;
+    --card-border: rgba(15, 23, 42, 0.12);
 
     /* 按钮 */
-    --button-bg: rgba(0, 0, 0, 0.05);
-    --button-bg-hover: rgba(0, 0, 0, 0.1);
-    --button-border: rgba(0, 0, 0, 0.15);
+    --button-bg: rgba(15, 23, 42, 0.08);
+    --button-bg-hover: rgba(15, 23, 42, 0.16);
+    --button-border: rgba(15, 23, 42, 0.18);
 
     /* 播放器 */
-    --player-bg: rgba(255, 255, 255, 0.98);
-    --player-border: rgba(0, 0, 0, 0.1);
+    --player-bg: rgba(241, 245, 249, 0.98);
+    --player-border: rgba(15, 23, 42, 0.12);
 
     /* 进度条和滑块 */
-    --progress-bg: rgba(0, 0, 0, 0.2);
-    --progress-fill: #6666FF;
+    --progress-bg: rgba(15, 23, 42, 0.25);
+    --progress-fill: #4c51bf;
 
     /* 模态框 */
     --modal-bg: linear-gradient(135deg, #8888FF 0%, #FF88BB 100%);
@@ -102,7 +102,7 @@
 
     /* 主题色 */
     --theme-color: #6666ff;
-    --theme-accent: #FF6699;
+    --theme-accent: #38bdf8;
 }
 
 /* ==========================================================================

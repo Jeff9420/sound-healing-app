@@ -33,20 +33,20 @@
 :root {
     /* Primary text colors - WCAG AA compliant */
     --text-primary: #ffffff;        /* White text on dark backgrounds */
-    --text-secondary: #f0f0f0;     /* Slightly softer white */
-    --text-muted: #cccccc;          /* Muted text, still meets contrast */
+    --text-secondary: #e2e8f0;     /* Slightly softer white */
+    --text-muted: #cbd5f5;          /* Muted text, still meets contrast */
     --text-inverse: #000000;        /* Black text on light backgrounds */
 
     /* Background colors */
     --bg-primary: #0f0f23;          /* Dark blue-black */
     --bg-secondary: #1a1a2e;         /* Slightly lighter dark */
     --bg-tertiary: #252542;          /* Medium dark */
-    --bg-card: rgba(255, 255, 255, 0.08); /* Card background */
+    --bg-card: rgba(13, 19, 48, 0.88); /* Card background */
 
     /* Border and separator colors */
-    --border-light: rgba(255, 255, 255, 0.15);
-    --border-medium: rgba(255, 255, 255, 0.25);
-    --border-strong: rgba(255, 255, 255, 0.35);
+    --border-light: rgba(99, 102, 241, 0.45);
+    --border-medium: rgba(99, 102, 241, 0.55);
+    --border-strong: rgba(165, 180, 252, 0.6);
 
     /* Accent colors with improved contrast */
     --accent-blue: #4dabf7;           /* Bright blue for highlights */
@@ -56,9 +56,9 @@
     --accent-purple: #a78bfa;          /* Bright purple for special states */
 
     /* Interactive element colors */
-    --interactive-bg: rgba(255, 255, 255, 0.12);
-    --interactive-hover: rgba(255, 255, 255, 0.18);
-    --interactive-active: rgba(255, 255, 255, 0.24);
+    --interactive-bg: rgba(30, 41, 99, 0.90);
+    --interactive-hover: rgba(79, 70, 229, 0.88);
+    --interactive-active: rgba(99, 102, 241, 0.78);
 
     /* Focus indicators */
     --focus-ring: rgba(102, 126, 234, 0.5);
@@ -127,17 +127,18 @@ body {
 
 .control-btn {
     color: var(--text-primary);
-    background: transparent;
-    border: 2px solid transparent;
-    /* Added visible focus state */
+    background: var(--interactive-bg);
+    border: 1px solid var(--border-light);
+    border-radius: 50%;
     transition: all 0.2s ease;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.45);
 }
 
 .control-btn:hover,
 .control-btn:focus {
-    background: var(--interactive-bg);
-    border-color: var(--border-light);
-    border-radius: 8px;
+    background: var(--interactive-hover);
+    border-color: var(--border-medium);
+    border-radius: 50%;
 }
 
 /* Progress bar with better contrast */
@@ -579,6 +580,42 @@ a:hover {
    Ensure proper contrast when printing
    ========================================================================== */
 
+.category-card {
+    background: rgba(13, 19, 48, 0.92) !important;
+    border: 1px solid rgba(99, 102, 241, 0.5) !important;
+    color: #f8fafc !important;
+}
+
+.category-card:hover {
+    background: rgba(30, 41, 99, 0.95) !important;
+}
+
+.header-icon-btn {
+    background: rgba(20, 31, 68, 0.88) !important;
+    border: 1px solid rgba(99, 102, 241, 0.45) !important;
+    color: #f8fafc !important;
+}
+
+.header-icon-btn:hover {
+    background: rgba(79, 70, 229, 0.85) !important;
+}
+
+.control-btn {
+    background: rgba(20, 31, 68, 0.88) !important;
+    border: 1px solid rgba(99, 102, 241, 0.45) !important;
+    color: #f8fafc !important;
+}
+
+.control-btn:hover,
+.control-btn:focus {
+    background: rgba(79, 70, 229, 0.85) !important;
+}
+
+.language-selector select {
+    background: rgba(20, 31, 68, 0.88) !important;
+    border: 1px solid rgba(99, 102, 241, 0.45) !important;
+    color: #f8fafc !important;
+}
 @media print {
     * {
         background: white !important;

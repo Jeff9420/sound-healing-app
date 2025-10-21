@@ -17,7 +17,7 @@ class VideoBackgroundManager {
     constructor() {
         // 视频配置 - 本地优化版本（2-9MB，比Archive.org快）
         this.videoConfig = {
-            baseUrl: 'https://archive.org/download/zen-bamboo/',
+            baseUrl: 'https://archive.org/cors/zen-bamboo/',
             categories: {
                 'Animal sounds': {
                     filename: 'forest-birds.mp4',
@@ -103,6 +103,12 @@ class VideoBackgroundManager {
         // 预加载首个视频（通常是meditation分类）
         this.preloadInitialVideo();
 
+        const defaultCategory = 'meditation';
+        const initialCategory = this.currentCategory || defaultCategory;
+        if (this.videoConfig.categories[initialCategory]) {
+            this.switchVideoBackground(initialCategory);
+        }
+
         console.log('✅ 视频背景系统初始化完成');
     }
 
@@ -118,11 +124,20 @@ class VideoBackgroundManager {
             initialCategories.forEach((category) => {
                 const url = this.getVideoUrl(category);
                 if (url) {
-                    console.log(`🔮 后台预加载初始视频: ${category}`);
+                    console.log('[Video] Queueing preload:', url);
                     this.preloadVideoInBackground(url);
                 }
             });
         }, 3000);
+    }
+
+    async fetchVideoBlob(url) {
+        const response = await fetch(url, { mode: 'cors', credentials: 'omit' });
+        if (!response.ok) {
+            throw new Error(`视频资源下载失败: ${response.status} ${response.statusText}`);
+        }
+        const blob = await response.blob();
+        return URL.createObjectURL(blob);
     }
 
     /**
@@ -178,12 +193,7 @@ class VideoBackgroundManager {
         video.playsInline = true;
         video.autoplay = false;
         video.preload = 'auto'; // 改为auto积极预加载，减少播放延迟
-
-        // 添加多种视频格式支持
-        video.innerHTML = `
-            <source type="video/mp4">
-            <source type="video/webm">
-        `;
+        video.crossOrigin = 'anonymous';
 
         return video;
     }
@@ -246,7 +256,7 @@ class VideoBackgroundManager {
             // 如果视频已缓存，立即开始切换；否则先加载
             const isCached = this.preloadedVideos.has(videoUrl);
             if (isCached) {
-                console.log('⚡ 使用缓存视频，立即切换');
+                console.log(`[Video] Using cached blob: ${url}`);
             }
 
             // 预加载视频（如已缓存会立即返回）
@@ -285,76 +295,68 @@ class VideoBackgroundManager {
      * 加载视频
      * 改进：命中缓存时同样等待 canplay，避免过早淡入黑屏
      */
-    loadVideo(videoElement, url) {
-        return new Promise((resolve, reject) => {
-            const isCached = this.preloadedVideos.has(url);
-            const cachedEntry = this.preloadedVideos.get(url);
+    async loadVideo(videoElement, url) {
+        let cacheEntry = this.preloadedVideos.get(url);
 
-            if (isCached) {
-                console.log('🎬 使用缓存视频资源:', url);
-                if (cachedEntry) {
-                    cachedEntry.ready = true;
-                    cachedEntry.lastUsed = Date.now();
-                }
+        try {
+            if (!cacheEntry || !cacheEntry.blobUrl) {
+                console.log(`[Video] Downloading resource: ${url}`);
+                const blobUrl = await this.fetchVideoBlob(url);
+                cacheEntry = {
+                    src: url,
+                    blobUrl,
+                    ready: true,
+                    lastUsed: Date.now()
+                };
+                this.preloadedVideos.set(url, cacheEntry);
+            } else {
+                cacheEntry.ready = true;
+                cacheEntry.lastUsed = Date.now();
+                console.log(`[Video] Using cached blob: ${url}`);
             }
 
-            const source = videoElement.querySelector('source[type="video/mp4"]');
-            if (!source) {
-                reject(new Error('未找到 video/mp4 source 元素'));
-                return;
+            await new Promise((resolve, reject) => {
+                let timeoutId = null;
+
+                const onReady = () => {
+                    cleanup();
+                    resolve();
+                };
+
+                const onError = (event) => {
+                    cleanup();
+                    const mediaError = event?.target?.error;
+                    const message = mediaError?.message || event?.message || '未知错误';
+                    reject(new Error(`视频加载失败: ${message} (${url})`));
+                };
+
+                const cleanup = () => {
+                    if (timeoutId) {
+                        clearTimeout(timeoutId);
+                    }
+                    videoElement.removeEventListener('loadeddata', onReady);
+                    videoElement.removeEventListener('error', onError);
+                };
+
+                videoElement.addEventListener('loadeddata', onReady, { once: true });
+                videoElement.addEventListener('error', onError, { once: true });
+
+                videoElement.setAttribute('data-source-url', url);
+                videoElement.src = cacheEntry.blobUrl;
+                videoElement.load();
+
+                timeoutId = setTimeout(() => {
+                    cleanup();
+                    reject(new Error('视频加载超时'));
+                }, 20000);
+            });
+        } catch (error) {
+            if (cacheEntry && cacheEntry.blobUrl) {
+                URL.revokeObjectURL(cacheEntry.blobUrl);
             }
-
-            const timeoutMs = isCached ? 5000 : 15000;
-            let timeoutId = null;
-
-            const cleanup = () => {
-                if (timeoutId) {
-                    clearTimeout(timeoutId);
-                }
-                videoElement.removeEventListener('canplay', onReady);
-                videoElement.removeEventListener('error', onError);
-            };
-
-            const onReady = () => {
-                cleanup();
-
-                if (!isCached) {
-                    this.preloadedVideos.set(url, { src: url, ready: true, lastUsed: Date.now() });
-                    console.log('✅ 视频可播放:', url);
-                } else {
-                    console.log('✅ 缓存视频已就绪:', url);
-                }
-
-                resolve();
-            };
-
-            const onError = (event) => {
-                cleanup();
-                const mediaError = event?.target?.error;
-                const message = mediaError?.message || event?.message || '未知错误';
-                reject(new Error(`视频加载失败: ${message}`));
-            };
-
-            source.src = url;
-            videoElement.load();
-
-            const haveCurrentData = typeof HTMLMediaElement !== 'undefined'
-                ? HTMLMediaElement.HAVE_CURRENT_DATA
-                : 2;
-
-            if (videoElement.readyState >= haveCurrentData) {
-                onReady();
-                return;
-            }
-
-            videoElement.addEventListener('canplay', onReady, { once: true });
-            videoElement.addEventListener('error', onError, { once: true });
-
-            timeoutId = setTimeout(() => {
-                cleanup();
-                reject(new Error('视频加载超时'));
-            }, timeoutMs);
-        });
+            this.preloadedVideos.delete(url);
+            throw error;
+        }
     }
 
     /**
@@ -440,25 +442,25 @@ class VideoBackgroundManager {
     /**
      * 后台预加载视频
      */
-    preloadVideoInBackground(url) {
-        const tempVideo = document.createElement('video');
-        tempVideo.preload = 'auto';
-        tempVideo.muted = true;
-        tempVideo.playsInline = true;
-        tempVideo.src = url;
-        tempVideo.load();
+    async preloadVideoInBackground(url) {
+        try {
+            const cached = this.preloadedVideos.get(url);
+            if (cached && cached.blobUrl) {
+                return;
+            }
 
-        // 使用canplay事件，比loadeddata更早触发
-        tempVideo.addEventListener('canplay', () => {
-            this.preloadedVideos.set(url, { src: url, ready: true, lastUsed: Date.now() });
-            console.log(`✅ 预加载视频完成: ${url}`);
-        }, { once: true });
-
-        tempVideo.addEventListener('error', () => {
-            console.warn(`⚠️ 预加载视频失败: ${url}`);
-        }, { once: true });
+            const blobUrl = await this.fetchVideoBlob(url);
+            this.preloadedVideos.set(url, {
+                src: url,
+                blobUrl,
+                ready: true,
+                lastUsed: Date.now()
+            });
+            console.log(`[Video] Preload complete: ${url}`);
+        } catch (error) {
+            console.warn(`[Video] Preload failed: ${url}`, error);
+        }
     }
-
     /**
      * 降级到Canvas动画
      */

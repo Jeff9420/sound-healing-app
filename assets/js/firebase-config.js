@@ -52,6 +52,14 @@ function initializeFirebase() {
         firebaseDb = firebase.firestore();
         console.log('✅ Firestore初始化成功');
 
+        // 初始化Storage（可选）
+        if (typeof firebase.storage === 'function') {
+            firebaseStorage = firebase.storage();
+            console.log('✅ Firebase Storage初始化成功');
+        } else {
+            console.warn('⚠️ Firebase Storage SDK未加载，如需云端文件请引入 firebase-storage-compat.js');
+        }
+
         // 初始化Analytics
         if (typeof firebase.analytics === 'function') {
             firebase.analytics();
@@ -69,6 +77,7 @@ function initializeFirebase() {
             }
         });
 
+        exposeFirebaseGlobals();
         return true;
 
     } catch (error) {
@@ -114,18 +123,6 @@ function isUserSignedIn() {
     return !!getCurrentUser();
 }
 
-// 导出
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        initializeFirebase,
-        getCurrentUser,
-        isUserSignedIn,
-        firebaseAuth,
-        firebaseDb,
-        firebaseStorage
-    };
-}
-
 // 自动初始化（延迟到DOM加载完成）
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
@@ -136,9 +133,31 @@ if (document.readyState === 'loading') {
     setTimeout(initializeFirebase, 1000);
 }
 
-// 导出到全局作用域
-window.firebaseConfig = firebaseConfig;
-window.firebaseApp = firebaseApp;
-window.firebaseAuth = firebaseAuth;
-window.firebaseDb = firebaseDb;
-window.firebaseStorage = firebaseStorage;
+exposeFirebaseGlobals();
+
+/**
+ * 将Firebase引用暴露到全局，方便其他脚本访问最新实例
+ */
+function exposeFirebaseGlobals() {
+    if (typeof window !== 'undefined') {
+        window.firebaseConfig = firebaseConfig;
+        window.firebaseApp = firebaseApp;
+        window.firebaseAuth = firebaseAuth;
+        window.firebaseDb = firebaseDb;
+        window.firebaseStorage = firebaseStorage;
+    }
+}
+
+// 模块导出（使用 getter 保持引用最新）
+if (typeof module !== 'undefined' && module.exports) {
+    Object.defineProperties(module.exports, {
+        initializeFirebase: { value: initializeFirebase },
+        getCurrentUser: { value: getCurrentUser },
+        isUserSignedIn: { value: isUserSignedIn },
+        firebaseConfig: { value: firebaseConfig },
+        firebaseApp: { get: () => firebaseApp },
+        firebaseAuth: { get: () => firebaseAuth },
+        firebaseDb: { get: () => firebaseDb },
+        firebaseStorage: { get: () => firebaseStorage }
+    });
+}

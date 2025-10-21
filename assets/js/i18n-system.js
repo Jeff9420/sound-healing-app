@@ -574,11 +574,19 @@ class InternationalizationSystem {
                 'meta.title': 'Sound Healing - Nature\'s Voice',
                 'app.title': 'Sound Healing',
                 'app.subtitle': 'Listen to the healing sounds of nature, return to inner peace',
-                'app.footer': '🎧 Use headphones for the best natural healing experience',
+                'app.ready': 'Sound healing space is ready',
+                'app.footer': 'Use headphones for the best natural healing experience',
+                
+                // Loading screen
+                'loading.text': 'Loading sound healing space...',
+                'loading.subtext': 'Please wait while we prepare healing audio...',
                 
                 // Header area
                 'header.title': 'Sound Healing',
                 'header.subtitle': 'Listen to the healing sounds of nature, return to inner peace',
+                
+                // Modal and dialogs
+                'modal.close': 'Close dialog',
                 
                 // Main interface
                 'main.exploreTitle': 'Explore Sound Ecosystem',
@@ -590,7 +598,9 @@ class InternationalizationSystem {
                 'player.selectSound': 'Choose Your Healing Sound',
                 'player.startJourney': 'Begin Your Natural Journey',
                 'player.noAudioSelected': 'No Audio Selected',
+                'player.notPlaying': 'Nothing is playing right now',
                 'player.playButton': 'Main Play Button',
+                'player.minimize': 'Minimize player',
                 
                 // Healing modes
                 'healing.mode.focus': 'Focus Mode',
@@ -643,6 +653,7 @@ class InternationalizationSystem {
                 'playlist.totalTime': 'Total Duration',
                 
                 // Timer
+                'timer.title': 'Sleep Timer',
                 'timer.none': 'No Timer',
                 'timer.5min': '5 Minutes',
                 'timer.10min': '10 Minutes',

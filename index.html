@@ -1,6 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿                        <div class="mega-menu__layout">
-                        <div class="mega-menu" id="megaMenuPersona">
-﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
@@ -176,21 +174,39 @@
     <!-- Amplitude Web SDK with Autocapture -->
     <script src="https://cdn.amplitude.com/script/b6c4ebe3ec4d16c8f5fd258d29653cfc.js"></script>
     <script>
-        window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
-        window.amplitude.init('b6c4ebe3ec4d16c8f5fd258d29653cfc', {
-            "fetchRemoteConfig": true,
-            "autocapture": {
-                "attribution": true,
-                "fileDownloads": true,
-                "formInteractions": true,
-                "pageViews": true,
-                "sessions": true,
-                "elementInteractions": true,
-                "networkTracking": true,
-                "webVitals": true,
-                "frustrationInteractions": true
+        (function initAmplitudeSafely() {
+            try {
+                var amplitude = window.amplitude;
+
+                if (!amplitude || typeof amplitude.init !== 'function') {
+                    console.warn('Amplitude SDK 未就绪，跳过初始化');
+                    return;
+                }
+
+                if (typeof amplitude.add === 'function' &&
+                    window.sessionReplay &&
+                    typeof window.sessionReplay.plugin === 'function') {
+                    amplitude.add(window.sessionReplay.plugin({ sampleRate: 1 }));
+                }
+
+                amplitude.init('b6c4ebe3ec4d16c8f5fd258d29653cfc', {
+                    "fetchRemoteConfig": true,
+                    "autocapture": {
+                        "attribution": true,
+                        "fileDownloads": true,
+                        "formInteractions": true,
+                        "pageViews": true,
+                        "sessions": true,
+                        "elementInteractions": true,
+                        "networkTracking": true,
+                        "webVitals": true,
+                        "frustrationInteractions": true
+                    }
+                });
+            } catch (error) {
+                console.warn('Amplitude 初始化失败:', error);
             }
-        });
+        })();
     </script>
 </head>
 <body>
@@ -961,6 +977,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
 
     <!-- Firebase 模块 -->
     <script src="assets/js/firebase-config.js"></script>

@@ -1,0 +1,204 @@
+{
+  "name": "声音疗愈空间 - Sound Healing App",
+  "short_name": "Sound Healing",
+  "description": "专业音频疗法平台，提供213+免费疗愈音频，帮助放松、冥想和改善睡眠质量",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#1a1a2e",
+  "background_color": "#0f0f23",
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "categories": ["health", "wellness", "meditation", "music", "lifestyle"],
+  "shortcuts": [
+    {
+      "name": "播放收藏",
+      "short_name": "收藏",
+      "description": "快速访问收藏的音频",
+      "url": "/favorites",
+      "icons": [
+        {
+          "src": "/assets/icons/favorite-96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "睡眠音乐",
+      "short_name": "睡眠",
+      "description": "播放助眠音乐",
+      "url": "/category/sleep",
+      "icons": [
+        {
+          "src": "/assets/icons/sleep-96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "冥想音乐",
+      "short_name": "冥想",
+      "description": "播放冥想音乐",
+      "url": "/category/meditation",
+      "icons": [
+        {
+          "src": "/assets/icons/meditation-96.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "icons": [
+    {
+      "src": "/assets/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icons/maskable-icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/icons/maskable-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/screenshots/desktop-main.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "主界面 - 桌面版"
+    },
+    {
+      "src": "/assets/screenshots/desktop-player.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "音频播放器 - 桌面版"
+    },
+    {
+      "src": "/assets/screenshots/mobile-main.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "主界面 - 移动版"
+    },
+    {
+      "src": "/assets/screenshots/mobile-player.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "音频播放器 - 移动版"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "protocol_handlers": [
+    {
+      "protocol": "web+soundhealing",
+      "url": "/play?track=%s"
+    }
+  ],
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+  "handle_links": "preferred",
+  "capture_links": "new-client",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui",
+    "browser"
+  ],
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "files": [
+        {
+          "name": "audio",
+          "accept": ["audio/*"]
+        }
+      ]
+    }
+  },
+  "file_handlers": [
+    {
+      "action": "/play",
+      "accept": {
+        "audio/*": [".mp3", ".wav", ".ogg", ".m4a", ".flac"]
+      }
+    }
+  ],
+  "share_target": {
+    "action": "/share-recommendation",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "scope_extensions": [
+    {
+      "origin": "https://archive.org"
+    }
+  ]
+}

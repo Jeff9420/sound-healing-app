@@ -23,24 +23,27 @@ class FirebaseAuthManager {
 
         try {
             // 等待一秒钟确保Firebase模块加载
-            setTimeout(() => {
-                // 尝试导入Firebase Auth
-                import('./firebase-auth.js').then(({ auth, onAuthStateChanged }) => {
+            const initializeAuth = async () => {
+                try {
+                    const { auth, onAuthStateChanged, getCurrentUser } = await import('./firebase-auth.js');
                     this.auth = auth;
+                    this.currentUser = typeof getCurrentUser === 'function' ? getCurrentUser(auth) : null;
                     console.log('✅ Firebase Auth模块加载成功');
 
-                    // 设置认证状态监听
                     onAuthStateChanged((user) => {
-                        this.currentUser = user;
+                        this.currentUser = user || null;
                         console.log('🔐 认证状态更新:', user ? '已登录' : '未登录');
                         this.updateUI(user);
                     });
 
-                }).catch(error => {
+                    this.updateUI(this.currentUser);
+                } catch (error) {
                     console.warn('⚠️ Firebase Auth模块加载失败，使用匿名模式:', error);
                     this.setupAnonymousMode();
-                });
-            }, 1000);
+                }
+            };
+
+            setTimeout(initializeAuth, 600);
 
         } catch (error) {
             console.warn('⚠️ Firebase Auth初始化失败，使用匿名模式:', error);
@@ -163,7 +166,8 @@ class FirebaseAuthManager {
                 throw new Error('Firebase Auth 未初始化');
             }
 
-            const result = await this.auth.signInAnonymously();
+            const { signInAnonymously } = await import('./firebase-auth.js');
+            const result = await signInAnonymously(this.auth);
             window.showNotification('✅ 已进入匿名模式', 'info');
             return result.user;
         } catch (error) {
