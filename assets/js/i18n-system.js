@@ -202,8 +202,8 @@ class InternationalizationSystem {
                 'app.ready': '声音疗愈空间已准备就绪！',
 
                 // 加载屏幕
-                'loading.text': '🎵 正在加载声音疗愈空间...',
-                'loading.subtext': '请稍候，正在加载疗愈音频',
+                'loading.text': '🎵 Loading sound healing space...',
+                'loading.subtext': 'Please wait, loading healing audio...',
 
                 // 模态框
                 'modal.close': '×',
