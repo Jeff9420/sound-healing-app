@@ -332,16 +332,20 @@
    动画性能监控
    ============================================= */
 
-/* 开发调试：显示GPU层 */
-.debug-layers * {
+/* 开发调试：显示GPU层 - 默认隐藏 */
+.debug-layers {
+    display: none !important;
+}
+
+.debug-layers.active * {
     outline: 1px solid rgba(255, 0, 0, 0.3);
 }
 
-.debug-layers .cloud {
+.debug-layers.active .cloud {
     outline: 1px solid rgba(0, 255, 0, 0.5);
 }
 
-.debug-layers .ecosystem-card {
+.debug-layers.active .ecosystem-card {
     outline: 1px solid rgba(0, 0, 255, 0.5);
 }
 

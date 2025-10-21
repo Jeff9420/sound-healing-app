@@ -548,13 +548,17 @@ cartodb-btn {
    调试工具
    ============================================= */
 
-/* 调试模式：显示触摸区域边界 */
-.debug-touch-targets * {
+/* 调试模式：显示触摸区域边界 - 默认隐藏 */
+.debug-touch-targets {
+    display: none !important;
+}
+
+.debug-touch-targets.active * {
     outline: 1px dashed rgba(255, 0, 0, 0.3) !important;
     outline-offset: 2px !important;
 }
 
-.debug-touch-targets .small-touch-target::before {
+.debug-touch-targets.active .small-touch-target::before {
     border: 1px solid rgba(255, 0, 0, 0.5) !important;
 }
 

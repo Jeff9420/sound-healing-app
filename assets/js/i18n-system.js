@@ -325,6 +325,7 @@ class InternationalizationSystem {
                 'message.timerSet': '定时器设置为 {duration} 分钟',
                 'message.loading': '加载中...',
                 'message.error': '出现错误',
+                'message.readyToListen': '准备好聆听了吗？即将开始疗愈之旅',
                 
                 // 智能推荐
                 'recommendation.morning': '清晨时光，唤醒内心的平静与专注',

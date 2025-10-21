@@ -335,8 +335,12 @@
    性能监控和调试
    ================================================================= */
 
-/* 开发模式：显示图层边界（调试用） */
-.debug-layers * {
+/* 开发模式：显示图层边界（调试用） - 默认隐藏 */
+.debug-layers {
+    display: none !important;
+}
+
+.debug-layers.active * {
     outline: 1px solid rgba(255, 0, 0, 0.3) !important;
 }
 
