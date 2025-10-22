@@ -14,48 +14,13 @@
       "use": "@vercel/static"
     }
   ],
-  "routes": [
-    {
-      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2))",
-      "headers": {
-        "Cache-Control": "public, max-age=31536000, immutable"
-      }
-    },
-    {
-      "src": "/(.*\\.(mp3|wav|ogg|mp4))",
-      "headers": {
-        "Cache-Control": "public, max-age=31536000, immutable",
-        "Access-Control-Allow-Origin": "*"
-      }
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
         {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://media.soundflows.app https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://cdn.amplitude.com https://*.amplitude.com https://www.gstatic.com https://firebase.googleapis.com https://apis.google.com; style-src 'self' 'unsafe-inline' https://media.soundflows.app; img-src 'self' data: https://media.soundflows.app https://*.soundflows.app https://*.vercel.app https://www.google-analytics.com https://www.googletagmanager.com; media-src 'self' https://media.soundflows.app; connect-src 'self' https://media.soundflows.app https://*.soundflows.app https://*.vercel.app https://www.googletagmanager.com https://www.google-analytics.com https://stats.g.doubleclick.net https://www.clarity.ms https://cdn.amplitude.com https://api.amplitude.com https://api2.amplitude.com https://*.amplitude.com https://api.hsforms.com https://*.hubspot.com https://hooks.zapier.com https://firebase.googleapis.com https://firebaseio.com https://*.firebaseio.com https://identitytoolkit.googleapis.com; font-src 'self' data:; frame-src https://www.googletagmanager.com https://firebase.googleapis.com; object-src 'none'; base-uri 'self'; form-action 'self';"
-        },
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=()"
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
         }
       ]
     }
