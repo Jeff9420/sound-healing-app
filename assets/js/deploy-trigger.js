@@ -1,1 +1,1 @@
-// Trigger deployment - 2025年10月22日 15:50:00 - CORS error handling improvements
+// Trigger deployment - 2025年10月22日 15:30:00 - Enhanced video path detection with multiple fallbacks

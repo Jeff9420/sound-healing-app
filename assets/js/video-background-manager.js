@@ -131,38 +131,39 @@ class VideoBackgroundManager {
         }, 3000);
     }
 
-    async fetchVideoBlob(url) {
-        try {
-            // 首先尝试CORS请求
-            const response = await fetch(url, { mode: 'cors', credentials: 'omit' });
-            if (!response.ok) {
-                throw new Error(`视频资源下载失败: ${response.status} ${response.statusText}`);
-            }
-            const blob = await response.blob();
-            return URL.createObjectURL(blob);
-        } catch (corsError) {
-            // CORS失败时，尝试使用代理方案
-            console.warn('⚠️ CORS请求失败，尝试代理方案:', corsError.message);
+    async fetchVideoBlob(initialUrl) {
+        // 获取所有可能的视频路径
+        const allPaths = this.currentVideoPaths || [initialUrl];
 
-            // 检查是否可以使用代理
-            const proxyUrl = this.getProxyUrl(url);
-            if (proxyUrl) {
-                try {
-                    const proxyResponse = await fetch(proxyUrl, { mode: 'cors', credentials: 'omit' });
-                    if (proxyResponse.ok) {
-                        const blob = await proxyResponse.blob();
-                        console.log('✅ 通过代理成功加载视频:', url);
-                        return URL.createObjectURL(blob);
-                    }
-                } catch (proxyError) {
-                    console.warn('⚠️ 代理加载也失败:', proxyError.message);
+        for (let i = 0; i < allPaths.length; i++) {
+            const url = allPaths[i];
+            try {
+                console.log(`[Video] 尝试路径 ${i + 1}/${allPaths.length}: ${url}`);
+
+                // 首先尝试CORS请求
+                const response = await fetch(url, { mode: 'cors', credentials: 'omit' });
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const blob = await response.blob();
+                console.log(`✅ 视频加载成功 (路径 ${i + 1}): ${url}`);
+                return URL.createObjectURL(blob);
+
+            } catch (error) {
+                console.warn(`⚠️ 路径 ${i + 1} 失败: ${url} - ${error.message}`);
+
+                // 如果不是最后一个路径，继续尝试下一个
+                if (i < allPaths.length - 1) {
+                    console.log(`🔄 尝试下一个路径...`);
+                    continue;
                 }
             }
-
-            // 最后降级方案：直接使用视频URL（可能有限制）
-            console.warn('⚠️ 降级到直接视频加载模式');
-            throw new Error(`无法加载视频资源: ${url}`);
         }
+
+        // 所有路径都失败了
+        console.error('❌ 所有视频路径都尝试失败');
+        throw new Error(`无法加载视频资源，已尝试 ${allPaths.length} 个路径`);
     }
 
     /**
@@ -316,13 +317,24 @@ class VideoBackgroundManager {
     }
 
     /**
-     * 获取视频URL
+     * 获取视频URL - 支持多个路径尝试
      */
     getVideoUrl(category) {
         const config = this.videoConfig.categories[category];
         if (!config) return null;
 
-        return `${this.videoConfig.baseUrl}${config.filename}`;
+        // 按优先级尝试多个路径
+        const videoPaths = [
+            `${this.videoConfig.baseUrl}video/${config.filename}`,   // video 子目录
+            `${this.videoConfig.baseUrl}videos/${config.filename}`,  // videos 子目录
+            `${this.videoConfig.baseUrl}${config.filename}`          // 根目录
+        ];
+
+        // 存储所有可能的路径供后续尝试
+        this.currentVideoPaths = videoPaths;
+
+        // 返回第一个路径（在 fetchVideoBlob 中会尝试多个路径）
+        return videoPaths[0];
     }
 
     /**
