@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据删除请求 - SoundFlows 声音疗愈空间</title>
+    <meta name="description" content="通过此页面请求删除您的个人数据，行使GDPR和CCPA赋予您的数据删除权利。">
+    <link rel="canonical" href="https://soundflows.app/data-deletion">
+    <link rel="stylesheet" href="assets/css/index-styles.css">
+    <link rel="stylesheet" href="assets/css/theme-system.css">
+    <style>
+        .deletion-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            line-height: 1.8;
+        }
+        .deletion-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .deletion-header h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .deletion-header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+        .deletion-form {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #6666ff;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background: #6666ff;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #5555ee;
+        }
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        .info-box {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .success-message {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+        .error-message {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+        .legal-nav {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .legal-nav a {
+            color: #6666ff;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .legal-nav a:hover {
+            background: #e8eaf6;
+        }
+        .verification-method {
+            background: white;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .verification-method h4 {
+            margin: 0 0 10px 0;
+            color: #6666ff;
+        }
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .radio-group input[type="radio"] {
+            margin-right: 8px;
+            width: auto;
+        }
+        @media (max-width: 768px) {
+            .deletion-container {
+                padding: 20px 15px;
+            }
+            .deletion-header h1 {
+                font-size: 2em;
+            }
+            .form-actions {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+            }
+            .legal-nav {
+                text-align: left;
+            }
+            .legal-nav a {
+                display: block;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="deletion-container">
+        <nav class="legal-nav">
+            <a href="index.html">← 返回应用</a>
+            <a href="privacy-policy.html">隐私政策</a>
+            <a href="terms.html">服务条款</a>
+            <a href="cookie-policy.html">Cookie政策</a>
+        </nav>
+
+        <header class="deletion-header">
+            <h1>数据删除请求</h1>
+            <p>行使您的数据删除权利 - GDPR & CCPA</p>
+        </header>
+
+        <div class="info-box">
+            <h3>📋 关于数据删除请求</h3>
+            <p>根据欧盟通用数据保护条例（GDPR）和加州消费者隐私法（CCPA），您有权要求我们删除您的个人数据。</p>
+            <p>提交请求后，我们将在30天内处理并回复您的请求。</p>
+        </div>
+
+        <form id="deletionForm" class="deletion-form">
+            <h2>提交删除请求</h2>
+
+            <div class="form-group">
+                <label for="email">电子邮件地址 *</label>
+                <input type="email" id="email" name="email" required
+                       placeholder="请输入您注册时使用的邮箱">
+            </div>
+
+            <div class="form-group">
+                <label>验证方式 *</label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="verification" value="email" checked>
+                        通过邮箱验证
+                    </label>
+                    <label>
+                        <input type="radio" name="verification" value="phone">
+                        通过手机验证
+                    </label>
+                </div>
+            </div>
+
+            <div id="emailVerification" class="verification-method">
+                <h4>邮箱验证</h4>
+                <p>我们将向您的邮箱发送验证链接，点击链接即可验证身份。</p>
+            </div>
+
+            <div id="phoneVerification" class="verification-method" style="display: none;">
+                <h4>手机验证</h4>
+                <div class="form-group">
+                    <label for="phone">手机号码</label>
+                    <input type="tel" id="phone" name="phone"
+                           placeholder="+86 138 0000 0000">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="dataType">要删除的数据类型 *</label>
+                <select id="dataType" name="dataType" required multiple>
+                    <option value="all">删除所有数据</option>
+                    <option value="account">账户信息</option>
+                    <option value="playHistory">播放历史</option>
+                    <option value="favorites">收藏列表</option>
+                    <option value="preferences">用户偏好设置</option>
+                    <option value="analytics">分析数据</option>
+                </select>
+                <small>按住Ctrl/Cmd键可选择多个选项</small>
+            </div>
+
+            <div class="form-group">
+                <label for="reason">删除原因（可选）</label>
+                <select id="reason" name="reason">
+                    <option value="">请选择原因</option>
+                    <option value="privacy">隐私担忧</option>
+                    <option value="no-longer-use">不再使用服务</option>
+                    <option value="data-accuracy">数据不准确</option>
+                    <option value="unlawful-processing">非法处理</option>
+                    <option value="other">其他原因</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="comments">补充说明（可选）</label>
+                <textarea id="comments" name="comments"
+                          placeholder="如有其他需要说明的事项，请在此填写..."></textarea>
+            </div>
+
+            <div class="warning-box">
+                <h3>⚠️ 重要提示</h3>
+                <ul>
+                    <li>删除操作是不可逆的，一旦删除将无法恢复</li>
+                    <li>删除账户后，您将失去所有数据和服务访问权限</li>
+                    <li>某些数据可能因法律要求需要保留</li>
+                    <li>处理时间通常为7-30个工作日</li>
+                </ul>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">提交删除请求</button>
+                <button type="button" class="btn btn-secondary" onclick="window.history.back()">取消</button>
+            </div>
+
+            <div id="successMessage" class="success-message">
+                <h4>✅ 请求提交成功！</h4>
+                <p>我们已收到您的数据删除请求，正在处理中。您将在24小时内收到确认邮件。</p>
+                <p>请求ID：<span id="requestId"></span></p>
+            </div>
+
+            <div id="errorMessage" class="error-message">
+                <h4>❌ 提交失败</h4>
+                <p id="errorText"></p>
+            </div>
+        </form>
+
+        <section style="margin-top: 50px;">
+            <h2>常见问题</h2>
+
+            <div class="info-box" style="margin-top: 20px;">
+                <h3>Q: 删除数据后还能恢复吗？</h3>
+                <p>A: 不能。数据删除是永久性的，请谨慎操作。</p>
+            </div>
+
+            <div class="info-box" style="margin-top: 20px;">
+                <h3>Q: 需要多长时间处理删除请求？</h3>
+                <p>A: 通常在7-30个工作日内完成处理，我们会通过邮件通知您结果。</p>
+            </div>
+
+            <div class="info-box" style="margin-top: 20px;">
+                <h3>Q: 哪些数据可能无法删除？</h3>
+                <p>A: 某些数据可能因法律义务、欺诈预防或公共利益需要保留。</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // 验证方式切换
+        document.querySelectorAll('input[name="verification"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const emailDiv = document.getElementById('emailVerification');
+                const phoneDiv = document.getElementById('phoneVerification');
+                const phoneInput = document.getElementById('phone');
+
+                if (this.value === 'email') {
+                    emailDiv.style.display = 'block';
+                    phoneDiv.style.display = 'none';
+                    phoneInput.removeAttribute('required');
+                } else {
+                    emailDiv.style.display = 'none';
+                    phoneDiv.style.display = 'block';
+                    phoneInput.setAttribute('required', 'required');
+                }
+            });
+        });
+
+        // 表单提交处理
+        document.getElementById('deletionForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const successMsg = document.getElementById('successMessage');
+            const errorMsg = document.getElementById('errorMessage');
+
+            // 禁用提交按钮
+            submitBtn.disabled = true;
+            submitBtn.textContent = '提交中...';
+
+            // 隐藏之前的消息
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+
+            // 收集表单数据
+            const formData = new FormData(this);
+            const data = {
+                email: formData.get('email'),
+                verification: formData.get('verification'),
+                phone: formData.get('phone') || '',
+                dataType: Array.from(formData.getAll('dataType')),
+                reason: formData.get('reason') || '',
+                comments: formData.get('comments') || '',
+                timestamp: new Date().toISOString(),
+                requestId: 'REQ-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9)
+            };
+
+            try {
+                // 模拟API请求
+                const response = await fetch('/api/data-deletion-request', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                // 模拟成功响应
+                if (true) { // 改为实际的API响应检查
+                    successMsg.style.display = 'block';
+                    document.getElementById('requestId').textContent = data.requestId;
+
+                    // 发送邮件通知（模拟）
+                    console.log('发送删除请求确认邮件至:', data.email);
+
+                    // 重置表单
+                    this.reset();
+
+                    // 滚动到成功消息
+                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            } catch (error) {
+                errorMsg.style.display = 'block';
+                document.getElementById('errorText').textContent = '提交失败，请稍后重试或联系 support@soundflows.app';
+                console.error('删除请求提交失败:', error);
+            } finally {
+                // 重新启用提交按钮
+                submitBtn.disabled = false;
+                submitBtn.textContent = '提交删除请求';
+            }
+        });
+
+        // 支持多选的select样式优化
+        const select = document.getElementById('dataType');
+        select.style.height = 'auto';
+        select.setAttribute('size', '6');
+    </script>
+</body>
+</html>

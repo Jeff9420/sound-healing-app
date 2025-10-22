@@ -45,63 +45,36 @@ window.SITE_CONFIG = window.SITE_CONFIG || {
      * 注意: 大多数邮件 API 不支持直接从前端调用 (CORS限制),
      * 需要通过后端中间件或 Zapier/Make.com 等无代码工具。
      */
+    /**
+     * 邮件营销自动化配置
+     *
+     * 当前使用HubSpot内置自动化
+     * 通过HubSpot Workflows自动处理邮件发送
+     *
+     * 如需切换到其他平台，请参考下方示例配置
+     */
     emailAutomation: {
-        // 平台类型: "mailchimp" | "sendgrid" | "brevo" | "hubspot" | "zapier" | "custom"
-        provider: "custom",
+        // 使用HubSpot内置自动化
+        provider: "hubspot",
 
-        // API 端点
-        // Mailchimp (通过后端): "https://your-backend.com/api/email/subscribe"
-        // SendGrid (通过后端): "https://api.sendgrid.com/v3/marketing/contacts"
-        // Brevo (通过后端): "https://api.brevo.com/v3/contacts"
-        // Zapier Webhook: "https://hooks.zapier.com/hooks/catch/12345/abcde/"
-        // HubSpot: 留空 (通过 CRM 自动化处理)
+        // HubSpot通过CRM Workflows处理，无需直接API调用
         endpoint: "",
 
-        // HTTP 方法
-        method: "POST",
+        // 邮件标签（在HubSpot中用于触发自动化）
+        tags: ["7-day-meditation-plan", "website-subscriber", "soundflows-user"],
 
-        // Mailchimp Audience ID 或其他平台的列表 ID
-        // 获取方式: Mailchimp -> Audience -> Settings -> Audience ID
-        listId: "",
-
-        // 是否启用双重确认 (Double Opt-In)
-        // true: 用户需要点击确认邮件才算订阅成功
-        // false: 提交后立即订阅
+        // HubSpot自动处理双重确认
         doubleOptIn: false,
 
-        // 默认标签 (用于自动化流程触发)
-        // 示例: ["website-subscriber", "7-day-plan"]
-        tags: [],
-
-        // 自定义 HTTP 请求头
-        // 注意: 如果使用后端,认证应在后端处理,这里留空
-        headers: {
-            // "Content-Type": "application/json" // 自动添加
-        },
-
-        // 认证方案: "Bearer" | "Basic" | "api-key" | ""
-        // Bearer: Authorization: Bearer {apiKey}
-        // Basic: Authorization: Basic {base64(apiKey:apiSecret)}
-        // api-key: Authorization: api-key {apiKey} (Brevo 使用)
-        // "": 仅使用 apiKey 值作为 Authorization
-        authScheme: "Bearer",
-
-        // API 密钥
-        // 注意: 生产环境不应在前端暴露 API 密钥!
-        // 使用后端中间件或 Zapier/Make.com 代替
-        apiKey: "",
-
-        // API 密钥对 (用于 Basic Auth)
-        apiSecret: "",
-
-        // 默认请求载荷 (会合并到每个请求中)
-        // 示例:
-        // {
-        //     "source": "website",
-        //     "language": "zh-CN",
-        //     "updateEnabled": true
-        // }
-        defaultPayload: {}
+        // 默认合并字段
+        defaultMergeFields: {
+            FNAME: "",
+            LNAME: "",
+            GOAL: "",
+            TIME_PREF: "",
+            LANGUAGE: "zh-CN",
+            SOURCE: "website"
+        }
     },
 
     /**
