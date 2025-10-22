@@ -1,17 +1,8 @@
 import { defineConfig } from 'vite'
-import { resolve } from 'path'
 import { VitePWA } from 'vite-plugin-pwa'
-import typescript from '@rollup/plugin-typescript'
 
 export default defineConfig({
   plugins: [
-    typescript({
-      target: 'es2020',
-      rootDir: 'src',
-      declaration: true,
-      declarationMap: true,
-      sourceMap: true,
-    }),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
@@ -70,18 +61,7 @@ export default defineConfig({
       }
     })
   ],
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src'),
-      '@/components': resolve(__dirname, 'src/components'),
-      '@/stores': resolve(__dirname, 'src/stores'),
-      '@/utils': resolve(__dirname, 'src/utils'),
-      '@/types': resolve(__dirname, 'src/types'),
-      '@/assets': resolve(__dirname, 'src/assets')
-    }
-  },
   build: {
-    target: 'es2020',
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: true,
@@ -95,20 +75,9 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html')
-      },
-      output: {
-        manualChunks: {
-          vendor: ['@firebase/app', '@firebase/auth', '@firebase/firestore'],
-          audio: ['./src/audio/AudioManager'],
-          ui: ['./src/ui/UIController'],
-          utils: ['./src/utils/index']
-        }
       }
     },
     chunkSizeWarningLimit: 1000
-  },
-  optimizeDeps: {
-    include: ['@firebase/app', '@firebase/auth', '@firebase/firestore']
   },
   server: {
     port: 3000,
