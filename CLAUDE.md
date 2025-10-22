@@ -4,7 +4,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a **声音疗愈 (Sound Healing)** web application - a local audio player with immersive background scenes and playlist functionality. The app features 213+ audio files across 9 categories (Animal sounds, Chakra, Fire, Hypnosis, Meditation, Rain, Running water, Singing bowl sound, Subconscious Therapy) with full-screen animated backgrounds that automatically match the playing audio type.
+This is a **声音疗愈 (Sound Healing)** v3.0.0 - An enterprise-grade modern web application for sound healing and meditation. The app features 213+ high-quality audio files hosted on Internet Archive, 9 dynamic video backgrounds on Cloudflare R2 CDN, and supports 5 languages with full PWA capabilities.
+
+### Current Production Status
+- **Version**: v3.0.0 (Enterprise-grade)
+- **Live Site**: https://soundflows.app
+- **Architecture**: Modern static site with distributed resources
+- **Deployment**: GitHub → Vercel CI/CD
+
+### Resource Distribution
+- **Audio**: Internet Archive (https://archive.org/download/sound-healing-collection/)
+- **Video**: Cloudflare R2 CDN (https://media.soundflows.app/)
+- **Frontend**: Vercel Edge Network
+- **Code**: GitHub repository
 
 ## Multilingual System (i18n)
 
