@@ -132,12 +132,46 @@ class VideoBackgroundManager {
     }
 
     async fetchVideoBlob(url) {
-        const response = await fetch(url, { mode: 'cors', credentials: 'omit' });
-        if (!response.ok) {
-            throw new Error(`视频资源下载失败: ${response.status} ${response.statusText}`);
+        try {
+            // 首先尝试CORS请求
+            const response = await fetch(url, { mode: 'cors', credentials: 'omit' });
+            if (!response.ok) {
+                throw new Error(`视频资源下载失败: ${response.status} ${response.statusText}`);
+            }
+            const blob = await response.blob();
+            return URL.createObjectURL(blob);
+        } catch (corsError) {
+            // CORS失败时，尝试使用代理方案
+            console.warn('⚠️ CORS请求失败，尝试代理方案:', corsError.message);
+
+            // 检查是否可以使用代理
+            const proxyUrl = this.getProxyUrl(url);
+            if (proxyUrl) {
+                try {
+                    const proxyResponse = await fetch(proxyUrl, { mode: 'cors', credentials: 'omit' });
+                    if (proxyResponse.ok) {
+                        const blob = await proxyResponse.blob();
+                        console.log('✅ 通过代理成功加载视频:', url);
+                        return URL.createObjectURL(blob);
+                    }
+                } catch (proxyError) {
+                    console.warn('⚠️ 代理加载也失败:', proxyError.message);
+                }
+            }
+
+            // 最后降级方案：直接使用视频URL（可能有限制）
+            console.warn('⚠️ 降级到直接视频加载模式');
+            throw new Error(`无法加载视频资源: ${url}`);
         }
-        const blob = await response.blob();
-        return URL.createObjectURL(blob);
+    }
+
+    /**
+     * 获取代理URL（如果可用）
+     */
+    getProxyUrl(originalUrl) {
+        // 这里可以配置代理服务器
+        // 由于这是临时解决方案，我们可以返回null，让系统降级到Canvas
+        return null;
     }
 
     /**

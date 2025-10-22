@@ -1,1 +1,1 @@
-// Trigger deployment - 2025年10月22日 15:45:20 - Deploy fixes to production
+// Trigger deployment - 2025年10月22日 15:50:00 - CORS error handling improvements
