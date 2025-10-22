@@ -51,7 +51,9 @@ This is a **声音疗愈 (Sound Healing)** web application - a local audio playe
 4. **BackgroundSceneManager** (`assets/js/background-scene-manager.js`) - Canvas fallback animated scenes that auto-switch based on audio category
 
 ### Configuration System
-- **`assets/js/audio-config.js`** - Central configuration file mapping audio categories to actual files in `assets/audio/` folders
+- **`assets/js/audio-config.js`** - Central configuration file mapping audio categories to Archive.org URLs
+  - **Audio files**: Hosted on Internet Archive (https://archive.org/download/sound-healing-collection/)
+  - **Video files**: Hosted on Cloudflare R2 CDN (https://media.soundflows.app/)
 - Audio files are organized by category folders, with each folder representing a playlist
 - Configuration auto-generated from actual file system structure
 
@@ -64,29 +66,34 @@ This is a **声音疗愈 (Sound Healing)** web application - a local audio playe
 
 ## Audio File Management
 
-### File Structure
+### File Hosting Structure
+**IMPORTANT**: Audio files are hosted on Internet Archive, NOT locally
+- **Archive.org URL**: https://archive.org/download/sound-healing-collection/
+- **Local folders**: `assets/audio/` - Reference only, actual files hosted on Archive.org
+
+### Archive.org Folder Structure
 ```
-assets/audio/
-├── Animal sounds/     # 26 files
-├── Chakra/           # 7 files  
-├── Fire/             # 4 files
-├── hypnosis/         # 70 files
-├── meditation/       # 14 files
-├── Rain/             # 14 files
-├── running water/    # 6 files
-├── Singing bowl sound/ # 61 files
-└── Subconscious Therapy/ # 11 files
+https://archive.org/download/sound-healing-collection/
+├── animal-sounds/        # 26 files (renamed from "Animal sounds")
+├── chakra/              # 7 files (renamed from "Chakra")
+├── fire-sounds/         # 4 files (renamed from "Fire")
+├── hypnosis/            # 70 files
+├── meditation/          # 14 files
+├── rain-sounds/         # 14 files (renamed from "Rain")
+├── water-sounds/        # 6 files (renamed from "running water")
+├── singing-bowls/       # 61 files (renamed from "Singing bowl sound")
+└── subconscious-therapy/ # 11 files (renamed from "Subconscious Therapy")
 ```
 
 ### Format Compatibility
-- **Primary format**: MP3 (91.5% of files)
-- **Compatibility issue**: Some legacy WMA files exist but have browser support limitations
+- **Primary format**: MP3 (100% of files on Archive.org)
+- **No local WMA files**: All legacy formats converted to MP3 for Archive.org
 - **AudioManager automatically detects supported formats** and handles graceful degradation
 
 ### File Naming Convention
 - Files have had numeric prefixes removed for cleaner presentation
-- Chinese filenames are preserved as they exist in the actual audio folders
-- Configuration file maps English category keys to Chinese display names
+- Chinese filenames are preserved as they exist in the Archive.org collection
+- **Folder mapping**: `audio-config.js` maps category keys to Archive.org folder names
 
 ## Development Commands
 
@@ -166,14 +173,14 @@ audioManager.detectSupportedFormats()
 ## Configuration Updates
 
 ### Adding New Audio Files
-1. Add audio files to appropriate category folder in `assets/audio/`
-2. Run audio configuration update script to regenerate `audio-config.js`
+1. **Upload to Archive.org**: Add audio files to the Internet Archive collection
+2. Update `audio-config.js`: Add new filenames to appropriate category
 3. Test in `quick-audio-test.html`
 
 ### Adding New Categories
-1. Create new folder in `assets/audio/`
-2. Add category mapping in configuration update script
-3. Add video file to Cloudflare R2 (media.soundflows.app/)
+1. **Upload to Archive.org**: Create new folder and upload audio files
+2. Update `audio-config.js`: Add new category with Archive.org folder mapping
+3. **Upload video**: Add video file to Cloudflare R2 (media.soundflows.app/)
 4. Update video configuration in `VideoBackgroundManager.videoConfig`
 5. Add scene configuration in `BackgroundSceneManager.sceneConfigs`
 6. Update UI to handle new category
@@ -239,10 +246,11 @@ See `DEPLOYMENT.md` for complete deployment guide and troubleshooting
 ## Common Issues & Solutions
 
 ### Audio Not Playing
-1. Check browser console for format support warnings
-2. Verify file exists in correct category folder
-3. Check `audio-config.js` matches actual file structure
-4. Test with `browser-audio-test.html`
+1. **Check Archive.org URLs**: Verify audio-config.js uses `https://archive.org/download/sound-healing-collection/`
+2. **Check AUDIO_CONFIG loading**: Open console and verify `window.AUDIO_CONFIG` is defined
+3. **Test Archive.org links**: Verify URLs are accessible in browser
+4. Check browser console for format support warnings
+5. Test with `browser-audio-test.html`
 
 ### Scene Not Switching
 1. Verify category key matches exactly in `VideoBackgroundManager.videoConfig.categories`
@@ -255,8 +263,10 @@ See `DEPLOYMENT.md` for complete deployment guide and troubleshooting
 2. Verify `https://media.soundflows.app/` is accessible
 3. Test video URL directly in browser
 4. Check that `video-background-manager.js` has correct baseUrl configuration
+5. **Note**: Cloudflare may block automated browsers - real users should see videos normally
 
 ### Configuration Sync Issues
-- Audio configuration (`audio-config.js`) must match actual file structure
-- Use provided Python scripts to auto-generate config from file system
+- **Audio**: Must match Archive.org collection structure
+- **Video**: Must match Cloudflare R2 CDN structure
 - File names are case-sensitive and must match exactly
+- **Never use R2 CDN for audio** - only Archive.org
