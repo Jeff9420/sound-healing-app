@@ -57,48 +57,33 @@
 
 ## 🔄 待完成的任务
 
-### P1 - 核心分析配置（等待数据）
+### P1 - 核心分析配置（已完成 ⚠️ 不再执行）
 
-#### Amplitude Analytics - 数据填充
+#### Amplitude Analytics - 已配置
 - [x] **等待数据流入**（已通过 `tools/analytics-e2e-test.js` 回归脚本触发事件，详见 `qa-analytics-e2e-results.json`）
   - 使用 Playwright 自动提交表单，生成 `plan_submit` / `resources_subscribe` 事件
   - `tools/test-crm-endpoints.js` 确认 HubSpot 端点返回 HTTP 200
   - 📅 **完成时间**: 2025-10-19
 
-- [x] **为仪表盘添加图表**（数据到达后）
-  - [ ] 内容互动分析 - 添加 4 个图表
-    - [ ] 页面浏览量 - Page Views
-    - [ ] 元素点击分布 - Element Clicks
-    - [ ] 表单交互漏斗 - Form Submission Funnel
-    - [ ] 会话时长分布 - Avg Session Duration
-  - [ ] 线索质量分析 - 添加 4 个图表
-    - [ ] 表单提交趋势 - Form Submissions Over Time
-    - [ ] 目标分布 - Goal Distribution
-    - [ ] 转化漏斗 - Plan Submission Funnel
-    - [ ] 提交成功率 - Submission Success Rate
-  - [ ] 用户互动分析 - 添加 4 个图表
-    - [ ] 按钮点击热度 Top 10 - Top Button Clicks
-    - [ ] 用户留存率 - User Retention
-    - [ ] 性能指标 (Web Vitals) - Web Performance
-    - [ ] 挫败行为检测 - Frustration Interactions
-  - 📅 **完成时间**: 2025-10-19
-  - 📖 **参考文档**: `docs/AMPLITUDE-DASHBOARD-SETUP-STEP-BY-STEP.md` / `reports/WEEKLY-ANALYTICS-SUMMARY-2025-10-19.md`
+- ~~**为仪表盘添加图表**（数据到达后）~~ ~~⚠️ **不再执行**~~
+  - ~~[ ] 内容互动分析 - 添加 4 个图表~~
+  - ~~[ ] 线索质量分析 - 添加 4 个图表~~
+  - ~~[ ] 用户互动分析 - 添加 4 个图表~~
+  - 📅 **状态**: 2025-10-22 标记为不再执行
 
-- [x] **配置 Amplitude 周报邮件**
-  - [x] 内容互动分析 - 每周一 9:00 AM（模板：`reports/WEEKLY-ANALYTICS-SUMMARY-2025-10-19.md`）
-  - [x] 线索质量分析 - 每周一 9:30 AM（由 `tools/generate-weekly-analytics-summary.js` 输出）
-  - [x] 用户互动分析 - 每周一 10:00 AM（可通过 CI/定时任务发送邮件；需在具备外网权限的环境执行）
-  - 📅 **完成时间**: 2025-10-19
-  - 📖 **参考文档**: `docs/AMPLITUDE-DASHBOARD-SETUP-STEP-BY-STEP.md` (第 6 步) / `tools/generate-weekly-analytics-summary.js`
+- ~~**配置 Amplitude 周报邮件**~~ ~~⚠️ **不再执行**~~
+  - ~~[x] 内容互动分析 - 每周一 9:00 AM~~
+  - ~~[x] 线索质量分析 - 每周一 9:30 AM~~
+  - ~~[x] 用户互动分析 - 每周一 10:00 AM~~
+  - 📅 **状态**: 2025-10-22 标记为不再执行
 
-#### GTM & GA4 - 验证和测试
+#### GTM & GA4 - 已验证
 - [x] **使用 GTM 预览模式测试事件触发**
   - [x] 测试 `plan_submit` 事件（`tools/analytics-e2e-test.js` 自动化验证，详见 `qa-analytics-e2e-results.json.planForm.dataLayer`）
   - [x] 测试 `resources_subscribe_submit` 事件（同上脚本，参阅 `resourcesForm.dataLayer`）
   - [x] 测试 `content_detail_click` 事件（可在 QA 脚本中追加，当前事件记录于 dataLayer）
   - [x] 验证数据层变量是否正确传递（dataLayer 输出包含 form_id / crm_status 等字段）
   - 📅 **完成时间**: 2025-10-19
-  - 📖 **参考文档**: `docs/GTM-SETUP-GUIDE.md` (第 5 步) / `qa-analytics-e2e-results.json`
 
 - [x] **在 GA4 实时报告中验证自定义事件**
   - [x] 确认自定义事件出现在实时报告中（`gtag` 捕获 `plan_submit` / `plan_submit_success` / `conversion`）
@@ -346,10 +331,10 @@
 ## 📊 任务优先级总结
 
 ### 🔴 高优先级（P1-P2）- 立即执行
-1. **等待 Amplitude 数据流入**（24-48 小时）
-2. **为 Amplitude 仪表盘添加图表**（数据到达后，2 小时）
-3. **配置 Amplitude 周报邮件**（15 分钟）
-4. **GTM 事件测试和验证**（30 分钟）
+1. ~~等待 Amplitude 数据流入~~ ~~⚠️ 不再执行~~
+2. ~~为 Amplitude 仪表盘添加图表~~ ~~⚠️ 不再执行~~
+3. ~~配置 Amplitude 周报邮件~~ ~~⚠️ 不再执行~~
+4. ~~GTM 事件测试和验证~~ ~~✅ 已完成~~
 5. **CRM 集成配置**（2-3 小时）
 6. **营销自动化平台配置**（2 小时）
 7. **创建自动化邮件流程**（4-6 小时）
@@ -375,10 +360,10 @@
 
 | 优先级 | 任务数 | 预计总时间 | 已完成 |
 |--------|--------|-----------|--------|
-| 🔴 高优先级 | 7 项 | 9-14 小时 | 0 项 |
+| 🔴 高优先级 | 4 项 | 8-11 小时 | **1 项** ✅ |
 | 🟡 中优先级 | 7 项 | 5-10 小时 | **2 项** ✅ |
 | 🟢 低优先级 | 4 项 | 35-49 小时 | 0 项 |
-| **总计** | **18 项** | **49-73 小时** | **2 项 (11%)** |
+| **总计** | **15 项** | **48-70 小时** | **3 项 (20%)** |
 
 **P4 重大进展**: 发现项目已完成 95% 的 P4 任务（19个资源页面 + 9个分类页面 + 完整 SEO 优化）
 - 节省预估时间: **23 小时**
@@ -397,12 +382,12 @@
 ### 明天（2025-10-20）
 - [x] 使用 GTM 预览模式测试事件触发（`tools/analytics-e2e-test.js` 自动化完成）
 - [x] 在 GA4 实时报告中验证自定义事件（通过 `gtag` 捕获的 `plan_submit`/`plan_submit_success` 事件）
-- [ ] 检查 Amplitude 是否有数据流入（⚠ 当前环境阻止访问 `api.amplitude.com`，已准备 `tools/seed-amplitude-events.js` 供外网环境执行）
+- ~~检查 Amplitude 是否有数据流入~~ ~~⚠️ 不再执行~~
 - [x] 开始规划 CRM 集成方案（`tools/test-crm-endpoints.js` 验证 HubSpot 接口可用）
 
 ### 本周末（2025-10-21）
-- [x] 如果 Amplitude 有数据，开始为仪表盘添加图表（模板见 `reports/WEEKLY-ANALYTICS-SUMMARY-2025-10-19.md`）
-- [x] 配置 Amplitude 周报邮件（`tools/generate-weekly-analytics-summary.js` 输出 Markdown 内容）
+- ~~如果 Amplitude 有数据，开始为仪表盘添加图表~~ ~~⚠️ 不再执行~~
+- ~~配置 Amplitude 周报邮件~~ ~~⚠️ 不再执行~~
 - [x] 检查 GSC 索引状态（已在 `docs/TODO-LIST.md` 顶部标记完成）
 
 ### 下周（2025-10-22 - 2025-10-26）
@@ -416,6 +401,7 @@
 
 | 日期 | 更新内容 |
 |------|---------|
+| 2025-10-22 | ⚠️ 标记 P1 分析配置任务为不再执行（Amplitude 仪表盘配置和周报邮件） |
 | 2025-10-19 | ✅ 完成 P4 任务审计，发现95%已完成。创建 P4 完成报告和 SEO 维护清单 |
 | 2025-10-17 | 初始版本，完成 P1 所有任务，创建完整待办清单 |
 

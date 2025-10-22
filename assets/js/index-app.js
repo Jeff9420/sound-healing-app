@@ -36,24 +36,24 @@ console.log('Variables declared successfully');
 // Fallback Audio Data (in case external config fails to load)
 const audioData = {
     meditation: [
-        { name: '深度冥想引导', url: 'https://archive.org/download/sound-healing-collection/meditation/Deep%20Meditation.mp3' },
-        { name: '呼吸冥想练习', url: 'https://archive.org/download/sound-healing-collection/meditation/Breathing%20Meditation.mp3' },
-        { name: '正念冥想', url: 'https://archive.org/download/sound-healing-collection/meditation/Mindfulness%20Meditation.mp3' }
+        { name: '深度冥想引导', url: './assets/audio/meditation/深度冥想引导.mp3' },
+        { name: '呼吸冥想练习', url: './assets/audio/meditation/呼吸冥想练习.mp3' },
+        { name: '正念冥想', url: './assets/audio/meditation/正念冥想.mp3' }
     ],
     nature: [
-        { name: '森林鸟鸣', url: 'https://archive.org/download/sound-healing-collection/nature/Forest%20Birds.mp3' },
-        { name: '海浪声', url: 'https://archive.org/download/sound-healing-collection/nature/Ocean%20Waves.mp3' },
-        { name: '溪流声', url: 'https://archive.org/download/sound-healing-collection/nature/Stream%20Sounds.mp3' }
+        { name: '森林鸟鸣', url: './assets/audio/Animal sounds/森林鸟鸣.mp3' },
+        { name: '海浪声', url: './assets/audio/running water/海浪声.mp3' },
+        { name: '溪流声', url: './assets/audio/running water/溪流声.mp3' }
     ],
     rain: [
-        { name: '轻柔雨声', url: 'https://archive.org/download/sound-healing-collection/rain/Gentle%20Rain.mp3' },
-        { name: '雷雨声', url: 'https://archive.org/download/sound-healing-collection/rain/Thunderstorm.mp3' },
-        { name: '雨夜声音', url: 'https://archive.org/download/sound-healing-collection/rain/Rainy%20Night.mp3' }
+        { name: '轻柔雨声', url: './assets/audio/Rain/轻柔雨声.mp3' },
+        { name: '雷雨声', url: './assets/audio/Rain/雷雨声.mp3' },
+        { name: '雨夜声音', url: './assets/audio/Rain/雨夜声音.mp3' }
     ],
     singing: [
-        { name: '颂钵冥想', url: 'https://archive.org/download/sound-healing-collection/singing-bowl/Singing%20Bowl%20Meditation.mp3' },
-        { name: 'Tibetan Singing Bowl', url: 'https://archive.org/download/sound-healing-collection/singing-bowl/Tibetan%20Bowl.mp3' },
-        { name: 'Chakra Healing', url: 'https://archive.org/download/sound-healing-collection/singing-bowl/Chakra%20Healing.mp3' }
+        { name: '颂钵冥想', url: './assets/audio/Singing bowl sound/颂钵冥想.mp3' },
+        { name: 'Tibetan Singing Bowl', url: './assets/audio/Singing bowl sound/Tibetan%20Singing%20Bowl.mp3' },
+        { name: 'Chakra Healing', url: './assets/audio/Singing bowl sound/Chakra%20Healing.mp3' }
     ]
 };
 

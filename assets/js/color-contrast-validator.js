@@ -213,19 +213,20 @@ class ColorContrastValidator {
     }
 
     highlightIssue(element) {
-        // Add red border to failing elements
-        element.style.outline = '3px solid #ff0000';
-        element.style.outlineOffset = '2px';
-        element.style.boxShadow = '0 0 10px rgba(255, 0, 0, 0.5)';
+        // Disabled: Don't add red borders to failing elements to avoid UI issues
+        // This was causing red boxes around controls in production
+        // element.style.outline = '3px solid #ff0000';
+        // element.style.outlineOffset = '2px';
+        // element.style.boxShadow = '0 0 10px rgba(255, 0, 0, 0.5)';
+
+        // Instead, just log to console for debugging
+        console.warn('Contrast issue detected:', element);
     }
 
     clearHighlights() {
-        this.failedElements.forEach(element => {
-            element.style.outline = '';
-            element.style.outlineOffset = '';
-            element.style.boxShadow = '';
-        });
+        // Since we no longer add visual highlights, just clear the array
         this.failedElements = [];
+        console.log('Contrast validator highlights cleared');
     }
 
     logSummary() {
