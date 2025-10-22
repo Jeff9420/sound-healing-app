@@ -1,6 +1,6 @@
 {
     "name": "sound-healing",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "一个免费的在线声音疗愈应用，提供213+高质量音频文件，帮助放松、冥想和改善睡眠质量",
     "type": "module",
     "main": "src/main.ts",
