@@ -1,7 +1,7 @@
-// Production Audio Configuration - Archive.org (修正版)
-// 文件名已根据Archive.org实际存在的文件进行修正
+// Production Audio Configuration - R2 CDN
+// 高性能 Cloudflare R2 CDN 服务
 const AUDIO_CONFIG = {
-    baseUrl: 'https://archive.org/download/sound-healing-collection/',
+    baseUrl: 'https://media.soundflows.app/audio/',
     categories: {
         'Animal sounds': {
             icon: '🦅',
