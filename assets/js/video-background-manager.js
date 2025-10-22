@@ -583,3 +583,4 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = VideoBackgroundManager;
 }
 
+// Force redeploy - 2025年10月22日 14:12:07
