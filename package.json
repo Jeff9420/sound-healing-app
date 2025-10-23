@@ -48,5 +48,8 @@
   ],
   "devDependencies": {
     "serve": "^14.0.0"
+  },
+  "dependencies": {
+    "@sentry/browser": "^10.21.0"
   }
 }

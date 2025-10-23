@@ -26,7 +26,9 @@
             'goal': 'meditation_goal',
             'time': 'preferred_time',
             'firstname': 'firstname',
-            'lastname': 'lastname'
+            'lastname': 'lastname',
+            'phone': 'phone',
+            'company': 'company'
         };
 
         // 转换字段格式
@@ -61,11 +63,48 @@
             });
         }
 
+        // 添加生命周期阶段
+        fields.push({
+            name: 'lifecyclestage',
+            value: payload.goal ? 'lead' : 'subscriber'
+        });
+
+        // 添加来源追踪
+        const urlParams = new URLSearchParams(window.location.search);
+        const utmSource = urlParams.get('utm_source') || 'website';
+        const utmMedium = urlParams.get('utm_medium') || 'form';
+        const utmCampaign = urlParams.get('utm_campaign') || '';
+
+        if (utmSource) fields.push({ name: 'utm_source', value: utmSource });
+        if (utmMedium) fields.push({ name: 'utm_medium', value: utmMedium });
+        if (utmCampaign) fields.push({ name: 'utm_campaign', value: utmCampaign });
+
+        // 添加语言信息
+        fields.push({
+            name: 'preferred_language',
+            value: navigator.language || 'zh-CN'
+        });
+
         return {
             fields: fields,
             context: {
                 pageUri: window.location.href,
-                pageName: document.title || 'SoundFlows'
+                pageName: document.title || 'SoundFlows',
+                ipAddress: '{{auto}}' // HubSpot 会自动填充
+            },
+            legalConsentOptions: {
+                // 根据需要添加同意选项
+                consent: {
+                    consentToProcess: true,
+                    text: "I agree to allow Example Company to process my personal data.",
+                    communications: [
+                        {
+                            value: true,
+                            subscriptionTypeId: 999,
+                            text: "I agree to receive marketing communications from Example Company."
+                        }
+                    ]
+                }
             }
         };
     }

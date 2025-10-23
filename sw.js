@@ -231,7 +231,7 @@ self.addEventListener('push', event => {
   const options = {
     body: 'Time for your sound healing session',
     icon: '/assets/icons/icon-192x192.png',
-    badge: '/assets/icons/badge-72x72.png',
+    badge: '/assets/icons/icon-96x96.png',
     vibrate: [100, 50, 100],
     data: {
       url: '/'
@@ -240,12 +240,12 @@ self.addEventListener('push', event => {
       {
         action: 'play',
         title: 'Play Now',
-        icon: '/assets/icons/play-icon.png'
+        icon: '/assets/icons/icon-96x96.png'
       },
       {
         action: 'dismiss',
         title: 'Dismiss',
-        icon: '/assets/icons/dismiss-icon.png'
+        icon: '/assets/icons/icon-72x72.png'
       }
     ]
   };

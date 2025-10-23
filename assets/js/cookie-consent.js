@@ -47,17 +47,65 @@ class CookieConsent {
     }
 
     applyConsent(consent) {
-        switch (consent.type) {
-        case 'accepted':
-            this.enableAnalytics();
-            break;
-        case 'necessary':
-            this.disableAnalytics();
-            break;
-        case 'denied':
-            this.disableAll();
-            break;
+        // 配置 GTM 同意模式
+        if (window.gtag) {
+            // 首先设置默认拒绝状态
+            window.gtag('consent', 'default', {
+                'ad_storage': 'denied',
+                'analytics_storage': 'denied',
+                'personalization_storage': 'denied',
+                'functionality_storage': 'denied',
+                'security_storage': 'granted'  // 必要的始终允许
+            });
+
+            // 根据用户同意更新
+            switch (consent.type) {
+            case 'accepted':
+                // 接受所有
+                window.gtag('consent', 'update', {
+                    'ad_storage': 'granted',
+                    'analytics_storage': 'granted',
+                    'personalization_storage': 'granted',
+                    'functionality_storage': 'granted',
+                    'security_storage': 'granted'
+                });
+                this.enableAnalytics();
+                break;
+            case 'necessary':
+                // 仅必要
+                window.gtag('consent', 'update', {
+                    'functionality_storage': 'granted',
+                    'security_storage': 'granted'
+                });
+                this.disableAnalytics();
+                break;
+            case 'denied':
+                // 拒绝所有
+                window.gtag('consent', 'update', {
+                    'security_storage': 'granted'
+                });
+                this.disableAll();
+                break;
+            }
+        } else {
+            // 如果 GTM 不可用，使用原始逻辑
+            switch (consent.type) {
+            case 'accepted':
+                this.enableAnalytics();
+                break;
+            case 'necessary':
+                this.disableAnalytics();
+                break;
+            case 'denied':
+                this.disableAll();
+                break;
+            }
         }
+
+        // 触发自定义事件
+        document.dispatchEvent(new CustomEvent('cookieConsentApplied', {
+            detail: consent
+        }));
     }
 
     enableAnalytics() {
@@ -102,21 +150,31 @@ class CookieConsent {
         this.banner.innerHTML = `
       <div class="cookie-banner">
         <div class="cookie-content">
-          <h3 data-i18n="cookie.title">🍪 Cookie Preferences</h3>
-          <p data-i18n="cookie.description">We use cookies to enhance your experience and analyze our traffic.
-          By clicking "Accept All", you consent to our use of cookies.</p>
+          <h3 data-i18n="cookie.title">🍪 我们重视您的隐私</h3>
+          <p data-i18n="cookie.description">
+            我们使用 Cookie 来改善您的体验、分析网站使用情况，并提供个性化内容。
+            根据您的偏好，您可以接受或拒绝不同类型的 Cookie。
+            <a href="#privacy-policy" onclick="window.open('/privacy-policy.html', '_blank'); return false;" style="color: #e8b86d; text-decoration: underline;">查看隐私政策</a>
+          </p>
 
-          <div class="cookie-actions">
-            <button id="cookieAccept" class="btn-primary" data-i18n="cookie.acceptSelected">Accept & Continue</button>
-            <button id="cookieSettings" class="btn-secondary" data-i18n="cookie.preferences">Settings</button>
+          <div class="cookie-options">
+            <label class="cookie-option">
+              <input type="radio" name="cookieConsent" value="accepted" checked>
+              <span>接受所有 Cookie</span>
+              <small>包括分析、营销和个性化 Cookie</small>
+            </label>
+
+            <label class="cookie-option">
+              <input type="radio" name="cookieConsent" value="necessary">
+              <span>仅必要 Cookie</span>
+              <small>仅运行网站所需的 Cookie</small>
+            </label>
           </div>
 
           <div class="cookie-actions">
-            <button id="cookiePreferences" class="btn-secondary" data-i18n="cookie.preferences">Preferences</button>
-            <button id="cookieAccept" class="btn-primary" data-i18n="cookie.acceptSelected">Accept Selected</button>
+            <button id="cookieAccept" class="btn-primary" data-i18n="cookie.acceptSelected">确认选择</button>
+            <button id="cookiePreferences" class="btn-secondary" data-i18n="cookie.preferences">自定义设置</button>
           </div>
-
-          <a href="/privacy-policy.html" id="privacyPolicyLink" class="privacy-link" data-i18n="cookie.privacyPolicy" target="_blank">Privacy Policy</a>
         </div>
       </div>
     `;

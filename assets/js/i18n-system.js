@@ -565,7 +565,30 @@ class InternationalizationSystem {
 
                 // SEO Meta 标签
                 'seo.title': '声音疗愈 - 213+ 免费冥想音乐、助眠白噪音、自然疗愈声音',
-                'seo.description': '免费在线声音疗愈平台，提供 213+ 高品质音频：冥想音乐、雨声助眠、白噪音、自然声景。专为放松、睡眠、减压设计的声音疗愈工具。'
+                'seo.description': '免费在线声音疗愈平台，提供 213+ 高品质音频：冥想音乐、雨声助眠、白噪音、自然声景。专为放松、睡眠、减压设计的声音疗愈工具。',
+
+                // Social Share
+                'share.title': '分享',
+                'share.international': '国际平台',
+                'share.chinese': '中文平台',
+                'share.universal': '通用选项',
+                'share.facebook': 'Facebook',
+                'share.twitter': 'Twitter',
+                'share.linkedin': 'LinkedIn',
+                'share.whatsapp': 'WhatsApp',
+                'share.telegram': 'Telegram',
+                'share.wechat': '微信',
+                'share.weibo': '微博',
+                'share.qq': 'QQ',
+                'share.qzone': 'QQ空间',
+                'share.douban': '豆瓣',
+                'share.email': '邮件分享',
+                'share.copyLink': '复制链接',
+                'share.linkCopied': '链接已复制到剪贴板！',
+                'share.wechatTitle': '分享到微信',
+                'share.wechatInstructions': '使用微信扫描二维码分享',
+                'share.wechatTip': '或点击右上角"..."分享给好友',
+                'share.close': '关闭'
             },
             
             'en-US': {
@@ -908,6 +931,29 @@ class InternationalizationSystem {
                 'seo.title': 'Free Meditation Music & Rain Sounds for Sleeping | 213+ Healing Sounds',
                 'seo.description': 'Free online sound healing platform with 213+ audio tracks: meditation music, rain sounds for sleeping, white noise, nature sounds. Perfect for relaxation, sleep & stress relief.',
 
+                // Social Share
+                'share.title': 'Share',
+                'share.international': 'International',
+                'share.chinese': 'Chinese Platforms',
+                'share.universal': 'Universal',
+                'share.facebook': 'Facebook',
+                'share.twitter': 'Twitter',
+                'share.linkedin': 'LinkedIn',
+                'share.whatsapp': 'WhatsApp',
+                'share.telegram': 'Telegram',
+                'share.wechat': 'WeChat',
+                'share.weibo': 'Weibo',
+                'share.qq': 'QQ',
+                'share.qzone': 'QZone',
+                'share.douban': 'Douban',
+                'share.email': 'Email',
+                'share.copyLink': 'Copy Link',
+                'share.linkCopied': 'Link copied to clipboard!',
+                'share.wechatTitle': 'Share to WeChat',
+                'share.wechatInstructions': 'Scan QR code with WeChat to share',
+                'share.wechatTip': 'Or click "..." in top right to share with friends',
+                'share.close': 'Close',
+
                 // Authentication Dialog - Firebase Auth UI
                 'auth.title': 'Login / Register',
                 'auth.login': 'Login',
@@ -1229,7 +1275,30 @@ class InternationalizationSystem {
 
                 // SEO Meta タグ
                 'seo.title': '無料瞑想音楽＆睡眠用雨音 | 213+以上のヒーリングサウンド',
-                'seo.description': '213+以上のオーディオトラックを提供する無料オンライン音響療法プラットフォーム：瞑想音楽、睡眠用雨音、ホワイトノイズ、自然音。リラクゼーション、睡眠、ストレス解消に最適。'
+                'seo.description': '213+以上のオーディオトラックを提供する無料オンライン音響療法プラットフォーム：瞑想音楽、睡眠用雨音、ホワイトノイズ、自然音。リラクゼーション、睡眠、ストレス解消に最適。',
+
+                // Social Share
+                'share.title': 'シェア',
+                'share.international': '国際プラットフォーム',
+                'share.chinese': '中国語プラットフォーム',
+                'share.universal': '共通',
+                'share.facebook': 'Facebook',
+                'share.twitter': 'Twitter',
+                'share.linkedin': 'LinkedIn',
+                'share.whatsapp': 'WhatsApp',
+                'share.telegram': 'Telegram',
+                'share.wechat': 'WeChat',
+                'share.weibo': 'Weibo',
+                'share.qq': 'QQ',
+                'share.qzone': 'QZone',
+                'share.douban': 'Douban',
+                'share.email': 'メール',
+                'share.copyLink': 'リンクをコピー',
+                'share.linkCopied': 'リンクがクリップボードにコピーされました！',
+                'share.wechatTitle': 'WeChatでシェア',
+                'share.wechatInstructions': 'WeChatでQRコードをスキャンしてシェア',
+                'share.wechatTip': 'または右上の「...」をクリックして友達とシェア',
+                'share.close': '閉じる'
             },
             
             'ko-KR': {
@@ -1525,7 +1594,30 @@ class InternationalizationSystem {
 
                 // SEO Meta 태그
                 'seo.title': '무료 명상 음악 & 수면 빗소리 | 213+ 힐링 사운드',
-                'seo.description': '213+개의 오디오 트랙을 제공하는 무료 온라인 사운드 힐링 플랫폼: 명상 음악, 수면용 빗소리, 백색 소음, 자연 소리. 릴렉스, 수면 및 스트레스 해소에 완벽합니다.'
+                'seo.description': '213+개의 오디오 트랙을 제공하는 무료 온라인 사운드 힐링 플랫폼: 명상 음악, 수면용 빗소리, 백색 소음, 자연 소리. 릴렉스, 수면 및 스트레스 해소에 완벽합니다.',
+
+                // Social Share
+                'share.title': '공유',
+                'share.international': '국제 플랫폼',
+                'share.chinese': '중국어 플랫폼',
+                'share.universal': '공통',
+                'share.facebook': 'Facebook',
+                'share.twitter': 'Twitter',
+                'share.linkedin': 'LinkedIn',
+                'share.whatsapp': 'WhatsApp',
+                'share.telegram': 'Telegram',
+                'share.wechat': 'WeChat',
+                'share.weibo': 'Weibo',
+                'share.qq': 'QQ',
+                'share.qzone': 'QZone',
+                'share.douban': 'Douban',
+                'share.email': '이메일',
+                'share.copyLink': '링크 복사',
+                'share.linkCopied': '링크가 클립보드에 복사되었습니다!',
+                'share.wechatTitle': 'WeChat으로 공유',
+                'share.wechatInstructions': 'WeChat으로 QR 코드를 스캔하여 공유',
+                'share.wechatTip': '또는 우측 상단의 "..."을 클릭하여 친구와 공유',
+                'share.close': '닫기'
             },
             
             'es-ES': {
@@ -1821,7 +1913,30 @@ class InternationalizationSystem {
 
                 // SEO Meta Etiquetas
                 'seo.title': 'Música de Meditación Gratuita y Sonidos de Lluvia para Dormir | 213+ Sonidos Curativos',
-                'seo.description': 'Plataforma gratuita de sanación con sonido con más de 213 pistas de audio: música de meditación, sonidos de lluvia para dormir, ruido blanco, sonidos de la naturaleza. Perfecto para relajación, sueño y alivio del estrés.'
+                'seo.description': 'Plataforma gratuita de sanación con sonido con más de 213 pistas de audio: música de meditación, sonidos de lluvia para dormir, ruido blanco, sonidos de la naturaleza. Perfecto para relajación, sueño y alivio del estrés.',
+
+                // Social Share
+                'share.title': 'Compartir',
+                'share.international': 'Plataformas Internacionales',
+                'share.chinese': 'Plataformas Chinas',
+                'share.universal': 'Universal',
+                'share.facebook': 'Facebook',
+                'share.twitter': 'Twitter',
+                'share.linkedin': 'LinkedIn',
+                'share.whatsapp': 'WhatsApp',
+                'share.telegram': 'Telegram',
+                'share.wechat': 'WeChat',
+                'share.weibo': 'Weibo',
+                'share.qq': 'QQ',
+                'share.qzone': 'QZone',
+                'share.douban': 'Douban',
+                'share.email': 'Correo',
+                'share.copyLink': 'Copiar Enlace',
+                'share.linkCopied': '¡Enlace copiado al portapapeles!',
+                'share.wechatTitle': 'Compartir en WeChat',
+                'share.wechatInstructions': 'Escanea el código QR con WeChat para compartir',
+                'share.wechatTip': 'O haz clic en "..." en la esquina superior derecha para compartir con amigos',
+                'share.close': 'Cerrar'
             }
         };
 

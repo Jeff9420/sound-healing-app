@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="meta.title">资源中心 - SoundFlows 声音疗愈</title>
+    <meta name="description" content="声音疗愈学习资源中心，包含冥想指南、音疗教程、用户案例和专业笔记">
+    <meta name="keywords" content="声音疗愈,冥想指南,音疗教程,放松技巧,睡眠改善">
+    <link rel="canonical" href="https://soundflows.app/resources">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="资源中心 - SoundFlows 声音疗愈">
+    <meta property="og:description" content="探索我们的声音疗愈资源库，学习冥想技巧，改善身心健康">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://soundflows.app/resources">
+    <meta property="og:image" content="https://soundflows.app/assets/images/og-resources.jpg">
+    <meta property="og:site_name" content="SoundFlows">
+    <meta property="og:locale" content="zh_CN">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="资源中心 - SoundFlows 声音疗愈">
+    <meta name="twitter:description" content="探索我们的声音疗愈资源库，学习冥想技巧，改善身心健康">
+    <meta name="twitter:image" content="https://soundflows.app/assets/images/og-resources.jpg">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/index-styles.css">
+    <link rel="stylesheet" href="assets/css/theme-system.css">
+    <style>
+        /* 资源中心专用样式 */
+        .resources-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 20px 40px;
+        }
+
+        .resources-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .resources-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+        }
+
+        .resources-header h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .resources-header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .resource-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+        }
+
+        .resource-card__icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .resource-card__tag {
+            display: inline-block;
+            background: rgba(102, 102, 255, 0.1);
+            color: #6666ff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .resource-card__title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .resource-card__desc {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .resource-card__link {
+            color: #6666ff;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: gap 0.3s ease;
+        }
+
+        .resource-card__link:hover {
+            gap: 10px;
+        }
+
+        .featured-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 60px;
+            color: white;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .featured-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .featured-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .featured-item h4 {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .featured-item p {
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+            transition: gap 0.3s ease;
+        }
+
+        .back-link:hover {
+            gap: 15px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .resources-page {
+                padding: 60px 15px 30px;
+            }
+
+            .resources-header h1 {
+                font-size: 2em;
+            }
+
+            .resources-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .resource-card {
+                padding: 20px;
+            }
+
+            .featured-section {
+                padding: 25px;
+            }
+        }
+
+        /* 暗色主题 */
+        body.dark-theme .resource-card {
+            background: rgba(45, 45, 45, 0.95);
+            color: #f0f0f0;
+        }
+
+        body.dark-theme .resource-card__title {
+            color: #f0f0f0;
+        }
+
+        body.dark-theme .resource-card__desc {
+            color: #ccc;
+        }
+
+        /* 加载动画 */
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resources-page">
+        <div class="resources-container">
+            <!-- 返回主页链接 -->
+            <a href="index.html" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                <span data-i18n="resources.backToHome">返回主页</span>
+            </a>
+
+            <!-- 页面标题 -->
+            <header class="resources-header fade-in">
+                <h1 data-i18n="resources.title">声音疗愈资源中心</h1>
+                <p data-i18n="resources.subtitle">
+                    探索我们的精选学习资源，掌握声音疗愈技巧，开启身心疗愈之旅
+                </p>
+            </header>
+
+            <!-- 特色内容 -->
+            <section class="featured-section fade-in">
+                <h2 data-i18n="resources.featured.title">本周精选</h2>
+                <div class="featured-grid">
+                    <article class="featured-item">
+                        <h4 data-i18n="resources.featured.item1.title">7日睡眠改善计划</h4>
+                        <p data-i18n="resources.featured.item1.desc">
+                            通过系统性的音疗练习，逐步改善睡眠质量，建立健康的睡眠习惯
+                        </p>
+                    </article>
+                    <article class="featured-item">
+                        <h4 data-i18n="resources.featured.item2.title">职场减压音频套装</h4>
+                        <p data-i18n="resources.featured.item2.desc">
+                            专为办公环境设计的背景音，帮助提升专注力，缓解工作压力
+                        </p>
+                    </article>
+                    <article class="featured-item">
+                        <h4 data-i18n="resources.featured.item3.title">亲子疗愈音乐指南</h4>
+                        <p data-i18n="resources.featured.item3.desc">
+                            适合家庭的疗愈音乐选择，增进亲子关系，营造和谐氛围
+                        </p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- 资源网格 -->
+            <div class="resources-grid">
+                <!-- 冥想指南 -->
+                <article class="resource-card fade-in" data-category="meditation">
+                    <div class="resource-card__icon">🧘</div>
+                    <div class="resource-card__tag" data-i18n="resources.guides.tag">入门指南</div>
+                    <h3 class="resource-card__title" data-i18n="resources.guides.meditation.title">
+                        冥想入门：从5分钟开始
+                    </h3>
+                    <p class="resource-card__desc" data-i18n="resources.guides.meditation.desc">
+                        适合初学者的冥想指南，从呼吸练习到正念冥想，循序渐进建立冥想习惯
+                    </p>
+                    <a href="#meditation-guide" class="resource-card__link" data-i18n="resources.readMore">
+                        阅读更多 →
+                    </a>
+                </article>
+
+                <!-- 睡眠改善 -->
+                <article class="resource-card fade-in" data-category="sleep">
+                    <div class="resource-card__icon">🌙</div>
+                    <div class="resource-card__tag" data-i18n="resources.guides.tag">睡眠指南</div>
+                    <h3 class="resource-card__title" data-i18n="resources.sleep.title">
+                        科学改善睡眠质量
+                    </h3>
+                    <p class="resource-card__desc" data-i18n="resources.sleep.desc">
+                        了解睡眠周期，掌握声音助眠技巧，使用特定的音频频率促进深度睡眠
+                    </p>
+                    <a href="#sleep-guide" class="resource-card__link" data-i18n="resources.readMore">
+                        阅读更多 →
+                    </a>
+                </article>
+
+                <!-- 压力管理 -->
+                <article class="resource-card fade-in" data-category="stress">
+                    <div class="resource-card__icon">🌿</div>
+                    <div class="resource-card__tag" data-i18n="resources.techniques.tag">实用技巧</div>
+                    <h3 class="resource-card__title" data-i18n="resources.stress.title">
+                        日常压力管理策略
+                    </h3>
+                    <p class="resource-card__desc" data-i18n="resources.stress.desc">
+                        学习快速放松技巧，使用自然声音缓解焦虑，建立情绪调节系统
+                    </p>
+                    <a href="#stress-guide" class="resource-card__link" data-i18n="resources.readMore">
+                        阅读更多 →
+                    </a>
+                </article>
+
+                <!-- 专注力提升 -->
+                <article class="resource-card fade-in" data-category="focus">
+                    <div class="resource-card__icon">🎯</div>
+                    <div class="resource-card__tag" data-i18n="resources.techniques.tag">效率提升</div>
+                    <h3 class="resource-card__title" data-i18n="resources.focus.title">
+                        提升专注力的音疗方法
+                    </h3>
+                    <p class="resource-card__desc" data-i18n="resources.focus.desc">
+                        探索Alpha波音乐、白噪音和自然声对专注力的影响，找到最适合的工作背景音
+                    </p>
+                    <a href="#focus-guide" class="resource-card__link" data-i18n="resources.readMore">
+                        阅读更多 →
+                    </a>
+                </article>
+
+                <!-- 情绪疗愈 -->
+                <article class="resource-card fade-in" data-category="emotional">
+                    <div class="resource-card__icon">💝</div>
+                    <div class="resource-card__tag" data-i18n="resources.techniques.tag">情绪管理</div>
+                    <h3 class="resource-card__title" data-i18n="resources.emotional.title">
+                        情绪疗愈与平衡
+                    </h3>
+                    <p class="resource-card__desc" data-i18n="resources.emotional.desc">
+                        使用特定的音乐频率调节情绪状态，学习颂钵和水晶碗疗愈基础知识
+                    </p>
+                    <a href="#emotional-guide" class="resource-card__link" data-i18n="resources.readMore">
+                        阅读更多 →
+                    </a>
+                </article>
+
+                <!-- 颂钵疗愈 -->
+                <article class="resource-card fade-in" data-category="healing">
+                    <div class="resource-card__icon">🔔</div>
+                    <div class="resource-card__tag" data-i18n="resources.advanced.tag">进阶学习</div>
+                    <h3 class="resource-card__title" data-i18n="resources.healing.title">
+                        颂钵疗愈详解
+                    </h3>
+                    <p class="resource-card__desc" data-i18n="resources.healing.desc">
+                        深入了解颂钵的历史、原理和实际应用，学习基础的颂钵演奏技巧
+                    </p>
+                    <a href="#healing-guide" class="resource-card__link" data-i18n="resources.readMore">
+                        阅读更多 →
+                    </a>
+                </article>
+            </div>
+
+            <!-- 用户案例 -->
+            <section class="featured-section fade-in">
+                <h2 data-i18n="resources.stories.title">用户成功案例</h2>
+                <div class="featured-grid">
+                    <article class="featured-item">
+                        <h4 data-i18n="resources.stories.story1.title">
+                            程序员张先生：告别失眠困扰
+                        </h4>
+                        <p data-i18n="resources.stories.story1.desc">
+                            使用雨声和冥想音乐3周后，睡眠时间从4小时延长到7小时，工作效率显著提升
+                        </p>
+                    </article>
+                    <article class="featured-item">
+                        <h4 data-i18n="resources.stories.story2.title">
+                            学生小李：考试焦虑缓解
+                        </h4>
+                        <p data-i18n="resources.stories.story2.desc">
+                            通过每日15分钟的正念冥想练习，考试焦虑评分从8分降至3分
+                        </p>
+                    </article>
+                    <article class="featured-item">
+                        <h4 data-i18n="resources.stories.story3.title">
+                            王女士：产后情绪调节
+                        </h4>
+                        <p data-i18n="resources.stories.story3.desc">
+                            使用颂钵音乐和呼吸练习，成功缓解产后抑郁症状，重拾生活乐趣
+                        </p>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/i18n-system.js"></script>
+    <script src="assets/js/theme-manager.js"></script>
+    <script src="assets/js/social-share.js"></script>
+    <script>
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', () => {
+            // 添加淡入动画
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            });
+
+            document.querySelectorAll('.resource-card, .featured-item').forEach(el => {
+                observer.observe(el);
+            });
+
+            // 更新社交分享内容
+            if (window.socialShare) {
+                window.socialShare.updateShareContent(
+                    document.title,
+                    '探索SoundFlows的声音疗愈资源库，学习冥想技巧，改善身心健康',
+                    window.location.href
+                );
+            }
+
+            // 资源卡片点击事件
+            document.querySelectorAll('.resource-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // 如果点击的不是链接，则展开详情
+                    if (!e.target.classList.contains('resource-card__link')) {
+                        const link = this.querySelector('.resource-card__link');
+                        if (link) {
+                            link.click();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

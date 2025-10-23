@@ -1,705 +1,547 @@
 /**
- * 前端性能优化器 - 实时监控和自动优化
- * 针对声音疗愈应用的性能瓶颈进行动态调整
+ * Performance Optimizer - 声音疗愈网站专用
+ * 自动优化网站加载速度和运行性能
+ * Version: 2.0.0
  */
+
 class PerformanceOptimizer {
     constructor() {
-        this.metrics = {
-            fcp: 0,
-            lcp: 0,
-            fid: 0,
-            cls: 0,
-            ttfb: 0,
-            loadTime: 0
+        this.config = {
+            // 图片优化
+            lazyLoadImages: true,
+            useWebP: true,
+            placeholderQuality: 10,
+
+            // 资源优化
+            preloadCriticalResources: true,
+            prefetchNextPages: true,
+            cacheResources: true,
+
+            // 代码优化
+            deferNonCriticalJS: true,
+            inlineCriticalCSS: true,
+
+            // 网络优化
+            useServiceWorker: true,
+
+            // 监控
+            monitorPerformance: true,
+            autoOptimize: true
         };
-        
-        this.thresholds = {
-            fcp: 2000,      // First Contentful Paint < 2s
-            lcp: 2500,      // Largest Contentful Paint < 2.5s  
-            fid: 100,       // First Input Delay < 100ms
-            cls: 0.1,       // Cumulative Layout Shift < 0.1
-            ttfb: 600,      // Time to First Byte < 600ms
-            loadTime: 3000  // 总加载时间 < 3s
+
+        this.optimizations = {
+            images: new Map(),
+            scripts: new Set(),
+            styles: new Set(),
+            fonts: new Set()
         };
-        
-        this.optimizations = new Map();
-        this.isOptimizing = false;
-        this.deviceCapabilities = this.detectDeviceCapabilities();
-        
+
         this.init();
     }
 
-    /**
-     * 初始化性能优化器
-     */
     init() {
-        this.measureCoreWebVitals();
-        this.monitorNetworkConditions();
-        this.detectDeviceConstraints();
-        this.startPerformanceMonitoring();
-        this.implementAdaptiveOptimizations();
-        
-        console.log('🚀 性能优化器已启动', this.deviceCapabilities);
+        this.optimizeImages();
+        this.optimizeScripts();
+        this.optimizeStyles();
+        this.optimizeFonts();
+        this.implementResourceHints();
+        this.setupServiceWorker();
+        this.setupAutoOptimization();
+
+        console.log('⚡ Performance Optimizer v2.0 initialized');
     }
 
-    /**
-     * 测量Core Web Vitals
-     */
-    measureCoreWebVitals() {
-        // First Contentful Paint
-        this.measureFCP();
-        
-        // Largest Contentful Paint
-        this.measureLCP();
-        
-        // First Input Delay
-        this.measureFID();
-        
-        // Cumulative Layout Shift
-        this.measureCLS();
-        
-        // Time to First Byte
-        this.measureTTFB();
+    // 1. 图片优化
+    optimizeImages() {
+        if (this.config.lazyLoadImages) {
+            this.setupImageLazyLoading();
+        }
+
+        if (this.config.useWebP) {
+            this.setupWebPSupport();
+        }
+
+        this.setupResponsiveImages();
+        this.setupImageOptimization();
     }
 
-    /**
-     * 测量First Contentful Paint
-     */
-    measureFCP() {
-        const observer = new PerformanceObserver((list) => {
-            for (const entry of list.getEntries()) {
-                if (entry.name === 'first-contentful-paint') {
-                    this.metrics.fcp = entry.startTime;
-                    console.log(`📊 FCP: ${entry.startTime.toFixed(0)}ms`);
-                    
-                    if (entry.startTime > this.thresholds.fcp) {
-                        this.triggerFCPOptimization();
+    setupImageLazyLoading() {
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        this.loadImage(img);
+                        imageObserver.unobserve(img);
                     }
-                }
-            }
-        });
-        
-        observer.observe({ entryTypes: ['paint'] });
-    }
-
-    /**
-     * 测量Largest Contentful Paint
-     */
-    measureLCP() {
-        const observer = new PerformanceObserver((list) => {
-            const entries = list.getEntries();
-            const lastEntry = entries[entries.length - 1];
-            
-            this.metrics.lcp = lastEntry.startTime;
-            console.log(`📊 LCP: ${lastEntry.startTime.toFixed(0)}ms`);
-            
-            if (lastEntry.startTime > this.thresholds.lcp) {
-                this.triggerLCPOptimization();
-            }
-        });
-        
-        observer.observe({ entryTypes: ['largest-contentful-paint'] });
-    }
-
-    /**
-     * 测量First Input Delay
-     */
-    measureFID() {
-        const observer = new PerformanceObserver((list) => {
-            for (const entry of list.getEntries()) {
-                this.metrics.fid = entry.processingStart - entry.startTime;
-                console.log(`📊 FID: ${this.metrics.fid.toFixed(0)}ms`);
-                
-                if (this.metrics.fid > this.thresholds.fid) {
-                    this.triggerFIDOptimization();
-                }
-            }
-        });
-        
-        observer.observe({ entryTypes: ['first-input'] });
-    }
-
-    /**
-     * 测量Cumulative Layout Shift
-     */
-    measureCLS() {
-        let clsValue = 0;
-        
-        const observer = new PerformanceObserver((list) => {
-            for (const entry of list.getEntries()) {
-                if (!entry.hadRecentInput) {
-                    clsValue += entry.value;
-                }
-            }
-            
-            this.metrics.cls = clsValue;
-            console.log(`📊 CLS: ${clsValue.toFixed(3)}`);
-            
-            if (clsValue > this.thresholds.cls) {
-                this.triggerCLSOptimization();
-            }
-        });
-        
-        observer.observe({ entryTypes: ['layout-shift'] });
-    }
-
-    /**
-     * 测量Time to First Byte
-     */
-    measureTTFB() {
-        const navigation = performance.getEntriesByType('navigation')[0];
-        if (navigation) {
-            this.metrics.ttfb = navigation.responseStart - navigation.requestStart;
-            console.log(`📊 TTFB: ${this.metrics.ttfb.toFixed(0)}ms`);
-            
-            if (this.metrics.ttfb > this.thresholds.ttfb) {
-                this.triggerTTFBOptimization();
-            }
-        }
-    }
-
-    /**
-     * 检测设备能力
-     */
-    detectDeviceCapabilities() {
-        const capabilities = {
-            cores: navigator.hardwareConcurrency || 4,
-            memory: navigator.deviceMemory || 4,
-            connection: this.getConnectionInfo(),
-            batteryLevel: null,
-            isLowEndDevice: false
-        };
-        
-        // 检测低端设备
-        capabilities.isLowEndDevice = capabilities.cores <= 2 || capabilities.memory <= 2;
-        
-        // 电池API
-        if ('getBattery' in navigator) {
-            navigator.getBattery().then((battery) => {
-                capabilities.batteryLevel = battery.level;
-                this.adaptToBatteryLevel(battery.level);
-                
-                battery.addEventListener('levelchange', () => {
-                    this.adaptToBatteryLevel(battery.level);
                 });
+            }, {
+                rootMargin: '50px 0px',
+                threshold: 0.01
+            });
+
+            // 观察所有图片
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+
+            // 处理背景图片懒加载
+            document.querySelectorAll('[data-bg-src]').forEach(el => {
+                imageObserver.observe(el);
             });
         }
-        
-        return capabilities;
     }
 
-    /**
-     * 获取网络连接信息
-     */
-    getConnectionInfo() {
-        if ('connection' in navigator) {
-            const connection = navigator.connection;
-            return {
-                effectiveType: connection.effectiveType,
-                downlink: connection.downlink,
-                rtt: connection.rtt,
-                saveData: connection.saveData
+    loadImage(img) {
+        const src = img.dataset.src || img.src;
+
+        const highQualityImg = new Image();
+        highQualityImg.src = src;
+
+        highQualityImg.onload = () => {
+            if (img.dataset.src) {
+                img.src = src;
+            } else {
+                img.style.backgroundImage = `url(${src})`;
+            }
+            img.classList.add('loaded');
+            img.removeAttribute('data-src');
+        };
+    }
+
+    setupWebPSupport() {
+        const webP = new Image();
+        webP.onload = webP.onerror = () => {
+            this.supportsWebP = webP.height === 2;
+            if (this.supportsWebP) {
+                this.convertImagesToWebP();
+            }
+        };
+        webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
+    }
+
+    convertImagesToWebP() {
+        document.querySelectorAll('img[src*=".jpg"], img[src*=".png"]').forEach(img => {
+            const src = img.src;
+            if (!src.includes('.webp') && src.includes('media.soundflows.app')) {
+                const webpSrc = src.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+                img.src = webpSrc;
+            }
+        });
+    }
+
+    setupResponsiveImages() {
+        document.querySelectorAll('img[data-responsive]').forEach(img => {
+            const widths = [320, 640, 960, 1280, 1920];
+            const srcset = widths.map(width =>
+                `${this.generateResponsiveSrc(img.src, width)} ${width}w`
+            ).join(', ');
+
+            img.srcset = srcset;
+            img.sizes = '(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw';
+        });
+    }
+
+    generateResponsiveSrc(src, width) {
+        if (src.includes('media.soundflows.app')) {
+            return `${src}?w=${width}&q=80&auto=format`;
+        }
+        return src;
+    }
+
+    setupImageOptimization() {
+        this.setupProgressiveImageLoading();
+        this.setupImagePriorityLoading();
+    }
+
+    setupProgressiveImageLoading() {
+        document.querySelectorAll('img[data-progressive]').forEach(img => {
+            const smallSrc = img.dataset.small;
+            const largeSrc = img.dataset.large;
+
+            const smallImg = new Image();
+            smallImg.src = smallSrc;
+            smallImg.onload = () => {
+                img.src = smallSrc;
+                img.classList.add('progressive-loaded');
+
+                const largeImg = new Image();
+                largeImg.src = largeSrc;
+                largeImg.onload = () => {
+                    img.src = largeSrc;
+                    img.classList.add('progressive-complete');
+                };
             };
-        }
-        return { effectiveType: '4g', downlink: 10, rtt: 100, saveData: false };
-    }
-
-    /**
-     * 监控网络状况变化
-     */
-    monitorNetworkConditions() {
-        if ('connection' in navigator) {
-            navigator.connection.addEventListener('change', () => {
-                const connection = this.getConnectionInfo();
-                console.log('🌐 网络状况变化:', connection);
-                this.adaptToNetworkCondition(connection);
-            });
-        }
-        
-        // 在线/离线状态监控
-        window.addEventListener('online', () => {
-            console.log('🟢 网络已连接');
-            this.handleOnlineState();
-        });
-        
-        window.addEventListener('offline', () => {
-            console.log('🔴 网络已断开');
-            this.handleOfflineState();
         });
     }
 
-    /**
-     * FCP优化触发
-     */
-    triggerFCPOptimization() {
-        console.log('🔧 触发FCP优化');
-        
-        // 内联关键CSS
+    setupImagePriorityLoading() {
+        const priorityMap = {
+            'hero': 1,
+            'above-fold': 2,
+            'content': 3,
+            'sidebar': 4,
+            'footer': 5
+        };
+
+        document.querySelectorAll('img[data-priority]').forEach(img => {
+            const priority = priorityMap[img.dataset.priority] || 5;
+            img.dataset.loadingPriority = priority;
+        });
+
+        const images = Array.from(document.querySelectorAll('img[data-priority]'))
+            .sort((a, b) => a.dataset.loadingPriority - b.dataset.loadingPriority);
+
+        this.loadImagesSequentially(images);
+    }
+
+    loadImagesSequentially(images) {
+        let index = 0;
+
+        const loadNext = () => {
+            if (index < images.length) {
+                const img = images[index];
+                this.loadImage(img);
+                index++;
+
+                if ('requestIdleCallback' in window) {
+                    requestIdleCallback(loadNext, { timeout: 1000 });
+                } else {
+                    setTimeout(loadNext, 100);
+                }
+            }
+        };
+
+        loadNext();
+    }
+
+    // 2. 脚本优化
+    optimizeScripts() {
+        this.deferNonCriticalScripts();
+        this.asyncThirdPartyScripts();
+        this.preloadCriticalScripts();
+        this.setupCodeSplitting();
+    }
+
+    deferNonCriticalScripts() {
+        document.querySelectorAll('script[data-defer]').forEach(script => {
+            script.defer = true;
+            script.removeAttribute('data-defer');
+        });
+    }
+
+    asyncThirdPartyScripts() {
+        const thirdPartyScripts = [
+            'https://www.google-analytics.com/analytics.js',
+            'https://www.googletagmanager.com/gtm.js'
+        ];
+
+        thirdPartyScripts.forEach(src => {
+            const script = document.createElement('script');
+            script.src = src;
+            script.async = true;
+            script.onload = () => {
+                console.log(`✅ Loaded: ${src}`);
+            };
+            document.head.appendChild(script);
+        });
+    }
+
+    preloadCriticalScripts() {
+        const criticalScripts = [
+            'assets/js/audio-config.js',
+            'assets/js/i18n-system.js'
+        ];
+
+        criticalScripts.forEach(src => {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'script';
+            link.href = src;
+            document.head.appendChild(link);
+        });
+    }
+
+    setupCodeSplitting() {
+        // 动态导入非核心功能
+        window.loadModule = (moduleName) => {
+            const moduleMap = {
+                'mixer': () => import('./audio-mixer.js'),
+                'dashboard': () => import('./stats-dashboard.js'),
+                'history': () => import('./history-favorites-ui.js')
+            };
+
+            if (moduleMap[moduleName]) {
+                return moduleMap[moduleName]();
+            }
+        };
+    }
+
+    // 3. 样式优化
+    optimizeStyles() {
         this.inlineCriticalCSS();
-        
-        // 预连接关键资源
-        this.preconnectCriticalDomains();
-        
-        // 延迟非关键资源
-        this.deferNonCriticalResources();
+        this.loadNonCriticalCSS();
     }
 
-    /**
-     * LCP优化触发
-     */
-    triggerLCPOptimization() {
-        console.log('🔧 触发LCP优化');
-        
-        // 预加载LCP元素
-        this.preloadLCPResource();
-        
-        // 优化图片加载
-        this.optimizeImageLoading();
-        
-        // 减少渲染阻塞
-        this.reduceRenderBlocking();
-    }
-
-    /**
-     * FID优化触发
-     */
-    triggerFIDOptimization() {
-        console.log('🔧 触发FID优化');
-        
-        // 分解长任务
-        this.breakLongTasks();
-        
-        // 使用web workers
-        this.offloadToWebWorkers();
-        
-        // 优化事件监听器
-        this.optimizeEventListeners();
-    }
-
-    /**
-     * CLS优化触发
-     */
-    triggerCLSOptimization() {
-        console.log('🔧 触发CLS优化');
-        
-        // 为图片设置尺寸
-        this.setImageDimensions();
-        
-        // 预留广告空间
-        this.reserveAdSpace();
-        
-        // 避免动态内容插入
-        this.preventDynamicInserts();
-    }
-
-    /**
-     * 内联关键CSS
-     */
     inlineCriticalCSS() {
-        if (this.optimizations.has('criticalCSS')) {
-            return;
-        }
-        
         const criticalCSS = `
-            body { font-family: Georgia, serif; background: #4a6741; color: #f7f4e9; }
-            .loading-spinner { position: fixed; top: 50%; left: 50%; }
-            .ecosystem-grid { display: grid; gap: 1rem; }
+            .loading-screen { display: flex; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+            .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+            .hero-intro { padding: 80px 20px; }
+            .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
         `;
-        
-        const style = document.createElement('style');
-        style.textContent = criticalCSS;
-        document.head.insertBefore(style, document.head.firstChild);
-        
-        this.optimizations.set('criticalCSS', true);
-        console.log('✅ 关键CSS已内联');
+
+        if (!document.querySelector('style[data-critical]')) {
+            const style = document.createElement('style');
+            style.setAttribute('data-critical', 'true');
+            style.textContent = criticalCSS;
+            document.head.insertBefore(style, document.head.firstChild);
+        }
     }
 
-    /**
-     * 预连接关键域名
-     */
-    preconnectCriticalDomains() {
-        const domains = ['//fonts.googleapis.com', '//cdn.jsdelivr.net'];
-        
-        domains.forEach(domain => {
-            if (!document.querySelector(`link[rel="preconnect"][href="${domain}"]`)) {
-                const link = document.createElement('link');
-                link.rel = 'preconnect';
-                link.href = domain;
-                document.head.appendChild(link);
-            }
+    loadNonCriticalCSS() {
+        const loadCSS = (href) => {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = href;
+            link.media = 'print';
+            link.onload = () => {
+                link.media = 'all';
+            };
+            document.head.appendChild(link);
+        };
+
+        const nonCriticalStyles = [
+            'assets/css/mixer.css',
+            'assets/css/stats-dashboard.css',
+            'assets/css/history-favorites.css'
+        ];
+
+        nonCriticalStyles.forEach(href => {
+            loadCSS(href);
         });
-        
-        console.log('✅ 关键域名预连接完成');
     }
 
-    /**
-     * 延迟非关键资源
-     */
-    deferNonCriticalResources() {
-        // 延迟加载非关键JavaScript
-        const scripts = document.querySelectorAll('script[src]:not([async]):not([defer])');
-        scripts.forEach(script => {
-            if (!script.src.includes('critical')) {
-                script.defer = true;
+    // 4. 字体优化
+    optimizeFonts() {
+        this.preloadFonts();
+        this.setupFontDisplay();
+    }
+
+    preloadFonts() {
+        const fonts = [
+            {
+                family: 'Inter',
+                weights: [400, 600, 700]
+            },
+            {
+                family: 'Noto Sans SC',
+                weights: [400, 500, 700]
             }
-        });
-        
-        console.log(`✅ 已延迟${scripts.length}个非关键脚本`);
-    }
+        ];
 
-    /**
-     * 预加载LCP资源
-     */
-    preloadLCPResource() {
-        // 识别LCP元素并预加载
-        const lcpElements = document.querySelectorAll('img, video, canvas');
-        lcpElements.forEach(element => {
-            if (element.offsetWidth * element.offsetHeight > 50000) { // 大于50k像素
+        fonts.forEach(font => {
+            font.weights.forEach(weight => {
                 const link = document.createElement('link');
                 link.rel = 'preload';
-                link.as = element.tagName === 'IMG' ? 'image' : 'video';
-                link.href = element.src || element.currentSrc;
+                link.as = 'font';
+                link.type = 'font/woff2';
+                link.crossOrigin = 'anonymous';
+                link.href = `https://fonts.googleapis.com/css2?family=${font.family.replace(' ', '+')}:wght@${weight}&display=swap`;
                 document.head.appendChild(link);
+            });
+        });
+    }
+
+    setupFontDisplay() {
+        document.querySelectorAll('link[rel="stylesheet"][href*="fonts.googleapis.com"]').forEach(link => {
+            if (!link.href.includes('display=swap')) {
+                link.href += '&display=swap';
             }
         });
     }
 
-    /**
-     * 分解长任务
-     */
-    breakLongTasks() {
-        // 使用scheduler.postTask或setTimeout分解任务
-        const originalSetTimeout = window.setTimeout;
-        window.setTimeout = (callback, delay, ...args) => {
-            if (delay === 0) {
-                // 使用MessageChannel实现更快的异步执行
-                const channel = new MessageChannel();
-                channel.port1.onmessage = () => callback(...args);
-                channel.port2.postMessage(null);
-            } else {
-                originalSetTimeout(callback, delay, ...args);
-            }
-        };
+    // 5. 资源提示优化
+    implementResourceHints() {
+        this.setupDNSPrefetch();
+        this.setupPreconnect();
+        this.setupPrefetch();
     }
 
-    /**
-     * 卸载到Web Workers
-     */
-    offloadToWebWorkers() {
-        if (!this.optimizations.has('webWorker')) {
-            // 创建通用计算Worker
-            const workerScript = `
-                self.onmessage = function(e) {
-                    const { type, data } = e.data;
-                    switch(type) {
-                        case 'heavy-calculation':
-                            const result = performHeavyCalculation(data);
-                            self.postMessage({ type: 'result', result });
-                            break;
-                    }
-                };
-                
-                function performHeavyCalculation(data) {
-                    // 执行重计算任务
-                    return data;
-                }
-            `;
-            
-            const blob = new Blob([workerScript], { type: 'application/javascript' });
-            const worker = new Worker(URL.createObjectURL(blob));
-            
-            window.performanceWorker = worker;
-            this.optimizations.set('webWorker', true);
-            console.log('✅ Web Worker已创建');
-        }
-    }
+    setupDNSPrefetch() {
+        const domains = [
+            'https://fonts.googleapis.com',
+            'https://fonts.gstatic.com',
+            'https://archive.org',
+            'https://media.soundflows.app'
+        ];
 
-    /**
-     * 优化事件监听器
-     */
-    optimizeEventListeners() {
-        // 使用事件委托减少监听器数量
-        const container = document.getElementById('categoriesContainer');
-        if (container && !container.dataset.optimized) {
-            // 移除单个卡片的监听器，使用委托
-            container.addEventListener('click', (e) => {
-                const card = e.target.closest('.ecosystem-card');
-                if (card) {
-                    // 处理卡片点击
-                    this.handleCardClick(card);
-                }
-            }, { passive: true });
-            
-            container.dataset.optimized = 'true';
-            console.log('✅ 事件监听器已优化');
-        }
-    }
-
-    /**
-     * 根据网络状况调整
-     */
-    adaptToNetworkCondition(connection) {
-        const { effectiveType, saveData } = connection;
-        
-        if (saveData || effectiveType === 'slow-2g' || effectiveType === '2g') {
-            this.enableDataSavingMode();
-        } else if (effectiveType === '4g') {
-            this.enableHighQualityMode();
-        }
-    }
-
-    /**
-     * 启用数据节省模式
-     */
-    enableDataSavingMode() {
-        document.body.classList.add('low-bandwidth');
-        
-        // 禁用自动播放
-        const audioElements = document.querySelectorAll('audio');
-        audioElements.forEach(audio => {
-            audio.preload = 'none';
+        domains.forEach(domain => {
+            const link = document.createElement('link');
+            link.rel = 'dns-prefetch';
+            link.href = domain;
+            document.head.appendChild(link);
         });
-        
-        // 减少动画效果
-        document.body.classList.add('reduced-motion');
-        
-        console.log('📱 数据节省模式已启用');
     }
 
-    /**
-     * 启用高质量模式
-     */
-    enableHighQualityMode() {
-        document.body.classList.remove('low-bandwidth', 'reduced-motion');
-        
-        // 启用预加载
-        if (window.audioLazyLoader) {
-            window.audioLazyLoader.smartPreload();
-        }
-        
-        console.log('🚀 高质量模式已启用');
-    }
+    setupPreconnect() {
+        const criticalDomains = [
+            'https://fonts.googleapis.com',
+            'https://archive.org'
+        ];
 
-    /**
-     * 根据电池电量调整
-     */
-    adaptToBatteryLevel(level) {
-        if (level < 0.2) { // 电量低于20%
-            this.enableBatterySavingMode();
-        } else if (level > 0.8) {
-            this.enableFullPerformanceMode();
-        }
-    }
-
-    /**
-     * 启用省电模式
-     */
-    enableBatterySavingMode() {
-        document.body.classList.add('low-battery');
-        
-        // 降低刷新率
-        const animations = document.querySelectorAll('.cloud, .ripple');
-        animations.forEach(element => {
-            element.style.animationDuration = '120s'; // 减慢动画
+        criticalDomains.forEach(domain => {
+            const link = document.createElement('link');
+            link.rel = 'preconnect';
+            link.href = domain;
+            link.crossOrigin = 'anonymous';
+            document.head.appendChild(link);
         });
-        
-        console.log('🔋 省电模式已启用');
     }
 
-    /**
-     * 启用全性能模式
-     */
-    enableFullPerformanceMode() {
-        document.body.classList.remove('low-battery');
-        console.log('⚡ 全性能模式已启用');
+    setupPrefetch() {
+        const likelyPages = [
+            'resources.html',
+            'privacy-policy.html'
+        ];
+
+        likelyPages.forEach(page => {
+            const link = document.createElement('link');
+            link.rel = 'prefetch';
+            link.href = page;
+            document.head.appendChild(link);
+        });
     }
 
-    /**
-     * 处理在线状态
-     */
-    handleOnlineState() {
-        // 恢复正常功能
-        document.body.classList.remove('offline');
-        
-        // 同步离线数据
-        if (window.cacheManager) {
-            window.cacheManager.syncOfflineData();
+    // 6. Service Worker设置
+    setupServiceWorker() {
+        if ('serviceWorker' in navigator && this.config.useServiceWorker) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('✅ Service Worker registered');
+                })
+                .catch(error => {
+                    console.error('❌ Service Worker failed:', error);
+                });
         }
     }
 
-    /**
-     * 处理离线状态
-     */
-    handleOfflineState() {
-        document.body.classList.add('offline');
-        
-        // 显示离线提示
-        this.showOfflineNotification();
-    }
+    // 7. 自动优化
+    setupAutoOptimization() {
+        if (!this.config.autoOptimize) return;
 
-    /**
-     * 显示离线通知
-     */
-    showOfflineNotification() {
-        const notification = document.createElement('div');
-        notification.className = 'offline-notification';
-        notification.innerHTML = `
-            <div class="notification-content">
-                <span>📶 网络连接已断开，当前为离线模式</span>
-                <button onclick="this.parentElement.parentElement.remove()">知道了</button>
-            </div>
-        `;
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.remove();
-            }
-        }, 5000);
-    }
-
-    /**
-     * 开始性能监控
-     */
-    startPerformanceMonitoring() {
-        // 每30秒监控一次性能指标
         setInterval(() => {
-            this.collectPerformanceMetrics();
+            this.autoOptimizeBasedOnMetrics();
         }, 30000);
-        
-        // 监控内存使用
-        if ('memory' in performance) {
-            setInterval(() => {
-                this.monitorMemoryUsage();
-            }, 60000);
+
+        this.setupNetworkAwareOptimization();
+    }
+
+    autoOptimizeBasedOnMetrics() {
+        if (!window.performanceAnalytics) return;
+
+        const metrics = window.performanceAnalytics.getMetrics();
+
+        if (metrics.coreWebVitals && metrics.coreWebVitals.LCP > 3000) {
+            this.optimizeImageLoading();
+        }
+
+        if (metrics.coreWebVitals && metrics.coreWebVitals.FID > 200) {
+            this.optimizeJavaScriptExecution();
         }
     }
 
-    /**
-     * 收集性能指标
-     */
-    collectPerformanceMetrics() {
-        const metrics = {
-            timestamp: Date.now(),
-            ...this.metrics,
-            memoryUsage: performance.memory ? {
-                used: performance.memory.usedJSHeapSize,
-                total: performance.memory.totalJSHeapSize,
-                limit: performance.memory.jsHeapSizeLimit
-            } : null
-        };
-        
-        // 发送到分析服务或本地存储
-        this.logMetrics(metrics);
-    }
-
-    /**
-     * 监控内存使用
-     */
-    monitorMemoryUsage() {
-        if (performance.memory) {
-            const usage = performance.memory.usedJSHeapSize / performance.memory.jsHeapSizeLimit;
-            
-            if (usage > 0.8) { // 内存使用超过80%
-                console.warn('⚠️ 内存使用过高，触发清理');
-                this.performMemoryCleanup();
-            }
-        }
-    }
-
-    /**
-     * 执行内存清理
-     */
-    performMemoryCleanup() {
-        // 清理音频缓存
-        if (window.audioLazyLoader) {
-            window.audioLazyLoader.cleanupExpiredCache();
-        }
-        
-        // 清理DOM节点
-        this.cleanupDOMNodes();
-        
-        // 触发垃圾回收（如果可用）
-        if (window.gc) {
-            window.gc();
-        }
-    }
-
-    /**
-     * 清理DOM节点
-     */
-    cleanupDOMNodes() {
-        // 移除隐藏的或不必要的DOM节点
-        const hiddenElements = document.querySelectorAll('[style*="display: none"]:not(.playlist-section)');
-        hiddenElements.forEach(element => {
-            if (!element.dataset.preserve) {
-                element.remove();
+    optimizeImageLoading() {
+        console.log('🔧 Optimizing image loading...');
+        document.querySelectorAll('img').forEach(img => {
+            if (img.src.includes('quality=')) {
+                img.src = img.src.replace(/quality=\d+/, 'quality=60');
             }
         });
-        
-        console.log(`🗑️ 清理了 ${hiddenElements.length} 个隐藏元素`);
     }
 
-    /**
-     * 记录性能指标
-     */
-    logMetrics(metrics) {
-        // 保存到localStorage或发送到服务器
-        const metricsLog = JSON.parse(localStorage.getItem('performanceMetrics') || '[]');
-        metricsLog.push(metrics);
-        
-        // 只保留最近50条记录
-        if (metricsLog.length > 50) {
-            metricsLog.shift();
+    optimizeJavaScriptExecution() {
+        console.log('🔧 Optimizing JavaScript execution...');
+        if (window.loadModule) {
+            setTimeout(() => {
+                window.loadModule('mixer');
+            }, 2000);
         }
-        
-        localStorage.setItem('performanceMetrics', JSON.stringify(metricsLog));
     }
 
-    /**
-     * 获取性能报告
-     */
-    getPerformanceReport() {
-        const report = {
-            metrics: this.metrics,
-            deviceCapabilities: this.deviceCapabilities,
-            optimizations: Array.from(this.optimizations.keys()),
-            recommendations: this.generateRecommendations()
+    setupNetworkAwareOptimization() {
+        if ('connection' in navigator) {
+            const connection = navigator.connection;
+
+            const optimizeForNetwork = () => {
+                const effectiveType = connection.effectiveType;
+
+                if (effectiveType === 'slow-2g' || effectiveType === '2g') {
+                    this.enableLowBandwidthMode();
+                } else if (effectiveType === '3g') {
+                    this.enable3GMode();
+                } else {
+                    this.enableHighBandwidthMode();
+                }
+            };
+
+            optimizeForNetwork();
+            connection.addEventListener('change', optimizeForNetwork);
+        }
+    }
+
+    enableLowBandwidthMode() {
+        console.log('📶 Low bandwidth mode enabled');
+        document.body.classList.add('low-bandwidth');
+
+        // 禁用非必要功能
+        if (window.mixerUI) window.mixerUI.disable();
+        if (window.statsDashboard) window.statsDashboard.disable();
+
+        // 降低图片质量
+        document.querySelectorAll('img').forEach(img => {
+            if (img.src.includes('media.soundflows.app')) {
+                img.src = img.src.replace(/q=\d+/, 'q=30');
+            }
+        });
+    }
+
+    enable3GMode() {
+        console.log('📶 3G mode enabled');
+        document.body.classList.add('medium-bandwidth');
+
+        // 适度优化
+        document.querySelectorAll('img').forEach(img => {
+            if (img.src.includes('media.soundflows.app')) {
+                img.src = img.src.replace(/q=\d+/, 'q=60');
+            }
+        });
+    }
+
+    enableHighBandwidthMode() {
+        console.log('📶 High bandwidth mode enabled');
+        document.body.classList.remove('low-bandwidth', 'medium-bandwidth');
+
+        // 启用所有功能
+        if (window.mixerUI) window.mixerUI.enable();
+        if (window.statsDashboard) window.statsDashboard.enable();
+    }
+
+    // 公共API
+    getOptimizationReport() {
+        return {
+            imagesOptimized: this.optimizations.images.size,
+            scriptsOptimized: this.optimizations.scripts.size,
+            stylesOptimized: this.optimizations.styles.size,
+            fontsOptimized: this.optimizations.fonts.size,
+            performanceScore: window.performanceAnalytics ?
+                window.performanceAnalytics.getPerformanceScore() : null
         };
-        
-        return report;
-    }
-
-    /**
-     * 生成优化建议
-     */
-    generateRecommendations() {
-        const recommendations = [];
-        
-        if (this.metrics.fcp > this.thresholds.fcp) {
-            recommendations.push('建议内联关键CSS以减少FCP时间');
-        }
-        
-        if (this.metrics.lcp > this.thresholds.lcp) {
-            recommendations.push('建议预加载LCP资源以改善LCP指标');
-        }
-        
-        if (this.metrics.fid > this.thresholds.fid) {
-            recommendations.push('建议分解长任务以改善FID指标');
-        }
-        
-        if (this.metrics.cls > this.thresholds.cls) {
-            recommendations.push('建议为图片设置固定尺寸以减少CLS');
-        }
-        
-        return recommendations;
     }
 }
 
-// 创建全局性能优化器实例
+// 初始化性能优化器
 window.performanceOptimizer = new PerformanceOptimizer();
 
 // 导出
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = PerformanceOptimizer;
-}
+window.PerformanceOptimizer = PerformanceOptimizer;
