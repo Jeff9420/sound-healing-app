@@ -616,6 +616,118 @@ a:hover {
     border: 1px solid rgba(99, 102, 241, 0.45) !important;
     color: #f8fafc !important;
 }
+/* ==========================================================================
+   SOCIAL SHARE BUTTONS CONTRAST FIXES
+   ========================================================================== */
+
+.social-share-toggle,
+.social-share-btn {
+    background: var(--interactive-bg) !important;
+    color: var(--text-primary) !important;
+    border: 2px solid var(--border-medium) !important;
+}
+
+.social-share-btn:hover,
+.social-share-btn:focus {
+    background: var(--interactive-hover) !important;
+    border-color: var(--accent-blue) !important;
+}
+
+/* Fix for white text on white background */
+.social-share-btn.facebook,
+.social-share-btn.twitter,
+.social-share-btn.linkedin,
+.social-share-btn.whatsapp,
+.social-share-btn.email,
+.social-share-btn.copylink {
+    color: var(--text-primary) !important;
+    background: var(--bg-secondary) !important;
+    border: 2px solid var(--border-light) !important;
+}
+
+/* ==========================================================================
+   BUTTON CONTRAST FIXES
+   ========================================================================== */
+
+.hero-intro__cta-primary {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+    color: #ffffff !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important;
+    border: none !important;
+}
+
+.conversion-offer__submit {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+    color: #ffffff !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+.content-card__link {
+    background: var(--interactive-bg) !important;
+    color: var(--text-primary) !important;
+    border: 2px solid var(--border-medium) !important;
+}
+
+.impact-card__cta {
+    background: var(--interactive-bg) !important;
+    color: var(--text-primary) !important;
+    border: 2px solid var(--border-medium) !important;
+}
+
+.focus-center-play-btn,
+.focus-btn {
+    background: var(--interactive-bg) !important;
+    color: var(--text-primary) !important;
+    border: 2px solid var(--border-medium) !important;
+}
+
+/* ==========================================================================
+   CURRENT CATEGORY BADGE CONTRAST
+   ========================================================================== */
+
+.track-category {
+    background: var(--bg-secondary) !important;
+    color: var(--accent-blue) !important;
+    opacity: 1 !important;
+    font-weight: 600 !important;
+    padding: 4px 12px !important;
+    border-radius: 12px !important;
+    border: 1px solid var(--border-light) !important;
+}
+
+/* ==========================================================================
+   COMPACT LOGIN BUTTONS
+   ========================================================================== */
+
+.compact-option-btn.google,
+.compact-option-btn.anonymous {
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border: 2px solid var(--border-medium) !important;
+}
+
+.send-code-btn {
+    background: var(--accent-blue) !important;
+    color: #ffffff !important;
+    border: none !important;
+}
+
+/* ==========================================================================
+   DROPDOWN MENU ITEMS
+   ========================================================================== */
+
+.dropdown-item {
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border: none !important;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background: var(--interactive-hover) !important;
+    color: var(--text-primary) !important;
+}
+
 @media print {
     * {
         background: white !important;

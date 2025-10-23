@@ -291,7 +291,7 @@ class VideoBackgroundManager {
             // 如果视频已缓存，立即开始切换；否则先加载
             const isCached = this.preloadedVideos.has(videoUrl);
             if (isCached) {
-                console.log(`[Video] Using cached blob: ${url}`);
+                console.log(`[Video] Using cached blob: ${videoUrl}`);
             }
 
             // 预加载视频（如已缓存会立即返回）

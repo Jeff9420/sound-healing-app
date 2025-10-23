@@ -33,6 +33,16 @@ audio.preload = 'auto';
 
 console.log('Variables declared successfully');
 
+// Helper function to get full URL for a file (using AUDIO_CONFIG)
+function getAudioUrl(categoryKey, filename) {
+    if (typeof AUDIO_CONFIG !== 'undefined' && AUDIO_CONFIG.categories[categoryKey]) {
+        const category = AUDIO_CONFIG.categories[categoryKey];
+        const folderName = category.folder || categoryKey.toLowerCase().replace(/\s+/g, '-');
+        return `${AUDIO_CONFIG.baseUrl}${folderName}/${encodeURIComponent(filename)}`;
+    }
+    return null;
+}
+
 // Fallback Audio Data (in case external config fails to load)
 const audioData = {
     meditation: [
@@ -304,7 +314,7 @@ function openPlaylist(categoryKey, category) {
         tracks = category.files.map((fileName, index) => ({
             name: fileName.replace(/\.[^/.]+$/, ''),
             fileName: fileName,
-            url: AUDIO_CONFIG.baseUrl + category.folder + '/' + fileName
+            url: getAudioUrl(categoryKey, fileName)
         }));
     } else {
         // Use fallback audioData
