@@ -89,8 +89,8 @@
             fields: fields,
             context: {
                 pageUri: window.location.href,
-                pageName: document.title || 'SoundFlows',
-                ipAddress: '{{auto}}' // HubSpot 会自动填充
+                pageName: document.title || 'SoundFlows'
+                // HubSpot 会自动填充IP地址，不需要提供
             },
             legalConsentOptions: {
                 // 根据需要添加同意选项

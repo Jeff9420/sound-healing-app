@@ -128,6 +128,20 @@ class GlobalErrorHandler {
      * 处理资源加载错误
      */
     handleResourceError(errorInfo) {
+        // 过滤掉正常的blob URL错误（视频降级时产生）
+        if (errorInfo.src && errorInfo.src.startsWith('blob:')) {
+            // 这是视频降级到Canvas的正常行为，不需要警告
+            return;
+        }
+
+        // 过滤掉扩展程序阻止的脚本
+        if (errorInfo.tagName === 'SCRIPT' &&
+            (errorInfo.src.includes('amplitude.com') ||
+             errorInfo.src.includes('googletagmanager.com'))) {
+            // 扩展程序阻止跟踪脚本，这是正常的
+            return;
+        }
+
         console.warn('⚠️ 资源加载失败:', errorInfo);
 
         // 保存错误信息
