@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Location Pages -->
+  <url>
+    <loc>https://soundflows.app/location/sound-therapy-usa.html</loc>
+    <lastmod>2025-01-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://soundflows.app/location/sound-therapy-usa.html"/>
+  </url>
+
+  <url>
+    <loc>https://soundflows.app/location/sound-therapy-uk.html</loc>
+    <lastmod>2025-01-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://soundflows.app/location/sound-therapy-uk.html"/>
+  </url>
+
+</urlset>
