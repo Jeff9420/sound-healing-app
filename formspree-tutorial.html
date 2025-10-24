@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formspree 图文教程 - 如何获取Form ID</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .content {
+            padding: 50px;
+        }
+        .step-container {
+            margin-bottom: 50px;
+        }
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f8f9ff;
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.1);
+        }
+        .step-number {
+            min-width: 60px;
+            height: 60px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-right: 30px;
+        }
+        .step-content {
+            flex: 1;
+        }
+        .step-content h3 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        .step-content p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        .screenshot {
+            background: #f4f4f4;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .screenshot-img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .highlight-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        .highlight-box h4 {
+            color: #856404;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        .code-box {
+            background: #263238;
+            color: #aed581;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            margin: 20px 0;
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            padding: 8px 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .copy-btn:hover {
+            background: #5566dd;
+        }
+        .btn-success {
+            background: #28a745;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        .btn-success:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+        .example-form {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        .example-form h4 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin: 15px 0;
+        }
+        .form-group label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .tip-box {
+            background: #e1f5fe;
+            border-left: 5px solid #03a9f4;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .tip-box h4 {
+            color: #0277bd;
+            margin-bottom: 10px;
+        }
+        .tip-box ul {
+            color: #0277bd;
+            padding-left: 20px;
+        }
+        .tip-box li {
+            margin: 8px 0;
+        }
+        .form-id-display {
+            background: #fff;
+            border: 3px solid #667eea;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        .form-id-display h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        .form-id-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+            font-family: 'Monaco', 'Courier New', monospace;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .arrow {
+            text-align: center;
+            font-size: 2rem;
+            color: #667eea;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📧 Formspree 完整教程</h1>
+            <p>一步步教您如何创建Formspree表单并获取Form ID</p>
+        </div>
+
+        <div class="content">
+            <!-- 步骤1：访问网站 -->
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>访问Formspree官网</h3>
+                    <p>首先，打开浏览器访问Formspree官网。这是创建表单的第一步。</p>
+
+                    <a href="https://formspree.io" target="_blank" class="btn-success">
+                        🔗 点击访问 formspree.io
+                    </a>
+
+                    <div class="screenshot">
+                        <p style="color: #666; margin-bottom: 15px;">Formspree首页 - 点击"Sign Up"或"Get Started"</p>
+                        <div style="background: #f0f0f0; padding: 100px; border-radius: 8px; text-align: center; color: #666;">
+                            [网站截图：Formspree首页]
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 步骤2：注册/登录 -->
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>注册账号</h3>
+                    <p>Formspree只需要邮箱验证，不需要手机！填写您的邮箱地址即可。</p>
+
+                    <div class="tip-box">
+                        <h4>💡 注册提示</h4>
+                        <ul>
+                            <li>使用您常用的邮箱（Gmail、QQ邮箱、163邮箱等）</li>
+                            <li>密码建议至少8位，包含字母和数字</li>
+                            <li>查收验证邮件并点击验证链接</li>
+                        </ul>
+                    </div>
+
+                    <div class="screenshot">
+                        <p style="color: #666; margin-bottom: 15px;">注册表单 - 只需填写邮箱和密码</p>
+                        <div style="background: #f0f0f0; padding: 100px; border-radius: 8px; text-align: center; color: #666;">
+                            [网站截图：注册表单]
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 步骤3：创建新表单 -->
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>创建新表单</h3>
+                    <p>登录后，点击"New Form"创建您的第一个表单。</p>
+
+                    <div class="screenshot">
+                        <p style="color: #666; margin-bottom: 15px;">Dashboard页面 - 点击"New Form"按钮</p>
+                        <div style="background: #f0f0f0; padding: 100px; border-radius: 8px; text-align: center; color: #666;">
+                            [网站截图：Dashboard页面]
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 步骤4：设置表单 -->
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>配置表单信息</h3>
+                    <p>填写表单的基本信息，最重要的部分是设置接收邮件的邮箱地址。</p>
+
+                    <div class="example-form">
+                        <h4>📝 表单配置示例</h4>
+                        <div class="form-group">
+                            <label>Form Name（表单名称）</label>
+                            <input type="text" value="SoundFlows Contact Form" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Recipient Email（接收邮箱）</label>
+                            <input type="email" placeholder="your-email@example.com">
+                        </div>
+                        <p style="color: #2e7d32; margin-top: 15px; font-size: 0.9rem;">
+                            ✅ 这就是接收表单提交的邮箱地址
+                        </p>
+                    </div>
+
+                    <div class="screenshot">
+                        <p style="color: #666; margin-bottom: 15px;">表单设置页面</p>
+                        <div style="background: #f0f0f0; padding: 100px; border-radius: 8px; text-align: center; color: #666;">
+                            [网站截图：表单设置]
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 步骤5：获取Form ID -->
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h3>获取您的Form ID</h3>
+                    <p>创建表单后，您会看到表单的详情页面。Form ID就在这里！</p>
+
+                    <div class="form-id-display">
+                        <h3>📍 Form ID 位置</h3>
+                        <p style="color: #666;">在表单详情页面的顶部，您会看到类似这样的URL：</p>
+                        <div class="form-id-value">https://formspree.io/f/<strong style="color: #ff6b6b;">mzbqknyp</strong></div>
+                        <p style="color: #667eea; font-weight: bold;">加粗的部分就是您的Form ID！</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>📌 Form ID 是什么？</h4>
+                        <p>Form ID是每个表单的唯一标识符，用于将表单提交连接到您的Formspree账号。它通常是：</p>
+                        <ul style="margin-top: 10px; padding-left: 20px; color: #856404;">
+                            <li>8-10个字符长</li>
+                            <li>由字母和数字组成</li>
+                            <li>格式：mzbqknyp, xqjpljko 等</li>
+                        </ul>
+                    </div>
+
+                    <div class="screenshot">
+                        <p style="color: #666; margin-bottom: 15px;">Form ID 在页面上的显示位置</p>
+                        <div style="background: #f0f0f0; padding: 100px; border-radius: 8px; text-align: center; color: #666;">
+                            [网站截图：Form ID位置]
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 步骤6：使用Form ID -->
+            <div class="step">
+                <div class="step-number">6</div>
+                <div class="step-content">
+                    <h3>在您的网站中使用</h3>
+                    <p>获取Form ID后，您可以在网站中使用了！</p>
+
+                    <div class="code-box">
+                        <button class="copy-btn" onclick="copyFormCode()">复制代码</button>
+                        <pre id="formCode">&lt;!-- HTML表单代码 --&gt;
+&lt;form action="https://formspree.io/f/您的FormID" method="POST"&gt;
+  &lt;label&gt;您的邮箱：&lt;/label&gt;
+  &lt;input type="email" name="email" required&gt;
+
+  &lt;label&gt;留言内容：&lt;/label&gt;
+  &lt;textarea name="message" required&gt;&lt;/textarea&gt;
+
+  &lt;button type="submit"&gt;发送&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;!-- JavaScript代码 --&gt;
+&lt;script&gt;
+// 保存Form ID到localStorage
+localStorage.setItem('formspreeFormId', '您的FormID');
+&lt;/script&gt;</pre>
+                    </div>
+
+                    <div class="arrow">⬇️</div>
+
+                    <div class="example-form">
+                        <h4>📝 实际示例</h4>
+                        <p>如果您的Form ID是 <strong>mzbqknyp</strong>，那么代码应该是：</p>
+                        <div class="code-box" style="margin-top: 15px;">
+                            <pre>&lt;form action="https://formspree.io/f/<strong>mzbqknyp</strong>" method="POST"&gt;
+  &lt;input type="email" name="email" placeholder="您的邮箱"&gt;
+  &lt;textarea name="message" placeholder="您的留言"&gt;&lt;/textarea&gt;
+  &lt;button type="submit"&gt;发送&lt;/button&gt;
+&lt;/form&gt;</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 重要提示 -->
+            <div class="highlight-box">
+                <h4>⚠️ 重要提示</h4>
+                <ul style="color: #856404;">
+                    <li><strong>保存Form ID</strong>：请将Form ID保存好，这是您表单的唯一标识</li>
+                    <li><strong>免费额度</strong>：免费版每月可以接收50封邮件</li>
+                    <li><strong>测试方法</strong>：提交表单后，登录Formspree查看Submissions</li>
+                    <li><strong>自定义</strong>：可以在Formspree后台设置自动回复等高级功能</li>
+                </ul>
+            </div>
+
+            <!-- 快速开始按钮 -->
+            <div style="text-align: center; margin-top: 50px;">
+                <h3 style="color: #333; margin-bottom: 20px;">🚀 准备好了吗？</h3>
+                <a href="https://formspree.io" target="_blank" class="btn-success" style="font-size: 20px; padding: 20px 50px;">
+                    🎯 立即创建我的Formspree表单
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyFormCode() {
+            const codeElement = document.getElementById('formCode');
+            const textArea = document.createElement('textarea');
+            textArea.value = codeElement.textContent;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = '已复制！';
+            btn.style.background = '#4CAF50';
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '#667eea';
+            }, 2000);
+        }
+
+        // 添加步骤动画
+        window.addEventListener('DOMContentLoaded', () => {
+            const steps = document.querySelectorAll('.step');
+            steps.forEach((step, index) => {
+                setTimeout(() => {
+                    step.style.opacity = '0';
+                    step.style.transform = 'translateY(20px)';
+                    step.style.transition = 'all 0.5s ease';
+
+                    setTimeout(() => {
+                        step.style.opacity = '1';
+                        step.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>

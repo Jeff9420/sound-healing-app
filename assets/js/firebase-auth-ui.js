@@ -143,6 +143,14 @@ class FirebaseAuthManager {
 
             window.showNotification('✅ Registration successful!', 'success');
 
+            // 发送欢迎邮件
+            this.sendWelcomeEmailAfterRegistration({
+                email: email,
+                displayName: displayName,
+                uid: result.user.uid,
+                language: this.getUserLanguage()
+            });
+
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'sign_up', {
                     method: 'Email'
@@ -155,6 +163,28 @@ class FirebaseAuthManager {
             window.showNotification('Registration failed: ' + error.message, 'error');
             return null;
         }
+    }
+
+    /**
+     * 注册后发送欢迎邮件
+     */
+    async sendWelcomeEmailAfterRegistration(userData) {
+        try {
+            // 触发用户注册事件
+            const event = new CustomEvent('userRegistered', { detail: userData });
+            document.dispatchEvent(event);
+
+            console.log('✅ 欢迎邮件事件已触发');
+        } catch (error) {
+            console.error('❌ 发送欢迎邮件失败:', error);
+        }
+    }
+
+    /**
+     * 获取用户语言
+     */
+    getUserLanguage() {
+        return window.i18n ? window.i18n.currentLanguage : 'zh-CN';
     }
 
     /**
@@ -210,7 +240,20 @@ class FirebaseAuthManager {
 
             // 动态导入所需的函数
             const { sendPasswordResetEmail } = await import('./firebase-auth.js');
+
+            // 生成重置令牌（模拟）
+            const resetToken = this.generateResetToken();
+
+            // 发送Firebase密码重置邮件
             await sendPasswordResetEmail(this.auth, email);
+
+            // 同时通过Formspree发送自定义重置邮件
+            this.sendCustomPasswordResetEmail({
+                email: email,
+                resetToken: resetToken,
+                language: this.getUserLanguage()
+            });
+
             window.showNotification('✅ Password reset email sent', 'success');
             return true;
         } catch (error) {
@@ -218,6 +261,34 @@ class FirebaseAuthManager {
             window.showNotification('Reset failed: ' + error.message, 'error');
             return false;
         }
+    }
+
+    /**
+     * 发送自定义密码重置邮件
+     */
+    async sendCustomPasswordResetEmail(resetData) {
+        try {
+            // 触发密码重置请求事件
+            const event = new CustomEvent('passwordResetRequested', { detail: resetData });
+            document.dispatchEvent(event);
+
+            console.log('✅ 密码重置邮件事件已触发');
+        } catch (error) {
+            console.error('❌ 发送密码重置邮件失败:', error);
+        }
+    }
+
+    /**
+     * 生成重置令牌
+     */
+    generateResetToken() {
+        // 生成一个简单的重置令牌
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let token = '';
+        for (let i = 0; i < 32; i++) {
+            token += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return token;
     }
 
     /**

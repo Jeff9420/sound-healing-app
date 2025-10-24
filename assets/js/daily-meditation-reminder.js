@@ -233,8 +233,19 @@ class DailyMeditationReminder {
      * 显示每日提醒
      */
     showDailyReminder() {
-        if (!this.isPermissionGranted) return;
+        // 发送浏览器通知
+        if (this.isPermissionGranted) {
+            this.showBrowserNotification();
+        }
 
+        // 发送邮件提醒
+        this.sendEmailReminder();
+    }
+
+    /**
+     * 显示浏览器通知
+     */
+    showBrowserNotification() {
         const messages = [
             '🧘‍♀️ 是时候进行今日冥想了！',
             '🌸 让我们一起开始今天的冥想练习吧',
@@ -282,6 +293,60 @@ class DailyMeditationReminder {
                 notification.close();
             }
         }, 5000);
+    }
+
+    /**
+     * 发送邮件提醒
+     */
+    sendEmailReminder() {
+        // 获取用户信息
+        const user = this.getCurrentUser();
+        if (!user || !user.email) {
+            console.log('⚠️ 未找到用户邮箱，跳过邮件提醒');
+            return;
+        }
+
+        // 触发每日提醒事件
+        const reminderData = {
+            email: user.email,
+            userName: user.displayName || '用户',
+            streakDays: this.streakDays,
+            language: this.getUserLanguage()
+        };
+
+        const event = new CustomEvent('dailyReminderTriggered', { detail: reminderData });
+        document.dispatchEvent(event);
+
+        console.log('✅ 每日提醒邮件事件已触发');
+    }
+
+    /**
+     * 获取当前用户
+     */
+    getCurrentUser() {
+        // 从Firebase获取用户信息
+        if (window.firebaseAuthManager && window.firebaseAuthManager.getCurrentUser) {
+            return window.firebaseAuthManager.getCurrentUser();
+        }
+
+        // 从本地存储获取
+        const savedUser = localStorage.getItem('currentUser');
+        if (savedUser) {
+            try {
+                return JSON.parse(savedUser);
+            } catch (e) {
+                return null;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * 获取用户语言
+     */
+    getUserLanguage() {
+        return window.i18n ? window.i18n.currentLanguage : 'zh-CN';
     }
 
     /**

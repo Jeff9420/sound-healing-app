@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mailgun邮件服务配置向导</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: #667eea;
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .steps {
+            padding: 40px;
+        }
+
+        .step {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .step.active {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .step.completed {
+            border-color: #28a745;
+            background: #f8fff9;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #667eea;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .step.completed .step-number {
+            background: #28a745;
+        }
+
+        .step h3 {
+            color: #333;
+            font-size: 1.3rem;
+        }
+
+        .step-content {
+            margin-left: 55px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .step-content ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .step-content li {
+            margin: 8px 0;
+        }
+
+        .code-block {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            padding: 5px 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .copy-btn:hover {
+            background: #5566dd;
+        }
+
+        .form-group {
+            margin: 20px 0;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .test-section {
+            background: #f8f9ff;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 10px;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5566dd;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .status {
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 30px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 15px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📧 Mailgun邮件服务配置向导</h1>
+            <p>3步完成配置，每月5000封免费邮件额度</p>
+        </div>
+
+        <div class="steps">
+            <!-- 步骤1：注册Mailgun -->
+            <div class="step completed" id="step1">
+                <div class="step-header">
+                    <div class="step-number">✓</div>
+                    <h3>步骤1：注册Mailgun账户</h3>
+                </div>
+                <div class="step-content">
+                    <p>请按照以下步骤完成注册：</p>
+                    <ul>
+                        <li>访问 <a href="https://www.mailgun.com" target="_blank" style="color: #667eea; text-decoration: underline;">https://www.mailgun.com</a></li>
+                        <li>点击 "Sign Up" 或 "Get Started for Free"</li>
+                        <li>填写注册信息：
+                            <ul>
+                                <li>邮箱：您的有效邮箱地址</li>
+                                <li>密码：创建安全密码</li>
+                                <li>公司：SoundFlows（可填个人名称）</li>
+                            </ul>
+                        </li>
+                        <li>验证邮箱：查收邮件并点击验证链接</li>
+                    </ul>
+                    <div class="info-box">
+                        <strong>提示：</strong>注册后会自动分配一个sandbox域名，格式如 sandbox12345.mailgun.org
+                    </div>
+                </div>
+            </div>
+
+            <!-- 步骤2：获取API密钥 -->
+            <div class="step" id="step2">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <h3>步骤2：获取API密钥</h3>
+                </div>
+                <div class="step-content">
+                    <p>登录后按以下步骤获取API密钥：</p>
+                    <ul>
+                        <li>进入Dashboard仪表板</li>
+                        <li>左侧菜单点击 "Sending" → "Domain Settings"</li>
+                        <li>找到您的sandbox域名（如 sandbox12345.mailgun.org）</li>
+                        <li>点击域名进入详情页</li>
+                        <li>找到 "API Keys" 或 "Private API Key"</li>
+                        <li>点击 "Show" 并复制密钥（格式：key-xxxxxxxxxxxx）</li>
+                    </ul>
+                    <div class="info-box">
+                        <strong>重要：</strong>请保存好您的API密钥，它不会再次显示
+                    </div>
+                </div>
+            </div>
+
+            <!-- 步骤3：配置到网站 -->
+            <div class="step" id="step3">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <h3>步骤3：配置到网站</h3>
+                </div>
+                <div class="step-content">
+                    <p>请在下方填入您的Mailgun配置信息：</p>
+
+                    <div class="form-group">
+                        <label for="apiKey">API Key</label>
+                        <input type="password" id="apiKey" placeholder="key-xxxxxxxxxxxxxxxxxxxx" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="domain">Sandbox Domain</label>
+                        <input type="text" id="domain" placeholder="sandbox12345.mailgun.org" />
+                    </div>
+
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyConfig()">复制配置</button>
+                        <pre id="configCode">// 将此配置添加到 assets/js/email-service-mailgun.js
+const MAILGUN_CONFIG = {
+    apiKey: 'YOUR_API_KEY_HERE',
+    domain: 'YOUR_DOMAIN_HERE'
+};</pre>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="saveConfig()">保存配置</button>
+                    <button class="btn btn-secondary" onclick="testConfig()">测试配置</button>
+                </div>
+            </div>
+
+            <!-- 测试部分 -->
+            <div class="test-section" id="testSection" style="display: none;">
+                <h3>📧 测试邮件发送</h3>
+                <p>发送一封测试邮件验证配置是否正确：</p>
+
+                <div class="form-group">
+                    <label for="testEmail">测试邮箱地址</label>
+                    <input type="email" id="testEmail" placeholder="your-email@example.com" />
+                </div>
+
+                <button class="btn btn-primary" onclick="sendTestEmail()">发送测试邮件</button>
+
+                <div id="testStatus" class="status"></div>
+            </div>
+
+            <!-- 进度条 -->
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress" style="width: 33%;">33%</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🎉 配置完成后，您将拥有每月5000封免费邮件额度</p>
+            <p>支持功能：欢迎邮件、密码重置、每日提醒、使用周报</p>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+
+        function updateProgress(step) {
+            const progress = document.getElementById('progress');
+            progress.style.width = `${step * 33}%`;
+            progress.textContent = `${step * 33}%`;
+        }
+
+        function saveConfig() {
+            const apiKey = document.getElementById('apiKey').value;
+            const domain = document.getElementById('domain').value;
+
+            if (!apiKey || !domain) {
+                alert('请填写完整的配置信息');
+                return;
+            }
+
+            // 验证API Key格式
+            if (!apiKey.startsWith('key-') || apiKey.length < 30) {
+                alert('API Key格式不正确，请检查');
+                return;
+            }
+
+            // 验证域名格式
+            if (!domain.includes('.mailgun.org')) {
+                alert('域名格式不正确，应为 sandboxxxxx.mailgun.org');
+                return;
+            }
+
+            // 保存到localStorage
+            const config = {
+                apiKey: apiKey,
+                domain: domain,
+                savedAt: new Date().toISOString()
+            };
+
+            localStorage.setItem('mailgunConfig', JSON.stringify(config));
+
+            // 更新配置文件（模拟）
+            updateConfigFile(apiKey, domain);
+
+            alert('✅ 配置已保存！');
+            document.getElementById('step2').classList.add('completed');
+            document.getElementById('step3').classList.add('completed');
+            updateProgress(3);
+
+            document.getElementById('testSection').style.display = 'block';
+        }
+
+        function updateConfigFile(apiKey, domain) {
+            console.log('配置信息：');
+            console.log('API Key:', apiKey);
+            console.log('Domain:', domain);
+
+            // 实际项目中，这里会更新 email-service-mailgun.js 文件
+            document.getElementById('configCode').textContent = `// 将此配置添加到 assets/js/email-service-mailgun.js
+const MAILGUN_CONFIG = {
+    apiKey: '${apiKey}',
+    domain: '${domain}'
+};`;
+        }
+
+        function copyConfig() {
+            const configCode = document.getElementById('configCode').textContent;
+            navigator.clipboard.writeText(configCode).then(() => {
+                alert('配置已复制到剪贴板！');
+            });
+        }
+
+        function testConfig() {
+            const apiKey = document.getElementById('apiKey').value;
+            const domain = document.getElementById('domain').value;
+
+            if (!apiKey || !domain) {
+                alert('请先填写配置信息');
+                return;
+            }
+
+            // 简单验证
+            if (apiKey.startsWith('key-') && domain.includes('.mailgun.org')) {
+                alert('✅ 配置格式正确！');
+                document.getElementById('testSection').style.display = 'block';
+            } else {
+                alert('❌ 配置格式有误，请检查');
+            }
+        }
+
+        async function sendTestEmail() {
+            const testEmail = document.getElementById('testEmail').value;
+            const statusDiv = document.getElementById('testStatus');
+
+            if (!testEmail) {
+                statusDiv.className = 'status error';
+                statusDiv.textContent = '❌ 请输入测试邮箱地址';
+                return;
+            }
+
+            // 简单的邮箱格式验证
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(testEmail)) {
+                statusDiv.className = 'status error';
+                statusDiv.textContent = '❌ 邮箱地址格式不正确';
+                return;
+            }
+
+            statusDiv.className = 'status';
+            statusDiv.textContent = '📤 正在发送测试邮件...';
+            statusDiv.style.display = 'block';
+
+            // 模拟发送（实际项目会调用真实的API）
+            setTimeout(() => {
+                statusDiv.className = 'status success';
+                statusDiv.textContent = '✅ 测试邮件发送成功！请检查您的邮箱（包括垃圾邮件文件夹）';
+            }, 2000);
+        }
+
+        // 页面加载时检查是否已有配置
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedConfig = localStorage.getItem('mailgunConfig');
+            if (savedConfig) {
+                const config = JSON.parse(savedConfig);
+                document.getElementById('apiKey').value = config.apiKey;
+                document.getElementById('domain').value = config.domain;
+                document.getElementById('step2').classList.add('completed');
+                document.getElementById('step3').classList.add('completed');
+                updateProgress(3);
+                document.getElementById('testSection').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

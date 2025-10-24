@@ -798,6 +798,8 @@
                 <span class="separator">|</span>
                 <a href="terms-of-service.html" data-i18n="footer.terms" target="_blank" rel="noopener">服务条款</a>
                 <span class="separator">|</span>
+                <a href="https://status.soundflows.app" target="_blank" rel="noopener">系统状态</a>
+                <span class="separator">|</span>
                 <button class="gdpr-ccpa-link" onclick="showCookieSettings()" data-i18n="footer.cookieSettings">Cookie设置</button>
                 <span class="separator">|</span>
                 <button class="gdpr-ccpa-link" onclick="showDataDeletionForm()" data-i18n="footer.dataDeletion">删除我的数据</button>
@@ -1174,8 +1176,19 @@
     <script src="assets/js/pwa-manager.js"></script>
     <script src="assets/js/notification-preferences.js"></script>
     <script src="assets/js/theme-manager.js"></script>
-  <script src="assets/js/offline-audio-manager.js"></script>
+    <script src="assets/js/offline-audio-manager.js"></script>
     <script src="assets/js/daily-meditation-reminder.js"></script>
+    <script src="assets/js/weekly-digest-email.js"></script>
+    <script src="assets/js/email-integration-handler.js"></script>
+
+    <!-- 邮件模板和邮件服务 -->
+    <script src="assets/js/email-templates-i18n.js"></script>
+    <script src="assets/js/email-service-mailgun.js"></script>
+    <script src="assets/js/email-service-sendgrid.js"></script>
+    <script src="assets/js/email-service-brevo.js"></script>
+    <script src="assets/js/email-service-formspree.js"></script>
+    <script src="assets/js/email-service-emailjs.js"></script>
+    <script src="quick-formspree-config.js"></script>
 
     <!-- 🎵 2.0 新增: 音频预加载和Autoplay检测器 -->
     <script src="assets/js/autoplay-detector.js"></script>

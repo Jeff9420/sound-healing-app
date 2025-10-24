@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📧 邮件服务备选方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .content {
+            padding: 40px;
+        }
+        .service-card {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s;
+        }
+        .service-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.1);
+        }
+        .service-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .service-icon {
+            font-size: 3rem;
+            margin-right: 20px;
+        }
+        .service-title {
+            font-size: 1.5rem;
+            color: #333;
+        }
+        .service-desc {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+        }
+        .feature-icon {
+            color: #28a745;
+            margin-right: 10px;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #5566dd;
+            transform: translateY(-2px);
+        }
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        .btn-success:hover {
+            background: #218838;
+        }
+        .btn-warning {
+            background: #ffc107;
+            color: #333;
+        }
+        .btn-warning:hover {
+            background: #e0a800;
+        }
+        .troubleshooting {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        .troubleshooting h3 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+        .troubleshooting ul {
+            color: #856404;
+            padding-left: 20px;
+        }
+        .troubleshooting li {
+            margin: 10px 0;
+        }
+        .recommendation {
+            background: #d1ecf1;
+            border: 2px solid #17a2b8;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        .recommendation h3 {
+            color: #0c5460;
+            margin-bottom: 15px;
+        }
+        .recommendation p {
+            color: #0c5460;
+            line-height: 1.6;
+        }
+        .code-box {
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            margin: 20px 0;
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            padding: 8px 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .copy-btn:hover {
+            background: #5566dd;
+        }
+        .status-box {
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: none;
+        }
+        .status-box.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        .status-box.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📧 邮件服务备选方案</h1>
+            <p>如果Mailgun注册遇到问题，我们推荐以下更简单的邮件服务</p>
+        </div>
+
+        <div class="content">
+            <!-- 推荐方案1：SendGrid -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">📬</div>
+                    <div class="service-title">SendGrid（推荐）</div>
+                </div>
+                <div class="service-desc">
+                    Twilio旗下的专业邮件服务，注册简单，中文界面友好，免费额度充足
+                </div>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <span class="feature-icon">✅</span>
+                        <span>免费100封/天（每月3000封）</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✅</span>
+                        <span>支持中文界面</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✅</span>
+                        <span>邮箱验证（无需短信）</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✅</span>
+                        <span>全球送达率99%</span>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <a href="https://signup.sendgrid.com" target="_blank" class="btn btn-success">
+                        🚀 立即注册SendGrid
+                    </a>
+                    <button class="btn btn-primary" onclick="configureSendGrid()">
+                        ⚙️ 快速配置SendGrid
+                    </button>
+                </div>
+            </div>
+
+            <!-- 推荐方案2：Brevo -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">📨</div>
+                    <div class="service-title">Brevo（原Sendinblue）</div>
+                </div>
+                <div class="service-desc">
+                    欧洲领先的邮件营销平台，注册仅需邮箱，免费额度大，功能全面
+                </div>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <span class="feature-icon">✅</span>
+                        <span>免费300封/天（每月9000封）</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✅</span>
+                        <span>仅需邮箱验证</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✅</span>
+                        <span>支持营销自动化</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✅</span>
+                        <span>内置CRM功能</span>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <a href="https://www.brevo.com/free-signup/" target="_blank" class="btn btn-success">
+                        🚀 立即注册Brevo
+                    </a>
+                    <button class="btn btn-primary" onclick="configureBrevo()">
+                        ⚙️ 快速配置Brevo
+                    </button>
+                </div>
+            </div>
+
+            <!-- 推荐方案3：Amazon SES -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">☁️</div>
+                    <div class="service-title">Amazon SES</div>
+                </div>
+                <div class="service-desc">
+                    AWS的邮件服务，价格极低，如果有AWS账户可以直接使用
+                </div>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <span class="feature-icon">✅</span>
+                        <span>$0.10/1000封</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✅</span>
+                        <span>每月62000封免费（从EC2发送）</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✅</span>
+                        <span>高度可靠</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">⚠️</span>
+                        <span>需要AWS账户</span>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <a href="https://aws.amazon.com/ses/" target="_blank" class="btn btn-warning">
+                        📖 了解Amazon SES
+                    </a>
+                </div>
+            </div>
+
+            <!-- 问题解决 -->
+            <div class="troubleshooting">
+                <h3>🔧 Mailgun注册问题解决方案</h3>
+                <ul>
+                    <li><strong>收不到短信验证码？</strong>
+                        <ul>
+                            <li>尝试使用不同的手机号码</li>
+                            <li>检查是否开启了短信拦截</li>
+                            <li>等待5-10分钟后重试</li>
+                            <li>尝试使用+86或0086前缀</li>
+                        </ul>
+                    </li>
+                    <li><strong>其他解决方案：</strong>
+                        <ul>
+                            <li>使用企业邮箱注册（通过更快）</li>
+                            <li>联系Mailgun客服（support@mailgun.com）</li>
+                            <li>使用VPN切换到美国/香港IP再尝试</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 推荐建议 -->
+            <div class="recommendation">
+                <h3>💡 我们的推荐</h3>
+                <p>对于大多数用户，我们推荐使用<strong>SendGrid</strong>，原因如下：</p>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li>✅ 注册仅需邮箱验证，无需手机短信</li>
+                    <li>✅ 提供中文界面，操作简单</li>
+                    <li>✅ 免费额度足够小型应用使用（3000封/月）</li>
+                    <li>✅ 送达率高，服务稳定</li>
+                    <li>✅ 文档齐全，集成简单</li>
+                </ul>
+            </div>
+
+            <!-- 配置区域 -->
+            <div id="configSection" style="display: none;">
+                <h3>⚙️ 快速配置</h3>
+                <div class="code-box">
+                    <button class="copy-btn" onclick="copyConfig()">复制配置</button>
+                    <pre id="configCode">// 邮件服务配置代码将在这里显示
+const EMAIL_CONFIG = {
+    service: 'sendgrid',
+    apiKey: 'YOUR_API_KEY_HERE'
+};</pre>
+                </div>
+                <div id="configStatus" class="status-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function configureSendGrid() {
+            const configSection = document.getElementById('configSection');
+            configSection.style.display = 'block';
+
+            document.getElementById('configCode').textContent = `// SendGrid配置步骤：
+// 1. 访问 https://signup.sendgrid.com 注册
+// 2. 验证邮箱后进入Dashboard
+// 3. Settings > API Keys > Create API Key
+// 4. 选择 "Restricted Access"，只勾选 "Mail Send" permission
+// 5. 复制生成的API Key（格式：SG.xxxxx）
+
+const SENDGRID_CONFIG = {
+    apiKey: 'SG.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+    // API Key会在注册后获得
+};
+
+// 使用示例：
+// const emailService = new SendGridEmailService(SENDGRID_CONFIG.apiKey);
+// await emailService.sendEmail({
+//     to: 'user@example.com',
+//     subject: 'Welcome!',
+//     html: '<h1>Welcome to SoundFlows</h1>'
+// });`;
+
+            document.getElementById('configStatus').className = 'status-box success';
+            document.getElementById('configStatus').textContent = '✅ 请按照上方步骤注册SendGrid并获取API Key';
+
+            // 滚动到配置区域
+            configSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function configureBrevo() {
+            const configSection = document.getElementById('configSection');
+            configSection.style.display = 'block';
+
+            document.getElementById('configCode').textContent = `// Brevo配置步骤：
+// 1. 访问 https://www.brevo.com/free-signup/ 注册
+// 2. 验证邮箱后登录
+// 3. SMTP & API > API Keys > Create a new API key
+// 4. 给key命名，复制生成的密钥（格式：xkeysib-xxxxx）
+
+const BREVO_CONFIG = {
+    apiKey: 'xkeysib-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+    // API Key会在注册后获得
+};
+
+// 使用示例：
+// const emailService = new BrevoEmailService(BREVO_CONFIG.apiKey);
+// await emailService.sendEmail({
+//     to: 'user@example.com',
+//     subject: 'Welcome!',
+//     html: '<h1>Welcome to SoundFlows</h1>'
+// });`;
+
+            document.getElementById('configStatus').className = 'status-box success';
+            document.getElementById('configStatus').textContent = '✅ 请按照上方步骤注册Brevo并获取API Key';
+
+            // 滚动到配置区域
+            configSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function copyConfig() {
+            const configCode = document.getElementById('configCode').textContent;
+            navigator.clipboard.writeText(configCode).then(() => {
+                alert('✅ 配置代码已复制到剪贴板！');
+            }).catch(err => {
+                console.error('复制失败:', err);
+            });
+        }
+
+        // 检查是否已有配置
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedConfig = localStorage.getItem('emailServiceConfig');
+            if (savedConfig) {
+                const config = JSON.parse(savedConfig);
+                if (config.service) {
+                    alert(`检测到已有${config.service.toUpperCase()}配置！`);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
