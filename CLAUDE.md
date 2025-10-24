@@ -71,10 +71,14 @@ This is a **声音疗愈 (Sound Healing)** v3.0.0 - An enterprise-grade modern w
 
 ### Key Components
 - **App Controller** (`assets/js/app.js`) - Main application orchestrator
-- **UI Controller** (`assets/js/ui-controller.js`) - Global controls and volume management  
+- **UI Controller** (`assets/js/ui-controller.js`) - Global controls and volume management
 - **Theme Manager** (`assets/js/theme-manager.js`) - Dark/light theme switching
 - **Performance Monitor** (`assets/js/performance-monitor.js`) - Memory and performance tracking
 - **Sleep Timer** (`assets/js/sleep-timer.js`) - Auto-stop functionality
+- **Firebase Auth UI** (`assets/js/firebase-auth-ui.js`) - User authentication system
+- **Email Integration Handler** (`assets/js/email-integration-handler.js`) - Email service coordination
+- **Daily Meditation Reminder** (`assets/js/daily-meditation-reminder.js`) - Daily notification system
+- **Weekly Digest Email** (`assets/js/weekly-digest-email.js`) - Weekly report generation
 
 ## Audio File Management
 
@@ -282,3 +286,112 @@ See `DEPLOYMENT.md` for complete deployment guide and troubleshooting
 - **Video**: Must match Cloudflare R2 CDN structure
 - File names are case-sensitive and must match exactly
 - **Never use R2 CDN for audio** - only Archive.org
+
+## Email System (Formspree Integration)
+
+### Email Service Configuration
+- **Provider**: Formspree (no API key required)
+- **Form ID**: mldpqopn (stored in localStorage)
+- **Free Tier**: 50 emails/month
+- **Endpoint**: https://formspree.io/f/mldpqopn
+
+### Email Types
+1. **Welcome Email** - Sent automatically on user registration
+   - Supports 5 languages
+   - Includes platform introduction and features
+   - Triggered by `userRegistered` event
+
+2. **Password Reset Email** - Sent when user requests password reset
+   - Includes secure reset link
+   - 24-hour expiration
+   - Triggered by `passwordResetRequested` event
+
+3. **Daily Reminder Email** - Sent based on user's reminder settings
+   - Includes streak tracking
+   - Daily inspirational quotes
+   - Triggered by `dailyReminderTriggered` event
+
+4. **Weekly Digest Email** - Sent every Sunday at 9 AM (default)
+   - Usage statistics and insights
+   - Most played tracks and categories
+   - Achievement badges
+   - Triggered by `weeklyDigestGenerated` event
+
+### Email Implementation
+- **Event-driven architecture**: Custom events trigger email sending
+- **Multilingual templates**: Support for zh-CN and en-US
+- **Local logging**: Email logs stored in localStorage (last 100 emails)
+- **No phone verification required**: Unlike Mailgun/SendGrid/Brevo
+
+### Email Configuration Files
+- **`assets/js/email-integration-handler.js`** - Central email coordination
+- **`assets/js/email-service-formspree.js`** - Formspree service implementation
+- **`quick-formspree-config.js`** - Form ID configuration
+
+### Testing Email System
+- Use `formspree-email-test.html` for comprehensive testing
+- Test all email types with custom parameters
+- View real-time sending statistics
+- Batch testing available
+
+## User Authentication System
+
+### Firebase Authentication Integration
+- **Authentication Methods**:
+  - Google OAuth (one-click login)
+  - Email/Password registration
+  - Anonymous browsing mode
+  - Password reset via email
+
+### Implementation Files
+- **`assets/js/firebase-auth-ui.js`** - Authentication UI and logic
+- **`assets/js/firebase-auth.js`** - Core Firebase auth functions
+
+### User Data Management
+- User profile information stored in Firebase
+- Local preferences saved in localStorage
+- Session persistence across browser refreshes
+- Automatic UI updates on auth state changes
+
+## User Features
+
+### Daily Meditation Reminder
+- **Browser Notifications**: Native browser notification API
+- **Streak Tracking**: Consecutive days counter
+- **Achievement System**: Milestone badges for streaks
+- **Email Reminders**: Integrated with email system
+- **Custom Time**: User configurable reminder time
+
+### Weekly Statistics and Reports
+- **Play History**: Last 100 audio plays tracked
+- **Usage Metrics**: Total sessions, minutes, favorites
+- **Category Preferences**: Most used audio categories
+- **Progress Tracking**: Meditation journey visualization
+- **Email Digest**: Weekly summary sent via email
+
+### User Preferences
+- **Language Settings**: 5 language options with instant switching
+- **Theme Selection**: Dark/light mode toggle
+- **Volume Control**: Persistent volume level
+- **Playback Settings**: Speed, loop, shuffle preferences
+- **Privacy Settings**: Data export and deletion options
+
+## Performance Optimization
+
+### Caching Strategy
+- **Service Worker**: Offline PWA functionality
+- **Audio Preloading**: Smart preloading of next tracks
+- **Video Caching**: Preload videos for smooth transitions
+- **Local Storage**: User settings and preferences
+
+### Bundle Optimization
+- **Code Splitting**: Dynamic imports for non-critical modules
+- **Tree Shaking**: Unused code elimination
+- **Minification**: JS/CSS compression
+- **Image Optimization**: WebP format with fallbacks
+
+### Monitoring
+- **Performance Metrics**: Core Web Vitals tracking
+- **Error Tracking**: Global error handling
+- **User Analytics**: GA4, Amplitude, Clarity integration
+- **Memory Usage**: Audio instance management
