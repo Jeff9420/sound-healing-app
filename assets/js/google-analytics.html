@@ -1,0 +1,22 @@
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y9X4LZ6Y7K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y9X4LZ6Y7K', {
+    custom_map: {'custom_parameter_1': 'audio_category'}
+  });
+
+  // Audio analytics
+  gtag('config', 'G-Y9X4LZ6Y7K', {
+    send_page_view: false
+  });
+
+  // Track page views
+  gtag('event', 'page_view', {
+    page_title: document.title,
+    page_location: window.location.href
+  });
+</script>

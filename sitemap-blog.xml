@@ -60,6 +60,30 @@
     </image:image>
   </url>
 
+  <url>
+    <loc>https://soundflows.app/blog/white-noise-sleep-focus-complete-guide.html</loc>
+    <lastmod>2025-01-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://soundflows.app/assets/images/blog/white-noise-hero.jpg</image:loc>
+      <image:caption>White noise sound waves for sleep and focus</image:caption>
+      <image:title>White Noise Complete Guide</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://soundflows.app/blog/rain-sounds-healing-benefits-science.html</loc>
+    <lastmod>2025-01-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://soundflows.app/assets/images/blog/rain-sounds-hero.jpg</image:loc>
+      <image:caption>Rain droplets creating peaceful atmosphere</image:caption>
+      <image:title>Rain Sounds Healing Benefits</image:title>
+    </image:image>
+  </url>
+
   <!-- Category Pages -->
   <url>
     <loc>https://soundflows.app/category/sleep-therapy/</loc>
