@@ -360,6 +360,13 @@
                                 aria-label="Toggle focus mode" title="专注模式" tabindex="0" aria-pressed="false">
                             <span aria-hidden="true">🎯</span>
                         </button>
+                        <!-- Daily Meditation Reminder Button -->
+                        <button class="reminder-btn" id="reminderBtn" onclick="window.dailyMeditationReminder.showReminderSettings()"
+                                aria-label="Daily meditation reminder settings" title="每日冥想提醒" tabindex="0">
+                            <span class="bell-icon" aria-hidden="true">🔔</span>
+                            <span id="reminderText">每日提醒</span>
+                        </button>
+
                         <!-- Theme Toggle Button -->
                         <button id="themeToggle" class="header-icon-btn theme-toggle-btn"
                                 aria-label="Toggle theme" title="切换主题" tabindex="0" aria-pressed="false">
@@ -783,6 +790,26 @@
         <div id="notification" class="notification"></div>
     </div>
 
+    <!-- GDPR/CCPA Compliance Section -->
+    <footer class="gdpr-footer" role="contentinfo">
+        <div class="gdpr-container">
+            <div class="gdpr-links">
+                <a href="privacy-policy.html" data-i18n="footer.privacy" target="_blank" rel="noopener">隐私政策</a>
+                <span class="separator">|</span>
+                <a href="terms-of-service.html" data-i18n="footer.terms" target="_blank" rel="noopener">服务条款</a>
+                <span class="separator">|</span>
+                <button class="gdpr-ccpa-link" onclick="showCookieSettings()" data-i18n="footer.cookieSettings">Cookie设置</button>
+                <span class="separator">|</span>
+                <button class="gdpr-ccpa-link" onclick="showDataDeletionForm()" data-i18n="footer.dataDeletion">删除我的数据</button>
+                <span class="separator">|</span>
+                <button class="gdpr-ccpa-link ccpa-opt-out" onclick="toggleCCPAOptOut()" id="ccpaOptOutBtn" data-i18n="footer.doNotSell">Do Not Sell My Info</button>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Sound Healing Space. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
     <!-- Structured Data (JSON-LD Schema.org) -->
     <script type="application/ld+json">
     {
@@ -1131,6 +1158,7 @@
     <script src="assets/js/dropdown-login-system.js"></script>
     <script src="assets/js/social-share.js"></script>
     <script src="assets/js/gdpr-compliance.js"></script>
+    <script src="assets/js/gdpr-ccpa-handler.js"></script>
     <!-- 视频背景系统 (2.0 新增) -->
     <script src="assets/js/video-background-manager.js"></script>
     <script src="assets/js/focus-mode-controller.js"></script>
@@ -1146,6 +1174,8 @@
     <script src="assets/js/pwa-manager.js"></script>
     <script src="assets/js/notification-preferences.js"></script>
     <script src="assets/js/theme-manager.js"></script>
+  <script src="assets/js/offline-audio-manager.js"></script>
+    <script src="assets/js/daily-meditation-reminder.js"></script>
 
     <!-- 🎵 2.0 新增: 音频预加载和Autoplay检测器 -->
     <script src="assets/js/autoplay-detector.js"></script>
@@ -1563,13 +1593,56 @@
         });
     </script>
 
-    <!-- 初始化主题管理器 -->
+    <!-- 初始化主题管理器和每日提醒 -->
     <script>
-        // 在DOM加载后初始化主题管理器
+        // 在DOM加载后初始化主题管理器和每日提醒
         document.addEventListener('DOMContentLoaded', () => {
             window.themeManager = new ThemeManager();
             console.log('✅ 主题管理器已初始化');
+
+            // 初始化每日冥想提醒按钮状态
+            if (window.dailyMeditationReminder) {
+                updateReminderButton();
+
+                // 监听音频播放事件，当用户完成冥想时标记练习
+                if (window.audioManager) {
+                    // 当音频播放完成时，可能表示完成了一次冥想练习
+                    window.audioManager.addEventListener('audioEnded', () => {
+                        // 可以自动标记，或者询问用户是否完成练习
+                        console.log('音频播放结束，询问用户是否完成冥想练习');
+                    });
+                }
+            }
         });
+
+        // 更新提醒按钮状态
+        function updateReminderButton() {
+            const reminderBtn = document.getElementById('reminderBtn');
+            const reminderText = document.getElementById('reminderText');
+
+            if (window.dailyMeditationReminder) {
+                const status = window.dailyMeditationReminder.getReminderStatus();
+
+                if (status.isEnabled) {
+                    reminderBtn.classList.add('has-streak');
+                    reminderText.textContent = `${status.streakDays}天连续`;
+                } else {
+                    reminderBtn.classList.remove('has-streak');
+                    reminderText.textContent = '每日提醒';
+                }
+            }
+        }
+
+        // 标记今日冥想练习完成
+        function markMeditationPractice() {
+            if (window.dailyMeditationReminder) {
+                window.dailyMeditationReminder.markTodayPractice();
+                updateReminderButton();
+            }
+        }
+
+        // 添加全局函数供用户调用
+        window.markMeditationPractice = markMeditationPractice;
     </script>
 </body>
 </html>

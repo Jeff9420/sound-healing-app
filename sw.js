@@ -36,8 +36,21 @@ const STATIC_CACHE_URLS = [
 ];
 
 // 精选音频文件预加载列表
-// 注意：所有音频已迁移至Archive.org CDN，无需预加载本地文件
-const FEATURED_AUDIO = [];
+// 注意：所有音频已迁移至Archive.org CDN，支持离线缓存
+const FEATURED_AUDIO = [
+  // 每个分类精选2-3个最受欢迎的音频文件用于离线缓存
+  'https://archive.org/download/sound-healing-collection/meditation/01-morning-meditation.mp3',
+  'https://archive.org/download/sound-healing-collection/meditation/02-deep-relaxation.mp3',
+  'https://archive.org/download/sound-healing-collection/rain-sounds/01-gentle-rain.mp3',
+  'https://archive.org/download/sound-healing-collection/rain-sounds/02-rain-on-leaves.mp3',
+  'https://archive.org/download/sound-healing-collection/singing-bowl-sound/01-root-chakra-bowl.mp3',
+  'https://archive.org/download/sound-healing-collection/singing-bowl-sound/02-heart-chakra-bowl.mp3',
+  'https://archive.org/download/sound-healing-collection/white-noise/01-pure-white-noise.mp3',
+  'https://archive.org/download/sound-healing-collection/white-noise/02-fan-white-noise.mp3'
+];
+
+// 运行时缓存名称
+const RUNTIME_CACHE = 'soundflows-runtime-v2.5';
 
 // 安装Service Worker
 self.addEventListener('install', event => {
@@ -268,17 +281,189 @@ self.addEventListener('notificationclick', event => {
 
 // 消息处理
 self.addEventListener('message', event => {
-  if (event.data && event.data.type === 'CLEAN_CACHE') {
-    event.waitUntil(
-      caches.keys().then(cacheNames => {
-        return Promise.all(
-          cacheNames.filter(name => name.startsWith('dynamic-'))
-            .map(name => caches.delete(name))
-        );
-      })
-    );
+  const { type, data } = event.data;
+
+  switch (type) {
+    case 'CLEAN_CACHE':
+      event.waitUntil(
+        caches.keys().then(cacheNames => {
+          return Promise.all(
+            cacheNames.filter(name => name.startsWith('dynamic-'))
+              .map(name => caches.delete(name))
+          );
+        })
+      );
+      break;
+
+    case 'DOWNLOAD_FOR_OFFLINE':
+      // 下载音频文件以供离线使用
+      event.waitUntil(downloadAudioForOffline(data.audioUrls));
+      break;
+
+    case 'GET_OFFLINE_AUDIO_LIST':
+      // 获取已缓存的音频列表
+      event.waitUntil(getOfflineAudioList().then(audioList => {
+        event.ports[0].postMessage({ type: 'OFFLINE_AUDIO_LIST', audioList });
+      }));
+      break;
+
+    case 'REMOVE_OFFLINE_AUDIO':
+      // 删除特定的离线音频
+      event.waitUntil(removeOfflineAudio(data.audioUrl));
+      break;
+
+    case 'GET_CACHE_STATUS':
+      // 获取缓存状态信息
+      event.waitUntil(getCacheStatus().then(status => {
+        event.ports[0].postMessage({ type: 'CACHE_STATUS', status });
+      }));
+      break;
+
+    case 'PRELOAD_CATEGORY':
+      // 预加载整个分类的音频
+      event.waitUntil(preloadCategory(data.category, data.audioUrls));
+      break;
   }
 });
+
+// 下载音频文件以供离线使用
+async function downloadAudioForOffline(audioUrls) {
+  const cache = await caches.open(RUNTIME_CACHE);
+  const results = [];
+
+  try {
+    for (const url of audioUrls) {
+      try {
+        const response = await fetch(url);
+        if (response.ok) {
+          await cache.put(url, response.clone());
+          results.push({ url, success: true });
+          console.log('✅ 音频已缓存供离线使用:', url);
+        } else {
+          results.push({ url, success: false, error: 'Download failed' });
+        }
+      } catch (error) {
+        results.push({ url, success: false, error: error.message });
+        console.error('❌ 音频缓存失败:', url, error);
+      }
+    }
+
+    // 通知客户端下载完成
+    const clients = await self.clients.matchAll();
+    clients.forEach(client => {
+      client.postMessage({
+        type: 'AUDIO_DOWNLOAD_COMPLETE',
+        results
+      });
+    });
+
+    return results;
+  } catch (error) {
+    console.error('❌ 批量下载失败:', error);
+    throw error;
+  }
+}
+
+// 获取已缓存的音频列表
+async function getOfflineAudioList() {
+  const cache = await caches.open(RUNTIME_CACHE);
+  const keys = await cache.keys();
+  const audioList = [];
+
+  for (const request of keys) {
+    const url = request.url;
+    if (url.includes('.mp3') || url.includes('.wav') || url.includes('.ogg')) {
+      const response = await cache.match(request);
+      if (response) {
+        const blob = await response.blob();
+        audioList.push({
+          url,
+          size: blob.size,
+          cached: true,
+          timestamp: response.headers.get('date') || new Date().toISOString()
+        });
+      }
+    }
+  }
+
+  return audioList;
+}
+
+// 删除特定的离线音频
+async function removeOfflineAudio(audioUrl) {
+  try {
+    const cache = await caches.open(RUNTIME_CACHE);
+    await cache.delete(audioUrl);
+    console.log('🗑️ 已删除离线音频:', audioUrl);
+
+    // 通知客户端
+    const clients = await self.clients.matchAll();
+    clients.forEach(client => {
+      client.postMessage({
+        type: 'OFFLINE_AUDIO_REMOVED',
+        url: audioUrl
+      });
+    });
+
+    return true;
+  } catch (error) {
+    console.error('❌ 删除离线音频失败:', error);
+    return false;
+  }
+}
+
+// 获取缓存状态信息
+async function getCacheStatus() {
+  const cache = await caches.open(RUNTIME_CACHE);
+  const keys = await cache.keys();
+  let totalSize = 0;
+  let audioCount = 0;
+
+  for (const request of keys) {
+    const response = await cache.match(request);
+    if (response) {
+      const blob = await response.blob();
+      totalSize += blob.size;
+
+      if (request.url.includes('.mp3') || request.url.includes('.wav') || request.url.includes('.ogg')) {
+        audioCount++;
+      }
+    }
+  }
+
+  return {
+    totalSize,
+    audioCount,
+    totalFiles: keys.length,
+    quota: await navigator.storage.estimate().then(estimate => ({
+      used: estimate.usage || 0,
+      available: estimate.quota || 0
+    }))
+  };
+}
+
+// 预加载整个分类的音频
+async function preloadCategory(category, audioUrls) {
+  console.log(`📦 开始预加载分类: ${category}`);
+
+  // 限制预加载数量，避免占用过多存储空间
+  const maxPreload = 5;
+  const urlsToPreload = audioUrls.slice(0, maxPreload);
+
+  const results = await downloadAudioForOffline(urlsToPreload);
+
+  // 通知客户端预加载完成
+  const clients = await self.clients.matchAll();
+  clients.forEach(client => {
+    client.postMessage({
+      type: 'CATEGORY_PRELOAD_COMPLETE',
+      category,
+      results
+    });
+  });
+
+  return results;
+}
 
 // 后台同步函数
 async function doBackgroundSync() {
