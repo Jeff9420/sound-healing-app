@@ -84,13 +84,13 @@ function getCategoryDisplayName(key, category) {
     if (category.nameKey) {
         return getText(category.nameKey, category.name || categoryInfo[key]?.name || key);
     }
-    const ecoKey = ecosystem..name;
-    const fallbackKey = category.;
+    const ecoKey = `ecosystem.${key}.name`;
+    const fallbackKey = `category.${key}`;
     return getText(ecoKey, getText(fallbackKey, category.name || categoryInfo[key]?.name || key));
 }
 
 function getCategoryDescription(key, category) {
-    return getText(ecosystem..desc, category.description || categoryInfo[key]?.desc || '');
+    return getText(`ecosystem.${key}.desc`, category.description || categoryInfo[key]?.desc || '');
 }
 
 function renderCategoryShortcuts(entries) {
