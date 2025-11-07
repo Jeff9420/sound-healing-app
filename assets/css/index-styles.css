@@ -2682,9 +2682,9 @@ canvas {
    SaaS Hero + Navigation Redesign
    ============================================================================ */
 :root {
-    --saas-bg: #120a07;
-    --saas-panel: #1f120b;
-    --saas-card: #28160d;
+    --saas-bg: rgba(18, 10, 7, 0.92);
+    --saas-panel: rgba(31, 18, 11, 0.88);
+    --saas-card: rgba(40, 22, 13, 0.85);
     --saas-border: rgba(255, 255, 255, 0.08);
     --saas-primary: #f6a93b;
     --saas-primary-dark: #f87c0f;
