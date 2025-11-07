@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
@@ -239,200 +239,154 @@
         <canvas id="backgroundCanvas"></canvas>
 
         <!-- Header -->
-        <div class="container">
-            <header class="header" role="banner">
-                <div class="header__inner">
-                    <div class="header__brand">
-                        <span class="header__icon" aria-hidden="true">🎵</span>
-                        <div class="header__brand-text">
-                            <h1 class="header__title" data-i18n="app.title">声音疗愈空间</h1>
-                            <span class="header__tagline" data-i18n="header.tagline">Soundflows · 数字音疗工作室</span>
+                <div class="saas-shell">
+            <header class="saas-hero" role="banner" id="heroIntro">
+                <nav class="saas-nav" aria-label="主导航">
+                    <div class="saas-nav__brand">
+                        <span class="saas-nav__logo" aria-hidden="true">🎧</span>
+                        <div>
+                            <p class="saas-nav__title" data-i18n="app.title">声音疗愈空间</p>
+                            <p class="saas-nav__subtitle" data-i18n="header.tagline">Soundflows · 数字音疗工作室</p>
                         </div>
                     </div>
-                    <button class="header__persona-toggle" data-menu="persona" aria-controls="personaMenu" aria-expanded="false" data-i18n="nav.persona.toggle" role="button" tabindex="0">使用目标</button>
-                    <nav class="header__persona-nav" id="personaMenu" aria-label="使用目标" aria-hidden="true" role="navigation">
-                        <div class="mega-menu__layout">
-                            <a class="mega-menu__item" data-cta="persona-meditation" href="#meditation" onclick="document.getElementById('categoryGrid').scrollIntoView({behavior: 'smooth'})">
-                                <span class="mega-menu__title" data-i18n="nav.persona.meditation.title">冥想专注</span>
-                                <span class="mega-menu__desc" data-i18n="nav.persona.meditation.desc">晨间正念与全天专注练习</span>
-                            </a>
-                            <a class="mega-menu__item" data-cta="persona-sleep" href="#rain-sounds" onclick="document.getElementById('categoryGrid').scrollIntoView({behavior: 'smooth'})">
-                                <span class="mega-menu__title" data-i18n="nav.persona.sleep.title">深度睡眠</span>
-                                <span class="mega-menu__desc" data-i18n="nav.persona.sleep.desc">雨声与白噪声音引导快速入睡</span>
-                            </a>
-                            <a class="mega-menu__item" data-cta="persona-balance" href="#chakra-healing" onclick="document.getElementById('categoryGrid').scrollIntoView({behavior: 'smooth'})">
-                                <span class="mega-menu__title" data-i18n="nav.persona.balance.title">能量平衡</span>
-                                <span class="mega-menu__desc" data-i18n="nav.persona.balance.desc">脉轮共振与气场净化</span>
-                            </a>
-                            <a class="mega-menu__item" data-cta="persona-emotion" href="#subconscious-therapy" onclick="document.getElementById('categoryGrid').scrollIntoView({behavior: 'smooth'})">
-                                <span class="mega-menu__title" data-i18n="nav.persona.emotion.title">情绪疗愈</span>
-                                <span class="mega-menu__desc" data-i18n="nav.persona.emotion.desc">潜意识疗愈与压力释放</span>
-                            </a>
-                        </div>
-                    </nav>
-                    <a class="header__nav-link" href="#contentHub" data-cta="nav-resources" data-i18n="nav.resources" role="button" tabindex="0">资源中心</a>
-                    <div class="header__menu">
-                        <nav class="header__actions" aria-label="快捷功能" role="navigation">
-                        <!-- Login/User Dropdown -->
-                        <div class="user-dropdown" id="userDropdown">
-                            <button class="header-icon-btn user-dropdown-toggle" id="userDropdownToggle"
-                                    aria-label="User menu" title="用户菜单" tabindex="0" aria-expanded="false" aria-haspopup="true">
-                                <span class="user-avatar" id="userAvatar" style="display: none;">👤</span>
-                                <span class="login-icon" id="loginIcon">👤</span>
+                    <ul class="saas-nav__links">
+                        <li><a href="#experienceLaunchpad" data-i18n="nav.quick.start">即刻体验</a></li>
+                        <li><a href="#categoryGrid" data-i18n="nav.quick.categories">疗愈分类</a></li>
+                        <li><a href="#impactProof" data-i18n="nav.quick.metrics">疗愈成效</a></li>
+                        <li><a href="#contentHub" data-i18n="nav.resources">资源中心</a></li>
+                    </ul>
+                    <div class="saas-nav__actions">
+                        <span class="saas-nav__pill" data-i18n="nav.badge.new">混音实验室 · Hot</span>
+                        <button class="saas-nav__language" type="button" aria-label="切换语言">
+                            <span aria-hidden="true">🌐</span>
+                            <span data-i18n="nav.language">中文</span>
+                        </button>
+                        <button class="saas-nav__signin" type="button" data-i18n="nav.signin">登录</button>
+                    </div>
+                </nav>
+                <div class="saas-hero__grid">
+                    <div class="saas-hero__content">
+                        <p class="saas-hero__eyebrow" data-i18n="hero.eyebrow">专业音疗 · 5 种语言实时可用</p>
+                        <h2 class="saas-hero__headline" data-i18n="hero.headline">213+ 沉浸式疗愈音频，随时进入放松、睡眠或专注状态</h2>
+                        <p class="saas-hero__description" data-i18n="hero.description">
+                            将你的空间变成一座私人疗愈工作室。无论是缓压、睡眠、冥想还是创造力唤醒，每一次播放都由精心挑选的声音与视觉场景组成。
+                        </p>
+                        <div class="saas-hero__cta">
+                            <button class="saas-btn saas-btn--primary" data-cta="start-experience" aria-label="立即开启疗愈">
+                                <span data-i18n="hero.cta.primary">立即开启沉浸体验</span>
                             </button>
-                            <div class="user-dropdown-menu" id="userDropdownMenu" role="menu" aria-hidden="true">
-                                <!-- Guest User Menu -->
-                                <div class="guest-menu" id="guestMenu">
-                                    <div class="dropdown-header" data-i18n="user.welcome">欢迎来到声音疗愈空间</div>
-                                    <button class="dropdown-item" onclick="handleGoogleLogin()" role="menuitem">
-                                        <span class="dropdown-icon">🔵</span>
-                                        <span data-i18n="auth.googleLogin">使用 Google 登录</span>
-                                    </button>
-                                    <button class="dropdown-item" onclick="showEmailLogin()" role="menuitem">
-                                        <span class="dropdown-icon">📧</span>
-                                        <span data-i18n="auth.emailLogin">邮箱登录</span>
-                                    </button>
-                                    <button class="dropdown-item" onclick="showPhoneLogin()" role="menuitem">
-                                        <span class="dropdown-icon">📱</span>
-                                        <span data-i18n="auth.phoneLogin">手机登录</span>
-                                    </button>
-                                    <div class="dropdown-divider"></div>
-                                    <button class="dropdown-item" onclick="handleAnonymousLogin()" role="menuitem">
-                                        <span class="dropdown-icon">👤</span>
-                                        <span data-i18n="auth.anonymousLogin">匿名使用</span>
-                                    </button>
+                            <button class="saas-btn saas-btn--ghost" data-scroll-target="#conversionOffer" data-track="plan-open">
+                                <span data-i18n="hero.cta.plan">获取个性化冥想计划</span>
+                            </button>
+                        </div>
+                        <div class="saas-hero__quick-actions" role="list">
+                            <button class="quick-card" data-goal="sleep" onclick="document.getElementById('experienceLaunchpad').scrollIntoView({behavior: 'smooth'})">
+                                <span>🌙</span>
+                                <div>
+                                    <p>快速入睡</p>
+                                    <small>15 分钟深度雨声</small>
                                 </div>
-                                <!-- Logged In User Menu -->
-                                <div class="logged-in-menu" id="loggedInMenu" style="display: none;">
-                                    <div class="dropdown-header">
-                                        <div class="user-info">
-                                            <div class="user-avatar-large" id="userAvatarLarge">👤</div>
-                                            <div class="user-details">
-                                                <div class="user-name" id="userName">用户</div>
-                                                <div class="user-email" id="userEmail">user@example.com</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-divider"></div>
-                                    <button class="dropdown-item" onclick="window.historyFavoritesUI && window.historyFavoritesUI.openPanel('history')" role="menuitem">
-                                        <span class="dropdown-icon">📜</span>
-                                        <span data-i18n="nav.history">播放历史</span>
-                                    </button>
-                                    <button class="dropdown-item" onclick="window.historyFavoritesUI && window.historyFavoritesUI.openPanel('favorites')" role="menuitem">
-                                        <span class="dropdown-icon">❤️</span>
-                                        <span data-i18n="nav.favorites">我的收藏</span>
-                                    </button>
-                                    <button class="dropdown-item" onclick="window.statsDashboard && window.statsDashboard.open()" role="menuitem">
-                                        <span class="dropdown-icon">📊</span>
-                                        <span data-i18n="nav.stats">收听统计</span>
-                                    </button>
-                                    <div class="dropdown-divider"></div>
-                                    <button class="dropdown-item" onclick="showSettings()" role="menuitem">
-                                        <span class="dropdown-icon">⚙️</span>
-                                        <span data-i18n="nav.settings">设置</span>
-                                    </button>
-                                    <button class="dropdown-item logout" onclick="handleLogout()" role="menuitem">
-                                        <span class="dropdown-icon">🚪</span>
-                                        <span data-i18n="auth.logout">退出登录</span>
-                                    </button>
+                            </button>
+                            <button class="quick-card" data-goal="focus" onclick="document.getElementById('categoryGrid').scrollIntoView({behavior: 'smooth'})">
+                                <span>✨</span>
+                                <div>
+                                    <p>专注冲刺</p>
+                                    <small>高频 α 波 + 白噪声</small>
                                 </div>
+                            </button>
+                            <button class="quick-card" data-goal="relax" onclick="document.getElementById('contentHub').scrollIntoView({behavior: 'smooth'})">
+                                <span>💆</span>
+                                <div>
+                                    <p>午间焕新</p>
+                                    <small>7 分钟呼吸 + 钵声</small>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="saas-hero__panel">
+                        <div class="saas-panel__badge">SaaS 级音疗控制台</div>
+                        <p class="saas-panel__copy">以数据驱动的多语言声音疗愈平台，提供即开即用的混音、睡眠定时与跨设备同步。</p>
+                        <div class="saas-panel__metrics">
+                            <div class="saas-panel__metric">
+                                <span>213+</span>
+                                <small data-i18n="hero.stats.audio">疗愈音频</small>
+                            </div>
+                            <div class="saas-panel__metric">
+                                <span>9</span>
+                                <small data-i18n="hero.stats.scenes">动态场景</small>
+                            </div>
+                            <div class="saas-panel__metric">
+                                <span>5</span>
+                                <small data-i18n="hero.stats.languages">全球语言</small>
                             </div>
                         </div>
-
-                        <!-- History & Favorites Buttons -->
-                        <button class="header-icon-btn" onclick="window.historyFavoritesUI && window.historyFavoritesUI.openPanel('history')"
-                                aria-label="View play history" title="播放历史" tabindex="0">
-                            <span aria-hidden="true">📜</span>
-                        </button>
-                        <button class="header-icon-btn" onclick="window.historyFavoritesUI && window.historyFavoritesUI.openPanel('favorites')"
-                                aria-label="View my favorites" title="我的收藏" tabindex="0">
-                            <span aria-hidden="true">&#10084;</span>
-                        </button>
-                        <button class="header-icon-btn" onclick="window.mixerUI && window.mixerUI.open()"
-                                aria-label="Open audio mixer" title="音频混音台" tabindex="0">
-                            <span aria-hidden="true">🎚️</span>
-                        </button>
-                        <button class="header-icon-btn" onclick="window.statsDashboard && window.statsDashboard.open()"
-                                aria-label="View listening statistics" title="收听统计" tabindex="0">
-                            <span aria-hidden="true">📊</span>
-                        </button>
-                        <button class="header-icon-btn" onclick="window.notificationPreferences && window.notificationPreferences.openSettings()"
-                                aria-label="Notification settings" title="通知设置" tabindex="0">
-                            <span aria-hidden="true">🔔</span>
-                        </button>
-                        <!-- Focus Mode Toggle (2.0 新增) -->
-                        <button id="focusModeToggle" class="header-icon-btn" onclick="window.focusModeController && window.focusModeController.toggle()"
-                                aria-label="Toggle focus mode" title="专注模式" tabindex="0" aria-pressed="false">
-                            <span aria-hidden="true">🎯</span>
-                        </button>
-                        <!-- Daily Meditation Reminder Button -->
-                        <button class="reminder-btn" id="reminderBtn" onclick="window.dailyMeditationReminder.showReminderSettings()"
-                                aria-label="Daily meditation reminder settings" title="每日冥想提醒" tabindex="0">
-                            <span class="bell-icon" aria-hidden="true">🔔</span>
-                            <span id="reminderText">每日提醒</span>
-                        </button>
-
-                        <!-- Theme Toggle Button -->
-                        <button id="themeToggle" class="header-icon-btn theme-toggle-btn"
-                                aria-label="Toggle theme" title="切换主题" tabindex="0" aria-pressed="false">
-                            <span class="theme-icon" aria-hidden="true">🌙</span>
-                        </button>
-                        <!-- Language Selector -->
-                        <div class="language-selector" role="group" aria-label="Language selection">
-                            <select id="languageSelect" onchange="changeLanguage(this.value)"
-                                    aria-label="Select language" tabindex="0">
-                                <option value="zh-CN">中文</option>
-                                <option value="en-US" selected>English</option>
-                                <option value="ja-JP">日本語</option>
-                                <option value="ko-KR">한국어</option>
-                                <option value="es-ES">Español</option>
-                            </select>
+                        <div class="saas-panel__footer">
+                            <p>已为 120K+ 次冥想提供声音引导</p>
+                            <a href="#impactProof" aria-label="查看成效数据">查看成效 →</a>
                         </div>
-                    </nav>
                     </div>
                 </div>
             </header>
+        </div>
 
-            <section class="hero-intro" id="heroIntro" role="main" aria-labelledby="heroHeadline">
-                <div class="hero-intro__content">
-                    <p class="hero-intro__eyebrow" data-i18n="hero.eyebrow">专业声音疗愈 · 5 种语言随时可用</p>
-                    <h2 id="heroHeadline" class="hero-intro__headline" data-i18n="hero.headline">213+ 沉浸式疗愈音频，帮你在 5 分钟内放松、睡眠与重启专注</h2>
-                    <p class="hero-intro__description" data-i18n="hero.description">
-                        从雨林白噪到脉轮共振，一键进入专属音疗空间。个性化播放、混音、统计与离线缓存，让每一次呼吸都被疗愈。
-                    </p>
-                                        <div class="hero-intro__cta-group" role="group" aria-label="Main actions">
-                        <button class="hero-intro__cta-primary" data-cta="start-experience" data-i18n="hero.cta.primary"
-                            onclick="document.getElementById('categoryGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });"
-                            aria-label="Start immersive experience" tabindex="0">
-                            立即开启沉浸体验
-                        </button>
-                        <a class="hero-intro__cta-secondary" data-cta="view-highlights" data-i18n="hero.cta.secondary" href="#featureHighlights"
-                           role="button" tabindex="0">
-                            查看核心亮点
-                        </a>
-                        <button type="button" class="hero-intro__cta-secondary hero-intro__cta-plan" data-track="plan-open" data-scroll-target="#conversionOffer" data-i18n="hero.cta.plan"
-                                aria-label="Get custom meditation plan" tabindex="0">
-                            获取定制冥想计划
-                        </button>
+        <section class="experience-launchpad" id="experienceLaunchpad" aria-label="即时播放控制台">
+            <div class="experience-launchpad__grid">
+                <div class="experience-launchpad__player">
+                    <div class="experience-launchpad__title">
+                        <p>Instant Player</p>
+                        <h3>一键唤醒疗愈声音</h3>
+                    </div>
+                    <div id="audioPlayer" class="audio-player" role="region" aria-label="Audio player controls" tabindex="-1" onclick="if(isMinimized) toggleMinimize()">
+                        <div class="minimize-indicator" onclick="toggleMinimize(event)" data-i18n="player.minimize" role="button" tabindex="0" aria-label="Minimize player" aria-expanded="true">▼收起</div>
+                        <div class="minimized-display">
+                            <div class="minimized-text" id="minimizedTrack" data-i18n="player.notPlaying" aria-live="polite">未播放</div>
+                        </div>
+                        <div class="player-content">
+                            <div class="now-playing" role="status" aria-live="polite">
+                                <div id="currentTrack" class="track-title" data-i18n="player.notPlaying" aria-label="Currently playing track">未播放</div>
+                                <div id="currentCategory" class="track-category" aria-label="Current track category"></div>
+                            </div>
+                            <div class="player-controls" role="group" aria-label="Playback controls">
+                                <button id="prevTrack" class="control-btn" aria-label="Play previous track">⏮</button>
+                                <button id="playPause" class="control-btn" aria-label="Play or pause">▶️</button>
+                                <button id="nextTrack" class="control-btn" aria-label="Play next track">⏭</button>
+                                <div class="volume-control">
+                                    <label for="volumeSlider" class="sr-only">Volume</label>
+                                    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.7" aria-label="Volume control">
+                                </div>
+                                <button id="shuffleToggle" class="control-btn" aria-pressed="false" aria-label="Toggle shuffle">🔀</button>
+                                <button id="repeatToggle" class="control-btn" aria-pressed="false" aria-label="Toggle repeat">🔁</button>
+                                <button id="sleepTimer" class="control-btn" aria-label="Sleep timer">⏱</button>
+                            </div>
+                            <div class="progress-section">
+                                <span id="currentTime" class="time-display">0:00</span>
+                                <div class="progress-bar" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                                    <div id="progressFill" class="progress-fill"></div>
+                                </div>
+                                <span id="totalDuration" class="time-display">0:00</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="hero-intro__stats">
-                    <div class="hero-intro__stat">
-                        <span class="hero-intro__stat-number">213+</span>
-                        <span class="hero-intro__stat-label" data-i18n="hero.stats.audio">疗愈音频与白噪合集</span>
-                    </div>
-                    <div class="hero-intro__stat">
-                        <span class="hero-intro__stat-number">9</span>
-                        <span class="hero-intro__stat-label" data-i18n="hero.stats.scenes">场景主题随情绪切换</span>
-                    </div>
-                    <div class="hero-intro__stat">
-                        <span class="hero-intro__stat-number">5</span>
-                        <span class="hero-intro__stat-label" data-i18n="hero.stats.languages">语言界面全球同步</span>
-                    </div>
+                <div class="experience-launchpad__insights">
+                    <article class="insight-card">
+                        <p class="insight-card__label">个性流程</p>
+                        <h4>选择状态，系统即刻推送最佳声音组合。</h4>
+                        <ul>
+                            <li>场景感知雾化灯效</li>
+                            <li>跨设备同步播放队列</li>
+                            <li>自动睡眠定时与唤醒</li>
+                        </ul>
+                    </article>
+                    <article class="insight-card">
+                        <p class="insight-card__label">团队支持</p>
+                        <h4>专属音疗顾问在线协助，输出周报与使用洞察。</h4>
+                        <a href="#conversionOffer">预约顾问 →</a>
+                    </article>
                 </div>
-            </section>
-
-            <section class="feature-summary" id="featureHighlights" role="region" aria-labelledby="featuresTitle">
+            </div>
+        </section>
+<section class="feature-summary" id="featureHighlights" role="region" aria-labelledby="featuresTitle">
                 <div class="feature-summary__heading">
                     <h3 id="featuresTitle" data-i18n="features.heading.title">为什么选择声音疗愈空间？</h3>
                     <p data-i18n="features.heading.desc">我们把专业音疗体验压缩进一个浏览器，在任何设备上都能获取科学、柔和且富有仪式感的放松流程。</p>
@@ -612,12 +566,7 @@
 
         <!-- Live region for screen reader announcements -->
         <div id="ariaLiveRegion" class="sr-only" aria-live="polite" aria-atomic="true"></div>
-        <div id="ariaAlertRegion" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
-
-        <!-- Audio Player -->
-        <div id="audioPlayer" class="audio-player" role="region" aria-label="Audio player controls" tabindex="-1" onclick="if(isMinimized) toggleMinimize()">
-            <div class="minimize-indicator" onclick="toggleMinimize(event)" data-i18n="player.minimize" role="button" tabindex="0" aria-label="Minimize player" aria-expanded="true">▼收起</div>
-            <div class="minimized-display">
+        <div id="ariaAlertRegion" class="sr-only" aria-live="assertive" aria-atomic="true"></div><div class="minimized-display">
                 <div class="minimized-text" id="minimizedTrack" data-i18n="player.notPlaying" aria-live="polite">未播放</div>
             </div>
             <div class="player-content">
@@ -1666,6 +1615,8 @@
     </script>
 </body>
 </html>
+
+
 
 
 
