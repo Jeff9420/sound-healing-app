@@ -1,0 +1,826 @@
+/* ==========================================
+   UI Redesign v2.0 - 简化导航与优化布局
+   ========================================== */
+
+/* ==========================================
+   1. 简化导航栏样式
+   ========================================== */
+
+.header {
+    background: rgba(13, 19, 31, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 1rem 0;
+}
+
+.header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.header__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 0 0 auto;
+}
+
+.header__icon {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.header__brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.header__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+    background: linear-gradient(135deg, #6666ff, #9f7aea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.header__tagline {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    line-height: 1.2;
+}
+
+/* 简化的导航操作区 - 只保留3个关键按钮 */
+.header__actions-simplified {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* 用户中心按钮（合并：登录、历史、收藏、统计） */
+.header__user-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(102, 102, 255, 0.1);
+    border: 1px solid rgba(102, 102, 255, 0.3);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.header__user-btn:hover {
+    background: rgba(102, 102, 255, 0.2);
+    border-color: rgba(102, 102, 255, 0.5);
+    transform: translateY(-1px);
+}
+
+.header__user-btn .icon {
+    font-size: 1.2rem;
+}
+
+/* 设置按钮（合并：主题、通知、专注模式、混音器） */
+.header__settings-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.header__settings-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+/* 语言选择器 */
+.header__language-select {
+    padding: 0.5rem 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 80px;
+}
+
+.header__language-select:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.header__language-select:focus {
+    outline: 2px solid rgba(102, 102, 255, 0.5);
+    outline-offset: 2px;
+}
+
+/* 隐藏旧的复杂导航元素 */
+.header__persona-toggle,
+.header__persona-nav,
+.header__nav-link,
+.header__menu .header__actions > *:not(.user-dropdown):not(#languageSelect) {
+    display: none !important;
+}
+
+/* ==========================================
+   2. 快速启动区样式
+   ========================================== */
+
+.quick-start-section {
+    padding: 4rem 0 3rem;
+    background: linear-gradient(180deg, rgba(13, 19, 31, 0.5) 0%, transparent 100%);
+}
+
+.quick-start__heading {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.quick-start__title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    background: linear-gradient(135deg, #fff, #ddd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.quick-start__subtitle {
+    font-size: 1rem;
+    opacity: 0.7;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* 精选分类卡片网格 */
+.quick-start__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* 精选分类卡片 */
+.featured-card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(102, 102, 255, 0.1), rgba(159, 122, 234, 0.1));
+    border: 2px solid rgba(102, 102, 255, 0.3);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.featured-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at top right, rgba(102, 102, 255, 0.2), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.featured-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(102, 102, 255, 0.6);
+    box-shadow: 0 20px 60px rgba(102, 102, 255, 0.3);
+}
+
+.featured-card:hover::before {
+    opacity: 1;
+}
+
+.featured-card__icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    display: block;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.featured-card__name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.featured-card__purpose {
+    font-size: 0.95rem;
+    opacity: 0.7;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.featured-card__play-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(135deg, #6666ff, #9f7aea);
+    border: none;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.featured-card__play-btn:hover {
+    background: linear-gradient(135deg, #5555ee, #8e69d9);
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(102, 102, 255, 0.4);
+}
+
+.featured-card__play-btn .icon {
+    font-size: 1.2rem;
+}
+
+/* 浏览全部链接 */
+.quick-start__browse-all {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 1.1rem;
+}
+
+.quick-start__browse-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #6666ff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.quick-start__browse-link:hover {
+    color: #8888ff;
+    transform: translateX(5px);
+}
+
+/* ==========================================
+   3. 音频分类区域优化
+   ========================================== */
+
+.category-section {
+    padding: 4rem 0;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.category-section__heading {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.category-section__title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.category-section__subtitle {
+    font-size: 1rem;
+    opacity: 0.7;
+}
+
+/* 优化后的分类网格 */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* ==========================================
+   4. 固定底部播放器
+   ========================================== */
+
+.audio-player-fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(13, 19, 31, 0.98);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 999;
+    transition: all 0.3s ease;
+}
+
+/* 迷你播放器（未播放/播放中） */
+.player-mini {
+    padding: 0.75rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.player-mini__placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.player-mini__info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.player-mini__cover {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    background: rgba(102, 102, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.player-mini__track {
+    flex: 1;
+    min-width: 0;
+}
+
+.player-mini__title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player-mini__category {
+    font-size: 0.85rem;
+    opacity: 0.6;
+}
+
+.player-mini__controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.player-mini__btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.player-mini__btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.player-mini__progress {
+    flex: 1;
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.player-mini__progress-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    position: relative;
+    cursor: pointer;
+}
+
+.player-mini__progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6666ff, #9f7aea);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.1s linear;
+}
+
+.player-mini__time {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    min-width: 40px;
+}
+
+.player-mini__volume {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.player-mini__volume-slider {
+    width: 80px;
+}
+
+/* 展开的播放器 */
+.player-expanded {
+    padding: 2rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.player-expanded__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.player-expanded__close {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.player-expanded__close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.player-expanded__main {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.player-expanded__cover {
+    width: 200px;
+    height: 200px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(102, 102, 255, 0.3), rgba(159, 122, 234, 0.3));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+}
+
+.player-expanded__info {
+    flex: 1;
+}
+
+.player-expanded__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.player-expanded__category {
+    font-size: 1rem;
+    opacity: 0.7;
+    margin-bottom: 2rem;
+}
+
+.player-expanded__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.player-expanded__control-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.player-expanded__control-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.player-expanded__control-btn--play {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, #6666ff, #9f7aea);
+    font-size: 1.5rem;
+}
+
+.player-expanded__control-btn--play:hover {
+    background: linear-gradient(135deg, #5555ee, #8e69d9);
+}
+
+.player-expanded__secondary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+/* ==========================================
+   5. 响应式设计
+   ========================================== */
+
+@media (max-width: 1024px) {
+    .quick-start__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .player-mini__progress {
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header__inner {
+        padding: 0 1rem;
+    }
+
+    .header__title {
+        font-size: 1rem;
+    }
+
+    .header__tagline {
+        font-size: 0.65rem;
+    }
+
+    .quick-start__grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .featured-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .player-mini {
+        padding: 0.5rem 1rem;
+        flex-wrap: wrap;
+    }
+
+    .player-mini__progress {
+        order: 3;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 0.5rem;
+    }
+
+    .player-mini__volume {
+        display: none;
+    }
+
+    .player-expanded__main {
+        flex-direction: column;
+    }
+
+    .player-expanded__cover {
+        width: 150px;
+        height: 150px;
+        font-size: 4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header__user-btn span:not(.icon) {
+        display: none;
+    }
+
+    .header__user-btn {
+        padding: 0.5rem;
+        min-width: 42px;
+    }
+
+    .quick-start__title {
+        font-size: 1.5rem;
+    }
+
+    .featured-card__icon {
+        font-size: 3rem;
+    }
+
+    .featured-card__name {
+        font-size: 1.25rem;
+    }
+}
+
+/* ==========================================
+   6. 辅助类和工具类
+   ========================================== */
+
+.hidden {
+    display: none !important;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* 滚动行为优化 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 焦点可见性 */
+*:focus-visible {
+    outline: 2px solid rgba(102, 102, 255, 0.5);
+    outline-offset: 2px;
+}
+
+/* ==========================================
+   7. 设置菜单弹窗样式
+   ========================================== */
+
+.settings-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.settings-modal__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+}
+
+.settings-modal__content {
+    position: relative;
+    background: rgba(13, 19, 31, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 400px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.settings-modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.settings-modal__header h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.settings-modal__close {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.settings-modal__close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.settings-modal__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.settings-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1rem;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.settings-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(102, 102, 255, 0.5);
+    transform: translateX(5px);
+}
+
+.settings-item .icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+    .settings-modal__content {
+        padding: 1.5rem;
+    }
+
+    .settings-item {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+}
