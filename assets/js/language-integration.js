@@ -172,7 +172,8 @@ class LanguageIntegrationController {
         const langInfo = this.i18nSystem.supportedLanguages[currentLang];
         
         if (langInfo && this.languageToggle) {
-            this.languageToggle.textContent = `🌐 ${langInfo.nativeName}`;
+            const flag = langInfo.flag || '🌐';
+            this.languageToggle.textContent = `${flag} ${langInfo.nativeName}`;
         }
         
         this.updateActiveOption();

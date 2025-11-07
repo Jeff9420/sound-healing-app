@@ -19,11 +19,34 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Microsoft YaHei', sans-serif;
-    background: #1a1a2e;
-    background-image: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    background: radial-gradient(140% 120% at 10% 0%, rgba(248, 172, 59, 0.18), transparent),
+                radial-gradient(120% 140% at 90% 0%, rgba(122, 90, 248, 0.15), transparent),
+                var(--saas-bg, #120a07);
     min-height: 100vh;
-    color: #eee;
+    color: var(--saas-text, #fdf3e5);
     overflow-x: hidden;
+}
+
+a {
+    color: var(--saas-primary, #f6a93b);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover,
+a:focus-visible {
+    color: var(--saas-accent, #7a5af8);
+}
+
+section:not(.saas-hero):not(.experience-launchpad) {
+    background: rgba(34, 19, 13, 0.8);
+    border: 1px solid var(--saas-border, rgba(255, 255, 255, 0.08));
+    border-radius: 24px;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    margin: clamp(1.5rem, 4vw, 3rem) auto;
+    max-width: 1200px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+    color: var(--saas-text, #fdf3e5);
 }
 
 /* ==========================================================================
@@ -36,8 +59,9 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #1a1a2e;
-    background-image: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    background: radial-gradient(140% 120% at 15% 0%, rgba(248, 172, 59, 0.25), transparent),
+                radial-gradient(120% 120% at 85% 0%, rgba(122, 90, 248, 0.2), transparent),
+                var(--saas-bg, #120a07);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -69,9 +93,9 @@ body {
    ========================================================================== */
 
 .header-icon-btn {
-    background: rgba(20, 31, 68, 0.88);
-    border: 1px solid rgba(99, 102, 241, 0.55);
-    color: #f8fafc;
+    background: rgba(40, 22, 13, 0.85);
+    border: 1px solid var(--saas-border, rgba(255, 255, 255, 0.08));
+    color: var(--saas-text, #fdf3e5);
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -85,9 +109,9 @@ body {
 }
 
 .header-icon-btn:hover {
-    background: rgba(79, 70, 229, 0.85);
+    background: linear-gradient(120deg, var(--saas-primary, #f6a93b), var(--saas-primary-dark, #f87c0f));
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
+    box-shadow: 0 8px 20px rgba(248, 124, 15, 0.35);
 }
 
 .header-icon-btn:active {
@@ -190,21 +214,21 @@ h1 {
 }
 
 .category-card {
-    background: rgba(13, 19, 48, 0.88);
-    border: 1px solid rgba(99, 102, 241, 0.45);
+    background: var(--saas-card, rgba(40, 22, 13, 0.85));
+    border: 1px solid var(--saas-border, rgba(255, 255, 255, 0.08));
     border-radius: 15px;
     padding: 30px;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
-    color: #f8fafc;
+    color: var(--saas-text, #fdf3e5);
 }
 
 .category-card:hover {
     transform: translateY(-5px);
-    background: rgba(30, 41, 99, 0.92);
-    box-shadow: 0 12px 32px rgba(17, 24, 64, 0.45);
+    background: rgba(61, 36, 22, 0.95);
+    box-shadow: 0 12px 32px rgba(12, 6, 3, 0.55);
 }
 
 .category-icon {
@@ -216,12 +240,12 @@ h1 {
     font-size: 1.3em;
     font-weight: bold;
     margin-bottom: 10px;
-    color: #f8fafc;
+    color: var(--saas-text, #fdf3e5);
 }
 
 .category-desc {
     font-size: 0.9em;
-    color: #e0e7ff;
+    color: var(--saas-muted, rgba(253, 243, 229, 0.75));
 }
 /* ==========================================================================
    播放列表模态框
@@ -240,7 +264,9 @@ h1 {
 
 .modal-content {
     position: relative;
-    background: linear-gradient(135deg, #6666FF 0%, #FF6699 100%);
+    background: rgba(34, 19, 13, 0.95);
+    border: 1px solid var(--saas-border, rgba(255, 255, 255, 0.08));
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
     margin: 50px auto;
     padding: 30px;
     width: 90%;
@@ -808,11 +834,12 @@ canvas {
 }
 
 .feature-card {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(40, 22, 13, 0.85);
     backdrop-filter: blur(12px);
     border-radius: 20px;
     padding: 24px;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--saas-border, rgba(255, 255, 255, 0.08));
+    box-shadow: 0 20px 40px rgba(7, 4, 2, 0.45);
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -821,12 +848,12 @@ canvas {
 .feature-card h4 {
     font-size: 1.15rem;
     font-weight: 600;
-    color: #ffffff;
+    color: var(--saas-text);
     margin-bottom: 8px;
 }
 
 .feature-card p {
-    color: rgba(255, 255, 255, 0.92);
+    color: var(--saas-muted);
     line-height: 1.6;
     font-size: 0.96rem;
 }
@@ -2784,6 +2811,78 @@ canvas {
     gap: 0.75rem;
 }
 
+.language-selector {
+    position: relative;
+}
+
+.language-toggle {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--saas-text);
+    padding: 0.55rem 1rem;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+    min-width: 150px;
+    text-align: left;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.language-toggle:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.language-dropdown {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.5rem);
+    width: 240px;
+    background: var(--saas-panel);
+    border: 1px solid var(--saas-border);
+    border-radius: 1rem;
+    padding: 0.5rem;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 20;
+}
+
+.language-selector.active .language-dropdown {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.language-option {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: var(--saas-text);
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.55rem 0.65rem;
+    border-radius: 0.8rem;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.language-option:hover,
+.language-option.active {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.language-option small {
+    color: var(--saas-muted);
+}
+
+.language-flag {
+    font-size: 1.35rem;
+}
+
 .saas-nav__pill {
     background: rgba(250, 193, 93, 0.14);
     border-radius: 999px;
@@ -2820,6 +2919,40 @@ canvas {
     grid-template-columns: minmax(0, 1fr) 340px;
     gap: clamp(1.5rem, 4vw, 3rem);
     padding-top: 2rem;
+}
+
+.saas-category-shortcuts {
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.75rem;
+}
+
+.category-shortcut {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.85rem 1rem;
+    border-radius: 1rem;
+    border: 1px solid var(--saas-border);
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--saas-text);
+    cursor: pointer;
+    transition: border 0.2s ease, transform 0.2s ease;
+}
+
+.category-shortcut__icon {
+    font-size: 1.4rem;
+}
+
+.category-shortcut__text small {
+    color: var(--saas-muted);
+}
+
+.category-shortcut:hover,
+.category-shortcut:focus-visible {
+    border-color: rgba(246, 169, 59, 0.8);
+    transform: translateY(-2px);
 }
 
 .saas-hero__content {

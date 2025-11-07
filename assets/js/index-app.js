@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Index Page Application Logic - 声音疗愈应用主页逻辑
  * 从 index.html 提取的内联JavaScript
  *
@@ -73,6 +73,65 @@ const categoryInfo = {
     rain: { name: '雨声系列', icon: '🌧️', desc: '雨打芭蕉，安神入眠' },
     singing: { name: '颂钵疗愈', icon: '🕯️', desc: '净化能量，平衡身心' }
 };
+function getAvailableCategoryEntries() {
+    if (typeof AUDIO_CONFIG !== 'undefined' && AUDIO_CONFIG.categories) {
+        return Object.entries(AUDIO_CONFIG.categories);
+    }
+    return Object.entries(categoryInfo);
+}
+
+function getCategoryDisplayName(key, category) {
+    if (category.nameKey) {
+        return getText(category.nameKey, category.name || categoryInfo[key]?.name || key);
+    }
+    const ecoKey = ecosystem..name;
+    const fallbackKey = category.;
+    return getText(ecoKey, getText(fallbackKey, category.name || categoryInfo[key]?.name || key));
+}
+
+function getCategoryDescription(key, category) {
+    return getText(ecosystem..desc, category.description || categoryInfo[key]?.desc || '');
+}
+
+function renderCategoryShortcuts(entries) {
+    const shortcutsContainer = document.getElementById('categoryShortcuts');
+    if (!shortcutsContainer) {
+        return;
+    }
+
+    const data = entries || getAvailableCategoryEntries();
+    shortcutsContainer.innerHTML = '';
+
+    data.forEach(([key, category]) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'category-shortcut';
+        button.setAttribute('data-category', key);
+        button.setAttribute('role', 'listitem');
+
+        const icon = category.icon || categoryInfo[key]?.icon || '🎵';
+        const name = getCategoryDisplayName(key, category);
+        const desc = getCategoryDescription(key, category);
+
+        button.innerHTML = 
+            <span class="category-shortcut__icon"></span>
+            <div class="category-shortcut__text">
+                <strong></strong>
+                <small></small>
+            </div>
+        ;
+
+        button.addEventListener('click', () => {
+            const grid = document.getElementById('categoryGrid');
+            if (grid) {
+                grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            openPlaylist(key, category);
+        });
+
+        shortcutsContainer.appendChild(button);
+    });
+}
 
 // Canvas animation variables
 let canvas, ctx;
@@ -237,21 +296,7 @@ function loadCategories() {
         return;
     }
 
-    categoryGrid.innerHTML = '';
-
-    if (typeof AUDIO_CONFIG !== 'undefined' && AUDIO_CONFIG.categories) {
-        Object.entries(AUDIO_CONFIG.categories).forEach(([key, category]) => {
-            const categoryCard = createCategoryCard(key, category);
-            categoryGrid.appendChild(categoryCard);
-        });
-    } else {
-        // Use fallback audioData
-        Object.entries(categoryInfo).forEach(([key, info]) => {
-            const categoryCard = createCategoryCard(key, info);
-            categoryGrid.appendChild(categoryCard);
-        });
-    }
-}
+    categoryGrid.innerHTML = '';\r\n\r\n    const entries = getAvailableCategoryEntries();\r\n    entries.forEach(([key, category]) => {\r\n        const categoryCard = createCategoryCard(key, category);\r\n        categoryGrid.appendChild(categoryCard);\r\n    });\r\n\r\n    renderCategoryShortcuts(entries);\r\n}
 
 function createCategoryCard(key, category) {
     const card = document.createElement('div');
@@ -260,16 +305,7 @@ function createCategoryCard(key, category) {
 
     const icon = category.icon || categoryInfo[key]?.icon || '🎵';
 
-    // Use i18n for category name translation
-    let name;
-    if (category.nameKey) {
-        name = getText(category.nameKey, category.name || categoryInfo[key]?.name || key);
-    } else {
-        const ecoKey = `ecosystem.${key}.name`;
-        const categoryKey = `category.${key}`;
-        name = getText(ecoKey, getText(categoryKey, category.name || categoryInfo[key]?.name || key));
-    }
-    const desc = getText(`ecosystem.${key}.desc`, category.description || categoryInfo[key]?.desc || '');
+    const name = getCategoryDisplayName(key, category);\r\n    const desc = getCategoryDescription(key, category);
 
     card.innerHTML = `
         <div class="category-icon">${icon}</div>

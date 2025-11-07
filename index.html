@@ -255,13 +255,52 @@
                     </ul>
                     <div class="saas-nav__actions">
                         <span class="saas-nav__pill" data-i18n="nav.badge.new">混音实验室 · Hot</span>
-                        <button class="saas-nav__language" type="button" aria-label="切换语言">
-                            <span aria-hidden="true">🌐</span>
-                            <span data-i18n="nav.language">中文</span>
-                        </button>
+                        <div class="language-selector" id="languageSelector">
+                            <button class="language-toggle" id="languageToggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+                                🌐 中文
+                            </button>
+                            <div class="language-dropdown" id="languageDropdown" role="listbox" aria-label="选择语言">
+                                <button class="language-option" type="button" data-lang="zh-CN" role="option" aria-selected="true">
+                                    <span class="language-flag">🇨🇳</span>
+                                    <div>
+                                        <p>中文</p>
+                                        <small>Simplified Chinese</small>
+                                    </div>
+                                </button>
+                                <button class="language-option" type="button" data-lang="en-US" role="option" aria-selected="false">
+                                    <span class="language-flag">🇺🇸</span>
+                                    <div>
+                                        <p>English</p>
+                                        <small>United States</small>
+                                    </div>
+                                </button>
+                                <button class="language-option" type="button" data-lang="ja-JP" role="option" aria-selected="false">
+                                    <span class="language-flag">🇯🇵</span>
+                                    <div>
+                                        <p>日本語</p>
+                                        <small>Japanese</small>
+                                    </div>
+                                </button>
+                                <button class="language-option" type="button" data-lang="ko-KR" role="option" aria-selected="false">
+                                    <span class="language-flag">🇰🇷</span>
+                                    <div>
+                                        <p>한국어</p>
+                                        <small>Korean</small>
+                                    </div>
+                                </button>
+                                <button class="language-option" type="button" data-lang="es-ES" role="option" aria-selected="false">
+                                    <span class="language-flag">🇪🇸</span>
+                                    <div>
+                                        <p>Español</p>
+                                        <small>Spanish</small>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
                         <button class="saas-nav__signin" type="button" data-i18n="nav.signin">登录</button>
                     </div>
                 </nav>
+                <div class="saas-category-shortcuts" id="categoryShortcuts" aria-label="音频类型快捷导航" role="list"></div>
                 <div class="saas-hero__grid">
                     <div class="saas-hero__content">
                         <p class="saas-hero__eyebrow" data-i18n="hero.eyebrow">专业音疗 · 5 种语言实时可用</p>
@@ -1105,6 +1144,7 @@
     <script src="assets/js/audio-config.js"></script>
     <script src="assets/js/i18n-system.js"></script>
     <script src="assets/js/i18n-translations-addon.js"></script>
+    <script src="assets/js/language-integration.js"></script>
     <script src="assets/js/cookie-consent-manager.js"></script>
     <script src="assets/js/email-templates.js"></script>
     <script src="assets/js/content-i18n-manager.js"></script>
