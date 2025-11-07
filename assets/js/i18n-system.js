@@ -500,6 +500,12 @@ class InternationalizationSystem {
                 'nav.persona.emotion.title': '情绪疗愈',
                 'nav.persona.emotion.desc': '潜意识疗愈与压力释放',
                 'nav.resources': '资源中心',
+                'nav.quick.start': '即刻体验',
+                'nav.quick.categories': '疗愈分类',
+                'nav.quick.metrics': '疗愈成效',
+                'nav.badge.new': '混音实验室 · 热门',
+                'nav.language': '中文',
+                'nav.signin': '登录 / 注册',
 
                 // Feature Summary Section
                 'features.heading.title': '为什么选择声音疗愈空间？',
@@ -864,6 +870,12 @@ class InternationalizationSystem {
                 'nav.persona.emotion.title': 'Emotional Healing',
                 'nav.persona.emotion.desc': 'Subconscious therapy & stress release',
                 'nav.resources': 'Resource Center',
+                'nav.quick.start': 'Quick Start',
+                'nav.quick.categories': 'Healing Categories',
+                'nav.quick.metrics': 'Impact Metrics',
+                'nav.badge.new': 'Mix Lab · Hot',
+                'nav.language': 'English',
+                'nav.signin': 'Sign In',
 
                 // Feature Summary Section
                 'features.heading.title': 'Why Choose Sound Healing Space?',
@@ -1210,6 +1222,12 @@ class InternationalizationSystem {
                 'nav.persona.emotion.title': '感情ヒーリング',
                 'nav.persona.emotion.desc': '潜在意識療法 & ストレス解放',
                 'nav.resources': 'リソースセンター',
+                'nav.quick.start': 'クイック体験',
+                'nav.quick.categories': 'ヒーリングカテゴリ',
+                'nav.quick.metrics': '効果指標',
+                'nav.badge.new': 'ミックスラボ · 注目',
+                'nav.language': '日本語',
+                'nav.signin': 'ログイン',
 
                 // Feature Summary Section
                 'features.heading.title': 'なぜサウンドヒーリングスペースを選ぶのか？',
@@ -1529,6 +1547,12 @@ class InternationalizationSystem {
                 'nav.persona.emotion.title': '감정 힐링',
                 'nav.persona.emotion.desc': '잠재의식 요법 & 스트레스 해방',
                 'nav.resources': '리소스 센터',
+                'nav.quick.start': '바로 체험',
+                'nav.quick.categories': '힐링 카테고리',
+                'nav.quick.metrics': '효과 지표',
+                'nav.badge.new': '믹스 랩 · HOT',
+                'nav.language': '한국어',
+                'nav.signin': '로그인',
 
                 // Feature Summary Section
                 'features.heading.title': '왜 사운드 힐링 스페이스를 선택하나요?',
@@ -1848,6 +1872,12 @@ class InternationalizationSystem {
                 'nav.persona.emotion.title': 'Sanación Emocional',
                 'nav.persona.emotion.desc': 'Terapia subconsciente y liberación de estrés',
                 'nav.resources': 'Centro de Recursos',
+                'nav.quick.start': 'Comenzar Ahora',
+                'nav.quick.categories': 'Categorías de Sanación',
+                'nav.quick.metrics': 'Métricas de Impacto',
+                'nav.badge.new': 'Laboratorio de Mezclas · Hot',
+                'nav.language': 'Español',
+                'nav.signin': 'Iniciar sesión',
 
                 // Feature Summary Section
                 'features.heading.title': '¿Por Qué Elegir Espacio de Sanación de Sonido?',
@@ -1939,6 +1969,55 @@ class InternationalizationSystem {
                 'share.close': 'Cerrar'
             }
         };
+
+        const supplementalTranslations = {
+            'zh-CN': {
+                'footer.privacy': '隐私政策',
+                'footer.terms': '服务条款',
+                'footer.cookieSettings': 'Cookie 设置',
+                'footer.dataDeletion': '数据删除申请',
+                'footer.doNotSell': '个人信息选择退出',
+                'player.selectAudio': '选择音频'
+            },
+            'en-US': {
+                'footer.privacy': 'Privacy Policy',
+                'footer.terms': 'Terms of Service',
+                'footer.cookieSettings': 'Cookie Settings',
+                'footer.dataDeletion': 'Data Deletion Request',
+                'footer.doNotSell': 'Do Not Sell My Info',
+                'player.selectAudio': 'Select audio'
+            },
+            'ja-JP': {
+                'footer.privacy': 'プライバシーポリシー',
+                'footer.terms': '利用規約',
+                'footer.cookieSettings': 'Cookie 設定',
+                'footer.dataDeletion': 'データ削除リクエスト',
+                'footer.doNotSell': '個人情報の販売停止',
+                'player.selectAudio': '音声を選択'
+            },
+            'ko-KR': {
+                'footer.privacy': '개인정보 처리방침',
+                'footer.terms': '이용 약관',
+                'footer.cookieSettings': '쿠키 설정',
+                'footer.dataDeletion': '데이터 삭제 요청',
+                'footer.doNotSell': '개인정보 판매 거부',
+                'player.selectAudio': '오디오 선택'
+            },
+            'es-ES': {
+                'footer.privacy': 'Política de Privacidad',
+                'footer.terms': 'Términos de Servicio',
+                'footer.cookieSettings': 'Configuración de Cookies',
+                'footer.dataDeletion': 'Solicitud de Eliminación de Datos',
+                'footer.doNotSell': 'No vender mi información',
+                'player.selectAudio': 'Seleccionar audio'
+            }
+        };
+
+        Object.keys(supplementalTranslations).forEach((lang) => {
+            if (translations[lang]) {
+                Object.assign(translations[lang], supplementalTranslations[lang]);
+            }
+        });
 
         return translations[langCode] || translations['en-US'];
     }
