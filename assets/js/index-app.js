@@ -296,7 +296,16 @@ function loadCategories() {
         return;
     }
 
-    categoryGrid.innerHTML = '';\r\n\r\n    const entries = getAvailableCategoryEntries();\r\n    entries.forEach(([key, category]) => {\r\n        const categoryCard = createCategoryCard(key, category);\r\n        categoryGrid.appendChild(categoryCard);\r\n    });\r\n\r\n    renderCategoryShortcuts(entries);\r\n}
+    categoryGrid.innerHTML = '';
+
+    const entries = getAvailableCategoryEntries();
+    entries.forEach(([key, category]) => {
+        const categoryCard = createCategoryCard(key, category);
+        categoryGrid.appendChild(categoryCard);
+    });
+
+    renderCategoryShortcuts(entries);
+}
 
 function createCategoryCard(key, category) {
     const card = document.createElement('div');
@@ -305,7 +314,8 @@ function createCategoryCard(key, category) {
 
     const icon = category.icon || categoryInfo[key]?.icon || '🎵';
 
-    const name = getCategoryDisplayName(key, category);\r\n    const desc = getCategoryDescription(key, category);
+    const name = getCategoryDisplayName(key, category);
+    const desc = getCategoryDescription(key, category);
 
     card.innerHTML = `
         <div class="category-icon">${icon}</div>
