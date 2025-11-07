@@ -113,13 +113,13 @@ function renderCategoryShortcuts(entries) {
         const name = getCategoryDisplayName(key, category);
         const desc = getCategoryDescription(key, category);
 
-        button.innerHTML = 
-            <span class="category-shortcut__icon"></span>
+        button.innerHTML = `
+            <span class="category-shortcut__icon">${icon}</span>
             <div class="category-shortcut__text">
-                <strong></strong>
-                <small></small>
+                <strong>${name}</strong>
+                <small>${desc}</small>
             </div>
-        ;
+        `;
 
         button.addEventListener('click', () => {
             const grid = document.getElementById('categoryGrid');
