@@ -34,63 +34,31 @@ class UIRedesignV2 {
      * 简化导航栏 - 只保留3个关键按钮
      */
     simplifyNavigation() {
-        const header = document.querySelector('.header');
-        if (!header) return;
+        const nav = document.querySelector('.saas-nav');
+        if (!nav) {
+            console.warn('UI Redesign v2.0: .saas-nav not found');
+            return;
+        }
 
-        // 隐藏旧的导航元素
-        const elementsToHide = [
-            '.header__persona-toggle',
-            '.header__persona-nav',
-            '.header__nav-link',
-            '.header-icon-btn:not(.user-dropdown-toggle)',
-            '.reminder-btn',
-            '.share-btn'
-        ];
+        // 注意：当前HTML已经使用简化导航，这里只添加增强功能
+        // 不隐藏现有元素，而是在现有基础上增强
 
-        elementsToHide.forEach(selector => {
-            const elements = header.querySelectorAll(selector);
-            elements.forEach(el => {
-                if (!el.closest('.user-dropdown')) {
-                    el.style.display = 'none';
-                }
-            });
-        });
+        // 获取现有的导航操作区
+        const navActions = nav.querySelector('.saas-nav__actions');
+        if (!navActions) {
+            console.warn('UI Redesign v2.0: .saas-nav__actions not found');
+            return;
+        }
 
-        // 创建简化的导航操作区
-        const headerMenu = header.querySelector('.header__menu');
-        if (!headerMenu) return;
-
-        // 创建新的导航容器
-        const actionsSimplified = document.createElement('nav');
-        actionsSimplified.className = 'header__actions-simplified';
-        actionsSimplified.setAttribute('aria-label', '主要操作');
-
-        // 1. 用户中心按钮（合并登录、历史、收藏、统计）
-        const userBtn = this.createUserCenterButton();
-
-        // 2. 设置按钮（合并主题、通知、专注、混音器）
+        // 添加设置按钮到现有导航（在语言选择器旁边）
         const settingsBtn = this.createSettingsButton();
+        const languageSelector = navActions.querySelector('.language-selector');
 
-        // 3. 语言选择器
-        const languageSelect = header.querySelector('#languageSelect');
-        if (languageSelect) {
-            languageSelect.className = 'header__language-select';
+        if (languageSelector && !navActions.querySelector('.header__settings-btn')) {
+            navActions.insertBefore(settingsBtn, languageSelector);
         }
 
-        // 添加到导航区
-        actionsSimplified.appendChild(userBtn);
-        actionsSimplified.appendChild(settingsBtn);
-        if (languageSelect) {
-            actionsSimplified.appendChild(languageSelect.parentElement || languageSelect);
-        }
-
-        // 替换现有的导航操作区
-        const oldActions = header.querySelector('.header__actions');
-        if (oldActions) {
-            oldActions.style.display = 'none';
-        }
-
-        headerMenu.appendChild(actionsSimplified);
+        console.log('✅ UI Redesign v2.0: Navigation simplified');
     }
 
     /**
@@ -138,8 +106,11 @@ class UIRedesignV2 {
      * 创建首屏快速启动区
      */
     createQuickStartSection() {
-        const heroSection = document.querySelector('.hero-intro');
-        if (!heroSection) return;
+        const heroSection = document.querySelector('.saas-hero');
+        if (!heroSection) {
+            console.warn('UI Redesign v2.0: .saas-hero not found');
+            return;
+        }
 
         // 创建快速启动区HTML
         const quickStartHTML = `
@@ -524,27 +495,33 @@ class UIRedesignV2 {
      * 重新排序内容布局
      */
     reorderContent() {
-        const container = document.querySelector('.container');
-        if (!container) return;
-
         const quickStart = document.getElementById('quickStart');
         const categorySection = document.querySelector('.category-section');
         const journeyShowcase = document.querySelector('.journey-showcase');
 
-        // 确保顺序：快速启动 → 音频分类 → 其他内容
-        if (quickStart && categorySection) {
-            categorySection.parentElement.insertBefore(categorySection, journeyShowcase);
+        if (!categorySection) {
+            console.warn('UI Redesign v2.0: .category-section not found');
+            return;
+        }
 
-            // 为分类区添加标题
-            if (!document.querySelector('.category-section__heading')) {
-                const heading = document.createElement('div');
-                heading.className = 'category-section__heading';
-                heading.innerHTML = `
-                    <h2 class="category-section__title" data-i18n="categories.title">全部 9 个疗愈声景分类</h2>
-                    <p class="category-section__subtitle" data-i18n="categories.subtitle">探索更多专业音疗体验，找到最适合你的声音</p>
-                `;
-                categorySection.insertBefore(heading, categorySection.firstChild);
-            }
+        // 确保顺序：快速启动 → 音频分类 → 其他内容
+        if (quickStart && journeyShowcase) {
+            // 将音频分类移到旅程展示之前
+            journeyShowcase.parentElement.insertBefore(categorySection, journeyShowcase);
+            console.log('✅ UI Redesign v2.0: Content reordered');
+        }
+
+        // 为分类区添加增强标题（如果还没有）
+        const categoryGrid = document.getElementById('categoryGrid');
+        if (categoryGrid && !document.querySelector('.category-section__heading')) {
+            const heading = document.createElement('div');
+            heading.className = 'category-section__heading';
+            heading.style.cssText = 'text-align: center; margin-bottom: 2rem; padding: 0 1rem;';
+            heading.innerHTML = `
+                <h2 class="category-section__title" data-i18n="categories.title" style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary, #1a1a2e);">浏览全部 213+ 疗愈音频</h2>
+                <p class="category-section__subtitle" data-i18n="categories.subtitle" style="font-size: 1.1rem; color: var(--text-secondary, #64748b);">9个专业分类，找到最适合你的声音</p>
+            `;
+            categorySection.insertBefore(heading, categorySection.firstChild);
         }
     }
 
