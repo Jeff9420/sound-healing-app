@@ -147,8 +147,6 @@
     <link rel="preload" href="assets/js/audio-config.js" as="script">
     <link rel="preload" href="assets/js/i18n-system.js" as="script">
     <link rel="preload" href="assets/js/index-app.js" as="script">
-    <!-- UI Redesign v2.0 -->
-    <script defer src="assets/js/ui-redesign-v2.js?v=20251108"></script>
   
     <!-- External Stylesheets -->
     <link rel="stylesheet" href="assets/css/global-theme.css">
@@ -228,9 +226,9 @@
     <!-- Loading Screen -->
     <div id="loadingScreen" class="loading-screen">
         <div class="loading-spinner"></div>
-        <div class="loading-text" data-i18n="loading.text">
-            🎵 正在加载声音疗愈空间...<br>
-            <small data-i18n="loading.subtext">请稍候，正在加载疗愈音频</small>
+        <div class="loading-text">
+            <span data-i18n="loading.text"></span><br>
+            <small data-i18n="loading.subtext"></small>
         </div>
     </div>
 
@@ -246,23 +244,31 @@
                     <div class="saas-nav__brand">
                         <span class="saas-nav__logo" aria-hidden="true">🎧</span>
                         <div>
-                            <p class="saas-nav__title" data-i18n="app.title">声音疗愈空间</p>
-                            <p class="saas-nav__subtitle" data-i18n="header.tagline">Soundflows · 数字音疗工作室</p>
+                            <p class="saas-nav__title" data-i18n="app.title"></p>
+                            <p class="saas-nav__subtitle" data-i18n="header.tagline"></p>
                         </div>
                     </div>
                     <ul class="saas-nav__links">
-                        <li><a href="#experienceLaunchpad" data-i18n="nav.quick.start">即刻体验</a></li>
-                        <li><a href="#categoryGrid" data-i18n="nav.quick.categories">疗愈分类</a></li>
-                        <li><a href="#impactProof" data-i18n="nav.quick.metrics">疗愈成效</a></li>
-                        <li><a href="#contentHub" data-i18n="nav.resources">资源中心</a></li>
+                        <li><a href="#experienceLaunchpad" data-i18n="nav.quick.start"></a></li>
+                        <li><a href="#categoryGrid" data-i18n="nav.quick.categories"></a></li>
+                        <li><a href="#impactProof" data-i18n="nav.quick.metrics"></a></li>
+                        <li><a href="#contentHub" data-i18n="nav.resources"></a></li>
                     </ul>
                     <div class="saas-nav__actions">
-                        <span class="saas-nav__pill" data-i18n="nav.badge.new">混音实验室 · Hot</span>
+                        <span class="saas-nav__pill" data-i18n="nav.badge.new"></span>
+                        <button class="saas-nav__ghost" type="button" id="navHistoryBtn" aria-label="Play History" onclick="window.historyFavoritesUI?.openPanel('history')">
+                            <span aria-hidden="true">🕘</span>
+                            <span data-i18n="nav.history"></span>
+                        </button>
+                        <button class="saas-nav__ghost" type="button" id="navFavoritesBtn" aria-label="My Favorites" onclick="window.historyFavoritesUI?.openPanel('favorites')">
+                            <span aria-hidden="true">⭐</span>
+                            <span data-i18n="nav.favorites"></span>
+                        </button>
                         <div class="language-selector" id="languageSelector">
                             <button class="language-toggle" id="languageToggle" type="button" aria-haspopup="listbox" aria-expanded="false">
-                                🌐 中文
+                                🌐 English
                             </button>
-                            <div class="language-dropdown" id="languageDropdown" role="listbox" aria-label="选择语言">
+                            <div class="language-dropdown" id="languageDropdown" role="listbox" aria-label="Select Language">
                                 <button class="language-option" type="button" data-lang="zh-CN" role="option" aria-selected="true">
                                     <span class="language-flag">🇨🇳</span>
                                     <div>
@@ -300,23 +306,21 @@
                                 </button>
                             </div>
                         </div>
-                        <button class="saas-nav__signin" type="button" data-i18n="nav.signin">登录</button>
+                        <button class="saas-nav__signin" type="button" data-i18n="nav.signin"></button>
                     </div>
                 </nav>
                 <div class="saas-category-shortcuts" id="categoryShortcuts" aria-label="音频类型快捷导航" role="list"></div>
                 <div class="saas-hero__grid">
                     <div class="saas-hero__content">
-                        <p class="saas-hero__eyebrow" data-i18n="hero.eyebrow">专业音疗 · 5 种语言实时可用</p>
-                        <h2 class="saas-hero__headline" data-i18n="hero.headline">213+ 沉浸式疗愈音频，随时进入放松、睡眠或专注状态</h2>
-                        <p class="saas-hero__description" data-i18n="hero.description">
-                            将你的空间变成一座私人疗愈工作室。无论是缓压、睡眠、冥想还是创造力唤醒，每一次播放都由精心挑选的声音与视觉场景组成。
-                        </p>
+                        <p class="saas-hero__eyebrow" data-i18n="hero.eyebrow"></p>
+                        <h2 class="saas-hero__headline" data-i18n="hero.headline"></h2>
+                        <p class="saas-hero__description" data-i18n="hero.description"></p>
                         <div class="saas-hero__cta">
-                            <button class="saas-btn saas-btn--primary" data-cta="start-experience" aria-label="立即开启疗愈">
-                                <span data-i18n="hero.cta.primary">立即开启沉浸体验</span>
+                            <button class="saas-btn saas-btn--primary" data-cta="start-experience" aria-label="Start Experience">
+                                <span data-i18n="hero.cta.primary"></span>
                             </button>
                             <button class="saas-btn saas-btn--ghost" data-scroll-target="#conversionOffer" data-track="plan-open">
-                                <span data-i18n="hero.cta.plan">获取个性化冥想计划</span>
+                                <span data-i18n="hero.cta.plan"></span>
                             </button>
                         </div>
                         <div class="saas-hero__quick-actions" role="list">
@@ -349,15 +353,15 @@
                         <div class="saas-panel__metrics">
                             <div class="saas-panel__metric">
                                 <span>213+</span>
-                                <small data-i18n="hero.stats.audio">疗愈音频</small>
+                                <small data-i18n="hero.stats.audio"></small>
                             </div>
                             <div class="saas-panel__metric">
                                 <span>9</span>
-                                <small data-i18n="hero.stats.scenes">动态场景</small>
+                                <small data-i18n="hero.stats.scenes"></small>
                             </div>
                             <div class="saas-panel__metric">
                                 <span>5</span>
-                                <small data-i18n="hero.stats.languages">全球语言</small>
+                                <small data-i18n="hero.stats.languages"></small>
                             </div>
                         </div>
                         <div class="saas-panel__footer">
@@ -584,6 +588,27 @@
                 </div>
             </section>
 
+            <section class="personalized-recommendations" id="personalizedRecommendations" aria-label="个性化声音推荐">
+                <div class="recommendations__header">
+                    <div>
+                        <p class="recommendations__eyebrow" data-i18n="recommendations.eyebrow">为你精挑细选</p>
+                        <h3 data-i18n="recommendations.title">基于行为和时间段的疗愈清单</h3>
+                        <p class="recommendations__description" data-i18n="recommendations.body">
+                            我们会结合你的最近播放、收藏偏好以及当前时间段，为你生成 6 条最契合的疗愈音频。
+                        </p>
+                    </div>
+                    <button class="recommendations__refresh" type="button" id="refreshRecommendationsBtn" aria-live="polite">
+                        <span aria-hidden="true">↻</span>
+                        <span data-i18n="recommendations.refresh">刷新推荐</span>
+                    </button>
+                </div>
+                <div class="recommendations__grid" id="recommendationsGrid" role="list" aria-live="polite">
+                    <div class="recommendations__skeleton" aria-hidden="true"></div>
+                    <div class="recommendations__skeleton" aria-hidden="true"></div>
+                    <div class="recommendations__skeleton" aria-hidden="true"></div>
+                </div>
+            </section>
+
             <section class="category-section" id="mainContent">
                 <h2 class="sr-only">Audio Categories</h2>
                 <div id="categoryGrid" class="category-grid" role="grid" aria-label="Audio categories">
@@ -606,7 +631,61 @@
 
         <!-- Live region for screen reader announcements -->
         <div id="ariaLiveRegion" class="sr-only" aria-live="polite" aria-atomic="true"></div>
-        <div id="ariaAlertRegion" class="sr-only" aria-live="assertive" aria-atomic="true"></div><div class="minimized-display">
+        <div id="ariaAlertRegion" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
+
+        <!-- Onboarding Tutorial -->
+        <div id="onboardingTutorial" class="onboarding-tutorial" aria-hidden="true">
+            <div class="tutorial-overlay" aria-hidden="true"></div>
+            <div class="tutorial-dialog" role="dialog" aria-modal="true" aria-labelledby="tutorialTitle">
+                <header class="tutorial-header">
+                    <p class="tutorial-label" data-i18n="tutorial.label">新手引导</p>
+                    <h3 id="tutorialTitle" data-i18n="tutorial.title">3 分钟熟悉 Sound Healing</h3>
+                    <button class="tutorial-close tutorial-btn" data-action="skip" aria-label="跳过教程">×</button>
+                </header>
+                <ol class="tutorial-steps">
+                    <li class="tutorial-step active" data-step="1">
+                        <h4 data-i18n="tutorial.step1.title">选择当下目标</h4>
+                        <p data-i18n="tutorial.step1.desc">浏览顶部的快捷入口，告诉我们你想睡眠、专注还是舒缓压力。</p>
+                    </li>
+                    <li class="tutorial-step" data-step="2">
+                        <h4 data-i18n="tutorial.step2.title">探索 200+ 分类</h4>
+                        <p data-i18n="tutorial.step2.desc">点击任一分类卡片即可开启播放列表，还能看到多语言描述。</p>
+                    </li>
+                    <li class="tutorial-step" data-step="3">
+                        <h4 data-i18n="tutorial.step3.title">掌控播放器</h4>
+                        <p data-i18n="tutorial.step3.desc">音量、睡眠定时、收藏都在底部播放器，键盘同样可操作。</p>
+                    </li>
+                    <li class="tutorial-step" data-step="4">
+                        <h4 data-i18n="tutorial.step4.title">领取个性推荐</h4>
+                        <p data-i18n="tutorial.step4.desc">完成一个音轨即可解锁推荐区，记录会同步到历史与收藏。</p>
+                    </li>
+                </ol>
+                <div class="tutorial-progress" role="tablist" aria-label="教程进度">
+                    <button class="progress-dot active" data-step="1" aria-label="教程第 1 步"></button>
+                    <button class="progress-dot" data-step="2" aria-label="教程第 2 步"></button>
+                    <button class="progress-dot" data-step="3" aria-label="教程第 3 步"></button>
+                    <button class="progress-dot" data-step="4" aria-label="教程第 4 步"></button>
+                </div>
+                <div class="tutorial-actions">
+                    <button class="tutorial-btn tutorial-btn--ghost" data-action="prev" aria-label="上一步" type="button">
+                        <span data-i18n="tutorial.prev">上一步</span>
+                    </button>
+                    <button class="tutorial-btn tutorial-btn--primary" data-action="next" aria-label="下一步" type="button">
+                        <span data-i18n="tutorial.next">下一步</span>
+                    </button>
+                    <button class="tutorial-btn tutorial-btn--primary" data-action="start" aria-label="开始体验" type="button" style="display: none;">
+                        <span data-i18n="tutorial.start">立即开始</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="tutorialHighlight" class="tutorial-highlight" aria-hidden="true"></div>
+        <button id="tutorialHelpBtn" class="tutorial-help-btn" type="button" aria-haspopup="dialog" aria-controls="onboardingTutorial">
+            <span aria-hidden="true">❔</span>
+            <span data-i18n="tutorial.help">需要引导</span>
+        </button>
+
+        <div class="minimized-display">
                 <div class="minimized-text" id="minimizedTrack" data-i18n="player.notPlaying" aria-live="polite">未播放</div>
             </div>
             <div class="player-content">
@@ -1162,6 +1241,7 @@
     <script src="assets/js/audio-metadata.js"></script>
     <script src="assets/js/recommendation-engine.js"></script>
     <script src="assets/js/history-favorites-ui.js"></script>
+    <script src="assets/js/onboarding-tutorial.js"></script>
     <script src="assets/js/audio-mixer.js"></script>
     <script src="assets/js/mixer-ui.js"></script>
     <script src="assets/js/chart-visualizer.js"></script>
@@ -1176,13 +1256,13 @@
     <script src="assets/js/email-integration-handler.js"></script>
 
     <!-- 邮件模板和邮件服务 -->
-    <script src="assets/js/email-templates-i18n.js"></script>
-    <script src="assets/js/email-service-mailgun.js"></script>
-    <script src="assets/js/email-service-sendgrid.js"></script>
-    <script src="assets/js/email-service-brevo.js"></script>
-    <script src="assets/js/email-service-formspree.js"></script>
-    <script src="assets/js/email-service-emailjs.js"></script>
-    <script src="quick-formspree-config.js"></script>
+    <script data-lazy-src="assets/js/email-templates-i18n.js"></script>
+    <script data-lazy-src="assets/js/email-service-mailgun.js"></script>
+    <script data-lazy-src="assets/js/email-service-sendgrid.js"></script>
+    <script data-lazy-src="assets/js/email-service-brevo.js"></script>
+    <script data-lazy-src="assets/js/email-service-formspree.js"></script>
+    <script data-lazy-src="assets/js/email-service-emailjs.js"></script>
+    <script data-lazy-src="quick-formspree-config.js"></script>
 
     <!-- 🎵 2.0 新增: 音频预加载和Autoplay检测器 -->
     <script src="assets/js/autoplay-detector.js"></script>
@@ -1412,29 +1492,84 @@
         });
     </script>
 
-    <script src="assets/js/crm-bridge.js"></script>
-    <script src="assets/js/email-automation.js"></script>
+    <script data-lazy-src="assets/js/crm-bridge.js"></script>
+    <script data-lazy-src="assets/js/email-automation.js"></script>
     <script src="assets/js/gtm-events.js"></script>
-    <script src="assets/js/content-hub.js"></script>
-    <script src="assets/js/config.js"></script>
+    <script data-lazy-src="assets/js/content-hub.js"></script>
+    <script data-lazy-src="assets/js/config.js"></script>
     <!-- Analytics Integration (Amplitude + GA4 + Clarity) -->
-    <script src="assets/js/analytics.js"></script>
+    <script data-lazy-src="assets/js/analytics.js"></script>
     <script src="assets/js/index-app.js"></script>
     <!-- UI Redesign v2.0 -->
     <script defer src="assets/js/ui-redesign-v2.js?v=20251108"></script>
     <!-- �?AudioManager兼容�?- 为旧模块提供window.audioManager -->
     <script src="assets/js/audioManager-compat.js"></script>
-    <script src="assets/js/rating-system.js"></script>
-    <script src="assets/js/touch-gestures.js"></script>
+    <script data-lazy-src="assets/js/rating-system.js"></script>
+    <script data-lazy-src="assets/js/touch-gestures.js"></script>
     <script src="assets/js/accessibility-enhancements.js"></script>
     <!-- Keyboard Navigation and Screen Reader Support -->
     <script src="assets/js/accessibility-keyboard-navigation.js"></script>
     <!-- Accessibility Testing and Validation -->
-    <script src="assets/js/accessibility-validator.js"></script>
+    <script data-lazy-src="assets/js/accessibility-validator.js"></script>
     <!-- Performance Monitor for Canvas Animations -->
-    <script src="assets/js/performance-monitor-overlay.js"></script>
+    <script data-lazy-src="assets/js/performance-monitor-overlay.js"></script>
     <!-- Color Contrast Validator for WCAG AA Compliance -->
-    <script src="assets/js/color-contrast-validator.js"></script>
+    <script data-lazy-src="assets/js/color-contrast-validator.js"></script>
+    <script>
+        (function setupExperienceHelpers() {
+            const lazyScripts = Array.from(document.querySelectorAll('script[data-lazy-src]'));
+            let lazyLoaded = false;
+
+            const loadLazyScripts = () => {
+                if (lazyLoaded || !lazyScripts.length) {
+                    return;
+                }
+                lazyLoaded = true;
+                lazyScripts.forEach((placeholder) => {
+                    const src = placeholder.getAttribute('data-lazy-src');
+                    if (!src) {
+                        return;
+                    }
+                    const script = document.createElement('script');
+                    script.src = src;
+                    script.defer = placeholder.defer;
+                    script.async = placeholder.async;
+                    document.body.appendChild(script);
+                });
+            };
+
+            const hydrateOnIntent = () => {
+                loadLazyScripts();
+            };
+
+            window.addEventListener('load', () => {
+                setTimeout(loadLazyScripts, 1500);
+            });
+            document.addEventListener('pointerdown', hydrateOnIntent, { once: true, passive: true });
+            document.addEventListener('focusin', hydrateOnIntent, { once: true });
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const helpBtn = document.getElementById('tutorialHelpBtn');
+                if (helpBtn) {
+                    helpBtn.addEventListener('click', () => {
+                        if (window.onboardingTutorial && typeof window.onboardingTutorial.show === 'function') {
+                            window.onboardingTutorial.show();
+                        }
+                    });
+                }
+
+                const refreshBtn = document.getElementById('refreshRecommendationsBtn');
+                if (refreshBtn) {
+                    refreshBtn.addEventListener('click', () => {
+                        if (typeof window.refreshPersonalizedRecommendations === 'function') {
+                            window.refreshPersonalizedRecommendations(true);
+                        }
+                    });
+                }
+            });
+        })();
+    </script>
+
 
     <!-- Firebase 登录表单处理函数 -->
     <script>
@@ -1655,10 +1790,6 @@
     </script>
 </body>
 </html>
-
-
-
-
 
 
 
