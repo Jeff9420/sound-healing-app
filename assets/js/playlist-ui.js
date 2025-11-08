@@ -186,7 +186,8 @@ class PlaylistUI {
             const formatWarning = !isSupported ? ` <span class="format-warning" title="此浏览器不支持${fileExtension.toUpperCase()}格式">⚠️</span>` : '';
             
             // 简化文件名显示
-            const displayName = this.formatTrackName(fileName);
+            const displayName = this.formatTrackName(fileName, categoryKey);
+            const metadata = this.getTrackMetadata(categoryKey, fileName);
             
             // Create secure DOM elements (prevent XSS)
             const trackNumberDiv = document.createElement('div');
@@ -198,11 +199,30 @@ class PlaylistUI {
 
             const trackNameDiv = document.createElement('div');
             trackNameDiv.className = 'track-name';
-            trackNameDiv.textContent = SecurityUtils.sanitizeFileName(displayName) + formatWarning;
+            trackNameDiv.textContent = SecurityUtils.sanitizeFileName(displayName);
+            if (!isSupported) {
+                const warning = document.createElement('span');
+                warning.className = 'format-warning';
+                warning.title = `此浏览器不支持${fileExtension.toUpperCase()}格式`;
+                warning.textContent = '⚠️';
+                trackNameDiv.appendChild(warning);
+            }
+
+            if (metadata) {
+                const metaText = this.buildMetaLine(metadata);
+                if (metaText) {
+                    const trackMetaDiv = document.createElement('div');
+                    trackMetaDiv.className = 'track-meta';
+                    trackMetaDiv.textContent = metaText;
+                    trackInfoDiv.appendChild(trackMetaDiv);
+                }
+            }
 
             const trackFileDiv = document.createElement('div');
             trackFileDiv.className = 'track-file';
-            trackFileDiv.textContent = SecurityUtils.sanitizeFileName(fileName);
+            trackFileDiv.textContent = metadata?.description
+                ? this.truncateDescription(metadata.description)
+                : SecurityUtils.sanitizeFileName(fileName);
 
             trackInfoDiv.appendChild(trackNameDiv);
             trackInfoDiv.appendChild(trackFileDiv);
@@ -308,7 +328,14 @@ class PlaylistUI {
         });
     }
 
-    formatTrackName(fileName) {
+    formatTrackName(fileName, categoryKey = this.currentCategory) {
+        if (window.audioMetadata && typeof window.audioMetadata.getLocalizedTitle === 'function' && categoryKey) {
+            const localized = window.audioMetadata.getLocalizedTitle(categoryKey, fileName);
+            if (localized) {
+                return localized;
+            }
+        }
+
         // 移除文件扩展名
         let name = fileName.replace(/\.(mp3|wma|wav|flac)$/i, '');
         
@@ -324,6 +351,38 @@ class PlaylistUI {
         }
         
         return name.trim() || fileName;
+    }
+
+    getTrackMetadata(categoryKey, fileName) {
+        if (window.audioMetadata && typeof window.audioMetadata.getMetadata === 'function') {
+            return window.audioMetadata.getMetadata(categoryKey, fileName);
+        }
+        return null;
+    }
+
+    buildMetaLine(metadata) {
+        if (!metadata) {
+            return '';
+        }
+        const durationLabel = metadata.duration || this.formatDurationLabel(metadata.durationSeconds);
+        const tags = Array.isArray(metadata.tags) ? metadata.tags.slice(0, 2).join(' · ') : '';
+        return [durationLabel, tags].filter(Boolean).join(' · ');
+    }
+
+    formatDurationLabel(seconds) {
+        if (typeof seconds !== 'number') {
+            return '';
+        }
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.max(0, Math.floor(seconds % 60));
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    truncateDescription(text) {
+        if (!text) {
+            return '';
+        }
+        return text.length > 90 ? `${text.slice(0, 87)}...` : text;
     }
 
     async playTrack(trackId, categoryKey, fileName) {
@@ -413,7 +472,7 @@ class PlaylistUI {
             this.currentTrackId = detail.trackId;
             
             if (this.currentTrackName && detail.fileName) {
-                this.currentTrackName.textContent = this.formatTrackName(detail.fileName);
+                this.currentTrackName.textContent = this.formatTrackName(detail.fileName, detail.category || this.currentCategory);
             }
         }
 

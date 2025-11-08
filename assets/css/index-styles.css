@@ -2811,6 +2811,27 @@ canvas {
     gap: 0.75rem;
 }
 
+.saas-nav__ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: var(--saas-text);
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease, border 0.2s ease;
+}
+
+.saas-nav__ghost:hover,
+.saas-nav__ghost:focus-visible {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
 .language-selector {
     position: relative;
 }
@@ -3420,4 +3441,326 @@ canvas {
     .saas-hero__cta {
         flex-direction: column;
     }
+}
+/* ============================================================
+   Personalized Recommendations
+   ============================================================ */
+.personalized-recommendations {
+    margin: 4rem 0;
+    padding: clamp(1.5rem, 4vw, 2.75rem);
+    border-radius: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: radial-gradient(circle at top left, rgba(123, 93, 255, 0.18), transparent 55%), rgba(11, 14, 30, 0.75);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 30px 60px rgba(5, 7, 15, 0.45);
+}
+
+.recommendations__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.75rem;
+}
+
+.recommendations__eyebrow {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--saas-primary);
+    margin-bottom: 0.35rem;
+}
+
+.recommendations__description {
+    color: var(--saas-muted);
+    max-width: 48ch;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.recommendations__refresh {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    color: var(--saas-text);
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: background 0.2s ease, border 0.2s ease, transform 0.2s ease;
+}
+
+.recommendations__refresh:hover,
+.recommendations__refresh:focus-visible {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.35);
+    transform: translateY(-2px);
+}
+
+.recommendations__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.recommendation-card {
+    border-radius: 24px;
+    padding: 1.3rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    min-height: 220px;
+    position: relative;
+    overflow: hidden;
+}
+
+.recommendation-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08), transparent 55%);
+    pointer-events: none;
+}
+
+.recommendation-card__reason {
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--saas-primary);
+}
+
+.recommendation-card__title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--saas-text);
+    margin: 0;
+}
+
+.recommendation-card__meta {
+    color: var(--saas-muted);
+    font-size: 0.85rem;
+}
+
+.recommendation-card__cta {
+    margin-top: auto;
+    border: none;
+    border-radius: 999px;
+    padding: 0.55rem 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(120deg, var(--saas-primary), var(--saas-primary-dark));
+    color: #0b0f16;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recommendation-card__cta:hover,
+.recommendation-card__cta:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(123, 93, 255, 0.3);
+}
+
+.recommendations__skeleton {
+    height: 220px;
+    border-radius: 24px;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.04) 25%, rgba(255, 255, 255, 0.07) 37%, rgba(255, 255, 255, 0.04) 63%);
+    background-size: 400% 100%;
+    animation: shimmer 1.4s ease infinite;
+}
+
+.recommendations__empty {
+    color: var(--saas-muted);
+    font-size: 0.95rem;
+    grid-column: 1 / -1;
+    padding: 1rem;
+    border-radius: 18px;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .personalized-recommendations {
+        margin: 2.5rem 0;
+    }
+
+    .recommendations__header {
+        flex-direction: column;
+    }
+}
+
+/* ============================================================
+   Onboarding Tutorial
+   ============================================================ */
+.tutorial-help-btn {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 9000;
+    border: none;
+    background: linear-gradient(135deg, var(--saas-primary), var(--saas-primary-dark));
+    color: #0b0f16;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    box-shadow: 0 12px 32px rgba(99, 102, 241, 0.35);
+}
+
+.onboarding-tutorial {
+    position: fixed;
+    inset: 0;
+    display: none;
+    place-items: center;
+    z-index: 10000;
+}
+
+.onboarding-tutorial.active {
+    display: grid;
+}
+
+.tutorial-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 7, 15, 0.7);
+    backdrop-filter: blur(6px);
+}
+
+.tutorial-dialog {
+    position: relative;
+    background: rgba(8, 10, 20, 0.95);
+    border-radius: 28px;
+    padding: 2rem;
+    width: min(640px, 90vw);
+    border: 1px solid rgba(123, 93, 255, 0.35);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.55);
+    color: var(--saas-text);
+    z-index: 1;
+}
+
+.tutorial-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.tutorial-label {
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--saas-primary);
+    margin: 0;
+}
+
+.tutorial-header h3 {
+    margin: 0;
+    font-size: 1.35rem;
+}
+
+.tutorial-close {
+    border: none;
+    background: transparent;
+    color: var(--saas-text);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.tutorial-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.85rem;
+}
+
+.tutorial-step {
+    padding: 0.9rem 1rem;
+    border-radius: 18px;
+    border: 1px solid transparent;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.tutorial-step.active {
+    border-color: rgba(123, 93, 255, 0.5);
+    background: rgba(123, 93, 255, 0.1);
+}
+
+.tutorial-step h4 {
+    margin: 0 0 0.3rem;
+}
+
+.tutorial-step p {
+    margin: 0;
+    color: var(--saas-muted);
+    font-size: 0.92rem;
+}
+
+.tutorial-progress {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.progress-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.progress-dot.active {
+    background: var(--saas-primary);
+    transform: scale(1.1);
+}
+
+.tutorial-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.tutorial-btn {
+    border-radius: 999px;
+    border: none;
+    padding: 0.65rem 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.tutorial-btn--ghost {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--saas-text);
+}
+
+.tutorial-btn--primary {
+    background: linear-gradient(120deg, var(--saas-primary), var(--saas-primary-dark));
+    color: #0b0f16;
+}
+
+.tutorial-highlight {
+    position: fixed;
+    border: 2px solid rgba(246, 244, 255, 0.65);
+    border-radius: 18px;
+    pointer-events: none;
+    z-index: 9500;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease, width 0.2s ease, height 0.2s ease;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.35);
+}
+
+.tutorial-highlight.show {
+    opacity: 1;
 }

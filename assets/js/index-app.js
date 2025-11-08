@@ -25,6 +25,8 @@ let isRepeatMode = false;
 let sleepTimer = null;
 const audio = new Audio();
 let tracks = [];
+const MAX_RECOMMENDATION_INIT_ATTEMPTS = 20;
+let recommendationsRenderTimer = null;
 
 // Initialize audio settings
 audio.volume = 0.7; // Default volume
@@ -249,6 +251,16 @@ function getText(key, fallback) {
     return fallback;
 }
 
+function getLocalizedTrackTitle(categoryKey, fileName) {
+    if (window.audioMetadata && typeof window.audioMetadata.getLocalizedTitle === 'function') {
+        const localized = window.audioMetadata.getLocalizedTitle(categoryKey, fileName);
+        if (localized) {
+            return localized;
+        }
+    }
+    return fileName.replace(/\.[^/.]+$/, '');
+}
+
 // ==========================================================================
 // 应用初始化
 // ==========================================================================
@@ -272,6 +284,7 @@ function initializeApp() {
 
     // Load categories
     loadCategories();
+    initRecommendationRail();
 
     // Initialize audio events
     audio.addEventListener('timeupdate', updateProgress);
@@ -432,9 +445,9 @@ function openPlaylist(categoryKey, category) {
 
     // Load tracks
     if (category.files && typeof AUDIO_CONFIG !== 'undefined' && AUDIO_CONFIG.baseUrl) {
-        tracks = category.files.map((fileName, index) => ({
-            name: fileName.replace(/\.[^/.]+$/, ''),
-            fileName: fileName,
+        tracks = category.files.map((fileName) => ({
+            name: getLocalizedTrackTitle(categoryKey, fileName),
+            fileName,
             url: getAudioUrl(categoryKey, fileName)
         }));
     } else {
@@ -450,9 +463,19 @@ function openPlaylist(categoryKey, category) {
         trackItem.className = 'track-item';
         trackItem.onclick = () => playTrack(index);
 
-        trackItem.innerHTML = `
-            <div style="font-size: 1.2em; margin-bottom: 5px;">🎵 ${track.name}</div>
-        `;
+        const title = document.createElement('div');
+        title.style.fontSize = '1.1em';
+        title.style.marginBottom = '4px';
+        title.textContent = `🎧 ${track.name}`;
+        trackItem.appendChild(title);
+
+        const metaLine = getTrackMetaSummary(categoryKey, track.fileName);
+        if (metaLine) {
+            const metaDiv = document.createElement('div');
+            metaDiv.className = 'track-meta';
+            metaDiv.textContent = metaLine;
+            trackItem.appendChild(metaDiv);
+        }
 
         trackList.appendChild(trackItem);
     });
@@ -1058,5 +1081,168 @@ if (document.readyState === 'loading') {
     document.addEventListener('languageChange', function() {
         loadCategories();
         updateStaticText();
+        scheduleRecommendationRefresh(true);
     });
 }
+
+
+function getTrackMetaSummary(categoryKey, fileName) {
+    if (!window.audioMetadata || typeof window.audioMetadata.getMetadata !== 'function') {
+        return '';
+    }
+    const metadata = window.audioMetadata.getMetadata(categoryKey, fileName);
+    if (!metadata) {
+        return '';
+    }
+    const durationLabel = metadata.duration || (metadata.durationSeconds ? formatDurationFromSeconds(metadata.durationSeconds) : '');
+    const tags = Array.isArray(metadata.tags) ? metadata.tags.slice(0, 2).join(' · ') : '';
+    return [durationLabel, tags].filter(Boolean).join(' · ');
+}
+
+function formatDurationFromSeconds(seconds) {
+    if (typeof seconds !== 'number') {
+        return '';
+    }
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.max(0, Math.floor(seconds % 60));
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
+function truncateText(text, maxLength = 80) {
+    if (!text) {
+        return '';
+    }
+    return text.length <= maxLength ? text : `${text.slice(0, maxLength - 1)}…`;
+}
+
+function initRecommendationRail(attempt = 0) {
+    const grid = document.getElementById('recommendationsGrid');
+    if (!grid) {
+        return;
+    }
+    if (!window.recommendationEngine) {
+        if (attempt > MAX_RECOMMENDATION_INIT_ATTEMPTS) {
+            grid.innerHTML = `<p class="recommendations__empty">${getText('recommendations.loading', '正在准备你的疗愈推荐...')}</p>`;
+            return;
+        }
+        setTimeout(() => initRecommendationRail(attempt + 1), 300);
+        return;
+    }
+    renderPersonalizedRecommendations(true);
+    if (!grid.dataset.listenersBound) {
+        window.addEventListener('userData:historyUpdated', () => scheduleRecommendationRefresh(false));
+        window.addEventListener('userData:favoritesUpdated', () => scheduleRecommendationRefresh(false));
+        document.addEventListener('tutorialCompleted', () => scheduleRecommendationRefresh(true));
+        grid.dataset.listenersBound = 'true';
+    }
+}
+
+function scheduleRecommendationRefresh(force = false) {
+    if (recommendationsRenderTimer) {
+        clearTimeout(recommendationsRenderTimer);
+    }
+    recommendationsRenderTimer = setTimeout(() => {
+        renderPersonalizedRecommendations(true);
+    }, force ? 0 : 600);
+}
+
+function renderPersonalizedRecommendations(force = false) {
+    const grid = document.getElementById('recommendationsGrid');
+    if (!grid || !window.recommendationEngine) {
+        return;
+    }
+
+    const recommendations = window.recommendationEngine.getRecommendations(6) || [];
+    grid.innerHTML = '';
+
+    if (!recommendations.length) {
+        const empty = document.createElement('p');
+        empty.className = 'recommendations__empty';
+        empty.textContent = getText('recommendations.empty', '开始播放或收藏几首声音，我们将为你量身推荐疗愈路线。');
+        grid.appendChild(empty);
+        return;
+    }
+
+    recommendations.forEach(rec => {
+        grid.appendChild(buildRecommendationCard(rec));
+    });
+}
+
+function buildRecommendationCard(rec) {
+    const card = document.createElement('article');
+    card.className = 'recommendation-card';
+    card.setAttribute('role', 'listitem');
+
+    const metadata = window.audioMetadata ? window.audioMetadata.getMetadata(rec.category, rec.fileName) : null;
+    const reasonText = (window.recommendationEngine && typeof window.recommendationEngine.getReasonText === 'function')
+        ? window.recommendationEngine.getReasonText(rec.reason, rec)
+        : getText('recommendations.reason.default', '为你推荐');
+    const titleText = getLocalizedTrackTitle(rec.category, rec.fileName);
+    const metaLine = getTrackMetaSummary(rec.category, rec.fileName);
+    const description = metadata?.description
+        ? truncateText(metadata.description, 110)
+        : getText('recommendations.descriptionFallback', '精选音频，随时沉浸。');
+
+    const reason = document.createElement('p');
+    reason.className = 'recommendation-card__reason';
+    reason.textContent = reasonText;
+
+    const title = document.createElement('p');
+    title.className = 'recommendation-card__title';
+    title.textContent = titleText;
+
+    let metaElement = null;
+    if (metaLine) {
+        metaElement = document.createElement('p');
+        metaElement.className = 'recommendation-card__meta';
+        metaElement.textContent = metaLine;
+    }
+
+    const desc = document.createElement('p');
+    desc.className = 'recommendation-card__meta';
+    desc.textContent = description;
+
+    const button = document.createElement('button');
+    button.className = 'recommendation-card__cta';
+    button.type = 'button';
+    button.textContent = getText('recommendations.play', '立即播放');
+    button.addEventListener('click', () => playRecommendedTrack(rec.category, rec.fileName));
+
+    card.appendChild(reason);
+    card.appendChild(title);
+    if (metaElement) {
+        card.appendChild(metaElement);
+    }
+    card.appendChild(desc);
+    card.appendChild(button);
+
+    return card;
+}
+
+function playRecommendedTrack(categoryKey, fileName) {
+    if (!categoryKey || !fileName || !AUDIO_CONFIG || !AUDIO_CONFIG.categories) {
+        return;
+    }
+
+    const category = AUDIO_CONFIG.categories[categoryKey];
+    if (!category || !category.files) {
+        return;
+    }
+
+    openPlaylist(categoryKey, category);
+    const trackIndex = tracks.findIndex(track => track.fileName === fileName);
+
+    if (trackIndex >= 0) {
+        playTrack(trackIndex);
+        window.showNotification(getText('recommendations.nowPlaying', '已为你加载推荐音频'), 'info');
+    }
+}
+
+window.refreshPersonalizedRecommendations = (force = false) => {
+    if (force) {
+        renderPersonalizedRecommendations(true);
+    } else {
+        scheduleRecommendationRefresh(true);
+    }
+};
+
