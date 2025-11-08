@@ -1621,7 +1621,7 @@ canvas {
 }
 
 .auth-tab.active {
-    background: rgba(102, 102, 255, 0.2);
+    background: rgba(246, 169, 59, 0.2);
     color: white;
     font-weight: 600;
 }
@@ -1681,9 +1681,9 @@ canvas {
 }
 
 .form-group input:focus {
-    border-color: #6666ff;
+    border-color: #f6a93b;
     background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 0 3px rgba(102, 102, 255, 0.2);
+    box-shadow: 0 0 0 3px rgba(246, 169, 59, 0.2);
 }
 
 .auth-btn {
@@ -1699,13 +1699,13 @@ canvas {
 }
 
 .auth-btn.primary {
-    background: linear-gradient(135deg, #6666ff 0%, #7777ff 100%);
+    background: linear-gradient(135deg, #f6a93b 0%, #7777ff 100%);
     color: white;
 }
 
 .auth-btn.primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(102, 102, 255, 0.3);
+    box-shadow: 0 10px 20px rgba(246, 169, 59, 0.35);
 }
 
 .auth-btn.secondary {
@@ -1747,7 +1747,7 @@ canvas {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #6666ff;
+    background: #f6a93b;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1809,8 +1809,8 @@ canvas {
 }
 
 .user-dropdown-toggle[aria-expanded="true"] {
-    background: rgba(102, 102, 255, 0.3);
-    border-color: rgba(102, 102, 255, 0.5);
+    background: rgba(246, 169, 59, 0.35);
+    border-color: rgba(246, 169, 59, 0.55);
 }
 
 .user-dropdown-menu {
@@ -1898,7 +1898,7 @@ canvas {
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #6666ff, #8888ff);
+    background: linear-gradient(135deg, #f6a93b, #ffd49a);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2039,9 +2039,9 @@ canvas {
 }
 
 .compact-login-form input:focus {
-    border-color: rgba(102, 102, 255, 0.5);
+    border-color: rgba(246, 169, 59, 0.55);
     background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 0 3px rgba(102, 102, 255, 0.2);
+    box-shadow: 0 0 0 3px rgba(246, 169, 59, 0.2);
 }
 
 .phone-code-group {
@@ -2055,8 +2055,8 @@ canvas {
 
 .send-code-btn {
     padding: 0 16px;
-    background: rgba(102, 102, 255, 0.2);
-    border: 1px solid rgba(102, 102, 255, 0.3);
+    background: rgba(246, 169, 59, 0.2);
+    border: 1px solid rgba(246, 169, 59, 0.35);
     border-radius: 12px;
     color: white;
     font-size: 0.9rem;
@@ -2066,8 +2066,8 @@ canvas {
 }
 
 .send-code-btn:hover {
-    background: rgba(102, 102, 255, 0.3);
-    border-color: rgba(102, 102, 255, 0.5);
+    background: rgba(246, 169, 59, 0.35);
+    border-color: rgba(246, 169, 59, 0.55);
 }
 
 .compact-login-btn {
@@ -2083,13 +2083,13 @@ canvas {
 }
 
 .compact-login-btn.primary {
-    background: linear-gradient(135deg, #6666ff 0%, #7777ff 100%);
+    background: linear-gradient(135deg, #f6a93b 0%, #7777ff 100%);
     color: white;
 }
 
 .compact-login-btn.primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(102, 102, 255, 0.3);
+    box-shadow: 0 8px 24px rgba(246, 169, 59, 0.35);
 }
 
 .compact-login-options {
@@ -2428,9 +2428,9 @@ canvas {
 }
 
 .setting-group input[type="time"]:focus {
-    border-color: #6666ff;
+    border-color: #f6a93b;
     background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 0 3px rgba(102, 102, 255, 0.2);
+    box-shadow: 0 0 0 3px rgba(246, 169, 59, 0.2);
 }
 
 /* Streak Display */
@@ -2533,13 +2533,13 @@ canvas {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #6666ff 0%, #7777ff 100%);
+    background: linear-gradient(135deg, #f6a93b 0%, #7777ff 100%);
     color: white;
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(102, 102, 255, 0.3);
+    box-shadow: 0 8px 20px rgba(246, 169, 59, 0.35);
 }
 
 /* Achievement Modal */
