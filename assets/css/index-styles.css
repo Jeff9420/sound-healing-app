@@ -2922,37 +2922,220 @@ canvas {
 }
 
 .saas-category-shortcuts {
-    margin-top: 1.5rem;
+    margin-top: 1.75rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    perspective: 1200px;
+    position: relative;
+    z-index: 2;
+}
+
+.saas-category-shortcuts::before {
+    content: '';
+    position: absolute;
+    inset: -40% 10%;
+    background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.12), transparent 55%),
+                radial-gradient(circle at 80% 10%, rgba(123, 94, 255, 0.15), transparent 60%);
+    opacity: 0.6;
+    pointer-events: none;
+    animation: shortcutHalo 16s linear infinite;
 }
 
 .category-shortcut {
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-    padding: 0.85rem 1rem;
-    border-radius: 1rem;
-    border: 1px solid var(--saas-border);
-    background: rgba(255, 255, 255, 0.02);
+    --accent-color: #7b5dff;
+    position: relative;
+    overflow: hidden;
+    padding: 1.2rem 1.3rem;
+    border-radius: 1.6rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08), transparent 45%),
+        linear-gradient(140deg, rgba(37, 20, 54, 0.9), rgba(11, 6, 24, 0.7));
+    box-shadow:
+        inset 0 0 25px rgba(255, 255, 255, 0.03),
+        0 30px 60px rgba(5, 2, 15, 0.45);
     color: var(--saas-text);
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
     cursor: pointer;
-    transition: border 0.2s ease, transform 0.2s ease;
+    transform-style: preserve-3d;
+    background-blend-mode: screen;
+    transition: transform 0.55s cubic-bezier(0.19, 1, 0.22, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-shortcut::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.15), transparent 40%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.category-shortcut__glow,
+.category-shortcut__orbit {
+    position: absolute;
+    inset: -50% -10%;
+    background: conic-gradient(from 180deg, transparent, rgba(255, 255, 255, 0.2), transparent 65%);
+    opacity: 0.7;
+    animation: shortcutGlow 14s linear infinite;
+}
+
+.category-shortcut__orbit {
+    inset: -30%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.25), transparent 65%);
+    animation-duration: 20s;
+}
+
+.category-shortcut__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.category-shortcut__badge {
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.7rem;
+}
+
+.category-shortcut__label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.category-shortcut__body {
+    display: flex;
+    gap: 0.85rem;
+    align-items: center;
 }
 
 .category-shortcut__icon {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1rem;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.08);
 }
 
-.category-shortcut__text small {
-    color: var(--saas-muted);
+.category-shortcut__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.category-shortcut__title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.category-shortcut__desc {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.category-shortcut__cta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.category-shortcut__cta svg {
+    color: var(--accent-color);
+    transform: translateZ(25px);
 }
 
 .category-shortcut:hover,
 .category-shortcut:focus-visible {
-    border-color: rgba(246, 169, 59, 0.8);
-    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: rotateY(10deg) translateZ(16px);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55), 0 0 35px rgba(123, 94, 255, 0.4);
+}
+
+.category-shortcut:hover::before,
+.category-shortcut:focus-visible::before {
+    opacity: 1;
+}
+
+.category-shortcut:hover .category-shortcut__glow,
+.category-shortcut:focus-visible .category-shortcut__glow {
+    opacity: 1;
+}
+
+.category-shortcut::after {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    pointer-events: none;
+}
+
+.category-shortcut {
+    --glow-color: rgba(255, 255, 255, 0.25);
+}
+
+.category-shortcut__badge,
+.category-shortcut__label,
+.category-shortcut__title {
+    transform: translateZ(30px);
+}
+
+.category-shortcut__body,
+.category-shortcut__cta {
+    transform: translateZ(20px);
+}
+
+.category-shortcut__glow,
+.category-shortcut__orbit {
+    background: radial-gradient(circle, var(--accent-color), transparent 70%);
+}
+
+.category-shortcut__glow {
+    mix-blend-mode: screen;
+}
+
+.category-shortcut__badge {
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.category-shortcut__label {
+    font-weight: 600;
+}
+
+.category-shortcut__cta span {
+    color: var(--accent-color);
+}
+
+@keyframes shortcutHalo {
+    0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+    100% { transform: translate3d(40px, 20px, 0) rotate(360deg); }
+}
+
+@keyframes shortcutGlow {
+    0% { transform: rotate(0deg); opacity: 0.35; }
+    50% { opacity: 0.6; }
+    100% { transform: rotate(360deg); opacity: 0.35; }
 }
 
 .saas-hero__content {

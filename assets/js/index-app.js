@@ -68,10 +68,67 @@ const audioData = {
 };
 
 const categoryInfo = {
-    meditation: { name: '冥想音乐', icon: '🧘', desc: '深度放松，内心平静' },
-    nature: { name: '自然之声', icon: '🌿', desc: '鸟语花香，流水潺潺' },
-    rain: { name: '雨声系列', icon: '🌧️', desc: '雨打芭蕉，安神入眠' },
-    singing: { name: '颂钵疗愈', icon: '🕯️', desc: '净化能量，平衡身心' }
+    meditation: { name: 'ڤ������', icon: '🧘', desc: '��ȷ��ɣ�����ƽ��' },
+    nature: { name: '��Ȼ֮��', icon: '🌿', desc: '���ﻨ�㣬��ˮ����' },
+    rain: { name: '����ϵ��', icon: '🌧️', desc: '���Ž�����������' },
+    singing: { name: '�̲�����', icon: '🔔', desc: '����������ƽ������' }
+};
+
+const categoryPresentations = {
+    'Animal sounds': {
+        badge: 'Forest Pulse',
+        label: 'Bio Acoustic',
+        tagline: 'Alpha Calm Bloom',
+        accent: '#58f5c3'
+    },
+    'Fire': {
+        badge: 'Warm Focus',
+        label: 'Ember Flow',
+        tagline: '200% Deep Heat Care',
+        accent: '#ff8a65'
+    },
+    'hypnosis': {
+        badge: 'Dream Lab',
+        label: 'Subconscious Drift',
+        tagline: 'Guided REM Reset',
+        accent: '#a066ff'
+    },
+    'meditation': {
+        badge: 'Zen Studio',
+        label: 'Breathing Field',
+        tagline: 'Mindful Bio-Sync',
+        accent: '#7bdcb5'
+    },
+    'Rain': {
+        badge: 'Cloud Core',
+        label: 'Rain Sanctuary',
+        tagline: 'Delta Sleep Engine',
+        accent: '#5ec8ff'
+    },
+    'running water': {
+        badge: 'Flow State',
+        label: 'Liquid Focus',
+        tagline: 'Hydro Memory Boost',
+        accent: '#63f5ff'
+    },
+    'Singing bowl sound': {
+        badge: 'Resonance Lab',
+        label: 'Tibetan Bloom',
+        tagline: 'Gamma Chakra Align',
+        accent: '#f7b1ff'
+    },
+    'Chakra': {
+        badge: 'Energy Grid',
+        label: 'Chakra Align',
+        tagline: 'Multi-tone Balance',
+        accent: '#ff7de9'
+    },
+    'Subconscious Therapy': {
+        badge: 'Mind Lab',
+        label: 'Deep Therapy',
+        tagline: 'Neuro Reset Mode',
+        accent: '#a3b1ff'
+    }
 };
 function getAvailableCategoryEntries() {
     if (typeof AUDIO_CONFIG !== 'undefined' && AUDIO_CONFIG.categories) {
@@ -112,12 +169,30 @@ function renderCategoryShortcuts(entries) {
         const icon = category.icon || categoryInfo[key]?.icon || '🎵';
         const name = getCategoryDisplayName(key, category);
         const desc = getCategoryDescription(key, category);
+        const presentation = categoryPresentations[key] || {};
+        const accentColor = presentation.accent || '#7b5dff';
+
+        button.style.setProperty('--accent-color', accentColor);
 
         button.innerHTML = `
-            <span class="category-shortcut__icon">${icon}</span>
-            <div class="category-shortcut__text">
-                <strong>${name}</strong>
-                <small>${desc}</small>
+            <span class="category-shortcut__glow"></span>
+            <span class="category-shortcut__orbit"></span>
+            <div class="category-shortcut__header">
+                <span class="category-shortcut__badge">${presentation.badge || 'Sound Module'}</span>
+                <span class="category-shortcut__label">${presentation.label || name}</span>
+            </div>
+            <div class="category-shortcut__body">
+                <div class="category-shortcut__icon">${icon}</div>
+                <div class="category-shortcut__copy">
+                    <p class="category-shortcut__title">${name}</p>
+                    <p class="category-shortcut__desc">${desc || getText('player.selectAudio', '选择音频')}</p>
+                </div>
+            </div>
+            <div class="category-shortcut__cta">
+                <span>${presentation.tagline || getText('nav.quick.start', '立即体验')}</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
             </div>
         `;
 
