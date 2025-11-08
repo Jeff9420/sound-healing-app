@@ -465,10 +465,158 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
+        const uxEnhancementTranslations = {
+            'zh-CN': {
+                'nav.history': '播放历史',
+                'nav.favorites': '我的收藏',
+                'recommendations.eyebrow': '为你精选',
+                'recommendations.title': '基于当下状态的疗愈清单',
+                'recommendations.body': '我们结合你的播放记录、收藏偏好和当前时间段，即时挑选 6 条更适合的声音。',
+                'recommendations.refresh': '刷新推荐',
+                'recommendations.play': '立即播放',
+                'recommendations.loading': '正在准备你的个性化推荐...',
+                'recommendations.empty': '先播放或收藏几首声音，我们就会为你生成专属清单。',
+                'recommendations.descriptionFallback': '精选疗愈音频，随时沉浸。',
+                'recommendations.reason.default': '为你推荐',
+                'recommendations.nowPlaying': '已为你加载推荐声音',
+                'tutorial.label': '新手引导',
+                'tutorial.title': '3 分钟熟悉 Sound Healing',
+                'tutorial.step1.title': '选择当下目标',
+                'tutorial.step1.desc': '通过顶部快捷入口告诉我们你想睡眠、专注还是舒缓压力。',
+                'tutorial.step2.title': '探索 200+ 分类',
+                'tutorial.step2.desc': '点击任一分类卡片即可打开播放列表并查看多语言描述。',
+                'tutorial.step3.title': '掌控播放器',
+                'tutorial.step3.desc': '音量、睡眠定时和收藏都在底部播放器，键盘操作同样可用。',
+                'tutorial.step4.title': '解锁推荐清单',
+                'tutorial.step4.desc': '完成一首音轨后立即生成个性推荐，并记录到历史与收藏。',
+                'tutorial.prev': '上一步',
+                'tutorial.next': '下一步',
+                'tutorial.start': '立即开始',
+                'tutorial.help': '需要引导'
+            },
+            'en-US': {
+                'nav.history': 'Listening History',
+                'nav.favorites': 'My Favorites',
+                'recommendations.eyebrow': 'Personal spotlight',
+                'recommendations.title': 'A healing list tailored for this moment',
+                'recommendations.body': 'We blend your listening history, favorites, and time of day to surface six sounds that fit right now.',
+                'recommendations.refresh': 'Refresh recommendations',
+                'recommendations.play': 'Play now',
+                'recommendations.loading': 'Preparing your personalized picks...',
+                'recommendations.empty': 'Listen to or favorite a few tracks to unlock your tailored list.',
+                'recommendations.descriptionFallback': 'Curated audio, ready whenever you are.',
+                'recommendations.reason.default': 'Recommended for you',
+                'recommendations.nowPlaying': 'Loaded your recommendation',
+                'tutorial.label': 'Guided Tour',
+                'tutorial.title': 'Get comfortable with Sound Healing in 3 minutes',
+                'tutorial.step1.title': 'Choose your goal',
+                'tutorial.step1.desc': 'Use the top shortcuts to tell us whether you want sleep, focus, or stress relief.',
+                'tutorial.step2.title': 'Explore 200+ categories',
+                'tutorial.step2.desc': 'Tap any card to open its playlist and see the multi-language description.',
+                'tutorial.step3.title': 'Master the player',
+                'tutorial.step3.desc': 'Volume, sleep timer, and favorites live in the bottom player and work with keyboard controls too.',
+                'tutorial.step4.title': 'Unlock recommendations',
+                'tutorial.step4.desc': 'Finishing one track instantly creates a personal list and saves it into history and favorites.',
+                'tutorial.prev': 'Previous',
+                'tutorial.next': 'Next',
+                'tutorial.start': 'Start now',
+                'tutorial.help': 'Need a tour'
+            },
+            'ja-JP': {
+                'nav.history': '再生履歴',
+                'nav.favorites': 'マイコレクション',
+                'recommendations.eyebrow': 'あなたへのおすすめ',
+                'recommendations.title': '今の気分に合わせたヒーリングリスト',
+                'recommendations.body': '再生履歴・お気に入り・時間帯をもとに、今ちょうどいい6曲を即座に提示します。',
+                'recommendations.refresh': 'おすすめを更新',
+                'recommendations.play': '今すぐ再生',
+                'recommendations.loading': 'あなただけのおすすめを準備しています…',
+                'recommendations.empty': 'いくつか再生またはお気に入りにすると、専用リストが表示されます。',
+                'recommendations.descriptionFallback': 'いつでも浸れる厳選オーディオです。',
+                'recommendations.reason.default': 'あなたへのおすすめ',
+                'recommendations.nowPlaying': 'おすすめのサウンドを読み込みました',
+                'tutorial.label': 'ガイドツアー',
+                'tutorial.title': '3分で Sound Healing をマスター',
+                'tutorial.step1.title': '目標を選ぶ',
+                'tutorial.step1.desc': 'ヘッダーのショートカットで睡眠・集中・リラックスなどを選択します。',
+                'tutorial.step2.title': '200以上のカテゴリを探索',
+                'tutorial.step2.desc': 'カードをタップするとプレイリストと多言語の説明が開きます。',
+                'tutorial.step3.title': 'プレーヤーを操作する',
+                'tutorial.step3.desc': '音量・スリープタイマー・お気に入りは下部プレーヤーやキーボードで操作できます。',
+                'tutorial.step4.title': 'おすすめリストを解放',
+                'tutorial.step4.desc': '1曲聴き終えると、履歴と連動したおすすめが生成されます。',
+                'tutorial.prev': '前へ',
+                'tutorial.next': '次へ',
+                'tutorial.start': '今すぐ始める',
+                'tutorial.help': 'ガイドを見る'
+            },
+            'ko-KR': {
+                'nav.history': '재생 기록',
+                'nav.favorites': '내 즐겨찾기',
+                'recommendations.eyebrow': '맞춤 추천',
+                'recommendations.title': '지금 상태에 맞춘 힐링 리스트',
+                'recommendations.body': '재생 기록, 즐겨찾기, 현재 시간대를 조합해 지금 딱 맞는 6가지 사운드를 골라드립니다.',
+                'recommendations.refresh': '추천 새로고침',
+                'recommendations.play': '지금 듣기',
+                'recommendations.loading': '맞춤 추천을 준비하는 중...',
+                'recommendations.empty': '몇 곡만 재생하거나 즐겨찾기에 추가하면 전용 리스트가 나타납니다.',
+                'recommendations.descriptionFallback': '언제든 몰입할 수 있는 큐레이션 사운드입니다.',
+                'recommendations.reason.default': '당신을 위한 추천',
+                'recommendations.nowPlaying': '추천 사운드를 불러왔어요',
+                'tutorial.label': '가이드 투어',
+                'tutorial.title': '3분 안에 Sound Healing 배우기',
+                'tutorial.step1.title': '목표 선택',
+                'tutorial.step1.desc': '상단 빠른 실행에서 수면·집중·휴식 중 원하는 목표를 고르세요.',
+                'tutorial.step2.title': '200+ 카테고리 탐색',
+                'tutorial.step2.desc': '카드를 탭하면 재생 목록과 다국어 설명이 열립니다.',
+                'tutorial.step3.title': '플레이어 조작',
+                'tutorial.step3.desc': '볼륨, 수면 타이머, 즐겨찾기는 하단 플레이어와 키보드로 쉽게 제어할 수 있습니다.',
+                'tutorial.step4.title': '추천 리스트 해제',
+                'tutorial.step4.desc': '곡을 듣고 나면 기록과 연동된 추천 리스트가 즉시 생성됩니다.',
+                'tutorial.prev': '이전',
+                'tutorial.next': '다음',
+                'tutorial.start': '지금 시작',
+                'tutorial.help': '가이드 보기'
+            },
+            'es-ES': {
+                'nav.history': 'Historial de reproducción',
+                'nav.favorites': 'Mis favoritos',
+                'recommendations.eyebrow': 'Selección para ti',
+                'recommendations.title': 'Lista de sanación personalizada para este momento',
+                'recommendations.body': 'Tomamos tu historial, favoritos y la hora del día para mostrar seis sonidos perfectos para ahora.',
+                'recommendations.refresh': 'Actualizar recomendaciones',
+                'recommendations.play': 'Reproducir ahora',
+                'recommendations.loading': 'Preparando tus recomendaciones personalizadas…',
+                'recommendations.empty': 'Reproduce o guarda algunas pistas y aparecerá tu lista personalizada.',
+                'recommendations.descriptionFallback': 'Audio curado, listo cuando tú lo estés.',
+                'recommendations.reason.default': 'Recomendado para ti',
+                'recommendations.nowPlaying': 'Cargamos tu recomendación',
+                'tutorial.label': 'Tour guiado',
+                'tutorial.title': 'Domina Sound Healing en 3 minutos',
+                'tutorial.step1.title': 'Elige tu objetivo',
+                'tutorial.step1.desc': 'Usa los accesos rápidos superiores para indicar si buscas dormir, concentrarte o relajarte.',
+                'tutorial.step2.title': 'Explora más de 200 categorías',
+                'tutorial.step2.desc': 'Toca cualquier tarjeta para abrir su lista y leer la descripción multilingüe.',
+                'tutorial.step3.title': 'Controla el reproductor',
+                'tutorial.step3.desc': 'Volumen, temporizador de sueño y favoritos están en el reproductor inferior y también aceptan atajos de teclado.',
+                'tutorial.step4.title': 'Desbloquea tu lista recomendada',
+                'tutorial.step4.desc': 'Al terminar una pista se genera al instante una lista personal y se guarda en historial y favoritos.',
+                'tutorial.prev': 'Anterior',
+                'tutorial.next': 'Siguiente',
+                'tutorial.start': 'Comenzar ahora',
+                'tutorial.help': 'Ver guía'
+            }
+        };
+
         // Extend existing translations
         Object.keys(cookieTranslations).forEach(lang => {
             const existingTranslations = window.i18n.translations.get(lang) || {};
             const mergedTranslations = {...existingTranslations, ...cookieTranslations[lang]};
+            window.i18n.translations.set(lang, mergedTranslations);
+        });
+        Object.keys(uxEnhancementTranslations).forEach(lang => {
+            const existingTranslations = window.i18n.translations.get(lang) || {};
+            const mergedTranslations = {...existingTranslations, ...uxEnhancementTranslations[lang]};
             window.i18n.translations.set(lang, mergedTranslations);
         });
 
@@ -477,6 +625,6 @@ document.addEventListener('DOMContentLoaded', () => {
             window.i18n.updateDOM();
         }
 
-        console.log('✅ Cookie & Social sharing translations loaded');
+        console.log('✅ Cookie, sharing, and UX translations loaded');
     }
 });
