@@ -5,47 +5,47 @@
 
 :root {
     /* ===== 主品牌色 ===== */
-    --primary-purple: #6666ff;
-    --primary-purple-dark: #5555ee;
-    --secondary-purple: #9f7aea;
-    --secondary-purple-dark: #8e69d9;
+    --primary-purple: #f6a93b;
+    --primary-purple-dark: #f87c0f;
+    --secondary-purple: #7a5af8;
+    --secondary-purple-dark: #6a3fe0;
 
     /* ===== 背景色 ===== */
-    --bg-primary: rgba(13, 19, 31, 0.95);
-    --bg-secondary: rgba(13, 19, 31, 0.98);
-    --bg-overlay: rgba(0, 0, 0, 0.2);
-    --bg-card: rgba(255, 255, 255, 0.05);
-    --bg-card-hover: rgba(255, 255, 255, 0.1);
+    --bg-primary: #120a07;
+    --bg-secondary: #1b100a;
+    --bg-overlay: rgba(8, 4, 2, 0.75);
+    --bg-card: rgba(255, 255, 255, 0.04);
+    --bg-card-hover: rgba(255, 255, 255, 0.08);
 
     /* ===== 紫色背景变体 ===== */
-    --bg-purple-10: rgba(102, 102, 255, 0.1);
-    --bg-purple-20: rgba(102, 102, 255, 0.2);
-    --bg-purple-30: rgba(102, 102, 255, 0.3);
+    --bg-purple-10: rgba(246, 169, 59, 0.12);
+    --bg-purple-20: rgba(246, 169, 59, 0.2);
+    --bg-purple-30: rgba(122, 90, 248, 0.18);
 
     /* ===== 渐变色 ===== */
-    --gradient-primary: linear-gradient(135deg, #6666ff, #9f7aea);
-    --gradient-primary-hover: linear-gradient(135deg, #5555ee, #8e69d9);
-    --gradient-soft: linear-gradient(135deg, rgba(102, 102, 255, 0.1), rgba(159, 122, 234, 0.1));
-    --gradient-overlay: linear-gradient(180deg, rgba(13, 19, 31, 0.5) 0%, transparent 100%);
+    --gradient-primary: linear-gradient(135deg, #f6a93b, #f87c0f);
+    --gradient-primary-hover: linear-gradient(135deg, #f6c36d, #f4973c);
+    --gradient-soft: linear-gradient(135deg, rgba(246, 169, 59, 0.08), rgba(122, 90, 248, 0.12));
+    --gradient-overlay: linear-gradient(180deg, rgba(18, 10, 7, 0.6) 0%, transparent 100%);
 
     /* ===== 文本颜色 ===== */
-    --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.7);
-    --text-muted: rgba(255, 255, 255, 0.5);
-    --text-purple: #6666ff;
-    --text-purple-light: #8888ff;
+    --text-primary: #fdf3e5;
+    --text-secondary: rgba(253, 243, 229, 0.75);
+    --text-muted: rgba(253, 243, 229, 0.5);
+    --text-purple: #f6c36d;
+    --text-purple-light: #ffd49a;
 
     /* ===== 边框颜色 ===== */
-    --border-subtle: rgba(255, 255, 255, 0.1);
-    --border-light: rgba(255, 255, 255, 0.2);
-    --border-purple: rgba(102, 102, 255, 0.3);
-    --border-purple-hover: rgba(102, 102, 255, 0.6);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-light: rgba(255, 255, 255, 0.16);
+    --border-purple: rgba(246, 169, 59, 0.35);
+    --border-purple-hover: rgba(246, 169, 59, 0.55);
 
     /* ===== 阴影 ===== */
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
-    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
-    --shadow-purple: 0 4px 20px rgba(102, 102, 255, 0.3);
+    --shadow-sm: 0 2px 8px rgba(7, 4, 2, 0.4);
+    --shadow-md: 0 4px 16px rgba(7, 4, 2, 0.55);
+    --shadow-lg: 0 8px 32px rgba(7, 4, 2, 0.65);
+    --shadow-purple: 0 6px 28px rgba(248, 124, 15, 0.35);
 
     /* ===== 间距 ===== */
     --spacing-xs: 0.25rem;
@@ -85,12 +85,48 @@ html {
 
 body {
     font-family: var(--font-sans);
-    background: var(--bg-primary);
+    background: radial-gradient(120% 140% at 15% 0%, rgba(246, 169, 59, 0.18), transparent 55%),
+                radial-gradient(100% 160% at 85% 10%, rgba(122, 90, 248, 0.12), transparent 60%),
+                var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+main,
+.page,
+.page-wrapper,
+.content-wrapper,
+.legal-page,
+.resources-page,
+.blog-page,
+#app,
+.site-wrapper {
+    background: transparent;
+    color: var(--text-primary);
+}
+
+section,
+article,
+.card,
+.panel,
+.module,
+.content-card,
+.blog-card,
+.resource-card,
+.legal-card,
+.stats-card,
+.insight-card,
+.form-card,
+.modal-surface,
+.playlist-modal .modal-content,
+.history-favorites-modal .hf-modal-content {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-sm);
+    color: var(--text-primary);
 }
 
 /* ===== 通用容器 ===== */
