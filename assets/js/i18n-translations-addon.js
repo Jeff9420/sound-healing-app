@@ -467,8 +467,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const uxEnhancementTranslations = {
             'zh-CN': {
+                'nav.quick.start': '立即体验',
+                'nav.quick.categories': '疗愈分类',
+                'nav.quick.metrics': '疗愈成效',
+                'nav.resources': '内容资源',
                 'nav.history': '播放历史',
                 'nav.favorites': '我的收藏',
+                'hero.quick.sleep.title': '快速入睡',
+                'hero.quick.sleep.desc': '15 分钟深度雨声',
+                'hero.quick.focus.title': '专注冲刺',
+                'hero.quick.focus.desc': '高频 α 波 + 白噪声',
+                'hero.quick.relax.title': '午间焕新',
+                'hero.quick.relax.desc': '7 分钟呼吸 + 钵声',
+                'hero.panel.badge': 'SaaS 级音疗控制台',
+                'hero.panel.copy': '以数据驱动的多语言声疗平台，即开即用的混音、睡眠定时与跨设备同步。',
+                'hero.panel.footer': '已为 120K+ 次冥想提供声音引导',
+                'hero.panel.link': '查看成效 →',
+                'launchpad.eyebrow': '即时播放器',
+                'launchpad.title': '一键唤醒疗愈声音',
+                'launchpad.insight1.label': '个性流程',
+                'launchpad.insight1.title': '选择状态，系统即刻推送最佳声音组合。',
+                'launchpad.insight1.item1': '场景感知雾化灯效',
+                'launchpad.insight1.item2': '跨设备同步播放队列',
+                'launchpad.insight1.item3': '自动睡眠定时与唤醒',
+                'launchpad.insight2.label': '团队支持',
+                'launchpad.insight2.title': '专属音疗顾问在线协助，输出周报与使用洞察。',
+                'launchpad.insight2.cta': '预约顾问 →',
                 'recommendations.eyebrow': '为你精选',
                 'recommendations.title': '基于当下状态的疗愈清单',
                 'recommendations.body': '我们结合你的播放记录、收藏偏好和当前时间段，即时挑选 6 条更适合的声音。',
@@ -495,8 +519,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 'tutorial.help': '需要引导'
             },
             'en-US': {
+                'nav.quick.start': 'Start Experience',
+                'nav.quick.categories': 'Browse Categories',
+                'nav.quick.metrics': 'Impact Metrics',
+                'nav.resources': 'Resource Library',
                 'nav.history': 'Listening History',
                 'nav.favorites': 'My Favorites',
+                'hero.quick.sleep.title': 'Quick Sleep',
+                'hero.quick.sleep.desc': '15-min deep rain session',
+                'hero.quick.focus.title': 'Focus Boost',
+                'hero.quick.focus.desc': 'High-frequency alpha + white noise',
+                'hero.quick.relax.title': 'Midday Refresh',
+                'hero.quick.relax.desc': '7-min breathing + bowls',
+                'hero.panel.badge': 'SaaS Healing Console',
+                'hero.panel.copy': 'Data-driven, multilingual sound therapy with instant mixing, sleep timers, and cross-device sync.',
+                'hero.panel.footer': '120K+ guided sessions delivered',
+                'hero.panel.link': 'View results →',
+                'launchpad.eyebrow': 'Instant Player',
+                'launchpad.title': 'Wake immersive healing audio in one tap',
+                'launchpad.insight1.label': 'Personal Flow',
+                'launchpad.insight1.title': 'Pick a state and get the best combination instantly.',
+                'launchpad.insight1.item1': 'Scene-aware ambient lighting',
+                'launchpad.insight1.item2': 'Cross-device queue sync',
+                'launchpad.insight1.item3': 'Auto sleep timer and wake-up',
+                'launchpad.insight2.label': 'Team Support',
+                'launchpad.insight2.title': 'Dedicated consultants provide reports and insights.',
+                'launchpad.insight2.cta': 'Book a consultant →',
                 'recommendations.eyebrow': 'Personal spotlight',
                 'recommendations.title': 'A healing list tailored for this moment',
                 'recommendations.body': 'We blend your listening history, favorites, and time of day to surface six sounds that fit right now.',
@@ -523,8 +571,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 'tutorial.help': 'Need a tour'
             },
             'ja-JP': {
+                'nav.quick.start': '今すぐ体験',
+                'nav.quick.categories': 'カテゴリを見る',
+                'nav.quick.metrics': '効果指標',
+                'nav.resources': 'リソース集',
                 'nav.history': '再生履歴',
                 'nav.favorites': 'マイコレクション',
+                'hero.quick.sleep.title': 'すぐに入眠',
+                'hero.quick.sleep.desc': '15分の深い雨音',
+                'hero.quick.focus.title': '集中ブースト',
+                'hero.quick.focus.desc': '高周波α波 + ホワイトノイズ',
+                'hero.quick.relax.title': '昼のリフレッシュ',
+                'hero.quick.relax.desc': '7分の呼吸 + シンギングボウル',
+                'hero.panel.badge': 'SaaS級ヒーリングコンソール',
+                'hero.panel.copy': 'データ駆動の多言語サウンド療法。即時ミキシング・スリープタイマー・デバイス同期を提供。',
+                'hero.panel.footer': '120K+ 回の瞑想をガイド',
+                'hero.panel.link': '成果を見る →',
+                'launchpad.eyebrow': 'インスタントプレーヤー',
+                'launchpad.title': 'ワンタップでヒーリングサウンドを呼び覚ます',
+                'launchpad.insight1.label': 'パーソナルフロー',
+                'launchpad.insight1.title': '状態を選ぶだけで最適な組み合わせを即提案。',
+                'launchpad.insight1.item1': 'シーン感知アンビエントライト',
+                'launchpad.insight1.item2': 'デバイスを越えたキュー同期',
+                'launchpad.insight1.item3': '自動スリープタイマー＆ウェイクアップ',
+                'launchpad.insight2.label': 'チームサポート',
+                'launchpad.insight2.title': '専任コンサルタントがレポートとインサイトを提供。',
+                'launchpad.insight2.cta': 'コンサルを予約 →',
                 'recommendations.eyebrow': 'あなたへのおすすめ',
                 'recommendations.title': '今の気分に合わせたヒーリングリスト',
                 'recommendations.body': '再生履歴・お気に入り・時間帯をもとに、今ちょうどいい6曲を即座に提示します。',
@@ -551,8 +623,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 'tutorial.help': 'ガイドを見る'
             },
             'ko-KR': {
+                'nav.quick.start': '체험 시작',
+                'nav.quick.categories': '카테고리 둘러보기',
+                'nav.quick.metrics': '효과 지표',
+                'nav.resources': '자료 센터',
                 'nav.history': '재생 기록',
                 'nav.favorites': '내 즐겨찾기',
+                'hero.quick.sleep.title': '빠른 수면',
+                'hero.quick.sleep.desc': '15분 딥 레인 세션',
+                'hero.quick.focus.title': '집중 스퍼트',
+                'hero.quick.focus.desc': '고주파 알파 + 화이트 노이즈',
+                'hero.quick.relax.title': '오후 리프레시',
+                'hero.quick.relax.desc': '7분 호흡 + 보울 사운드',
+                'hero.panel.badge': 'SaaS급 힐링 콘솔',
+                'hero.panel.copy': '데이터 기반 다국어 사운드 테라피, 즉시 믹싱 · 수면 타이머 · 기기 동기화 제공.',
+                'hero.panel.footer': '120K+ 회 명상 세션 지원',
+                'hero.panel.link': '성과 보기 →',
+                'launchpad.eyebrow': '인스턴트 플레이어',
+                'launchpad.title': '한 번의 탭으로 힐링 사운드를 깨우세요',
+                'launchpad.insight1.label': '맞춤 플로우',
+                'launchpad.insight1.title': '상태만 선택하면 최적 조합을 즉시 제공합니다.',
+                'launchpad.insight1.item1': '장면 감지 무드 조명',
+                'launchpad.insight1.item2': '기기간 큐 동기화',
+                'launchpad.insight1.item3': '자동 수면 타이머와 기상',
+                'launchpad.insight2.label': '팀 지원',
+                'launchpad.insight2.title': '전담 컨설턴트가 보고서와 인사이트를 제공합니다.',
+                'launchpad.insight2.cta': '컨설턴트 예약 →',
                 'recommendations.eyebrow': '맞춤 추천',
                 'recommendations.title': '지금 상태에 맞춘 힐링 리스트',
                 'recommendations.body': '재생 기록, 즐겨찾기, 현재 시간대를 조합해 지금 딱 맞는 6가지 사운드를 골라드립니다.',
@@ -579,8 +675,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 'tutorial.help': '가이드 보기'
             },
             'es-ES': {
+                'nav.quick.start': 'Iniciar experiencia',
+                'nav.quick.categories': 'Explorar categorías',
+                'nav.quick.metrics': 'Métricas de impacto',
+                'nav.resources': 'Biblioteca de recursos',
                 'nav.history': 'Historial de reproducción',
                 'nav.favorites': 'Mis favoritos',
+                'hero.quick.sleep.title': 'Sueño rápido',
+                'hero.quick.sleep.desc': '15 min de lluvia profunda',
+                'hero.quick.focus.title': 'Impulso de enfoque',
+                'hero.quick.focus.desc': 'Ondas alfa de alta frecuencia + ruido blanco',
+                'hero.quick.relax.title': 'Renovación de mediodía',
+                'hero.quick.relax.desc': 'Respiración de 7 min + cuencos',
+                'hero.panel.badge': 'Consola SaaS de sanación',
+                'hero.panel.copy': 'Plataforma multilingüe impulsada por datos con mezcla instantánea, temporizador de sueño y sincronización entre dispositivos.',
+                'hero.panel.footer': 'Más de 120K sesiones guiadas',
+                'hero.panel.link': 'Ver resultados →',
+                'launchpad.eyebrow': 'Reproductor instantáneo',
+                'launchpad.title': 'Activa sonidos sanadores con un toque',
+                'launchpad.insight1.label': 'Flujo personal',
+                'launchpad.insight1.title': 'Elige tu estado y recibe la combinación ideal al instante.',
+                'launchpad.insight1.item1': 'Iluminación ambiental inteligente',
+                'launchpad.insight1.item2': 'Cola sincronizada entre dispositivos',
+                'launchpad.insight1.item3': 'Temporizador y despertar automáticos',
+                'launchpad.insight2.label': 'Soporte del equipo',
+                'launchpad.insight2.title': 'Consultores dedicados aportan reportes e insights.',
+                'launchpad.insight2.cta': 'Agenda un asesor →',
                 'recommendations.eyebrow': 'Selección para ti',
                 'recommendations.title': 'Lista de sanación personalizada para este momento',
                 'recommendations.body': 'Tomamos tu historial, favoritos y la hora del día para mostrar seis sonidos perfectos para ahora.',
@@ -619,6 +739,62 @@ document.addEventListener('DOMContentLoaded', () => {
             const mergedTranslations = {...existingTranslations, ...uxEnhancementTranslations[lang]};
             window.i18n.translations.set(lang, mergedTranslations);
         });
+
+        const selectorBindings = [
+            { selector: '.saas-nav__links li:nth-child(1) a', key: 'nav.quick.start' },
+            { selector: '.saas-nav__links li:nth-child(2) a', key: 'nav.quick.categories' },
+            { selector: '.saas-nav__links li:nth-child(3) a', key: 'nav.quick.metrics' },
+            { selector: '.saas-nav__links li:nth-child(4) a', key: 'nav.resources' },
+            { selector: '.saas-hero__quick-actions .quick-card:nth-child(1) p', key: 'hero.quick.sleep.title' },
+            { selector: '.saas-hero__quick-actions .quick-card:nth-child(1) small', key: 'hero.quick.sleep.desc' },
+            { selector: '.saas-hero__quick-actions .quick-card:nth-child(2) p', key: 'hero.quick.focus.title' },
+            { selector: '.saas-hero__quick-actions .quick-card:nth-child(2) small', key: 'hero.quick.focus.desc' },
+            { selector: '.saas-hero__quick-actions .quick-card:nth-child(3) p', key: 'hero.quick.relax.title' },
+            { selector: '.saas-hero__quick-actions .quick-card:nth-child(3) small', key: 'hero.quick.relax.desc' },
+            { selector: '.saas-panel__badge', key: 'hero.panel.badge' },
+            { selector: '.saas-panel__copy', key: 'hero.panel.copy' },
+            { selector: '.saas-panel__footer p', key: 'hero.panel.footer' },
+            { selector: '.saas-panel__footer a', key: 'hero.panel.link' },
+            { selector: '.experience-launchpad__title p', key: 'launchpad.eyebrow' },
+            { selector: '.experience-launchpad__title h3', key: 'launchpad.title' },
+            { selector: '.experience-launchpad__insights article:nth-child(1) .insight-card__label', key: 'launchpad.insight1.label' },
+            { selector: '.experience-launchpad__insights article:nth-child(1) h4', key: 'launchpad.insight1.title' },
+            { selector: '.experience-launchpad__insights article:nth-child(1) li:nth-child(1)', key: 'launchpad.insight1.item1' },
+            { selector: '.experience-launchpad__insights article:nth-child(1) li:nth-child(2)', key: 'launchpad.insight1.item2' },
+            { selector: '.experience-launchpad__insights article:nth-child(1) li:nth-child(3)', key: 'launchpad.insight1.item3' },
+            { selector: '.experience-launchpad__insights article:nth-child(2) .insight-card__label', key: 'launchpad.insight2.label' },
+            { selector: '.experience-launchpad__insights article:nth-child(2) h4', key: 'launchpad.insight2.title' },
+            { selector: '.experience-launchpad__insights article:nth-child(2) a', key: 'launchpad.insight2.cta' }
+        ];
+
+        const applyUXBindings = () => {
+            if (typeof document === 'undefined') return;
+            const lang = window.i18n?.currentLanguage || 'en-US';
+            const translate = (key) => {
+                if (window.i18n && typeof window.i18n.t === 'function') {
+                    return window.i18n.t(key);
+                }
+                return (uxEnhancementTranslations[lang] && uxEnhancementTranslations[lang][key]) ||
+                    (uxEnhancementTranslations['en-US'] && uxEnhancementTranslations['en-US'][key]) ||
+                    key;
+            };
+
+            selectorBindings.forEach(({ selector, key }) => {
+                document.querySelectorAll(selector).forEach((node) => {
+                    const value = translate(key);
+                    if (value) {
+                        node.textContent = value;
+                    }
+                });
+            });
+        };
+
+        document.addEventListener('languageChanged', applyUXBindings);
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => applyUXBindings(), { once: true });
+        } else {
+            applyUXBindings();
+        }
 
         // Re-apply current language to update Cookie banner
         if (window.i18n.currentLanguage && typeof window.i18n.updateDOM === 'function') {
