@@ -993,7 +993,43 @@ class InternationalizationSystem {
                 // Form Messages
                 'auth.filledEmail': 'Please fill in all fields',
                 'auth.passwordMinLength': 'Password must be at least 6 characters',
-                'auth.resetEmailSent': 'Password reset email has been sent'
+                'auth.resetEmailSent': 'Password reset email has been sent',
+
+                // Recommendations Section
+                'recommendations.eyebrow': 'Carefully Selected for You',
+                'recommendations.title': 'Healing Playlist Based on Behavior and Time',
+                'recommendations.body': 'We combine your recent plays, favorite preferences, and current time to generate 6 healing audio tracks that best match your needs.',
+                'recommendations.refresh': 'Refresh Recommendations',
+
+                // Tutorial/Onboarding
+                'tutorial.label': 'Quick Tutorial',
+                'tutorial.title': 'Get Familiar with Sound Healing in 3 Minutes',
+                'tutorial.step1.title': 'Choose Your Goal',
+                'tutorial.step1.desc': 'Browse the quick shortcuts at the top to tell us whether you want to sleep, focus, or relieve stress.',
+                'tutorial.step2.title': 'Explore 200+ Categories',
+                'tutorial.step2.desc': 'Click any category card to open the playlist and view multi-language descriptions.',
+                'tutorial.step3.title': 'Master the Player',
+                'tutorial.step3.desc': 'Volume, sleep timer, and favorites are all in the bottom player. Keyboard controls also available.',
+                'tutorial.step4.title': 'Get Personalized Recommendations',
+                'tutorial.step4.desc': 'Complete one track to unlock the recommendation section. Your history syncs to favorites.',
+                'tutorial.prev': 'Previous',
+                'tutorial.next': 'Next',
+                'tutorial.start': 'Start Now',
+                'tutorial.help': 'Need Help',
+
+                // Missing Category Translations
+                'category.Animal sounds': 'Animal Sounds',
+                'category.Fire': 'Fire',
+                'category.hypnosis': 'Hypnosis',
+                'category.running water': 'Running Water',
+                'category.Chakra': 'Chakra',
+                'category.Subconscious Therapy': 'Subconscious Therapy',
+                'category.meditation': 'Meditation',
+
+                // Footer
+                'footer.privacy': 'Privacy Policy',
+                'footer.terms': 'Terms of Service',
+                'footer.copyright': '© 2025 Sound Healing Space. All rights reserved.'
             },
             
             'ja-JP': {
