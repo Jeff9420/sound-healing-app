@@ -149,7 +149,7 @@
 
 .stats-empty {
     text-align: center;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(27, 16, 10, 0.5);
     padding: 40px;
 }
 
@@ -168,7 +168,7 @@
 }
 
 .chart-label {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(27, 16, 10, 0.8);
     font-size: 14px;
     font-weight: 500;
     text-align: right;
@@ -398,7 +398,7 @@
 
 .chart-container h4 {
     margin: 0 0 15px 0;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(18, 10, 7, 0.9);
     font-size: 16px;
     font-weight: 500;
 }

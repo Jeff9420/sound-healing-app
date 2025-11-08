@@ -546,7 +546,7 @@ h1, h2, h3, h4, h5, h6, p, span, div, button {
     :root {
         --text-primary: #fff;
         --text-secondary: #f0f0f0;
-        --border-warm: 2px solid rgba(255, 255, 255, 0.5);
+        --border-warm: 2px solid rgba(27, 16, 10, 0.5);
     }
 }
 
@@ -572,13 +572,13 @@ input:focus-visible,
    ================================================================= */
 @media print {
     body {
-        background: white !important;
+        background: #120a07 !important;
         color: black !important;
         filter: none !important;
     }
 
     .carrossel-item {
-        background: white !important;
+        background: #120a07 !important;
         border: 1px solid #ccc !important;
         box-shadow: none !important;
     }

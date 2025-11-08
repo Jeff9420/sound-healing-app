@@ -730,7 +730,7 @@ a:hover {
 
 @media print {
     * {
-        background: white !important;
+        background: #120a07 !important;
         color: black !important;
         box-shadow: none !important;
     }

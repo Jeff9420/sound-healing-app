@@ -357,7 +357,7 @@
 }
 
 .player-mini__placeholder {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(27, 16, 10, 0.5);
     font-size: 0.95rem;
     display: flex;
     align-items: center;

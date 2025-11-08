@@ -95,7 +95,7 @@
 
 .mixer-presets label {
     display: block;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(27, 16, 10, 0.7);
     font-size: 14px;
     margin-bottom: 12px;
     font-weight: 500;
@@ -155,7 +155,7 @@
 .mixer-empty {
     text-align: center;
     padding: 60px 20px;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(27, 16, 10, 0.5);
 }
 
 .mixer-empty p {
@@ -203,7 +203,7 @@
 }
 
 .track-category {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(27, 16, 10, 0.5);
     font-size: 13px;
     padding: 3px 10px;
     background: rgba(108, 92, 231, 0.2);
@@ -266,7 +266,7 @@
 }
 
 .track-volume-value {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(27, 16, 10, 0.7);
     font-size: 13px;
     min-width: 40px;
     text-align: center;
@@ -351,7 +351,7 @@
 }
 
 .mixer-master label {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(18, 10, 7, 0.9);
     font-size: 15px;
     font-weight: 500;
     min-width: 80px;

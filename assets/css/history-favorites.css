@@ -246,7 +246,7 @@
     display: flex;
     gap: 15px;
     font-size: 13px;
-    color: var(--text-secondary, rgba(255, 255, 255, 0.5));
+    color: var(--text-secondary, rgba(27, 16, 10, 0.5));
 }
 
 .hf-item-category {
@@ -293,7 +293,7 @@
     justify-content: center;
     padding: 60px 20px;
     text-align: center;
-    color: var(--text-secondary, rgba(255, 255, 255, 0.5));
+    color: var(--text-secondary, rgba(27, 16, 10, 0.5));
 }
 
 .hf-empty-icon {
@@ -387,7 +387,7 @@
 }
 
 [data-theme="light"] .hf-modal-content {
-    background: #ffffff;
+    background: #120a07;
 }
 
 [data-theme="light"] .hf-item {

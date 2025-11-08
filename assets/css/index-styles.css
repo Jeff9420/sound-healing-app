@@ -773,7 +773,7 @@ canvas {
     display: block;
     margin-top: 6px;
     font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(27, 16, 10, 0.7);
 }
 
 .feature-summary {
@@ -1089,7 +1089,7 @@ canvas {
 
 .journey-card p {
     font-size: 0.96rem;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(27, 16, 10, 0.8);
     line-height: 1.6;
     flex: 1 1 auto;
 }
@@ -1189,7 +1189,7 @@ canvas {
     border-radius: 12px;
     border: 1px solid rgba(141, 232, 255, 0.18);
     background: rgba(5, 8, 20, 0.72);
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(18, 10, 7, 0.9);
     font-size: 0.95rem;
 }
 
@@ -1448,7 +1448,7 @@ canvas {
 }
 
 .impact-card p {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(27, 16, 10, 0.8);
     line-height: 1.6;
     flex: 1 1 auto;
 }
@@ -1529,7 +1529,7 @@ canvas {
 .mobile-toast__close {
     border: none;
     background: transparent;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(27, 16, 10, 0.7);
     font-size: 1.4rem;
     line-height: 1;
     cursor: pointer;
@@ -1585,7 +1585,7 @@ canvas {
 .auth-close {
     background: none;
     border: none;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(27, 16, 10, 0.7);
     font-size: 1.5em;
     cursor: pointer;
     padding: 10px;
@@ -1628,7 +1628,7 @@ canvas {
 
 .auth-tab:hover:not(.active) {
     background: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(27, 16, 10, 0.8);
 }
 
 .auth-form {
@@ -1677,7 +1677,7 @@ canvas {
 }
 
 .form-group input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(27, 16, 10, 0.5);
 }
 
 .form-group input:focus {
@@ -1710,7 +1710,7 @@ canvas {
 
 .auth-btn.secondary {
     background: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(27, 16, 10, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -1764,7 +1764,7 @@ canvas {
 .btn-signout {
     padding: 8px 16px;
     background: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(27, 16, 10, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     cursor: pointer;
@@ -1841,7 +1841,7 @@ canvas {
 .dropdown-header {
     padding: 16px 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(18, 10, 7, 0.9);
     font-size: 0.95rem;
     font-weight: 500;
 }
@@ -1983,7 +1983,7 @@ canvas {
 .compact-modal-close {
     background: none;
     border: none;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(27, 16, 10, 0.7);
     font-size: 1.5em;
     cursor: pointer;
     padding: 8px;
@@ -2011,7 +2011,7 @@ canvas {
 }
 
 .compact-login-form p {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(27, 16, 10, 0.8);
     font-size: 0.95rem;
     margin-bottom: 16px;
     line-height: 1.5;
@@ -2035,7 +2035,7 @@ canvas {
 }
 
 .compact-login-form input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(27, 16, 10, 0.5);
 }
 
 .compact-login-form input:focus {
@@ -2102,7 +2102,7 @@ canvas {
 .compact-link {
     background: none;
     border: none;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(27, 16, 10, 0.7);
     font-size: 0.9rem;
     cursor: pointer;
     transition: color 0.2s ease;
@@ -2135,7 +2135,7 @@ canvas {
 .compact-modal-divider span {
     background: rgba(26, 26, 46, 0.95);
     padding: 0 12px;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(27, 16, 10, 0.5);
     font-size: 0.85rem;
     position: relative;
     z-index: 1;
@@ -2231,7 +2231,7 @@ canvas {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding: 30px 20px 20px;
     margin-top: 60px;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(27, 16, 10, 0.8);
 }
 
 .gdpr-container {
@@ -2252,7 +2252,7 @@ canvas {
 
 .gdpr-links a,
 .gdpr-ccpa-link {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(27, 16, 10, 0.7);
     text-decoration: none;
     padding: 8px 16px;
     border-radius: 8px;
@@ -2277,7 +2277,7 @@ canvas {
 
 .copyright {
     font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(27, 16, 10, 0.5);
 }
 
 .ccpa-opt-out {
@@ -2404,7 +2404,7 @@ canvas {
     display: flex;
     align-items: center;
     gap: 12px;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(18, 10, 7, 0.9);
     font-size: 1rem;
     cursor: pointer;
 }
@@ -2461,7 +2461,7 @@ canvas {
 
 .streak-label {
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(27, 16, 10, 0.8);
 }
 
 .streak-fire {
@@ -2494,7 +2494,7 @@ canvas {
 
 .reminder-preview p {
     margin: 0 0 8px 0;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(27, 16, 10, 0.7);
     font-size: 0.9rem;
 }
 
@@ -2524,7 +2524,7 @@ canvas {
 
 .btn-secondary {
     background: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(27, 16, 10, 0.8);
 }
 
 .btn-secondary:hover {
@@ -3087,7 +3087,7 @@ canvas {
     justify-content: space-between;
     align-items: center;
     font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(27, 16, 10, 0.7);
     text-transform: uppercase;
     letter-spacing: 0.1em;
 }

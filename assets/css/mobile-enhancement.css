@@ -218,7 +218,7 @@ button::before,
     transform: translateY(-50%);
     width: 16px;
     height: 16px;
-    background: white;
+    background: #120a07;
     border-radius: 50%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   }
@@ -413,7 +413,7 @@ button::before,
 }
 
 .update-content button {
-  background: white;
+  background: #120a07;
   color: #6666ff;
   border: none;
   padding: 6px 16px;
