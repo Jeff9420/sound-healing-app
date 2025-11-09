@@ -1315,7 +1315,7 @@ main.forest-path {
     -webkit-appearance: none;
     width: 16px;
     height: 16px;
-    background: #ffffff;
+    background: var(--primary-color, #000000);
     border-radius: 50%;
     cursor: pointer;
 }
