@@ -176,7 +176,7 @@
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background: #120a07;
+    background: #ffffff;
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
@@ -191,7 +191,7 @@
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background: #120a07;
+    background: #ffffff;
     cursor: pointer;
     border: none;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -405,7 +405,7 @@
 [data-theme="light"] .focus-center-play-btn {
     background: rgba(0, 0, 0, 0.08);
     border-color: rgba(0, 0, 0, 0.2);
-    color: #fdf3e5;
+    color: #000000;
 }
 
 [data-theme="light"] .focus-mini-controls {
@@ -415,7 +415,7 @@
 [data-theme="light"] .focus-track-title,
 [data-theme="light"] .focus-btn,
 [data-theme="light"] .focus-volume-control {
-    color: #fdf3e5;
+    color: #000000;
 }
 
 [data-theme="light"] .focus-track-category {

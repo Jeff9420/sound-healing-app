@@ -9,13 +9,13 @@
 
 :root {
     /* 主色调 */
-    --primary-bg: #120a07;
+    --primary-bg: #ffffff;
     --primary-bg-gradient-start: #1b100a;
-    --primary-bg-gradient-mid: #120a07;
+    --primary-bg-gradient-mid: #ffffff;
     --primary-bg-gradient-end: #0b0604;
 
     /* 文字颜色 */
-    --text-primary: #fdf3e5;
+    --text-primary: #000000;
     --text-secondary: rgba(253, 243, 229, 0.78);
     --text-tertiary: rgba(253, 243, 229, 0.55);
 
@@ -35,10 +35,10 @@
 
     /* 进度条和滑块 */
     --progress-bg: rgba(255, 181, 115, 0.25);
-    --progress-fill: #f6a93b;
+    --progress-fill: #000000;
 
     /* 模态框 */
-    --modal-bg: linear-gradient(135deg, #f6a93b 0%, #f87c0f 100%);
+    --modal-bg: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
     --modal-overlay: rgba(7, 4, 2, 0.9);
 
     /* 通知 */
@@ -50,8 +50,8 @@
     --shadow-lg: 0 18px 40px rgba(5, 3, 2, 0.7);
 
     /* 主题色 */
-    --theme-color: #f6a93b;
-    --theme-accent: #7a5af8;
+    --theme-color: #000000;
+    --theme-accent: #ffffff;
 }
 
 /* ==========================================================================

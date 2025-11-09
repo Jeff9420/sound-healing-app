@@ -18,35 +18,54 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Microsoft YaHei', sans-serif;
-    background: radial-gradient(140% 120% at 10% 0%, rgba(248, 172, 59, 0.18), transparent),
-                radial-gradient(120% 140% at 90% 0%, rgba(122, 90, 248, 0.15), transparent),
-                var(--saas-bg, #120a07);
+    font-family: var(--font-sans);
+    background: var(--bg-primary);
     min-height: 100vh;
-    color: var(--saas-text, #fdf3e5);
+    color: var(--text-primary);
     overflow-x: hidden;
 }
 
+@media (prefers-color-scheme: dark) {
+    body {
+        background: var(--bg-dark-primary);
+        color: var(--text-light);
+    }
+}
+
 a {
-    color: var(--saas-primary, #f6a93b);
+    color: var(--primary-color);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 a:hover,
 a:focus-visible {
-    color: var(--saas-accent, #7a5af8);
+    opacity: 0.8;
+}
+
+@media (prefers-color-scheme: dark) {
+    a {
+        color: var(--text-light);
+    }
 }
 
 section:not(.saas-hero):not(.experience-launchpad) {
-    background: rgba(34, 19, 13, 0.8);
-    border: 1px solid var(--saas-border, rgba(255, 255, 255, 0.08));
-    border-radius: 24px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
     padding: clamp(1.5rem, 3vw, 2.5rem);
     margin: clamp(1.5rem, 4vw, 3rem) auto;
     max-width: 1200px;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
-    color: var(--saas-text, #fdf3e5);
+    box-shadow: var(--shadow-sm);
+    color: var(--text-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+    section:not(.saas-hero):not(.experience-launchpad) {
+        background: var(--bg-dark-secondary);
+        border-color: rgba(255, 255, 255, 0.1);
+        color: var(--text-light);
+    }
 }
 
 /* ==========================================================================
@@ -59,14 +78,18 @@ section:not(.saas-hero):not(.experience-launchpad) {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(140% 120% at 15% 0%, rgba(248, 172, 59, 0.25), transparent),
-                radial-gradient(120% 120% at 85% 0%, rgba(122, 90, 248, 0.2), transparent),
-                var(--saas-bg, #120a07);
+    background: var(--bg-primary);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 9999;
+}
+
+@media (prefers-color-scheme: dark) {
+    .loading-screen {
+        background: var(--bg-dark-primary);
+    }
 }
 
 .loading-spinner {
@@ -95,7 +118,7 @@ section:not(.saas-hero):not(.experience-launchpad) {
 .header-icon-btn {
     background: rgba(40, 22, 13, 0.85);
     border: 1px solid var(--saas-border, rgba(255, 255, 255, 0.08));
-    color: var(--saas-text, #fdf3e5);
+    color: var(--saas-text, #000000);
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -109,7 +132,7 @@ section:not(.saas-hero):not(.experience-launchpad) {
 }
 
 .header-icon-btn:hover {
-    background: linear-gradient(120deg, var(--saas-primary, #f6a93b), var(--saas-primary-dark, #f87c0f));
+    background: linear-gradient(120deg, var(--saas-primary, #000000), var(--saas-primary-dark, #1a1a1a));
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(248, 124, 15, 0.35);
 }
@@ -222,7 +245,7 @@ h1 {
     cursor: pointer;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
-    color: var(--saas-text, #fdf3e5);
+    color: var(--saas-text, #000000);
 }
 
 .category-card:hover {
@@ -240,7 +263,7 @@ h1 {
     font-size: 1.3em;
     font-weight: bold;
     margin-bottom: 10px;
-    color: var(--saas-text, #fdf3e5);
+    color: var(--saas-text, #000000);
 }
 
 .category-desc {
@@ -808,8 +831,8 @@ h1 {
 
 .feature-summary__cta:hover,
 .feature-summary__cta:focus-visible {
-    background: linear-gradient(135deg, #f6a93b, #f87c0f);
-    color: #120a07;
+    background: linear-gradient(135deg, #000000, #1a1a1a);
+    color: #ffffff;
     transform: translateY(-1px);
     box-shadow: 0 10px 20px rgba(248, 124, 15, 0.45);
     border-color: transparent;
@@ -908,8 +931,8 @@ h1 {
 
 .header__persona-toggle:hover,
 .header__persona-toggle:focus-visible {
-    background: linear-gradient(135deg, #f6a93b, #f87c0f);
-    color: #120a07;
+    background: linear-gradient(135deg, #000000, #1a1a1a);
+    color: #ffffff;
     border-color: transparent;
     transform: translateY(-1px);
 }
@@ -1274,8 +1297,8 @@ h1 {
 
 .content-hub__cta:hover,
 .content-hub__cta:focus-visible {
-    background: linear-gradient(135deg, #f6a93b, #f87c0f);
-    color: #120a07;
+    background: linear-gradient(135deg, #000000, #1a1a1a);
+    color: #ffffff;
     border-color: transparent;
     transform: translateY(-1px);
     box-shadow: 0 10px 20px rgba(248, 124, 15, 0.45);
@@ -1673,7 +1696,7 @@ h1 {
 }
 
 .form-group input:focus {
-    border-color: #f6a93b;
+    border-color: #000000;
     background: rgba(255, 255, 255, 0.08);
     box-shadow: 0 0 0 3px rgba(246, 169, 59, 0.2);
 }
@@ -1691,7 +1714,7 @@ h1 {
 }
 
 .auth-btn.primary {
-    background: linear-gradient(135deg, #f6a93b 0%, #7777ff 100%);
+    background: linear-gradient(135deg, #000000 0%, #7777ff 100%);
     color: white;
 }
 
@@ -1739,7 +1762,7 @@ h1 {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #f6a93b;
+    background: #000000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1890,7 +1913,7 @@ h1 {
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #f6a93b, #ffd49a);
+    background: linear-gradient(135deg, #000000, #ffd49a);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2075,7 +2098,7 @@ h1 {
 }
 
 .compact-login-btn.primary {
-    background: linear-gradient(135deg, #f6a93b 0%, #7777ff 100%);
+    background: linear-gradient(135deg, #000000 0%, #7777ff 100%);
     color: white;
 }
 
@@ -2420,7 +2443,7 @@ h1 {
 }
 
 .setting-group input[type="time"]:focus {
-    border-color: #f6a93b;
+    border-color: #000000;
     background: rgba(255, 255, 255, 0.08);
     box-shadow: 0 0 0 3px rgba(246, 169, 59, 0.2);
 }
@@ -2525,7 +2548,7 @@ h1 {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #f6a93b 0%, #7777ff 100%);
+    background: linear-gradient(135deg, #000000 0%, #7777ff 100%);
     color: white;
 }
 
@@ -2716,10 +2739,10 @@ h1 {
     --saas-panel: rgba(31, 18, 11, 0.88);
     --saas-card: rgba(40, 22, 13, 0.85);
     --saas-border: rgba(255, 255, 255, 0.08);
-    --saas-primary: #f6a93b;
-    --saas-primary-dark: #f87c0f;
-    --saas-accent: #7a5af8;
-    --saas-text: #fdf3e5;
+    --saas-primary: #000000;
+    --saas-primary-dark: #1a1a1a;
+    --saas-accent: #ffffff;
+    --saas-text: #000000;
     --saas-muted: rgba(253, 243, 229, 0.7);
 }
 

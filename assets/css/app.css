@@ -767,7 +767,7 @@ button,
   right: -6px;
   width: 12px;
   height: 12px;
-  background: #120a07;
+  background: #ffffff;
   border: 2px solid var(--accent);
   border-radius: 50%;
   transform: translateY(-50%);
@@ -2136,7 +2136,7 @@ input[type=range]::-moz-range-thumb{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #120a07;
+  background: #ffffff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.3);
