@@ -19,40 +19,40 @@
 ﻿:root{
   --bg-url:none;
 
-  /* Raphael AI 黑色主题 - 浅色模式 */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f5f5f5;
-  --bg-tint: linear-gradient(135deg, rgba(245,245,245,0.95) 0%, rgba(255,255,255,0.98) 100%);
+  /* Raphael AI 温暖棕色主题 */
+  --bg-primary: #201913;
+  --bg-secondary: #2a2218;
+  --bg-tint: linear-gradient(135deg, rgba(42,34,24,0.95) 0%, rgba(32,25,19,0.98) 100%);
 
-  /* 前景色 - 浅色模式 */
-  --fg: #000000;
-  --muted: #666666;
+  /* 前景色 - 米色/浅米色 */
+  --fg: #edeade;
+  --muted: #a39887;
 
-  /* 主色调 - 黑色 */
-  --accent: #000000;
+  /* 主色调 - 棕色/米色 */
+  --accent: #d4a574;
 
-  /* 面板背景 - 浅色模式 */
-  --panel-bg: rgba(0,0,0,0.02);
+  /* 面板背景 - 棕色系 */
+  --panel-bg: rgba(237,234,222,0.05);
   --panel-br: 16px;
-  --panel-border: rgba(0,0,0,0.08);
-  --panel-border-2: rgba(0,0,0,0.05);
+  --panel-border: rgba(237,234,222,0.08);
+  --panel-border-2: rgba(237,234,222,0.05);
 
-  /* 阴影 - 现代黑色风格 */
-  --shadow: 0 4px 16px rgba(0,0,0,0.15);
+  /* 阴影 - 温暖棕色风格 */
+  --shadow: 0 4px 16px rgba(32,25,19,0.25);
   --round: 14px;
   --mono: "SF Pro Text", "Helvetica Neue", system-ui, -apple-system, sans-serif;
   --carousel-radius: 240px;
 
-  /* 疗愈主题色彩 - 保留原有色彩用于特殊场景 */
-  --healing-forest: #4a5f3a;
-  --healing-fire: #c8754d;
-  --healing-water: #4d95c8;
-  --healing-cosmic: #854dc8;
-  --healing-earth: #b4a589;
+  /* 疗愈主题色彩 - 棕色系调整 */
+  --healing-forest: #8b7355;
+  --healing-fire: #c99a60;
+  --healing-water: #9fa39f;
+  --healing-cosmic: #a39887;
+  --healing-earth: #d4a574;
 
   /* 动态主题色彩（会随当前主题变化） */
   --theme-primary: var(--accent);
-  --theme-secondary: #333333;
+  --theme-secondary: #d4cbb8;
   --theme-accent: var(--accent);
 }
 
