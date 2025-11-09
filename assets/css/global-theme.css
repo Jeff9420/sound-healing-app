@@ -1,82 +1,100 @@
-/* ==========================================
+﻿/* ==========================================
    Global Theme - 全局主题样式
    应用首页的颜色方案和设计风格到所有页面
    ========================================== */
 
 :root {
-    /* ===== Raphael AI 温暖棕色主题 ===== */
-    /* 统一的温暖棕色/米色配色系统 */
-    --primary-color: #201913;      /* 深棕色 - 主背景 */
-    --primary-color-light: #2a2218; /* 稍浅的棕色 */
-    --secondary-color: #edeade;     /* 浅米色 - 文字 */
-    --secondary-color-dark: #d4cbb8; /* 稍深的米色 */
+    /* Raphael.app inspired desert dusk palette */
+    --primary-color: #f6a93b;
+    --primary-color-strong: #f87c0f;
+    --primary-color-light: #ffd27a;
+    --secondary-color: #fdf3e5;
+    --secondary-color-dark: #d8c3ab;
+    --accent-color: #7a5af8;
+    --accent-color-soft: #c58fff;
+    --accent-emerald: #5fe0c6;
 
-    /* ===== 背景色 ===== */
-    --bg-primary: #201913;          /* 深棕色 */
-    --bg-secondary: #2a2218;        /* 稍浅的棕色 */
-    --bg-deepest: #1a130e;          /* 最深棕色 */
-    --bg-overlay: rgba(32, 25, 19, 0.7);
-    --bg-card: rgba(38, 30, 23, 0.4);  /* 卡片背景 */
-    --bg-card-hover: rgba(42, 34, 24, 0.6);
+    /* Background layers */
+    --bg-body: #0b0704;
+    --bg-primary: var(--bg-body);
+    --bg-secondary: #1a0f0a;
+    --bg-tertiary: #24140d;
+    --bg-deepest: #120804;
+    --bg-overlay: rgba(11, 7, 4, 0.65);
+    --bg-card: rgba(26, 15, 10, 0.88);
+    --bg-card-hover: rgba(34, 18, 12, 0.92);
+    --glass-panel: rgba(35, 19, 13, 0.7);
 
-    /* ===== 深色模式背景变体 ===== */
-    --bg-dark-primary: #201913;
-    --bg-dark-secondary: #2a2218;
-    --bg-dark-card: rgba(38, 30, 23, 0.4);
-    --bg-dark-card-hover: rgba(42, 34, 24, 0.6);
+    /* Dark mode variants */
+    --bg-dark-primary: #060302;
+    --bg-dark-secondary: #120804;
+    --bg-dark-card: rgba(18, 8, 4, 0.92);
+    --bg-dark-card-hover: rgba(26, 12, 6, 0.96);
 
-    /* ===== 渐变色 ===== */
-    --gradient-primary: linear-gradient(135deg, #201913, #2a2218);
-    --gradient-primary-hover: linear-gradient(135deg, #2a2218, #34291e);
-    --gradient-soft: linear-gradient(135deg, rgba(32, 25, 19, 0.05), rgba(42, 34, 24, 0.1));
-    --gradient-overlay: linear-gradient(180deg, rgba(32, 25, 19, 0.6) 0%, transparent 100%);
-    --gradient-warm: linear-gradient(180deg, #201913 0%, #2a2218 50%, #201913 100%);  /* 温暖棕色渐变 - 用于body背景 */
+    /* Gradients */
+    --gradient-body: radial-gradient(circle at 20% 20%, rgba(122, 90, 248, 0.18), transparent 55%),
+                      radial-gradient(circle at 80% 0%, rgba(246, 169, 59, 0.2), transparent 45%),
+                      linear-gradient(160deg, #0b0704 0%, #1b0c08 45%, #0d0805 100%);
+    --gradient-primary: linear-gradient(125deg, #f6a93b 0%, #f87c0f 60%, #f05a28 100%);
+    --gradient-primary-hover: linear-gradient(125deg, #fbc468 0%, #f6a93b 45%, #f87c0f 100%);
+    --gradient-accent: linear-gradient(135deg, #7a5af8 0%, #c26be8 50%, #f6a93b 100%);
+    --gradient-soft: linear-gradient(145deg, rgba(255, 236, 208, 0.08), rgba(12, 6, 3, 0));
+    --gradient-overlay: linear-gradient(180deg, rgba(6, 3, 2, 0.9) 0%, rgba(6, 3, 2, 0.2) 100%);
+    --gradient-hero: linear-gradient(120deg, #110704 0%, #210c08 55%, #0b0704 100%);
 
-    /* ===== 文本颜色 ===== */
-    --text-primary: #edeade;        /* 浅米色 - 主文字 */
-    --text-secondary: #d4cbb8;      /* 稍深的米色 - 次要文字 */
-    --text-muted: #a39887;          /* 棕色调 - 弱化文字 */
-    --text-light: #edeade;          /* 浅米色 */
-    --text-light-secondary: #d4cbb8;
+    /* Typography colors */
+    --text-primary: #fdf3e5;
+    --text-secondary: #e4cfba;
+    --text-muted: #bfa48c;
+    --text-soft: #a78972;
+    --text-inverse: #0c0603;
+    --text-light: #fdf3e5;
+    --text-light-secondary: #d8c3ab;
 
-    /* ===== 边框颜色 ===== */
-    --border-subtle: rgba(237, 234, 222, 0.1);
-    --border-light: rgba(237, 234, 222, 0.15);
-    --border-dark: rgba(237, 234, 222, 0.25);
-    --border-dark-hover: rgba(237, 234, 222, 0.35);
+    /* Borders */
+    --border-subtle: rgba(253, 243, 229, 0.08);
+    --border-light: rgba(253, 243, 229, 0.14);
+    --border-dark: rgba(253, 243, 229, 0.22);
+    --border-dark-hover: rgba(253, 243, 229, 0.32);
+    --glass-stroke: rgba(248, 124, 15, 0.2);
 
-    /* ===== 阴影 ===== */
-    --shadow-sm: 0 2px 8px rgba(32, 25, 19, 0.15);
-    --shadow-md: 0 4px 16px rgba(32, 25, 19, 0.25);
-    --shadow-lg: 0 8px 32px rgba(32, 25, 19, 0.35);
-    --shadow-primary: 0 6px 28px rgba(32, 25, 19, 0.25);
+    /* Shadows */
+    --shadow-sm: 0 6px 24px rgba(5, 3, 2, 0.35);
+    --shadow-md: 0 12px 40px rgba(5, 3, 2, 0.45);
+    --shadow-lg: 0 22px 70px rgba(5, 3, 2, 0.55);
+    --shadow-primary: 0 18px 50px rgba(248, 124, 15, 0.45);
 
-    /* ===== 间距 ===== */
+    /* Inputs */
+    --input-bg: rgba(19, 11, 7, 0.9);
+    --input-border: rgba(253, 243, 229, 0.16);
+    --input-border-hover: rgba(246, 169, 59, 0.45);
+    --focus-ring: 0 0 0 3px rgba(246, 169, 59, 0.35);
+
+    /* Spacing */
     --spacing-xs: 0.25rem;
     --spacing-sm: 0.5rem;
     --spacing-md: 1rem;
     --spacing-lg: 1.5rem;
     --spacing-xl: 2rem;
     --spacing-2xl: 3rem;
+    --section-padding: clamp(2.5rem, 5vw, 4rem);
 
-    /* ===== 圆角 ===== */
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 12px;
-    --radius-xl: 16px;
+    /* Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-xl: 26px;
     --radius-full: 9999px;
 
-    /* ===== 过渡效果 ===== */
+    /* Transitions */
     --transition-fast: 0.15s ease;
     --transition-normal: 0.3s ease;
     --transition-slow: 0.5s ease;
 
-    /* ===== 字体 ===== */
-    --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    --font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-}
-
-/* ===== 全局基础样式 ===== */
+    /* Typography */
+    --font-sans: \"Inter\", \"Pretendard\", \"SF Pro Display\", system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;
+    --font-mono: \"Space Mono\", \"SF Mono\", Monaco, \"Cascadia Code\", \"Roboto Mono\", Consolas, \"Courier New\", monospace;
+}/* ===== 全局基础样式 ===== */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -89,7 +107,7 @@ html {
 
 body {
     font-family: var(--font-sans);
-    background: var(--gradient-warm) !important;  /* 使用温暖棕色渐变，优先级最高 */
+    background: var(--gradient-body) !important;  /* 使用温暖棕色渐变，优先级最高 */
     color: var(--text-primary) !important;
     line-height: 1.6;
     min-height: 100vh;

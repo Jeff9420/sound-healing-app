@@ -14,50 +14,50 @@
    ========================================================================== */
 
 [data-theme="light"] {
-    /* 主色调 - Raphael AI 温暖棕色主题 */
-    --primary-bg: #201913;
-    --primary-bg-gradient-start: #201913;
-    --primary-bg-gradient-mid: #2a2218;
-    --primary-bg-gradient-end: #201913;
+    /* 主色调 - Raphael 风格的深棕基底 */
+    --primary-bg: #0b0704;
+    --primary-bg-gradient-start: #0b0704;
+    --primary-bg-gradient-mid: #1d0c08;
+    --primary-bg-gradient-end: #130805;
 
     /* 文字颜色 */
-    --text-primary: #edeade;
-    --text-secondary: #d4cbb8;
-    --text-tertiary: #a39887;
+    --text-primary: #fdf3e5;
+    --text-secondary: #e4cfba;
+    --text-tertiary: #bfa48c;
 
     /* 卡片和组件背景 */
-    --card-bg: rgba(38, 30, 23, 0.4);
-    --card-bg-hover: rgba(42, 34, 24, 0.6);
-    --card-border: rgba(237, 234, 222, 0.1);
+    --card-bg: rgba(26, 15, 10, 0.88);
+    --card-bg-hover: rgba(34, 18, 12, 0.94);
+    --card-border: rgba(253, 243, 229, 0.12);
 
     /* 按钮 */
-    --button-bg: rgba(15, 23, 42, 0.08);
-    --button-bg-hover: rgba(15, 23, 42, 0.16);
-    --button-border: rgba(15, 23, 42, 0.18);
+    --button-bg: rgba(253, 243, 229, 0.08);
+    --button-bg-hover: rgba(253, 243, 229, 0.16);
+    --button-border: rgba(253, 243, 229, 0.18);
 
     /* 播放器 */
-    --player-bg: rgba(241, 245, 249, 0.98);
-    --player-border: rgba(15, 23, 42, 0.12);
+    --player-bg: rgba(19, 11, 7, 0.92);
+    --player-border: rgba(253, 243, 229, 0.1);
 
     /* 进度条和滑块 */
-    --progress-bg: rgba(15, 23, 42, 0.25);
-    --progress-fill: #4c51bf;
+    --progress-bg: rgba(253, 243, 229, 0.18);
+    --progress-fill: #f6a93b;
 
     /* 模态框 */
-    --modal-bg: linear-gradient(135deg, #8888FF 0%, #FF88BB 100%);
-    --modal-overlay: rgba(0, 0, 0, 0.5);
+    --modal-bg: linear-gradient(140deg, rgba(17, 7, 4, 0.95) 0%, rgba(58, 23, 14, 0.85) 45%, rgba(122, 90, 248, 0.45) 100%);
+    --modal-overlay: rgba(5, 3, 2, 0.75);
 
     /* 通知 */
-    --notification-bg: rgba(18, 10, 7, 0.95);
+    --notification-bg: rgba(20, 10, 6, 0.95);
 
     /* 阴影 */
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-    --shadow-md: 0 5px 15px rgba(102, 102, 255, 0.15);
-    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+    --shadow-sm: 0 6px 24px rgba(5, 3, 2, 0.3);
+    --shadow-md: 0 12px 40px rgba(5, 3, 2, 0.45);
+    --shadow-lg: 0 20px 60px rgba(5, 3, 2, 0.55);
 
     /* 主题色 */
-    --theme-color: #6666ff;
-    --theme-accent: #38bdf8;
+    --theme-color: #f6a93b;
+    --theme-accent: #7a5af8;
 }
 
 /* ==========================================================================
