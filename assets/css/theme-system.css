@@ -4,50 +4,50 @@
  */
 
 /* ==========================================================================
-   CSS变量定义 - Dark Theme (默认)
+   CSS变量定义 - Raphael AI Black/White Theme (默认)
    ========================================================================== */
 
 :root {
-    /* 主色调 */
+    /* 主色调 - Raphael AI 黑白主题 */
     --primary-bg: #ffffff;
-    --primary-bg-gradient-start: #1b100a;
-    --primary-bg-gradient-mid: #ffffff;
-    --primary-bg-gradient-end: #0b0604;
+    --primary-bg-gradient-start: #ffffff;
+    --primary-bg-gradient-mid: #f8f8f8;
+    --primary-bg-gradient-end: #f0f0f0;
 
     /* 文字颜色 */
     --text-primary: #000000;
-    --text-secondary: rgba(253, 243, 229, 0.78);
-    --text-tertiary: rgba(253, 243, 229, 0.55);
+    --text-secondary: rgba(0, 0, 0, 0.7);
+    --text-tertiary: rgba(0, 0, 0, 0.5);
 
     /* 卡片和组件背景 */
-    --card-bg: rgba(32, 18, 12, 0.92);
-    --card-bg-hover: rgba(40, 22, 14, 0.95);
-    --card-border: rgba(255, 181, 115, 0.25);
+    --card-bg: rgba(0, 0, 0, 0.02);
+    --card-bg-hover: rgba(0, 0, 0, 0.05);
+    --card-border: rgba(0, 0, 0, 0.08);
 
     /* 按钮 */
-    --button-bg: rgba(255, 181, 115, 0.12);
-    --button-bg-hover: rgba(255, 181, 115, 0.2);
-    --button-border: rgba(255, 181, 115, 0.35);
+    --button-bg: rgba(0, 0, 0, 0.05);
+    --button-bg-hover: rgba(0, 0, 0, 0.08);
+    --button-border: rgba(0, 0, 0, 0.12);
 
     /* 播放器 */
-    --player-bg: rgba(16, 9, 6, 0.95);
-    --player-border: rgba(255, 181, 115, 0.25);
+    --player-bg: rgba(255, 255, 255, 0.98);
+    --player-border: rgba(0, 0, 0, 0.08);
 
     /* 进度条和滑块 */
-    --progress-bg: rgba(255, 181, 115, 0.25);
+    --progress-bg: rgba(0, 0, 0, 0.12);
     --progress-fill: #000000;
 
     /* 模态框 */
-    --modal-bg: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
-    --modal-overlay: rgba(7, 4, 2, 0.9);
+    --modal-bg: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+    --modal-overlay: rgba(0, 0, 0, 0.5);
 
     /* 通知 */
-    --notification-bg: rgba(8, 4, 2, 0.85);
+    --notification-bg: rgba(0, 0, 0, 0.85);
 
     /* 阴影 */
-    --shadow-sm: 0 2px 8px rgba(5, 3, 2, 0.45);
-    --shadow-md: 0 8px 24px rgba(5, 3, 2, 0.55);
-    --shadow-lg: 0 18px 40px rgba(5, 3, 2, 0.7);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.15);
 
     /* 主题色 */
     --theme-color: #000000;
