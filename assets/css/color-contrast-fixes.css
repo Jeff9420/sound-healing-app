@@ -32,21 +32,21 @@
 
 :root {
     /* Primary text colors - WCAG AA compliant */
-    --text-primary: #ffffff;        /* White text on dark backgrounds */
-    --text-secondary: #e2e8f0;     /* Slightly softer white */
-    --text-muted: #cbd5f5;          /* Muted text, still meets contrast */
-    --text-inverse: #000000;        /* Black text on light backgrounds */
+    --text-primary: #000000;        /* Black text on light backgrounds */
+    --text-secondary: #333333;      /* Dark gray text */
+    --text-muted: #666666;          /* Muted dark gray text */
+    --text-inverse: #ffffff;        /* White text on dark backgrounds */
 
-    /* Background colors */
-    --bg-primary: #0f0f23;          /* Dark blue-black */
-    --bg-secondary: #1a1a2e;         /* Slightly lighter dark */
-    --bg-tertiary: #252542;          /* Medium dark */
-    --bg-card: rgba(13, 19, 48, 0.88); /* Card background */
+    /* Background colors - Raphael AI Theme */
+    --bg-primary: #ffffff;          /* White background */
+    --bg-secondary: #f8f8f8;        /* Light gray background */
+    --bg-tertiary: #f0f0f0;         /* Medium light gray */
+    --bg-card: rgba(0, 0, 0, 0.02); /* Card background */
 
     /* Border and separator colors */
-    --border-light: rgba(99, 102, 241, 0.45);
-    --border-medium: rgba(99, 102, 241, 0.55);
-    --border-strong: rgba(165, 180, 252, 0.6);
+    --border-light: rgba(0, 0, 0, 0.08);
+    --border-medium: rgba(0, 0, 0, 0.15);
+    --border-strong: rgba(0, 0, 0, 0.25);
 
     /* Accent colors with improved contrast */
     --accent-blue: #4dabf7;           /* Bright blue for highlights */
@@ -56,13 +56,13 @@
     --accent-purple: #a78bfa;          /* Bright purple for special states */
 
     /* Interactive element colors */
-    --interactive-bg: rgba(30, 41, 99, 0.90);
-    --interactive-hover: rgba(79, 70, 229, 0.88);
-    --interactive-active: rgba(99, 102, 241, 0.78);
+    --interactive-bg: rgba(0, 0, 0, 0.05);
+    --interactive-hover: rgba(0, 0, 0, 0.08);
+    --interactive-active: rgba(0, 0, 0, 0.12);
 
     /* Focus indicators */
-    --focus-ring: rgba(102, 126, 234, 0.5);
-    --focus-outline: #667eea;
+    --focus-ring: rgba(0, 0, 0, 0.3);
+    --focus-outline: #000000;
 }
 
 /* ==========================================================================

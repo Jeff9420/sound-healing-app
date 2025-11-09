@@ -8,16 +8,16 @@
    ============================================= */
 
 :root {
-    /* 重新定义基础颜色以确保足够的对比度 */
-    --text-primary: #ffffff;          /* 主要文本 - 白色 */
-    --text-secondary: #f5f0e8;        /* 次要文本 - 米白色 */
-    --text-muted: #e0d5c7;           /* 弱化文本 - 浅米色 */
-    --text-disabled: #b8a89a;         /* 禁用文本 - 灰米色 */
+    /* Raphael AI 现代黑色主题 */
+    --text-primary: #000000;          /* 主要文本 - 黑色 */
+    --text-secondary: #333333;        /* 次要文本 - 深灰 */
+    --text-muted: #666666;           /* 弱化文本 - 中灰 */
+    --text-disabled: #999999;         /* 禁用文本 - 浅灰 */
 
     /* 背景颜色系统 */
-    --bg-primary: rgba(13, 19, 31, 0.95);      /* 主背景 - 深蓝灰 */
-    --bg-secondary: rgba(20, 28, 43, 0.9);    /* 次要背景 */
-    --bg-tertiary: rgba(30, 40, 60, 0.8);      /* 第三级背景 */
+    --bg-primary: #ffffff;            /* 主背景 - 白色 */
+    --bg-secondary: #f8f8f8;         /* 次要背景 - 浅灰 */
+    --bg-tertiary: #f0f0f0;           /* 第三级背景 - 中浅灰 */
     --bg-overlay: rgba(0, 0, 0, 0.7);          /* 遮罩背景 */
 
     /* 增强的主题色彩（更高对比度） */
