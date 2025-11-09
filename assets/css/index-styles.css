@@ -3767,3 +3767,9 @@ h1 {
 .tutorial-highlight.show {
     opacity: 1;
 }
+/* 禁用旧的视频背景容器，避免出现浅色渐变 */
+.video-background-container,
+.video-background-container::before,
+.video-background-container::after {
+    display: none !important;
+}
