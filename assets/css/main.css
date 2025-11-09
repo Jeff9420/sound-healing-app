@@ -107,18 +107,19 @@
 
 /* 自然主题CSS变量 */
 :root {
-    --nature-dark: #1a2e1a;
-    --nature-forest: #2d4a2d;
-    --nature-moss: #4a6741;
-    --nature-sage: #7fb069;
-    --nature-mint: #b8e6b8;
-    --nature-cream: #f7f4e9;
-    --nature-earth: #8b4513;
-    --nature-sky: #87ceeb;
-    --nature-water: #4682b4;
-    --nature-gold: #daa520;
-    --nature-shadow: 0 8px 24px rgba(26, 46, 26, 0.3);
-    --nature-light-shadow: 0 4px 12px rgba(26, 46, 26, 0.15);
+    /* Raphael AI 温暖棕色主题 */
+    --nature-dark: #201913;
+    --nature-forest: #2a2218;
+    --nature-moss: #34291e;
+    --nature-sage: #d4a574;
+    --nature-mint: #edeade;
+    --nature-cream: #edeade;
+    --nature-earth: #8b7355;
+    --nature-sky: #a39887;
+    --nature-water: #9fa39f;
+    --nature-gold: #c99a60;
+    --nature-shadow: 0 8px 24px rgba(32, 25, 19, 0.3);
+    --nature-light-shadow: 0 4px 12px rgba(32, 25, 19, 0.15);
     --nature-radius: 20px;
     --nature-transition: all 0.4s ease;
 }
@@ -134,12 +135,12 @@
 /* 基础布局 */
 body {
     font-family: 'Georgia', 'Times New Roman', serif;
-    background: linear-gradient(180deg, 
-        #87ceeb 0%,
-        #b8e6b8 20%,
-        #7fb069 40%,
-        #4a6741 70%,
-        #2d4a2d 100%);
+    background: linear-gradient(180deg,
+        #edeade 0%,
+        #d4cbb8 20%,
+        #c99a60 40%,
+        #2a2218 70%,
+        #201913 100%);
     background-attachment: fixed;
     color: var(--nature-cream);
     min-height: 100vh;

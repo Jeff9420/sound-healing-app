@@ -14,15 +14,15 @@
 /* Enable high contrast mode via CSS custom property or system preference */
 @media (prefers-contrast: high) {
     :root {
-        --text-primary: #ffffff;
-        --text-secondary: #e0e0e0;
-        --text-muted: #b0b0b0;
-        --bg-primary: #000000;
-        --bg-secondary: #1a1a1a;
-        --border-color: #ffffff;
-        --accent-color: #ffff00;
-        --link-color: #00ffff;
-        --focus-outline: #ffffff;
+        --text-primary: #edeade;
+        --text-secondary: #d4cbb8;
+        --text-muted: #a39887;
+        --bg-primary: #201913;
+        --bg-secondary: #2a2218;
+        --border-color: #edeade;
+        --accent-color: #d4a574;
+        --link-color: #c99a60;
+        --focus-outline: #d4a574;
     }
 }
 
@@ -31,33 +31,33 @@
    ========================================================================== */
 
 :root {
-    /* Primary text colors - WCAG AA compliant */
-    --text-primary: #000000;        /* Black text on light backgrounds */
-    --text-secondary: #333333;      /* Dark gray text */
-    --text-muted: #666666;          /* Muted dark gray text */
-    --text-inverse: #ffffff;        /* White text on dark backgrounds */
+    /* Primary text colors - Raphael AI 温暖棕色主题 */
+    --text-primary: #edeade;        /* 浅米色文本 */
+    --text-secondary: #d4cbb8;      /* 稍深米色文本 */
+    --text-muted: #a39887;          /* 棕色调弱化文本 */
+    --text-inverse: #201913;        /* 深棕色文本 */
 
-    /* Background colors - Raphael AI Theme */
-    --bg-primary: #ffffff;          /* White background */
-    --bg-secondary: #f8f8f8;        /* Light gray background */
-    --bg-tertiary: #f0f0f0;         /* Medium light gray */
-    --bg-card: rgba(0, 0, 0, 0.02); /* Card background */
+    /* Background colors - Raphael AI 温暖棕色主题 */
+    --bg-primary: #201913;          /* 深棕色背景 */
+    --bg-secondary: #2a2218;        /* 稍浅棕色背景 */
+    --bg-tertiary: #34291e;         /* 更浅棕色 */
+    --bg-card: rgba(38, 30, 23, 0.4); /* 卡片背景 */
 
     /* Border and separator colors */
-    --border-light: rgba(0, 0, 0, 0.08);
-    --border-medium: rgba(0, 0, 0, 0.15);
-    --border-strong: rgba(0, 0, 0, 0.25);
+    --border-light: rgba(237, 234, 222, 0.08);
+    --border-medium: rgba(237, 234, 222, 0.15);
+    --border-strong: rgba(237, 234, 222, 0.25);
 
-    /* Accent colors with improved contrast */
-    --accent-blue: #4dabf7;           /* Bright blue for highlights */
-    --accent-green: #4ade80;          /* Bright green for success */
-    --accent-yellow: #ffd93d;         /* Bright yellow for warnings */
-    --accent-red: #ff6b6b;            /* Bright red for errors */
-    --accent-purple: #a78bfa;          /* Bright purple for special states */
+    /* Accent colors - 棕色系 */
+    --accent-blue: #9fa39f;           /* 灰棕色 */
+    --accent-green: #8b7355;          /* 棕色 */
+    --accent-yellow: #d4a574;         /* 金棕色 */
+    --accent-red: #c99a60;            /* 深金棕色 */
+    --accent-purple: #a39887;         /* 棕色调 */
 
     /* Interactive element colors */
-    --interactive-bg: rgba(0, 0, 0, 0.05);
-    --interactive-hover: rgba(0, 0, 0, 0.08);
+    --interactive-bg: rgba(237, 234, 222, 0.05);
+    --interactive-hover: rgba(237, 234, 222, 0.08);
     --interactive-active: rgba(0, 0, 0, 0.12);
 
     /* Focus indicators */

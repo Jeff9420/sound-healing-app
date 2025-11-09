@@ -4,55 +4,10 @@
  */
 
 /* ==========================================================================
-   CSS变量定义 - Raphael AI Black/White Theme (默认)
+   主题系统 - 使用 global-theme.css 的 Raphael AI 温暖棕色主题
    ========================================================================== */
 
-:root {
-    /* 主色调 - Raphael AI 黑白主题 */
-    --primary-bg: #ffffff;
-    --primary-bg-gradient-start: #ffffff;
-    --primary-bg-gradient-mid: #f8f8f8;
-    --primary-bg-gradient-end: #f0f0f0;
-
-    /* 文字颜色 */
-    --text-primary: #000000;
-    --text-secondary: rgba(0, 0, 0, 0.7);
-    --text-tertiary: rgba(0, 0, 0, 0.5);
-
-    /* 卡片和组件背景 */
-    --card-bg: rgba(0, 0, 0, 0.02);
-    --card-bg-hover: rgba(0, 0, 0, 0.05);
-    --card-border: rgba(0, 0, 0, 0.08);
-
-    /* 按钮 */
-    --button-bg: rgba(0, 0, 0, 0.05);
-    --button-bg-hover: rgba(0, 0, 0, 0.08);
-    --button-border: rgba(0, 0, 0, 0.12);
-
-    /* 播放器 */
-    --player-bg: rgba(255, 255, 255, 0.98);
-    --player-border: rgba(0, 0, 0, 0.08);
-
-    /* 进度条和滑块 */
-    --progress-bg: rgba(0, 0, 0, 0.12);
-    --progress-fill: #000000;
-
-    /* 模态框 */
-    --modal-bg: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
-    --modal-overlay: rgba(0, 0, 0, 0.5);
-
-    /* 通知 */
-    --notification-bg: rgba(0, 0, 0, 0.85);
-
-    /* 阴影 */
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
-    --shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.15);
-
-    /* 主题色 */
-    --theme-color: #000000;
-    --theme-accent: #ffffff;
-}
+/* :root 定义已移除，使用全局主题变量 */
 
 /* ==========================================================================
    Light Theme (亮色主题)

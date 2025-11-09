@@ -4,49 +4,50 @@
    ========================================== */
 
 :root {
-    /* ===== Raphael AI 现代黑色主题 ===== */
-    --primary-color: #000000;
-    --primary-color-light: #1a1a1a;
-    --secondary-color: #ffffff;
-    --secondary-color-dark: #f5f5f5;
+    /* ===== Raphael AI 温暖棕色主题 ===== */
+    /* 统一的温暖棕色/米色配色系统 */
+    --primary-color: #201913;      /* 深棕色 - 主背景 */
+    --primary-color-light: #2a2218; /* 稍浅的棕色 */
+    --secondary-color: #edeade;     /* 浅米色 - 文字 */
+    --secondary-color-dark: #d4cbb8; /* 稍深的米色 */
 
     /* ===== 背景色 ===== */
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8f8f8;
-    --bg-overlay: rgba(0, 0, 0, 0.5);
-    --bg-card: rgba(0, 0, 0, 0.02);
-    --bg-card-hover: rgba(0, 0, 0, 0.05);
+    --bg-primary: #201913;          /* 深棕色 */
+    --bg-secondary: #2a2218;        /* 稍浅的棕色 */
+    --bg-overlay: rgba(32, 25, 19, 0.7);
+    --bg-card: rgba(38, 30, 23, 0.4);  /* 卡片背景 */
+    --bg-card-hover: rgba(42, 34, 24, 0.6);
 
     /* ===== 深色模式背景变体 ===== */
-    --bg-dark-primary: #0a0a0a;
-    --bg-dark-secondary: #1a1a1a;
-    --bg-dark-card: rgba(255, 255, 255, 0.05);
-    --bg-dark-card-hover: rgba(255, 255, 255, 0.08);
+    --bg-dark-primary: #201913;
+    --bg-dark-secondary: #2a2218;
+    --bg-dark-card: rgba(38, 30, 23, 0.4);
+    --bg-dark-card-hover: rgba(42, 34, 24, 0.6);
 
     /* ===== 渐变色 ===== */
-    --gradient-primary: linear-gradient(135deg, #000000, #1a1a1a);
-    --gradient-primary-hover: linear-gradient(135deg, #1a1a1a, #333333);
-    --gradient-soft: linear-gradient(135deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.08));
-    --gradient-overlay: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+    --gradient-primary: linear-gradient(135deg, #201913, #2a2218);
+    --gradient-primary-hover: linear-gradient(135deg, #2a2218, #34291e);
+    --gradient-soft: linear-gradient(135deg, rgba(32, 25, 19, 0.05), rgba(42, 34, 24, 0.1));
+    --gradient-overlay: linear-gradient(180deg, rgba(32, 25, 19, 0.6) 0%, transparent 100%);
 
     /* ===== 文本颜色 ===== */
-    --text-primary: #000000;
-    --text-secondary: rgba(0, 0, 0, 0.7);
-    --text-muted: rgba(0, 0, 0, 0.5);
-    --text-light: #ffffff;
-    --text-light-secondary: rgba(255, 255, 255, 0.8);
+    --text-primary: #edeade;        /* 浅米色 - 主文字 */
+    --text-secondary: #d4cbb8;      /* 稍深的米色 - 次要文字 */
+    --text-muted: #a39887;          /* 棕色调 - 弱化文字 */
+    --text-light: #edeade;          /* 浅米色 */
+    --text-light-secondary: #d4cbb8;
 
     /* ===== 边框颜色 ===== */
-    --border-subtle: rgba(0, 0, 0, 0.08);
-    --border-light: rgba(0, 0, 0, 0.15);
-    --border-dark: rgba(0, 0, 0, 0.25);
-    --border-dark-hover: rgba(0, 0, 0, 0.35);
+    --border-subtle: rgba(237, 234, 222, 0.1);
+    --border-light: rgba(237, 234, 222, 0.15);
+    --border-dark: rgba(237, 234, 222, 0.25);
+    --border-dark-hover: rgba(237, 234, 222, 0.35);
 
     /* ===== 阴影 ===== */
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
-    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
-    --shadow-primary: 0 6px 28px rgba(0, 0, 0, 0.15);
+    --shadow-sm: 0 2px 8px rgba(32, 25, 19, 0.15);
+    --shadow-md: 0 4px 16px rgba(32, 25, 19, 0.25);
+    --shadow-lg: 0 8px 32px rgba(32, 25, 19, 0.35);
+    --shadow-primary: 0 6px 28px rgba(32, 25, 19, 0.25);
 
     /* ===== 间距 ===== */
     --spacing-xs: 0.25rem;

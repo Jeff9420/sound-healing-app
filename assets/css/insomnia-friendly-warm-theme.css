@@ -2,60 +2,8 @@
    🌙 失眠友好UI - 温暖夜色主题 (方案一)
    ================================================================= */
 
-/* 全局失眠友好设置 - 更新为Raphael AI黑白主题 */
-:root {
-    /* === 核心颜色变量 - Raphael AI 黑白主题 === */
-    /* 背景色系 */
-    --bg-deepest: #ffffff;      /* 主背景 - 白色 */
-    --bg-deep: #f8f8f8;         /* 深层背景 - 浅灰 */
-    --bg-medium: #f0f0f0;       /* 中层背景 - 浅灰 */
-    --bg-light: #e8e8e8;        /* 浅层背景 - 灰色 */
-
-    /* 文字色系 - 黑色主题 */
-    --text-primary: #000000;    /* 黑色 - 主要文字 */
-    --text-secondary: #1a1a1a;  /* 深灰 - 次要文字 */
-    --text-tertiary: #333333;   /* 灰色 - 辅助文字 */
-    --text-muted: #666666;      /* 浅灰 - 静音文字 */
-
-    /* 强调和交互色系 - 黑色 */
-    --accent-primary: #000000;   /* 黑色 - 主要强调色 */
-    --accent-warm: #000000;      /* 黑色 - 强调色 */
-    --accent-glow: #000000;      /* 黑色 - 发光强调色 */
-
-    /* 半透明覆盖层 */
-    --overlay-dark: rgba(0, 0, 0, 0.05);        /* 深色遮罩 */
-    --overlay-medium: rgba(0, 0, 0, 0.08);      /* 中等遮罩 */
-    --overlay-light: rgba(0, 0, 0, 0.03);       /* 浅色遮罩 */
-    --overlay-subtle: rgba(0, 0, 0, 0.01);      /* 微妙遮罩 */
-
-    /* 渐变定义 */
-    --gradient-warm: linear-gradient(135deg, #ffffff 0%, #f8f8f8 30%, #f0f0f0 70%, #e8e8e8 100%);
-    --gradient-card: linear-gradient(145deg, #ffffff 0%, #f8f8f8 50%, #f0f0f0 100%);
-    --gradient-glow: radial-gradient(circle at center, rgba(0, 0, 0, 0.1) 0%, transparent 70%);
-
-    /* === 技术参数 === */
-    /* 蓝光过滤设置 */
-    --blue-light-filter: none;
-    --night-mode-filter: none;
-    --deep-night-filter: none;
-
-    /* 过渡动画 - 4秒呼吸节律 */
-    --smooth-transition: all 4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --gentle-transition: all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --breathing-rhythm: 4s;
-
-    /* 阴影定义 - 柔和黑色阴影 */
-    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08);
-    --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.12);
-    --shadow-strong: 0 12px 48px rgba(0, 0, 0, 0.15);
-    --shadow-glow: 0 0 24px rgba(0, 0, 0, 0.08);
-    --shadow-text: 0 2px 8px rgba(0, 0, 0, 0.05);
-
-    /* 边框和描边 */
-    --border-warm: 1px solid rgba(0, 0, 0, 0.08);
-    --border-glow: 1px solid rgba(0, 0, 0, 0.12);
-    --border-soft: 1px solid rgba(0, 0, 0, 0.04);
-}
+/* 失眠友好主题 - 使用 global-theme.css 的 Raphael AI 温暖棕色主题 */
+/* :root 定义已移除，使用全局主题变量 */
 
 /* =================================================================
    全局基础样式重置

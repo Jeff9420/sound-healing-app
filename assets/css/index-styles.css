@@ -2735,15 +2735,16 @@ h1 {
    SaaS Hero + Navigation Redesign
    ============================================================================ */
 :root {
-    --saas-bg: rgba(18, 10, 7, 0.92);
-    --saas-panel: rgba(31, 18, 11, 0.88);
-    --saas-card: rgba(40, 22, 13, 0.85);
-    --saas-border: rgba(255, 255, 255, 0.08);
-    --saas-primary: #000000;
-    --saas-primary-dark: #1a1a1a;
-    --saas-accent: #ffffff;
-    --saas-text: #000000;
-    --saas-muted: rgba(253, 243, 229, 0.7);
+    /* Raphael AI 温暖棕色主题 */
+    --saas-bg: rgba(32, 25, 19, 0.92);
+    --saas-panel: rgba(42, 34, 24, 0.88);
+    --saas-card: rgba(50, 40, 30, 0.85);
+    --saas-border: rgba(237, 234, 222, 0.08);
+    --saas-primary: #201913;
+    --saas-primary-dark: #2a2218;
+    --saas-accent: #edeade;
+    --saas-text: #edeade;
+    --saas-muted: rgba(163, 152, 143, 0.7);
 }
 
 .saas-shell {

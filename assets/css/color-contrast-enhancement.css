@@ -8,38 +8,38 @@
    ============================================= */
 
 :root {
-    /* Raphael AI 现代黑色主题 */
-    --text-primary: #000000;          /* 主要文本 - 黑色 */
-    --text-secondary: #333333;        /* 次要文本 - 深灰 */
-    --text-muted: #666666;           /* 弱化文本 - 中灰 */
-    --text-disabled: #999999;         /* 禁用文本 - 浅灰 */
+    /* Raphael AI 温暖棕色主题 */
+    --text-primary: #edeade;          /* 主要文本 - 浅米色 */
+    --text-secondary: #d4cbb8;        /* 次要文本 - 稍深米色 */
+    --text-muted: #a39887;            /* 弱化文本 - 棕色调 */
+    --text-disabled: #876f5f;         /* 禁用文本 - 深棕色 */
 
     /* 背景颜色系统 */
-    --bg-primary: #ffffff;            /* 主背景 - 白色 */
-    --bg-secondary: #f8f8f8;         /* 次要背景 - 浅灰 */
-    --bg-tertiary: #f0f0f0;           /* 第三级背景 - 中浅灰 */
-    --bg-overlay: rgba(0, 0, 0, 0.7);          /* 遮罩背景 */
+    --bg-primary: #201913;            /* 主背景 - 深棕色 */
+    --bg-secondary: #2a2218;          /* 次要背景 - 稍浅棕色 */
+    --bg-tertiary: #34291e;           /* 第三级背景 - 更浅棕色 */
+    --bg-overlay: rgba(32, 25, 19, 0.7);          /* 遮罩背景 */
 
-    /* 增强的主题色彩（更高对比度） */
-    --accent-primary: #7fb069;       /* 主要强调色 - 亮绿色 */
-    --accent-secondary: #ffd93d;      /* 次要强调色 - 亮黄色 */
-    --accent-tertiary: #6bb6ff;       /* 第三强调色 - 亮蓝色 */
+    /* 增强的主题色彩 - 棕色/米色系 */
+    --accent-primary: #d4a574;        /* 主要强调色 - 金棕色 */
+    --accent-secondary: #c99a60;      /* 次要强调色 - 深金棕 */
+    --accent-tertiary: #a39887;       /* 第三强调色 - 棕色 */
 
     /* 交互状态颜色 */
-    --interactive-normal: #6666ff;    /* 正常交互 - 亮紫色 */
-    --interactive-hover: #8080ff;     /* 悬停状态 */
-    --interactive-active: #9999ff;    /* 激活状态 */
-    --interactive-focus: #b3b3ff;     /* 焦点状态 */
+    --interactive-normal: #d4a574;    /* 正常交互 - 金棕色 */
+    --interactive-hover: #e6b888;     /* 悬停状态 */
+    --interactive-active: #c99a60;    /* 激活状态 */
+    --interactive-focus: #d4a574;     /* 焦点状态 */
 
     /* 边界和分隔线 */
-    --border-primary: rgba(255, 255, 255, 0.3);  /* 主要边框 */
-    --border-secondary: rgba(255, 255, 255, 0.15); /* 次要边框 */
-    --border-tertiary: rgba(255, 255, 255, 0.08); /* 第三级边框 */
+    --border-primary: rgba(237, 234, 222, 0.25);  /* 主要边框 */
+    --border-secondary: rgba(237, 234, 222, 0.15); /* 次要边框 */
+    --border-tertiary: rgba(237, 234, 222, 0.08); /* 第三级边框 */
 
     /* 阴影系统 */
-    --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.3);
-    --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.4);
-    --shadow-heavy: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --shadow-light: 0 2px 8px rgba(32, 25, 19, 0.3);
+    --shadow-medium: 0 4px 16px rgba(32, 25, 19, 0.4);
+    --shadow-heavy: 0 8px 32px rgba(32, 25, 19, 0.5);
 
     /* 错误和警告状态 */
     --error-primary: #ff6b6b;
@@ -49,12 +49,12 @@
     --success-primary: #66bb6a;
     --success-secondary: #81c784;
 
-    /* 重新定义的疗愈主题色彩（更高对比度） */
-    --healing-forest: #7fb069;        /* 森林主题 - 亮绿色 */
-    --healing-fire: #ff8a65;         /* 火焰主题 - 亮橙红色 */
-    --healing-water: #4fc3f7;        /* 水流主题 - 亮蓝色 */
-    --healing-cosmic: #ba68c8;        /* 宇宙主题 - 亮紫色 */
-    --healing-earth: #d4a574;         /* 大地主题 - 亮棕色 */
+    /* 疗愈主题色彩 - 棕色系 */
+    --healing-forest: #8b7355;        /* 森林主题 - 棕色 */
+    --healing-fire: #c99a60;          /* 火焰主题 - 金棕 */
+    --healing-water: #9fa39f;         /* 水流主题 - 灰棕 */
+    --healing-cosmic: #9d8b7e;        /* 宇宙主题 - 棕色 */
+    --healing-earth: #d4a574;         /* 大地主题 - 金棕 */
 }
 
 /* =============================================
