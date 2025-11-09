@@ -1,4 +1,4 @@
-/**
+﻿/**
  * i18n Translation Add-ons
  * Cookie consent, Social sharing, and other missing translations
  * This file extends the base i18n system with additional translations
@@ -56,6 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 'auth.signupButton': '注册',
                 'auth.googleLogin': '使用 Google 登录',
                 'auth.anonymousLogin': '匿名登录',
+                'auth.guestHint': '也可以先匿名体验，大部分功能随时再绑定邮箱。',
+                'auth.guestCta': '先匿名体验',
                 'auth.resetButton': '发送重置邮件',
                 'auth.close': '×',
                 'auth.filledEmail': '请填写邮箱和密码',
@@ -147,6 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 'auth.signupButton': 'Register',
                 'auth.googleLogin': 'Sign in with Google',
                 'auth.anonymousLogin': 'Anonymous Login',
+                'auth.guestHint': 'You can explore most features as a guest and link your email later.',
+                'auth.guestCta': 'Continue as guest',
                 'auth.resetButton': 'Send Reset Email',
                 'auth.close': '×',
                 'auth.filledEmail': 'Please fill in email and password',
@@ -516,7 +520,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'tutorial.prev': '上一步',
                 'tutorial.next': '下一步',
                 'tutorial.start': '立即开始',
-                'tutorial.help': '需要引导'
+                'tutorial.help': '需要 3 分钟引导？'
             },
             'en-US': {
                 'nav.quick.start': 'Start Experience',

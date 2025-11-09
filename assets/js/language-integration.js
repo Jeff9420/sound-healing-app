@@ -169,11 +169,20 @@ class LanguageIntegrationController {
         }
         
         const currentLang = this.i18nSystem.getCurrentLanguage();
-        const langInfo = this.i18nSystem.supportedLanguages[currentLang];
+        const langInfo = this.i18nSystem.supportedLanguages[currentLang] || {};
         
-        if (langInfo && this.languageToggle) {
-            const flag = langInfo.flag || '🌐';
-            this.languageToggle.textContent = `${flag} ${langInfo.nativeName}`;
+        if (this.languageToggle) {
+            const labelEl = this.languageToggle.querySelector('[data-role=\"language-label\"]');
+            const iconEl = this.languageToggle.querySelector('.language-toggle__icon');
+            const codeLabel = (langInfo.code || currentLang || 'en').split('-')[0].toUpperCase();
+            if (labelEl) {
+                labelEl.textContent = codeLabel;
+            } else {
+                this.languageToggle.textContent = `${codeLabel}`;
+            }
+            if (iconEl) {
+                iconEl.textContent = langInfo.flag || '🌐';
+            }
         }
         
         this.updateActiveOption();

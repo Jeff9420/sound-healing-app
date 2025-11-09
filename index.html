@@ -265,44 +265,25 @@
                             <span data-i18n="nav.favorites"></span>
                         </button>
                         <div class="language-selector" id="languageSelector">
-                            <button class="language-toggle" id="languageToggle" type="button" aria-haspopup="listbox" aria-expanded="false">
-                                🌐 English
+                            <button class="language-toggle" id="languageToggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">
+                                <span class="language-toggle__label" data-role="language-label">EN</span>
+                                <span class="language-toggle__icon" aria-hidden="true">🌐</span>
                             </button>
                             <div class="language-dropdown" id="languageDropdown" role="listbox" aria-label="Select Language">
-                                <button class="language-option" type="button" data-lang="zh-CN" role="option" aria-selected="true">
-                                    <span class="language-flag">🇨🇳</span>
-                                    <div>
-                                        <p>中文</p>
-                                        <small>Simplified Chinese</small>
-                                    </div>
+                                <button class="language-option" type="button" data-lang="en-US" role="option" aria-selected="true">
+                                    <span>English</span>
                                 </button>
-                                <button class="language-option" type="button" data-lang="en-US" role="option" aria-selected="false">
-                                    <span class="language-flag">🇺🇸</span>
-                                    <div>
-                                        <p>English</p>
-                                        <small>United States</small>
-                                    </div>
+                                <button class="language-option" type="button" data-lang="zh-CN" role="option" aria-selected="false">
+                                    <span>简体中文</span>
                                 </button>
                                 <button class="language-option" type="button" data-lang="ja-JP" role="option" aria-selected="false">
-                                    <span class="language-flag">🇯🇵</span>
-                                    <div>
-                                        <p>日本語</p>
-                                        <small>Japanese</small>
-                                    </div>
+                                    <span>日本語</span>
                                 </button>
                                 <button class="language-option" type="button" data-lang="ko-KR" role="option" aria-selected="false">
-                                    <span class="language-flag">🇰🇷</span>
-                                    <div>
-                                        <p>한국어</p>
-                                        <small>Korean</small>
-                                    </div>
+                                    <span>한국어</span>
                                 </button>
                                 <button class="language-option" type="button" data-lang="es-ES" role="option" aria-selected="false">
-                                    <span class="language-flag">🇪🇸</span>
-                                    <div>
-                                        <p>Español</p>
-                                        <small>Spanish</small>
-                                    </div>
+                                    <span>Español</span>
                                 </button>
                             </div>
                         </div>
@@ -311,62 +292,52 @@
                 </nav>
                 <div class="saas-category-shortcuts" id="categoryShortcuts" aria-label="音频类型快捷导航" role="list"></div>
                 <div class="saas-hero__grid">
-                    <div class="saas-hero__content">
-                        <p class="saas-hero__eyebrow" data-i18n="hero.eyebrow"></p>
-                        <h2 class="saas-hero__headline" data-i18n="hero.headline"></h2>
-                        <p class="saas-hero__description" data-i18n="hero.description"></p>
+                                        <div class="saas-hero__content">
+                        <p class="saas-hero__eyebrow" data-i18n="hero.eyebrow">Tonight, breathe slower</p>
+                        <h2 class="saas-hero__headline" data-i18n="hero.headline">Fall asleep faster with science-backed soundscapes</h2>
+                        <p class="saas-hero__description" data-i18n="hero.description">213+ rain, white noise and meditation tracks designed for deeper sleep, calmer focus and softer mornings.</p>
                         <div class="saas-hero__cta">
-                            <button class="saas-btn saas-btn--primary" data-cta="start-experience" aria-label="Start Experience">
-                                <span data-i18n="hero.cta.primary"></span>
+                            <button class="saas-btn saas-btn--primary" data-cta="start-experience" data-action="start-default-session" aria-label="Start sleep session">
+                                <span data-i18n="hero.cta.primary">Start sleep session · 15‑min rain sound</span>
                             </button>
                             <button class="saas-btn saas-btn--ghost" data-scroll-target="#conversionOffer" data-track="plan-open">
-                                <span data-i18n="hero.cta.plan"></span>
-                            </button>
-                        </div>
-                        <div class="saas-hero__quick-actions" role="list">
-                            <button class="quick-card" data-goal="sleep" onclick="document.getElementById('experienceLaunchpad').scrollIntoView({behavior: 'smooth'})">
-                                <span>🌙</span>
-                                <div>
-                                    <p>快速入睡</p>
-                                    <small>15 分钟深度雨声</small>
-                                </div>
-                            </button>
-                            <button class="quick-card" data-goal="focus" onclick="document.getElementById('categoryGrid').scrollIntoView({behavior: 'smooth'})">
-                                <span>✨</span>
-                                <div>
-                                    <p>专注冲刺</p>
-                                    <small>高频 α 波 + 白噪声</small>
-                                </div>
-                            </button>
-                            <button class="quick-card" data-goal="relax" onclick="document.getElementById('contentHub').scrollIntoView({behavior: 'smooth'})">
-                                <span>💆</span>
-                                <div>
-                                    <p>午间焕新</p>
-                                    <small>7 分钟呼吸 + 钵声</small>
-                                </div>
+                                <span data-i18n="hero.cta.plan">Get your free 7-day plan</span>
                             </button>
                         </div>
                     </div>
                     <div class="saas-hero__panel">
-                        <div class="saas-panel__badge">SaaS 级音疗控制台</div>
-                        <p class="saas-panel__copy">以数据驱动的多语言声音疗愈平台，提供即开即用的混音、睡眠定时与跨设备同步。</p>
+                                                <div class="saas-panel__badge" data-i18n="hero.panel.badge">Trusted nightly ritual</div>
+                        <p class="saas-panel__copy" data-i18n="hero.panel.copy">A calm-first experience that streams instantly on any device—no log-in required to start relaxing tonight.</p>
                         <div class="saas-panel__metrics">
-                            <div class="saas-panel__metric">
-                                <span>213+</span>
-                                <small data-i18n="hero.stats.audio"></small>
-                            </div>
-                            <div class="saas-panel__metric">
-                                <span>9</span>
-                                <small data-i18n="hero.stats.scenes"></small>
-                            </div>
-                            <div class="saas-panel__metric">
-                                <span>5</span>
-                                <small data-i18n="hero.stats.languages"></small>
-                            </div>
+                            <article class="metric-card">
+                                <p class="metric-card__number">213+</p>
+                                <p class="metric-card__title" data-i18n="hero.metrics.soundscapes">Healing soundscapes</p>
+                                <p class="metric-card__desc" data-i18n="hero.metrics.soundscapes.desc">Rain, white noise, bowls & breath-led journeys.</p>
+                            </article>
+                            <article class="metric-card">
+                                <p class="metric-card__number">9</p>
+                                <p class="metric-card__title" data-i18n="hero.metrics.languages">Languages supported</p>
+                                <p class="metric-card__desc" data-i18n="hero.metrics.languages.desc">English, 中文, 日本語, 한국어, Español & more.</p>
+                            </article>
+                            <article class="metric-card">
+                                <p class="metric-card__number">120K+</p>
+                                <p class="metric-card__title" data-i18n="hero.metrics.sessions">Guided sessions played</p>
+                                <p class="metric-card__desc" data-i18n="hero.metrics.sessions.desc">Sleep logs, focus rituals and mindful mornings.</p>
+                            </article>
+                            <article class="metric-card metric-card--journeys">
+                                <p class="metric-card__title" data-i18n="hero.metrics.journeys">5 core journeys</p>
+                                <ul>
+                                    <li data-i18n="hero.metrics.journeys.sleep">Sleep</li>
+                                    <li data-i18n="hero.metrics.journeys.focus">Focus</li>
+                                    <li data-i18n="hero.metrics.journeys.anxiety">Anxiety</li>
+                                    <li data-i18n="hero.metrics.journeys.emotion">Emotions</li>
+                                    <li data-i18n="hero.metrics.journeys.chakra">Chakras</li>
+                                </ul>
+                            </article>
                         </div>
                         <div class="saas-panel__footer">
-                            <p>已为 120K+ 次冥想提供声音引导</p>
-                            <a href="#impactProof" aria-label="查看成效数据">查看成效 →</a>
+                            <p data-i18n="hero.panel.footer">Backed by 120K+ anonymous sleep & focus logs</p>
+                            <a href="#impactProof" aria-label="See data" data-i18n="hero.panel.link">See results →</a>
                         </div>
                     </div>
                 </div>
@@ -377,8 +348,8 @@
             <div class="experience-launchpad__grid">
                 <div class="experience-launchpad__player">
                     <div class="experience-launchpad__title">
-                        <p>Instant Player</p>
-                        <h3>一键唤醒疗愈声音</h3>
+                        <p data-i18n="player.instantLabel">Instant Player</p>
+                        <h3 data-i18n="player.instantHeadline">One tap to start relaxing</h3>
                     </div>
                     <div id="audioPlayer" class="audio-player" role="region" aria-label="Audio player controls" tabindex="-1" onclick="if(isMinimized) toggleMinimize()">
                         <div class="minimize-indicator" onclick="toggleMinimize(event)" data-i18n="player.minimize" role="button" tabindex="0" aria-label="Minimize player" aria-expanded="true">▼收起</div>
@@ -387,7 +358,10 @@
                         </div>
                         <div class="player-content">
                             <div class="now-playing" role="status" aria-live="polite">
-                                <div id="currentTrack" class="track-title" data-i18n="player.notPlaying" aria-label="Currently playing track">未播放</div>
+                                <span class="player-recommendation-badge" id="playerBadge" data-i18n="player.defaultTrack.badge">Official recommendation</span>
+                                <div id="currentTrack" class="track-title" data-i18n="player.notPlaying" aria-label="Currently playing track">Sleep Warm Rain · 15 min</div>
+                                <div id="playerTags" class="track-tags" data-i18n="player.defaultTrack.tags">#sleep #beginner #try-tonight</div>
+                                <p id="playerDescription" class="track-description" data-i18n="player.defaultTrack.desc">A gentle, voice-free rain track to slow your mind before bed.</p>
                                 <div id="currentCategory" class="track-category" aria-label="Current track category"></div>
                             </div>
                             <div class="player-controls" role="group" aria-label="Playback controls">
@@ -409,6 +383,7 @@
                                 </div>
                                 <span id="totalDuration" class="time-display">0:00</span>
                             </div>
+                            <p class="player-helper" data-i18n="player.helper">Press ▶️ to start your first session. No signup needed.</p>
                         </div>
                     </div>
                 </div>
@@ -501,6 +476,7 @@
                     </ul>
                 </div>
                 <div class="conversion-offer__form">
+                    <p class="plan-trust" data-i18n="form.plan.trust">Generated from 120K+ anonymous sessions. Unsubscribe anytime.</p>
                     <form id="planRequestForm" novalidate>
                         <div class="conversion-offer__field">
                             <label for="planName" data-i18n="form.plan.label.name">你的昵称</label>
@@ -691,9 +667,12 @@
             <div class="player-content">
                 <!-- Now Playing Section -->
                 <div class="now-playing" role="status" aria-live="polite">
-                    <div id="currentTrack" class="track-title" data-i18n="player.notPlaying" aria-label="Currently playing track">未播放</div>
-                    <div id="currentCategory" class="track-category" aria-label="Current track category"></div>
-                </div>
+                                <span class="player-recommendation-badge" id="playerBadge" data-i18n="player.defaultTrack.badge">Official recommendation</span>
+                                <div id="currentTrack" class="track-title" data-i18n="player.notPlaying" aria-label="Currently playing track">Sleep Warm Rain · 15 min</div>
+                                <div id="playerTags" class="track-tags" data-i18n="player.defaultTrack.tags">#sleep #beginner #try-tonight</div>
+                                <p id="playerDescription" class="track-description" data-i18n="player.defaultTrack.desc">A gentle, voice-free rain track to slow your mind before bed.</p>
+                                <div id="currentCategory" class="track-category" aria-label="Current track category"></div>
+                            </div>
 
                 <!-- Main Playback Controls -->
                 <div class="player-controls" role="group" aria-label="Playback controls">
@@ -776,6 +755,7 @@
                     <h3 id="compactLoginTitle" data-i18n="auth.welcome">欢迎回来</h3>
                     <button class="compact-modal-close" onclick="closeCompactLogin()" aria-label="Close login modal">&times;</button>
                 </div>
+                <p class="compact-login-hint" data-i18n="auth.guestHint">You can explore most features as a guest and link your email later.</p>
 
                 <!-- Email Login Form -->
                 <div id="emailLoginForm" class="compact-login-form">
@@ -848,7 +828,7 @@
                     </button>
                     <button class="compact-option-btn anonymous" onclick="handleAnonymousLogin()" tabindex="0">
                         <span class="btn-icon">👤</span>
-                        匿名使用
+                        <span data-i18n="auth.guestCta">Continue as guest</span>
                     </button>
                 </div>
             </div>

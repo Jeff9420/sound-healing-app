@@ -478,7 +478,7 @@ class InternationalizationSystem {
 
                 // Hero Section
                 'hero.eyebrow': '专业声音疗愈 · 5 种语言随时可用',
-                'hero.headline': '213+ 沉浸式疗愈音频，帮你在 5 分钟内放松、睡眠与重启专注',
+                'hero.headline': '今晚早点睡着：15 分钟雨声 + 白噪，帮你快速进入深度睡眠',
                 'hero.description': '从雨林白噪到脉轮共振，一键进入专属音疗空间。个性化播放、混音、统计与离线缓存，让每一次呼吸都被疗愈。',
                 'hero.cta.primary': '立即开启沉浸体验',
                 'hero.cta.secondary': '查看核心亮点',
@@ -847,12 +847,12 @@ class InternationalizationSystem {
                 'form.plan.success': '✅ Plan request successful! We\'ll send your custom meditation schedule to your inbox within 5 minutes. Please check your email.',
 
                 // Hero Section
-                'hero.eyebrow': 'Professional Sound Healing · Available in 5 Languages',
-                'hero.headline': '213+ Immersive Healing Audio Tracks - Relax, Sleep & Refocus in 5 Minutes',
-                'hero.description': 'From rainforest white noise to chakra resonance, enter your personal sound therapy space with one click. Personalized playback, mixing, statistics and offline caching make every breath a healing moment.',
-                'hero.cta.primary': 'Start Immersive Experience',
+                'hero.eyebrow': 'Tonight, breathe slower',
+                'hero.headline': 'Fall asleep faster with science-backed soundscapes',
+                'hero.description': '213+ rain, white noise and meditation tracks designed for deeper sleep, calmer focus and softer mornings.',
+                'hero.cta.primary': 'Start sleep session · 15-min rain sound',
                 'hero.cta.secondary': 'View Core Features',
-                'hero.cta.plan': 'Get Custom Meditation Plan',
+                'hero.cta.plan': 'Get your free 7-day plan',
                 'hero.stats.audio': 'Healing Audio & White Noise Collection',
                 'hero.stats.scenes': 'Scene Themes Match Your Mood',
                 'hero.stats.languages': 'Language Interface Global Sync',
@@ -1015,7 +1015,7 @@ class InternationalizationSystem {
                 'tutorial.prev': 'Previous',
                 'tutorial.next': 'Next',
                 'tutorial.start': 'Start Now',
-                'tutorial.help': 'Need Help',
+                'tutorial.help': 'Need a 3-min tour?',
 
                 // Missing Category Translations
                 'category.Animal sounds': 'Animal Sounds',

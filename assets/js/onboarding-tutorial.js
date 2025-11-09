@@ -9,6 +9,10 @@ class OnboardingTutorial {
             2: '.healing-dashboard', // 主题选择区域
             3: '.audio-controller'   // 播放控制区域
         };
+        this.idleTimer = null;
+        this.idleDelay = 35000;
+        this.hasInteracted = false;
+        this.idleListenersBound = false;
         this.init();
     }
 
@@ -34,12 +38,51 @@ class OnboardingTutorial {
     checkFirstVisit() {
         const hasVisited = localStorage.getItem('soundHealingTutorialCompleted');
 
-        if (!hasVisited) {
-            // 延迟显示教程，确保页面完全加载
-            setTimeout(() => {
-                this.showTutorial();
-            }, 1000);
+        if (hasVisited) {
+            this.isCompleted = true;
+            return;
         }
+
+        this.registerIdleListeners();
+        this.startIdleTimer();
+    }
+
+    registerIdleListeners() {
+        if (this.idleListenersBound) {
+            return;
+        }
+        this.idleListenersBound = true;
+        const interactionHandler = () => this.handleIdleInteraction();
+        ['pointerdown', 'keydown', 'scroll'].forEach(evt => {
+            document.addEventListener(evt, interactionHandler, { once: true });
+        });
+        document.addEventListener('playerInteraction', interactionHandler, { once: true });
+        document.addEventListener('playerPlaybackError', () => {
+            if (!this.isCompleted && !this.tutorial?.classList.contains('active')) {
+                this.showTutorial();
+            }
+        });
+    }
+
+    startIdleTimer() {
+        this.clearIdleTimer();
+        this.idleTimer = setTimeout(() => {
+            if (!this.hasInteracted && !this.isCompleted) {
+                this.showTutorial();
+            }
+        }, this.idleDelay);
+    }
+
+    clearIdleTimer() {
+        if (this.idleTimer) {
+            clearTimeout(this.idleTimer);
+            this.idleTimer = null;
+        }
+    }
+
+    handleIdleInteraction() {
+        this.hasInteracted = true;
+        this.clearIdleTimer();
     }
 
     bindEvents() {
@@ -97,10 +140,12 @@ class OnboardingTutorial {
     }
 
     showTutorial() {
-        if (!this.tutorial) {
+        if (!this.tutorial || this.isCompleted) {
             return;
         }
 
+        this.clearIdleTimer();
+        this.hasInteracted = true;
         this.tutorial.style.display = 'block';
         this.tutorial.classList.add('active');
         document.body.style.overflow = 'hidden';
@@ -258,6 +303,7 @@ class OnboardingTutorial {
     markAsCompleted() {
         localStorage.setItem('soundHealingTutorialCompleted', 'true');
         this.isCompleted = true;
+        this.clearIdleTimer();
     }
 
     showSkipMessage() {

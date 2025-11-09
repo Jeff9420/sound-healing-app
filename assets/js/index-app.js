@@ -132,6 +132,16 @@ const categoryPresentations = {
         accent: '#a3b1ff'
     }
 };
+
+const DEFAULT_SLEEP_SESSION = {
+    categoryKey: 'Rain',
+    fileName: '小雨 入眠 助眠，学习，冥想，放松.mp3',
+    fallbackTitle: 'Sleep Warm Rain · 15 min',
+    fallbackTags: '#sleep #beginner #try-tonight',
+    fallbackDesc: 'A gentle, voice-free rain track to slow your mind before bed.',
+    badge: 'Official recommendation',
+    duration: '15:00'
+};
 function getAvailableCategoryEntries() {
     if (typeof AUDIO_CONFIG !== 'undefined' && AUDIO_CONFIG.categories) {
         return Object.entries(AUDIO_CONFIG.categories);
@@ -150,6 +160,65 @@ function getCategoryDisplayName(key, category) {
 
 function getCategoryDescription(key, category) {
     return getText(`ecosystem.${key}.desc`, category.description || categoryInfo[key]?.desc || '');
+}
+
+function getDefaultSessionConfig() {
+    return {
+        categoryKey: DEFAULT_SLEEP_SESSION.categoryKey,
+        fileName: DEFAULT_SLEEP_SESSION.fileName,
+        title: getText('player.defaultTrack.title', DEFAULT_SLEEP_SESSION.fallbackTitle),
+        tags: getText('player.defaultTrack.tags', DEFAULT_SLEEP_SESSION.fallbackTags),
+        description: getText('player.defaultTrack.desc', DEFAULT_SLEEP_SESSION.fallbackDesc),
+        badge: getText('player.defaultTrack.badge', DEFAULT_SLEEP_SESSION.badge),
+        duration: DEFAULT_SLEEP_SESSION.duration || '15:00'
+    };
+}
+
+function prefillInstantPlayer() {
+    if (currentTrackIndex >= 0) {
+        return;
+    }
+    const config = getDefaultSessionConfig();
+    const trackEl = document.getElementById('currentTrack');
+    const tagsEl = document.getElementById('playerTags');
+    const descEl = document.getElementById('playerDescription');
+    const badgeEl = document.getElementById('playerBadge');
+    const minimizedTrack = document.getElementById('minimizedTrack');
+    const totalDuration = document.getElementById('totalDuration');
+
+    if (trackEl) trackEl.textContent = config.title;
+    if (tagsEl) tagsEl.textContent = config.tags;
+    if (descEl) descEl.textContent = config.description;
+    if (badgeEl) badgeEl.textContent = config.badge;
+    if (totalDuration) totalDuration.textContent = config.duration;
+    if (minimizedTrack) minimizedTrack.textContent = config.title;
+}
+
+function playDefaultSleepSession() {
+    const config = getDefaultSessionConfig();
+    const url = getAudioUrl(config.categoryKey, config.fileName);
+
+    if (!url) {
+        window.showNotification(getText('player.defaultTrack.error', 'Unable to load the starter track. Please try another category.'), 'error');
+        return;
+    }
+
+    const categoryMeta = (typeof AUDIO_CONFIG !== 'undefined' && AUDIO_CONFIG.categories[config.categoryKey]) || {};
+    currentCategory = {
+        key: config.categoryKey,
+        name: getCategoryDisplayName(config.categoryKey, categoryMeta)
+    };
+    tracks = [{
+        name: config.title,
+        url,
+        fileName: config.fileName
+    }];
+    prefillInstantPlayer();
+    playTrack(0);
+}
+
+if (typeof window !== 'undefined') {
+    window.playDefaultSleepSession = playDefaultSleepSession;
 }
 
 function renderCategoryShortcuts(entries) {
@@ -285,6 +354,14 @@ function initializeApp() {
     // Load categories
     loadCategories();
     initRecommendationRail();
+    prefillInstantPlayer();
+
+    const heroStartBtn = document.querySelector('[data-action="start-default-session"]');
+    if (heroStartBtn) {
+        heroStartBtn.addEventListener('click', () => {
+            playDefaultSleepSession();
+        });
+    }
 
     // Initialize audio events
     audio.addEventListener('timeupdate', updateProgress);
@@ -1065,6 +1142,7 @@ if (document.readyState === 'loading') {
         document.addEventListener('languageChange', function() {
             loadCategories();
             updateStaticText();
+            prefillInstantPlayer();
         });
     });
 } else {
@@ -1082,6 +1160,7 @@ if (document.readyState === 'loading') {
         loadCategories();
         updateStaticText();
         scheduleRecommendationRefresh(true);
+        prefillInstantPlayer();
     });
 }
 
