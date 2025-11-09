@@ -14,11 +14,11 @@
     gap: 0.5rem;
     margin-bottom: 2rem;
     font-size: 0.875rem;
-    color: #718096;
+    color: var(--text-light);
 }
 
 .breadcrumb a {
-    color: #4a5568;
+    color: var(--text-light);
     text-decoration: none;
 }
 
@@ -27,7 +27,7 @@
 }
 
 .breadcrumb .current {
-    color: #2d3748;
+    color: var(--text-primary);
     font-weight: 500;
 }
 
@@ -40,7 +40,7 @@
     align-items: center;
     gap: 1rem;
     margin-bottom: 1rem;
-    color: #718096;
+    color: var(--text-light);
     font-size: 0.875rem;
 }
 
@@ -57,20 +57,20 @@
 }
 
 .article-meta .read-time {
-    color: #718096;
+    color: var(--text-light);
 }
 
 .article-header h1 {
     font-size: 2.5rem;
     line-height: 1.2;
-    color: #2d3748;
+    color: var(--text-primary);
     margin-bottom: 1rem;
     font-weight: 700;
 }
 
 .subtitle {
     font-size: 1.25rem;
-    color: #4a5568;
+    color: var(--text-light);
     line-height: 1.5;
     margin-bottom: 0;
 }
@@ -100,27 +100,27 @@
 
 .article-body {
     line-height: 1.7;
-    color: #2d3748;
+    color: var(--text-primary);
 }
 
 .article-body h2 {
     font-size: 1.875rem;
     margin: 2.5rem 0 1rem;
-    color: #2d3748;
+    color: var(--text-primary);
     font-weight: 600;
 }
 
 .article-body h3 {
     font-size: 1.5rem;
     margin: 2rem 0 1rem;
-    color: #2d3748;
+    color: var(--text-primary);
     font-weight: 600;
 }
 
 .article-body h4 {
     font-size: 1.25rem;
     margin: 1.5rem 0 0.75rem;
-    color: #2d3748;
+    color: var(--text-primary);
     font-weight: 600;
 }
 
@@ -178,7 +178,7 @@
 }
 
 .study-results {
-    background: #f7fafc;
+    background: var(--bg-secondary);
     padding: 2rem;
     border-radius: 15px;
     margin: 2rem 0;
@@ -197,7 +197,7 @@
 }
 
 .result-card {
-    background: #ffffff;
+    background: var(--bg-primary);
     padding: 1.5rem;
     border-radius: 10px;
     text-align: center;
@@ -215,11 +215,11 @@
 .result-card p {
     margin: 0;
     font-size: 0.875rem;
-    color: #4a5568;
+    color: var(--text-light);
 }
 
 .visual-explanation {
-    background: #edf2f7;
+    background: var(--bg-secondary);
     padding: 2rem;
     border-radius: 15px;
     margin: 2rem 0;
@@ -238,7 +238,7 @@
 .brain {
     text-align: center;
     padding: 1rem;
-    background: #ffffff;
+    background: var(--bg-primary);
     border-radius: 10px;
     min-width: 120px;
 }
@@ -254,7 +254,7 @@
 .plus,
 .equals {
     font-size: 1.5rem;
-    color: #4a5568;
+    color: var(--text-light);
 }
 
 .frequency-guide {
@@ -265,7 +265,7 @@
 }
 
 .freq-card {
-    background: #ffffff;
+    background: var(--bg-primary);
     padding: 1.5rem;
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -294,7 +294,7 @@
 
 .freq-card h3 {
     margin-top: 0;
-    color: #2d3748;
+    color: var(--text-primary);
 }
 
 .freq-card p {
@@ -304,7 +304,7 @@
 
 .session-length {
     display: inline-block;
-    background: #edf2f7;
+    background: var(--bg-secondary);
     padding: 0.25rem 0.75rem;
     border-radius: 15px;
     font-size: 0.75rem;
@@ -317,7 +317,7 @@
 }
 
 .company-case {
-    background: #f7fafc;
+    background: var(--bg-secondary);
     padding: 1.5rem;
     border-radius: 10px;
     margin-bottom: 1rem;
@@ -331,7 +331,7 @@
 }
 
 .protocol-section {
-    background: #f7fafc;
+    background: var(--bg-secondary);
     padding: 2rem;
     border-radius: 15px;
     margin: 2rem 0;
@@ -342,7 +342,7 @@
 }
 
 .equipment-item {
-    background: #ffffff;
+    background: var(--bg-primary);
     padding: 1rem;
     border-radius: 10px;
     margin-bottom: 1rem;
@@ -353,7 +353,7 @@
 
 .equipment-item h4 {
     margin-top: 0;
-    color: #2d3748;
+    color: var(--text-primary);
 }
 
 .equipment-item.required h4::before {
@@ -370,7 +370,7 @@
     display: flex;
     align-items: center;
     padding: 0.75rem;
-    background: #ffffff;
+    background: var(--bg-primary);
     border-radius: 8px;
     margin-bottom: 0.5rem;
 }
@@ -382,7 +382,7 @@
 }
 
 .time-slot .activity {
-    color: #4a5568;
+    color: var(--text-light);
 }
 
 .session-structure {
@@ -395,7 +395,7 @@
     grid-template-columns: 100px 1fr 2fr;
     align-items: center;
     padding: 0.75rem;
-    background: #ffffff;
+    background: var(--bg-primary);
     border-radius: 8px;
 }
 
@@ -406,11 +406,11 @@
 
 .phase-name {
     font-weight: 500;
-    color: #2d3748;
+    color: var(--text-primary);
 }
 
 .phase-desc {
-    color: #718096;
+    color: var(--text-light);
     font-size: 0.875rem;
 }
 
@@ -424,7 +424,7 @@
     gap: 1rem;
     padding: 1rem;
     margin-bottom: 1rem;
-    background: #f7fafc;
+    background: var(--bg-secondary);
     border-radius: 10px;
 }
 
@@ -435,11 +435,11 @@
 }
 
 .timeline-item .result {
-    color: #4a5568;
+    color: var(--text-light);
 }
 
 .safety-box {
-    background: #fff5f5;
+    background: var(--bg-secondary);
     border: 2px solid #feb2b2;
     padding: 2rem;
     border-radius: 15px;
@@ -463,7 +463,7 @@
 }
 
 .metric {
-    background: #ffffff;
+    background: var(--bg-primary);
     padding: 1.5rem;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -477,7 +477,7 @@
 
 .metric p {
     font-size: 0.875rem;
-    color: #4a5568;
+    color: var(--text-light);
     margin-bottom: 0;
 }
 
@@ -516,7 +516,7 @@
 .cta-button {
     display: inline-block;
     padding: 0.75rem 2rem;
-    background: #ffffff;
+    background: var(--bg-primary);
     color: #667eea;
     text-decoration: none;
     border-radius: 25px;
@@ -530,7 +530,7 @@
 }
 
 .sources {
-    background: #f7fafc;
+    background: var(--bg-secondary);
     padding: 2rem;
     border-radius: 15px;
     margin-top: 3rem;
@@ -538,13 +538,13 @@
 
 .sources h3 {
     margin-top: 0;
-    color: #2d3748;
+    color: var(--text-primary);
 }
 
 .sources ul {
     margin-bottom: 0;
     font-size: 0.875rem;
-    color: #4a5568;
+    color: var(--text-light);
 }
 
 .article-footer {
@@ -565,8 +565,8 @@
 }
 
 .tag {
-    background: #edf2f7;
-    color: #4a5568;
+    background: var(--bg-secondary);
+    color: var(--text-light);
     padding: 0.5rem 1rem;
     border-radius: 20px;
     font-size: 0.875rem;
@@ -586,7 +586,7 @@
 }
 
 .share-buttons span {
-    color: #718096;
+    color: var(--text-light);
     font-size: 0.875rem;
 }
 
@@ -626,7 +626,7 @@
 }
 
 .sidebar-section {
-    background: #f7fafc;
+    background: var(--bg-secondary);
     padding: 1.5rem;
     border-radius: 15px;
     margin-bottom: 2rem;
@@ -635,7 +635,7 @@
 .sidebar-section h3 {
     margin-top: 0;
     margin-bottom: 1rem;
-    color: #2d3748;
+    color: var(--text-primary);
     font-size: 1.125rem;
 }
 
@@ -653,7 +653,7 @@
 
 .related-posts a,
 .categories a {
-    color: #4a5568;
+    color: var(--text-light);
     text-decoration: none;
     font-size: 0.875rem;
     line-height: 1.4;
@@ -713,7 +713,7 @@
 .download-btn {
     width: 100%;
     padding: 0.75rem;
-    background: #ffffff;
+    background: var(--bg-primary);
     color: #667eea;
     border: none;
     border-radius: 8px;
@@ -732,7 +732,7 @@
 }
 
 .change-item {
-    background: #ffffff;
+    background: var(--bg-primary);
     padding: 1.5rem;
     border-radius: 10px;
     margin-bottom: 1rem;
@@ -741,7 +741,7 @@
 }
 
 .change-item h4 {
-    color: #2d3748;
+    color: var(--text-primary);
     margin-top: 0;
     margin-bottom: 0.5rem;
 }
@@ -751,7 +751,7 @@
 }
 
 .freq-profile {
-    background: #f7fafc;
+    background: var(--bg-secondary);
     padding: 1.5rem;
     border-radius: 15px;
     margin-bottom: 1rem;
@@ -771,14 +771,14 @@
 }
 
 .freq-name {
-    color: #4a5568;
+    color: var(--text-light);
     font-weight: 500;
 }
 
 .freq-details p {
     margin: 0.5rem 0;
     font-size: 0.875rem;
-    color: #4a5568;
+    color: var(--text-light);
 }
 
 .neurochemical-changes {
@@ -798,7 +798,7 @@
 .neurochem-item h4 {
     margin-top: 0;
     margin-bottom: 0.5rem;
-    color: #2d3748;
+    color: var(--text-primary);
 }
 
 .testimonials {
@@ -806,7 +806,7 @@
 }
 
 .testimonial {
-    background: #f7fafc;
+    background: var(--bg-secondary);
     padding: 2rem;
     border-radius: 15px;
     margin-bottom: 2rem;
@@ -840,7 +840,7 @@
 }
 
 .meditation-protocol {
-    background: #f7fafc;
+    background: var(--bg-secondary);
     padding: 2rem;
     border-radius: 15px;
     margin: 2rem 0;
@@ -852,7 +852,7 @@
 }
 
 .week-block {
-    background: #ffffff;
+    background: var(--bg-primary);
     padding: 1.5rem;
     border-radius: 10px;
     border-left: 4px solid #667eea;
@@ -874,7 +874,7 @@
 }
 
 .practice-item {
-    background: #f7fafc;
+    background: var(--bg-secondary);
     padding: 1.5rem;
     border-radius: 10px;
     margin-bottom: 1rem;
@@ -882,7 +882,7 @@
 }
 
 .practice-item h4 {
-    color: #2d3748;
+    color: var(--text-primary);
     margin-top: 0;
     margin-bottom: 0.5rem;
 }
@@ -892,7 +892,7 @@
 }
 
 .myth-busted {
-    background: #fff5f5;
+    background: var(--bg-secondary);
     padding: 1.5rem;
     border-radius: 10px;
     margin-bottom: 1rem;
@@ -935,7 +935,7 @@
 }
 
 .faq-item {
-    background: #f7fafc;
+    background: var(--bg-secondary);
     border-radius: 10px;
     margin-bottom: 1rem;
 }
@@ -943,7 +943,7 @@
 .faq-item summary {
     padding: 1rem;
     font-weight: 600;
-    color: #2d3748;
+    color: var(--text-primary);
     cursor: pointer;
     list-style: none;
     position: relative;
@@ -964,12 +964,12 @@
 .faq-item p {
     padding: 0 1rem 1rem;
     margin: 0;
-    color: #4a5568;
+    color: var(--text-light);
 }
 
 /* Location-specific content styling */
 .location-specific {
-    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    background: var(--bg-secondary);
     padding: 2rem;
     border-radius: 15px;
     margin: 2rem 0;
@@ -977,7 +977,7 @@
 }
 
 .location-specific h3 {
-    color: #2d3748;
+    color: var(--text-primary);
     margin-top: 0;
     margin-bottom: 1.5rem;
 }
@@ -1025,7 +1025,7 @@
 
 /* Case study enhancements */
 .case-study {
-    background: #ffffff;
+    background: var(--bg-primary);
     padding: 2rem;
     border-radius: 15px;
     margin-bottom: 2rem;
@@ -1142,5 +1142,28 @@
     .timeline-item {
         flex-direction: column;
         text-align: center;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .result-card,
+    .freq-card,
+    .equipment-item,
+    .time-slot,
+    .phase,
+    .metric,
+    .change-item,
+    .week-block,
+    .case-study {
+        box-shadow: 0 2px 4px rgba(255, 255, 255, 0.05);
+    }
+
+    .article-footer {
+        border-top-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .featured-image figcaption {
+        background: rgba(0, 0, 0, 0.85);
     }
 }
