@@ -14,21 +14,21 @@
    ========================================================================== */
 
 [data-theme="light"] {
-    /* 主色调 */
-    --primary-bg: #f8fafc;
-    --primary-bg-gradient-start: #f8fafc;
-    --primary-bg-gradient-mid: #e2e8f0;
-    --primary-bg-gradient-end: #cbd5e1;
+    /* 主色调 - Raphael AI 温暖棕色主题 */
+    --primary-bg: #201913;
+    --primary-bg-gradient-start: #201913;
+    --primary-bg-gradient-mid: #2a2218;
+    --primary-bg-gradient-end: #201913;
 
     /* 文字颜色 */
-    --text-primary: #1a202c;
-    --text-secondary: #2d3748;
-    --text-tertiary: #4a5568;
+    --text-primary: #edeade;
+    --text-secondary: #d4cbb8;
+    --text-tertiary: #a39887;
 
     /* 卡片和组件背景 */
-    --card-bg: #ffffff;
-    --card-bg-hover: #f8fafc;
-    --card-border: rgba(15, 23, 42, 0.12);
+    --card-bg: rgba(38, 30, 23, 0.4);
+    --card-bg-hover: rgba(42, 34, 24, 0.6);
+    --card-border: rgba(237, 234, 222, 0.1);
 
     /* 按钮 */
     --button-bg: rgba(15, 23, 42, 0.08);
@@ -64,16 +64,7 @@
    应用主题变量到现有样式
    ========================================================================== */
 
-body {
-    background: var(--primary-bg);
-    background-image: linear-gradient(
-        135deg,
-        var(--primary-bg-gradient-start) 0%,
-        var(--primary-bg-gradient-mid) 50%,
-        var(--primary-bg-gradient-end) 100%
-    );
-    color: var(--text-primary);
-}
+/* body 背景由 global-theme.css 统一控制，此处不再重复定义 */
 
 .loading-screen {
     background: var(--primary-bg);

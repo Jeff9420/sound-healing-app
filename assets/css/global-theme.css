@@ -14,6 +14,7 @@
     /* ===== 背景色 ===== */
     --bg-primary: #201913;          /* 深棕色 */
     --bg-secondary: #2a2218;        /* 稍浅的棕色 */
+    --bg-deepest: #1a130e;          /* 最深棕色 */
     --bg-overlay: rgba(32, 25, 19, 0.7);
     --bg-card: rgba(38, 30, 23, 0.4);  /* 卡片背景 */
     --bg-card-hover: rgba(42, 34, 24, 0.6);
@@ -29,6 +30,7 @@
     --gradient-primary-hover: linear-gradient(135deg, #2a2218, #34291e);
     --gradient-soft: linear-gradient(135deg, rgba(32, 25, 19, 0.05), rgba(42, 34, 24, 0.1));
     --gradient-overlay: linear-gradient(180deg, rgba(32, 25, 19, 0.6) 0%, transparent 100%);
+    --gradient-warm: linear-gradient(180deg, #201913 0%, #2a2218 50%, #201913 100%);  /* 温暖棕色渐变 - 用于body背景 */
 
     /* ===== 文本颜色 ===== */
     --text-primary: #edeade;        /* 浅米色 - 主文字 */
@@ -87,8 +89,8 @@ html {
 
 body {
     font-family: var(--font-sans);
-    background: var(--bg-primary);
-    color: var(--text-primary);
+    background: var(--gradient-warm) !important;  /* 使用温暖棕色渐变，优先级最高 */
+    color: var(--text-primary) !important;
     line-height: 1.6;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
