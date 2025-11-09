@@ -174,7 +174,8 @@ class LanguageIntegrationController {
         if (this.languageToggle) {
             const labelEl = this.languageToggle.querySelector('[data-role=\"language-label\"]');
             const iconEl = this.languageToggle.querySelector('.language-toggle__icon');
-            const codeLabel = (langInfo.code || currentLang || 'en').split('-')[0].toUpperCase();
+            const rawCode = String(langInfo.code || currentLang || 'en');
+            const codeLabel = rawCode.split('-')[0].toUpperCase();
             if (labelEl) {
                 labelEl.textContent = codeLabel;
             } else {
