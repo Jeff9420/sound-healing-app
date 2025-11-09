@@ -9,49 +9,49 @@
 
 :root {
     /* 主色调 */
-    --primary-bg: #1a1a2e;
-    --primary-bg-gradient-start: #1a1a2e;
-    --primary-bg-gradient-mid: #16213e;
-    --primary-bg-gradient-end: #0f3460;
+    --primary-bg: #120a07;
+    --primary-bg-gradient-start: #1b100a;
+    --primary-bg-gradient-mid: #120a07;
+    --primary-bg-gradient-end: #0b0604;
 
     /* 文字颜色 */
-    --text-primary: #f8fafc;
-    --text-secondary: rgba(226, 232, 240, 0.9);
-    --text-tertiary: rgba(27, 16, 10, 0.7);
+    --text-primary: #fdf3e5;
+    --text-secondary: rgba(253, 243, 229, 0.78);
+    --text-tertiary: rgba(253, 243, 229, 0.55);
 
     /* 卡片和组件背景 */
-    --card-bg: rgba(13, 19, 48, 0.92);
-    --card-bg-hover: rgba(30, 41, 99, 0.95);
-    --card-border: rgba(99, 102, 241, 0.5);
+    --card-bg: rgba(32, 18, 12, 0.92);
+    --card-bg-hover: rgba(40, 22, 14, 0.95);
+    --card-border: rgba(255, 181, 115, 0.25);
 
     /* 按钮 */
-    --button-bg: rgba(20, 31, 68, 0.88);
-    --button-bg-hover: rgba(79, 70, 229, 0.85);
-    --button-border: rgba(99, 102, 241, 0.45);
+    --button-bg: rgba(255, 181, 115, 0.12);
+    --button-bg-hover: rgba(255, 181, 115, 0.2);
+    --button-border: rgba(255, 181, 115, 0.35);
 
     /* 播放器 */
-    --player-bg: rgba(11, 16, 36, 0.95);
-    --player-border: rgba(99, 102, 241, 0.35);
+    --player-bg: rgba(16, 9, 6, 0.95);
+    --player-border: rgba(255, 181, 115, 0.25);
 
     /* 进度条和滑块 */
-    --progress-bg: rgba(148, 163, 255, 0.35);
-    --progress-fill: #60a5fa;
+    --progress-bg: rgba(255, 181, 115, 0.25);
+    --progress-fill: #f6a93b;
 
     /* 模态框 */
-    --modal-bg: linear-gradient(135deg, #5560ff 0%, #7c3aed 100%);
-    --modal-overlay: rgba(0, 0, 0, 0.8);
+    --modal-bg: linear-gradient(135deg, #f6a93b 0%, #f87c0f 100%);
+    --modal-overlay: rgba(7, 4, 2, 0.9);
 
     /* 通知 */
-    --notification-bg: rgba(0, 0, 0, 0.8);
+    --notification-bg: rgba(8, 4, 2, 0.85);
 
     /* 阴影 */
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-    --shadow-md: 0 8px 18px rgba(79, 70, 229, 0.35);
-    --shadow-lg: 0 18px 36px rgba(15, 23, 42, 0.45);
+    --shadow-sm: 0 2px 8px rgba(5, 3, 2, 0.45);
+    --shadow-md: 0 8px 24px rgba(5, 3, 2, 0.55);
+    --shadow-lg: 0 18px 40px rgba(5, 3, 2, 0.7);
 
     /* 主题色 */
-    --theme-color: #6666ff;
-    --theme-accent: #38bdf8;
+    --theme-color: #f6a93b;
+    --theme-accent: #7a5af8;
 }
 
 /* ==========================================================================
