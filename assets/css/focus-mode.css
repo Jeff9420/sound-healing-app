@@ -176,7 +176,7 @@
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background: #ffffff;
+    background: var(--text-light, #ffffff);
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
@@ -191,7 +191,7 @@
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background: #ffffff;
+    background: var(--text-light, #ffffff);
     cursor: pointer;
     border: none;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -399,13 +399,13 @@
 
 /* 亮色主题适配 */
 [data-theme="light"] .focus-mode-overlay {
-    background: rgba(255, 255, 255, 0.98);
+    background: var(--bg-primary, rgba(255, 255, 255, 0.98));
 }
 
 [data-theme="light"] .focus-center-play-btn {
     background: rgba(0, 0, 0, 0.08);
     border-color: rgba(0, 0, 0, 0.2);
-    color: #000000;
+    color: var(--fg, #000000);
 }
 
 [data-theme="light"] .focus-mini-controls {
@@ -415,15 +415,42 @@
 [data-theme="light"] .focus-track-title,
 [data-theme="light"] .focus-btn,
 [data-theme="light"] .focus-volume-control {
-    color: #000000;
+    color: var(--fg, #000000);
 }
 
 [data-theme="light"] .focus-track-category {
-    color: rgba(0, 0, 0, 0.6);
+    color: var(--muted, rgba(0, 0, 0, 0.6));
 }
 
 [data-theme="light"] .focus-hint-text {
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--muted, rgba(0, 0, 0, 0.5));
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .focus-mode-overlay {
+        background: rgba(0, 0, 0, 0.98);
+    }
+
+    .focus-center-play-btn {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+        color: var(--text-light, #ffffff);
+    }
+
+    .focus-track-title,
+    .focus-btn,
+    .focus-volume-control {
+        color: var(--text-light, #ffffff);
+    }
+
+    .focus-track-category {
+        color: var(--muted, rgba(255, 255, 255, 0.6));
+    }
+
+    .focus-hint-text {
+        color: var(--muted, rgba(255, 255, 255, 0.5));
+    }
 }
 
 /* 无障碍支持 - 减少动画 */

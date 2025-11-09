@@ -376,7 +376,7 @@
     width: 48px;
     height: 48px;
     border-radius: 8px;
-    background: rgba(246, 169, 59, 0.2);
+    background: var(--bg-secondary, rgba(246, 169, 59, 0.2));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -394,11 +394,13 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: var(--fg, inherit);
 }
 
 .player-mini__category {
     font-size: 0.85rem;
     opacity: 0.6;
+    color: var(--muted, inherit);
 }
 
 .player-mini__controls {
@@ -411,9 +413,9 @@
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-secondary, rgba(255, 255, 255, 0.1));
     border: none;
-    color: #fff;
+    color: var(--text-light, #fff);
     font-size: 1rem;
     cursor: pointer;
     display: flex;
@@ -423,7 +425,7 @@
 }
 
 .player-mini__btn:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--bg-secondary, rgba(255, 255, 255, 0.2));
     transform: scale(1.1);
 }
 
@@ -456,6 +458,7 @@
     font-size: 0.85rem;
     opacity: 0.7;
     min-width: 40px;
+    color: var(--muted, inherit);
 }
 
 .player-mini__volume {
@@ -690,6 +693,46 @@ html {
 *:focus-visible {
     outline: 2px solid rgba(246, 169, 59, 0.55);
     outline-offset: 2px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .header {
+        background: var(--bg-primary, rgba(18, 10, 7, 0.95));
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .header__title {
+        background: linear-gradient(135deg, var(--text-light, #ffffff), var(--muted, #dddddd));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .player-mini__cover {
+        background: var(--bg-secondary, rgba(246, 169, 59, 0.2));
+    }
+
+    .player-mini__title {
+        color: var(--text-light, #ffffff);
+    }
+
+    .player-mini__category {
+        color: var(--muted, rgba(255, 255, 255, 0.6));
+    }
+
+    .player-mini__btn {
+        background: var(--bg-secondary, rgba(255, 255, 255, 0.1));
+        color: var(--text-light, #fff);
+    }
+
+    .player-mini__btn:hover {
+        background: var(--bg-secondary, rgba(255, 255, 255, 0.2));
+    }
+
+    .player-mini__time {
+        color: var(--muted, rgba(255, 255, 255, 0.7));
+    }
 }
 
 /* ==========================================

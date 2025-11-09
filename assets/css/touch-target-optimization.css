@@ -206,8 +206,8 @@ cartodb-btn {
     width: 44px !important;
     height: 44px !important;
     border-radius: 50% !important;
-    background: #6666ff !important;
-    border: 3px solid white !important;
+    background: var(--accent, #6666ff) !important;
+    border: 3px solid var(--text-light, white) !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
     cursor: pointer !important;
     -webkit-appearance: none !important;
@@ -220,8 +220,8 @@ cartodb-btn {
     width: 44px !important;
     height: 44px !important;
     border-radius: 50% !important;
-    background: #6666ff !important;
-    border: 3px solid white !important;
+    background: var(--accent, #6666ff) !important;
+    border: 3px solid var(--text-light, white) !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
     cursor: pointer !important;
     border: none !important;
@@ -270,7 +270,7 @@ cartodb-btn {
 
 .track-duration {
     font-size: 14px !important;
-    color: rgba(27, 16, 10, 0.7) !important;
+    color: var(--muted, rgba(27, 16, 10, 0.7)) !important;
     min-width: 50px !important;
     text-align: right !important;
 }
@@ -403,8 +403,8 @@ cartodb-btn {
         font-size: 16px !important;
         border-radius: 8px !important;
         border: 1px solid rgba(255, 255, 255, 0.2) !important;
-        background: rgba(255, 255, 255, 0.05) !important;
-        color: white !important;
+        background: var(--bg-secondary, rgba(255, 255, 255, 0.05)) !important;
+        color: var(--text-light, white) !important;
         width: 100% !important;
         margin: 8px 0 !important;
     }
@@ -440,7 +440,7 @@ cartodb-btn {
         top: 2px !important;
         left: 2px !important;
         transition: all 0.3s ease !important;
-        background: #ffffff !important;
+        background: var(--bg-primary, #ffffff) !important;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
     }
 
@@ -521,13 +521,50 @@ cartodb-btn {
 /* 高对比度模式下的触摸目标 */
 @media (prefers-contrast: high) {
     .high-contrast-touch {
-        border: 2px solid white !important;
-        background: rgba(0, 0, 0, 0.8) !important;
+        border: 2px solid var(--text-light, white) !important;
+        background: var(--bg-primary, rgba(0, 0, 0, 0.8)) !important;
     }
 
     .high-contrast-touch:focus {
-        outline: 4px solid #6666ff !important;
+        outline: 4px solid var(--accent, #6666ff) !important;
         outline-offset: 2px !important;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .volume-slider::-webkit-slider-thumb,
+    .progress-slider::-webkit-slider-thumb {
+        background: var(--accent, #6666ff) !important;
+        border: 3px solid var(--text-light, white) !important;
+    }
+
+    .volume-slider::-moz-range-thumb,
+    .progress-slider::-moz-range-thumb {
+        background: var(--accent, #6666ff) !important;
+        border: 3px solid var(--text-light, white) !important;
+    }
+
+    .track-duration {
+        color: var(--muted, rgba(255, 255, 255, 0.7)) !important;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="url"],
+    input[type="number"],
+    textarea,
+    select {
+        background: var(--bg-secondary, rgba(255, 255, 255, 0.05)) !important;
+        color: var(--text-light, white) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    }
+
+    .toggle-switch-handle {
+        background: var(--text-light, #ffffff) !important;
     }
 }
 

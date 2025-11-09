@@ -383,29 +383,54 @@
 
 /* 深色主题支持 */
 [data-theme="dark"] .hf-modal-content {
-    background: #1a1a2e;
+    background: var(--bg-primary, #1a1a2e);
 }
 
 [data-theme="light"] .hf-modal-content {
-    background: #ffffff;
+    background: var(--bg-primary, #ffffff);
 }
 
 [data-theme="light"] .hf-item {
-    background: rgba(0, 0, 0, 0.03);
+    background: var(--bg-secondary, rgba(0, 0, 0, 0.03));
     border-color: rgba(0, 0, 0, 0.1);
 }
 
 [data-theme="light"] .hf-item:hover {
-    background: rgba(0, 0, 0, 0.05);
+    background: var(--bg-secondary, rgba(0, 0, 0, 0.05));
     border-color: rgba(0, 0, 0, 0.15);
 }
 
 [data-theme="light"] .hf-item-title {
-    color: #2d3436;
+    color: var(--fg, #2d3436);
 }
 
 [data-theme="light"] .hf-item-meta {
-    color: #636e72;
+    color: var(--muted, #636e72);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .hf-modal-content {
+        background: var(--bg-primary, #1a1a2e);
+    }
+
+    .hf-item {
+        background: var(--bg-secondary, rgba(255, 255, 255, 0.05));
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .hf-item:hover {
+        background: var(--bg-secondary, rgba(255, 255, 255, 0.08));
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .hf-item-title {
+        color: var(--text-light, #fff);
+    }
+
+    .hf-item-meta {
+        color: var(--muted, rgba(255, 255, 255, 0.6));
+    }
 }
 
 /* 动画效果 */
