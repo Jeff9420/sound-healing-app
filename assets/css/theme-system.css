@@ -360,7 +360,7 @@ body {
 }
 
 [data-theme="light"] #backgroundCanvas {
-    opacity: 0.4;
+    display: none;
 }
 
 /* ==========================================================================
