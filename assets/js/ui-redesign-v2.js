@@ -527,6 +527,10 @@ class UIRedesignV2 {
                 <p class="category-section__subtitle" data-i18n="categories.subtitle" style="font-size: 1.1rem; color: var(--text-secondary, #64748b);">9个专业分类，找到最适合你的声音</p>
             `;
             categorySection.insertBefore(heading, categorySection.firstChild);
+
+            if (window.i18n && typeof window.i18n.updatePageContent === 'function') {
+                window.i18n.updatePageContent();
+            }
         }
     }
 

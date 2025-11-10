@@ -582,6 +582,8 @@ class InternationalizationSystem {
                 'featured.meditation.purpose': '专注',
                 'featured.hypnosis.name': '催眠',
                 'featured.hypnosis.purpose': '深睡',
+                'categories.title': '浏览全部 213+ 疗愈音频',
+                'categories.subtitle': '9 大疗愈分类，找到最契合你的声音',
 
                 'ecosystem.species.count': '种',
                 
@@ -1025,6 +1027,8 @@ class InternationalizationSystem {
                 'featured.meditation.purpose': 'Focus',
                 'featured.hypnosis.name': 'Hypnosis',
                 'featured.hypnosis.purpose': 'Deep Sleep',
+                'categories.title': 'Explore All 213+ Healing Sounds',
+                'categories.subtitle': '9 curated categories to match every mood and goal',
 
                 'ecosystem.species.count': ' species',
                 
@@ -1515,6 +1519,8 @@ class InternationalizationSystem {
                 'featured.meditation.purpose': '集中',
                 'featured.hypnosis.name': '催眠',
                 'featured.hypnosis.purpose': '深い眠り',
+                'categories.title': '213以上のヒーリングサウンドをすべて見る',
+                'categories.subtitle': '9種類の専門カテゴリから今の気分に合う音を選べます',
 
                 'ecosystem.species.count': '種',
                 
@@ -1893,6 +1899,8 @@ class InternationalizationSystem {
                 'featured.meditation.purpose': '집중',
                 'featured.hypnosis.name': '최면',
                 'featured.hypnosis.purpose': '깊은 수면',
+                'categories.title': '213+ 힐링 사운드를 모두 둘러보기',
+                'categories.subtitle': '9가지 전문 카테고리에서 지금 필요한 사운드를 찾아보세요',
 
                 'ecosystem.species.count': '종',
                 
@@ -2271,6 +2279,8 @@ class InternationalizationSystem {
                 'featured.meditation.purpose': 'Enfoque',
                 'featured.hypnosis.name': 'Hipnosis',
                 'featured.hypnosis.purpose': 'Sueño profundo',
+                'categories.title': 'Explora los 213+ paisajes sonoros sanadores',
+                'categories.subtitle': '9 categorías especializadas para acompañar cada momento',
 
                 'ecosystem.species.count': ' especies',
                 
