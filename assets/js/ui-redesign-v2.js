@@ -174,6 +174,11 @@ class UIRedesignV2 {
 
         // 绑定快速启动卡片的点击事件
         this.setupQuickStartCards();
+
+        // 触发一次多语言刷新，确保新插入区域与当前语言一致
+        if (window.i18n && typeof window.i18n.updatePageContent === 'function') {
+            window.i18n.updatePageContent();
+        }
     }
 
     /**

@@ -111,13 +111,13 @@ class LanguageIntegrationController {
         
         // 点击外部关闭下拉菜单
         document.addEventListener('click', (e) => {
-            if (!this.languageSelector.contains(e.target)) {
+            if (this.languageSelector && !this.languageSelector.contains(e.target)) {
                 this.closeDropdown();
             }
         });
         
-        // 监听语言变更事件
-        document.addEventListener('languageChanged', (e) => {
+        // 监听来自 i18n 系统的语言变更事件
+        document.addEventListener('languageChange', () => {
             this.updateLanguageDisplay();
         });
         
@@ -162,7 +162,35 @@ class LanguageIntegrationController {
      * 关闭下拉菜单
      */
     closeDropdown() {
-        this.languageSelector.classList.remove('active');
+        if (this.languageSelector) {
+            this.languageSelector.classList.remove('active');
+        }
+    }
+    
+    /**
+     * 解析 i18n 系统返回的语言标识
+     */
+    getCurrentLanguageCode() {
+        if (!this.i18nSystem || typeof this.i18nSystem.getCurrentLanguage !== 'function') {
+            return 'en-US';
+        }
+        
+        const current = this.i18nSystem.getCurrentLanguage();
+        
+        if (typeof current === 'string') {
+            return current;
+        }
+        
+        if (current && typeof current === 'object') {
+            if (current.code) {
+                return current.code;
+            }
+            if (current.config && current.config.code) {
+                return current.config.code;
+            }
+        }
+        
+        return this.i18nSystem.currentLanguage || 'en-US';
     }
     
     /**
@@ -173,8 +201,8 @@ class LanguageIntegrationController {
             return;
         }
         
-        const currentLang = this.i18nSystem.getCurrentLanguage();
-        const langInfo = this.i18nSystem.supportedLanguages[currentLang] || {};
+        const currentLang = this.getCurrentLanguageCode();
+        const langInfo = this.i18nSystem.supportedLanguages[currentLang] || { code: currentLang };
         
         if (this.languageToggle) {
             const labelEl = this.languageToggle.querySelector('[data-role=\"language-label\"]');
@@ -202,7 +230,7 @@ class LanguageIntegrationController {
             return;
         }
         
-        const currentLang = this.i18nSystem.getCurrentLanguage();
+        const currentLang = this.getCurrentLanguageCode();
         const options = this.languageDropdown.querySelectorAll('.language-option');
         
         options.forEach(option => {
@@ -350,10 +378,11 @@ class LanguageIntegrationController {
             return null;
         }
         
-        const currentLang = this.i18nSystem.getCurrentLanguage();
+        const currentLang = this.getCurrentLanguageCode();
+        const langInfo = this.i18nSystem.supportedLanguages[currentLang] || {};
         return {
             code: currentLang,
-            info: this.i18nSystem.supportedLanguages[currentLang],
+            info: langInfo,
             isRTL: ['ar', 'he', 'fa'].includes(currentLang.split('-')[0])
         };
     }
@@ -381,7 +410,7 @@ class LanguageIntegrationController {
         }
         
         document.removeEventListener('click', this.closeDropdown);
-        document.removeEventListener('languageChanged', this.updateLanguageDisplay);
+        document.removeEventListener('languageChange', this.updateLanguageDisplay);
         
         this.isInitialized = false;
         console.log('🧹 语言集成控制器已销毁');

@@ -242,6 +242,9 @@ function renderCategoryShortcuts(entries) {
         const desc = getCategoryDescription(key, category);
         const presentation = categoryPresentations[key] || {};
         const accentColor = presentation.accent || '#7b5dff';
+        const badgeText = getText(`categoryCard.${key}.badge`, presentation.badge || 'Sound Module');
+        const labelText = getText(`categoryCard.${key}.label`, presentation.label || name);
+        const taglineText = getText(`categoryCard.${key}.tagline`, presentation.tagline || getText('nav.quick.start', '立即体验'));
 
         button.style.setProperty('--accent-color', accentColor);
 
@@ -249,8 +252,8 @@ function renderCategoryShortcuts(entries) {
             <span class="category-shortcut__glow"></span>
             <span class="category-shortcut__orbit"></span>
             <div class="category-shortcut__header">
-                <span class="category-shortcut__badge">${presentation.badge || 'Sound Module'}</span>
-                <span class="category-shortcut__label">${presentation.label || name}</span>
+                <span class="category-shortcut__badge">${badgeText}</span>
+                <span class="category-shortcut__label">${labelText}</span>
             </div>
             <div class="category-shortcut__body">
                 <div class="category-shortcut__icon">${icon}</div>
@@ -260,7 +263,7 @@ function renderCategoryShortcuts(entries) {
                 </div>
             </div>
             <div class="category-shortcut__cta">
-                <span>${presentation.tagline || getText('nav.quick.start', '立即体验')}</span>
+                <span>${taglineText}</span>
                 <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
                     <path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
