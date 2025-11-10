@@ -3,17 +3,16 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
-  <!-- Homepage - www -->
+  <!-- Homepage - English (Default) -->
   <url>
     <loc>https://www.soundflows.app/</loc>
-    <lastmod>2025-10-19</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.soundflows.app/" />
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.soundflows.app/?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.soundflows.app/?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://www.soundflows.app/?lang=ko" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.soundflows.app/?lang=es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.soundflows.app/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.soundflows.app/zh/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.soundflows.app/ja/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.soundflows.app/es/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/" />
     <image:image>
       <image:loc>https://www.soundflows.app/assets/images/app-hero.jpg</image:loc>
@@ -25,209 +24,161 @@
   <!-- Homepage - non-www -->
   <url>
     <loc>https://soundflows.app/</loc>
-    <lastmod>2025-10-19</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://soundflows.app/" />
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://soundflows.app/?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="ja-JP" href="https://soundflows.app/?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://soundflows.app/?lang=ko" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://soundflows.app/?lang=es" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://soundflows.app/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://soundflows.app/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.soundflows.app/zh/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.soundflows.app/ja/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.soundflows.app/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/" />
     <image:image>
-      <image:loc>https://soundflows.app/assets/images/app-hero.jpg</image:loc>
+      <image:loc>https://www.soundflows.app/assets/images/app-hero.jpg</image:loc>
       <image:title>Free Sound Healing Music App</image:title>
       <image:caption>213+ premium healing sounds for meditation and relaxation</image:caption>
     </image:image>
   </url>
 
-  <!-- 各语言版本 (Language Versions) -->
+  <!-- Language Versions -->
   <url>
-    <loc>https://www.soundflows.app/?lang=en</loc>
-    <lastmod>2025-10-19</lastmod>
+    <loc>https://www.soundflows.app/zh/</loc>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.soundflows.app/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.soundflows.app/zh/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.soundflows.app/ja/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.soundflows.app/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/" />
+  </url>
+
+  <!-- SEO Landing Pages - New Structure -->
+  <url>
+    <loc>https://www.soundflows.app/sleep-sounds/</loc>
+    <lastmod>2025-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.soundflows.app/sleep-sounds/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.soundflows.app/zh/sleep-sounds/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/sleep-sounds/" />
   </url>
 
   <url>
-    <loc>https://www.soundflows.app/?lang=zh</loc>
-    <lastmod>2025-10-19</lastmod>
+    <loc>https://www.soundflows.app/meditation-focus/</loc>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.soundflows.app/meditation-focus/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.soundflows.app/zh/meditation-focus/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/meditation-focus/" />
   </url>
 
   <url>
-    <loc>https://www.soundflows.app/?lang=ja</loc>
-    <lastmod>2025-10-19</lastmod>
+    <loc>https://www.soundflows.app/anxiety-sound-healing/</loc>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.soundflows.app/anxiety-sound-healing/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.soundflows.app/zh/anxiety-sound-healing/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/anxiety-sound-healing/" />
   </url>
 
   <url>
-    <loc>https://www.soundflows.app/?lang=ko</loc>
-    <lastmod>2025-10-19</lastmod>
+    <loc>https://www.soundflows.app/chakra-sound-healing/</loc>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.soundflows.app/chakra-sound-healing/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.soundflows.app/zh/chakra-sound-healing/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/chakra-sound-healing/" />
   </url>
 
-  <url>
-    <loc>https://www.soundflows.app/?lang=es</loc>
-    <lastmod>2025-10-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- 音频分类页面 (Audio Category Pages) -->
-
+  <!-- Legacy Audio Category Pages -->
   <url>
     <loc>https://www.soundflows.app/pages/meditation/</loc>
-    <lastmod>2025-10-19</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.soundflows.app/pages/meditation/" />
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.soundflows.app/pages/meditation/?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.soundflows.app/pages/meditation/?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://www.soundflows.app/pages/meditation/?lang=ko" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.soundflows.app/pages/meditation/?lang=es" />
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.soundflows.app/pages/meditation/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.soundflows.app/zh/pages/meditation/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/pages/meditation/" />
   </url>
 
   <url>
     <loc>https://www.soundflows.app/pages/rain-sounds/</loc>
-    <lastmod>2025-10-19</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.soundflows.app/pages/rain-sounds/" />
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.soundflows.app/pages/rain-sounds/?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.soundflows.app/pages/rain-sounds/?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://www.soundflows.app/pages/rain-sounds/?lang=ko" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.soundflows.app/pages/rain-sounds/?lang=es" />
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.soundflows.app/pages/rain-sounds/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.soundflows.app/zh/pages/rain-sounds/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/pages/rain-sounds/" />
   </url>
 
   <url>
     <loc>https://www.soundflows.app/pages/chakra-healing/</loc>
-    <lastmod>2025-10-19</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.soundflows.app/pages/chakra-healing/" />
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.soundflows.app/pages/chakra-healing/?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.soundflows.app/pages/chakra-healing/?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://www.soundflows.app/pages/chakra-healing/?lang=ko" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.soundflows.app/pages/chakra-healing/?lang=es" />
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.soundflows.app/pages/chakra-healing/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.soundflows.app/zh/pages/chakra-healing/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/pages/chakra-healing/" />
   </url>
 
   <url>
     <loc>https://www.soundflows.app/pages/singing-bowls/</loc>
-    <lastmod>2025-10-19</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.soundflows.app/pages/singing-bowls/" />
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.soundflows.app/pages/singing-bowls/?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.soundflows.app/pages/singing-bowls/?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://www.soundflows.app/pages/singing-bowls/?lang=ko" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.soundflows.app/pages/singing-bowls/?lang=es" />
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.soundflows.app/pages/singing-bowls/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.soundflows.app/zh/pages/singing-bowls/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/pages/singing-bowls/" />
   </url>
 
   <url>
     <loc>https://www.soundflows.app/pages/hypnosis/</loc>
-    <lastmod>2025-10-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.soundflows.app/pages/hypnosis/" />
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.soundflows.app/pages/hypnosis/?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.soundflows.app/pages/hypnosis/?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://www.soundflows.app/pages/hypnosis/?lang=ko" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.soundflows.app/pages/hypnosis/?lang=es" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/pages/hypnosis/" />
-  </url>
-
-  <!-- Blog Pages -->
-  <url>
-    <loc>https://www.soundflows.app/content/blog/</loc>
-    <lastmod>2025-10-19</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.soundflows.app/content/blog/meditation-routine-checklist.html</loc>
-    <lastmod>2025-10-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://www.soundflows.app/content/blog/best-headphones-for-sleep.html</loc>
-    <lastmod>2025-10-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://www.soundflows.app/content/blog/chakra-class-sequencing-guide.html</loc>
-    <lastmod>2025-10-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://www.soundflows.app/content/blog/how-to-lead-sound-baths.html</loc>
-    <lastmod>2025-10-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://www.soundflows.app/content/blog/designing-focus-playlists.html</loc>
-    <lastmod>2025-10-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://www.soundflows.app/content/blog/create-evening-reset-ritual.html</loc>
-    <lastmod>2025-10-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.soundflows.app/pages/hypnosis/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.soundflows.app/zh/pages/hypnosis/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/pages/hypnosis/" />
   </url>
 
   <!-- Resources Center -->
   <url>
     <loc>https://www.soundflows.app/pages/resources/index.html</loc>
-    <lastmod>2025-10-19</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.soundflows.app/pages/resources/index.html" />
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.soundflows.app/pages/resources/index.html?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.soundflows.app/pages/resources/index.html?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://www.soundflows.app/pages/resources/index.html?lang=ko" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.soundflows.app/pages/resources/index.html?lang=es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.soundflows.app/pages/resources/index.html" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.soundflows.app/zh/pages/resources/index.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/pages/resources/index.html" />
   </url>
 
   <!-- Subconscious Therapy Journey -->
   <url>
     <loc>https://www.soundflows.app/pages/subconscious-therapy/index.html</loc>
-    <lastmod>2025-10-19</lastmod>
+    <lastmod>2025-11-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.soundflows.app/pages/subconscious-therapy/index.html" />
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.soundflows.app/pages/subconscious-therapy/index.html?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.soundflows.app/pages/subconscious-therapy/index.html?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="ko-KR" href="https://www.soundflows.app/pages/subconscious-therapy/index.html?lang=ko" />
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.soundflows.app/pages/subconscious-therapy/index.html?lang=es" />
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.soundflows.app/pages/subconscious-therapy/index.html" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.soundflows.app/zh/pages/subconscious-therapy/index.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/pages/subconscious-therapy/index.html" />
   </url>
 
-  <!-- Amplitude Test Page (Low Priority) -->
+  <!-- Legal Pages -->
   <url>
-    <loc>https://www.soundflows.app/amplitude-test.html</loc>
-    <lastmod>2025-10-17</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <loc>https://www.soundflows.app/privacy-policy.html</loc>
+    <lastmod>2025-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://www.soundflows.app/terms.html</loc>
+    <lastmod>2025-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 
 </urlset>
