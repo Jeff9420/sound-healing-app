@@ -85,31 +85,210 @@ class InternationalizationSystem {
         console.log('🌍 启动国际化系统...');
 
         try {
-            // 强制设置默认语言为英语
-            this.currentLanguage = 'en-US';
-            this.fallbackLanguage = 'en-US';
+            const initialLanguage = this.determineInitialLanguage();
+            this.currentLanguage = initialLanguage;
+            this.fallbackLanguage = this.fallbackLanguage || 'en-US';
 
-            // 保存到本地存储
-            localStorage.setItem('sound_healing_language', 'en-US');
+            this.persistLanguagePreference(initialLanguage);
 
-            // 立即加载英语翻译数据
-            await this.loadLanguageData('en-US');
+            await this.loadLanguageData(initialLanguage);
+            if (initialLanguage !== this.fallbackLanguage) {
+                await this.loadLanguageData(this.fallbackLanguage);
+            }
 
-            // 初始化格式化器
             this.initializeFormatters();
 
-            // 立即应用英语
-            await this.applyLanguage('en-US');
+            await this.applyLanguage(initialLanguage);
 
-            // 设置初始化完成标志
             this.isInitialized = true;
 
             console.log(`✅ 国际化系统启动完成，当前语言: ${this.currentLanguage}`);
 
         } catch (error) {
             console.error('❌ 国际化系统启动失败:', error);
-            // 降级到英文
-            this.currentLanguage = 'en-US';
+            this.currentLanguage = this.fallbackLanguage || 'en-US';
+        }
+    }
+
+    /**
+     * 根据路径、HTML属性、存储和浏览器偏好确定初始语言
+     */
+    determineInitialLanguage() {
+        const contextLanguage = this.getContextLanguage();
+        if (contextLanguage) {
+            return contextLanguage;
+        }
+
+        const storedLanguage = this.getStoredLanguage();
+        if (storedLanguage) {
+            console.log(`📱 使用保存的语言偏好: ${storedLanguage}`);
+            return storedLanguage;
+        }
+
+        const browserLanguage = this.getBrowserLanguage();
+        if (browserLanguage) {
+            console.log(`🌐 检测到浏览器语言: ${browserLanguage}`);
+            return browserLanguage;
+        }
+
+        console.log(`🌐 使用默认语言: ${this.fallbackLanguage || 'en-US'}`);
+        return this.fallbackLanguage || 'en-US';
+    }
+
+    /**
+     * 从页面上下文(路径、HTML lang、全局变量)获取语言
+     */
+    getContextLanguage() {
+        const globalOverride = (typeof window !== 'undefined') 
+            ? (window.SOUNDFLOWS_DEFAULT_LOCALE || window.__DEFAULT_LOCALE || window.__SOUNDFLOWS_DEFAULT_LOCALE)
+            : null;
+        const normalizedGlobal = this.normalizeLanguageCode(globalOverride);
+        if (normalizedGlobal) {
+            return normalizedGlobal;
+        }
+
+        const pathLanguage = this.getLanguageFromPath();
+        if (pathLanguage) {
+            console.log(`🌐 根据路径应用语言: ${pathLanguage}`);
+            return pathLanguage;
+        }
+
+        let htmlLang = null;
+        if (typeof document !== 'undefined' && document.documentElement) {
+            htmlLang = document.documentElement.getAttribute('lang');
+        }
+        const normalizedHtml = this.normalizeLanguageCode(htmlLang);
+        if (normalizedHtml) {
+            return normalizedHtml;
+        }
+
+        return null;
+    }
+
+    /**
+     * 从URL路径解析语言 (/en, /zh 等)
+     */
+    getLanguageFromPath() {
+        if (typeof window === 'undefined') {
+            return null;
+        }
+
+        const segments = window.location.pathname.split('/').filter(Boolean);
+        if (!segments.length) {
+            return null;
+        }
+
+        const firstSegment = segments[0].toLowerCase();
+        const pathMap = {
+            'en': 'en-US',
+            'en-us': 'en-US',
+            'zh': 'zh-CN',
+            'zh-cn': 'zh-CN',
+            'zh-hans': 'zh-CN',
+            'ja': 'ja-JP',
+            'ja-jp': 'ja-JP',
+            'jp': 'ja-JP',
+            'ko': 'ko-KR',
+            'ko-kr': 'ko-KR',
+            'kr': 'ko-KR',
+            'es': 'es-ES',
+            'es-es': 'es-ES'
+        };
+
+        const mapped = pathMap[firstSegment];
+        if (mapped && this.supportedLanguages[mapped]) {
+            return mapped;
+        }
+
+        return null;
+    }
+
+    /**
+     * 语言别名规范化
+     */
+    normalizeLanguageCode(langCode) {
+        if (!langCode || typeof langCode !== 'string') {
+            return null;
+        }
+
+        const normalized = langCode.trim().toLowerCase();
+        const aliasMap = {
+            'en': 'en-US',
+            'en-us': 'en-US',
+            'en-gb': 'en-US',
+            'zh': 'zh-CN',
+            'zh-cn': 'zh-CN',
+            'zh-hans': 'zh-CN',
+            'zh-sg': 'zh-CN',
+            'ja': 'ja-JP',
+            'ja-jp': 'ja-JP',
+            'jp': 'ja-JP',
+            'ko': 'ko-KR',
+            'ko-kr': 'ko-KR',
+            'kr': 'ko-KR',
+            'es': 'es-ES',
+            'es-es': 'es-ES'
+        };
+
+        if (aliasMap[normalized]) {
+            return aliasMap[normalized];
+        }
+
+        const exactMatch = Object.keys(this.supportedLanguages).find(
+            code => code.toLowerCase() === normalized
+        );
+
+        return exactMatch || null;
+    }
+
+    /**
+     * 获取本地存储中的语言偏好
+     */
+    getStoredLanguage() {
+        try {
+            const savedLanguage = localStorage.getItem('sound_healing_language');
+            if (savedLanguage && this.supportedLanguages[savedLanguage]) {
+                return savedLanguage;
+            }
+        } catch (error) {
+            console.warn('⚠️ 无法读取语言本地存储:', error);
+        }
+        return null;
+    }
+
+    /**
+     * 检测浏览器语言
+     */
+    getBrowserLanguage() {
+        if (typeof navigator === 'undefined') {
+            return null;
+        }
+
+        const browserLang = navigator.language || (Array.isArray(navigator.languages) && navigator.languages[0]);
+        if (!browserLang) {
+            return null;
+        }
+
+        if (this.supportedLanguages[browserLang]) {
+            return browserLang;
+        }
+
+        const langCode = browserLang.split('-')[0];
+        const matchedLang = Object.keys(this.supportedLanguages).find(
+            key => key.startsWith(langCode)
+        );
+
+        return matchedLang || null;
+    }
+
+    /**
+     * 持久化语言设置
+     */
+    persistLanguagePreference(langCode) {
+        try {
+            localStorage.setItem('sound_healing_language', langCode);
+        } catch (error) {
+            console.warn('⚠️ 无法保存语言偏好:', error);
         }
     }
     
@@ -117,35 +296,18 @@ class InternationalizationSystem {
      * 检测用户语言偏好
      */
     detectUserLanguage() {
-        // 优先级：本地存储 > 浏览器语言 > 默认英文
-        const savedLanguage = localStorage.getItem('sound_healing_language');
-        if (savedLanguage && this.supportedLanguages[savedLanguage]) {
-            this.currentLanguage = savedLanguage;
-            console.log(`📱 使用保存的语言偏好: ${savedLanguage}`);
+        const storedLanguage = this.getStoredLanguage();
+        if (storedLanguage) {
+            this.currentLanguage = storedLanguage;
+            console.log(`📱 使用保存的语言偏好: ${storedLanguage}`);
             return;
         }
         
-        // 检测浏览器语言
-        const browserLang = navigator.language || navigator.languages?.[0];
-        if (browserLang) {
-            // 匹配完整的语言代码
-            if (this.supportedLanguages[browserLang]) {
-                this.currentLanguage = browserLang;
-                console.log(`🌐 检测到浏览器语言: ${browserLang}`);
-                return;
-            }
-            
-            // 匹配语言主代码 (如 'en' 匹配 'en-US')
-            const langCode = browserLang.split('-')[0];
-            const matchedLang = Object.keys(this.supportedLanguages).find(
-                key => key.startsWith(langCode)
-            );
-            
-            if (matchedLang) {
-                this.currentLanguage = matchedLang;
-                console.log(`🌐 匹配浏览器语言: ${browserLang} -> ${matchedLang}`);
-                return;
-            }
+        const browserLanguage = this.getBrowserLanguage();
+        if (browserLanguage) {
+            this.currentLanguage = browserLanguage;
+            console.log(`🌐 检测到浏览器语言: ${browserLanguage}`);
+            return;
         }
         
         console.log(`🌐 使用默认语言: ${this.currentLanguage}`);
@@ -486,6 +648,18 @@ class InternationalizationSystem {
                 'hero.stats.audio': '疗愈音频与白噪合集',
                 'hero.stats.scenes': '场景主题随情绪切换',
                 'hero.stats.languages': '语言界面全球同步',
+                'stats.tracks.title': '疗愈声景',
+                'stats.tracks.desc': '213+ 首助眠、专注、缓压音场。',
+                'stats.languages.title': '支持语言',
+                'stats.languages.desc': '英语、中文、日语、韩语、西语等。',
+                'stats.sessions.title': '引导冥想播放',
+                'stats.sessions.desc': '全球用户已完成的睡眠与专注会话。',
+                'stats.journeys.title': '5 大疗愈目标',
+                'stats.journeys.sleep': '睡眠',
+                'stats.journeys.focus': '专注',
+                'stats.journeys.anxiety': '焦虑舒缓',
+                'stats.journeys.emotion': '情绪平衡',
+                'stats.journeys.chakra': '脉轮',
 
                 // Header & Navigation
                 'header.tagline': 'Soundflows · 数字音疗工作室',
@@ -858,6 +1032,18 @@ class InternationalizationSystem {
                 'hero.stats.audio': 'Healing Audio & White Noise Collection',
                 'hero.stats.scenes': 'Scene Themes Match Your Mood',
                 'hero.stats.languages': 'Language Interface Global Sync',
+                'stats.tracks.title': 'Healing soundscapes',
+                'stats.tracks.desc': 'Curated audio for sleep, focus and anxiety relief.',
+                'stats.languages.title': 'Languages',
+                'stats.languages.desc': 'English, 中文, 日本語, 한국어, Español & more.',
+                'stats.sessions.title': 'Guided sessions',
+                'stats.sessions.desc': 'Sleep logs, focus rituals and mindful mornings completed.',
+                'stats.journeys.title': '5 core journeys',
+                'stats.journeys.sleep': 'Sleep',
+                'stats.journeys.focus': 'Focus',
+                'stats.journeys.anxiety': 'Anxiety relief',
+                'stats.journeys.emotion': 'Emotional balance',
+                'stats.journeys.chakra': 'Chakras',
 
                 // Hero Panel (Right Side Stats Card)
                 'hero.panel.badge': 'Trusted by 120K+ users',
@@ -1266,6 +1452,18 @@ class InternationalizationSystem {
                 'hero.stats.audio': 'ヒーリングオーディオ & ホワイトノイズコレクション',
                 'hero.stats.scenes': 'シーンテーマは気分に合わせて',
                 'hero.stats.languages': '言語インターフェースグローバル同期',
+                'stats.tracks.title': 'Healing soundscapes',
+                'stats.tracks.desc': 'Curated audio for sleep, focus and anxiety relief.',
+                'stats.languages.title': 'Languages',
+                'stats.languages.desc': 'English, 中文, 日本語, 한국어, Español & more.',
+                'stats.sessions.title': 'Guided sessions',
+                'stats.sessions.desc': 'Sleep logs, focus rituals and mindful mornings completed.',
+                'stats.journeys.title': '5 core journeys',
+                'stats.journeys.sleep': 'Sleep',
+                'stats.journeys.focus': 'Focus',
+                'stats.journeys.anxiety': 'Anxiety relief',
+                'stats.journeys.emotion': 'Emotional balance',
+                'stats.journeys.chakra': 'Chakras',
 
                 // Header & Navigation
                 'header.tagline': 'Soundflows · デジタル音響療法スタジオ',
@@ -1591,6 +1789,18 @@ class InternationalizationSystem {
                 'hero.stats.audio': '힐링 오디오 & 백색 소음 컬렉션',
                 'hero.stats.scenes': '기분에 맞는 장면 테마',
                 'hero.stats.languages': '언어 인터페이스 글로벌 동기화',
+                'stats.tracks.title': 'Healing soundscapes',
+                'stats.tracks.desc': 'Curated audio for sleep, focus and anxiety relief.',
+                'stats.languages.title': 'Languages',
+                'stats.languages.desc': 'English, 中文, 日本語, 한국어, Español & more.',
+                'stats.sessions.title': 'Guided sessions',
+                'stats.sessions.desc': 'Sleep logs, focus rituals and mindful mornings completed.',
+                'stats.journeys.title': '5 core journeys',
+                'stats.journeys.sleep': 'Sleep',
+                'stats.journeys.focus': 'Focus',
+                'stats.journeys.anxiety': 'Anxiety relief',
+                'stats.journeys.emotion': 'Emotional balance',
+                'stats.journeys.chakra': 'Chakras',
 
                 // Header & Navigation
                 'header.tagline': 'Soundflows · 디지털 사운드 테라피 스튜디오',
@@ -1916,6 +2126,18 @@ class InternationalizationSystem {
                 'hero.stats.audio': 'Colección de Audio de Sanación y Ruido Blanco',
                 'hero.stats.scenes': 'Temas de Escena Coinciden con Tu Estado de Ánimo',
                 'hero.stats.languages': 'Sincronización Global de Interfaz de Idioma',
+                'stats.tracks.title': 'Healing soundscapes',
+                'stats.tracks.desc': 'Curated audio for sleep, focus and anxiety relief.',
+                'stats.languages.title': 'Languages',
+                'stats.languages.desc': 'English, 中文, 日本語, 한국어, Español & more.',
+                'stats.sessions.title': 'Guided sessions',
+                'stats.sessions.desc': 'Sleep logs, focus rituals and mindful mornings completed.',
+                'stats.journeys.title': '5 core journeys',
+                'stats.journeys.sleep': 'Sleep',
+                'stats.journeys.focus': 'Focus',
+                'stats.journeys.anxiety': 'Anxiety relief',
+                'stats.journeys.emotion': 'Emotional balance',
+                'stats.journeys.chakra': 'Chakras',
 
                 // Header & Navigation
                 'header.tagline': 'Soundflows · Estudio Digital de Terapia de Sonido',

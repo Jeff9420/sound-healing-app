@@ -99,6 +99,11 @@ class LanguageIntegrationController {
         this.languageDropdown.addEventListener('click', (e) => {
             const option = e.target.closest('.language-option');
             if (option) {
+                const redirectUrl = option.getAttribute('data-url');
+                if (redirectUrl) {
+                    window.location.href = redirectUrl;
+                    return;
+                }
                 const langCode = option.getAttribute('data-lang');
                 this.changeLanguage(langCode);
             }
