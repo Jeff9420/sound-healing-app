@@ -402,45 +402,16 @@
 
         <section class="experience-launchpad" id="experienceLaunchpad" aria-label="Instant playback console">
             <div class="experience-launchpad__grid">
-                <div class="experience-launchpad__player">
-                    <div class="experience-launchpad__title">
-                        <p data-i18n="player.instantLabel">Instant Player · No Download Required</p>
-                        <h3 data-i18n="player.instantHeadline">Press play to start relaxing</h3>
-                    </div>
-                    <div id="audioPlayer" class="audio-player" role="region" aria-label="Audio player controls" tabindex="-1" onclick="if(isMinimized) toggleMinimize()">
-                        <div class="minimize-indicator" onclick="toggleMinimize(event)" data-i18n="player.minimize" role="button" tabindex="0" aria-label="Minimize player" aria-expanded="true">Minimize player</div>
-                        <div class="minimized-display">
-                            <div class="minimized-text" id="minimizedTrack" data-i18n="player.notPlaying" aria-live="polite">Nothing is playing right now</div>
+                <div class="experience-launchpad__player-card">
+                    <div class="player-modal-prompt">
+                        <p class="player-modal-prompt__eyebrow">Floating Player</p>
+                        <h3>Playback controls pop up when you press play</h3>
+                        <p>Pick any sound and the floating controller appears so you can adjust volume, shuffle, timer, and more without leaving the page.</p>
+                        <div class="player-modal-prompt__actions">
+                            <button class="saas-btn saas-btn--primary" type="button" onclick="window.openPlayerModal(true)">Open player</button>
+                            <button class="saas-btn saas-btn--ghost" type="button" onclick="openPlaylist('Rain', AUDIO_CONFIG.categories['Rain'])" data-i18n="player.exploreMore">Explore more sounds</button>
                         </div>
-                        <div class="player-content">
-                            <div class="now-playing" role="status" aria-live="polite">
-                                <span class="player-recommendation-badge" id="playerBadge" data-i18n="player.defaultTrack.badge">Official recommendation</span>
-                                <div id="currentTrack" class="track-title" data-i18n="player.defaultTrack.title" aria-label="Currently playing track">Sleep Warm Rain · 15 min</div>
-                                <div id="playerTags" class="track-tags" data-i18n="player.defaultTrack.tags">#sleep #beginner #try-tonight</div>
-                                <p id="playerDescription" class="track-description" data-i18n="player.defaultTrack.desc">A gentle, voice-free rain track to slow your mind before bed.</p>
-                                <div id="currentCategory" class="track-category" aria-label="Current track category"></div>
-                            </div>
-                            <div class="player-controls" role="group" aria-label="Playback controls">
-                                <button id="prevTrack" class="control-btn" aria-label="Play previous track">⏮</button>
-                                <button id="playPause" class="control-btn" aria-label="Play or pause">▶️</button>
-                                <button id="nextTrack" class="control-btn" aria-label="Play next track">⏭</button>
-                                <div class="volume-control">
-                                    <label for="volumeSlider" class="sr-only">Volume</label>
-                                    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.7" aria-label="Volume control">
-                                </div>
-                                <button id="shuffleToggle" class="control-btn" aria-pressed="false" aria-label="Toggle shuffle">🔀</button>
-                                <button id="repeatToggle" class="control-btn" aria-pressed="false" aria-label="Toggle repeat">🔁</button>
-                                <button id="sleepTimer" class="control-btn" aria-label="Sleep timer">⏱</button>
-                            </div>
-                            <div class="progress-section">
-                                <span id="currentTime" class="time-display">0:00</span>
-                                <div class="progress-bar" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                                    <div id="progressFill" class="progress-fill"></div>
-                                </div>
-                                <span id="totalDuration" class="time-display">0:00</span>
-                            </div>
-                            <p class="player-helper" data-i18n="player.helper">Press ▶️ to start your first session. No signup needed.</p>
-                        </div>
+                        <p class="player-modal-prompt__hint">The player opens automatically whenever you start an audio track.</p>
                     </div>
                 </div>
                 <div class="experience-launchpad__insights">
@@ -651,6 +622,56 @@
                 <button class="close" onclick="closePlaylist()" data-i18n="modal.close" aria-label="Close playlist" tabindex="0">Close dialog</button>
                 <h2 id="playlistTitle" data-i18n="playlist.title">Playlist</h2>
                 <div id="trackList" class="track-list" role="list" aria-label="Audio tracks"></div>
+            </div>
+        </div>
+
+        <div id="playerControlModal" class="player-control-modal" role="dialog" aria-modal="true" aria-labelledby="playerModalTitle" aria-hidden="true">
+            <div class="player-control-modal__overlay" data-close-player-modal></div>
+            <div class="player-control-modal__surface" role="document">
+                <header class="player-control-modal__header">
+                    <p data-i18n="player.instantLabel">Instant Player �� No Download Required</p>
+                    <h3 id="playerModalTitle" data-i18n="player.instantHeadline">Press play to start relaxing</h3>
+                    <button class="player-control-modal__close" type="button" data-role="player-modal-close" data-close-player-modal aria-label="Close player">��</button>
+                </header>
+                <div id="audioPlayer" class="audio-player" role="region" aria-label="Audio player controls" tabindex="-1">
+                    <div class="minimize-indicator" onclick="toggleMinimize(event)" data-i18n="player.minimize" role="button" tabindex="0" aria-label="Minimize player" aria-expanded="true">Minimize player</div>
+                    <div class="minimized-display">
+                        <div class="minimized-text" id="minimizedTrack" data-i18n="player.notPlaying" aria-live="polite">Nothing is playing right now</div>
+                    </div>
+                    <div class="player-content">
+                        <div class="now-playing" role="status" aria-live="polite">
+                            <span class="player-recommendation-badge" id="playerBadge" data-i18n="player.defaultTrack.badge">Official recommendation</span>
+                            <div id="currentTrack" class="track-title" data-i18n="player.defaultTrack.title" aria-label="Currently playing track">Sleep Warm Rain �� 15 min</div>
+                            <div id="playerTags" class="track-tags" data-i18n="player.defaultTrack.tags">#sleep #beginner #try-tonight</div>
+                            <p id="playerDescription" class="track-description" data-i18n="player.defaultTrack.desc">A gentle, voice-free rain track to slow your mind before bed.</p>
+                            <div id="currentCategory" class="track-category" aria-label="Current track category"></div>
+                        </div>
+                        <div class="player-controls" role="group" aria-label="Playback controls">
+                            <button id="prevTrack" class="control-btn" aria-label="Play previous track">??</button>
+                            <button id="playPause" class="control-btn" aria-label="Play or pause">??</button>
+                            <button id="nextTrack" class="control-btn" aria-label="Play next track">??</button>
+                            <div class="volume-control">
+                                <label for="volumeSlider" class="sr-only">Volume</label>
+                                <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.7" aria-label="Volume control">
+                            </div>
+                            <button id="shuffleToggle" class="control-btn" aria-pressed="false" aria-label="Toggle shuffle">??</button>
+                            <button id="repeatToggle" class="control-btn" aria-pressed="false" aria-label="Toggle repeat">??</button>
+                            <button id="sleepTimer" class="control-btn" aria-label="Sleep timer">??</button>
+                        </div>
+                        <div class="progress-section">
+                            <span id="currentTime" class="time-display">0:00</span>
+                            <div class="progress-bar" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                                <div id="progressFill" class="progress-fill"></div>
+                            </div>
+                            <span id="totalDuration" class="time-display">0:00</span>
+                        </div>
+                        <p class="player-helper" data-i18n="player.helper">Press ?? to start your first session. No signup needed.</p>
+                        <div class="player-cta">
+                            <button class="player-cta__button" onclick="playDefaultSleepSession()" data-i18n="player.defaultTrack.cta">Start sleep session</button>
+                            <button class="player-cta__secondary" onclick="openPlaylist('Rain', AUDIO_CONFIG.categories['Rain'])" data-i18n="player.exploreMore">Explore more sounds</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

@@ -414,45 +414,16 @@
 
         <section class="experience-launchpad" id="experienceLaunchpad" aria-label="即时播放控制台">
             <div class="experience-launchpad__grid">
-                <div class="experience-launchpad__player">
-                    <div class="experience-launchpad__title">
-                        <p data-i18n="player.instantLabel">即刻播放</p>
-                        <h3 data-i18n="player.instantHeadline">一键进入放松状态</h3>
-                    </div>
-                    <div id="audioPlayer" class="audio-player" role="region" aria-label="Audio player controls" tabindex="-1" onclick="if(isMinimized) toggleMinimize()">
-                        <div class="minimize-indicator" onclick="toggleMinimize(event)" data-i18n="player.minimize" role="button" tabindex="0" aria-label="Minimize player" aria-expanded="true">▼收起</div>
-                        <div class="minimized-display">
-                            <div class="minimized-text" id="minimizedTrack" data-i18n="player.notPlaying" aria-live="polite">未播放</div>
+                <div class="experience-launchpad__player-card">
+                    <div class="player-modal-prompt">
+                        <p class="player-modal-prompt__eyebrow">����������</p>
+                        <h3>���ſ��ƻ����㰴�²���ʱ�Զ�����</h3>
+                        <p>ѡ��������Ƶ�������������ᵯ�����������������ϴ�ơ���ʱ�����ã������뿪��ǰҳ�档</p>
+                        <div class="player-modal-prompt__actions">
+                            <button class="saas-btn saas-btn--primary" type="button" onclick="window.openPlayerModal(true)">�����򿪲�����</button>
+                            <button class="saas-btn saas-btn--ghost" type="button" onclick="openPlaylist('Rain', AUDIO_CONFIG.categories['Rain'])" data-i18n="player.exploreMore">���������Ƶ</button>
                         </div>
-                        <div class="player-content">
-                            <div class="now-playing" role="status" aria-live="polite">
-                                <span class="player-recommendation-badge" id="playerBadge" data-i18n="player.defaultTrack.badge">官方推荐</span>
-                                <div id="currentTrack" class="track-title" data-i18n="player.notPlaying" aria-label="Currently playing track">15 分钟温暖雨声</div>
-                                <div id="playerTags" class="track-tags" data-i18n="player.defaultTrack.tags">#助眠 #新手 #今晚</div>
-                                <p id="playerDescription" class="track-description" data-i18n="player.defaultTrack.desc">柔和无语音的雨声，帮助睡前放慢脑波。</p>
-                                <div id="currentCategory" class="track-category" aria-label="Current track category"></div>
-                            </div>
-                            <div class="player-controls" role="group" aria-label="Playback controls">
-                                <button id="prevTrack" class="control-btn" aria-label="Play previous track">⏮</button>
-                                <button id="playPause" class="control-btn" aria-label="Play or pause">▶️</button>
-                                <button id="nextTrack" class="control-btn" aria-label="Play next track">⏭</button>
-                                <div class="volume-control">
-                            <label for="volumeSlider" class="sr-only">音量</label>
-                                    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.7" aria-label="Volume control">
-                                </div>
-                                <button id="shuffleToggle" class="control-btn" aria-pressed="false" aria-label="Toggle shuffle">🔀</button>
-                                <button id="repeatToggle" class="control-btn" aria-pressed="false" aria-label="Toggle repeat">🔁</button>
-                                <button id="sleepTimer" class="control-btn" aria-label="Sleep timer">⏱</button>
-                            </div>
-                            <div class="progress-section">
-                                <span id="currentTime" class="time-display">0:00</span>
-                                <div class="progress-bar" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                                    <div id="progressFill" class="progress-fill"></div>
-                                </div>
-                                <span id="totalDuration" class="time-display">0:00</span>
-                            </div>
-                        <p class="player-helper" data-i18n="player.helper">点击 ▶️ 即可开始首个疗程，无需注册。</p>
-                        </div>
+                        <p class="player-modal-prompt__hint">ÿ���㿪ʼ������Ƶ�������������Զ�������</p>
                     </div>
                 </div>
                 <div class="experience-launchpad__insights">
@@ -667,6 +638,56 @@
                 <button class="close" onclick="closePlaylist()" data-i18n="modal.close" aria-label="关闭播放列表" tabindex="0">&times;</button>
                 <h2 id="playlistTitle" data-i18n="playlist.title">选择音频</h2>
                 <div id="trackList" class="track-list" role="list" aria-label="Audio tracks"></div>
+            </div>
+        </div>
+
+        <div id="playerControlModal" class="player-control-modal" role="dialog" aria-modal="true" aria-labelledby="playerModalTitle" aria-hidden="true">
+            <div class="player-control-modal__overlay" data-close-player-modal></div>
+            <div class="player-control-modal__surface" role="document">
+                <header class="player-control-modal__header">
+                    <p data-i18n="player.instantLabel">���̲��� �� ��������</p>
+                    <h3 id="playerModalTitle" data-i18n="player.instantHeadline">���²��ż��ɷ���</h3>
+                    <button class="player-control-modal__close" type="button" data-role="player-modal-close" data-close-player-modal aria-label="�رղ�����">��</button>
+                </header>
+                <div id="audioPlayer" class="audio-player" role="region" aria-label="��Ƶ���ſ���" tabindex="-1">
+                    <div class="minimize-indicator" onclick="toggleMinimize(event)" data-i18n="player.minimize" role="button" tabindex="0" aria-label="��С��������" aria-expanded="true">��С��������</div>
+                    <div class="minimized-display">
+                        <div class="minimized-text" id="minimizedTrack" data-i18n="player.notPlaying" aria-live="polite">��ǰû�в���</div>
+                    </div>
+                    <div class="player-content">
+                        <div class="now-playing" role="status" aria-live="polite">
+                            <span class="player-recommendation-badge" id="playerBadge" data-i18n="player.defaultTrack.badge">�ٷ��Ƽ�</span>
+                            <div id="currentTrack" class="track-title" data-i18n="player.defaultTrack.title" aria-label="��ǰ������Ŀ">15 ������ů����</div>
+                            <div id="playerTags" class="track-tags" data-i18n="player.defaultTrack.tags">#���� #���� #����</div>
+                            <p id="playerDescription" class="track-description" data-i18n="player.defaultTrack.desc">���������������������˯ǰ�����Բ���</p>
+                            <div id="currentCategory" class="track-category" aria-label="��ǰ��Ƶ����"></div>
+                        </div>
+                        <div class="player-controls" role="group" aria-label="���ſ���">
+                            <button id="prevTrack" class="control-btn" aria-label="��һ��">??</button>
+                            <button id="playPause" class="control-btn" aria-label="���Ż���ͣ">??</button>
+                            <button id="nextTrack" class="control-btn" aria-label="��һ��">??</button>
+                            <div class="volume-control">
+                                <label for="volumeSlider" class="sr-only">����</label>
+                                <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.7" aria-label="��������">
+                            </div>
+                            <button id="shuffleToggle" class="control-btn" aria-pressed="false" aria-label="�������">??</button>
+                            <button id="repeatToggle" class="control-btn" aria-pressed="false" aria-label="ѭ������">??</button>
+                            <button id="sleepTimer" class="control-btn" aria-label="˯�߶�ʱ">??</button>
+                        </div>
+                        <div class="progress-section">
+                            <span id="currentTime" class="time-display">0:00</span>
+                            <div class="progress-bar" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                                <div id="progressFill" class="progress-fill"></div>
+                            </div>
+                            <span id="totalDuration" class="time-display">0:00</span>
+                        </div>
+                        <p class="player-helper" data-i18n="player.helper">��� ?? ���ɿ�ʼ�׸��Ƴ̣�����ע�ᡣ</p>
+                        <div class="player-cta">
+                            <button class="player-cta__button" onclick="playDefaultSleepSession()" data-i18n="player.defaultTrack.cta">���������Ƴ�</button>
+                            <button class="player-cta__secondary" onclick="openPlaylist('Rain', AUDIO_CONFIG.categories['Rain'])" data-i18n="player.exploreMore">�鿴������Ƶ</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

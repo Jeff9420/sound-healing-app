@@ -579,6 +579,52 @@ function closePlaylist() {
 }
 
 // ==========================================================================
+// 浮动播放器模态
+// ==========================================================================
+
+function openPlayerModal(shouldFocusClose = false) {
+    const modal = document.getElementById('playerControlModal');
+    if (!modal) {
+        return;
+    }
+    modal.classList.add('player-modal--visible');
+    modal.removeAttribute('aria-hidden');
+    document.body.classList.add('player-modal-open');
+
+    if (shouldFocusClose) {
+        const closeBtn = modal.querySelector('[data-role="player-modal-close"]');
+        if (closeBtn) {
+            closeBtn.focus();
+        }
+    }
+}
+
+function closePlayerModal() {
+    const modal = document.getElementById('playerControlModal');
+    if (!modal) {
+        return;
+    }
+    modal.classList.remove('player-modal--visible');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('player-modal-open');
+}
+
+document.addEventListener('click', (event) => {
+    if (event.target && event.target.hasAttribute('data-close-player-modal')) {
+        closePlayerModal();
+    }
+});
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+        closePlayerModal();
+    }
+});
+
+window.openPlayerModal = openPlayerModal;
+window.closePlayerModal = closePlayerModal;
+
+// ==========================================================================
 // 音频播放控制
 // ==========================================================================
 
@@ -673,6 +719,8 @@ async function playTrack(index) {
         player.classList.add('show');
         player.classList.remove('minimized');
     }
+
+    openPlayerModal(false);
 
     window.dispatchEvent(new CustomEvent('audioStateChange', {
         detail: { isPlaying: true, track: track }
