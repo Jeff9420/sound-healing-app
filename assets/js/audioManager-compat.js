@@ -96,11 +96,22 @@
                 const categoryData = window.AUDIO_CONFIG.categories[categoryKey];
                 const baseUrl = window.AUDIO_CONFIG.baseUrl || '';
 
-                window.tracks = (categoryData.files || []).map(fileName => ({
-                    name: fileName.replace(/\.[^/.]+$/, ''),
-                    fileName,
-                    url: `${baseUrl}${categoryData.folder}/${fileName}`
-                }));
+                window.tracks = (categoryData.files || []).map(fileName => {
+                    // 使用全局 getAudioUrl 函数（如果可用），否则手动构建并编码URL
+                    let url;
+                    if (typeof window.getAudioUrl === 'function') {
+                        url = window.getAudioUrl(categoryKey, fileName);
+                    } else {
+                        // 降级处理：手动构建URL并编码文件名
+                        url = `${baseUrl}${categoryData.folder}/${encodeURIComponent(fileName)}`;
+                    }
+
+                    return {
+                        name: fileName.replace(/\.[^/.]+$/, ''),
+                        fileName,
+                        url
+                    };
+                });
 
                 window.currentCategory = { key: categoryKey, ...categoryData };
                 return;
