@@ -440,7 +440,13 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
                 return fileName;
             }
 
-            // 构建本地音频路径
+            // 使用全局 getAudioUrl 函数从 audio-config.js
+            if (typeof getAudioUrl === 'function') {
+                return getAudioUrl(categoryName, fileName);
+            }
+
+            // 降级处理：如果全局函数不可用，使用本地路径
+            console.warn('全局 getAudioUrl 函数不可用，使用本地路径');
             return `/assets/audio/${categoryName}/${fileName}`;
         }
 
