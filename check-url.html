@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL检查</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .box {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 { margin-bottom: 20px; }
+        h2 { font-size: 18px; margin-bottom: 10px; }
+        .url {
+            background: #f9f9f9;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 3px solid #2196F3;
+            word-break: break-all;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        button {
+            background: #2196F3;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin: 10px 0;
+        }
+        .success { color: #4CAF50; font-weight: bold; }
+        .error { color: #f44336; font-weight: bold; }
+        .info { color: #666; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <h1>🔍 URL生成检查工具</h1>
+
+    <div class="box">
+        <h2>配置状态</h2>
+        <div id="config-status">正在检查...</div>
+    </div>
+
+    <div class="box">
+        <h2>URL生成测试</h2>
+        <button onclick="runTest()">开始测试</button>
+        <div id="test-result"></div>
+    </div>
+
+    <div class="box">
+        <h2>播放测试</h2>
+        <div id="play-status"></div>
+        <audio id="audio" controls style="width: 100%; margin-top: 10px;"></audio>
+    </div>
+
+    <script src="/assets/js/audio-config.js"></script>
+    <script>
+        window.addEventListener('load', checkConfig);
+
+        function checkConfig() {
+            const status = document.getElementById('config-status');
+            let html = '';
+
+            if (typeof AUDIO_CONFIG === 'undefined') {
+                html = '<div class="error">❌ AUDIO_CONFIG 未定义</div>';
+                status.innerHTML = html;
+                return;
+            }
+
+            if (typeof getAudioUrl !== 'function') {
+                html = '<div class="error">❌ getAudioUrl 函数未定义</div>';
+                status.innerHTML = html;
+                return;
+            }
+
+            const categories = Object.keys(AUDIO_CONFIG.categories);
+            html = `
+                <div class="success">✅ 配置已加载</div>
+                <div class="info">Base URL: ${AUDIO_CONFIG.baseUrl}</div>
+                <div class="info">分类数量: ${categories.length}</div>
+            `;
+
+            status.innerHTML = html;
+        }
+
+        function runTest() {
+            const result = document.getElementById('test-result');
+            const playStatus = document.getElementById('play-status');
+
+            if (typeof AUDIO_CONFIG === 'undefined' || typeof getAudioUrl !== 'function') {
+                result.innerHTML = '<div class="error">配置未加载，无法测试</div>';
+                return;
+            }
+
+            const category = 'Animal sounds';
+            const file = '森林里百灵鸟鸣叫.mp3';
+            const url = getAudioUrl(category, file);
+            const expected = 'https://archive.org/download/sound-healing-collection/animal-sounds/森林里百灵鸟鸣叫.mp3';
+
+            const match = url === expected;
+
+            let html = `
+                <h3 style="margin-top: 15px;">实际生成的URL:</h3>
+                <div class="url">${url}</div>
+
+                <h3 style="margin-top: 15px;">正确的URL:</h3>
+                <div class="url">${expected}</div>
+
+                <h3 style="margin-top: 15px;">对比结果:</h3>
+                <div style="margin-top: 10px;">
+                    ${match ?
+                        '<span class="success">✅ URL完全匹配！代码是正确的</span>' :
+                        '<span class="error">❌ URL不匹配！需要修复代码</span>'}
+                </div>
+            `;
+
+            result.innerHTML = html;
+
+            // 测试播放
+            playStatus.innerHTML = '<div class="info">正在测试音频加载...</div>';
+            const audio = document.getElementById('audio');
+            audio.src = url;
+
+            audio.addEventListener('canplay', () => {
+                playStatus.innerHTML = '<div class="success">✅ 音频加载成功！可以播放</div>';
+            }, { once: true });
+
+            audio.addEventListener('error', (e) => {
+                let msg = '未知错误';
+                if (e.target.error) {
+                    switch(e.target.error.code) {
+                        case 1: msg = '用户中止'; break;
+                        case 2: msg = '网络错误'; break;
+                        case 3: msg = '解码错误'; break;
+                        case 4: msg = 'URL无效或文件不存在（404）'; break;
+                    }
+                }
+                playStatus.innerHTML = `<div class="error">❌ 加载失败: ${msg}</div>`;
+            }, { once: true });
+        }
+    </script>
+</body>
+</html>
