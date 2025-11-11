@@ -292,14 +292,15 @@ AUDIO_CONFIG.categories['Subconscious Therapy'].folder = 'subconscious-therapy';
 AUDIO_CONFIG.categories['Chakra'].folder = 'chakra';
 
 // Helper function to get full URL for a file
+// 重要：Archive.org上的文件名使用原始中文，不需要URL编码
 function getAudioUrl(categoryKey, filename) {
     const category = AUDIO_CONFIG.categories[categoryKey];
     if (!category) {
         return null;
     }
-    
+
     const folderName = category.folder || categoryKey.toLowerCase().replace(/\s+/g, '-');
-    return `${AUDIO_CONFIG.baseUrl}${folderName}/${encodeURIComponent(filename)}`;
+    return `${AUDIO_CONFIG.baseUrl}${folderName}/${filename}`;
 }
 
 // Export for use in other modules
