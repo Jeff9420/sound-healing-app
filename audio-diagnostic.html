@@ -226,6 +226,18 @@
             // 生成URL
             const url = getAudioUrl(randomCategory, randomFile);
 
+            // 显示调试信息
+            const debugInfo = `
+                <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; margin: 10px 0; font-size: 11px;">
+                    <div><strong>调试信息：</strong></div>
+                    <div>Base URL: ${AUDIO_CONFIG.baseUrl}</div>
+                    <div>Category Key: ${randomCategory}</div>
+                    <div>Folder: ${category.folder || '未设置'}</div>
+                    <div>文件名(原始): ${randomFile}</div>
+                    <div>文件名(编码): ${encodeURIComponent(randomFile)}</div>
+                </div>
+            `;
+
             resultDiv.innerHTML = `
                 <div class="status info">
                     <span class="status-icon">🎵</span>
@@ -234,7 +246,10 @@
                         <small>${randomFile}</small>
                     </div>
                 </div>
+                ${debugInfo}
                 <div class="url-display">${url}</div>
+                <button onclick="copyToClipboard('${url.replace(/'/g, "\\'")}')">📋 复制URL</button>
+                <button onclick="window.open('${url.replace(/'/g, "\\'")}', '_blank')">🔗 在新标签页打开</button>
                 <audio controls autoplay>
                     <source src="${url}" type="audio/mpeg">
                 </audio>
@@ -273,13 +288,38 @@
             });
 
             audioElement.addEventListener('error', (e) => {
-                const errorMsg = e.target.error ?
-                    `错误代码: ${e.target.error.code}` : '未知错误';
+                let errorMsg = '未知错误';
+                let errorDetails = '';
+
+                if (e.target.error) {
+                    errorMsg = `错误代码: ${e.target.error.code}`;
+                    switch(e.target.error.code) {
+                        case 1: errorDetails = 'MEDIA_ERR_ABORTED - 用户中止'; break;
+                        case 2: errorDetails = 'MEDIA_ERR_NETWORK - 网络错误'; break;
+                        case 3: errorDetails = 'MEDIA_ERR_DECODE - 解码错误'; break;
+                        case 4: errorDetails = 'MEDIA_ERR_SRC_NOT_SUPPORTED - URL无效或文件不存在'; break;
+                    }
+                }
+
                 statusDiv.innerHTML = `
                     <span class="status-icon">❌</span>
-                    <span>加载失败: ${errorMsg}</span>
+                    <div>
+                        <div>加载失败: ${errorMsg}</div>
+                        <div style="font-size: 11px; opacity: 0.8; margin-top: 4px;">${errorDetails}</div>
+                        <div style="font-size: 11px; opacity: 0.8; margin-top: 4px;">
+                            建议：1) 检查Archive.org集合是否存在 2) 检查文件名是否正确
+                        </div>
+                    </div>
                 `;
                 statusDiv.className = 'status error';
+            });
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('URL已复制到剪贴板！');
+            }).catch(() => {
+                alert('复制失败，请手动复制URL');
             });
         }
 
