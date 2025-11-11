@@ -96,6 +96,7 @@
                 const categoryData = window.AUDIO_CONFIG.categories[categoryKey];
                 const baseUrl = window.AUDIO_CONFIG.baseUrl || '';
 
+                // 重要：Archive.org上的文件名使用原始中文，不需要URL编码
                 window.tracks = (categoryData.files || []).map(fileName => ({
                     name: fileName.replace(/\.[^/.]+$/, ''),
                     fileName,
