@@ -1,0 +1,424 @@
+<!--
+    SaaS Footer Component
+    Comprehensive site footer with navigation, social, and legal links
+
+    Sections:
+    1. Main Footer (Logo, About, Navigation Columns, Newsletter)
+    2. Bottom Bar (Copyright, Legal Links, Social Media)
+    3. Back to Top Button
+
+    Key Features:
+    - 4 navigation columns (Product, Resources, Company, Legal)
+    - Newsletter subscription form
+    - Social media links
+    - Language selector
+    - Mobile-responsive (stacked layout)
+    - Sleep Timer prominently mentioned
+-->
+
+<footer class="saas-footer" role="contentinfo" aria-labelledby="footerHeading">
+    <h2 id="footerHeading" class="sr-only">Footer Navigation</h2>
+
+    <div class="saas-footer__container">
+        <!-- Main Footer Content -->
+        <div class="footer-main">
+            <!-- Brand Column -->
+            <div class="footer-brand">
+                <div class="footer-brand__logo">
+                    <span class="footer-brand__logo-icon">🎧</span>
+                    <span class="footer-brand__logo-text" data-i18n="footer.brand.name">
+                        SoundFlows
+                    </span>
+                </div>
+
+                <p class="footer-brand__tagline" data-i18n="footer.brand.tagline">
+                    Free healing sounds for better sleep, focus, and meditation. 213+ sounds with Smart Sleep Timer.
+                </p>
+
+                <div class="footer-brand__stats">
+                    <div class="footer-stat">
+                        <span class="footer-stat__number">120K+</span>
+                        <span class="footer-stat__label" data-i18n="footer.brand.stat1">Users</span>
+                    </div>
+                    <div class="footer-stat">
+                        <span class="footer-stat__number">213+</span>
+                        <span class="footer-stat__label" data-i18n="footer.brand.stat2">Sounds</span>
+                    </div>
+                    <div class="footer-stat">
+                        <span class="footer-stat__number">4.8★</span>
+                        <span class="footer-stat__label" data-i18n="footer.brand.stat3">Rating</span>
+                    </div>
+                </div>
+
+                <!-- Language Selector -->
+                <div class="footer-language">
+                    <label for="footer-language-select" class="footer-language__label" data-i18n="footer.language.label">
+                        Language:
+                    </label>
+                    <select id="footer-language-select" class="footer-language__select" aria-label="Select language">
+                        <option value="en-US" data-i18n="footer.language.en">English</option>
+                        <option value="zh-CN" data-i18n="footer.language.zh">中文</option>
+                        <option value="ja-JP" data-i18n="footer.language.ja">日本語</option>
+                        <option value="ko-KR" data-i18n="footer.language.ko">한국어</option>
+                        <option value="es-ES" data-i18n="footer.language.es">Español</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Navigation Columns -->
+            <div class="footer-nav">
+                <!-- Product Column -->
+                <div class="footer-nav-column">
+                    <h3 class="footer-nav-column__title" data-i18n="footer.nav.product.title">
+                        Product
+                    </h3>
+                    <ul class="footer-nav-column__list">
+                        <li>
+                            <a href="#features" data-i18n="footer.nav.product.features">
+                                Features
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#howItWorks" data-i18n="footer.nav.product.howItWorks">
+                                How It Works
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#pricing" data-i18n="footer.nav.product.pricing">
+                                Pricing
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#testimonials" data-i18n="footer.nav.product.testimonials">
+                                Testimonials
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#faq" data-i18n="footer.nav.product.faq">
+                                FAQ
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Resources Column -->
+                <div class="footer-nav-column">
+                    <h3 class="footer-nav-column__title" data-i18n="footer.nav.resources.title">
+                        Resources
+                    </h3>
+                    <ul class="footer-nav-column__list">
+                        <li>
+                            <a href="/blog" data-i18n="footer.nav.resources.blog">
+                                Blog
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/sleep-guide" data-i18n="footer.nav.resources.sleepGuide">
+                                Sleep Guide
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/meditation-tips" data-i18n="footer.nav.resources.meditationTips">
+                                Meditation Tips
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/sound-library" data-i18n="footer.nav.resources.soundLibrary">
+                                Sound Library
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/api-docs" data-i18n="footer.nav.resources.api">
+                                API Docs
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Company Column -->
+                <div class="footer-nav-column">
+                    <h3 class="footer-nav-column__title" data-i18n="footer.nav.company.title">
+                        Company
+                    </h3>
+                    <ul class="footer-nav-column__list">
+                        <li>
+                            <a href="/about" data-i18n="footer.nav.company.about">
+                                About Us
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/mission" data-i18n="footer.nav.company.mission">
+                                Our Mission
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/team" data-i18n="footer.nav.company.team">
+                                Team
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/careers" data-i18n="footer.nav.company.careers">
+                                Careers
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/contact" data-i18n="footer.nav.company.contact">
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Legal Column -->
+                <div class="footer-nav-column">
+                    <h3 class="footer-nav-column__title" data-i18n="footer.nav.legal.title">
+                        Legal
+                    </h3>
+                    <ul class="footer-nav-column__list">
+                        <li>
+                            <a href="/privacy" data-i18n="footer.nav.legal.privacy">
+                                Privacy Policy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/terms" data-i18n="footer.nav.legal.terms">
+                                Terms of Service
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/cookies" data-i18n="footer.nav.legal.cookies">
+                                Cookie Policy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/gdpr" data-i18n="footer.nav.legal.gdpr">
+                                GDPR
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/licenses" data-i18n="footer.nav.legal.licenses">
+                                Licenses
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Newsletter Column -->
+            <div class="footer-newsletter">
+                <h3 class="footer-newsletter__title" data-i18n="footer.newsletter.title">
+                    Stay Updated
+                </h3>
+                <p class="footer-newsletter__description" data-i18n="footer.newsletter.description">
+                    Get weekly wellness tips, new sounds, and Sleep Timer tricks delivered to your inbox.
+                </p>
+
+                <form class="footer-newsletter__form" aria-label="Newsletter subscription">
+                    <div class="footer-newsletter__input-wrapper">
+                        <label for="footer-email" class="sr-only" data-i18n="footer.newsletter.emailLabel">
+                            Email address
+                        </label>
+                        <input
+                            type="email"
+                            id="footer-email"
+                            name="email"
+                            class="footer-newsletter__input"
+                            placeholder="your@email.com"
+                            data-i18n-placeholder="footer.newsletter.placeholder"
+                            required
+                            aria-required="true"
+                        />
+                        <button type="submit" class="footer-newsletter__button" aria-label="Subscribe">
+                            <span data-i18n="footer.newsletter.button">Subscribe</span>
+                        </button>
+                    </div>
+                    <p class="footer-newsletter__note" data-i18n="footer.newsletter.note">
+                        No spam. Unsubscribe anytime.
+                    </p>
+                </form>
+
+                <!-- Social Links -->
+                <div class="footer-social">
+                    <h4 class="footer-social__title" data-i18n="footer.social.title">
+                        Follow Us
+                    </h4>
+                    <div class="footer-social__links">
+                        <a href="https://twitter.com/soundflows" class="footer-social__link" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                            </svg>
+                        </a>
+                        <a href="https://instagram.com/soundflows" class="footer-social__link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" fill="none" stroke="#0b0704" stroke-width="2"/>
+                                <circle cx="17.5" cy="6.5" r="1.5" fill="#0b0704"/>
+                            </svg>
+                        </a>
+                        <a href="https://facebook.com/soundflows" class="footer-social__link" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                            </svg>
+                        </a>
+                        <a href="https://github.com/soundflows" class="footer-social__link" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+                            </svg>
+                        </a>
+                        <a href="https://youtube.com/@soundflows" class="footer-social__link" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M23 9.71a8.5 8.5 0 00-.91-4.13 2.92 2.92 0 00-1.72-1A78.36 78.36 0 0012 4.27a78.45 78.45 0 00-8.34.3 2.87 2.87 0 00-1.46.74c-.9.83-1 2.25-1.1 3.45a48.29 48.29 0 000 6.48 9.55 9.55 0 00.3 2.12 2.93 2.93 0 001.15 1.51 3.05 3.05 0 001.9.56 45.49 45.49 0 0016.59 0 2.98 2.98 0 001.9-.56 2.88 2.88 0 001.15-1.51 9.43 9.43 0 00.3-2.12 47.94 47.94 0 000-6.48zM9.74 15.67V8.33L15.66 12z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="footer-bottom">
+            <div class="footer-bottom__left">
+                <p class="footer-copyright" data-i18n="footer.copyright">
+                    © 2025 SoundFlows. All rights reserved. Made with ❤️ for better sleep.
+                </p>
+            </div>
+
+            <div class="footer-bottom__right">
+                <nav class="footer-legal-links" aria-label="Legal links">
+                    <a href="/privacy" data-i18n="footer.legal.privacyShort">Privacy</a>
+                    <span class="footer-legal-links__separator">•</span>
+                    <a href="/terms" data-i18n="footer.legal.termsShort">Terms</a>
+                    <span class="footer-legal-links__separator">•</span>
+                    <a href="/cookies" data-i18n="footer.legal.cookiesShort">Cookies</a>
+                    <span class="footer-legal-links__separator">•</span>
+                    <a href="/sitemap.xml" data-i18n="footer.legal.sitemap">Sitemap</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="footer-back-to-top" aria-label="Back to top" data-back-to-top hidden>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="18 15 12 9 6 15"/>
+        </svg>
+    </button>
+</footer>
+
+<script>
+// Footer JavaScript
+(function() {
+    'use strict';
+
+    // Initialize footer functionality
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initFooter);
+    } else {
+        initFooter();
+    }
+
+    function initFooter() {
+        initLanguageSelector();
+        initBackToTop();
+        initNewsletterForm();
+    }
+
+    // Language Selector
+    function initLanguageSelector() {
+        const selector = document.getElementById('footer-language-select');
+        if (!selector) return;
+
+        // Set current language
+        const currentLang = localStorage.getItem('userLanguage') || 'en-US';
+        selector.value = currentLang;
+
+        // Handle language change
+        selector.addEventListener('change', function(e) {
+            const newLang = e.target.value;
+            localStorage.setItem('userLanguage', newLang);
+
+            // Trigger i18n language change if available
+            if (window.i18n && typeof window.i18n.changeLanguage === 'function') {
+                window.i18n.changeLanguage(newLang);
+            } else {
+                // Fallback: reload page
+                window.location.reload();
+            }
+        });
+    }
+
+    // Back to Top Button
+    function initBackToTop() {
+        const backToTopBtn = document.querySelector('[data-back-to-top]');
+        if (!backToTopBtn) return;
+
+        // Show/hide based on scroll position
+        function toggleBackToTop() {
+            if (window.scrollY > 500) {
+                backToTopBtn.hidden = false;
+            } else {
+                backToTopBtn.hidden = true;
+            }
+        }
+
+        window.addEventListener('scroll', toggleBackToTop, { passive: true });
+        toggleBackToTop(); // Initial check
+
+        // Scroll to top on click
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // Newsletter Form
+    function initNewsletterForm() {
+        const form = document.querySelector('.footer-newsletter__form');
+        if (!form) return;
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const emailInput = form.querySelector('[name="email"]');
+            const submitBtn = form.querySelector('[type="submit"]');
+            const email = emailInput.value.trim();
+
+            if (!email) return;
+
+            // Disable form during submission
+            emailInput.disabled = true;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Subscribing...';
+
+            try {
+                // TODO: Integrate with actual email service (Formspree, etc.)
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+
+                // Success
+                submitBtn.textContent = '✓ Subscribed!';
+                emailInput.value = '';
+
+                // Show success message
+                alert('Thanks for subscribing! Check your email for confirmation.');
+
+                // Reset button after 3 seconds
+                setTimeout(() => {
+                    submitBtn.textContent = 'Subscribe';
+                    emailInput.disabled = false;
+                    submitBtn.disabled = false;
+                }, 3000);
+
+            } catch (error) {
+                // Error
+                console.error('Newsletter subscription error:', error);
+                submitBtn.textContent = 'Try Again';
+                emailInput.disabled = false;
+                submitBtn.disabled = false;
+                alert('Oops! Something went wrong. Please try again.');
+            }
+        });
+    }
+})();
+</script>
