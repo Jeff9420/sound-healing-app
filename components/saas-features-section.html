@@ -1,0 +1,325 @@
+<!--
+    SaaS Features Section Component
+    Showcases 6 key features with Sleep Timer in first position
+
+    Feature Showcase:
+    1. Smart Sleep Timer (FIRST - 60-min auto-stop with fade-out)
+    2. Video Background Scenes (9 moods, auto-switch)
+    3. Personal Sound Mixer (Layer & customize)
+    4. Play History & Favorites (Track your journey)
+    5. Focus Mode (Distraction-free fullscreen)
+    6. Offline PWA (Works without internet)
+-->
+
+<section class="saas-features" role="region" id="features" aria-labelledby="featuresTitle">
+    <div class="saas-features__container">
+        <!-- Section Header -->
+        <header class="saas-features__header">
+            <p class="saas-features__eyebrow" data-i18n="features.eyebrow">
+                Powerful Features for Better Sleep & Focus
+            </p>
+            <h2 class="saas-features__title" id="featuresTitle" data-i18n="features.title">
+                Everything You Need for Deep Relaxation & Mindful Living
+            </h2>
+            <p class="saas-features__description" data-i18n="features.description">
+                Professional sound therapy tools designed for modern lifestyles — smart timers, personalized mixing, usage insights, and more. All free, forever.
+            </p>
+        </header>
+
+        <!-- Features Grid (6 Features) -->
+        <div class="saas-features__grid">
+
+            <!-- Feature 1: Smart Sleep Timer (PRIMARY) -->
+            <article class="feature-showcase feature-showcase--primary">
+                <div class="feature-showcase__content">
+                    <div class="feature-showcase__badge" data-i18n="features.timer.badge">
+                        #1 Most Used Feature
+                    </div>
+
+                    <h3 class="feature-showcase__title" data-i18n="features.timer.title">
+                        🌙 Smart Sleep Timer
+                    </h3>
+
+                    <p class="feature-showcase__description" data-i18n="features.timer.description">
+                        Set a timer, drift off peacefully. Audio gently fades out in 3 seconds — no jarring stops, no sudden wake-ups. Perfect for bedtime routines.
+                    </p>
+
+                    <ul class="feature-showcase__list">
+                        <li data-i18n="features.timer.point1">
+                            <strong>60-min default</strong> — optimal for most sleep cycles
+                        </li>
+                        <li data-i18n="features.timer.point2">
+                            <strong>Customizable 15-120 min</strong> — naps to full nights
+                        </li>
+                        <li data-i18n="features.timer.point3">
+                            <strong>3-second fade-out</strong> — gentle, not jarring
+                        </li>
+                        <li data-i18n="features.timer.point4">
+                            <strong>Auto-stop saves battery</strong> — eco-friendly design
+                        </li>
+                    </ul>
+
+                    <div class="feature-showcase__stats">
+                        <div class="feature-stat">
+                            <p class="feature-stat__number">82%</p>
+                            <p class="feature-stat__label" data-i18n="features.timer.stat1">
+                                Users set timer every night
+                            </p>
+                        </div>
+                        <div class="feature-stat">
+                            <p class="feature-stat__number">60min</p>
+                            <p class="feature-stat__label" data-i18n="features.timer.stat2">
+                                Most popular duration
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-showcase__visual">
+                    <div class="feature-demo feature-demo--timer">
+                        <div class="timer-display">
+                            <div class="timer-display__icon">🌙</div>
+                            <div class="timer-display__time">60:00</div>
+                            <div class="timer-display__label" data-i18n="features.timer.demo.label">
+                                Sleep Timer Active
+                            </div>
+                            <div class="timer-display__fade" data-i18n="features.timer.demo.fade">
+                                Gentle 3s fade-out enabled
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Feature 2: Video Background Scenes -->
+            <article class="feature-showcase feature-showcase--reverse">
+                <div class="feature-showcase__content">
+                    <h3 class="feature-showcase__title" data-i18n="features.scenes.title">
+                        🎨 Immersive Video Backgrounds
+                    </h3>
+
+                    <p class="feature-showcase__description" data-i18n="features.scenes.description">
+                        9 stunning video backgrounds auto-switch based on your selected sound category. From forest streams to cosmic stars, every scene deepens your immersion.
+                    </p>
+
+                    <ul class="feature-showcase__list">
+                        <li data-i18n="features.scenes.point1">
+                            <strong>Auto-matching</strong> — scenes change with sound category
+                        </li>
+                        <li data-i18n="features.scenes.point2">
+                            <strong>Cloudflare R2 CDN</strong> — fast loading globally
+                        </li>
+                        <li data-i18n="features.scenes.point3">
+                            <strong>Canvas fallback</strong> — works even if video fails
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="feature-showcase__visual">
+                    <div class="feature-demo feature-demo--scenes">
+                        <div class="scene-grid">
+                            <div class="scene-tile" data-i18n="features.scenes.scene1">Forest Birds</div>
+                            <div class="scene-tile" data-i18n="features.scenes.scene2">Rain Drops</div>
+                            <div class="scene-tile" data-i18n="features.scenes.scene3">Cosmic Stars</div>
+                            <div class="scene-tile" data-i18n="features.scenes.scene4">Campfire</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Feature 3: Personal Sound Mixer -->
+            <article class="feature-showcase">
+                <div class="feature-showcase__content">
+                    <h3 class="feature-showcase__title" data-i18n="features.mixer.title">
+                        🎵 Personal Sound Mixer
+                    </h3>
+
+                    <p class="feature-showcase__description" data-i18n="features.mixer.description">
+                        Layer rain sounds + white noise + singing bowls for your perfect audio recipe. Save favorites and share custom mixes with friends.
+                    </p>
+
+                    <ul class="feature-showcase__list">
+                        <li data-i18n="features.mixer.point1">
+                            <strong>Multi-track layering</strong> — mix up to 4 sounds
+                        </li>
+                        <li data-i18n="features.mixer.point2">
+                            <strong>Individual volume control</strong> — fine-tune each layer
+                        </li>
+                        <li data-i18n="features.mixer.point3">
+                            <strong>Save & share recipes</strong> — build your library
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="feature-showcase__visual">
+                    <div class="feature-demo feature-demo--mixer">
+                        <div class="mixer-track">
+                            <span class="mixer-track__icon">🌧️</span>
+                            <span class="mixer-track__name" data-i18n="features.mixer.track1">Rain</span>
+                            <div class="mixer-track__bar">
+                                <div class="mixer-track__fill" style="width: 75%;"></div>
+                            </div>
+                            <span class="mixer-track__vol">75%</span>
+                        </div>
+                        <div class="mixer-track">
+                            <span class="mixer-track__icon">🎵</span>
+                            <span class="mixer-track__name" data-i18n="features.mixer.track2">Singing Bowl</span>
+                            <div class="mixer-track__bar">
+                                <div class="mixer-track__fill" style="width: 50%;"></div>
+                            </div>
+                            <span class="mixer-track__vol">50%</span>
+                        </div>
+                        <div class="mixer-track">
+                            <span class="mixer-track__icon">🔥</span>
+                            <span class="mixer-track__name" data-i18n="features.mixer.track3">Fire</span>
+                            <div class="mixer-track__bar">
+                                <div class="mixer-track__fill" style="width: 30%;"></div>
+                            </div>
+                            <span class="mixer-track__vol">30%</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Feature 4: Play History & Favorites -->
+            <article class="feature-showcase feature-showcase--reverse">
+                <div class="feature-showcase__content">
+                    <h3 class="feature-showcase__title" data-i18n="features.history.title">
+                        📊 Play History & Favorites
+                    </h3>
+
+                    <p class="feature-showcase__description" data-i18n="features.history.description">
+                        Track your meditation journey with automatic play history. Star your favorites, build playlists, and get weekly insights on your wellness progress.
+                    </p>
+
+                    <ul class="feature-showcase__list">
+                        <li data-i18n="features.history.point1">
+                            <strong>Last 100 plays tracked</strong> — with timestamps
+                        </li>
+                        <li data-i18n="features.history.point2">
+                            <strong>Favorites sync</strong> — across all devices
+                        </li>
+                        <li data-i18n="features.history.point3">
+                            <strong>Weekly email digest</strong> — usage stats & insights
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="feature-showcase__visual">
+                    <div class="feature-demo feature-demo--history">
+                        <div class="history-item">
+                            <span class="history-item__icon">⭐</span>
+                            <div class="history-item__info">
+                                <p class="history-item__name" data-i18n="features.history.item1">Rain Sounds</p>
+                                <p class="history-item__meta">60 min • 2 hours ago</p>
+                            </div>
+                        </div>
+                        <div class="history-item">
+                            <span class="history-item__icon">🎵</span>
+                            <div class="history-item__info">
+                                <p class="history-item__name" data-i18n="features.history.item2">Meditation Music</p>
+                                <p class="history-item__meta">30 min • Yesterday</p>
+                            </div>
+                        </div>
+                        <div class="history-item">
+                            <span class="history-item__icon">⭐</span>
+                            <div class="history-item__info">
+                                <p class="history-item__name" data-i18n="features.history.item3">Singing Bowls</p>
+                                <p class="history-item__meta">45 min • 2 days ago</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Feature 5: Focus Mode -->
+            <article class="feature-showcase">
+                <div class="feature-showcase__content">
+                    <h3 class="feature-showcase__title" data-i18n="features.focus.title">
+                        🎯 Distraction-Free Focus Mode
+                    </h3>
+
+                    <p class="feature-showcase__description" data-i18n="features.focus.description">
+                        Enter fullscreen focus mode for deep work or meditation. Hide all UI distractions — just you, the sound, and the immersive background.
+                    </p>
+
+                    <ul class="feature-showcase__list">
+                        <li data-i18n="features.focus.point1">
+                            <strong>Fullscreen immersion</strong> — zero distractions
+                        </li>
+                        <li data-i18n="features.focus.point2">
+                            <strong>Keyboard shortcuts</strong> — control without breaking flow
+                        </li>
+                        <li data-i18n="features.focus.point3">
+                            <strong>Timer integration</strong> — Pomodoro-style sessions
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="feature-showcase__visual">
+                    <div class="feature-demo feature-demo--focus">
+                        <div class="focus-screen">
+                            <div class="focus-screen__content">
+                                <p class="focus-screen__title" data-i18n="features.focus.demo.title">Focus Mode Active</p>
+                                <p class="focus-screen__subtitle" data-i18n="features.focus.demo.subtitle">Press ESC to exit</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Feature 6: Offline PWA -->
+            <article class="feature-showcase feature-showcase--reverse">
+                <div class="feature-showcase__content">
+                    <h3 class="feature-showcase__title" data-i18n="features.pwa.title">
+                        📱 Works Offline (PWA)
+                    </h3>
+
+                    <p class="feature-showcase__description" data-i18n="features.pwa.description">
+                        Install SoundFlows as a Progressive Web App. Works offline, launches instantly, feels like a native app — no app store needed.
+                    </p>
+
+                    <ul class="feature-showcase__list">
+                        <li data-i18n="features.pwa.point1">
+                            <strong>One-click install</strong> — from browser address bar
+                        </li>
+                        <li data-i18n="features.pwa.point2">
+                            <strong>Offline playback</strong> — cached audio works anywhere
+                        </li>
+                        <li data-i18n="features.pwa.point3">
+                            <strong>Home screen icon</strong> — like a real app
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="feature-showcase__visual">
+                    <div class="feature-demo feature-demo--pwa">
+                        <div class="pwa-icon">
+                            <span class="pwa-icon__emoji">🎧</span>
+                            <p class="pwa-icon__label">SoundFlows</p>
+                        </div>
+                        <div class="pwa-badge" data-i18n="features.pwa.demo.badge">
+                            Installable PWA
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- Bottom CTA -->
+        <div class="saas-features__cta">
+            <button class="saas-btn saas-btn--primary saas-btn--large"
+                    data-cta="start-from-features"
+                    data-action="scroll-to-hero"
+                    aria-label="Try all features free">
+                <span data-i18n="features.cta.primary">
+                    Experience All Features Free →
+                </span>
+            </button>
+            <p class="features-cta__subtext" data-i18n="features.cta.subtext">
+                No credit card • No download • Start in 5 seconds
+            </p>
+        </div>
+    </div>
+</section>
