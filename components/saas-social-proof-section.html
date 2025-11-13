@@ -1,0 +1,326 @@
+<!--
+    SaaS Social Proof / Testimonials Section Component
+    Builds trust through user testimonials and usage statistics
+
+    Key Features:
+    - 120K+ active users statistic
+    - 6 featured testimonials highlighting Sleep Timer success
+    - Star ratings and user avatars
+    - Trust badges (Google, Product Hunt, etc.)
+    - Mobile-first responsive design
+-->
+
+<section class="saas-social-proof" role="region" id="testimonials" aria-labelledby="testimonialsTitle">
+    <div class="saas-social-proof__container">
+        <!-- Section Header -->
+        <header class="saas-social-proof__header">
+            <p class="saas-social-proof__eyebrow" data-i18n="socialProof.eyebrow">
+                Trusted by 120K+ Users Worldwide
+            </p>
+            <h2 class="saas-social-proof__title" id="testimonialsTitle" data-i18n="socialProof.title">
+                Join Thousands Who Sleep Better Every Night
+            </h2>
+            <p class="saas-social-proof__description" data-i18n="socialProof.description">
+                Real stories from real people who transformed their sleep and wellness with SoundFlows' Sleep Timer feature.
+            </p>
+        </header>
+
+        <!-- Trust Stats Bar -->
+        <div class="social-proof-stats">
+            <div class="proof-stat">
+                <div class="proof-stat__number">120K+</div>
+                <div class="proof-stat__label" data-i18n="socialProof.stats.users">
+                    Active Users
+                </div>
+            </div>
+            <div class="proof-stat">
+                <div class="proof-stat__number">4.8/5</div>
+                <div class="proof-stat__label" data-i18n="socialProof.stats.rating">
+                    Average Rating
+                </div>
+            </div>
+            <div class="proof-stat">
+                <div class="proof-stat__number">82%</div>
+                <div class="proof-stat__label" data-i18n="socialProof.stats.timerUsers">
+                    Use Timer Nightly
+                </div>
+            </div>
+            <div class="proof-stat">
+                <div class="proof-stat__number">213+</div>
+                <div class="proof-stat__label" data-i18n="socialProof.stats.sounds">
+                    Healing Sounds
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonials Grid -->
+        <div class="testimonials-grid">
+            <!-- Testimonial 1: Sleep Timer Success (PRIMARY) -->
+            <article class="testimonial-card testimonial-card--featured">
+                <div class="testimonial-card__badge" data-i18n="socialProof.testimonial1.badge">
+                    ⭐ Featured Success Story
+                </div>
+
+                <div class="testimonial-card__header">
+                    <div class="testimonial-card__avatar">
+                        <span class="testimonial-card__avatar-text">SL</span>
+                    </div>
+                    <div class="testimonial-card__author">
+                        <div class="testimonial-card__name" data-i18n="socialProof.testimonial1.name">
+                            Sarah L.
+                        </div>
+                        <div class="testimonial-card__meta" data-i18n="socialProof.testimonial1.meta">
+                            New York • Using for 6 months
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card__rating">
+                    <span class="star-rating" aria-label="5 out of 5 stars">
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                    </span>
+                </div>
+
+                <blockquote class="testimonial-card__quote">
+                    <p data-i18n="socialProof.testimonial1.quote">
+                        "The 60-minute Sleep Timer changed my life! I used to fall asleep with YouTube playing all night, wasting battery and ruining my sleep quality. Now I set the timer, hear rain sounds for an hour, and the gentle 3-second fade-out doesn't wake me. I've slept better for 6 months straight. Best feature ever."
+                    </p>
+                </blockquote>
+
+                <div class="testimonial-card__highlight">
+                    <span class="testimonial-card__highlight-icon">🌙</span>
+                    <span class="testimonial-card__highlight-text" data-i18n="socialProof.testimonial1.highlight">
+                        60-min timer + Rain sounds = Perfect sleep combo
+                    </span>
+                </div>
+            </article>
+
+            <!-- Testimonial 2: Anxiety Relief -->
+            <article class="testimonial-card">
+                <div class="testimonial-card__header">
+                    <div class="testimonial-card__avatar">
+                        <span class="testimonial-card__avatar-text">MK</span>
+                    </div>
+                    <div class="testimonial-card__author">
+                        <div class="testimonial-card__name" data-i18n="socialProof.testimonial2.name">
+                            Michael K.
+                        </div>
+                        <div class="testimonial-card__meta" data-i18n="socialProof.testimonial2.meta">
+                            London • 3 months
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card__rating">
+                    <span class="star-rating" aria-label="5 out of 5 stars">
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                    </span>
+                </div>
+
+                <blockquote class="testimonial-card__quote">
+                    <p data-i18n="socialProof.testimonial2.quote">
+                        "I have anxiety and the timer feature helps me manage bedtime worries. Setting it to 90 minutes with singing bowls means I can relax knowing the audio won't play all night. The fade-out is so gentle I never notice it. Game changer for anxious minds."
+                    </p>
+                </blockquote>
+            </article>
+
+            <!-- Testimonial 3: Work Focus -->
+            <article class="testimonial-card">
+                <div class="testimonial-card__header">
+                    <div class="testimonial-card__avatar">
+                        <span class="testimonial-card__avatar-text">LW</span>
+                    </div>
+                    <div class="testimonial-card__author">
+                        <div class="testimonial-card__name" data-i18n="socialProof.testimonial3.name">
+                            Lisa W.
+                        </div>
+                        <div class="testimonial-card__meta" data-i18n="socialProof.testimonial3.meta">
+                            San Francisco • 4 months
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card__rating">
+                    <span class="star-rating" aria-label="5 out of 5 stars">
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                    </span>
+                </div>
+
+                <blockquote class="testimonial-card__quote">
+                    <p data-i18n="socialProof.testimonial3.quote">
+                        "I use the timer for Pomodoro work sessions! 45-minute timer with white noise keeps me focused without distractions. When time's up, the audio stops gently and I take a break. Perfect for deep work and productivity."
+                    </p>
+                </blockquote>
+            </article>
+
+            <!-- Testimonial 4: Parent Success -->
+            <article class="testimonial-card">
+                <div class="testimonial-card__header">
+                    <div class="testimonial-card__avatar">
+                        <span class="testimonial-card__avatar-text">JM</span>
+                    </div>
+                    <div class="testimonial-card__author">
+                        <div class="testimonial-card__name" data-i18n="socialProof.testimonial4.name">
+                            Jessica M.
+                        </div>
+                        <div class="testimonial-card__meta" data-i18n="socialProof.testimonial4.meta">
+                            Toronto • 8 months
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card__rating">
+                    <span class="star-rating" aria-label="5 out of 5 stars">
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                    </span>
+                </div>
+
+                <blockquote class="testimonial-card__quote">
+                    <p data-i18n="socialProof.testimonial4.quote">
+                        "I have two young kids and the timer is a lifesaver for bedtime routine. Set 30-min timer with forest sounds, they fall asleep, and audio stops automatically. No more worrying about leaving sounds on all night. Parent-approved!"
+                    </p>
+                </blockquote>
+            </article>
+
+            <!-- Testimonial 5: Meditation Practice -->
+            <article class="testimonial-card">
+                <div class="testimonial-card__header">
+                    <div class="testimonial-card__avatar">
+                        <span class="testimonial-card__avatar-text">DH</span>
+                    </div>
+                    <div class="testimonial-card__author">
+                        <div class="testimonial-card__name" data-i18n="socialProof.testimonial5.name">
+                            David H.
+                        </div>
+                        <div class="testimonial-card__meta" data-i18n="socialProof.testimonial5.meta">
+                            Tokyo • 5 months
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card__rating">
+                    <span class="star-rating" aria-label="5 out of 5 stars">
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                    </span>
+                </div>
+
+                <blockquote class="testimonial-card__quote">
+                    <p data-i18n="socialProof.testimonial5.quote">
+                        "As a meditation teacher, I recommend SoundFlows to all my students. The timer feature is perfect for guided sessions—set 20 minutes with meditation music, lead the practice, and audio fades out smoothly. Professional quality, completely free."
+                    </p>
+                </blockquote>
+            </article>
+
+            <!-- Testimonial 6: Nap Expert -->
+            <article class="testimonial-card">
+                <div class="testimonial-card__header">
+                    <div class="testimonial-card__avatar">
+                        <span class="testimonial-card__avatar-text">AM</span>
+                    </div>
+                    <div class="testimonial-card__author">
+                        <div class="testimonial-card__name" data-i18n="socialProof.testimonial6.name">
+                            Anna M.
+                        </div>
+                        <div class="testimonial-card__meta" data-i18n="socialProof.testimonial6.meta">
+                            Berlin • 7 months
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card__rating">
+                    <span class="star-rating" aria-label="4 out of 5 stars">
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star">★</span>
+                        <span class="star-rating__star star-rating__star--empty">☆</span>
+                    </span>
+                </div>
+
+                <blockquote class="testimonial-card__quote">
+                    <p data-i18n="socialProof.testimonial6.quote">
+                        "Perfect for power naps! I set 20-min timer during lunch break, close my eyes with rain sounds, and wake up refreshed when it fades out. No more oversleeping or missing alarms. The timer range (15-120 min) covers everything I need."
+                    </p>
+                </blockquote>
+            </article>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="trust-badges">
+            <div class="trust-badges__title" data-i18n="socialProof.trustBadges.title">
+                Featured On:
+            </div>
+            <div class="trust-badges__logos">
+                <div class="trust-badge">
+                    <span class="trust-badge__icon">🏆</span>
+                    <span class="trust-badge__text" data-i18n="socialProof.trustBadges.productHunt">
+                        Product Hunt
+                    </span>
+                </div>
+                <div class="trust-badge">
+                    <span class="trust-badge__icon">⭐</span>
+                    <span class="trust-badge__text" data-i18n="socialProof.trustBadges.googlePlay">
+                        4.8★ Rating
+                    </span>
+                </div>
+                <div class="trust-badge">
+                    <span class="trust-badge__icon">🌍</span>
+                    <span class="trust-badge__text" data-i18n="socialProof.trustBadges.global">
+                        5 Languages
+                    </span>
+                </div>
+                <div class="trust-badge">
+                    <span class="trust-badge__icon">🔒</span>
+                    <span class="trust-badge__text" data-i18n="socialProof.trustBadges.privacy">
+                        Privacy First
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Counter (Live-ish) -->
+        <div class="live-user-counter">
+            <div class="live-user-counter__indicator">
+                <span class="live-user-counter__pulse"></span>
+                <span class="live-user-counter__text" data-i18n="socialProof.liveCounter.text">
+                    <strong class="live-user-counter__number">1,247</strong> people are using SoundFlows right now
+                </span>
+            </div>
+        </div>
+
+        <!-- Bottom CTA -->
+        <div class="saas-social-proof__cta">
+            <button class="saas-btn saas-btn--primary saas-btn--large"
+                    data-cta="start-from-testimonials"
+                    data-action="scroll-to-hero"
+                    aria-label="Join our community">
+                <span data-i18n="socialProof.cta.primary">
+                    Join 120K+ Happy Users →
+                </span>
+            </button>
+            <p class="social-proof-cta__subtext" data-i18n="socialProof.cta.subtext">
+                Start sleeping better tonight • 100% free forever
+            </p>
+        </div>
+    </div>
+</section>

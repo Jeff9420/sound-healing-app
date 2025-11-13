@@ -1,0 +1,491 @@
+/**
+ * SaaS Social Proof Section CSS
+ * Mobile-First Responsive Design
+ * User testimonials and trust indicators
+ *
+ * Breakpoints:
+ * - Mobile: < 768px (default)
+ * - Tablet: 768px - 1023px
+ * - Desktop: 1024px+
+ */
+
+/* ================================
+   CSS Variables
+   ================================ */
+:root {
+    /* Social Proof colors */
+    --social-proof-bg: #0b0704;
+    --social-proof-text: #fdf3e5;
+    --social-proof-text-muted: rgba(253, 243, 229, 0.75);
+    --social-proof-border: rgba(253, 243, 229, 0.15);
+    --social-proof-primary: #6666ff;
+    --social-proof-primary-light: rgba(102, 102, 255, 0.15);
+    --social-proof-accent: #f6a93b;
+    --social-proof-success: #4ade80;
+    --social-proof-star: #fbbf24;
+
+    /* Spacing */
+    --social-proof-padding: 3rem 1.5rem;
+    --social-proof-gap: 1.5rem;
+}
+
+/* ================================
+   Container
+   ================================ */
+.saas-social-proof {
+    width: 100%;
+    background: var(--social-proof-bg);
+    padding: var(--social-proof-padding);
+}
+
+.saas-social-proof__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* ================================
+   Section Header
+   ================================ */
+.saas-social-proof__header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.saas-social-proof__eyebrow {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--social-proof-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 1rem 0;
+}
+
+.saas-social-proof__title {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--social-proof-text);
+    margin: 0 0 1.5rem 0;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.saas-social-proof__description {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: 1.6;
+    color: var(--social-proof-text-muted);
+    margin: 0;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ================================
+   Trust Stats Bar
+   ================================ */
+.social-proof-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    padding: 2.5rem 2rem;
+    border: 1px solid var(--social-proof-border);
+    border-radius: 16px;
+    background: rgba(26, 15, 10, 0.4);
+    margin-bottom: 3rem;
+}
+
+.proof-stat {
+    text-align: center;
+}
+
+.proof-stat__number {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    color: var(--social-proof-primary);
+    margin: 0 0 0.5rem 0;
+    line-height: 1;
+}
+
+.proof-stat__label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--social-proof-text-muted);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* ================================
+   Testimonials Grid
+   ================================ */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--social-proof-gap);
+    margin-bottom: 3rem;
+}
+
+/* ================================
+   Testimonial Card
+   ================================ */
+.testimonial-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 2rem;
+    border: 1px solid var(--social-proof-border);
+    border-radius: 16px;
+    background: rgba(26, 15, 10, 0.6);
+    backdrop-filter: blur(10px);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--social-proof-primary);
+    box-shadow: 0 8px 24px rgba(102, 102, 255, 0.2);
+}
+
+/* Featured Testimonial (Sleep Timer Success) */
+.testimonial-card--featured {
+    border: 2px solid var(--social-proof-primary);
+    background: var(--social-proof-primary-light);
+    box-shadow: 0 0 32px rgba(102, 102, 255, 0.25);
+}
+
+.testimonial-card--featured:hover {
+    box-shadow: 0 8px 32px rgba(102, 102, 255, 0.4);
+}
+
+/* ================================
+   Card Badge
+   ================================ */
+.testimonial-card__badge {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    background: var(--social-proof-primary);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 4px 12px rgba(102, 102, 255, 0.4);
+}
+
+/* ================================
+   Card Header (Author Info)
+   ================================ */
+.testimonial-card__header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.testimonial-card__avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--social-proof-primary) 0%, var(--social-proof-accent) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.testimonial-card__avatar-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.testimonial-card__author {
+    flex: 1;
+}
+
+.testimonial-card__name {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--social-proof-text);
+    margin: 0 0 0.25rem 0;
+}
+
+.testimonial-card__meta {
+    font-size: 0.875rem;
+    color: var(--social-proof-text-muted);
+    margin: 0;
+}
+
+/* ================================
+   Star Rating
+   ================================ */
+.testimonial-card__rating {
+    display: flex;
+    align-items: center;
+}
+
+.star-rating {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.star-rating__star {
+    font-size: 1.25rem;
+    color: var(--social-proof-star);
+}
+
+.star-rating__star--empty {
+    color: rgba(251, 191, 36, 0.3);
+}
+
+/* ================================
+   Quote
+   ================================ */
+.testimonial-card__quote {
+    margin: 0;
+}
+
+.testimonial-card__quote p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--social-proof-text-muted);
+    margin: 0;
+    font-style: italic;
+}
+
+/* ================================
+   Highlight Box
+   ================================ */
+.testimonial-card__highlight {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background: rgba(102, 102, 255, 0.2);
+    border: 1px solid var(--social-proof-primary);
+}
+
+.testimonial-card__highlight-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.testimonial-card__highlight-text {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--social-proof-text);
+    line-height: 1.4;
+}
+
+/* ================================
+   Trust Badges
+   ================================ */
+.trust-badges {
+    text-align: center;
+    padding: 2.5rem 2rem;
+    border: 1px solid var(--social-proof-border);
+    border-radius: 16px;
+    background: rgba(26, 15, 10, 0.4);
+    margin-bottom: 2rem;
+}
+
+.trust-badges__title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--social-proof-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 1.5rem 0;
+}
+
+.trust-badges__logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.trust-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+}
+
+.trust-badge__icon {
+    font-size: 2rem;
+}
+
+.trust-badge__text {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--social-proof-text);
+}
+
+/* ================================
+   Live User Counter
+   ================================ */
+.live-user-counter {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.live-user-counter__indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    border-radius: 999px;
+    background: rgba(74, 222, 128, 0.1);
+    border: 1px solid var(--social-proof-success);
+}
+
+.live-user-counter__pulse {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--social-proof-success);
+    animation: pulse-dot 2s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes pulse-dot {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+}
+
+.live-user-counter__text {
+    font-size: 0.9375rem;
+    color: var(--social-proof-text-muted);
+}
+
+.live-user-counter__number {
+    color: var(--social-proof-success);
+    font-weight: 700;
+}
+
+/* ================================
+   Bottom CTA
+   ================================ */
+.saas-social-proof__cta {
+    text-align: center;
+}
+
+.social-proof-cta__subtext {
+    margin-top: 1rem;
+    font-size: 0.9375rem;
+    color: var(--social-proof-text-muted);
+}
+
+/* ================================
+   Tablet (768px+)
+   ================================ */
+@media (min-width: 768px) {
+    :root {
+        --social-proof-padding: 4rem 2rem;
+        --social-proof-gap: 2rem;
+    }
+
+    .social-proof-stats {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .testimonial-card--featured {
+        grid-column: 1 / -1;
+    }
+
+    .trust-badges__logos {
+        gap: 2.5rem;
+    }
+
+    .trust-badge {
+        flex-direction: row;
+        gap: 0.75rem;
+    }
+}
+
+/* ================================
+   Desktop (1024px+)
+   ================================ */
+@media (min-width: 1024px) {
+    :root {
+        --social-proof-padding: 5rem 2.5rem;
+        --social-proof-gap: 2.5rem;
+    }
+
+    .saas-social-proof__header {
+        margin-bottom: 4rem;
+    }
+
+    .testimonials-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .testimonial-card--featured {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    .testimonial-card {
+        padding: 2.5rem;
+    }
+
+    .testimonial-card__quote p {
+        font-size: 1.0625rem;
+    }
+}
+
+/* ================================
+   Accessibility
+   ================================ */
+@media (prefers-reduced-motion: reduce) {
+    .testimonial-card {
+        transition: none !important;
+    }
+
+    .live-user-counter__pulse {
+        animation: none !important;
+    }
+}
+
+/* Focus Styles */
+.saas-btn:focus-visible {
+    outline: 2px solid var(--social-proof-primary);
+    outline-offset: 3px;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .testimonial-card {
+        border-width: 2px;
+    }
+
+    .testimonial-card--featured {
+        border-width: 3px;
+    }
+
+    .testimonial-card__badge {
+        border: 2px solid #ffffff;
+    }
+
+    .live-user-counter__indicator {
+        border-width: 2px;
+    }
+}
