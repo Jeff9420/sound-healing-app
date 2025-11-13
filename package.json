@@ -6,7 +6,7 @@
     "deploy": "vercel --prod",
     "deploy:preview": "vercel",
     "serve": "npx serve .",
-    "start": "python -m http.server 8000",
+    "start": "py -m http.server 8000",
     "test": "echo \"Run browser tests manually\" && exit 0"
   },
   "keywords": [
@@ -53,3 +53,4 @@
     "@sentry/browser": "^10.21.0"
   }
 }
+
