@@ -1,0 +1,144 @@
+<!--
+    Responsive Header Component
+    Mobile-First Design for SoundFlows SaaS Website
+
+    Features:
+    - Hamburger menu for mobile (< 768px)
+    - Sticky header on scroll
+    - Language selector integration
+    - Sign in / Try Free CTAs
+-->
+
+<header class="responsive-header" role="banner" id="mainHeader">
+    <nav class="responsive-nav" aria-label="Main navigation">
+        <!-- Logo -->
+        <a href="/" class="nav-logo" aria-label="SoundFlows Home">
+            <span class="nav-logo__icon" aria-hidden="true">🎧</span>
+            <div class="nav-logo__text">
+                <span class="nav-logo__title" data-i18n="app.title">SoundFlows</span>
+                <span class="nav-logo__tagline" data-i18n="header.tagline">Sound Healing</span>
+            </div>
+        </a>
+
+        <!-- Hamburger Button (Mobile Only) -->
+        <button class="nav-hamburger"
+                id="navHamburger"
+                type="button"
+                aria-label="Toggle navigation menu"
+                aria-expanded="false"
+                aria-controls="navMenu">
+            <span class="nav-hamburger__line"></span>
+            <span class="nav-hamburger__line"></span>
+            <span class="nav-hamburger__line"></span>
+        </button>
+
+        <!-- Navigation Menu -->
+        <div class="nav-menu" id="navMenu" role="navigation">
+            <!-- Main Links -->
+            <ul class="nav-links">
+                <li class="nav-links__item">
+                    <a href="#features" class="nav-links__link" data-i18n="nav.features">
+                        Features
+                    </a>
+                </li>
+                <li class="nav-links__item">
+                    <a href="#benefits" class="nav-links__link" data-i18n="nav.benefits">
+                        Benefits
+                    </a>
+                </li>
+                <li class="nav-links__item">
+                    <a href="#pricing" class="nav-links__link" data-i18n="nav.pricing">
+                        Pricing
+                    </a>
+                </li>
+                <li class="nav-links__item">
+                    <a href="#resources" class="nav-links__link" data-i18n="nav.resources">
+                        Resources
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Actions -->
+            <div class="nav-actions">
+                <!-- Language Selector -->
+                <div class="nav-language" id="navLanguageSelector">
+                    <button class="nav-language__toggle"
+                            id="navLanguageToggle"
+                            type="button"
+                            aria-haspopup="listbox"
+                            aria-expanded="false"
+                            aria-label="Select language">
+                        <span class="nav-language__icon" aria-hidden="true">🌐</span>
+                        <span class="nav-language__label" data-role="language-label">EN</span>
+                        <span class="nav-language__arrow" aria-hidden="true">▾</span>
+                    </button>
+                    <div class="nav-language__dropdown"
+                         id="navLanguageDropdown"
+                         role="listbox"
+                         aria-label="Select Language">
+                        <button class="nav-language__option"
+                                type="button"
+                                data-lang="en-US"
+                                data-url="/en/"
+                                role="option"
+                                aria-selected="true">
+                            <span>🇺🇸</span>
+                            <span>English</span>
+                        </button>
+                        <button class="nav-language__option"
+                                type="button"
+                                data-lang="zh-CN"
+                                data-url="/zh/"
+                                role="option"
+                                aria-selected="false">
+                            <span>🇨🇳</span>
+                            <span>简体中文</span>
+                        </button>
+                        <button class="nav-language__option"
+                                type="button"
+                                data-lang="ja-JP"
+                                role="option"
+                                aria-selected="false">
+                            <span>🇯🇵</span>
+                            <span>日本語</span>
+                        </button>
+                        <button class="nav-language__option"
+                                type="button"
+                                data-lang="ko-KR"
+                                role="option"
+                                aria-selected="false">
+                            <span>🇰🇷</span>
+                            <span>한국어</span>
+                        </button>
+                        <button class="nav-language__option"
+                                type="button"
+                                data-lang="es-ES"
+                                role="option"
+                                aria-selected="false">
+                            <span>🇪🇸</span>
+                            <span>Español</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sign In Button -->
+                <button class="nav-btn nav-btn--ghost"
+                        type="button"
+                        id="navSignInBtn"
+                        data-i18n="nav.signin">
+                    Sign In
+                </button>
+
+                <!-- Try Free Button (Primary CTA) -->
+                <a href="#hero"
+                   class="nav-btn nav-btn--primary"
+                   data-i18n="nav.try.free">
+                    Try Free
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Overlay (for closing menu by tapping outside) -->
+    <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+</header>

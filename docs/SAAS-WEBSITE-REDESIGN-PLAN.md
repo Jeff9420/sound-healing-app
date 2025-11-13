@@ -45,6 +45,20 @@
 
 ## 📐 新网站结构设计
 
+**页面流程**（从上到下）：
+1. Header（顶部导航栏）
+2. Hero Section（标题区）
+3. Benefits（核心优势）
+4. Features（产品特色）
+5. How It Works（使用流程）
+6. Social Proof（用户证言）
+7. Pricing（价格方案）
+8. CTA（最终行动召唤）
+9. FAQ（常见问题）← 紧挨Footer
+10. Footer（底部导航）
+
+---
+
 ### 1. Header（顶部导航栏）
 
 #### 桌面端布局
