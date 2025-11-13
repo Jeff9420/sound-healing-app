@@ -1,0 +1,537 @@
+/**
+ * SaaS How It Works Section CSS
+ * Mobile-First Responsive Design
+ * 3-step timeline with visual demo
+ *
+ * Breakpoints:
+ * - Mobile: < 768px (default)
+ * - Tablet: 768px - 1023px
+ * - Desktop: 1024px+
+ */
+
+/* ================================
+   CSS Variables
+   ================================ */
+:root {
+    /* How It Works colors */
+    --hiw-bg: #0b0704;
+    --hiw-text: #fdf3e5;
+    --hiw-text-muted: rgba(253, 243, 229, 0.75);
+    --hiw-border: rgba(253, 243, 229, 0.15);
+    --hiw-primary: #6666ff;
+    --hiw-primary-light: rgba(102, 102, 255, 0.15);
+    --hiw-accent: #f6a93b;
+    --hiw-success: #4ade80;
+
+    /* Spacing */
+    --hiw-padding: 3rem 1.5rem;
+}
+
+/* ================================
+   Container
+   ================================ */
+.saas-how-it-works {
+    width: 100%;
+    background: var(--hiw-bg);
+    padding: var(--hiw-padding);
+}
+
+.saas-how-it-works__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* ================================
+   Section Header
+   ================================ */
+.saas-how-it-works__header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.saas-how-it-works__eyebrow {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--hiw-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 1rem 0;
+}
+
+.saas-how-it-works__title {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--hiw-text);
+    margin: 0 0 1.5rem 0;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.saas-how-it-works__description {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: 1.6;
+    color: var(--hiw-text-muted);
+    margin: 0;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ================================
+   Steps Timeline
+   ================================ */
+.steps-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+/* ================================
+   Step Card
+   ================================ */
+.step-card {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.step-card--highlight {
+    padding: 2rem;
+    border: 2px solid var(--hiw-primary);
+    border-radius: 16px;
+    background: var(--hiw-primary-light);
+    box-shadow: 0 0 32px rgba(102, 102, 255, 0.25);
+}
+
+/* ================================
+   Step Number & Connector
+   ================================ */
+.step-card__number-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.step-card__number {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(253, 243, 229, 0.1);
+    border: 2px solid var(--hiw-border);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--hiw-text);
+}
+
+.step-card__number--highlight {
+    background: var(--hiw-primary);
+    border-color: var(--hiw-primary);
+    color: #ffffff;
+    box-shadow: 0 4px 16px rgba(102, 102, 255, 0.4);
+}
+
+.step-card__connector {
+    flex: 1;
+    width: 2px;
+    min-height: 60px;
+    background: linear-gradient(to bottom, var(--hiw-border) 0%, transparent 100%);
+    margin-top: 0.5rem;
+}
+
+/* ================================
+   Step Content
+   ================================ */
+.step-card__content {
+    flex: 1;
+}
+
+.step-card__icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.step-card__title {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--hiw-text);
+    margin: 0 0 1rem 0;
+}
+
+.step-card__description {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--hiw-text-muted);
+    margin: 0 0 1.25rem 0;
+}
+
+/* ================================
+   Step Features List
+   ================================ */
+.step-card__features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.step-card__features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--hiw-text-muted);
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.step-card__features li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--hiw-primary);
+    font-weight: 700;
+}
+
+.step-card__features strong {
+    color: var(--hiw-text);
+}
+
+/* ================================
+   Step Tip
+   ================================ */
+.step-card__tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background: rgba(246, 169, 59, 0.1);
+    border: 1px solid rgba(246, 169, 59, 0.3);
+}
+
+.step-card__tip-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.step-card__tip-text {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--hiw-text-muted);
+}
+
+/* ================================
+   Highlight Box (Step 2)
+   ================================ */
+.step-card__highlight-box {
+    padding: 1.25rem;
+    border-radius: 12px;
+    background: rgba(102, 102, 255, 0.2);
+    border: 1px solid var(--hiw-primary);
+}
+
+.highlight-box__title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--hiw-text);
+    margin: 0 0 0.5rem 0;
+}
+
+.highlight-box__text {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--hiw-text-muted);
+    margin: 0;
+}
+
+/* ================================
+   Visual Demo Section
+   ================================ */
+.how-it-works-demo {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2.5rem;
+    border: 1px solid var(--hiw-border);
+    border-radius: 20px;
+    background: rgba(26, 15, 10, 0.6);
+    backdrop-filter: blur(10px);
+    margin-bottom: 3rem;
+    align-items: center;
+}
+
+/* ================================
+   Demo Device
+   ================================ */
+.demo-device {
+    max-width: 320px;
+    width: 100%;
+}
+
+.demo-device__screen {
+    aspect-ratio: 9 / 16;
+    background: linear-gradient(135deg, rgba(11, 7, 4, 0.95) 0%, rgba(26, 15, 10, 0.95) 100%);
+    border: 8px solid rgba(253, 243, 229, 0.2);
+    border-radius: 32px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.demo-content {
+    width: 100%;
+    text-align: center;
+}
+
+.demo-content__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.demo-icon {
+    font-size: 2rem;
+}
+
+.demo-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--hiw-text);
+}
+
+.demo-content__player {
+    margin-bottom: 1.5rem;
+}
+
+/* ================================
+   Demo Waveform
+   ================================ */
+.demo-waveform {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    height: 60px;
+    margin-bottom: 1rem;
+}
+
+.demo-waveform__bar {
+    width: 8px;
+    background: var(--hiw-primary);
+    border-radius: 999px;
+    animation: waveform-pulse 1.5s ease-in-out infinite;
+}
+
+.demo-waveform__bar:nth-child(1) {
+    height: 30%;
+    animation-delay: 0s;
+}
+
+.demo-waveform__bar:nth-child(2) {
+    height: 60%;
+    animation-delay: 0.1s;
+}
+
+.demo-waveform__bar:nth-child(3) {
+    height: 45%;
+    animation-delay: 0.2s;
+}
+
+.demo-waveform__bar:nth-child(4) {
+    height: 70%;
+    animation-delay: 0.3s;
+}
+
+.demo-waveform__bar:nth-child(5) {
+    height: 40%;
+    animation-delay: 0.4s;
+}
+
+@keyframes waveform-pulse {
+    0%, 100% {
+        transform: scaleY(1);
+    }
+    50% {
+        transform: scaleY(1.5);
+    }
+}
+
+/* ================================
+   Demo Timer
+   ================================ */
+.demo-timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(102, 102, 255, 0.2);
+    border: 1px solid var(--hiw-primary);
+    border-radius: 999px;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.demo-timer__icon {
+    font-size: 1.25rem;
+}
+
+.demo-timer__text {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--hiw-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.demo-content__label {
+    font-size: 0.875rem;
+    color: var(--hiw-text-muted);
+    margin: 0;
+}
+
+/* ================================
+   Demo Benefits
+   ================================ */
+.demo-benefits__title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--hiw-text);
+    margin: 0 0 1rem 0;
+}
+
+.demo-benefits__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.demo-benefits__list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--hiw-text-muted);
+}
+
+.demo-benefit__icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(74, 222, 128, 0.2);
+    color: var(--hiw-success);
+    font-weight: 700;
+    font-size: 0.875rem;
+}
+
+/* ================================
+   Bottom CTA
+   ================================ */
+.saas-how-it-works__cta {
+    text-align: center;
+}
+
+.how-it-works-cta__subtext {
+    margin-top: 1rem;
+    font-size: 0.9375rem;
+    color: var(--hiw-text-muted);
+}
+
+/* ================================
+   Tablet (768px+)
+   ================================ */
+@media (min-width: 768px) {
+    :root {
+        --hiw-padding: 4rem 2rem;
+    }
+
+    .how-it-works-demo {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 3rem;
+    }
+
+    .demo-device {
+        max-width: 280px;
+    }
+
+    .demo-benefits {
+        flex: 1;
+        max-width: 400px;
+    }
+}
+
+/* ================================
+   Desktop (1024px+)
+   ================================ */
+@media (min-width: 1024px) {
+    :root {
+        --hiw-padding: 5rem 2.5rem;
+    }
+
+    .saas-how-it-works__header {
+        margin-bottom: 4rem;
+    }
+
+    .steps-timeline {
+        gap: 2.5rem;
+    }
+
+    .step-card--highlight {
+        padding: 2.5rem;
+    }
+
+    .demo-device {
+        max-width: 320px;
+    }
+}
+
+/* ================================
+   Accessibility
+   ================================ */
+@media (prefers-reduced-motion: reduce) {
+    .demo-waveform__bar {
+        animation: none !important;
+    }
+}
+
+/* Focus Styles */
+.saas-btn:focus-visible {
+    outline: 2px solid var(--hiw-primary);
+    outline-offset: 3px;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .step-card--highlight {
+        border-width: 3px;
+    }
+
+    .demo-device__screen {
+        border-width: 10px;
+    }
+}
