@@ -1,0 +1,183 @@
+<!--
+    SaaS Hero Section Component
+    Optimized to highlight Sleep Timer as core killer feature
+
+    Key Features:
+    - Sleep Timer prominently featured (60-min default, 3-second fade-out)
+    - Mobile-first responsive design
+    - Two-column layout (content + stats panel)
+    - Multiple CTAs for conversion
+    - Fully internationalized with data-i18n attributes
+-->
+
+<section class="saas-hero-v2" role="banner" id="heroSection">
+    <div class="saas-hero-v2__container">
+        <!-- Hero Content (Left Column) -->
+        <div class="saas-hero-v2__content">
+            <p class="saas-hero-v2__eyebrow" data-i18n="hero.v2.eyebrow">
+                Free Sound Healing App with Smart Sleep Timer
+            </p>
+
+            <h2 class="saas-hero-v2__headline" data-i18n="hero.v2.headline">
+                Sleep Better Tonight with Rain Sounds & Auto-Stop Timer
+            </h2>
+
+            <p class="saas-hero-v2__description" data-i18n="hero.v2.description">
+                Free online sound healing with 213+ meditation music and rain sounds.
+                Set a 60-minute timer and drift off — audio gently fades out so you wake up refreshed, not startled.
+            </p>
+
+            <!-- Sleep Timer Feature Highlight -->
+            <div class="saas-hero-v2__feature-badge">
+                <span class="feature-badge__icon" aria-hidden="true">🌙</span>
+                <div class="feature-badge__content">
+                    <p class="feature-badge__title" data-i18n="hero.v2.timer.title">
+                        Smart Sleep Timer ⭐
+                    </p>
+                    <p class="feature-badge__desc" data-i18n="hero.v2.timer.desc">
+                        60-min auto-stop with gentle 3-second fade-out — saves battery, prevents wake-ups
+                    </p>
+                </div>
+            </div>
+
+            <!-- Primary CTAs -->
+            <div class="saas-hero-v2__cta-group">
+                <button class="saas-btn saas-btn--primary saas-btn--large"
+                        data-cta="start-sleep-session"
+                        data-action="start-default-session"
+                        aria-label="Start 60-minute sleep session">
+                    <span data-i18n="hero.v2.cta.primary">
+                        Start 60-Min Sleep Session →
+                    </span>
+                </button>
+
+                <button class="saas-btn saas-btn--ghost saas-btn--large"
+                        data-scroll-target="#categoryGrid"
+                        aria-label="Browse all sounds">
+                    <span data-i18n="hero.v2.cta.secondary">
+                        Browse 213+ Free Sounds
+                    </span>
+                </button>
+            </div>
+
+            <!-- Trust Indicators -->
+            <div class="saas-hero-v2__trust-bar">
+                <div class="trust-item">
+                    <span class="trust-item__icon" aria-hidden="true">✓</span>
+                    <span class="trust-item__text" data-i18n="hero.v2.trust.no-download">
+                        No app download
+                    </span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-item__icon" aria-hidden="true">✓</span>
+                    <span class="trust-item__text" data-i18n="hero.v2.trust.no-signup">
+                        No signup required
+                    </span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-item__icon" aria-hidden="true">✓</span>
+                    <span class="trust-item__text" data-i18n="hero.v2.trust.free">
+                        100% free forever
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats & Features Panel (Right Column) -->
+        <div class="saas-hero-v2__panel">
+            <!-- Social Proof Badge -->
+            <div class="saas-panel-v2__badge" data-i18n="hero.v2.panel.badge">
+                Trusted by 120K+ users worldwide
+            </div>
+
+            <!-- Core Stats Grid -->
+            <div class="stats-grid-v2">
+                <article class="stat-card-v2">
+                    <p class="stat-card-v2__number">213+</p>
+                    <p class="stat-card-v2__label" data-i18n="hero.v2.stats.tracks.label">
+                        Healing Soundscapes
+                    </p>
+                    <p class="stat-card-v2__desc" data-i18n="hero.v2.stats.tracks.desc">
+                        Rain, white noise, singing bowls & more
+                    </p>
+                </article>
+
+                <article class="stat-card-v2 stat-card-v2--highlight">
+                    <div class="stat-card-v2__icon" aria-hidden="true">🌙</div>
+                    <p class="stat-card-v2__label" data-i18n="hero.v2.stats.timer.label">
+                        Smart Sleep Timer
+                    </p>
+                    <p class="stat-card-v2__desc" data-i18n="hero.v2.stats.timer.desc">
+                        15-120 min auto-stop with 3-second gentle fade
+                    </p>
+                </article>
+
+                <article class="stat-card-v2">
+                    <p class="stat-card-v2__number">5</p>
+                    <p class="stat-card-v2__label" data-i18n="hero.v2.stats.languages.label">
+                        Languages
+                    </p>
+                    <p class="stat-card-v2__desc" data-i18n="hero.v2.stats.languages.desc">
+                        EN, 中文, 日本語, 한국어, Español
+                    </p>
+                </article>
+
+                <article class="stat-card-v2">
+                    <p class="stat-card-v2__number">120K+</p>
+                    <p class="stat-card-v2__label" data-i18n="hero.v2.stats.sessions.label">
+                        Sleep Sessions
+                    </p>
+                    <p class="stat-card-v2__desc" data-i18n="hero.v2.stats.sessions.desc">
+                        Anonymous users improved sleep quality
+                    </p>
+                </article>
+            </div>
+
+            <!-- Feature List -->
+            <div class="feature-list-v2">
+                <p class="feature-list-v2__title" data-i18n="hero.v2.features.title">
+                    What makes us different:
+                </p>
+                <ul class="feature-list-v2__items">
+                    <li class="feature-list-v2__item">
+                        <span class="feature-item__icon" aria-hidden="true">🎯</span>
+                        <span data-i18n="hero.v2.features.timer">
+                            60-min default sleep timer (customizable 15-120 min)
+                        </span>
+                    </li>
+                    <li class="feature-list-v2__item">
+                        <span class="feature-item__icon" aria-hidden="true">🎨</span>
+                        <span data-i18n="hero.v2.features.scenes">
+                            9 video backgrounds auto-match your mood
+                        </span>
+                    </li>
+                    <li class="feature-list-v2__item">
+                        <span class="feature-item__icon" aria-hidden="true">🎵</span>
+                        <span data-i18n="hero.v2.features.mixer">
+                            Personal mixing - layer sounds for unique recipes
+                        </span>
+                    </li>
+                    <li class="feature-list-v2__item">
+                        <span class="feature-item__icon" aria-hidden="true">📊</span>
+                        <span data-i18n="hero.v2.features.insights">
+                            Usage insights - track your meditation journey
+                        </span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Secondary CTA in Panel -->
+            <div class="saas-panel-v2__footer">
+                <p class="panel-footer__text" data-i18n="hero.v2.panel.footer">
+                    Join 120K+ users who sleep better with SoundFlows
+                </p>
+                <a href="#conversionOffer"
+                   class="panel-footer__link"
+                   aria-label="Get free 7-day plan"
+                   data-i18n="hero.v2.panel.link">
+                    Get Your Free 7-Day Meditation Plan →
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

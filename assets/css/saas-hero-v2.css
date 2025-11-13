@@ -1,0 +1,453 @@
+/**
+ * SaaS Hero Section V2 - Optimized for Sleep Timer Feature
+ * Mobile-First Responsive Design
+ *
+ * Breakpoints:
+ * - Mobile: < 768px (default)
+ * - Tablet: 768px - 1023px
+ * - Desktop: 1024px+
+ */
+
+/* ================================
+   CSS Variables
+   ================================ */
+:root {
+    /* Hero-specific colors */
+    --hero-bg: rgba(11, 7, 4, 0.98);
+    --hero-text: #fdf3e5;
+    --hero-text-muted: rgba(253, 243, 229, 0.75);
+    --hero-border: rgba(253, 243, 229, 0.15);
+    --hero-primary: #6666ff;
+    --hero-accent: #f6a93b;
+    --hero-highlight-bg: rgba(102, 102, 255, 0.15);
+
+    /* Spacing */
+    --hero-padding: 2rem 1.5rem;
+    --hero-gap: 2rem;
+
+    /* Typography */
+    --hero-headline-size: clamp(1.75rem, 5vw, 3rem);
+    --hero-description-size: clamp(1rem, 2vw, 1.25rem);
+}
+
+/* ================================
+   Hero Container
+   ================================ */
+.saas-hero-v2 {
+    position: relative;
+    width: 100%;
+    background: var(--hero-bg);
+    padding: var(--hero-padding);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.saas-hero-v2__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--hero-gap);
+}
+
+/* ================================
+   Hero Content (Left Column on Desktop)
+   ================================ */
+.saas-hero-v2__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.saas-hero-v2__eyebrow {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--hero-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+}
+
+.saas-hero-v2__headline {
+    font-size: var(--hero-headline-size);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--hero-text);
+    margin: 0;
+}
+
+.saas-hero-v2__description {
+    font-size: var(--hero-description-size);
+    line-height: 1.6;
+    color: var(--hero-text-muted);
+    margin: 0;
+    max-width: 600px;
+}
+
+/* ================================
+   Sleep Timer Feature Badge
+   ================================ */
+.saas-hero-v2__feature-badge {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem;
+    border: 2px solid var(--hero-primary);
+    border-radius: 16px;
+    background: var(--hero-highlight-bg);
+    box-shadow: 0 0 24px rgba(102, 102, 255, 0.2);
+}
+
+.feature-badge__icon {
+    font-size: 2rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.feature-badge__content {
+    flex: 1;
+}
+
+.feature-badge__title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--hero-text);
+    margin: 0 0 0.5rem 0;
+}
+
+.feature-badge__desc {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--hero-text-muted);
+    margin: 0;
+}
+
+/* ================================
+   CTA Buttons
+   ================================ */
+.saas-hero-v2__cta-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+}
+
+.saas-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.875rem 1.75rem;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    white-space: nowrap;
+}
+
+.saas-btn--large {
+    padding: 1.125rem 2.25rem;
+    font-size: 1.125rem;
+}
+
+.saas-btn--primary {
+    background: var(--hero-primary);
+    color: #ffffff;
+    border: 2px solid var(--hero-primary);
+}
+
+.saas-btn--primary:hover {
+    background: #5555ee;
+    border-color: #5555ee;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 102, 255, 0.4);
+}
+
+.saas-btn--ghost {
+    background: transparent;
+    color: var(--hero-text);
+    border: 2px solid var(--hero-border);
+}
+
+.saas-btn--ghost:hover {
+    border-color: var(--hero-primary);
+    background: rgba(102, 102, 255, 0.1);
+}
+
+/* ================================
+   Trust Bar
+   ================================ */
+.saas-hero-v2__trust-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--hero-border);
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9375rem;
+    color: var(--hero-text-muted);
+}
+
+.trust-item__icon {
+    color: #4ade80;
+    font-weight: 700;
+}
+
+/* ================================
+   Stats Panel (Right Column on Desktop)
+   ================================ */
+.saas-hero-v2__panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+    border: 1px solid var(--hero-border);
+    border-radius: 24px;
+    background: rgba(26, 15, 10, 0.6);
+    backdrop-filter: blur(10px);
+}
+
+.saas-panel-v2__badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    background: rgba(102, 102, 255, 0.2);
+    color: var(--hero-primary);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* ================================
+   Stats Grid
+   ================================ */
+.stats-grid-v2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+
+.stat-card-v2 {
+    padding: 1.5rem;
+    border: 1px solid var(--hero-border);
+    border-radius: 12px;
+    background: rgba(11, 7, 4, 0.6);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.stat-card-v2:hover {
+    transform: translateY(-2px);
+    border-color: var(--hero-primary);
+}
+
+.stat-card-v2--highlight {
+    border: 2px solid var(--hero-primary);
+    background: var(--hero-highlight-bg);
+}
+
+.stat-card-v2__number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--hero-primary);
+    margin: 0 0 0.5rem 0;
+    line-height: 1;
+}
+
+.stat-card-v2__icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-card-v2__label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--hero-text);
+    margin: 0 0 0.5rem 0;
+}
+
+.stat-card-v2__desc {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--hero-text-muted);
+    margin: 0;
+}
+
+/* ================================
+   Feature List
+   ================================ */
+.feature-list-v2 {
+    padding: 1.5rem;
+    border: 1px solid var(--hero-border);
+    border-radius: 12px;
+    background: rgba(11, 7, 4, 0.4);
+}
+
+.feature-list-v2__title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--hero-text);
+    margin: 0 0 1rem 0;
+}
+
+.feature-list-v2__items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+}
+
+.feature-list-v2__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--hero-text-muted);
+}
+
+.feature-item__icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+/* ================================
+   Panel Footer
+   ================================ */
+.saas-panel-v2__footer {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--hero-border);
+    text-align: center;
+}
+
+.panel-footer__text {
+    font-size: 0.875rem;
+    color: var(--hero-text-muted);
+    margin: 0 0 1rem 0;
+}
+
+.panel-footer__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--hero-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+}
+
+.panel-footer__link:hover {
+    color: #5555ee;
+}
+
+/* ================================
+   Tablet (768px+)
+   ================================ */
+@media (min-width: 768px) {
+    :root {
+        --hero-padding: 3rem 2rem;
+        --hero-gap: 3rem;
+    }
+
+    .saas-hero-v2__container {
+        grid-template-columns: 1fr 1fr;
+        display: grid;
+        align-items: start;
+    }
+
+    .saas-hero-v2__cta-group {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .saas-hero-v2__trust-bar {
+        flex-direction: row;
+        gap: 1.5rem;
+    }
+
+    .stats-grid-v2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ================================
+   Desktop (1024px+)
+   ================================ */
+@media (min-width: 1024px) {
+    :root {
+        --hero-padding: 4rem 2.5rem;
+        --hero-gap: 4rem;
+    }
+
+    .saas-hero-v2 {
+        min-height: 90vh;
+    }
+
+    .saas-hero-v2__container {
+        gap: 4rem;
+    }
+
+    .saas-hero-v2__content {
+        gap: 2rem;
+    }
+
+    .saas-hero-v2__feature-badge {
+        padding: 1.5rem;
+    }
+
+    .feature-badge__title {
+        font-size: 1.25rem;
+    }
+
+    .saas-btn--large {
+        padding: 1.25rem 2.5rem;
+        font-size: 1.125rem;
+    }
+}
+
+/* ================================
+   Accessibility
+   ================================ */
+@media (prefers-reduced-motion: reduce) {
+    .saas-btn,
+    .stat-card-v2,
+    .panel-footer__link {
+        transition: none !important;
+    }
+}
+
+/* Focus Styles */
+.saas-btn:focus-visible,
+.panel-footer__link:focus-visible {
+    outline: 2px solid var(--hero-primary);
+    outline-offset: 3px;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .saas-hero-v2__feature-badge {
+        border-width: 3px;
+    }
+
+    .saas-btn--primary {
+        border-width: 3px;
+    }
+
+    .stat-card-v2--highlight {
+        border-width: 3px;
+    }
+}
