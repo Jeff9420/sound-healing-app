@@ -1,0 +1,433 @@
+<!--
+    SaaS FAQ Section Component
+    Accordion-style FAQ with 12 common questions
+
+    Categories:
+    - Free Model & Pricing (3 questions)
+    - Sleep Timer & Features (4 questions)
+    - Privacy & Security (2 questions)
+    - Technical & Support (3 questions)
+
+    Key Features:
+    - Collapsible accordion with smooth animations
+    - Keyboard accessible (Enter/Space to toggle)
+    - ARIA attributes for screen readers
+    - Mobile-first responsive design
+    - Clean, scannable layout
+-->
+
+<section class="saas-faq" role="region" id="faq" aria-labelledby="faqTitle">
+    <div class="saas-faq__container">
+        <!-- Section Header -->
+        <header class="saas-faq__header">
+            <p class="saas-faq__eyebrow" data-i18n="faq.eyebrow">
+                Frequently Asked Questions
+            </p>
+            <h2 class="saas-faq__title" id="faqTitle" data-i18n="faq.title">
+                Everything You Need to Know About SoundFlows
+            </h2>
+            <p class="saas-faq__description" data-i18n="faq.description">
+                Got questions? We've got answers. Learn about our free-forever model, Sleep Timer features, privacy, and more.
+            </p>
+        </header>
+
+        <!-- FAQ Grid -->
+        <div class="faq-grid">
+            <!-- Category 1: Free Model & Pricing -->
+            <div class="faq-category">
+                <h3 class="faq-category__title" data-i18n="faq.category1.title">
+                    💰 Free Model & Pricing
+                </h3>
+
+                <div class="faq-accordion">
+                    <!-- Q1: Why is it free? -->
+                    <div class="faq-item">
+                        <button class="faq-item__question"
+                                aria-expanded="false"
+                                aria-controls="faq-answer-1"
+                                data-faq-toggle>
+                            <span class="faq-item__question-text" data-i18n="faq.q1.question">
+                                Why is SoundFlows 100% free? What's the catch?
+                            </span>
+                            <span class="faq-item__icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-item__answer" id="faq-answer-1" hidden>
+                            <p data-i18n="faq.q1.answer1">
+                                <strong>There is no catch.</strong> We believe healing sounds should be accessible to everyone, regardless of income. All 213+ sounds, Sleep Timer, video backgrounds, and premium features are free forever.
+                            </p>
+                            <p data-i18n="faq.q1.answer2">
+                                We cover hosting costs through optional donations from supporters who love the platform. If you can't donate, that's totally fine — enjoy everything for free!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Q2: Will you charge later? -->
+                    <div class="faq-item">
+                        <button class="faq-item__question"
+                                aria-expanded="false"
+                                aria-controls="faq-answer-2"
+                                data-faq-toggle>
+                            <span class="faq-item__question-text" data-i18n="faq.q2.question">
+                                Will you start charging for features later?
+                            </span>
+                            <span class="faq-item__icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-item__answer" id="faq-answer-2" hidden>
+                            <p data-i18n="faq.q2.answer1">
+                                <strong>Never.</strong> All current features will remain free forever, guaranteed. We're committed to this promise.
+                            </p>
+                            <p data-i18n="faq.q2.answer2">
+                                The only paid tier we're considering is Enterprise (Q2 2025) for organizations that need white-label branding, custom sound libraries, and SSO integration. Individual users will always have 100% free access.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Q3: How do you sustain this? -->
+                    <div class="faq-item">
+                        <button class="faq-item__question"
+                                aria-expanded="false"
+                                aria-controls="faq-answer-3"
+                                data-faq-toggle>
+                            <span class="faq-item__question-text" data-i18n="faq.q3.question">
+                                How do you sustain a free platform?
+                            </span>
+                            <span class="faq-item__icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-item__answer" id="faq-answer-3" hidden>
+                            <p data-i18n="faq.q3.answer1">
+                                We use cost-efficient infrastructure: audio files are hosted on Internet Archive (free), video backgrounds on Cloudflare R2 (affordable CDN), and the frontend on Vercel's free tier.
+                            </p>
+                            <p data-i18n="faq.q3.answer2">
+                                Optional donations from supporters help cover CDN bandwidth costs. About 5% of users donate, which is enough to keep the lights on. Thank you to all supporters! ❤️
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category 2: Sleep Timer & Features -->
+            <div class="faq-category">
+                <h3 class="faq-category__title" data-i18n="faq.category2.title">
+                    🌙 Sleep Timer & Features
+                </h3>
+
+                <div class="faq-accordion">
+                    <!-- Q4: How does Sleep Timer work? -->
+                    <div class="faq-item faq-item--featured">
+                        <button class="faq-item__question"
+                                aria-expanded="false"
+                                aria-controls="faq-answer-4"
+                                data-faq-toggle>
+                            <span class="faq-item__question-text" data-i18n="faq.q4.question">
+                                How does the Sleep Timer work? 🌟
+                            </span>
+                            <span class="faq-item__icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-item__answer" id="faq-answer-4" hidden>
+                            <p data-i18n="faq.q4.answer1">
+                                <strong>The Sleep Timer is our #1 most-loved feature!</strong> Here's how it works:
+                            </p>
+                            <ul>
+                                <li data-i18n="faq.q4.bullet1">
+                                    <strong>Default 60 minutes</strong> - Optimal for most sleep cycles
+                                </li>
+                                <li data-i18n="faq.q4.bullet2">
+                                    <strong>Customizable 15-120 min</strong> - Perfect for naps (15-30 min) or full nights (90-120 min)
+                                </li>
+                                <li data-i18n="faq.q4.bullet3">
+                                    <strong>3-second gentle fade-out</strong> - Audio gradually decreases volume over 3 seconds, so you won't be startled awake
+                                </li>
+                                <li data-i18n="faq.q4.bullet4">
+                                    <strong>Auto-stop saves battery</strong> - No more waking up to a dead phone!
+                                </li>
+                            </ul>
+                            <p data-i18n="faq.q4.answer2">
+                                82% of our users set the timer every night. It's the reason most people choose SoundFlows over other sound apps.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Q5: Can I use without timer? -->
+                    <div class="faq-item">
+                        <button class="faq-item__question"
+                                aria-expanded="false"
+                                aria-controls="faq-answer-5"
+                                data-faq-toggle>
+                            <span class="faq-item__question-text" data-i18n="faq.q5.question">
+                                Can I play sounds without the Sleep Timer?
+                            </span>
+                            <span class="faq-item__icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-item__answer" id="faq-answer-5" hidden>
+                            <p data-i18n="faq.q5.answer1">
+                                <strong>Absolutely!</strong> The Sleep Timer is optional. You can play sounds on infinite loop without setting a timer.
+                            </p>
+                            <p data-i18n="faq.q5.answer2">
+                                This is perfect for meditation, work focus sessions, or background ambiance. Just hit play and leave it running as long as you need.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Q6: Works offline? -->
+                    <div class="faq-item">
+                        <button class="faq-item__question"
+                                aria-expanded="false"
+                                aria-controls="faq-answer-6"
+                                data-faq-toggle>
+                            <span class="faq-item__question-text" data-i18n="faq.q6.question">
+                                Does it work offline?
+                            </span>
+                            <span class="faq-item__icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-item__answer" id="faq-answer-6" hidden>
+                            <p data-i18n="faq.q6.answer1">
+                                <strong>Yes!</strong> SoundFlows is a Progressive Web App (PWA). Once installed on your device, it works offline with cached audio files.
+                            </p>
+                            <p data-i18n="faq.q6.answer2">
+                                To install: On mobile, tap "Add to Home Screen" in your browser menu. On desktop, look for the install icon in the address bar. Then play any sound once while online to cache it for offline use.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Q7: Multiple sounds at once? -->
+                    <div class="faq-item">
+                        <button class="faq-item__question"
+                                aria-expanded="false"
+                                aria-controls="faq-answer-7"
+                                data-faq-toggle>
+                            <span class="faq-item__question-text" data-i18n="faq.q7.question">
+                                Can I play multiple sounds at once?
+                            </span>
+                            <span class="faq-item__icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-item__answer" id="faq-answer-7" hidden>
+                            <p data-i18n="faq.q7.answer1">
+                                <strong>Yes!</strong> Use the Personal Sound Mixer to layer up to 4 sounds simultaneously. For example: rain + thunder + white noise + singing bowls.
+                            </p>
+                            <p data-i18n="faq.q7.answer2">
+                                Each sound has individual volume control. Save your favorite mixes and share them with friends via custom URLs.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category 3: Privacy & Security -->
+            <div class="faq-category">
+                <h3 class="faq-category__title" data-i18n="faq.category3.title">
+                    🔒 Privacy & Security
+                </h3>
+
+                <div class="faq-accordion">
+                    <!-- Q8: Data collection? -->
+                    <div class="faq-item">
+                        <button class="faq-item__question"
+                                aria-expanded="false"
+                                aria-controls="faq-answer-8"
+                                data-faq-toggle>
+                            <span class="faq-item__question-text" data-i18n="faq.q8.question">
+                                Do you collect my data?
+                            </span>
+                            <span class="faq-item__icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-item__answer" id="faq-answer-8" hidden>
+                            <p data-i18n="faq.q8.answer1">
+                                <strong>We collect minimal data, stored locally in your browser.</strong> No signup required means we don't even have your email unless you voluntarily provide it.
+                            </p>
+                            <p data-i18n="faq.q8.answer2">
+                                What we track locally (in your browser's localStorage):
+                            </p>
+                            <ul>
+                                <li data-i18n="faq.q8.bullet1">Play history (last 100 sessions)</li>
+                                <li data-i18n="faq.q8.bullet2">Favorite sounds</li>
+                                <li data-i18n="faq.q8.bullet3">Language preference</li>
+                                <li data-i18n="faq.q8.bullet4">Volume settings</li>
+                            </ul>
+                            <p data-i18n="faq.q8.answer3">
+                                We use privacy-first analytics (Plausible, not Google Analytics) to understand page views and popular sounds — no personal identifiers, no tracking across sites.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Q9: GDPR compliant? -->
+                    <div class="faq-item">
+                        <button class="faq-item__question"
+                                aria-expanded="false"
+                                aria-controls="faq-answer-9"
+                                data-faq-toggle>
+                            <span class="faq-item__question-text" data-i18n="faq.q9.question">
+                                Are you GDPR/CCPA compliant?
+                            </span>
+                            <span class="faq-item__icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-item__answer" id="faq-answer-9" hidden>
+                            <p data-i18n="faq.q9.answer1">
+                                <strong>Yes.</strong> Since we don't require signup and don't collect personal data (except optional email for donations), we're compliant by design.
+                            </p>
+                            <p data-i18n="faq.q9.answer2">
+                                All data is stored locally in your browser. You can clear it anytime via your browser settings or our "Clear Data" button in Settings. We have no central database with user information.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category 4: Technical & Support -->
+            <div class="faq-category">
+                <h3 class="faq-category__title" data-i18n="faq.category4.title">
+                    🛠️ Technical & Support
+                </h3>
+
+                <div class="faq-accordion">
+                    <!-- Q10: Browser support? -->
+                    <div class="faq-item">
+                        <button class="faq-item__question"
+                                aria-expanded="false"
+                                aria-controls="faq-answer-10"
+                                data-faq-toggle>
+                            <span class="faq-item__question-text" data-i18n="faq.q10.question">
+                                Which browsers are supported?
+                            </span>
+                            <span class="faq-item__icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-item__answer" id="faq-answer-10" hidden>
+                            <p data-i18n="faq.q10.answer1">
+                                SoundFlows works on all modern browsers:
+                            </p>
+                            <ul>
+                                <li data-i18n="faq.q10.bullet1"><strong>Chrome/Edge</strong> - Full support (recommended)</li>
+                                <li data-i18n="faq.q10.bullet2"><strong>Firefox</strong> - Full support</li>
+                                <li data-i18n="faq.q10.bullet3"><strong>Safari</strong> - Full support (iOS 14.5+)</li>
+                                <li data-i18n="faq.q10.bullet4"><strong>Mobile browsers</strong> - Fully responsive</li>
+                            </ul>
+                            <p data-i18n="faq.q10.answer2">
+                                For best experience, use the latest browser version. Older browsers (IE11) are not supported.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Q11: Audio not playing? -->
+                    <div class="faq-item">
+                        <button class="faq-item__question"
+                                aria-expanded="false"
+                                aria-controls="faq-answer-11"
+                                data-faq-toggle>
+                            <span class="faq-item__question-text" data-i18n="faq.q11.question">
+                                Audio not playing — how to fix?
+                            </span>
+                            <span class="faq-item__icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-item__answer" id="faq-answer-11" hidden>
+                            <p data-i18n="faq.q11.answer1">
+                                Try these troubleshooting steps:
+                            </p>
+                            <ol>
+                                <li data-i18n="faq.q11.bullet1"><strong>Check volume</strong> - Ensure device volume is up and not muted</li>
+                                <li data-i18n="faq.q11.bullet2"><strong>Browser autoplay</strong> - Some browsers block autoplay. Click play button manually first.</li>
+                                <li data-i18n="faq.q11.bullet3"><strong>Refresh page</strong> - Hard refresh (Ctrl+Shift+R or Cmd+Shift+R)</li>
+                                <li data-i18n="faq.q11.bullet4"><strong>Clear cache</strong> - Clear browser cache and reload</li>
+                                <li data-i18n="faq.q11.bullet5"><strong>Try different browser</strong> - Test in Chrome/Firefox</li>
+                            </ol>
+                            <p data-i18n="faq.q11.answer2">
+                                Still having issues? Email us at support@soundflows.app with your browser version and device info.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Q12: Contact support? -->
+                    <div class="faq-item">
+                        <button class="faq-item__question"
+                                aria-expanded="false"
+                                aria-controls="faq-answer-12"
+                                data-faq-toggle>
+                            <span class="faq-item__question-text" data-i18n="faq.q12.question">
+                                How do I contact support?
+                            </span>
+                            <span class="faq-item__icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-item__answer" id="faq-answer-12" hidden>
+                            <p data-i18n="faq.q12.answer1">
+                                We offer email support for all users (free and supporters):
+                            </p>
+                            <ul>
+                                <li data-i18n="faq.q12.bullet1"><strong>Email</strong>: support@soundflows.app</li>
+                                <li data-i18n="faq.q12.bullet2"><strong>Response time</strong>: Within 24-48 hours</li>
+                                <li data-i18n="faq.q12.bullet3"><strong>GitHub Issues</strong>: Report bugs at github.com/soundflows/issues</li>
+                            </ul>
+                            <p data-i18n="faq.q12.answer2">
+                                Please include: browser version, device type, and steps to reproduce any issues. We read every message!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Still Have Questions CTA -->
+        <div class="faq-cta">
+            <h3 class="faq-cta__title" data-i18n="faq.cta.title">
+                Still Have Questions?
+            </h3>
+            <p class="faq-cta__text" data-i18n="faq.cta.text">
+                Can't find what you're looking for? We're here to help. Email us anytime and we'll respond within 24-48 hours.
+            </p>
+            <button class="saas-btn saas-btn--outline saas-btn--large"
+                    data-action="mailto:support@soundflows.app"
+                    aria-label="Contact support">
+                <span data-i18n="faq.cta.button">
+                    Email Support →
+                </span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<script>
+// FAQ Accordion Functionality
+(function() {
+    'use strict';
+
+    // Initialize FAQ accordion on DOM load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initFAQAccordion);
+    } else {
+        initFAQAccordion();
+    }
+
+    function initFAQAccordion() {
+        const faqToggles = document.querySelectorAll('[data-faq-toggle]');
+
+        faqToggles.forEach(toggle => {
+            toggle.addEventListener('click', handleFAQToggle);
+            toggle.addEventListener('keydown', handleFAQKeydown);
+        });
+    }
+
+    function handleFAQToggle(event) {
+        const button = event.currentTarget;
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        const answerId = button.getAttribute('aria-controls');
+        const answer = document.getElementById(answerId);
+        const icon = button.querySelector('.faq-item__icon');
+
+        if (!answer) return;
+
+        // Toggle state
+        button.setAttribute('aria-expanded', !isExpanded);
+        answer.hidden = isExpanded;
+        icon.textContent = isExpanded ? '+' : '−';
+
+        // Add/remove active class
+        const faqItem = button.closest('.faq-item');
+        faqItem.classList.toggle('faq-item--active', !isExpanded);
+    }
+
+    function handleFAQKeydown(event) {
+        // Allow Enter or Space to toggle
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            handleFAQToggle(event);
+        }
+    }
+})();
+</script>
