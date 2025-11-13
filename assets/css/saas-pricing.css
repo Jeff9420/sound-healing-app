@@ -1,0 +1,554 @@
+/**
+ * SaaS Pricing Section CSS
+ * Mobile-First Responsive Design
+ * 3-tier pricing: Free Forever (primary), Support Us, Enterprise
+ *
+ * Breakpoints:
+ * - Mobile: < 768px (default)
+ * - Tablet: 768px - 1023px
+ * - Desktop: 1024px+
+ */
+
+/* ================================
+   CSS Variables
+   ================================ */
+:root {
+    /* Pricing colors */
+    --pricing-bg: #0b0704;
+    --pricing-text: #fdf3e5;
+    --pricing-text-muted: rgba(253, 243, 229, 0.75);
+    --pricing-border: rgba(253, 243, 229, 0.15);
+    --pricing-primary: #6666ff;
+    --pricing-primary-light: rgba(102, 102, 255, 0.15);
+    --pricing-accent: #f6a93b;
+    --pricing-success: #4ade80;
+
+    /* Spacing */
+    --pricing-padding: 3rem 1.5rem;
+    --pricing-gap: 1.5rem;
+}
+
+/* ================================
+   Container
+   ================================ */
+.saas-pricing {
+    width: 100%;
+    background: var(--pricing-bg);
+    padding: var(--pricing-padding);
+}
+
+.saas-pricing__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* ================================
+   Section Header
+   ================================ */
+.saas-pricing__header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.saas-pricing__eyebrow {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--pricing-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 1rem 0;
+}
+
+.saas-pricing__title {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--pricing-text);
+    margin: 0 0 1.5rem 0;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.saas-pricing__description {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: 1.6;
+    color: var(--pricing-text-muted);
+    margin: 0;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ================================
+   Pricing Cards Grid
+   ================================ */
+.pricing-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--pricing-gap);
+    margin-bottom: 3rem;
+}
+
+/* ================================
+   Pricing Card
+   ================================ */
+.pricing-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2.5rem 2rem;
+    border: 1px solid var(--pricing-border);
+    border-radius: 20px;
+    background: rgba(26, 15, 10, 0.6);
+    backdrop-filter: blur(10px);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pricing-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--pricing-primary);
+    box-shadow: 0 8px 24px rgba(102, 102, 255, 0.2);
+}
+
+/* Primary Card (Free Forever) */
+.pricing-card--primary {
+    border: 2px solid var(--pricing-primary);
+    background: var(--pricing-primary-light);
+    box-shadow: 0 0 40px rgba(102, 102, 255, 0.3);
+}
+
+.pricing-card--primary:hover {
+    box-shadow: 0 8px 40px rgba(102, 102, 255, 0.4);
+}
+
+/* Disabled Card (Enterprise Coming Soon) */
+.pricing-card--disabled {
+    opacity: 0.7;
+}
+
+.pricing-card--disabled:hover {
+    transform: none;
+    border-color: var(--pricing-border);
+    box-shadow: none;
+}
+
+/* ================================
+   Card Badge
+   ================================ */
+.pricing-card__badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    background: var(--pricing-primary);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 4px 12px rgba(102, 102, 255, 0.4);
+    white-space: nowrap;
+}
+
+/* ================================
+   Card Header
+   ================================ */
+.pricing-card__header {
+    text-align: center;
+}
+
+.pricing-card__icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.pricing-card__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--pricing-text);
+    margin: 0 0 0.5rem 0;
+}
+
+.pricing-card__subtitle {
+    font-size: 1rem;
+    line-height: 1.4;
+    color: var(--pricing-text-muted);
+    margin: 0;
+}
+
+/* ================================
+   Card Price
+   ================================ */
+.pricing-card__price {
+    text-align: center;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--pricing-border);
+    border-bottom: 1px solid var(--pricing-border);
+}
+
+.pricing-card__price-amount {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.pricing-card__price-currency {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--pricing-primary);
+    margin-top: 0.5rem;
+}
+
+.pricing-card__price-number {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--pricing-primary);
+}
+
+.pricing-card__price-plus {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--pricing-primary);
+    margin-top: 0.5rem;
+}
+
+.pricing-card__price-text {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--pricing-text);
+}
+
+.pricing-card__price-period {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--pricing-text-muted);
+}
+
+/* ================================
+   Card Description
+   ================================ */
+.pricing-card__description {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.pricing-card__description p {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--pricing-text-muted);
+    margin: 0;
+}
+
+.pricing-card__description strong {
+    color: var(--pricing-text);
+}
+
+/* ================================
+   Card Features List
+   ================================ */
+.pricing-card__features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.pricing-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.pricing-feature__icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: var(--pricing-success);
+    font-size: 1rem;
+}
+
+.pricing-feature__text {
+    flex: 1;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--pricing-text-muted);
+}
+
+.pricing-feature__text strong {
+    color: var(--pricing-text);
+}
+
+/* Highlighted Feature (Sleep Timer) */
+.pricing-feature--highlight {
+    padding: 0.75rem;
+    border-radius: 8px;
+    background: rgba(102, 102, 255, 0.15);
+    border: 1px solid rgba(102, 102, 255, 0.3);
+}
+
+.pricing-feature--highlight .pricing-feature__icon {
+    font-size: 1.25rem;
+}
+
+/* ================================
+   Card CTA Button
+   ================================ */
+.pricing-card__cta {
+    width: 100%;
+    margin-top: auto;
+}
+
+/* ================================
+   Card Note
+   ================================ */
+.pricing-card__note {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--pricing-text-muted);
+    margin: 0;
+}
+
+/* ================================
+   FAQ Callout
+   ================================ */
+.pricing-faq-callout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2.5rem 2rem;
+    border: 1px solid var(--pricing-border);
+    border-radius: 16px;
+    background: rgba(26, 15, 10, 0.4);
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.pricing-faq-callout__icon {
+    font-size: 3rem;
+}
+
+.pricing-faq-callout__content {
+    flex: 1;
+}
+
+.pricing-faq-callout__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--pricing-text);
+    margin: 0 0 0.75rem 0;
+}
+
+.pricing-faq-callout__text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--pricing-text-muted);
+    margin: 0;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ================================
+   Comparison Table
+   ================================ */
+.pricing-comparison {
+    margin-bottom: 3rem;
+}
+
+.pricing-comparison__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--pricing-text);
+    margin: 0 0 2rem 0;
+    text-align: center;
+}
+
+.pricing-comparison__table-wrapper {
+    overflow-x: auto;
+    border: 1px solid var(--pricing-border);
+    border-radius: 16px;
+    background: rgba(26, 15, 10, 0.4);
+}
+
+.pricing-comparison__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.pricing-comparison__table thead {
+    background: rgba(102, 102, 255, 0.1);
+}
+
+.pricing-comparison__table th,
+.pricing-comparison__table td {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--pricing-border);
+}
+
+.pricing-comparison__table th {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--pricing-text);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.pricing-comparison__table td {
+    font-size: 0.9375rem;
+    color: var(--pricing-text-muted);
+}
+
+.pricing-comparison__table tbody tr:last-child th,
+.pricing-comparison__table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.pricing-comparison__row--highlight {
+    background: rgba(102, 102, 255, 0.05);
+}
+
+.comparison-check {
+    color: var(--pricing-success);
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.comparison-cross {
+    color: var(--pricing-text-muted);
+    opacity: 0.5;
+}
+
+/* ================================
+   Bottom CTA
+   ================================ */
+.saas-pricing__cta {
+    text-align: center;
+}
+
+.pricing-cta__subtext {
+    margin-top: 1rem;
+    font-size: 0.9375rem;
+    color: var(--pricing-text-muted);
+}
+
+/* ================================
+   Tablet (768px+)
+   ================================ */
+@media (min-width: 768px) {
+    :root {
+        --pricing-padding: 4rem 2rem;
+        --pricing-gap: 2rem;
+    }
+
+    .pricing-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .pricing-card--primary {
+        grid-column: span 2;
+    }
+
+    .pricing-faq-callout {
+        flex-direction: row;
+        text-align: left;
+    }
+
+    .pricing-faq-callout__icon {
+        flex-shrink: 0;
+    }
+
+    .pricing-faq-callout__content {
+        text-align: left;
+    }
+
+    .pricing-faq-callout__text {
+        margin-left: 0;
+    }
+}
+
+/* ================================
+   Desktop (1024px+)
+   ================================ */
+@media (min-width: 1024px) {
+    :root {
+        --pricing-padding: 5rem 2.5rem;
+        --pricing-gap: 2.5rem;
+    }
+
+    .saas-pricing__header {
+        margin-bottom: 4rem;
+    }
+
+    .pricing-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .pricing-card--primary {
+        grid-column: span 1;
+    }
+
+    .pricing-card {
+        padding: 3rem 2.5rem;
+    }
+
+    .pricing-card__title {
+        font-size: 2rem;
+    }
+
+    .pricing-comparison__table th,
+    .pricing-comparison__table td {
+        padding: 1.25rem 2rem;
+    }
+}
+
+/* ================================
+   Accessibility
+   ================================ */
+@media (prefers-reduced-motion: reduce) {
+    .pricing-card {
+        transition: none !important;
+    }
+}
+
+/* Focus Styles */
+.saas-btn:focus-visible {
+    outline: 2px solid var(--pricing-primary);
+    outline-offset: 3px;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .pricing-card {
+        border-width: 2px;
+    }
+
+    .pricing-card--primary {
+        border-width: 3px;
+    }
+
+    .pricing-card__badge {
+        border: 2px solid #ffffff;
+    }
+
+    .pricing-comparison__table {
+        border-width: 2px;
+    }
+}

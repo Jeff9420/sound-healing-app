@@ -1,0 +1,410 @@
+<!--
+    SaaS Pricing Section Component
+    Shows transparent pricing with 100% free forever model
+
+    Pricing Tiers:
+    1. Free Forever (PRIMARY) - All features included, Sleep Timer highlighted
+    2. Support Us (Optional) - Donation tier for supporters
+    3. Enterprise (Coming Soon) - For organizations
+
+    Key Message: Everything is free, donations welcome but not required
+-->
+
+<section class="saas-pricing" role="region" id="pricing" aria-labelledby="pricingTitle">
+    <div class="saas-pricing__container">
+        <!-- Section Header -->
+        <header class="saas-pricing__header">
+            <p class="saas-pricing__eyebrow" data-i18n="pricing.eyebrow">
+                Simple, Transparent Pricing
+            </p>
+            <h2 class="saas-pricing__title" id="pricingTitle" data-i18n="pricing.title">
+                Free Forever. No Hidden Costs. No Subscriptions.
+            </h2>
+            <p class="saas-pricing__description" data-i18n="pricing.description">
+                We believe healing sounds should be accessible to everyone. That's why all 213+ sounds, Sleep Timer, and premium features are 100% free forever.
+            </p>
+        </header>
+
+        <!-- Pricing Cards Grid -->
+        <div class="pricing-cards">
+            <!-- Tier 1: Free Forever (PRIMARY) -->
+            <article class="pricing-card pricing-card--primary">
+                <div class="pricing-card__badge" data-i18n="pricing.free.badge">
+                    ⭐ Most Popular
+                </div>
+
+                <div class="pricing-card__header">
+                    <div class="pricing-card__icon">🎧</div>
+                    <h3 class="pricing-card__title" data-i18n="pricing.free.title">
+                        Free Forever
+                    </h3>
+                    <p class="pricing-card__subtitle" data-i18n="pricing.free.subtitle">
+                        Everything you need, always free
+                    </p>
+                </div>
+
+                <div class="pricing-card__price">
+                    <div class="pricing-card__price-amount">
+                        <span class="pricing-card__price-currency">$</span>
+                        <span class="pricing-card__price-number">0</span>
+                    </div>
+                    <div class="pricing-card__price-period" data-i18n="pricing.free.period">
+                        Forever
+                    </div>
+                </div>
+
+                <ul class="pricing-card__features">
+                    <li class="pricing-feature">
+                        <span class="pricing-feature__icon">✓</span>
+                        <span class="pricing-feature__text">
+                            <strong data-i18n="pricing.free.feature1.strong">213+ healing sounds</strong>
+                            <span data-i18n="pricing.free.feature1.text"> — full library access</span>
+                        </span>
+                    </li>
+                    <li class="pricing-feature pricing-feature--highlight">
+                        <span class="pricing-feature__icon">🌙</span>
+                        <span class="pricing-feature__text">
+                            <strong data-i18n="pricing.free.feature2.strong">Smart Sleep Timer</strong>
+                            <span data-i18n="pricing.free.feature2.text"> — 60-min default, 3s fade-out</span>
+                        </span>
+                    </li>
+                    <li class="pricing-feature">
+                        <span class="pricing-feature__icon">✓</span>
+                        <span class="pricing-feature__text">
+                            <strong data-i18n="pricing.free.feature3.strong">9 video backgrounds</strong>
+                            <span data-i18n="pricing.free.feature3.text"> — immersive scenes</span>
+                        </span>
+                    </li>
+                    <li class="pricing-feature">
+                        <span class="pricing-feature__icon">✓</span>
+                        <span class="pricing-feature__text">
+                            <strong data-i18n="pricing.free.feature4.strong">Personal mixer</strong>
+                            <span data-i18n="pricing.free.feature4.text"> — layer up to 4 sounds</span>
+                        </span>
+                    </li>
+                    <li class="pricing-feature">
+                        <span class="pricing-feature__icon">✓</span>
+                        <span class="pricing-feature__text">
+                            <strong data-i18n="pricing.free.feature5.strong">Play history</strong>
+                            <span data-i18n="pricing.free.feature5.text"> — last 100 sessions tracked</span>
+                        </span>
+                    </li>
+                    <li class="pricing-feature">
+                        <span class="pricing-feature__icon">✓</span>
+                        <span class="pricing-feature__text">
+                            <strong data-i18n="pricing.free.feature6.strong">Focus mode</strong>
+                            <span data-i18n="pricing.free.feature6.text"> — distraction-free fullscreen</span>
+                        </span>
+                    </li>
+                    <li class="pricing-feature">
+                        <span class="pricing-feature__icon">✓</span>
+                        <span class="pricing-feature__text">
+                            <strong data-i18n="pricing.free.feature7.strong">PWA offline mode</strong>
+                            <span data-i18n="pricing.free.feature7.text"> — works without internet</span>
+                        </span>
+                    </li>
+                    <li class="pricing-feature">
+                        <span class="pricing-feature__icon">✓</span>
+                        <span class="pricing-feature__text">
+                            <strong data-i18n="pricing.free.feature8.strong">5 languages</strong>
+                            <span data-i18n="pricing.free.feature8.text"> — English, 中文, 日本語, 한국어, Español</span>
+                        </span>
+                    </li>
+                    <li class="pricing-feature">
+                        <span class="pricing-feature__icon">✓</span>
+                        <span class="pricing-feature__text">
+                            <strong data-i18n="pricing.free.feature9.strong">No ads, ever</strong>
+                            <span data-i18n="pricing.free.feature9.text"> — clean experience</span>
+                        </span>
+                    </li>
+                    <li class="pricing-feature">
+                        <span class="pricing-feature__icon">✓</span>
+                        <span class="pricing-feature__text">
+                            <strong data-i18n="pricing.free.feature10.strong">Priority support</strong>
+                            <span data-i18n="pricing.free.feature10.text"> — email assistance</span>
+                        </span>
+                    </li>
+                </ul>
+
+                <button class="saas-btn saas-btn--primary saas-btn--large pricing-card__cta"
+                        data-cta="start-free"
+                        data-action="scroll-to-hero"
+                        aria-label="Start using free">
+                    <span data-i18n="pricing.free.cta">
+                        Start Using Free →
+                    </span>
+                </button>
+
+                <p class="pricing-card__note" data-i18n="pricing.free.note">
+                    No credit card • No signup required • Instant access
+                </p>
+            </article>
+
+            <!-- Tier 2: Support Us (Optional Donation) -->
+            <article class="pricing-card">
+                <div class="pricing-card__header">
+                    <div class="pricing-card__icon">❤️</div>
+                    <h3 class="pricing-card__title" data-i18n="pricing.support.title">
+                        Support Us
+                    </h3>
+                    <p class="pricing-card__subtitle" data-i18n="pricing.support.subtitle">
+                        Help keep SoundFlows free
+                    </p>
+                </div>
+
+                <div class="pricing-card__price">
+                    <div class="pricing-card__price-amount">
+                        <span class="pricing-card__price-currency">$</span>
+                        <span class="pricing-card__price-number">5</span>
+                        <span class="pricing-card__price-plus">+</span>
+                    </div>
+                    <div class="pricing-card__price-period" data-i18n="pricing.support.period">
+                        One-time or Monthly
+                    </div>
+                </div>
+
+                <div class="pricing-card__description">
+                    <p data-i18n="pricing.support.description1">
+                        <strong>100% optional.</strong> All features remain free forever, regardless of donation status.
+                    </p>
+                    <p data-i18n="pricing.support.description2">
+                        Your support helps us cover hosting costs (Cloudflare R2, Internet Archive), add new sounds, and maintain the platform.
+                    </p>
+                </div>
+
+                <ul class="pricing-card__features">
+                    <li class="pricing-feature">
+                        <span class="pricing-feature__icon">✓</span>
+                        <span class="pricing-feature__text">
+                            <strong data-i18n="pricing.support.feature1.strong">All free features</strong>
+                            <span data-i18n="pricing.support.feature1.text"> — nothing changes</span>
+                        </span>
+                    </li>
+                    <li class="pricing-feature">
+                        <span class="pricing-feature__icon">🎁</span>
+                        <span class="pricing-feature__text">
+                            <strong data-i18n="pricing.support.feature2.strong">Supporter badge</strong>
+                            <span data-i18n="pricing.support.feature2.text"> — show your support</span>
+                        </span>
+                    </li>
+                    <li class="pricing-feature">
+                        <span class="pricing-feature__icon">🙏</span>
+                        <span class="pricing-feature__text">
+                            <strong data-i18n="pricing.support.feature3.strong">Our eternal gratitude</strong>
+                            <span data-i18n="pricing.support.feature3.text"> — helps keep it free for all</span>
+                        </span>
+                    </li>
+                    <li class="pricing-feature">
+                        <span class="pricing-feature__icon">📧</span>
+                        <span class="pricing-feature__text">
+                            <strong data-i18n="pricing.support.feature4.strong">Monthly updates</strong>
+                            <span data-i18n="pricing.support.feature4.text"> — new sounds, features</span>
+                        </span>
+                    </li>
+                    <li class="pricing-feature">
+                        <span class="pricing-feature__icon">🗳️</span>
+                        <span class="pricing-feature__text">
+                            <strong data-i18n="pricing.support.feature5.strong">Feature voting</strong>
+                            <span data-i18n="pricing.support.feature5.text"> — influence roadmap</span>
+                        </span>
+                    </li>
+                </ul>
+
+                <button class="saas-btn saas-btn--secondary saas-btn--large pricing-card__cta"
+                        data-cta="donate"
+                        data-action="open-donation"
+                        aria-label="Support us">
+                    <span data-i18n="pricing.support.cta">
+                        Support SoundFlows ❤️
+                    </span>
+                </button>
+
+                <p class="pricing-card__note" data-i18n="pricing.support.note">
+                    Cancel anytime • 100% refund guarantee
+                </p>
+            </article>
+
+            <!-- Tier 3: Enterprise (Coming Soon) -->
+            <article class="pricing-card pricing-card--disabled">
+                <div class="pricing-card__header">
+                    <div class="pricing-card__icon">🏢</div>
+                    <h3 class="pricing-card__title" data-i18n="pricing.enterprise.title">
+                        Enterprise
+                    </h3>
+                    <p class="pricing-card__subtitle" data-i18n="pricing.enterprise.subtitle">
+                        For organizations & teams
+                    </p>
+                </div>
+
+                <div class="pricing-card__price">
+                    <div class="pricing-card__price-amount">
+                        <span class="pricing-card__price-text" data-i18n="pricing.enterprise.price">
+                            Custom
+                        </span>
+                    </div>
+                    <div class="pricing-card__price-period" data-i18n="pricing.enterprise.period">
+                        Coming Q2 2025
+                    </div>
+                </div>
+
+                <div class="pricing-card__description">
+                    <p data-i18n="pricing.enterprise.description">
+                        Custom deployment for hospitals, therapy clinics, wellness centers, and corporate wellness programs.
+                    </p>
+                </div>
+
+                <ul class="pricing-card__features">
+                    <li class="pricing-feature">
+                        <span class="pricing-feature__icon">✓</span>
+                        <span class="pricing-feature__text" data-i18n="pricing.enterprise.feature1">
+                            White-label branding
+                        </span>
+                    </li>
+                    <li class="pricing-feature">
+                        <span class="pricing-feature__icon">✓</span>
+                        <span class="pricing-feature__text" data-i18n="pricing.enterprise.feature2">
+                            Custom sound library
+                        </span>
+                    </li>
+                    <li class="pricing-feature">
+                        <span class="pricing-feature__icon">✓</span>
+                        <span class="pricing-feature__text" data-i18n="pricing.enterprise.feature3">
+                            Analytics dashboard
+                        </span>
+                    </li>
+                    <li class="pricing-feature">
+                        <span class="pricing-feature__icon">✓</span>
+                        <span class="pricing-feature__text" data-i18n="pricing.enterprise.feature4">
+                            SSO integration
+                        </span>
+                    </li>
+                    <li class="pricing-feature">
+                        <span class="pricing-feature__icon">✓</span>
+                        <span class="pricing-feature__text" data-i18n="pricing.enterprise.feature5">
+                            SLA & priority support
+                        </span>
+                    </li>
+                </ul>
+
+                <button class="saas-btn saas-btn--outline saas-btn--large pricing-card__cta"
+                        data-cta="enterprise-notify"
+                        data-action="join-waitlist"
+                        aria-label="Join waitlist"
+                        disabled>
+                    <span data-i18n="pricing.enterprise.cta">
+                        Join Waitlist →
+                    </span>
+                </button>
+
+                <p class="pricing-card__note" data-i18n="pricing.enterprise.note">
+                    Available Q2 2025 • Email notifications when ready
+                </p>
+            </article>
+        </div>
+
+        <!-- FAQ Callout -->
+        <div class="pricing-faq-callout">
+            <div class="pricing-faq-callout__icon">❓</div>
+            <div class="pricing-faq-callout__content">
+                <h3 class="pricing-faq-callout__title" data-i18n="pricing.faq.title">
+                    Have Questions About Pricing?
+                </h3>
+                <p class="pricing-faq-callout__text" data-i18n="pricing.faq.text">
+                    We're transparent about everything. Check our FAQ below for common questions about our free-forever model, donations, and enterprise options.
+                </p>
+            </div>
+            <button class="saas-btn saas-btn--outline"
+                    data-action="scroll-to-faq"
+                    aria-label="View FAQ">
+                <span data-i18n="pricing.faq.cta">
+                    View FAQ →
+                </span>
+            </button>
+        </div>
+
+        <!-- Comparison Table (Desktop Only) -->
+        <div class="pricing-comparison">
+            <h3 class="pricing-comparison__title" data-i18n="pricing.comparison.title">
+                Feature Comparison
+            </h3>
+
+            <div class="pricing-comparison__table-wrapper">
+                <table class="pricing-comparison__table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="pricing.comparison.feature">Feature</th>
+                            <th data-i18n="pricing.comparison.free">Free Forever</th>
+                            <th data-i18n="pricing.comparison.support">Support Us</th>
+                            <th data-i18n="pricing.comparison.enterprise">Enterprise</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-i18n="pricing.comparison.row1">213+ Healing Sounds</td>
+                            <td><span class="comparison-check">✓</span></td>
+                            <td><span class="comparison-check">✓</span></td>
+                            <td><span class="comparison-check">✓</span> + Custom</td>
+                        </tr>
+                        <tr class="pricing-comparison__row--highlight">
+                            <td data-i18n="pricing.comparison.row2">🌙 Smart Sleep Timer</td>
+                            <td><span class="comparison-check">✓</span></td>
+                            <td><span class="comparison-check">✓</span></td>
+                            <td><span class="comparison-check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="pricing.comparison.row3">Video Backgrounds</td>
+                            <td><span class="comparison-check">✓</span> 9 scenes</td>
+                            <td><span class="comparison-check">✓</span> 9 scenes</td>
+                            <td><span class="comparison-check">✓</span> Custom</td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="pricing.comparison.row4">Offline PWA Mode</td>
+                            <td><span class="comparison-check">✓</span></td>
+                            <td><span class="comparison-check">✓</span></td>
+                            <td><span class="comparison-check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="pricing.comparison.row5">Supporter Badge</td>
+                            <td><span class="comparison-cross">—</span></td>
+                            <td><span class="comparison-check">✓</span></td>
+                            <td><span class="comparison-check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="pricing.comparison.row6">White-label Branding</td>
+                            <td><span class="comparison-cross">—</span></td>
+                            <td><span class="comparison-cross">—</span></td>
+                            <td><span class="comparison-check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="pricing.comparison.row7">Analytics Dashboard</td>
+                            <td><span class="comparison-cross">—</span></td>
+                            <td><span class="comparison-cross">—</span></td>
+                            <td><span class="comparison-check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="pricing.comparison.row8">Priority Support</td>
+                            <td>Email</td>
+                            <td>Email</td>
+                            <td>24/7 + SLA</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Bottom CTA -->
+        <div class="saas-pricing__cta">
+            <button class="saas-btn saas-btn--primary saas-btn--large"
+                    data-cta="start-from-pricing"
+                    data-action="scroll-to-hero"
+                    aria-label="Get started free">
+                <span data-i18n="pricing.cta.primary">
+                    Get Started Free — No Credit Card →
+                </span>
+            </button>
+            <p class="pricing-cta__subtext" data-i18n="pricing.cta.subtext">
+                Join 120K+ users • All features free forever • Start in 5 seconds
+            </p>
+        </div>
+    </div>
+</section>
