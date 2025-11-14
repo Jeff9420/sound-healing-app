@@ -28,10 +28,17 @@
             const checkInterval = setInterval(() => {
                 attempts++;
 
-                // 检查依赖是否加载
-                if (typeof window.i18n !== 'undefined' &&
-                    typeof window.SAAS_TRANSLATIONS !== 'undefined') {
+                // 检查依赖是否加载（i18n系统必须加载，至少有一个SAAS翻译源）
+                const i18nReady = typeof window.i18n !== 'undefined';
+                const hasBasicTranslations = typeof window.SAAS_TRANSLATIONS !== 'undefined';
+                const hasCompleteTranslations = typeof window.SAAS_COMPLETE_TRANSLATIONS !== 'undefined';
+
+                if (i18nReady && (hasBasicTranslations || hasCompleteTranslations)) {
                     clearInterval(checkInterval);
+                    const sources = [];
+                    if (hasBasicTranslations) sources.push('SAAS_TRANSLATIONS');
+                    if (hasCompleteTranslations) sources.push('SAAS_COMPLETE_TRANSLATIONS');
+                    console.log(`✅ 检测到翻译源: ${sources.join(', ')}`);
                     resolve();
                     return;
                 }
@@ -45,15 +52,18 @@
         });
     }
 
-    // 合并翻译数据
-    function mergeSaasTranslations() {
-        console.log('📦 合并SaaS组件翻译...');
+    // 合并单个翻译源
+    function mergeTranslationSource(i18nSystem, translationSource, sourceName) {
+        if (!translationSource) {
+            console.log(`⚠️ ${sourceName} 不存在，跳过...`);
+            return;
+        }
 
-        const i18nSystem = window.i18n;
-        const saasTranslations = window.SAAS_TRANSLATIONS;
+        console.log(`📦 合并 ${sourceName}...`);
+        let totalMerged = 0;
 
         // 遍历所有语言
-        Object.keys(saasTranslations).forEach(langCode => {
+        Object.keys(translationSource).forEach(langCode => {
             console.log(`  处理语言: ${langCode}`);
 
             // 获取现有翻译数据
@@ -68,18 +78,42 @@
             }
 
             // 合并SaaS翻译到现有翻译
-            const saasLangData = saasTranslations[langCode];
+            const langData = translationSource[langCode];
             let mergedCount = 0;
 
-            Object.keys(saasLangData).forEach(key => {
-                existingTranslations[key] = saasLangData[key];
+            Object.keys(langData).forEach(key => {
+                existingTranslations[key] = langData[key];
                 mergedCount++;
             });
 
+            totalMerged += mergedCount;
             console.log(`  ✅ ${langCode}: 合并了 ${mergedCount} 个翻译键值`);
         });
 
-        console.log('✅ SaaS翻译合并完成！');
+        console.log(`✅ ${sourceName} 合并完成！总计: ${totalMerged} 个键值`);
+    }
+
+    // 合并所有SaaS翻译数据
+    function mergeSaasTranslations() {
+        console.log('📦 开始合并所有SaaS组件翻译...');
+
+        const i18nSystem = window.i18n;
+
+        // 合并基础翻译（i18n-saas-extensions.js）
+        mergeTranslationSource(i18nSystem, window.SAAS_TRANSLATIONS, 'SAAS_TRANSLATIONS');
+
+        // 合并完整翻译（i18n-saas-complete-translations.js）
+        mergeTranslationSource(i18nSystem, window.SAAS_COMPLETE_TRANSLATIONS, 'SAAS_COMPLETE_TRANSLATIONS');
+
+        console.log('🎉 所有SaaS翻译合并完成！');
+
+        // 输出合并后的统计信息
+        console.log(`📊 翻译统计:`);
+        i18nSystem.loadedLanguages.forEach(lang => {
+            const translations = i18nSystem.translations.get(lang);
+            const count = translations ? Object.keys(translations).length : 0;
+            console.log(`  - ${lang}: ${count} 个翻译键值`);
+        });
     }
 
     // 触发UI更新（如果当前语言包含SaaS组件）
@@ -110,10 +144,22 @@
             console.log('🎉 SaaS翻译集成完成！');
 
             // 触发自定义事件，通知应用集成完成
+            const integratedLanguages = new Set();
+            if (window.SAAS_TRANSLATIONS) {
+                Object.keys(window.SAAS_TRANSLATIONS).forEach(lang => integratedLanguages.add(lang));
+            }
+            if (window.SAAS_COMPLETE_TRANSLATIONS) {
+                Object.keys(window.SAAS_COMPLETE_TRANSLATIONS).forEach(lang => integratedLanguages.add(lang));
+            }
+
             const event = new CustomEvent('saasTranslationsReady', {
                 detail: {
                     timestamp: Date.now(),
-                    languagesIntegrated: Object.keys(window.SAAS_TRANSLATIONS)
+                    languagesIntegrated: Array.from(integratedLanguages),
+                    sources: {
+                        basic: typeof window.SAAS_TRANSLATIONS !== 'undefined',
+                        complete: typeof window.SAAS_COMPLETE_TRANSLATIONS !== 'undefined'
+                    }
                 }
             });
             document.dispatchEvent(event);
