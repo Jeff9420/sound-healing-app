@@ -402,6 +402,30 @@
                 document.addEventListener('click', function(e) {
                     console.log('🖱️ Click detected on:', e.target.tagName, e.target.className);
 
+                    // Check for scroll target buttons first
+                    const scrollBtn = e.target.closest('[data-scroll-target]');
+                    if (scrollBtn) {
+                        e.preventDefault();
+                        const scrollTarget = scrollBtn.getAttribute('data-scroll-target');
+                        console.log('📜 Scroll button clicked:', scrollTarget);
+
+                        // If target doesn't exist on this page, redirect to main app
+                        if (scrollTarget === '#categoryGrid') {
+                            console.log('🔗 Redirecting to main app sound library');
+                            window.location.href = 'index.html#sound-library';
+                            return;
+                        } else {
+                            const element = document.querySelector(scrollTarget);
+                            if (element) {
+                                element.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                });
+                            }
+                            return;
+                        }
+                    }
+
                     const cta = e.target.closest('[data-cta]');
                     if (cta) {
                         e.preventDefault(); // Prevent default action
@@ -415,7 +439,7 @@
 
                     // Also handle regular links
                     const link = e.target.closest('a[href]');
-                    if (link && !cta) {
+                    if (link && !cta && !scrollBtn) {
                         const href = link.getAttribute('href');
                         console.log('🔗 Link clicked:', href);
                         // Let the link work normally if it's not a CTA
@@ -423,7 +447,7 @@
 
                     // Handle buttons without data-cta
                     const button = e.target.closest('button');
-                    if (button && !cta) {
+                    if (button && !cta && !scrollBtn) {
                         console.log('🔘 Button clicked (no data-cta)');
                     }
                 }, true); // Use capture phase to catch all clicks
