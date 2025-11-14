@@ -3924,7 +3924,6 @@ h1 {
     inset: 0;
     display: none;
     z-index: 9999;
-    pointer-events: none;
 }
 .player-control-modal.player-modal--visible {
     display: block;

@@ -623,6 +623,26 @@ function closePlaylist() {
 // 浮动播放器模态
 // ==========================================================================
 
+function syncPlayerModalOverflow(forceRemove = false) {
+    if (typeof document === 'undefined') {
+        return;
+    }
+    if (forceRemove || !MOBILE_PLAYER_QUERY) {
+        document.body.classList.remove('player-modal-open');
+        return;
+    }
+    const modal = document.getElementById('playerControlModal');
+    if (!modal || !modal.classList.contains('player-modal--visible')) {
+        document.body.classList.remove('player-modal-open');
+        return;
+    }
+    if (MOBILE_PLAYER_QUERY.matches) {
+        document.body.classList.add('player-modal-open');
+    } else {
+        document.body.classList.remove('player-modal-open');
+    }
+}
+
 function openPlayerModal(shouldFocusClose = false) {
     const modal = document.getElementById('playerControlModal');
     const player = document.getElementById('audioPlayer');
@@ -710,11 +730,7 @@ async function playTrack(index) {
         currentCategoryElem.textContent = category.name || currentCategory.key;
     }
 
-    if (currentCategory && currentCategory.key) {
-        window.dispatchEvent(new CustomEvent('categoryChanged', {
-            detail: { category: currentCategory.key }
-        }));
-    }
+    openPlayerModal(false);
 
     if (window.audioPreloader && window.audioPreloader.isCached(track.url)) {
         console.log('🎧 音频已缓存，使用浏览器缓存加速加载');
@@ -769,12 +785,6 @@ async function playTrack(index) {
     updatePlayPauseButton();
 
     const player = document.getElementById('audioPlayer');
-    if (player) {
-        player.classList.add('show');
-    }
-
-    openPlayerModal(false);
-
     window.dispatchEvent(new CustomEvent('audioStateChange', {
         detail: { isPlaying: true, track: track }
     }));
@@ -1400,4 +1410,5 @@ window.refreshPersonalizedRecommendations = (force = false) => {
         scheduleRecommendationRefresh(true);
     }
 };
+
 
