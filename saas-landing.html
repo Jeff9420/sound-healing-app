@@ -195,6 +195,25 @@
                     }
                 } catch (error) {
                     console.error(`❌ Error loading ${component.file}:`, error);
+
+                    // Show user-friendly error message
+                    const container = document.getElementById(component.id);
+                    if (container && error.message.includes('Failed to fetch')) {
+                        container.innerHTML = `
+                            <div style="background: rgba(239, 68, 68, 0.1); border: 2px solid #ef4444; border-radius: 12px; padding: 2rem; margin: 2rem; text-align: center;">
+                                <h2 style="color: #ef4444; margin-bottom: 1rem;">⚠️ 组件加载失败</h2>
+                                <p style="color: #fdf3e5; margin-bottom: 1rem;">此页面需要通过 HTTP 服务器访问，不能直接打开HTML文件。</p>
+                                <p style="color: rgba(253, 243, 229, 0.7); font-size: 0.9rem; margin-bottom: 1.5rem;">
+                                    原因：浏览器安全策略阻止了从 file:// 协议加载本地文件。
+                                </p>
+                                <div style="background: rgba(11, 7, 4, 0.8); border-radius: 8px; padding: 1rem; margin: 1rem 0; text-align: left;">
+                                    <p style="color: #6666ff; font-weight: bold; margin-bottom: 0.5rem;">解决方法：</p>
+                                    <pre style="color: #a3e635; margin: 0;">python -m http.server 8000</pre>
+                                    <p style="color: rgba(253, 243, 229, 0.7); margin-top: 0.5rem;">然后访问: http://localhost:8000/saas-landing.html</p>
+                                </div>
+                            </div>
+                        `;
+                    }
                 }
             }
 

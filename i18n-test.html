@@ -551,7 +551,6 @@
                 log('📊 Checking translation coverage...', 'info');
 
                 const currentLang = window.i18n.currentLanguage;
-                const translations = window.i18n.translations.get(currentLang) || {};
 
                 // Sample keys to check
                 const sampleSections = {
@@ -563,7 +562,10 @@
                 };
 
                 Object.entries(sampleSections).forEach(([section, keys]) => {
-                    const covered = keys.filter(k => translations[k]).length;
+                    const covered = keys.filter(k => {
+                        const value = window.i18n.t(k);
+                        return value && value !== k; // Translation exists and is not the key itself
+                    }).length;
                     const percentage = Math.round((covered / keys.length) * 100);
 
                     const status = percentage === 100 ? 'success' : (percentage >= 70 ? 'warning' : 'error');
