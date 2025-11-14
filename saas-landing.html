@@ -124,6 +124,19 @@
         section {
             scroll-margin-top: 80px;
         }
+
+        /* CRITICAL: Ensure all buttons and links are clickable */
+        button, a, .saas-btn, [data-cta], [role="button"] {
+            pointer-events: auto !important;
+            cursor: pointer !important;
+        }
+
+        /* Ensure main content is above any fixed elements */
+        main, #mainContent {
+            position: relative !important;
+            z-index: 1 !important;
+            pointer-events: auto !important;
+        }
     </style>
 </head>
 <body>
@@ -362,19 +375,35 @@
 
             // CTA button tracking
             function initializeCTATracking() {
+                // Global click handler for all elements
                 document.addEventListener('click', function(e) {
+                    console.log('🖱️ Click detected on:', e.target.tagName, e.target.className);
+
                     const cta = e.target.closest('[data-cta]');
                     if (cta) {
+                        e.preventDefault(); // Prevent default action
                         const ctaName = cta.getAttribute('data-cta');
-                        console.log('🎯 CTA clicked:', ctaName);
-
-                        // You can add analytics tracking here
-                        // Example: gtag('event', 'cta_click', { cta_name: ctaName });
+                        const action = cta.getAttribute('data-action');
+                        console.log('🎯 CTA clicked:', ctaName, 'action:', action);
 
                         // Handle specific CTA actions
                         handleCTAAction(cta);
                     }
-                });
+
+                    // Also handle regular links
+                    const link = e.target.closest('a[href]');
+                    if (link && !cta) {
+                        const href = link.getAttribute('href');
+                        console.log('🔗 Link clicked:', href);
+                        // Let the link work normally if it's not a CTA
+                    }
+
+                    // Handle buttons without data-cta
+                    const button = e.target.closest('button');
+                    if (button && !cta) {
+                        console.log('🔘 Button clicked (no data-cta)');
+                    }
+                }, true); // Use capture phase to catch all clicks
             }
 
             // Handle CTA actions
