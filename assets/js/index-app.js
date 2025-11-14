@@ -271,32 +271,53 @@ function renderCategoryShortcuts(entries) {
         `;
 
         button.addEventListener('click', () => {
-            // 直接播放该分类的第一首音频，不打开播放列表
             const audioFiles = category.files || [];
-            if (audioFiles.length > 0) {
-                // 设置当前分类
-                currentCategory = { key: key, ...category };
+            if (!audioFiles.length) {
+                console.warn(`Category "${key}" has no audio files`);
+                return;
+            }
 
-                // 加载该分类的所有音频到 tracks 数组
-                tracks = audioFiles.map(filename => {
-                    const fileUrl = `${category.baseUrl}/${filename}`;
+            const playlistTracks = audioFiles
+                .map((filename) => {
+                    const url = getAudioUrl(key, filename) || (category.baseUrl ? `${category.baseUrl}/${filename}` : null);
+
+                    if (!url) {
+                        console.warn(`Unable to resolve audio URL for ${key} -> ${filename}`);
+                        return null;
+                    }
+
                     return {
-                        name: filename.replace(/\.(mp3|wav|wma|ogg)$/i, ''),
-                        url: fileUrl,
+                        name: getLocalizedTrackTitle(key, filename),
+                        fileName: filename,
+                        url,
                         category: key
                     };
-                });
+                })
+                .filter(Boolean);
 
-                // 播放第一首
-                playTrack(0);
-
-                // 显示播放器
-                const player = document.querySelector('.audio-player');
-                if (player) {
-                    player.style.transform = 'translateY(0)';
+            if (!playlistTracks.length) {
+                const fallbackTracks = audioData[key];
+                if (fallbackTracks?.length) {
+                    tracks = fallbackTracks;
+                    currentCategory = { key, ...category };
+                    playTrack(0);
+                } else {
+                    window.showNotification?.(
+                        getText('player.playError', '????????????????????'),
+                        'error'
+                    );
                 }
-            } else {
-                console.warn(`Category "${key}" has no audio files`);
+                return;
+            }
+
+            currentCategory = { key, ...category };
+            tracks = playlistTracks;
+
+            playTrack(0);
+
+            const player = document.querySelector('.audio-player');
+            if (player) {
+                player.style.transform = 'translateY(0)';
             }
         });
 
