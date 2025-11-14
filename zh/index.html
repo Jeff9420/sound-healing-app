@@ -651,44 +651,91 @@
                     <button class="player-control-modal__close" type="button" data-role="player-modal-close" data-close-player-modal aria-label="�رղ�����">��</button>
                 </header>
                 <div id="audioPlayer" class="audio-player" role="region" aria-label="��Ƶ���ſ���" tabindex="-1">
-                    <div class="minimize-indicator" onclick="toggleMinimize(event)" data-i18n="player.minimize" role="button" tabindex="0" aria-label="��С��������" aria-expanded="true">��С��������</div>
-                    <div class="minimized-display">
-                        <div class="minimized-text" id="minimizedTrack" data-i18n="player.notPlaying" aria-live="polite">��ǰû�в���</div>
-                    </div>
                     <div class="player-content">
+                        <!-- Now Playing Section -->
                         <div class="now-playing" role="status" aria-live="polite">
                             <span class="player-recommendation-badge" id="playerBadge" data-i18n="player.defaultTrack.badge">�ٷ��Ƽ�</span>
-                            <div id="currentTrack" class="track-title" data-i18n="player.defaultTrack.title" aria-label="��ǰ������Ŀ">15 ������ů����</div>
+                            <div id="currentTrack" class="track-title" data-i18n="player.notPlaying" aria-label="Currently playing track">15 ������ů����</div>
                             <div id="playerTags" class="track-tags" data-i18n="player.defaultTrack.tags">#���� #���� #����</div>
                             <p id="playerDescription" class="track-description" data-i18n="player.defaultTrack.desc">���������������������˯ǰ�����Բ���</p>
-                            <div id="currentCategory" class="track-category" aria-label="��ǰ��Ƶ����"></div>
+                            <div id="currentCategory" class="track-category" aria-label="Current track category"></div>
                         </div>
+
+                        <!-- Main Playback Controls -->
                         <div class="player-controls" role="group" aria-label="���ſ���">
-                            <button id="prevTrack" class="control-btn" aria-label="��һ��">??</button>
-                            <button id="playPause" class="control-btn" aria-label="���Ż���ͣ">??</button>
-                            <button id="nextTrack" class="control-btn" aria-label="��һ��">??</button>
-                            <div class="volume-control">
-                                <label for="volumeSlider" class="sr-only">����</label>
-                                <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.7" aria-label="��������">
-                            </div>
-                            <button id="shuffleToggle" class="control-btn" aria-pressed="false" aria-label="�������">??</button>
-                            <button id="repeatToggle" class="control-btn" aria-pressed="false" aria-label="ѭ������">??</button>
-                            <button id="sleepTimer" class="control-btn" aria-label="˯�߶�ʱ">??</button>
+                            <button class="control-btn" onclick="previousTrack()" aria-label="��һ��" tabindex="0">??</button>
+                            <button id="playPauseBtn" class="control-btn play-btn" onclick="togglePlayPause()" aria-label="���Ż���ͣ" tabindex="0">??</button>
+                            <button class="control-btn" onclick="nextTrack()" aria-label="��һ��" tabindex="0">??</button>
+                            <button class="control-btn" onclick="stopAudio()" aria-label="ֹͣ����" tabindex="0">??</button>
                         </div>
-                        <div class="progress-section">
-                            <span id="currentTime" class="time-display">0:00</span>
-                            <div class="progress-bar" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                                <div id="progressFill" class="progress-fill"></div>
+
+                        <!-- Progress Bar -->
+                        <div class="progress-container" role="group" aria-label="���Ž���">
+                            <span id="currentTime" class="time-display" aria-label="��ǰʱ��">0:00</span>
+                            <div class="progress-bar" onclick="seekTo(event)" role="slider" tabindex="0"
+                                 aria-label="���Ž���" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+                                 aria-valuetext="0 percent played">
+                                <div id="progressFill" class="progress-fill" aria-hidden="true"></div>
                             </div>
-                            <span id="totalDuration" class="time-display">0:00</span>
+                            <span id="duration" class="time-display" aria-label="��ʱ��">0:00</span>
                         </div>
-                        <p class="player-helper" data-i18n="player.helper">��� ?? ���ɿ�ʼ�׸��Ƴ̣�����ע�ᡣ</p>
+
+                        <!-- Additional Controls -->
+                        <div class="extra-controls" role="group" aria-label="��������">
+                            <div class="control-group" role="group" aria-label="����ģʽ">
+                                <button class="control-btn" id="shuffleBtn" onclick="toggleShuffle()"
+                                        data-i18n-title="player.shuffle" aria-label="�л��������" aria-pressed="false" tabindex="0">??</button>
+                                <button class="control-btn" id="repeatBtn" onclick="toggleRepeat()"
+                                        data-i18n-title="player.repeat" aria-label="�л�ѭ������" aria-pressed="false" tabindex="0">??</button>
+                                <button class="control-btn" id="sleepTimerBtn" onclick="toggleSleepTimer()"
+                                        data-i18n-title="player.sleepTimer" aria-label="˯�߶�ʱ��" aria-expanded="false" tabindex="0">?</button>
+                            </div>
+
+                            <div class="control-group" role="group" aria-label="��������">
+                                <span style="margin-right: 10px;" aria-hidden="true">??</span>
+                                <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="70"
+                                       onchange="changeVolume(this.value)"
+                                       aria-label="��������" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70"
+                                       aria-valuetext="70 percent volume" tabindex="0">
+                                <span id="volumeValue" style="margin-left: 10px; min-width: 35px;" aria-live="polite" aria-label="�����ٷֱ�">70%</span>
+                            </div>
+
+                            <div class="control-group" role="group" aria-label="�����ٶ�">
+                                <span style="margin-right: 10px;" aria-hidden="true">??</span>
+                                <select id="playbackRate" class="playback-rate" onchange="changePlaybackRate(this.value)"
+                                        aria-label="�����ٶ�" tabindex="0">
+                                    <option value="0.5">0.5x</option>
+                                    <option value="0.75">0.75x</option>
+                                    <option value="1" selected>1x</option>
+                                    <option value="1.25">1.25x</option>
+                                    <option value="1.5">1.5x</option>
+                                    <option value="2">2x</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Sleep Timer Modal -->
+                        <div id="sleepTimerModal" class="timer-modal" style="display: none;" role="dialog" aria-labelledby="sleepTimerTitle" aria-modal="true">
+                            <div class="timer-content">
+                                <h3 id="sleepTimerTitle" data-i18n="timer.title">˯�߶�ʱ��</h3>
+                                <div class="timer-options" role="group" aria-label="��ʱѡ��">
+                                    <button onclick="setSleepTimer(5)" data-i18n="timer.5min" aria-label="�趨5����" tabindex="0">5����</button>
+                                    <button onclick="setSleepTimer(10)" data-i18n="timer.10min" aria-label="�趨10����" tabindex="0">10����</button>
+                                    <button onclick="setSleepTimer(15)" data-i18n="timer.15min" aria-label="�趨15����" tabindex="0">15����</button>
+                                    <button onclick="setSleepTimer(30)" data-i18n="timer.30min" aria-label="�趨30����" tabindex="0">30����</button>
+                                    <button onclick="setSleepTimer(60)" data-i18n="timer.60min" aria-label="�趨60����" tabindex="0">60����</button>
+                                    <button onclick="setSleepTimer(0)" data-i18n="timer.off" aria-label="�رն�ʱ" tabindex="0">�ر�</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="player-helper" data-i18n="player.helper">��� ?? ���ɿ�ʼ��һ������������ע�ᡣ</p>
                         <div class="player-cta">
-                            <button class="player-cta__button" onclick="playDefaultSleepSession()" data-i18n="player.defaultTrack.cta">���������Ƴ�</button>
-                            <button class="player-cta__secondary" onclick="openPlaylist('Rain', AUDIO_CONFIG.categories['Rain'])" data-i18n="player.exploreMore">�鿴������Ƶ</button>
+                            <button class="player-cta__button" onclick="playDefaultSleepSession()" data-i18n="player.defaultTrack.cta">��ʼ˯���Ƴ�</button>
+                            <button class="player-cta__secondary" onclick="openPlaylist('Rain', AUDIO_CONFIG.categories['Rain'])" data-i18n="player.exploreMore">�鿴��������</button>
                         </div>
                     </div>
-                </div>
+</div>
             </div>
         </div>
 
@@ -750,89 +797,6 @@
             <span aria-hidden="true">❔</span>
             <span data-i18n="tutorial.help">需要引导</span>
         </button>
-
-        <div class="minimized-display">
-                <div class="minimized-text" id="minimizedTrack" data-i18n="player.notPlaying" aria-live="polite">未播放</div>
-            </div>
-            <div class="player-content">
-                <!-- Now Playing Section -->
-                <div class="now-playing" role="status" aria-live="polite">
-                                <span class="player-recommendation-badge" id="playerBadge" data-i18n="player.defaultTrack.badge">官方推荐</span>
-                                <div id="currentTrack" class="track-title" data-i18n="player.notPlaying" aria-label="Currently playing track">15 分钟温暖雨声</div>
-                                <div id="playerTags" class="track-tags" data-i18n="player.defaultTrack.tags">#助眠 #新手 #今晚</div>
-                                <p id="playerDescription" class="track-description" data-i18n="player.defaultTrack.desc">柔和无语音的雨声，帮助睡前放慢脑波。</p>
-                                <div id="currentCategory" class="track-category" aria-label="Current track category"></div>
-                            </div>
-
-                <!-- Main Playback Controls -->
-                <div class="player-controls" role="group" aria-label="Playback controls">
-                    <button class="control-btn" onclick="previousTrack()" aria-label="Previous track" tabindex="0">⏮️</button>
-                    <button id="playPauseBtn" class="control-btn play-btn" onclick="togglePlayPause()" aria-label="Play or pause audio" tabindex="0">▶️</button>
-                    <button class="control-btn" onclick="nextTrack()" aria-label="Next track" tabindex="0">⏭️</button>
-                    <button class="control-btn" onclick="stopAudio()" aria-label="Stop audio playback" tabindex="0">⏹️</button>
-                </div>
-
-                <!-- Progress Bar -->
-                <div class="progress-container" role="group" aria-label="Audio progress">
-                    <span id="currentTime" class="time-display" aria-label="Current time">0:00</span>
-                    <div class="progress-bar" onclick="seekTo(event)" role="slider" tabindex="0"
-                         aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
-                         aria-valuetext="0 percent played">
-                        <div id="progressFill" class="progress-fill" aria-hidden="true"></div>
-                    </div>
-                    <span id="duration" class="time-display" aria-label="Total duration">0:00</span>
-                </div>
-
-                <!-- Additional Controls -->
-                <div class="extra-controls" role="group" aria-label="Audio settings">
-                    <div class="control-group" role="group" aria-label="Playback modes">
-                        <button class="control-btn" id="shuffleBtn" onclick="toggleShuffle()"
-                                data-i18n-title="player.shuffle" aria-label="Toggle shuffle mode" aria-pressed="false" tabindex="0">🔀</button>
-                        <button class="control-btn" id="repeatBtn" onclick="toggleRepeat()"
-                                data-i18n-title="player.repeat" aria-label="Toggle repeat mode" aria-pressed="false" tabindex="0">🔁</button>
-                        <button class="control-btn" id="sleepTimerBtn" onclick="toggleSleepTimer()"
-                                data-i18n-title="player.sleepTimer" aria-label="Sleep timer" aria-expanded="false" tabindex="0">⏰</button>
-                    </div>
-
-                    <div class="control-group" role="group" aria-label="Volume control">
-                        <span style="margin-right: 10px;" aria-hidden="true">🔊</span>
-                        <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="70"
-                               onchange="changeVolume(this.value)"
-                               aria-label="Volume control" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70"
-                               aria-valuetext="70 percent volume" tabindex="0">
-                        <span id="volumeValue" style="margin-left: 10px; min-width: 35px;" aria-live="polite" aria-label="Volume percentage">70%</span>
-                    </div>
-
-                    <div class="control-group" role="group" aria-label="Playback speed">
-                        <span style="margin-right: 10px;" aria-hidden="true">⏱️</span>
-                        <select id="playbackRate" class="playback-rate" onchange="changePlaybackRate(this.value)"
-                                aria-label="Playback speed" tabindex="0">
-                            <option value="0.5">0.5x</option>
-                            <option value="0.75">0.75x</option>
-                            <option value="1" selected>1x</option>
-                            <option value="1.25">1.25x</option>
-                            <option value="1.5">1.5x</option>
-                            <option value="2">2x</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Sleep Timer Modal -->
-                <div id="sleepTimerModal" class="timer-modal" style="display: none;" role="dialog" aria-labelledby="sleepTimerTitle" aria-modal="true">
-                    <div class="timer-content">
-                        <h3 id="sleepTimerTitle" data-i18n="timer.title">睡眠定时器</h3>
-                        <div class="timer-options" role="group" aria-label="Sleep timer options">
-                            <button onclick="setSleepTimer(5)" data-i18n="timer.5min" aria-label="Set sleep timer for 5 minutes" tabindex="0">5分钟</button>
-                            <button onclick="setSleepTimer(10)" data-i18n="timer.10min" aria-label="Set sleep timer for 10 minutes" tabindex="0">10分钟</button>
-                            <button onclick="setSleepTimer(15)" data-i18n="timer.15min" aria-label="Set sleep timer for 15 minutes" tabindex="0">15分钟</button>
-                            <button onclick="setSleepTimer(30)" data-i18n="timer.30min" aria-label="Set sleep timer for 30 minutes" tabindex="0">30分钟</button>
-                            <button onclick="setSleepTimer(60)" data-i18n="timer.60min" aria-label="Set sleep timer for 60 minutes" tabindex="0">60分钟</button>
-                            <button onclick="setSleepTimer(0)" data-i18n="timer.off" aria-label="Turn off sleep timer" tabindex="0">关闭</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- User Rating Widget -->
         <div id="rating-widget"></div>

@@ -183,15 +183,15 @@ function prefillInstantPlayer() {
     const tagsEl = document.getElementById('playerTags');
     const descEl = document.getElementById('playerDescription');
     const badgeEl = document.getElementById('playerBadge');
-    const minimizedTrack = document.getElementById('minimizedTrack');
     const totalDuration = document.getElementById('totalDuration');
+    const legacyDuration = document.getElementById('duration');
 
     if (trackEl) trackEl.textContent = config.title;
     if (tagsEl) tagsEl.textContent = config.tags;
     if (descEl) descEl.textContent = config.description;
     if (badgeEl) badgeEl.textContent = config.badge;
     if (totalDuration) totalDuration.textContent = config.duration;
-    if (minimizedTrack) minimizedTrack.textContent = config.title;
+    if (legacyDuration) legacyDuration.textContent = config.duration;
 }
 
 function playDefaultSleepSession() {
@@ -314,11 +314,6 @@ function renderCategoryShortcuts(entries) {
             tracks = playlistTracks;
 
             playTrack(0);
-
-            const player = document.querySelector('.audio-player');
-            if (player) {
-                player.style.transform = 'translateY(0)';
-            }
         });
 
         shortcutsContainer.appendChild(button);
@@ -627,12 +622,16 @@ function closePlaylist() {
 
 function openPlayerModal(shouldFocusClose = false) {
     const modal = document.getElementById('playerControlModal');
+    const player = document.getElementById('audioPlayer');
     if (!modal) {
         return;
     }
     modal.classList.add('player-modal--visible');
     modal.removeAttribute('aria-hidden');
     document.body.classList.add('player-modal-open');
+    if (player) {
+        player.classList.add('show');
+    }
 
     if (shouldFocusClose) {
         const closeBtn = modal.querySelector('[data-role="player-modal-close"]');
@@ -644,12 +643,16 @@ function openPlayerModal(shouldFocusClose = false) {
 
 function closePlayerModal() {
     const modal = document.getElementById('playerControlModal');
+    const player = document.getElementById('audioPlayer');
     if (!modal) {
         return;
     }
     modal.classList.remove('player-modal--visible');
     modal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('player-modal-open');
+    if (player) {
+        player.classList.remove('show');
+    }
 }
 
 document.addEventListener('click', (event) => {
@@ -687,16 +690,12 @@ async function playTrack(index) {
 
     const currentTrack = document.getElementById('currentTrack');
     const currentCategoryElem = document.getElementById('currentCategory');
-    const minimizedTrack = document.getElementById('minimizedTrack');
 
     if (currentTrack) {
         currentTrack.textContent = track.name;
     }
     if (currentCategoryElem) {
         currentCategoryElem.textContent = category.name || currentCategory.key;
-    }
-    if (minimizedTrack) {
-        minimizedTrack.textContent = `${track.name} - ${category.name || currentCategory.key}`;
     }
 
     if (currentCategory && currentCategory.key) {
@@ -760,7 +759,6 @@ async function playTrack(index) {
     const player = document.getElementById('audioPlayer');
     if (player) {
         player.classList.add('show');
-        player.classList.remove('minimized');
     }
 
     openPlayerModal(false);
@@ -874,9 +872,9 @@ function updateProgress() {
 }
 
 function updateDuration() {
-    const duration = document.getElementById('duration');
-    if (duration) {
-        duration.textContent = formatTime(audio.duration);
+    const durationEl = document.getElementById('duration') || document.getElementById('totalDuration');
+    if (durationEl) {
+        durationEl.textContent = formatTime(audio.duration);
     }
 }
 
@@ -900,34 +898,6 @@ function formatTime(seconds) {
 // ==========================================================================
 // 播放器界面控制
 // ==========================================================================
-
-let isMinimized = false;
-
-function toggleMinimize(event) {
-    if (event) {
-        event.stopPropagation();
-    }
-
-    const player = document.getElementById('audioPlayer');
-    const indicator = document.querySelector('.minimize-indicator');
-
-    if (!player) {
-        return;
-    }
-
-    if (isMinimized) {
-        player.classList.remove('minimized');
-        if (indicator) {
-            indicator.textContent = getText('player.minimize', '▲ 收起');
-        }
-    } else {
-        player.classList.add('minimized');
-        if (indicator) {
-            indicator.textContent = getText('player.expand', '▼ 展开');
-        }
-    }
-    isMinimized = !isMinimized;
-}
 
 // ==========================================================================
 // 通知系统
