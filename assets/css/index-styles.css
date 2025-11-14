@@ -467,8 +467,8 @@ h1 {
     color: #f8fafc;
     font-size: 0.6em;
     cursor: pointer;
-    width: 20px;
-    height: 20px;
+    width: 20px !important;
+    height: 20px !important;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -493,8 +493,8 @@ h1 {
 
 .play-btn {
     font-size: 0.7em;
-    width: 24px;
-    height: 24px;
+    width: 24px !important;
+    height: 24px !important;
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.85), rgba(79, 70, 229, 0.9));
     border-color: rgba(99, 102, 241, 0.6);
 }
@@ -636,13 +636,13 @@ h1 {
         gap: 3px;
     }
     .control-btn {
-        width: 18px;
-        height: 18px;
+        width: 18px !important;
+        height: 18px !important;
         font-size: 0.55em;
     }
     .play-btn {
-        width: 22px;
-        height: 22px;
+        width: 22px !important;
+        height: 22px !important;
         font-size: 0.65em;
     }
     .extra-controls {
