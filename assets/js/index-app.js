@@ -27,6 +27,9 @@ const audio = new Audio();
 let tracks = [];
 const MAX_RECOMMENDATION_INIT_ATTEMPTS = 20;
 let recommendationsRenderTimer = null;
+const MOBILE_PLAYER_QUERY = (typeof window !== 'undefined' && typeof window.matchMedia === 'function')
+    ? window.matchMedia('(max-width: 768px)')
+    : null;
 
 // Initialize audio settings
 audio.volume = 0.7; // Default volume
@@ -628,7 +631,7 @@ function openPlayerModal(shouldFocusClose = false) {
     }
     modal.classList.add('player-modal--visible');
     modal.removeAttribute('aria-hidden');
-    document.body.classList.add('player-modal-open');
+    syncPlayerModalOverflow();
     if (player) {
         player.classList.add('show');
     }
@@ -649,7 +652,7 @@ function closePlayerModal() {
     }
     modal.classList.remove('player-modal--visible');
     modal.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('player-modal-open');
+    syncPlayerModalOverflow(true);
     if (player) {
         player.classList.remove('show');
     }
@@ -669,6 +672,15 @@ document.addEventListener('keydown', (event) => {
 
 window.openPlayerModal = openPlayerModal;
 window.closePlayerModal = closePlayerModal;
+
+if (MOBILE_PLAYER_QUERY) {
+    const mqHandler = () => syncPlayerModalOverflow();
+    if (typeof MOBILE_PLAYER_QUERY.addEventListener === 'function') {
+        MOBILE_PLAYER_QUERY.addEventListener('change', mqHandler);
+    } else if (typeof MOBILE_PLAYER_QUERY.addListener === 'function') {
+        MOBILE_PLAYER_QUERY.addListener(mqHandler);
+    }
+}
 
 // ==========================================================================
 // 音频播放控制
