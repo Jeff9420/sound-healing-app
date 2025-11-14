@@ -374,6 +374,76 @@ function getLocalizedTrackTitle(categoryKey, fileName) {
     return fileName.replace(/\.[^/.]+$/, '');
 }
 
+function ensurePlayerControlPanel() {
+    const panelHTML = `
+        <div id="playerControlModal" class="player-control-panel player-modal--visible" role="region" aria-labelledby="playerModalTitle">
+            <div class="floating-player-panel">
+                <header class="player-control-modal__header">
+                    <p class="player-control-modal__eyebrow" data-i18n="player.instantLabel">Instant Player · No Download Required</p>
+                    <h3 id="playerModalTitle" data-i18n="player.instantHeadline">Press play to start relaxing</h3>
+                </header>
+                <div id="audioPlayer" class="audio-player show" role="region" aria-label="Audio player controls" tabindex="-1">
+                    <div class="player-content">
+                        <div class="now-playing" role="status" aria-live="polite">
+                            <span class="player-recommendation-badge" id="playerBadge" data-i18n="player.defaultTrack.badge">Official recommendation</span>
+                            <div id="currentTrack" class="track-title" data-i18n="player.notPlaying" aria-label="Currently playing track">Nothing is playing right now</div>
+                            <div id="playerTags" class="track-tags" data-i18n="player.defaultTrack.tags">#sleep #beginner #try-tonight</div>
+                            <p id="playerDescription" class="track-description" data-i18n="player.defaultTrack.desc">A gentle, voice-free rain track to slow your mind before bed.</p>
+                            <div id="currentCategory" class="track-category" aria-label="Current track category"></div>
+                        </div>
+                        <div class="player-controls" role="group" aria-label="Playback controls">
+                            <button class="control-btn" onclick="previousTrack()" aria-label="Previous track" tabindex="0">⏮️</button>
+                            <button id="playPauseBtn" class="control-btn play-btn" onclick="togglePlayPause()" aria-label="Play or pause audio" tabindex="0">▶️</button>
+                            <button class="control-btn" onclick="nextTrack()" aria-label="Next track" tabindex="0">⏭️</button>
+                            <button class="control-btn" onclick="stopAudio()" aria-label="Stop audio playback" tabindex="0">⏹️</button>
+                        </div>
+                        <div class="progress-container" role="group" aria-label="Audio progress">
+                            <span id="currentTime" class="time-display" aria-label="Current time">0:00</span>
+                            <div class="progress-bar" onclick="seekTo(event)" role="slider" tabindex="0" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 percent played">
+                                <div id="progressFill" class="progress-fill" aria-hidden="true"></div>
+                            </div>
+                            <span id="duration" class="time-display" aria-label="Total duration">0:00</span>
+                        </div>
+                        <div class="extra-controls" role="group" aria-label="Audio settings">
+                            <div class="control-group" role="group" aria-label="Playback modes">
+                                <button class="control-btn" id="shuffleBtn" onclick="toggleShuffle()" aria-pressed="false" tabindex="0">🔀</button>
+                                <button class="control-btn" id="repeatBtn" onclick="toggleRepeat()" aria-pressed="false" tabindex="0">🔁</button>
+                                <button class="control-btn" id="sleepTimerBtn" onclick="toggleSleepTimer()" aria-expanded="false" tabindex="0">⏰</button>
+                            </div>
+                            <div class="control-group" role="group" aria-label="Volume control">
+                                <span aria-hidden="true">🔊</span>
+                                <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="70" onchange="changeVolume(this.value)" aria-label="Volume control" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70" aria-valuetext="70 percent volume" tabindex="0">
+                                <span id="volumeValue" style="min-width: 35px;" aria-live="polite" aria-label="Volume percentage">70%</span>
+                            </div>
+                            <div class="control-group" role="group" aria-label="Playback speed">
+                                <span aria-hidden="true">⏱️</span>
+                                <select id="playbackRate" class="playback-rate" onchange="changePlaybackRate(this.value)" aria-label="Playback speed" tabindex="0">
+                                    <option value="0.5">0.5x</option>
+                                    <option value="0.75">0.75x</option>
+                                    <option value="1" selected>1x</option>
+                                    <option value="1.25">1.25x</option>
+                                    <option value="1.5">1.5x</option>
+                                    <option value="2">2x</option>
+                                </select>
+                            </div>
+                        </div>
+                        <p class="player-helper" data-i18n="player.helper">Press ▶️ to start your first session. No signup needed.</p>
+                        <div class="player-cta">
+                            <button class="player-cta__button" onclick="playDefaultSleepSession()" data-i18n="player.defaultTrack.cta">Start sleep session</button>
+                            <button class="player-cta__secondary" onclick="openPlaylist('Rain', AUDIO_CONFIG.categories['Rain'])" data-i18n="player.exploreMore">Explore more sounds</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+    const existing = document.getElementById('playerControlModal');
+    if (existing) {
+        existing.outerHTML = panelHTML;
+    } else {
+        document.body.insertAdjacentHTML('beforeend', panelHTML);
+    }
+}
+
 // ==========================================================================
 // 应用初始化
 // ==========================================================================
@@ -383,6 +453,7 @@ function getLocalizedTrackTitle(categoryKey, fileName) {
  */
 function initializeApp() {
     console.log('Initializing app...');
+    ensurePlayerControlPanel();
 
     // Initialize canvas
     canvas = document.getElementById('backgroundCanvas');
