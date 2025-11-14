@@ -405,24 +405,24 @@ h1 {
 }
 
 .player-content {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
     color: var(--text-primary);
-    text-align: center;
+    text-align: left;
 }
 
 .now-playing {
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 }
 
 .track-title {
-    font-size: 1.3em;
-    font-weight: bold;
-    margin-bottom: 5px;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 4px;
 }
 
 .track-category {
-    font-size: 1em;
+    font-size: 0.9em;
     opacity: 0.7;
 }
 
@@ -433,20 +433,20 @@ h1 {
 .player-controls {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    gap: 16px;
-    margin: 20px 0;
+    gap: 12px;
+    margin: 16px 0;
 }
 
 .control-btn {
     background: rgba(20, 31, 68, 0.88);
     border: 1px solid rgba(99, 102, 241, 0.4);
     color: #f8fafc;
-    font-size: 1.35em;
+    font-size: 1.1em;
     cursor: pointer;
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -457,13 +457,13 @@ h1 {
 
 .control-btn:hover {
     background: rgba(79, 70, 229, 0.85);
-    transform: translateY(-2px);
+    transform: translateY(-1px);
 }
 
 .play-btn {
-    font-size: 1.75em;
-    width: 64px;
-    height: 64px;
+    font-size: 1.4em;
+    width: 54px;
+    height: 54px;
 }
 
 /* ==========================================================================
@@ -474,8 +474,8 @@ h1 {
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
-    gap: 12px;
-    margin: 20px 0;
+    gap: 10px;
+    margin: 16px 0;
 }
 
 .progress-bar {
@@ -510,15 +510,15 @@ h1 {
 .extra-controls {
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    margin: 24px 0 12px;
+    gap: 14px;
+    margin: 18px 0 10px;
 }
 
 .control-group {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
 }
 
 @media (min-width: 768px) {
@@ -538,12 +538,12 @@ h1 {
     }
     .player-controls {
         justify-content: flex-start;
-        gap: 12px;
+        gap: 10px;
     }
     .control-btn {
         width: 48px;
         height: 48px;
-        font-size: 1.2em;
+        font-size: 1.05em;
     }
     .play-btn {
         width: 56px;
@@ -3921,14 +3921,14 @@ h1 {
 /* Floating player modal */
 .player-control-panel {
     position: fixed;
-    bottom: clamp(1rem, 4vh, 2rem);
-    right: clamp(1rem, 4vw, 3rem);
+    bottom: clamp(0.75rem, 3vh, 1.5rem);
+    right: clamp(0.75rem, 3vw, 2rem);
     z-index: 9999;
-    width: clamp(320px, 32vw, 520px);
+    width: clamp(280px, 26vw, 420px);
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    transform: translateY(20px);
+    transition: opacity 0.28s ease, transform 0.28s ease;
+    transform: translateY(16px);
 }
 .player-control-panel.player-modal--visible {
     opacity: 1;
@@ -3936,18 +3936,18 @@ h1 {
     transform: translateY(0);
 }
 .floating-player-panel {
-    background: rgba(7, 7, 20, 0.92);
-    border-radius: 32px;
-    border: 1px solid var(--border-light);
-    box-shadow: 0 20px 45px rgba(7, 7, 20, 0.45);
-    padding: clamp(1.25rem, 2vw, 2.25rem);
-    backdrop-filter: blur(18px);
+    background: rgba(6, 5, 14, 0.92);
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 15px 40px rgba(6, 5, 14, 0.35);
+    padding: clamp(1rem, 1.7vw, 1.8rem);
+    backdrop-filter: blur(15px);
 }
 .player-control-modal__header {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.9rem;
 }
 .player-control-modal__close {
     position: absolute;
@@ -3986,15 +3986,16 @@ h1 {
 body.player-modal-open {
     overflow: hidden;
 }
-.player-control-modal__header {
-    margin-bottom: 1.25rem;
+.player-control-modal__header h3 {
+    margin: 0;
+    font-size: 1.15rem;
 }
 .player-control-modal__eyebrow {
     text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
     color: var(--text-muted);
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.2rem;
 }
 
 @media (max-width: 768px) {
@@ -4006,8 +4007,10 @@ body.player-modal-open {
         top: 0;
         padding: 0 1rem;
         transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
     }
     .floating-player-panel {
-        border-radius: 0 0 28px 28px;
+        border-radius: 0 0 22px 22px;
     }
 }
