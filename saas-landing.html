@@ -330,44 +330,23 @@
                 }, 1000);
             }
 
-            // Scroll animations
+            // Scroll animations - DISABLED for debugging
             function initializeScrollAnimations() {
-                const observerOptions = {
-                    threshold: 0.1,
-                    rootMargin: '0px 0px -50px 0px'
-                };
+                // TEMPORARILY DISABLED - This was causing content to be invisible
+                // The opacity: 0 setting was preventing content from showing
 
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('animate-in');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, observerOptions);
+                console.log('⚠️ Scroll animations temporarily disabled for debugging');
+                console.log('✅ All content will be visible immediately');
 
-                // Observe sections after components load
+                // Make sure all sections are visible
                 setTimeout(() => {
                     const sections = document.querySelectorAll('section[class*="saas-"]');
                     sections.forEach(section => {
-                        section.style.opacity = '0';
-                        section.style.transform = 'translateY(20px)';
-                        section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                        observer.observe(section);
+                        section.style.opacity = '1';
+                        section.style.transform = 'translateY(0)';
                     });
+                    console.log(`✅ Made ${sections.length} sections visible`);
                 }, 500);
-
-                // Add CSS for animation
-                const style = document.createElement('style');
-                style.textContent = `
-                    .animate-in {
-                        opacity: 1 !important;
-                        transform: translateY(0) !important;
-                    }
-                `;
-                document.head.appendChild(style);
-
-                console.log('✅ Scroll animations initialized');
             }
 
             // CTA button tracking
