@@ -120,11 +120,11 @@
     function refreshUI() {
         console.log('🔄 刷新UI翻译...');
 
-        if (window.i18n && typeof window.i18n.translatePage === 'function') {
-            window.i18n.translatePage();
+        if (window.i18n && typeof window.i18n.updatePageContent === 'function') {
+            window.i18n.updatePageContent();
             console.log('✅ UI翻译已更新');
         } else {
-            console.warn('⚠️ i18n.translatePage 方法不可用');
+            console.warn('⚠️ i18n.updatePageContent 方法不可用');
         }
     }
 

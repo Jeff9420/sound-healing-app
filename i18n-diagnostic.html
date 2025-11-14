@@ -294,7 +294,7 @@
                 let testsFailed = 0;
 
                 testKeys.forEach(({ key, name }) => {
-                    const value = window.i18n.translate(key);
+                    const value = window.i18n.t(key);
                     if (value && value !== key) {
                         addResult(`✅ ${name}: "${value.substring(0, 50)}${value.length > 50 ? '...' : ''}"`, 'pass');
                         testsPassed++;

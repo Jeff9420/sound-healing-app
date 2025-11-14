@@ -534,7 +534,7 @@
                 let failed = 0;
 
                 testKeys.forEach(key => {
-                    const value = window.i18n.translate(key);
+                    const value = window.i18n.t(key);
                     if (value && value !== key) {
                         passed++;
                     } else {
@@ -597,7 +597,7 @@
                 ];
 
                 sampleKeys.forEach(key => {
-                    report.sampleTranslations[key] = window.i18n.translate(key);
+                    report.sampleTranslations[key] = window.i18n.t(key);
                 });
 
                 // Create download
