@@ -65,6 +65,10 @@
 
         html {
             scroll-behavior: smooth;
+            /* CRITICAL: Ensure html can scroll */
+            height: auto !important;
+            overflow: visible !important;
+            overflow-y: auto !important;
         }
 
         body {
@@ -74,6 +78,11 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            /* CRITICAL: Override main.css line 1133 which sets overflow:hidden */
+            height: auto !important;
+            min-height: 100vh !important;
+            overflow: visible !important;
+            overflow-y: auto !important;
         }
 
         /* Loading Indicator */
