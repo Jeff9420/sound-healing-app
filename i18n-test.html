@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundFlows i18n Test - Multi-Language Testing Suite</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0b0704 0%, #1a0f0a 100%);
+            color: #fdf3e5;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #6666ff, #f6a93b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(253, 243, 229, 0.7);
+            margin-bottom: 2rem;
+        }
+
+        .test-panel {
+            background: rgba(26, 15, 10, 0.8);
+            border: 1px solid rgba(253, 243, 229, 0.15);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .test-panel h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #6666ff;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .lang-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid rgba(102, 102, 255, 0.5);
+            border-radius: 8px;
+            background: rgba(26, 15, 10, 0.6);
+            color: #fdf3e5;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            border-color: #6666ff;
+            background: rgba(102, 102, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .lang-btn.active {
+            border-color: #6666ff;
+            background: #6666ff;
+            color: #ffffff;
+        }
+
+        /* Test Sections */
+        .test-section {
+            background: rgba(11, 7, 4, 0.5);
+            border-left: 3px solid #6666ff;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .test-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #f6a93b;
+        }
+
+        .test-item {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 1rem;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: rgba(253, 243, 229, 0.05);
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .test-key {
+            color: #6666ff;
+            font-weight: 600;
+        }
+
+        .test-value {
+            color: #fdf3e5;
+        }
+
+        .test-value.missing {
+            color: #ff6666;
+            font-style: italic;
+        }
+
+        /* Console */
+        .console {
+            background: #000000;
+            border: 1px solid rgba(102, 102, 255, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 1rem;
+        }
+
+        .console-line {
+            padding: 0.25rem 0;
+            border-bottom: 1px solid rgba(253, 243, 229, 0.1);
+        }
+
+        .console-line:last-child {
+            border-bottom: none;
+        }
+
+        .console-success { color: #4ade80; }
+        .console-error { color: #ff6666; }
+        .console-warning { color: #f6a93b; }
+        .console-info { color: #6666ff; }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-card {
+            background: rgba(102, 102, 255, 0.1);
+            border: 1px solid rgba(102, 102, 255, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #6666ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(253, 243, 229, 0.7);
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .action-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn-primary {
+            background: #6666ff;
+            color: #ffffff;
+        }
+
+        .action-btn-primary:hover {
+            background: #5555ee;
+            transform: translateY(-2px);
+        }
+
+        .action-btn-secondary {
+            background: rgba(253, 243, 229, 0.1);
+            color: #fdf3e5;
+            border: 1px solid rgba(253, 243, 229, 0.3);
+        }
+
+        .action-btn-secondary:hover {
+            background: rgba(253, 243, 229, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌐 SoundFlows i18n Test Suite</h1>
+        <p class="subtitle">Multi-Language Translation Testing & Verification</p>
+
+        <!-- Language Switcher Panel -->
+        <div class="test-panel">
+            <h2>🔄 Language Switcher</h2>
+            <div class="language-switcher">
+                <button class="lang-btn" data-lang="en-US">🇺🇸 English</button>
+                <button class="lang-btn" data-lang="zh-CN">🇨🇳 中文</button>
+                <button class="lang-btn" data-lang="ja-JP">🇯🇵 日本語</button>
+                <button class="lang-btn" data-lang="ko-KR">🇰🇷 한국어</button>
+                <button class="lang-btn" data-lang="es-ES">🇪🇸 Español</button>
+            </div>
+            <p style="color: rgba(253, 243, 229, 0.6); font-size: 0.9rem;">
+                Current Language: <strong id="currentLang" style="color: #6666ff;">Loading...</strong>
+            </p>
+        </div>
+
+        <!-- Test Statistics -->
+        <div class="test-panel">
+            <h2>📊 Translation Statistics</h2>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalKeys">0</div>
+                    <div class="stat-label">Total Translation Keys</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="loadedLangs">0</div>
+                    <div class="stat-label">Loaded Languages</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="currentKeys">0</div>
+                    <div class="stat-label">Current Lang Keys</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="missingKeys">0</div>
+                    <div class="stat-label">Missing Keys</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sample Translations Test -->
+        <div class="test-panel">
+            <h2>🔍 Sample Translations</h2>
+
+            <div class="test-section">
+                <h3>Benefits Section</h3>
+                <div class="test-item">
+                    <span class="test-key">benefits.title</span>
+                    <span class="test-value" data-i18n="benefits.title">Loading...</span>
+                </div>
+                <div class="test-item">
+                    <span class="test-key">benefits.benefit1.title</span>
+                    <span class="test-value" data-i18n="benefits.benefit1.title">Loading...</span>
+                </div>
+            </div>
+
+            <div class="test-section">
+                <h3>Features Section</h3>
+                <div class="test-item">
+                    <span class="test-key">features.timer.title</span>
+                    <span class="test-value" data-i18n="features.timer.title">Loading...</span>
+                </div>
+                <div class="test-item">
+                    <span class="test-key">features.timer.badge</span>
+                    <span class="test-value" data-i18n="features.timer.badge">Loading...</span>
+                </div>
+            </div>
+
+            <div class="test-section">
+                <h3>Pricing Section</h3>
+                <div class="test-item">
+                    <span class="test-key">pricing.title</span>
+                    <span class="test-value" data-i18n="pricing.title">Loading...</span>
+                </div>
+                <div class="test-item">
+                    <span class="test-key">pricing.free.title</span>
+                    <span class="test-value" data-i18n="pricing.free.title">Loading...</span>
+                </div>
+            </div>
+
+            <div class="test-section">
+                <h3>FAQ Section</h3>
+                <div class="test-item">
+                    <span class="test-key">faq.q1.question</span>
+                    <span class="test-value" data-i18n="faq.q1.question">Loading...</span>
+                </div>
+                <div class="test-item">
+                    <span class="test-key">faq.q4.question</span>
+                    <span class="test-value" data-i18n="faq.q4.question">Loading...</span>
+                </div>
+            </div>
+
+            <div class="test-section">
+                <h3>Footer Section</h3>
+                <div class="test-item">
+                    <span class="test-key">footer.brand.tagline</span>
+                    <span class="test-value" data-i18n="footer.brand.tagline">Loading...</span>
+                </div>
+                <div class="test-item">
+                    <span class="test-key">footer.newsletter.title</span>
+                    <span class="test-value" data-i18n="footer.newsletter.title">Loading...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="test-panel">
+            <h2>⚙️ Test Actions</h2>
+            <div class="action-buttons">
+                <button class="action-btn action-btn-primary" id="runFullTest">
+                    Run Full Test
+                </button>
+                <button class="action-btn action-btn-secondary" id="checkCoverage">
+                    Check Coverage
+                </button>
+                <button class="action-btn action-btn-secondary" id="exportReport">
+                    Export Report
+                </button>
+                <button class="action-btn action-btn-secondary" id="clearConsole">
+                    Clear Console
+                </button>
+            </div>
+        </div>
+
+        <!-- Console Output -->
+        <div class="test-panel">
+            <h2>📝 Test Console</h2>
+            <div class="console" id="testConsole">
+                <div class="console-line console-info">Initializing i18n test suite...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- i18n Scripts (in correct order) -->
+    <script src="assets/js/i18n-system.js"></script>
+    <script src="assets/js/i18n-translations-addon.js"></script>
+    <script src="assets/js/i18n-saas-extensions.js"></script>
+    <script src="assets/js/i18n-saas-complete-translations.js"></script>
+    <script src="assets/js/i18n-saas-integrator.js"></script>
+
+    <!-- Test Suite Script -->
+    <script>
+        (function() {
+            'use strict';
+
+            // Console logger
+            const consoleEl = document.getElementById('testConsole');
+
+            function log(message, type = 'info') {
+                const line = document.createElement('div');
+                line.className = `console-line console-${type}`;
+                line.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+                consoleEl.appendChild(line);
+                consoleEl.scrollTop = consoleEl.scrollHeight;
+            }
+
+            // Wait for i18n to be ready
+            function waitForI18n() {
+                return new Promise((resolve) => {
+                    let attempts = 0;
+                    const checkInterval = setInterval(() => {
+                        attempts++;
+                        if (typeof window.i18n !== 'undefined') {
+                            clearInterval(checkInterval);
+                            log('✅ i18n system loaded successfully', 'success');
+                            resolve();
+                        } else if (attempts > 50) {
+                            clearInterval(checkInterval);
+                            log('❌ Failed to load i18n system', 'error');
+                            reject();
+                        }
+                    }, 100);
+                });
+            }
+
+            // Initialize test suite
+            async function initialize() {
+                try {
+                    log('🚀 Starting i18n test suite...');
+
+                    // Wait for i18n
+                    await waitForI18n();
+
+                    // Update stats
+                    updateStats();
+
+                    // Setup language switcher
+                    setupLanguageSwitcher();
+
+                    // Setup action buttons
+                    setupActionButtons();
+
+                    // Update current language display
+                    updateCurrentLanguage();
+
+                    log('✅ Test suite initialized successfully', 'success');
+
+                    // Run initial test
+                    setTimeout(() => {
+                        runFullTest();
+                    }, 500);
+
+                } catch (error) {
+                    log(`❌ Initialization error: ${error.message}`, 'error');
+                }
+            }
+
+            // Update statistics
+            function updateStats() {
+                if (!window.i18n) return;
+
+                const currentLang = window.i18n.currentLanguage;
+                const translations = window.i18n.translations.get(currentLang) || {};
+                const allKeys = new Set();
+
+                // Count total unique keys across all languages
+                window.i18n.translations.forEach((langData) => {
+                    Object.keys(langData).forEach(key => allKeys.add(key));
+                });
+
+                document.getElementById('totalKeys').textContent = allKeys.size;
+                document.getElementById('loadedLangs').textContent = window.i18n.loadedLanguages.size;
+                document.getElementById('currentKeys').textContent = Object.keys(translations).length;
+
+                // Check missing keys
+                const missingCount = allKeys.size - Object.keys(translations).length;
+                document.getElementById('missingKeys').textContent = missingCount;
+
+                if (missingCount > 0) {
+                    log(`⚠️ ${missingCount} keys missing in ${currentLang}`, 'warning');
+                }
+            }
+
+            // Setup language switcher
+            function setupLanguageSwitcher() {
+                const buttons = document.querySelectorAll('.lang-btn');
+
+                buttons.forEach(btn => {
+                    const lang = btn.getAttribute('data-lang');
+
+                    // Set initial active state
+                    if (lang === window.i18n.currentLanguage) {
+                        btn.classList.add('active');
+                    }
+
+                    btn.addEventListener('click', () => {
+                        log(`🔄 Switching to ${lang}...`);
+
+                        // Remove active from all
+                        buttons.forEach(b => b.classList.remove('active'));
+
+                        // Add active to clicked
+                        btn.classList.add('active');
+
+                        // Change language
+                        window.i18n.changeLanguage(lang);
+
+                        // Update UI
+                        updateCurrentLanguage();
+                        updateStats();
+
+                        log(`✅ Language switched to ${lang}`, 'success');
+                    });
+                });
+            }
+
+            // Update current language display
+            function updateCurrentLanguage() {
+                const langNames = {
+                    'en-US': 'English (US)',
+                    'zh-CN': '中文（简体）',
+                    'ja-JP': '日本語',
+                    'ko-KR': '한국어',
+                    'es-ES': 'Español'
+                };
+
+                const currentLang = window.i18n.currentLanguage;
+                document.getElementById('currentLang').textContent =
+                    `${currentLang} - ${langNames[currentLang] || 'Unknown'}`;
+            }
+
+            // Setup action buttons
+            function setupActionButtons() {
+                document.getElementById('runFullTest').addEventListener('click', runFullTest);
+                document.getElementById('checkCoverage').addEventListener('click', checkCoverage);
+                document.getElementById('exportReport').addEventListener('click', exportReport);
+                document.getElementById('clearConsole').addEventListener('click', () => {
+                    consoleEl.innerHTML = '<div class="console-line console-info">Console cleared.</div>';
+                });
+            }
+
+            // Run full test
+            function runFullTest() {
+                log('🧪 Running full translation test...', 'info');
+
+                const testKeys = [
+                    'benefits.title',
+                    'benefits.benefit1.title',
+                    'features.timer.title',
+                    'features.timer.badge',
+                    'pricing.title',
+                    'pricing.free.title',
+                    'faq.q1.question',
+                    'faq.q4.question',
+                    'footer.brand.tagline',
+                    'footer.newsletter.title'
+                ];
+
+                let passed = 0;
+                let failed = 0;
+
+                testKeys.forEach(key => {
+                    const value = window.i18n.translate(key);
+                    if (value && value !== key) {
+                        passed++;
+                    } else {
+                        failed++;
+                        log(`❌ Missing translation for key: ${key}`, 'error');
+                    }
+                });
+
+                log(`✅ Test complete: ${passed} passed, ${failed} failed`, passed === testKeys.length ? 'success' : 'warning');
+            }
+
+            // Check coverage
+            function checkCoverage() {
+                log('📊 Checking translation coverage...', 'info');
+
+                const currentLang = window.i18n.currentLanguage;
+                const translations = window.i18n.translations.get(currentLang) || {};
+
+                // Sample keys to check
+                const sampleSections = {
+                    'Benefits': ['benefits.title', 'benefits.benefit1.title', 'benefits.benefit2.title'],
+                    'Features': ['features.timer.title', 'features.mixer.title', 'features.pwa.title'],
+                    'Pricing': ['pricing.title', 'pricing.free.title', 'pricing.support.title'],
+                    'FAQ': ['faq.q1.question', 'faq.q4.question', 'faq.q7.question'],
+                    'Footer': ['footer.brand.tagline', 'footer.newsletter.title']
+                };
+
+                Object.entries(sampleSections).forEach(([section, keys]) => {
+                    const covered = keys.filter(k => translations[k]).length;
+                    const percentage = Math.round((covered / keys.length) * 100);
+
+                    const status = percentage === 100 ? 'success' : (percentage >= 70 ? 'warning' : 'error');
+                    log(`${section}: ${percentage}% (${covered}/${keys.length})`, status);
+                });
+            }
+
+            // Export report
+            function exportReport() {
+                log('📄 Generating test report...', 'info');
+
+                const report = {
+                    timestamp: new Date().toISOString(),
+                    currentLanguage: window.i18n.currentLanguage,
+                    loadedLanguages: Array.from(window.i18n.loadedLanguages),
+                    statistics: {
+                        totalKeys: document.getElementById('totalKeys').textContent,
+                        loadedLangs: document.getElementById('loadedLangs').textContent,
+                        currentKeys: document.getElementById('currentKeys').textContent,
+                        missingKeys: document.getElementById('missingKeys').textContent
+                    },
+                    sampleTranslations: {}
+                };
+
+                // Get sample translations
+                const sampleKeys = [
+                    'benefits.title',
+                    'features.timer.title',
+                    'pricing.title',
+                    'faq.q1.question'
+                ];
+
+                sampleKeys.forEach(key => {
+                    report.sampleTranslations[key] = window.i18n.translate(key);
+                });
+
+                // Create download
+                const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `i18n-test-report-${Date.now()}.json`;
+                a.click();
+
+                log('✅ Report exported successfully', 'success');
+            }
+
+            // Start initialization when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initialize);
+            } else {
+                initialize();
+            }
+
+        })();
+    </script>
+</body>
+</html>
