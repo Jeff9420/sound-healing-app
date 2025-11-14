@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - SaaS Landing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: auto !important;
+            overflow: auto !important;
+            overflow-y: auto !important;
+        }
+
+        body {
+            font-family: monospace;
+            background: #0b0704;
+            color: #fdf3e5;
+            padding: 2rem;
+            line-height: 1.8;
+        }
+
+        .debug-panel {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(102, 102, 255, 0.95);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 12px;
+            z-index: 99999;
+            max-width: 300px;
+        }
+
+        .debug-panel h3 {
+            margin-bottom: 0.5rem;
+            font-size: 14px;
+        }
+
+        .debug-info {
+            margin: 0.25rem 0;
+        }
+
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: 2px solid #6666ff;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .controls {
+            margin: 1rem 0;
+        }
+
+        button {
+            background: #6666ff;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-right: 0.5rem;
+        }
+
+        button:hover {
+            background: #5555ee;
+        }
+
+        .test-content {
+            background: rgba(26, 15, 10, 0.8);
+            border: 1px solid rgba(253, 243, 229, 0.15);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1rem 0;
+            min-height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-panel" id="debugPanel">
+        <h3>📊 实时诊断</h3>
+        <div id="debugInfo">加载中...</div>
+    </div>
+
+    <h1>🔍 SaaS Landing 页面诊断工具</h1>
+
+    <div class="controls">
+        <button onclick="location.reload()">🔄 刷新</button>
+        <button onclick="openInNewWindow()">🪟 新窗口打开</button>
+        <button onclick="testScroll()">📏 测试滚动</button>
+    </div>
+
+    <div class="test-content">
+        <h2>测试区域 1</h2>
+        <p>如果您能看到这个区域，说明页面基本CSS正常。</p>
+        <p>尝试向下滚动，看看是否能看到下面的测试区域。</p>
+    </div>
+
+    <div class="test-content">
+        <h2>测试区域 2</h2>
+        <p>如果您滚动到这里，说明滚动功能正常。</p>
+    </div>
+
+    <div class="test-content">
+        <h2>测试区域 3</h2>
+        <p>继续向下滚动...</p>
+    </div>
+
+    <div class="test-content">
+        <h2>测试区域 4</h2>
+        <p>如果能看到这里，说明页面滚动完全正常！</p>
+    </div>
+
+    <div class="test-content">
+        <h2>测试区域 5（底部）</h2>
+        <p>✅ 恭喜！您已经滚动到页面底部，滚动功能正常工作。</p>
+    </div>
+
+    <h2 style="margin-top: 2rem;">🌐 原始 Landing Page（嵌入式）</h2>
+    <p>下面是嵌入的 saas-landing.html：</p>
+    <iframe id="landingFrame" src="/saas-landing.html"></iframe>
+
+    <script>
+        function updateDebugInfo() {
+            const debugInfo = document.getElementById('debugInfo');
+
+            const info = `
+                <div class="debug-info">窗口高度: ${window.innerHeight}px</div>
+                <div class="debug-info">文档高度: ${document.body.scrollHeight}px</div>
+                <div class="debug-info">可滚动: ${document.body.scrollHeight > window.innerHeight ? '✅ 是' : '❌ 否'}</div>
+                <div class="debug-info">滚动位置: ${window.scrollY}px</div>
+                <div class="debug-info">Body overflow: ${getComputedStyle(document.body).overflow}</div>
+                <div class="debug-info">HTML overflow: ${getComputedStyle(document.documentElement).overflow}</div>
+            `;
+
+            debugInfo.innerHTML = info;
+        }
+
+        function testScroll() {
+            alert(`
+页面信息：
+- 窗口高度: ${window.innerHeight}px
+- 文档高度: ${document.body.scrollHeight}px
+- 可以滚动: ${document.body.scrollHeight > window.innerHeight ? '是' : '否'}
+- 当前滚动位置: ${window.scrollY}px
+
+现在将滚动到页面底部...
+            `);
+
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            });
+
+            setTimeout(() => {
+                alert(`滚动完成！当前位置: ${window.scrollY}px`);
+            }, 1000);
+        }
+
+        function openInNewWindow() {
+            window.open('/saas-landing.html', '_blank', 'width=1200,height=800');
+        }
+
+        // 监听iframe加载
+        const frame = document.getElementById('landingFrame');
+        frame.addEventListener('load', function() {
+            try {
+                const iframeDoc = frame.contentDocument || frame.contentWindow.document;
+                const iframeBody = iframeDoc.body;
+
+                console.log('📊 Iframe 诊断:');
+                console.log('  - iframe 文档高度:', iframeBody.scrollHeight);
+                console.log('  - iframe 窗口高度:', frame.contentWindow.innerHeight);
+                console.log('  - iframe 可滚动:', iframeBody.scrollHeight > frame.contentWindow.innerHeight);
+
+                // 每秒更新一次
+                setInterval(() => {
+                    console.log('  - iframe 滚动位置:', frame.contentWindow.scrollY);
+                }, 1000);
+
+            } catch (error) {
+                console.log('无法访问 iframe 内容（同源策略）');
+            }
+        });
+
+        // 初始更新
+        updateDebugInfo();
+
+        // 每秒更新一次
+        setInterval(updateDebugInfo, 1000);
+
+        // 滚动事件监听
+        window.addEventListener('scroll', updateDebugInfo);
+
+        console.log('🔍 调试工具已加载');
+        console.log('📏 当前页面信息:');
+        console.log('  - 窗口高度:', window.innerHeight);
+        console.log('  - 文档高度:', document.body.scrollHeight);
+        console.log('  - 可以滚动:', document.body.scrollHeight > window.innerHeight);
+    </script>
+</body>
+</html>

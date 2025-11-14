@@ -271,11 +271,33 @@ function renderCategoryShortcuts(entries) {
         `;
 
         button.addEventListener('click', () => {
-            const grid = document.getElementById('categoryGrid');
-            if (grid) {
-                grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // 直接播放该分类的第一首音频，不打开播放列表
+            const audioFiles = category.files || [];
+            if (audioFiles.length > 0) {
+                // 设置当前分类
+                currentCategory = { key: key, ...category };
+
+                // 加载该分类的所有音频到 tracks 数组
+                tracks = audioFiles.map(filename => {
+                    const fileUrl = `${category.baseUrl}/${filename}`;
+                    return {
+                        name: filename.replace(/\.(mp3|wav|wma|ogg)$/i, ''),
+                        url: fileUrl,
+                        category: key
+                    };
+                });
+
+                // 播放第一首
+                playTrack(0);
+
+                // 显示播放器
+                const player = document.querySelector('.audio-player');
+                if (player) {
+                    player.style.transform = 'translateY(0)';
+                }
+            } else {
+                console.warn(`Category "${key}" has no audio files`);
             }
-            openPlaylist(key, category);
         });
 
         shortcutsContainer.appendChild(button);
@@ -354,8 +376,8 @@ function initializeApp() {
     // Initialize Page Visibility API for performance
     setupPageVisibilityListener();
 
-    // Load categories
-    loadCategories();
+    // 分类网格已移除 - 现在使用导航下的快捷卡片
+    // loadCategories();
     initRecommendationRail();
     prefillInstantPlayer();
 
@@ -1191,7 +1213,7 @@ if (document.readyState === 'loading') {
 
         // Listen for language change events
         document.addEventListener('languageChange', function() {
-            loadCategories();
+            // loadCategories(); // 分类网格已移除
             updateStaticText();
             prefillInstantPlayer();
         });
@@ -1208,7 +1230,7 @@ if (document.readyState === 'loading') {
 
     // Listen for language change events
     document.addEventListener('languageChange', function() {
-        loadCategories();
+        // loadCategories(); // 分类网格已移除
         updateStaticText();
         scheduleRecommendationRefresh(true);
         prefillInstantPlayer();

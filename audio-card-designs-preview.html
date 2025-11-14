@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音频卡片设计方案预览 - Audio Card Design Prototypes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(180deg,
+                #edeade 0%,
+                #d4cbb8 20%,
+                #c99a60 40%,
+                #2a2218 70%,
+                #201913 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #edeade;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #edeade;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            color: #d4a574;
+            opacity: 0.9;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #c99a60;
+            padding: 15px 25px;
+            background: rgba(42, 34, 24, 0.6);
+            border-radius: 12px;
+            border-left: 4px solid #d4a574;
+            backdrop-filter: blur(10px);
+        }
+
+        .recommended-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #c99a60, #d4a574);
+            color: #201913;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-left: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+        }
+
+        .description {
+            font-size: 1rem;
+            margin-bottom: 25px;
+            color: rgba(237, 234, 222, 0.8);
+            padding-left: 25px;
+            line-height: 1.6;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        /* ========== 方案 1: 悬浮卡片 + 磨砂玻璃 ========== */
+        .card-design-1 {
+            background: rgba(42, 34, 24, 0.5);
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            border-radius: 20px;
+            padding: 32px 28px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 16px rgba(32, 25, 19, 0.3);
+        }
+
+        .card-design-1:hover {
+            transform: translateY(-8px);
+            background: rgba(42, 34, 24, 0.7);
+            box-shadow: 0 16px 48px rgba(201, 154, 96, 0.4);
+            border-color: rgba(212, 165, 116, 0.5);
+        }
+
+        .card-design-1 .card-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        .card-design-1 .card-title {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+            color: #edeade;
+            font-weight: 600;
+        }
+
+        .card-design-1 .card-meta {
+            font-size: 0.95rem;
+            color: #d4a574;
+            margin-bottom: 24px;
+            opacity: 0.9;
+        }
+
+        .card-design-1 .card-btn {
+            background: linear-gradient(135deg, rgba(201, 154, 96, 0.3), rgba(212, 165, 116, 0.3));
+            border: 2px solid rgba(212, 165, 116, 0.4);
+            color: #edeade;
+            padding: 12px 32px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .card-design-1 .card-btn:hover {
+            background: linear-gradient(135deg, rgba(201, 154, 96, 0.5), rgba(212, 165, 116, 0.5));
+            border-color: rgba(212, 165, 116, 0.7);
+            transform: translateY(-2px);
+        }
+
+        /* ========== 方案 2: 渐变边框卡片 ========== */
+        .card-design-2 {
+            position: relative;
+            background: rgba(32, 25, 19, 0.8);
+            border-radius: 20px;
+            padding: 32px 28px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .card-design-2::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(135deg, #c99a60, #d4a574, #c99a60);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .card-design-2:hover::before {
+            opacity: 1;
+        }
+
+        .card-design-2:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(201, 154, 96, 0.4);
+        }
+
+        .card-design-2 .card-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-design-2 .card-title {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            color: #edeade;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-design-2 .card-divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4a574, transparent);
+            margin: 12px auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-design-2 .card-meta {
+            font-size: 0.95rem;
+            color: #d4a574;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-design-2 .card-btn {
+            background: linear-gradient(135deg, #c99a60, #d4a574);
+            border: none;
+            color: #201913;
+            padding: 12px 32px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-design-2 .card-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(201, 154, 96, 0.5);
+        }
+
+        /* ========== 方案 3: 极简扁平卡片 ========== */
+        .card-design-3 {
+            background: rgba(42, 34, 24, 0.9);
+            border: none;
+            border-radius: 16px;
+            padding: 28px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .card-design-3:hover {
+            background: rgba(52, 41, 30, 1);
+            transform: translateX(5px);
+        }
+
+        .card-design-3 .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .card-design-3 .card-title-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-design-3 .card-icon {
+            font-size: 2.5rem;
+        }
+
+        .card-design-3 .card-title {
+            font-size: 1.4rem;
+            color: #edeade;
+            font-weight: 600;
+        }
+
+        .card-design-3 .card-play-icon {
+            font-size: 2rem;
+            color: #d4a574;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        .card-design-3:hover .card-play-icon {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .card-design-3 .card-divider {
+            height: 1px;
+            background: linear-gradient(90deg, rgba(212, 165, 116, 0.3), transparent);
+            margin: 16px 0;
+        }
+
+        .card-design-3 .card-meta {
+            font-size: 0.95rem;
+            color: #d4a574;
+            line-height: 1.6;
+        }
+
+        /* ========== 方案 4: 波纹动画卡片 ========== */
+        .card-design-4 {
+            position: relative;
+            background: rgba(42, 34, 24, 0.6);
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            border-radius: 20px;
+            padding: 32px 28px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(8px);
+            overflow: hidden;
+        }
+
+        .card-design-4::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201, 154, 96, 0.3), transparent 70%);
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+
+        .card-design-4:hover::before {
+            width: 300%;
+            height: 300%;
+            opacity: 1;
+        }
+
+        .card-design-4:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 165, 116, 0.5);
+        }
+
+        .card-design-4 .card-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .card-design-4 .card-title {
+            font-size: 1.6rem;
+            margin-bottom: 16px;
+            color: #edeade;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-design-4 .wave-decoration {
+            height: 30px;
+            margin: 16px 0;
+            position: relative;
+            z-index: 1;
+            opacity: 0.5;
+        }
+
+        .card-design-4 .wave-bar {
+            display: inline-block;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to top, #c99a60, #d4a574);
+            margin: 0 2px;
+            border-radius: 2px;
+            animation: wave 1.5s ease-in-out infinite;
+        }
+
+        .card-design-4 .wave-bar:nth-child(1) { animation-delay: 0s; }
+        .card-design-4 .wave-bar:nth-child(2) { animation-delay: 0.1s; }
+        .card-design-4 .wave-bar:nth-child(3) { animation-delay: 0.2s; }
+        .card-design-4 .wave-bar:nth-child(4) { animation-delay: 0.3s; }
+        .card-design-4 .wave-bar:nth-child(5) { animation-delay: 0.4s; }
+        .card-design-4 .wave-bar:nth-child(6) { animation-delay: 0.3s; }
+        .card-design-4 .wave-bar:nth-child(7) { animation-delay: 0.2s; }
+        .card-design-4 .wave-bar:nth-child(8) { animation-delay: 0.1s; }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleY(0.5); }
+            50% { transform: scaleY(1); }
+        }
+
+        .card-design-4 .card-meta {
+            font-size: 0.95rem;
+            color: #d4a574;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-design-4 .card-btn {
+            background: linear-gradient(135deg, rgba(201, 154, 96, 0.4), rgba(212, 165, 116, 0.4));
+            border: 2px solid rgba(212, 165, 116, 0.5);
+            color: #edeade;
+            padding: 12px 32px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            animation: pulse-btn 2s infinite;
+        }
+
+        @keyframes pulse-btn {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(201, 154, 96, 0.7); }
+            50% { box-shadow: 0 0 0 10px rgba(201, 154, 96, 0); }
+        }
+
+        .card-design-4 .card-btn:hover {
+            background: linear-gradient(135deg, rgba(201, 154, 96, 0.6), rgba(212, 165, 116, 0.6));
+            transform: translateY(-2px);
+        }
+
+        /* ========== 推荐方案: 方案1+2组合 ========== */
+        .card-recommended {
+            position: relative;
+            background: rgba(42, 34, 24, 0.6);
+            border-radius: 20px;
+            padding: 32px 28px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 24px rgba(201, 154, 96, 0.3);
+            overflow: hidden;
+        }
+
+        /* 渐变边框 */
+        .card-recommended::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(135deg, #c99a60, #d4a574, #c99a60);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .card-recommended:hover {
+            transform: translateY(-10px);
+            background: rgba(42, 34, 24, 0.8);
+            box-shadow: 0 20px 60px rgba(201, 154, 96, 0.5);
+        }
+
+        .card-recommended:hover::before {
+            opacity: 1;
+        }
+
+        .card-recommended .card-icon {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 4px 12px rgba(201, 154, 96, 0.5));
+            position: relative;
+            z-index: 1;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .card-recommended .card-title {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            color: #edeade;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-recommended .card-meta {
+            font-size: 1rem;
+            color: #d4a574;
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-recommended .card-btn {
+            background: linear-gradient(135deg, #c99a60, #d4a574);
+            border: none;
+            color: #201913;
+            padding: 14px 36px;
+            border-radius: 28px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 4px 16px rgba(201, 154, 96, 0.4);
+        }
+
+        .card-recommended .card-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(201, 154, 96, 0.6);
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .section-title { font-size: 1.4rem; }
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        /* 提示框 */
+        .tip-box {
+            background: rgba(201, 154, 96, 0.15);
+            border-left: 4px solid #c99a60;
+            padding: 20px 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .tip-box p {
+            color: #edeade;
+            line-height: 1.6;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 音频卡片设计方案预览</h1>
+        <p class="subtitle">Audio Card Design Prototypes - 悬停查看交互效果</p>
+
+        <!-- 推荐方案 -->
+        <div class="section">
+            <h2 class="section-title">
+                ⭐ 推荐方案
+                <span class="recommended-badge">✨ Claude 推荐</span>
+            </h2>
+            <p class="description">
+                <strong>磨砂玻璃 + 渐变边框组合</strong><br>
+                融合方案1的轻盈感和方案2的精致感，既现代又温暖，完美匹配网站整体风格。
+                悬停时有明显上浮效果和边框高亮，用户体验极佳。
+            </p>
+            <div class="cards-grid">
+                <div class="card-recommended">
+                    <div class="card-icon">🌧️</div>
+                    <div class="card-title">雨声 Rain Sounds</div>
+                    <div class="card-meta">14 tracks · 45 min</div>
+                    <button class="card-btn">⏵ 开始播放</button>
+                </div>
+
+                <div class="card-recommended">
+                    <div class="card-icon">🎼</div>
+                    <div class="card-title">颂钵 Singing Bowls</div>
+                    <div class="card-meta">61 tracks · 2h 15min</div>
+                    <button class="card-btn">⏵ 开始播放</button>
+                </div>
+
+                <div class="card-recommended">
+                    <div class="card-icon">🧘</div>
+                    <div class="card-title">冥想 Meditation</div>
+                    <div class="card-meta">14 tracks · 50 min</div>
+                    <button class="card-btn">⏵ 开始播放</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <p>💡 <strong>设计亮点：</strong>半透明磨砂背景保持视觉层次，渐变金边增加精致感，悬停上浮效果提供即时反馈，整体设计轻盈且现代。</p>
+        </div>
+
+        <!-- 方案 1 -->
+        <div class="section">
+            <h2 class="section-title">方案 1: 悬浮卡片 + 磨砂玻璃</h2>
+            <p class="description">
+                <strong>特点：</strong>现代、轻量、优雅<br>
+                使用半透明背景和模糊效果，营造漂浮感。悬停时轻微上浮，按钮采用半透明渐变设计。
+            </p>
+            <div class="cards-grid">
+                <div class="card-design-1">
+                    <div class="card-icon">💧</div>
+                    <div class="card-title">流水 Water Sounds</div>
+                    <div class="card-meta">6 tracks · 28 min</div>
+                    <button class="card-btn">⏵ Play All</button>
+                </div>
+
+                <div class="card-design-1">
+                    <div class="card-icon">🔥</div>
+                    <div class="card-title">火焰 Fire Sounds</div>
+                    <div class="card-meta">4 tracks · 20 min</div>
+                    <button class="card-btn">⏵ Play All</button>
+                </div>
+
+                <div class="card-design-1">
+                    <div class="card-icon">🌙</div>
+                    <div class="card-title">催眠 Hypnosis</div>
+                    <div class="card-meta">70 tracks · 3h 30min</div>
+                    <button class="card-btn">⏵ Play All</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 方案 2 -->
+        <div class="section">
+            <h2 class="section-title">方案 2: 渐变边框卡片</h2>
+            <p class="description">
+                <strong>特点：</strong>精致、有层次感<br>
+                金棕色渐变边框搭配深色背景，分割线装饰增加细节，按钮使用网站主色金棕渐变。
+            </p>
+            <div class="cards-grid">
+                <div class="card-design-2">
+                    <div class="card-icon">🐦</div>
+                    <div class="card-title">动物 Animal Sounds</div>
+                    <div class="card-divider"></div>
+                    <div class="card-meta">26 tracks available</div>
+                    <button class="card-btn">⏵ Start Listening</button>
+                </div>
+
+                <div class="card-design-2">
+                    <div class="card-icon">🕉️</div>
+                    <div class="card-title">脉轮 Chakra</div>
+                    <div class="card-divider"></div>
+                    <div class="card-meta">7 healing tracks</div>
+                    <button class="card-btn">⏵ Start Listening</button>
+                </div>
+
+                <div class="card-design-2">
+                    <div class="card-icon">🌌</div>
+                    <div class="card-title">潜意识 Subconscious</div>
+                    <div class="card-divider"></div>
+                    <div class="card-meta">11 therapy tracks</div>
+                    <button class="card-btn">⏵ Start Listening</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 方案 3 -->
+        <div class="section">
+            <h2 class="section-title">方案 3: 极简扁平卡片</h2>
+            <p class="description">
+                <strong>特点：</strong>简洁、快速加载、无障碍<br>
+                无阴影纯色背景，图标和播放按钮横向排列，高对比度文字确保可读性。悬停时向右滑动。
+            </p>
+            <div class="cards-grid">
+                <div class="card-design-3">
+                    <div class="card-header">
+                        <div class="card-title-group">
+                            <div class="card-icon">🌧️</div>
+                            <div class="card-title">雨声 Rain</div>
+                        </div>
+                        <div class="card-play-icon">▶</div>
+                    </div>
+                    <div class="card-divider"></div>
+                    <div class="card-meta">14 crackling rain tracks<br>Perfect for deep sleep</div>
+                </div>
+
+                <div class="card-design-3">
+                    <div class="card-header">
+                        <div class="card-title-group">
+                            <div class="card-icon">🎼</div>
+                            <div class="card-title">颂钵 Bowls</div>
+                        </div>
+                        <div class="card-play-icon">▶</div>
+                    </div>
+                    <div class="card-divider"></div>
+                    <div class="card-meta">61 singing bowl tracks<br>Traditional healing sounds</div>
+                </div>
+
+                <div class="card-design-3">
+                    <div class="card-header">
+                        <div class="card-title-group">
+                            <div class="card-icon">🔥</div>
+                            <div class="card-title">火焰 Fire</div>
+                        </div>
+                        <div class="card-play-icon">▶</div>
+                    </div>
+                    <div class="card-divider"></div>
+                    <div class="card-meta">4 crackling fire tracks<br>Warm and cozy ambience</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 方案 4 -->
+        <div class="section">
+            <h2 class="section-title">方案 4: 波纹动画卡片</h2>
+            <p class="description">
+                <strong>特点：</strong>互动性强、有趣<br>
+                悬停时出现同心圆波纹扩散效果，音频波形装饰，按钮带脉冲动画，图标自然浮动。
+            </p>
+            <div class="cards-grid">
+                <div class="card-design-4">
+                    <div class="card-icon">🧘</div>
+                    <div class="card-title">冥想 Meditation</div>
+                    <div class="wave-decoration">
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                    </div>
+                    <div class="card-meta">14 meditation tracks</div>
+                    <button class="card-btn">⏵ Experience Now</button>
+                </div>
+
+                <div class="card-design-4">
+                    <div class="card-icon">🌙</div>
+                    <div class="card-title">催眠 Hypnosis</div>
+                    <div class="wave-decoration">
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                    </div>
+                    <div class="card-meta">70 hypnosis tracks</div>
+                    <button class="card-btn">⏵ Experience Now</button>
+                </div>
+
+                <div class="card-design-4">
+                    <div class="card-icon">💧</div>
+                    <div class="card-title">流水 Water</div>
+                    <div class="wave-decoration">
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                    </div>
+                    <div class="card-meta">6 flowing water tracks</div>
+                    <button class="card-btn">⏵ Experience Now</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <p>
+                💬 <strong>如何选择：</strong><br>
+                • 追求现代感和轻盈感 → 选择<strong>推荐方案</strong>或<strong>方案1</strong><br>
+                • 喜欢精致细节和层次感 → 选择<strong>方案2</strong><br>
+                • 需要极简快速加载 → 选择<strong>方案3</strong><br>
+                • 想要趣味互动效果 → 选择<strong>方案4</strong>
+            </p>
+        </div>
+
+        <div style="text-align: center; padding: 40px 0; color: rgba(237, 234, 222, 0.6);">
+            <p>🎨 所有设计均采用网站温暖棕色自然风格配色</p>
+            <p>鼠标悬停查看各方案的交互效果</p>
+        </div>
+    </div>
+
+    <script>
+        console.log('✅ 音频卡片设计预览已加载');
+        console.log('🎨 5种设计方案：推荐方案 + 方案1-4');
+        console.log('💡 悬停卡片查看交互效果');
+    </script>
+</body>
+</html>
