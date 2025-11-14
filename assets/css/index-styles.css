@@ -414,17 +414,18 @@ h1 {
 .player-compact {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
 }
 
 .now-playing {
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
 .track-title {
-    font-size: 1.1em;
+    font-size: 0.95em;
     font-weight: 600;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
+    line-height: 1.3;
 }
 
 .track-category {
@@ -436,15 +437,16 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 12px;
+    gap: 8px;
 }
 
 .player-meta-line {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    font-size: 0.85em;
+    gap: 6px;
+    font-size: 0.75em;
     color: var(--text-muted);
+    line-height: 1.4;
 }
 
 /* ==========================================================================
@@ -461,30 +463,33 @@ h1 {
 }
 
 .control-btn {
-    background: rgba(20, 31, 68, 0.88);
-    border: 1px solid rgba(99, 102, 241, 0.4);
+    background: rgba(20, 31, 68, 0.75);
+    border: 1px solid rgba(99, 102, 241, 0.35);
     color: #f8fafc;
-    font-size: 1.1em;
+    font-size: 0.9em;
     cursor: pointer;
-    width: 48px;
-    height: 48px;
+    width: 36px;
+    height: 36px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    transition: all 0.2s;
-    box-shadow: 0 6px 16px rgba(5, 3, 2, 0.45);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 3px 10px rgba(5, 3, 2, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .control-btn:hover {
-    background: rgba(79, 70, 229, 0.85);
-    transform: translateY(-1px);
+    background: rgba(79, 70, 229, 0.9);
+    transform: translateY(-1px) scale(1.05);
+    box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .play-btn {
-    font-size: 1.4em;
-    width: 54px;
-    height: 54px;
+    font-size: 1.1em;
+    width: 42px;
+    height: 42px;
 }
 
 /* ==========================================================================
@@ -502,28 +507,29 @@ h1 {
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 .player-controls-row {
     display: grid;
     grid-template-columns: auto auto minmax(0, 1fr);
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 .primary-controls,
 .secondary-controls {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 6px;
 }
 
 .volume-inline {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 8px;
+    gap: 6px;
+    font-size: 0.9em;
 }
 
 .player-helper-row {
@@ -533,11 +539,18 @@ h1 {
 
 .progress-bar {
     width: 100%;
-    height: 6px;
-    background: rgba(255,255,255,0.25);
-    border-radius: 3px;
+    height: 4px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 2px;
     cursor: pointer;
     position: relative;
+    overflow: hidden;
+    transition: height 0.2s ease;
+}
+
+.progress-bar:hover {
+    height: 5px;
+    background: rgba(255,255,255,0.2);
 }
 
 .progress-fill {
@@ -546,14 +559,17 @@ h1 {
     left: 0;
     height: 100%;
     background: linear-gradient(120deg, #a855f7, #6366f1);
-    border-radius: 3px;
+    border-radius: 2px;
     width: 0;
-    transition: width 0.1s;
+    transition: width 0.1s ease;
+    box-shadow: 0 0 8px rgba(99, 102, 241, 0.5);
 }
 
 .time-display {
-    font-size: 0.9em;
-    min-width: 45px;
+    font-size: 0.75em;
+    min-width: 40px;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-muted);
 }
 
 /* ==========================================================================
@@ -576,16 +592,20 @@ h1 {
 
 .player-mini-link {
     border: none;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.06);
     color: var(--text-primary);
-    padding: 4px 12px;
+    padding: 3px 10px;
     border-radius: 999px;
-    font-size: 0.78rem;
+    font-size: 0.7rem;
     cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .player-mini-link:hover {
-    background: rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
 }
 
 @media (min-width: 768px) {
@@ -605,43 +625,55 @@ h1 {
     }
     .player-controls {
         justify-content: flex-start;
-        gap: 10px;
+        gap: 8px;
     }
     .control-btn {
-        width: 48px;
-        height: 48px;
-        font-size: 1.05em;
+        width: 38px;
+        height: 38px;
+        font-size: 0.95em;
     }
     .play-btn {
-        width: 56px;
-        height: 56px;
+        width: 44px;
+        height: 44px;
     }
     .extra-controls {
-        gap: 14px;
+        gap: 10px;
     }
     .control-group {
-        gap: 10px;
+        gap: 8px;
     }
 }
 
 .volume-slider {
-    width: 80px;
-    height: 4px;
+    width: 70px;
+    height: 3px;
     -webkit-appearance: none;
     appearance: none;
-    background: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.2);
     border-radius: 2px;
     outline: none;
+    transition: background 0.2s ease;
+}
+
+.volume-slider:hover {
+    background: rgba(255,255,255,0.3);
 }
 
 .volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     background: #FF6699;
     border-radius: 50%;
     cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 4px rgba(255, 102, 153, 0.4);
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 2px 6px rgba(255, 102, 153, 0.6);
 }
 
 .playback-rate {
@@ -3985,36 +4017,39 @@ h1 {
 }
 
 
-/* Floating player modal */
+/* Floating player modal - Redesigned for compact, professional look */
 .player-control-panel {
     position: fixed;
-    bottom: clamp(0.75rem, 3vh, 1.5rem);
-    right: clamp(0.75rem, 3vw, 2rem);
+    bottom: clamp(0.75rem, 2.5vh, 1.25rem);
+    right: clamp(0.75rem, 2.5vw, 1.5rem);
     z-index: 9999;
-    width: clamp(280px, 26vw, 420px);
+    width: clamp(240px, 22vw, 340px);
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.28s ease, transform 0.28s ease;
-    transform: translateY(16px);
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(12px) scale(0.98);
 }
 .player-control-panel.player-modal--visible {
     opacity: 1;
     pointer-events: auto;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
 }
 .floating-player-panel {
-    background: rgba(6, 5, 14, 0.92);
-    border-radius: 22px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 15px 40px rgba(6, 5, 14, 0.35);
-    padding: clamp(1rem, 1.7vw, 1.8rem);
-    backdrop-filter: blur(15px);
+    background: rgba(8, 6, 16, 0.94);
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+                0 2px 8px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    padding: clamp(0.75rem, 1.2vw, 1.2rem);
+    backdrop-filter: blur(20px) saturate(180%);
 }
 .player-control-modal__header {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
-    margin-bottom: 0.9rem;
+    gap: 0.15rem;
+    margin-bottom: 0.65rem;
 }
 .player-control-modal__close {
     position: absolute;
@@ -4055,14 +4090,16 @@ body.player-modal-open {
 }
 .player-control-modal__header h3 {
     margin: 0;
-    font-size: 1.15rem;
+    font-size: 0.95rem;
+    font-weight: 600;
 }
 .player-control-modal__eyebrow {
     text-transform: uppercase;
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
     color: var(--text-muted);
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.1rem;
+    opacity: 0.8;
 }
 
 @media (max-width: 768px) {
