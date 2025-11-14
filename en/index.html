@@ -628,10 +628,6 @@
 
                         <div id="playerControlModal" class="player-control-panel player-modal--visible" role="region" aria-labelledby="playerModalTitle">
             <div class="floating-player-panel">
-                <div class="player-header">
-                    <p class="player-control-modal__eyebrow" data-i18n="player.instantLabel">Instant Player · No Download Required</p>
-                    <h3 id="playerModalTitle" data-i18n="player.instantHeadline">Press play to start relaxing</h3>
-                </div>
                 <div id="audioPlayer" class="audio-player show" role="region" aria-label="Audio player controls" tabindex="-1">
                     <div class="player-compact">
                         <div class="player-meta">
@@ -643,7 +639,6 @@
                                     <span id="currentCategory" aria-label="Current track category"></span>
                                 </div>
                             </div>
-                            <button class="player-mini-link" type="button" onclick="openPlaylist('Rain', AUDIO_CONFIG.categories['Rain'])" data-i18n="player.exploreMore">Explore</button>
                         </div>
 
                         <div class="player-progress-row" role="group" aria-label="Audio progress">
@@ -669,10 +664,6 @@
                                 <span aria-hidden="true">🔊</span>
                                 <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="70" onchange="changeVolume(this.value)" aria-label="Volume control" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70" aria-valuetext="70 percent volume" tabindex="0">
                             </div>
-                        </div>
-
-                        <div class="player-helper-row">
-                            <button class="player-mini-link" type="button" onclick="playDefaultSleepSession()" data-i18n="player.defaultTrack.cta">Start session</button>
                         </div>
                     </div>
                 </div>
