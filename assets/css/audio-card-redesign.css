@@ -1,0 +1,277 @@
+/**
+ * 音频卡片重新设计 - 推荐方案
+ * 磨砂玻璃 + 渐变边框组合设计
+ *
+ * 设计特点：
+ * - 半透明磨砂玻璃背景（轻盈感）
+ * - 金棕色渐变边框（精致感）
+ * - 悬停上浮 10px + 边框高亮
+ * - 渐变金色按钮
+ * - 图标浮动动画
+ *
+ * @author Sound Healing Team
+ * @version 3.0.0
+ * @date 2025-11-14
+ */
+
+/* ==========================================================================
+   分类卡片 - 推荐方案设计
+   ========================================================================== */
+
+.category-card {
+    position: relative;
+    background: rgba(42, 34, 24, 0.6);
+    border-radius: 20px;
+    padding: 32px 28px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 24px rgba(201, 154, 96, 0.3);
+    overflow: hidden;
+    color: var(--saas-text, #edeade);
+}
+
+/* 渐变边框效果 */
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 20px;
+    padding: 2px;
+    background: linear-gradient(135deg, #c99a60, #d4a574, #c99a60);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+/* 悬停效果 */
+.category-card:hover {
+    transform: translateY(-10px);
+    background: rgba(42, 34, 24, 0.8);
+    box-shadow: 0 20px 60px rgba(201, 154, 96, 0.5);
+}
+
+.category-card:hover::before {
+    opacity: 1;
+}
+
+/* 激活/点击效果 */
+.category-card:active {
+    transform: translateY(-8px);
+    transition-duration: 0.1s;
+}
+
+/* 图标样式与浮动动画 */
+.category-icon {
+    font-size: 4.5rem;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 4px 12px rgba(201, 154, 96, 0.5));
+    position: relative;
+    z-index: 1;
+    animation: float 3s ease-in-out infinite;
+    display: inline-block;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* 标题样式 */
+.category-name {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    color: #edeade;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 描述文字 */
+.category-desc {
+    font-size: 1rem;
+    color: #d4a574;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+/* 如果卡片内有按钮 */
+.category-card .card-btn,
+.category-card button {
+    background: linear-gradient(135deg, #c99a60, #d4a574);
+    border: none;
+    color: #201913;
+    padding: 14px 36px;
+    border-radius: 28px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 16px rgba(201, 154, 96, 0.4);
+}
+
+.category-card .card-btn:hover,
+.category-card button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(201, 154, 96, 0.6);
+}
+
+.category-card .card-btn:active,
+.category-card button:active {
+    transform: translateY(-1px);
+}
+
+/* 轨道计数标签（如果有的话） */
+.category-card .track-count {
+    background: rgba(201, 154, 96, 0.2);
+    border: 1px solid rgba(212, 165, 116, 0.3);
+    color: #d4a574;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: inline-block;
+    margin-top: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ==========================================================================
+   响应式设计
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .category-card {
+        padding: 24px 20px;
+    }
+
+    .category-icon {
+        font-size: 3.5rem;
+    }
+
+    .category-name {
+        font-size: 1.5rem;
+    }
+
+    .category-desc {
+        font-size: 0.95rem;
+    }
+
+    .category-card:hover {
+        transform: translateY(-5px);
+    }
+}
+
+@media (max-width: 480px) {
+    .category-card {
+        padding: 20px 16px;
+    }
+
+    .category-icon {
+        font-size: 3rem;
+        margin-bottom: 16px;
+    }
+
+    .category-name {
+        font-size: 1.3rem;
+    }
+
+    .category-desc {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+}
+
+/* ==========================================================================
+   焦点可访问性
+   ========================================================================== */
+
+.category-card:focus-visible {
+    outline: 3px solid rgba(212, 165, 116, 0.6);
+    outline-offset: 4px;
+}
+
+/* 键盘导航时增强边框 */
+.category-card:focus-visible::before {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   加载状态（可选）
+   ========================================================================== */
+
+.category-card.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.category-card.loading .category-icon {
+    animation: float 1s ease-in-out infinite, pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* ==========================================================================
+   深色主题适配
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+    .category-card {
+        background: rgba(42, 34, 24, 0.7);
+    }
+
+    .category-card:hover {
+        background: rgba(42, 34, 24, 0.9);
+    }
+
+    .category-name {
+        color: #edeade;
+    }
+
+    .category-desc {
+        color: #d4a574;
+    }
+}
+
+/* ==========================================================================
+   打印样式
+   ========================================================================== */
+
+@media print {
+    .category-card {
+        break-inside: avoid;
+        box-shadow: none;
+    }
+
+    .category-card::before {
+        display: none;
+    }
+
+    .category-icon {
+        animation: none;
+    }
+}
