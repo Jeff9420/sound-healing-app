@@ -376,8 +376,8 @@ function initializeApp() {
     // Initialize Page Visibility API for performance
     setupPageVisibilityListener();
 
-    // 分类网格已移除 - 现在使用导航下的快捷卡片
-    // loadCategories();
+    // 加载导航下的快捷卡片
+    loadCategories();
     initRecommendationRail();
     prefillInstantPlayer();
 
@@ -481,20 +481,20 @@ function resizeCanvas() {
 
 function loadCategories() {
     console.log('Loading categories...');
-    const categoryGrid = document.getElementById('categoryGrid');
-    if (!categoryGrid) {
-        return;
-    }
 
-    categoryGrid.innerHTML = '';
-
+    // 只渲染导航下的快捷卡片，不加载中间的分类网格
     const entries = getAvailableCategoryEntries();
-    entries.forEach(([key, category]) => {
-        const categoryCard = createCategoryCard(key, category);
-        categoryGrid.appendChild(categoryCard);
-    });
-
     renderCategoryShortcuts(entries);
+
+    // 中间的分类网格已移除
+    // const categoryGrid = document.getElementById('categoryGrid');
+    // if (categoryGrid) {
+    //     categoryGrid.innerHTML = '';
+    //     entries.forEach(([key, category]) => {
+    //         const categoryCard = createCategoryCard(key, category);
+    //         categoryGrid.appendChild(categoryCard);
+    //     });
+    // }
 }
 
 function createCategoryCard(key, category) {
@@ -1213,7 +1213,7 @@ if (document.readyState === 'loading') {
 
         // Listen for language change events
         document.addEventListener('languageChange', function() {
-            // loadCategories(); // 分类网格已移除
+            loadCategories(); // 重新渲染导航卡片
             updateStaticText();
             prefillInstantPlayer();
         });
@@ -1230,7 +1230,7 @@ if (document.readyState === 'loading') {
 
     // Listen for language change events
     document.addEventListener('languageChange', function() {
-        // loadCategories(); // 分类网格已移除
+        loadCategories(); // 重新渲染导航卡片
         updateStaticText();
         scheduleRecommendationRefresh(true);
         prefillInstantPlayer();
