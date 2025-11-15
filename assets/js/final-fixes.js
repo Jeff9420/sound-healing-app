@@ -58,8 +58,7 @@
                 /* 彻底解决双滚动条问题 */
                 html {
                     overflow-x: hidden !important;
-                    overflow-y: hidden !important;
-                    height: 100%;
+                    overflow-y: auto !important;
                     scrollbar-width: thin;
                 }
 
@@ -70,7 +69,7 @@
                     padding: 0 !important;
                     max-width: 100vw !important;
                     position: static !important;
-                    min-height: 100%;
+                    min-height: 100vh;
                     scrollbar-width: thin;
                 }
 
@@ -120,7 +119,7 @@
             document.body.style.overflowX = 'hidden';
             document.body.style.overflowY = 'auto';
             document.documentElement.style.overflowX = 'hidden';
-            document.documentElement.style.overflowY = 'hidden';
+            document.documentElement.style.overflowY = 'auto';
         }
 
         // 3. 监听并修复后续加载的内容
