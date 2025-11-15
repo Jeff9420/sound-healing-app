@@ -4283,6 +4283,7 @@ h1 {
     gap: 12px;
 }
 
+/* 创建音量进度条样式，与音频进度条保持一致 */
 .player-modal-content .volume-slider {
     flex: 1;
     height: 6px;
@@ -4290,41 +4291,40 @@ h1 {
     appearance: none;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 3px;
-    outline: none;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: height 0.2s ease;
 }
 
+/* 隐藏默认的滑块样式 */
 .player-modal-content .volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 6px rgba(99, 102, 241, 0.4);
-}
-
-.player-modal-content .volume-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.2);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.6);
+    width: 0;
+    height: 0;
+    background: transparent;
+    border: none;
 }
 
 .player-modal-content .volume-slider::-moz-range-thumb {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    cursor: pointer;
+    width: 0;
+    height: 0;
+    background: transparent;
     border: none;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 6px rgba(99, 102, 241, 0.4);
 }
 
-.player-modal-content .volume-slider::-moz-range-thumb:hover {
-    transform: scale(1.2);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.6);
+/* 使用背景渐变模拟进度条填充 */
+.player-modal-content .volume-slider {
+    background: linear-gradient(to right,
+        #6366f1 0%,
+        #8b5cf6 var(--volume-percent, 70%),
+        rgba(255, 255, 255, 0.1) var(--volume-percent, 70%),
+        rgba(255, 255, 255, 0.1) 100%);
+}
+
+.player-modal-content .volume-slider:hover {
+    height: 8px;
 }
 
 /* 动画 */
