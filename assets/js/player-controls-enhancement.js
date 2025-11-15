@@ -94,21 +94,39 @@
                     display: none;
                 `;
 
+                // 获取当前语言
+                const lang = window.i18n ? window.i18n.currentLanguage : 'en-US';
+                const isZh = lang.includes('zh');
+                const isJa = lang.includes('ja');
+                const isKo = lang.includes('ko');
+                const isEs = lang.includes('es');
+
+                // 多语言文本
+                const texts = {
+                    title: isZh ? '睡眠定时器' : isJa ? '睡眠タイマー' : isKo ? '수면 타이머' : isEs ? 'Temporizador de sueño' : 'Sleep Timer',
+                    customTime: isZh ? '自定义时间（分钟）' : isJa ? 'カスタム時間（分）' : isKo ? '사용자 지정 시간（분）' : isEs ? 'Tiempo personalizado (minutos)' : 'Custom time (minutes)',
+                    set: isZh ? '设置' : isJa ? '設定' : isKo ? '설정' : isEs ? 'Establecer' : 'Set',
+                    cancel: isZh ? '取消' : isJa ? 'キャンセル' : isKo ? '취소' : isEs ? 'Cancelar' : 'Cancel',
+                    minutes: isZh ? '分钟' : isJa ? '分' : isKo ? '분' : isEs ? 'min' : 'min',
+                    off: isZh ? '关闭' : isJa ? 'オフ' : isKo ? '끄기' : isEs ? 'Apagar' : 'Off'
+                };
+
                 modal.innerHTML = `
-                    <h3 style="margin: 0 0 20px 0; font-size: 18px; text-align: center;">睡眠定时器</h3>
+                    <h3 style="margin: 0 0 20px 0; font-size: 18px; text-align: center;">${texts.title}</h3>
                     <div class="timer-options" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
-                        <button onclick="setSleepTimer(15); closeSleepTimerModal();" style="padding: 12px; background: rgba(255,255,255,0.1); border: none; color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px;">15分钟</button>
-                        <button onclick="setSleepTimer(30); closeSleepTimerModal();" style="padding: 12px; background: rgba(255,255,255,0.1); border: none; color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px;">30分钟</button>
-                        <button onclick="setSleepTimer(45); closeSleepTimerModal();" style="padding: 12px; background: rgba(255,255,255,0.1); border: none; color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px;">45分钟</button>
-                        <button onclick="setSleepTimer(60); closeSleepTimerModal();" style="padding: 12px; background: rgba(255,255,255,0.1); border: none; color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px;">60分钟</button>
+                        <button onclick="setSleepTimer(15); closeSleepTimerModal();" style="padding: 12px; background: rgba(255,255,255,0.1); border: none; color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px;">15 ${texts.minutes}</button>
+                        <button onclick="setSleepTimer(30); closeSleepTimerModal();" style="padding: 12px; background: rgba(255,255,255,0.1); border: none; color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px;">30 ${texts.minutes}</button>
+                        <button onclick="setSleepTimer(45); closeSleepTimerModal();" style="padding: 12px; background: rgba(255,255,255,0.1); border: none; color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px;">45 ${texts.minutes}</button>
+                        <button onclick="setSleepTimer(60); closeSleepTimerModal();" style="padding: 12px; background: rgba(255,255,255,0.1); border: none; color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px;">60 ${texts.minutes}</button>
+                        <button onclick="setSleepTimer(0); closeSleepTimerModal();" style="padding: 12px; background: rgba(255,100,100,0.2); border: 1px solid rgba(255,100,100,0.3); color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px; grid-column: 1 / -1;">${texts.off}</button>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 8px; font-size: 14px; opacity: 0.8;">自定义时间（分钟）</label>
+                        <label style="display: block; margin-bottom: 8px; font-size: 14px; opacity: 0.8;">${texts.customTime}</label>
                         <input type="number" id="customTimerMinutes" min="1" max="180" value="30" style="width: 100%; padding: 8px 12px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 8px; font-size: 14px;">
                     </div>
                     <div style="display: flex; gap: 10px;">
-                        <button onclick="setCustomSleepTimer(); closeSleepTimerModal();" style="flex: 1; padding: 12px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border: none; color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px;">设置</button>
-                        <button onclick="closeSleepTimerModal();" style="flex: 1; padding: 12px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px;">取消</button>
+                        <button onclick="setCustomSleepTimer(); closeSleepTimerModal();" style="flex: 1; padding: 12px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border: none; color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px;">${texts.set}</button>
+                        <button onclick="closeSleepTimerModal();" style="flex: 1; padding: 12px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: #fff; border-radius: 8px; cursor: pointer; font-size: 14px;">${texts.cancel}</button>
                     </div>
                 `;
 
