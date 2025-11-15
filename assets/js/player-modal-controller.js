@@ -82,14 +82,16 @@ class PlayerModalController {
     hide() {
         if (!this.modal) return;
 
+        // 记录调用堆栈，找出是谁在关闭播放器
+        console.log('❌ Player modal hidden - Called from:');
+        console.trace();
+
         this.modal.classList.remove('show');
         this.modal.setAttribute('aria-hidden', 'true');
         this.isVisible = false;
 
         // 恢复背景滚动
         document.body.style.overflow = '';
-
-        console.log('Player modal hidden');
     }
 
     /**
