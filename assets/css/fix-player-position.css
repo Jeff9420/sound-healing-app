@@ -1,0 +1,38 @@
+/*
+ * 修复固定播放器位置问题的CSS文件
+ * 禁用固定底部播放器，使用模态框播放器
+ */
+
+/* 完全隐藏固定底部播放器 */
+#fixedPlayer.audio-player-fixed {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+}
+
+/* 确保模态框播放器正常工作 */
+.player-modal {
+  z-index: 10000 !important;
+}
+
+.player-modal.show {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+/* 防止固定播放器影响页面布局 */
+body {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+html, body {
+  height: auto !important;
+  min-height: 100vh !important;
+  overflow-x: hidden !important;
+}

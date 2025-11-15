@@ -25,7 +25,8 @@ class UIRedesignV2 {
     setupUI() {
         this.simplifyNavigation();
         this.createQuickStartSection();
-        this.createFixedPlayer();
+        // 禁用固定底部播放器，使用模态框播放器
+        // this.createFixedPlayer();
         this.reorderContent();
         this.setupEventListeners();
     }
