@@ -470,7 +470,6 @@ function initializeApp() {
     loadCategories();
     initRecommendationRail();
     prefillInstantPlayer();
-    openPlayerModal(false);
 
     const heroStartBtn = document.querySelector('[data-action="start-default-session"]');
     if (heroStartBtn) {
