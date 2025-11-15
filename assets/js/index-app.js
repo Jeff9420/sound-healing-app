@@ -695,6 +695,26 @@ function closePlaylist() {
 // 浮动播放器模态
 // ==========================================================================
 
+function getPlayerModalElement() {
+    return document.getElementById('playerModal') || document.getElementById('playerControlModal');
+}
+
+function isPlayerModalVisible(modal) {
+    return modal.classList.contains('show') || modal.classList.contains('player-modal--visible');
+}
+
+function showPlayerModalElement(modal) {
+    modal.classList.add('show');
+    modal.classList.add('player-modal--visible');
+    modal.removeAttribute('aria-hidden');
+}
+
+function hidePlayerModalElement(modal) {
+    modal.classList.remove('show');
+    modal.classList.remove('player-modal--visible');
+    modal.setAttribute('aria-hidden', 'true');
+}
+
 function syncPlayerModalOverflow(forceRemove = false) {
     if (typeof document === 'undefined') {
         return;
@@ -703,8 +723,8 @@ function syncPlayerModalOverflow(forceRemove = false) {
         document.body.classList.remove('player-modal-open');
         return;
     }
-    const modal = document.getElementById('playerControlModal');
-    if (!modal || !modal.classList.contains('player-modal--visible')) {
+    const modal = getPlayerModalElement();
+    if (!modal || !isPlayerModalVisible(modal)) {
         document.body.classList.remove('player-modal-open');
         return;
     }
@@ -716,13 +736,13 @@ function syncPlayerModalOverflow(forceRemove = false) {
 }
 
 function openPlayerModal(shouldFocusClose = false) {
-    const modal = document.getElementById('playerControlModal');
+    const modal = getPlayerModalElement();
     const player = document.getElementById('audioPlayer');
     if (!modal) {
+        console.warn('Player modal element not found');
         return;
     }
-    modal.classList.add('player-modal--visible');
-    modal.removeAttribute('aria-hidden');
+    showPlayerModalElement(modal);
     syncPlayerModalOverflow();
     if (player) {
         player.classList.add('show');
@@ -737,13 +757,12 @@ function openPlayerModal(shouldFocusClose = false) {
 }
 
 function closePlayerModal() {
-    const modal = document.getElementById('playerControlModal');
+    const modal = getPlayerModalElement();
     const player = document.getElementById('audioPlayer');
     if (!modal) {
         return;
     }
-    modal.classList.remove('player-modal--visible');
-    modal.setAttribute('aria-hidden', 'true');
+    hidePlayerModalElement(modal);
     syncPlayerModalOverflow(true);
     if (player) {
         player.classList.remove('show');
