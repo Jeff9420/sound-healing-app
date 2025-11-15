@@ -388,9 +388,9 @@ h1 {
 .audio-player {
     position: relative;
     background: var(--bg-card);
-    border-radius: 28px;
+    border-radius: 20px;
     border: 1px solid var(--border-light);
-    padding: 2rem;
+    padding: 8px;
     box-shadow: var(--shadow-lg);
     transform: translateY(12px);
     opacity: 0;
@@ -415,10 +415,12 @@ h1 {
     display: flex;
     flex-direction: column; /* 改为纵向布局 - 三行设计 */
     align-items: stretch;
-    gap: 10px; /* 行与行之间的间距 */
+    gap: 4px; /* 行与行之间的间距 - 紧凑设计，确保100px高度 */
     flex-wrap: nowrap;
-    padding: 8px 12px; /* 增加内边距 */
+    padding: 6px 12px; /* 上下6px + 左右12px */
     width: 100%;
+    height: 100px; /* 固定高度100px */
+    box-sizing: border-box;
 }
 
 .now-playing {
@@ -463,15 +465,15 @@ h1 {
     margin: 16px 0;
 }
 
-/* 控制按钮基础样式 */
+/* 控制按钮基础样式 - 超紧凑100px高度设计 */
 .control-btn {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.12);
     color: #f8fafc;
-    font-size: 0.95em; /* 图标尺寸 */
+    font-size: 0.8em; /* 减小图标尺寸 */
     cursor: pointer;
-    width: 38px !important; /* 统一按钮大小 */
-    height: 38px !important;
+    width: 28px !important; /* 减小按钮大小 */
+    height: 28px !important;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -498,9 +500,9 @@ h1 {
 
 /* 播放/暂停按钮 - 最突出的视觉层次 */
 .play-btn {
-    font-size: 1.15em; /* 更大的图标 */
-    width: 46px !important; /* 主要按钮更大 */
-    height: 46px !important;
+    font-size: 0.95em; /* 减小图标尺寸 */
+    width: 32px !important; /* 减小主要按钮大小 */
+    height: 32px !important;
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.9), rgba(79, 70, 229, 0.95));
     border-color: rgba(99, 102, 241, 0.8);
     box-shadow: 0 4px 12px rgba(99, 102, 241, 0.5),
@@ -525,24 +527,28 @@ h1 {
     gap: 10px;
     margin: 16px 0;
 }
-/* 第2行：进度条 + 时间显示 - 优化为更清晰的时间进度条设计 */
+/* 第2行：进度条 + 时间显示 - 超紧凑设计 */
 .player-progress-row {
     display: flex;
     align-items: center;
-    gap: 12px; /* 进度条和时间之间的间距 */
+    gap: 8px; /* 进度条和时间之间的间距 */
     width: 100%;
-    padding: 0.5rem 0;
+    padding: 0; /* 移除padding实现100px高度 */
+    height: 24px; /* 固定进度条行高度 */
+    flex-shrink: 0;
 }
 
-/* 第1行：所有控制按钮横向排列 - 根据截图优化为更紧凑的设计 */
+/* 第1行：所有控制按钮横向排列 - 超紧凑100px高度设计 */
 .player-controls-row {
     display: flex;
     align-items: center;
     justify-content: center; /* 按钮居中排列 */
-    gap: 12px; /* 按钮之间适中的间距 */
+    gap: 8px; /* 减小按钮间距 */
     flex-wrap: nowrap;
     width: 100%;
-    padding: 0.5rem 0;
+    padding: 0; /* 移除padding实现100px高度 */
+    height: 32px; /* 固定按钮行高度 */
+    flex-shrink: 0;
 }
 
 /* 移除旧的分组样式 */
@@ -551,22 +557,19 @@ h1 {
     display: contents; /* 移除分组容器 */
 }
 
-/* 第3行：音量控制 - 根据截图设计优化为更清晰的音量控制 */
+/* 第3行：音量控制 - 移除标签，和进度条保持一致 */
 .player-volume-row {
     display: flex;
     align-items: center;
-    gap: 12px; /* 标签和滑块之间的间距 */
+    gap: 0;
     width: 100%;
-    padding: 0.5rem 0;
+    padding: 0; /* 移除padding实现100px高度 */
+    height: 24px; /* 固定音量行高度 */
+    flex-shrink: 0;
 }
 
 .volume-label {
-    font-size: 0.85em;
-    color: #f1f5f9;
-    font-weight: 500;
-    min-width: 32px;
-    flex-shrink: 0;
-    letter-spacing: 0.02em;
+    display: none; /* 隐藏音量标签 */
 }
 
 /* 保留旧样式以防向后兼容 */
@@ -580,7 +583,7 @@ h1 {
 
 .progress-bar {
     width: 100%;
-    height: 5px; /* 根据截图设计优化高度 */
+    height: 4px; /* 精简高度 */
     background: rgba(255,255,255,0.2);
     border-radius: 10px;
     cursor: pointer;
@@ -592,7 +595,7 @@ h1 {
 }
 
 .progress-bar:hover {
-    height: 6px; /* hover时略微增大 */
+    height: 5px; /* hover时略微增大 */
     background: rgba(255,255,255,0.25);
 }
 
@@ -611,10 +614,10 @@ h1 {
 /* 时间显示 - 显示在进度条右侧 */
 .time-display {
     display: inline-block !important;
-    font-size: 0.8em;
+    font-size: 0.7em; /* 减小字体尺寸 */
     color: rgba(255, 255, 255, 0.75);
     font-weight: 500;
-    min-width: 36px;
+    min-width: 30px; /* 减小最小宽度 */
     text-align: right;
     font-variant-numeric: tabular-nums; /* 等宽数字，避免跳动 */
     flex-shrink: 0;
@@ -691,7 +694,8 @@ h1 {
 
 .volume-slider {
     flex: 1; /* 占满剩余空间 */
-    height: 5px; /* 根据截图优化轨道高度,与进度条一致 */
+    width: 100%; /* 和进度条一样占满宽度 */
+    height: 4px; /* 和进度条保持一致 */
     -webkit-appearance: none;
     appearance: none;
     background: rgba(255,255,255,0.2);
