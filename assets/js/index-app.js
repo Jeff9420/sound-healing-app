@@ -899,7 +899,23 @@ function togglePlayPause() {
 function updatePlayPauseButton() {
     const btn = document.getElementById('playPauseBtn');
     if (btn) {
-        btn.textContent = isPlaying ? '⏸️' : '▶️';
+        // 支持旧的emoji图标
+        if (btn.textContent !== undefined && !btn.querySelector('svg')) {
+            btn.textContent = isPlaying ? '⏸️' : '▶️';
+        }
+
+        // 支持新的SVG图标
+        const playIcon = btn.querySelector('.play-icon');
+        const pauseIcon = btn.querySelector('.pause-icon');
+        if (playIcon && pauseIcon) {
+            if (isPlaying) {
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+            } else {
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+            }
+        }
     }
 }
 

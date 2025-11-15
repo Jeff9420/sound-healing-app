@@ -4083,137 +4083,295 @@ h1 {
 }
 
 
-/* Floating player modal - Ultra-minimalist capsule design (icon-only) */
-.player-control-panel {
+/* ====================================================================================
+   弹窗式播放器 - 现代精致设计
+   ==================================================================================== */
+
+/* 播放器模态框容器 - 默认隐藏 */
+.player-modal {
     position: fixed;
-    bottom: clamp(1.2rem, 4vh, 2rem);
-    right: clamp(1.2rem, 4vw, 2.5rem);
-    z-index: 9999;
-    width: auto;
-    max-width: 90vw;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    transform: translateY(8px) scale(0.96);
-}
-.player-control-panel.player-modal--visible {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0) scale(1);
-}
-.floating-player-panel {
-    background: linear-gradient(135deg, rgba(12, 10, 24, 0.92), rgba(8, 6, 18, 0.95));
-    border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8),
-                0 8px 20px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.12),
-                inset 0 -1px 0 rgba(0, 0, 0, 0.4);
-    padding: 10px 16px; /* 增加内边距，让内容更舒适 */
-    backdrop-filter: blur(32px) saturate(200%);
-    display: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: none; /* 默认隐藏 */
     align-items: center;
-    gap: 12px; /* 增加元素间距 */
-    min-width: max-content;
-}
-.player-control-modal__header,
-.player-header {
-    display: none !important;
-}
-.player-control-modal__close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: transparent;
-    border: none;
-    color: var(--text-primary);
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-.player-modal-prompt {
-    background: var(--bg-card);
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius-xl);
-    padding: 2rem;
-    box-shadow: var(--shadow-md);
-}
-.player-modal-prompt__eyebrow {
-    font-size: 0.95rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 0.5rem;
-}
-.player-modal-prompt__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin: 1.5rem 0;
-}
-.player-modal-prompt__hint {
-    color: var(--text-muted);
-    font-size: 0.96rem;
-}
-body.player-modal-open {
-    overflow: hidden;
-}
-.player-control-modal__header h3 {
-    margin: 0;
-    font-size: 0.95rem;
-    font-weight: 600;
-}
-.player-control-modal__eyebrow {
-    text-transform: uppercase;
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    color: var(--text-muted);
-    margin-bottom: 0.1rem;
-    opacity: 0.8;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 移动端优化 - 保持触摸友好的大小 */
+/* 显示状态 */
+.player-modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+/* 半透明背景遮罩 */
+.player-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* 播放器主体容器 */
+.player-modal-content {
+    position: relative;
+    z-index: 1;
+    width: 90%;
+    max-width: 480px;
+    animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 播放器卡片 */
+.player-modal-content .audio-player {
+    background: linear-gradient(135deg,
+        rgba(15, 12, 30, 0.98) 0%,
+        rgba(22, 18, 42, 0.95) 100%);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 28px 32px;
+    box-shadow:
+        0 24px 48px rgba(0, 0, 0, 0.9),
+        0 8px 16px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(40px) saturate(180%);
+    position: relative;
+}
+
+/* 关闭按钮 */
+.player-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+}
+
+.player-close-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+/* 第1行：控制按钮 */
+.player-modal-content .player-controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.player-modal-content .control-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+}
+
+.player-modal-content .control-btn:hover {
+    background: rgba(99, 102, 241, 0.2);
+    border-color: rgba(99, 102, 241, 0.4);
+    transform: translateY(-2px);
+}
+
+.player-modal-content .control-btn:active {
+    transform: translateY(0);
+}
+
+/* 播放按钮特殊样式 */
+.player-modal-content .play-btn {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    border-color: rgba(99, 102, 241, 0.5);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+.player-modal-content .play-btn:hover {
+    background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+    transform: translateY(-3px) scale(1.05);
+}
+
+/* 激活状态的按钮 */
+.player-modal-content .control-btn[aria-pressed="true"],
+.player-modal-content .control-btn.active {
+    background: rgba(99, 102, 241, 0.3);
+    border-color: rgba(99, 102, 241, 0.6);
+    color: #c4b5fd;
+}
+
+/* 第2行：进度条 */
+.player-modal-content .player-progress-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.player-modal-content .progress-bar {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: height 0.2s ease;
+}
+
+.player-modal-content .progress-bar:hover {
+    height: 8px;
+}
+
+.player-modal-content .progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+    border-radius: 3px;
+    width: 0;
+    transition: width 0.1s ease;
+    box-shadow: 0 0 8px rgba(99, 102, 241, 0.6);
+}
+
+.player-modal-content .time-display {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+    min-width: 40px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+/* 第3行：音量控制 */
+.player-modal-content .player-volume-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.player-modal-content .volume-slider {
+    flex: 1;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+}
+
+.player-modal-content .volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(99, 102, 241, 0.4);
+}
+
+.player-modal-content .volume-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.6);
+}
+
+.player-modal-content .volume-slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(99, 102, 241, 0.4);
+}
+
+.player-modal-content .volume-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.6);
+}
+
+/* 动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(40px) scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* 移动端适配 */
 @media (max-width: 768px) {
-    .player-control-panel {
-        position: fixed;
-        bottom: 1rem;
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-        width: auto;
-        max-width: calc(100vw - 2rem);
+    .player-modal-content {
+        width: 95%;
+        max-width: none;
     }
-    .player-control-panel.player-modal--visible {
-        transform: translateX(-50%) scale(1);
+
+    .player-modal-content .audio-player {
+        padding: 24px 20px;
+        border-radius: 20px;
     }
-    .floating-player-panel {
-        border-radius: 40px;
-        padding: 8px 12px; /* 移动端也保持足够的内边距 */
-        gap: 8px; /* 保持元素间距 */
+
+    .player-modal-content .player-controls-row {
+        gap: 8px;
+        margin-bottom: 16px;
     }
-    .player-compact {
-        gap: 8px; /* 移动端保持合理间距 */
+
+    .player-modal-content .control-btn {
+        width: 36px;
+        height: 36px;
     }
-    /* 移动端按钮稍小但仍符合触摸标准 */
-    .control-btn {
-        width: 32px !important;
-        height: 32px !important;
-        font-size: 0.9em;
+
+    .player-modal-content .play-btn {
+        width: 48px;
+        height: 48px;
     }
-    .play-btn {
-        width: 44px !important; /* 移动端主按钮仍保持44px标准 */
-        height: 44px !important;
-        font-size: 1em;
-    }
-    .primary-controls .control-btn:not(.play-btn) {
-        width: 36px !important;
-        height: 36px !important;
-    }
-    .volume-slider {
-        width: 40px; /* 移动端音量滑块略短 */
-    }
-    .player-progress-row {
-        min-width: 60px;
-        max-width: 120px;
+
+    .player-modal-content .player-progress-row {
+        margin-bottom: 14px;
     }
 }

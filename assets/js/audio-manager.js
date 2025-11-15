@@ -541,6 +541,11 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
                 this.currentTrack = { trackId, categoryName, fileName };
                 this.startProgressUpdate();
 
+                // 触发音频开始播放事件 - 用于显示弹窗播放器
+                window.dispatchEvent(new CustomEvent('audioStarted', {
+                    detail: { trackId, categoryName, fileName }
+                }));
+
                 // 添加到播放历史
                 if (window.userDataManager) {
                     const displayName = this.getDisplayName(fileName);
