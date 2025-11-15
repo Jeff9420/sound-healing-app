@@ -413,11 +413,12 @@ h1 {
 
 .player-compact {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 12px; /* 增加间距，视觉更清晰 */
+    flex-direction: column; /* 改为纵向布局 - 三行设计 */
+    align-items: stretch;
+    gap: 10px; /* 行与行之间的间距 */
     flex-wrap: nowrap;
-    padding: 6px 4px; /* 增加内边距，让内容有呼吸空间 */
+    padding: 8px 12px; /* 增加内边距 */
+    width: 100%;
 }
 
 .now-playing {
@@ -462,14 +463,15 @@ h1 {
     margin: 16px 0;
 }
 
+/* 控制按钮基础样式 */
 .control-btn {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.12);
     color: #f8fafc;
-    font-size: 1em; /* 增大图标尺寸 */
+    font-size: 0.95em; /* 图标尺寸 */
     cursor: pointer;
-    width: 36px !important; /* 增大按钮，符合触摸标准 */
-    height: 36px !important;
+    width: 38px !important; /* 统一按钮大小 */
+    height: 38px !important;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -496,9 +498,9 @@ h1 {
 
 /* 播放/暂停按钮 - 最突出的视觉层次 */
 .play-btn {
-    font-size: 1.1em; /* 更大的图标 */
-    width: 48px !important; /* 主要按钮最大 */
-    height: 48px !important;
+    font-size: 1.15em; /* 更大的图标 */
+    width: 46px !important; /* 主要按钮更大 */
+    height: 46px !important;
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.9), rgba(79, 70, 229, 0.95));
     border-color: rgba(99, 102, 241, 0.8);
     box-shadow: 0 4px 12px rgba(99, 102, 241, 0.5),
@@ -512,13 +514,6 @@ h1 {
                 inset 0 1px 2px rgba(255, 255, 255, 0.25);
 }
 
-/* 上一首/下一首按钮 - 次要视觉层次 */
-.primary-controls .control-btn:not(.play-btn) {
-    width: 40px !important;
-    height: 40px !important;
-    font-size: 1.05em;
-}
-
 /* ==========================================================================
    进度条
    ========================================================================== */
@@ -530,45 +525,53 @@ h1 {
     gap: 10px;
     margin: 16px 0;
 }
+/* 第2行：进度条 + 时间显示 - 优化为更清晰的时间进度条设计 */
 .player-progress-row {
     display: flex;
     align-items: center;
-    flex: 1;
-    min-width: 80px; /* 增加最小宽度 */
-    max-width: 180px; /* 增加最大宽度 */
-    gap: 6px; /* 增加时间显示和进度条之间的间距 */
+    gap: 12px; /* 进度条和时间之间的间距 */
+    width: 100%;
+    padding: 0.5rem 0;
 }
 
+/* 第1行：所有控制按钮横向排列 - 根据截图优化为更紧凑的设计 */
 .player-controls-row {
     display: flex;
     align-items: center;
-    gap: 10px; /* 增加控制组之间的间距 */
+    justify-content: center; /* 按钮居中排列 */
+    gap: 12px; /* 按钮之间适中的间距 */
     flex-wrap: nowrap;
+    width: 100%;
+    padding: 0.5rem 0;
 }
 
+/* 移除旧的分组样式 */
 .primary-controls,
 .secondary-controls {
+    display: contents; /* 移除分组容器 */
+}
+
+/* 第3行：音量控制 - 根据截图设计优化为更清晰的音量控制 */
+.player-volume-row {
     display: flex;
     align-items: center;
-    gap: 6px; /* 同组按钮之间的间距 */
+    gap: 12px; /* 标签和滑块之间的间距 */
+    width: 100%;
+    padding: 0.5rem 0;
 }
 
-.primary-controls {
-    margin-right: 6px; /* 主控制组右边距 */
-}
-
-.secondary-controls {
-    margin-left: 4px;
-    margin-right: 4px;
-}
-
-.volume-inline {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 6px; /* 增加图标和滑块之间的间距 */
-    font-size: 0.9em; /* 增大音量图标 */
+.volume-label {
+    font-size: 0.85em;
+    color: #f1f5f9;
+    font-weight: 500;
+    min-width: 32px;
     flex-shrink: 0;
+    letter-spacing: 0.02em;
+}
+
+/* 保留旧样式以防向后兼容 */
+.volume-inline {
+    display: none !important;
 }
 
 .player-helper-row {
@@ -577,19 +580,20 @@ h1 {
 
 .progress-bar {
     width: 100%;
-    height: 4px; /* 增加高度，更易点击 */
-    background: rgba(255,255,255,0.15);
+    height: 5px; /* 根据截图设计优化高度 */
+    background: rgba(255,255,255,0.2);
     border-radius: 10px;
     cursor: pointer;
     position: relative;
     overflow: hidden;
     transition: height 0.2s ease, background 0.2s ease;
     flex: 1;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .progress-bar:hover {
-    height: 6px; /* hover时更明显 */
-    background: rgba(255,255,255,0.22);
+    height: 6px; /* hover时略微增大 */
+    background: rgba(255,255,255,0.25);
 }
 
 .progress-fill {
@@ -597,22 +601,23 @@ h1 {
     top: 0;
     left: 0;
     height: 100%;
-    background: linear-gradient(90deg, #a855f7, #6366f1);
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
     border-radius: 10px;
     width: 0;
     transition: width 0.1s ease;
-    box-shadow: 0 0 12px rgba(99, 102, 241, 0.7);
+    box-shadow: 0 0 8px rgba(99, 102, 241, 0.6);
 }
 
-/* 显示时间 - 重要的用户反馈 */
+/* 时间显示 - 显示在进度条右侧 */
 .time-display {
-    display: inline-block !important; /* 显示时间 */
-    font-size: 0.7em;
-    color: rgba(255, 255, 255, 0.65);
+    display: inline-block !important;
+    font-size: 0.8em;
+    color: rgba(255, 255, 255, 0.75);
     font-weight: 500;
-    min-width: 32px;
-    text-align: center;
+    min-width: 36px;
+    text-align: right;
     font-variant-numeric: tabular-nums; /* 等宽数字，避免跳动 */
+    flex-shrink: 0;
 }
 
 /* ==========================================================================
@@ -685,52 +690,52 @@ h1 {
 }
 
 .volume-slider {
-    width: 50px; /* 增加滑块长度，更易操作 */
-    height: 3px; /* 增加轨道高度 */
+    flex: 1; /* 占满剩余空间 */
+    height: 5px; /* 根据截图优化轨道高度,与进度条一致 */
     -webkit-appearance: none;
     appearance: none;
-    background: rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.2);
     border-radius: 10px;
     outline: none;
     transition: background 0.2s ease;
-    flex-shrink: 0;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .volume-slider:hover {
-    background: rgba(255,255,255,0.28);
+    background: rgba(255,255,255,0.25);
 }
 
 .volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 12px; /* 增大滑块拖柄 */
-    height: 12px;
-    background: linear-gradient(135deg, #FF6699, #FF88BB);
+    width: 14px; /* 滑块拖柄大小 */
+    height: 14px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: 0 2px 6px rgba(255, 102, 153, 0.6);
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.6);
 }
 
 .volume-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.2);
-    box-shadow: 0 3px 10px rgba(255, 102, 153, 0.9);
+    transform: scale(1.15);
+    box-shadow: 0 3px 12px rgba(99, 102, 241, 0.8);
 }
 
 .volume-slider::-moz-range-thumb {
-    width: 12px;
-    height: 12px;
-    background: linear-gradient(135deg, #FF6699, #FF88BB);
+    width: 14px;
+    height: 14px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
     border: none;
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: 0 2px 6px rgba(255, 102, 153, 0.6);
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.6);
 }
 
 .volume-slider::-moz-range-thumb:hover {
-    transform: scale(1.2);
-    box-shadow: 0 3px 10px rgba(255, 102, 153, 0.9);
+    transform: scale(1.15);
+    box-shadow: 0 3px 12px rgba(99, 102, 241, 0.8);
 }
 
 .playback-rate {

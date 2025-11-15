@@ -630,40 +630,28 @@
             <div class="floating-player-panel">
                 <div id="audioPlayer" class="audio-player show" role="region" aria-label="Audio player controls" tabindex="-1">
                     <div class="player-compact">
-                        <div class="player-meta">
-                            <div>
-                                <span class="player-recommendation-badge" id="playerBadge" data-i18n="player.defaultTrack.badge">Official recommendation</span>
-                                <p id="currentTrack" class="track-title" data-i18n="player.notPlaying" aria-label="Currently playing track">Nothing is playing right now</p>
-                                <div class="player-meta-line">
-                                    <span id="playerTags" data-i18n="player.defaultTrack.tags">#sleep #beginner #try-tonight</span>
-                                    <span id="currentCategory" aria-label="Current track category"></span>
-                                </div>
-                            </div>
+                        <!-- 第1行：所有控制按钮（循环、上一首、播放、下一首、随机、定时器） -->
+                        <div class="player-controls-row" role="group" aria-label="Playback controls">
+                            <button class="control-btn" id="repeatBtn" onclick="toggleRepeat()" aria-pressed="false" aria-label="Repeat mode" tabindex="0">🔁</button>
+                            <button class="control-btn" onclick="previousTrack()" aria-label="Previous track" tabindex="0">⏮️</button>
+                            <button id="playPauseBtn" class="control-btn play-btn" onclick="togglePlayPause()" aria-label="Play or pause audio" tabindex="0">▶️</button>
+                            <button class="control-btn" onclick="nextTrack()" aria-label="Next track" tabindex="0">⏭️</button>
+                            <button class="control-btn" id="shuffleBtn" onclick="toggleShuffle()" aria-pressed="false" aria-label="Shuffle mode" tabindex="0">🔀</button>
+                            <button class="control-btn" id="sleepTimerBtn" onclick="toggleSleepTimer()" aria-expanded="false" aria-label="Sleep timer" tabindex="0">⏰</button>
                         </div>
 
+                        <!-- 第2行：音频时间进度条 -->
                         <div class="player-progress-row" role="group" aria-label="Audio progress">
-                            <span id="currentTime" class="time-display" aria-label="Current time">0:00</span>
                             <div class="progress-bar" onclick="seekTo(event)" role="slider" tabindex="0" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 percent played">
                                 <div id="progressFill" class="progress-fill" aria-hidden="true"></div>
                             </div>
-                            <span id="duration" class="time-display" aria-label="Total duration">0:00</span>
+                            <span id="currentTime" class="time-display" aria-label="Current time">0:00</span>
                         </div>
 
-                        <div class="player-controls-row">
-                            <div class="primary-controls" role="group" aria-label="Primary controls">
-                                <button class="control-btn" onclick="previousTrack()" aria-label="Previous track" tabindex="0">⏮️</button>
-                                <button id="playPauseBtn" class="control-btn play-btn" onclick="togglePlayPause()" aria-label="Play or pause audio" tabindex="0">▶️</button>
-                                <button class="control-btn" onclick="nextTrack()" aria-label="Next track" tabindex="0">⏭️</button>
-                            </div>
-                            <div class="secondary-controls" role="group" aria-label="Playback options">
-                                <button class="control-btn" id="shuffleBtn" onclick="toggleShuffle()" aria-pressed="false" tabindex="0">🔀</button>
-                                <button class="control-btn" id="repeatBtn" onclick="toggleRepeat()" aria-pressed="false" tabindex="0">🔁</button>
-                                <button class="control-btn" id="sleepTimerBtn" onclick="toggleSleepTimer()" aria-expanded="false" tabindex="0">⏰</button>
-                            </div>
-                            <div class="volume-inline" aria-label="Volume control">
-                                <span aria-hidden="true">🔊</span>
-                                <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="70" onchange="changeVolume(this.value)" aria-label="Volume control" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70" aria-valuetext="70 percent volume" tabindex="0">
-                            </div>
+                        <!-- 第3行：音量调节 -->
+                        <div class="player-volume-row" aria-label="Volume control">
+                            <label class="volume-label">音量</label>
+                            <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="70" onchange="changeVolume(this.value)" aria-label="Volume control" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70" aria-valuetext="70 percent volume" tabindex="0">
                         </div>
                     </div>
                 </div>
