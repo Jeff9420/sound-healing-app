@@ -22,12 +22,33 @@ class PlayerModalController {
     setup() {
         this.modal = document.getElementById('playerModal');
         if (!this.modal) {
-            console.error('Player modal not found');
+            console.error('❌ Player modal not found - #playerModal element missing');
             return;
         }
 
+        console.log('✅ Player modal found:', this.modal);
+
         // 监听音频播放事件
-        window.addEventListener('audioStarted', () => this.show());
+        window.addEventListener('audioStarted', (e) => {
+            console.log('🎵 audioStarted event received:', e.detail);
+            this.show();
+        });
+
+        // 监听旧的音频播放事件（兼容性）
+        window.addEventListener('audioStateChange', (e) => {
+            if (e.detail && e.detail.isPlaying) {
+                console.log('🎵 audioStateChange event (playing):', e.detail);
+                this.show();
+            }
+        });
+
+        // 监听audio元素的play事件（最后的保险）
+        document.addEventListener('play', (e) => {
+            if (e.target.tagName === 'AUDIO') {
+                console.log('🎵 HTML5 audio play event detected');
+                this.show();
+            }
+        }, true);
 
         // ESC键关闭
         document.addEventListener('keydown', (e) => {
@@ -36,7 +57,7 @@ class PlayerModalController {
             }
         });
 
-        console.log('Player Modal Controller initialized');
+        console.log('✅ Player Modal Controller initialized successfully');
     }
 
     /**
@@ -90,5 +111,18 @@ function closePlayer() {
     }
 }
 
+// 全局函数 - 手动显示播放器（测试用）
+function showPlayer() {
+    if (window.playerModalController) {
+        window.playerModalController.show();
+    }
+}
+
 // 创建全局实例
 window.playerModalController = new PlayerModalController();
+
+// 添加到全局window对象，方便调试
+window.showPlayer = showPlayer;
+window.closePlayer = closePlayer;
+
+console.log('🎯 Player Modal Controller loaded. Test with: showPlayer() or closePlayer()');
