@@ -389,6 +389,14 @@ class InternationalizationSystem {
                 'player.noAudioSelected': '未选择音频',
                 'player.playButton': '主播放按钮',
                 'player.notPlaying': '未播放',
+                'player.exploreMore': '探索疗愈音频',
+
+                // 播放器模态框
+                'player.modal.prompt': '体验启动台',
+                'player.modal.title': '体验启动台：一键播放，智能定时自动关闭',
+                'player.modal.description': '选择疗愈音频，即刻进入沉浸式体验，播放器自动弹出、音量随时控制，定时自动关闭，不影响当前浏览。',
+                'player.modal.start': '立即开启播放',
+                'player.modal.hint': '每天开始疗愈音频播放，自动记录疗愈数据。',
                 'player.nowPlaying': '正在播放',
                 'player.playError': '播放失败，请点击播放按钮',
                 'player.shuffle': '随机播放',
@@ -853,6 +861,14 @@ class InternationalizationSystem {
                 'player.nowPlaying': 'Now Playing',
                 'player.expand': 'Expand player',
                 'player.minimize': 'Minimize player',
+                'player.exploreMore': 'Explore Healing Sounds',
+
+                // Player Modal
+                'player.modal.prompt': 'Experience Launchpad',
+                'player.modal.title': 'Experience Launchpad: One-Click Play, Smart Auto-Timer',
+                'player.modal.description': 'Choose healing audio for an immersive experience. Player pops up automatically with volume control and smart timer, no interruption to your browsing.',
+                'player.modal.start': 'Start Playing Now',
+                'player.modal.hint': 'Start healing audio daily, automatically track your healing data.',
                 
                 // Healing modes
                 'healing.mode.focus': 'Focus Mode',
