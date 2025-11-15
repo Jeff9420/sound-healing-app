@@ -7,11 +7,14 @@
 body {
     overflow-x: hidden !important;
     overflow-y: auto !important;
+    min-height: 100%;
 }
 
 /* 确保html和body都有正确的滚动设置 */
 html {
-    overflow: auto !important;
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+    height: 100%;
 }
 
 /* 修复所有模态框的overflow问题 */
