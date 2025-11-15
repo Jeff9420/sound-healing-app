@@ -453,7 +453,7 @@ function ensurePlayerControlPanel() {
  */
 function initializeApp() {
     console.log('Initializing app...');
-    ensurePlayerControlPanel();
+    // ensurePlayerControlPanel(); // 已移除：使用新的Modal播放器代替旧的底部播放器
 
     // Initialize canvas
     canvas = document.getElementById('backgroundCanvas');
