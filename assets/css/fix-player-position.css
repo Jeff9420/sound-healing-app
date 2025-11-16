@@ -25,17 +25,17 @@
   pointer-events: auto !important;
 }
 
-/* 防止固定播放器影响页面布局，确保只有一个滚动条 */
+/* 防止固定播放器影响页面布局，确保只有一个滚动条 - html滚动，body不滚动 */
 html {
   overflow-x: hidden !important;
-  overflow-y: hidden !important;
+  overflow-y: auto !important;
   height: 100% !important;
 }
 
 body {
   overflow-x: hidden !important;
-  overflow-y: auto !important;
-  min-height: 100% !important;
+  overflow-y: hidden !important;
+  min-height: 100vh !important;
   padding-bottom: 0 !important;
   margin-bottom: 0 !important;
 }

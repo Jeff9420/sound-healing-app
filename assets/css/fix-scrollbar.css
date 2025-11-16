@@ -3,17 +3,17 @@
  * 确保只保留一个主滚动条，避免多重容器卡住页面
  */
 
-/* 默认让 html/body 负责滚动 */
-body {
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
-    min-height: 100%;
-}
-
+/* 只让 html 负责滚动，body 不滚动 */
 html {
     overflow-x: hidden !important;
-    overflow-y: hidden !important;
+    overflow-y: auto !important;
     height: 100%;
+}
+
+body {
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+    min-height: 100vh;
 }
 
 /* 模态层自身禁止滚动，内部内容可滚动 */

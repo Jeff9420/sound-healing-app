@@ -121,21 +121,21 @@
     function fixScrollbar() {
         // 强制CSS规则
         const scrollbarCSS = `
-            /* 强制只允许一个滚动条 */
+            /* 强制只允许一个滚动条 - html滚动，body不滚动 */
             html {
                 overflow-x: hidden !important;
-                overflow-y: hidden !important;
+                overflow-y: auto !important;
                 height: 100%;
             }
 
             body {
                 overflow-x: hidden !important;
-                overflow-y: auto !important;
+                overflow-y: hidden !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 max-width: 100vw !important;
                 position: static !important;
-                min-height: 100%;
+                min-height: 100vh;
             }
 
             /* 移除所有可能的overflow设置 */

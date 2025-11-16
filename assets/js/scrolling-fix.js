@@ -34,7 +34,7 @@
             }
         }
 
-        // Ensure body scroll styles are correct
+        // Ensure scroll styles are correct - html scrolls, body doesn't
         function ensureScrollStyles() {
             const html = document.documentElement;
             const body = document.body;
@@ -46,11 +46,11 @@
                 body.style.width = '';
             }
 
-            // Ensure proper overflow (only body should scroll)
+            // Ensure proper overflow (only html should scroll)
             html.style.overflowX = 'hidden';
-            html.style.overflowY = 'hidden';
+            html.style.overflowY = 'auto';
             body.style.overflowX = 'hidden';
-            body.style.overflowY = 'auto';
+            body.style.overflowY = 'hidden';
         }
 
         // Initialize fixes immediately and then periodically

@@ -55,22 +55,22 @@
         function fixDoubleScrollbar() {
             // 创建一个强制性的CSS修复
             const css = `
-                /* 彻底解决双滚动条问题 */
+                /* 彻底解决双滚动条问题 - html滚动，body不滚动 */
                 html {
                     overflow-x: hidden !important;
-                    overflow-y: hidden !important;
+                    overflow-y: auto !important;
                     height: 100%;
                     scrollbar-width: thin;
                 }
 
                 body {
                     overflow-x: hidden !important;
-                    overflow-y: auto !important;
+                    overflow-y: hidden !important;
                     margin: 0 !important;
                     padding: 0 !important;
                     max-width: 100vw !important;
                     position: static !important;
-                    min-height: 100%;
+                    min-height: 100vh;
                     scrollbar-width: thin;
                 }
 
@@ -116,11 +116,11 @@
                 document.head.appendChild(styleEl);
             }
 
-            // 强制设置body样式
-            document.body.style.overflowX = 'hidden';
-            document.body.style.overflowY = 'auto';
+            // 强制设置样式 - html滚动，body不滚动
             document.documentElement.style.overflowX = 'hidden';
-            document.documentElement.style.overflowY = 'hidden';
+            document.documentElement.style.overflowY = 'auto';
+            document.body.style.overflowX = 'hidden';
+            document.body.style.overflowY = 'hidden';
         }
 
         // 3. 监听并修复后续加载的内容
