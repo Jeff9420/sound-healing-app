@@ -44,6 +44,36 @@
     <link rel="stylesheet" href="../assets/css/global-theme.css">
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="../assets/css/neptune-ui.css">
+    <style>
+        .language-band {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 2rem;
+            background: rgba(8, 5, 12, 0.85);
+            border-bottom: 1px solid rgba(253, 243, 229, 0.08);
+        }
+
+        .language-band__brand {
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: 0.04em;
+        }
+
+        .language-band__brand span {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .language-band__controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/css/neptune-ui.css">
 
     <!-- Structured Data (Schema.org) -->
     <script type="application/ld+json">
@@ -84,6 +114,37 @@
     </script>
 </head>
 <body>
+    <header class="language-band">
+        <a class="language-band__brand" href="../">
+            <strong data-i18n="app.title">Sound Healing</strong>
+            <span data-i18n="header.tagline">Soundflows · Free Online Sound Healing</span>
+        </a>
+        <div class="language-band__controls">
+            <div class="language-selector" id="languageSelector">
+                <button class="language-toggle" id="languageToggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">
+                    <span class="language-toggle__label" data-role="language-label">EN</span>
+                    <span class="language-toggle__icon" aria-hidden="true">🌐</span>
+                </button>
+                <div class="language-dropdown" id="languageDropdown" role="listbox" aria-label="Select Language">
+                    <button class="language-option" type="button" data-lang="en-US" role="option" aria-selected="true">
+                        <span>English</span>
+                    </button>
+                    <button class="language-option" type="button" data-lang="zh-CN" role="option" aria-selected="false">
+                        <span>简体中文</span>
+                    </button>
+                    <button class="language-option" type="button" data-lang="ja-JP" role="option" aria-selected="false">
+                        <span>日本語</span>
+                    </button>
+                    <button class="language-option" type="button" data-lang="ko-KR" role="option" aria-selected="false">
+                        <span>한국어</span>
+                    </button>
+                    <button class="language-option" type="button" data-lang="es-ES" role="option" aria-selected="false">
+                        <span>Español</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
     <!-- Navigation -->
     <nav style="padding: 1rem 2rem; background: var(--bg-secondary); border-bottom: 1px solid var(--border-subtle);">
         <a href="../" style="color: var(--text-primary); text-decoration: none; font-weight: 600;">← Back to SoundFlows Home</a>
@@ -472,6 +533,8 @@
     <footer style="background: var(--bg-secondary); padding: 2rem; text-align: center; margin-top: 4rem; border-top: 1px solid var(--border-subtle);">
         <p style="color: var(--text-muted);">© 2025 SoundFlows. All rights reserved. | <a href="../privacy-policy.html" style="color: var(--text-muted);">Privacy Policy</a> | <a href="../terms-of-service.html" style="color: var(--text-muted);">Terms of Service</a></p>
     </footer>
+    <script src="../assets/js/i18n-system.js"></script>
+    <script src="../assets/js/language-integration.js"></script>
     <script src="../assets/js/ai-signature.js"></script>
 </body>
 </html>
