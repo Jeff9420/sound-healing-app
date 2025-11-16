@@ -124,7 +124,8 @@
             /* 强制只允许一个滚动条 */
             html {
                 overflow-x: hidden !important;
-                overflow-y: auto !important;
+                overflow-y: hidden !important;
+                height: 100%;
             }
 
             body {
@@ -134,6 +135,7 @@
                 padding: 0 !important;
                 max-width: 100vw !important;
                 position: static !important;
+                min-height: 100%;
             }
 
             /* 移除所有可能的overflow设置 */
