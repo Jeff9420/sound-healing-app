@@ -46,9 +46,9 @@
                 body.style.width = '';
             }
 
-            // Ensure proper overflow (avoid nested scrollbars)
+            // Ensure proper overflow (only body should scroll)
             html.style.overflowX = 'hidden';
-            html.style.overflowY = 'auto';
+            html.style.overflowY = 'hidden';
             body.style.overflowX = 'hidden';
             body.style.overflowY = 'auto';
         }
