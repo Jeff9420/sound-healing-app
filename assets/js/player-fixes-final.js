@@ -215,6 +215,7 @@
             /* 强制只允许一个滚动条 */
             html {
                 overflow-x: hidden !important;
+                overflow-y: auto !important;
             }
 
             body {

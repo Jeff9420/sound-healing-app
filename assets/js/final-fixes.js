@@ -64,7 +64,7 @@
 
                 body {
                     overflow-x: hidden !important;
-                    overflow-y: visible !important;
+                    overflow-y: auto !important;
                     margin: 0 !important;
                     padding: 0 !important;
                     max-width: 100vw !important;
@@ -117,7 +117,7 @@
 
             // 强制设置body样式
             document.body.style.overflowX = 'hidden';
-            document.body.style.overflowY = 'visible';
+            document.body.style.overflowY = 'auto';
             document.documentElement.style.overflowX = 'hidden';
             document.documentElement.style.overflowY = 'auto';
         }

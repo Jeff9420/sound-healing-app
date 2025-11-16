@@ -8,6 +8,7 @@
   }
 
   const config = window.ANALYTICS_CONFIG || {};
+  const aiSignatureQueue = window.__pendingAISignatureEvents = window.__pendingAISignatureEvents || [];
   const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
   const isLocalFile = window.location.protocol === 'file:';
   const saveData = connection && connection.saveData;
@@ -75,6 +76,70 @@
         cta_source: source || ''
       });
     }
+  });
+
+  function logAISignatureStart(detail) {
+    const payload = {
+      source: detail && detail.source ? detail.source : 'ai-module',
+      hrv: detail && detail.hrv,
+      mood: detail && detail.mood,
+      language: detail && detail.language ? detail.language : (document.documentElement.lang || 'en'),
+      path: detail && detail.path ? detail.path : window.location.pathname,
+      timestamp: Date.now()
+    };
+
+    if (typeof window.trackCTA === 'function') {
+      window.trackCTA('ai_signature_start', payload.source);
+    }
+
+    const amplitudeInstance = window.amplitude && typeof window.amplitude.getInstance === 'function'
+      ? window.amplitude.getInstance()
+      : null;
+
+    if (amplitudeInstance && typeof amplitudeInstance.logEvent === 'function') {
+      amplitudeInstance.logEvent('ai_signature_start', payload);
+    } else {
+      aiSignatureQueue.push(payload);
+    }
+
+    const sentryReady = window.Sentry && typeof window.Sentry.captureMessage === 'function';
+    if (sentryReady && typeof window.Sentry.addBreadcrumb === 'function') {
+      window.Sentry.addBreadcrumb({
+        category: 'ai',
+        message: 'soundflows.aiSignatureStart',
+        data: payload,
+        level: 'info'
+      });
+    }
+
+    if (sentryReady) {
+      window.Sentry.captureMessage('ai_signature_start', {
+        level: 'info',
+        extra: payload
+      });
+    } else {
+      const pendingSentry = window.__pendingAISignatureSentry = window.__pendingAISignatureSentry || [];
+      pendingSentry.push(payload);
+    }
+  }
+
+  function flushAISignatureQueue() {
+    if (!aiSignatureQueue.length) {
+      return;
+    }
+    const amplitudeInstance = window.amplitude && typeof window.amplitude.getInstance === 'function'
+      ? window.amplitude.getInstance()
+      : null;
+    if (!amplitudeInstance || typeof amplitudeInstance.logEvent !== 'function') {
+      return;
+    }
+    while (aiSignatureQueue.length) {
+      amplitudeInstance.logEvent('ai_signature_start', aiSignatureQueue.shift());
+    }
+  }
+
+  document.addEventListener('soundflows.aiSignatureStart', (event) => {
+    logAISignatureStart((event && event.detail) || {});
   });
 
   if (!shouldLoad) {

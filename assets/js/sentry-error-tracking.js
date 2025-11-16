@@ -116,6 +116,26 @@
                         window.Sentry.captureMessage(message, level, extra);
                     }
                 };
+
+                const pendingAiEvents = Array.isArray(window.__pendingAISignatureSentry)
+                    ? window.__pendingAISignatureSentry.splice(0)
+                    : [];
+                pendingAiEvents.forEach(payload => {
+                    if (window.Sentry && typeof window.Sentry.addBreadcrumb === 'function') {
+                        window.Sentry.addBreadcrumb({
+                            category: 'ai',
+                            message: 'soundflows.aiSignatureStart (queued)',
+                            data: payload,
+                            level: 'info'
+                        });
+                    }
+                    if (window.Sentry) {
+                        window.Sentry.captureMessage('ai_signature_start', {
+                            level: 'info',
+                            extra: payload
+                        });
+                    }
+                });
             }
         };
         script.onerror = function() {

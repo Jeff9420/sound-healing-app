@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
@@ -28,6 +28,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="../assets/css/index-styles.css">
+    <link rel="stylesheet" href="../assets/css/neptune-ui.css">
 
     <style>
         .blog-index {
@@ -295,7 +296,7 @@
     <!-- Header -->
     <header class="blog-header">
         <nav class="blog-nav">
-            <a href="../" class="blog-logo">🎵 Sound Healing</a>
+            <a href="../" class="blog-logo">馃幍 Sound Healing</a>
             <div class="blog-nav-links">
                 <a href="../#categoryGrid">Listen</a>
                 <a href="#categories">Categories</a>
@@ -310,6 +311,145 @@
         <section class="blog-hero">
             <h1>Sound Healing Blog</h1>
             <p>Discover science-backed insights on how sound can transform your sleep, focus, and well-being. Explore our expert guides on meditation, binaural beats, and nature sounds.</p>
+        </section>
+
+        <section class="ai-section-wrapper ai-hero" id="aiSoundAdvisor">
+            <div>
+                <p class="ai-hero__eyebrow" data-i18n="ai.hero.eyebrow">SoundFlows AI 路 Personalized for every breath</p>
+                <h2 class="ai-hero__title" data-i18n="ai.hero.title">Meet your AI sound healing advisor</h2>
+                <p class="ai-hero__description" data-i18n="ai.hero.desc">
+                    Share how you feel and let our model map it to 213+ curated soundscapes, ritual guidance and gentle check-ins.
+                    Designed with sleep scientists and meditation coaches.
+                </p>
+                <div class="ai-hero__actions">
+                    <button class="ai-button ai-button--primary" type="button" data-i18n="ai.hero.primary"
+                            onclick="startAISignaturePlan('hero-primary')">Start my AI session</button>
+                    <button class="ai-button ai-button--ghost" type="button" data-i18n="ai.hero.secondary"
+                            onclick="document.getElementById('aiHealingJourneys').scrollIntoView({behavior: 'smooth'})">
+                        Explore journeys
+                    </button>
+                </div>
+            </div>
+            <div class="ai-hero__mockup" aria-label="AI chat preview">
+                <figure class="ai-hero__mockup-preview">
+                    <div class="ai-hero__mockup-visual">
+                        <img src="../assets/images/og-image.jpg" alt="SoundFlows AI advisor preview" loading="lazy">
+                        <div class="ai-hero__mockup-overlay">
+                            <div class="ai-metric">
+                                <span class="ai-metric__label">HRV</span>
+                                <span class="ai-metric__value" data-ai-hrv>68</span>
+                            </div>
+                            <div class="ai-metric ai-metric--secondary">
+                                <span class="ai-metric__label">Mood</span>
+                                <span class="ai-metric__value" data-ai-mood>Calm</span>
+                            </div>
+                        </div>
+                    </div>
+                </figure>
+                <div class="ai-chat">
+                    <div class="ai-chat__message ai-chat__message--user" data-i18n="ai.hero.chat.user">
+                        鈥淚 keep waking up at 3am and feel anxious about tomorrow.鈥?                    </div>
+                    <div class="ai-chat__message ai-chat__message--assistant" data-i18n="ai.hero.chat.assistant">
+                        鈥淎cknowledged. I will slow the breathing pace, queue theta rain waves and dim visuals. Want to add a body scan reminder?鈥?                    </div>
+                </div>
+                <div class="ai-recommendations">
+                    <p class="ai-recommendations__title" data-i18n="ai.hero.reco.title">Suggested recipes</p>
+                    <div class="ai-recommendations__list">
+                        <div class="ai-recommendations__item">
+                            <span data-i18n="ai.hero.reco.first">Deep Sleep Rain + Alpha Bowls 路 45 min</span>
+                            <button type="button" class="ai-button ai-button--ghost" onclick="startAISignaturePlan('hero-recommendation')"
+                                    data-i18n="ai.hero.reco.play">Play</button>
+                        </div>
+                        <div class="ai-recommendations__item">
+                            <span data-i18n="ai.hero.reco.second">Midnight Anxiety Reset 路 20 min coaching</span>
+                            <button type="button" class="ai-button ai-button--ghost"
+                                    onclick="document.getElementById('conversionOffer')?.scrollIntoView({behavior: 'smooth'})"
+                                    data-i18n="ai.hero.reco.learn">Learn</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ai-logo-list" aria-label="Research partners and coverage">
+            <span data-i18n="ai.hero.logo.harvard">Sleep Hygiene Lab 路 Boston</span>
+            <span data-i18n="ai.hero.logo.clinic">Mindful Breathing Clinic</span>
+            <span data-i18n="ai.hero.logo.press">Featured in CalmTech Journal</span>
+            <span data-i18n="ai.hero.logo.community">120K+ anonymized sessions</span>
+        </section>
+
+        <section class="ai-section-wrapper ai-bento" id="aiHealingJourneys" aria-label="AI healing journeys">
+            <div>
+                <p class="ai-hero__eyebrow" data-i18n="ai.bento.eyebrow">Journeys</p>
+                <h3 class="ai-hero__title" data-i18n="ai.bento.title">One advisor, four rituals</h3>
+                <p class="ai-hero__description" data-i18n="ai.bento.desc">
+                    Our AI model blends heart-rate friendly tempos, binaural layers and nature stems for every intention.
+                    Pick a path or let the advisor route you automatically.
+                </p>
+            </div>
+            <div class="ai-bento__grid">
+                <article class="ai-card" style="--ai-card-bg: url('../assets/images/blog/rain-sounds-hero.jpg')">
+                    <div class="ai-card__icon" aria-hidden="true">馃寵</div>
+                    <h4 class="ai-card__title" data-i18n="ai.bento.sleep.title">Sleep Depth Boost</h4>
+                    <p data-i18n="ai.bento.sleep.desc">
+                        Slow rain, warm drones and breathing prompts taper over 45 minutes. Gentle wake chime optional.
+                    </p>
+                    <div class="ai-card__meta">
+                        <span>Delta 路 2.5 Hz</span>
+                        <span>Favorite of 68k users</span>
+                    </div>
+                </article>
+                <article class="ai-card" style="--ai-card-bg: url('../assets/images/blog/meditation-brain-hero.jpg')">
+                    <div class="ai-card__icon" aria-hidden="true">馃挍</div>
+                    <h4 class="ai-card__title" data-i18n="ai.bento.anxiety.title">Calm the Loop</h4>
+                    <p data-i18n="ai.bento.anxiety.desc">
+                        AI detects racing thoughts and inserts guided affirmations + ocean noise to stabilize heart rhythm.
+                    </p>
+                    <div class="ai-card__meta">
+                        <span>HRV sync</span>
+                        <span>In-app journaling</span>
+                    </div>
+                </article>
+                <article class="ai-card" style="--ai-card-bg: url('../assets/images/blog/white-noise-hero.jpg')">
+                    <div class="ai-card__icon" aria-hidden="true">馃寑</div>
+                    <h4 class="ai-card__title" data-i18n="ai.bento.focus.title">Focus Bubble</h4>
+                    <p data-i18n="ai.bento.focus.desc">
+                        Crisp white noise blended with coffee shop murmurs. Auto break reminders every 25 minutes.
+                    </p>
+                    <div class="ai-card__meta">
+                        <span>Pomodoro</span>
+                        <span>Noise cancelling tips</span>
+                    </div>
+                </article>
+                <article class="ai-card" style="--ai-card-bg: url('../assets/images/blog/binaural-beats-focus-hero.jpg')">
+                    <div class="ai-card__icon" aria-hidden="true">鉁?/div>
+                    <h4 class="ai-card__title" data-i18n="ai.bento.energy.title">Chakra Resonance</h4>
+                    <p data-i18n="ai.bento.energy.desc">
+                        Seven short rituals, each tuned to a chakra frequency with singing bowls and subtle vocals.
+                    </p>
+                    <div class="ai-card__meta">
+                        <span>Guided voice</span>
+                        <span>Sanskrit mantras</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="ai-section-wrapper ai-cta" id="aiSignaturePlan">
+            <p class="ai-hero__eyebrow" data-i18n="ai.cta.eyebrow">Signature plan</p>
+            <h3 class="ai-cta__title" data-i18n="ai.cta.title">Start a 7-day AI sound retreat for free</h3>
+            <p class="ai-hero__description" data-i18n="ai.cta.desc">
+                Day 1 calibrates your mood, Day 2 tunes sleep pressure, Day 3 unlocks custom reminders鈥攅verything right inside
+                the browser.
+            </p>
+            <div class="ai-cta__actions">
+                <button class="ai-button ai-button--primary" type="button" data-i18n="ai.cta.primary"
+                        onclick="startAISignaturePlan('cta-footer')">Begin calibration</button>
+                <button class="ai-button ai-button--ghost" type="button" data-i18n="ai.cta.secondary"
+                        onclick="document.getElementById('conversionOffer')?.scrollIntoView({behavior: 'smooth'})">
+                    Talk to a sound coach
+                </button>
+            </div>
         </section>
 
         <!-- Featured Articles -->
@@ -333,7 +473,7 @@
                             <span>January 24, 2025</span>
                             <span>12 min read</span>
                         </div>
-                        <a href="./white-noise-sleep-focus-complete-guide.html" class="read-more">Read More →</a>
+                        <a href="./white-noise-sleep-focus-complete-guide.html" class="read-more">Read More 鈫?/a>
                     </div>
                 </article>
 
@@ -354,7 +494,7 @@
                             <span>January 24, 2025</span>
                             <span>10 min read</span>
                         </div>
-                        <a href="./rain-sounds-healing-benefits-science.html" class="read-more">Read More →</a>
+                        <a href="./rain-sounds-healing-benefits-science.html" class="read-more">Read More 鈫?/a>
                     </div>
                 </article>
 
@@ -375,7 +515,7 @@
                             <span>January 23, 2025</span>
                             <span>15 min read</span>
                         </div>
-                        <a href="./40hz-pink-noise-deep-sleep.html" class="read-more">Read More →</a>
+                        <a href="./40hz-pink-noise-deep-sleep.html" class="read-more">Read More 鈫?/a>
                     </div>
                 </article>
 
@@ -396,7 +536,7 @@
                             <span>January 23, 2025</span>
                             <span>18 min read</span>
                         </div>
-                        <a href="./binaural-beats-focus-productivity.html" class="read-more">Read More →</a>
+                        <a href="./binaural-beats-focus-productivity.html" class="read-more">Read More 鈫?/a>
                     </div>
                 </article>
 
@@ -417,7 +557,7 @@
                             <span>January 23, 2025</span>
                             <span>20 min read</span>
                         </div>
-                        <a href="./meditation-music-brain-changes.html" class="read-more">Read More →</a>
+                        <a href="./meditation-music-brain-changes.html" class="read-more">Read More 鈫?/a>
                     </div>
                 </article>
             </div>
@@ -428,32 +568,32 @@
             <h2 style="text-align: center; margin-bottom: 20px;">Explore by Category</h2>
             <div class="categories-grid">
                 <div class="category-card">
-                    <div class="category-icon">🌙</div>
+                    <div class="category-icon">馃寵</div>
                     <div class="category-name">Sleep Science</div>
                     <div class="category-count">3 articles</div>
                 </div>
                 <div class="category-card">
-                    <div class="category-icon">🧠</div>
+                    <div class="category-icon">馃</div>
                     <div class="category-name">Brain Health</div>
                     <div class="category-count">2 articles</div>
                 </div>
                 <div class="category-card">
-                    <div class="category-icon">🎯</div>
+                    <div class="category-icon">馃幆</div>
                     <div class="category-name">Focus & Productivity</div>
                     <div class="category-count">2 articles</div>
                 </div>
                 <div class="category-card">
-                    <div class="category-icon">🌿</div>
+                    <div class="category-icon">馃尶</div>
                     <div class="category-name">Nature Sounds</div>
                     <div class="category-count">1 article</div>
                 </div>
                 <div class="category-card">
-                    <div class="category-icon">🧘</div>
+                    <div class="category-icon">馃</div>
                     <div class="category-name">Meditation</div>
                     <div class="category-count">1 article</div>
                 </div>
                 <div class="category-card">
-                    <div class="category-icon">🔬</div>
+                    <div class="category-icon">馃敩</div>
                     <div class="category-name">Research</div>
                     <div class="category-count">5 articles</div>
                 </div>
@@ -527,5 +667,7 @@
             });
         });
     </script>
+    <script src="../assets/js/ai-signature.js"></script>
 </body>
 </html>
+

@@ -179,6 +179,7 @@
 
     <!-- Fix Scrollbar Issues - Prevent nested scrollbars -->
     <link rel="stylesheet" href="../assets/css/fix-scrollbar.css">
+    <link rel="stylesheet" href="../assets/css/neptune-ui.css">
 
     <!-- Analytics Configuration (Load before analytics.js) -->
     <script src="../assets/js/analytics-config.js"></script>
@@ -423,6 +424,144 @@
                 </div>
             </header>
         </div>
+
+        <section class="ai-section-wrapper ai-hero" id="aiSoundAdvisor">
+            <div>
+                <p class="ai-hero__eyebrow" data-i18n="ai.hero.eyebrow">SoundFlows AI · 15秒读懂你的状态</p>
+                <h2 class="ai-hero__title" data-i18n="ai.hero.title">遇见你的AI声音疗愈顾问</h2>
+                <p class="ai-hero__description" data-i18n="ai.hero.desc">
+                    告诉我们你的情绪，我们会把213+声景、仪式引导与轻度提醒匹配到你身上，由睡眠科学家与冥想教练共同调校。
+                </p>
+                <div class="ai-hero__actions">
+                    <button class="ai-button ai-button--primary" type="button" data-i18n="ai.hero.primary"
+                            onclick="startAISignaturePlan('hero-primary')">开始我的AI疗程</button>
+                    <button class="ai-button ai-button--ghost" type="button" data-i18n="ai.hero.secondary"
+                            onclick="document.getElementById('aiHealingJourneys').scrollIntoView({behavior: 'smooth'})">
+                        浏览疗愈旅程
+                    </button>
+                </div>
+            </div>
+            <div class="ai-hero__mockup" aria-label="AI chat preview">
+                <figure class="ai-hero__mockup-preview">
+                    <div class="ai-hero__mockup-visual">
+                        <img src="../assets/images/og-image.jpg" alt="SoundFlows AI advisor preview" loading="lazy">
+                        <div class="ai-hero__mockup-overlay">
+                            <div class="ai-metric">
+                                <span class="ai-metric__label">HRV</span>
+                                <span class="ai-metric__value" data-ai-hrv>68</span>
+                            </div>
+                            <div class="ai-metric ai-metric--secondary">
+                                <span class="ai-metric__label">心情</span>
+                                <span class="ai-metric__value" data-ai-mood>平静</span>
+                            </div>
+                        </div>
+                    </div>
+                </figure>
+                <div class="ai-chat">
+                    <div class="ai-chat__message ai-chat__message--user" data-i18n="ai.hero.chat.user">
+                        “我总是凌晨三点醒来，对明天感到焦虑。”
+                    </div>
+                    <div class="ai-chat__message ai-chat__message--assistant" data-i18n="ai.hero.chat.assistant">
+                        “收到。我会放慢呼吸节奏，排队θ波雨声并调暗视觉，需要加入身体扫描提醒吗？”
+                    </div>
+                </div>
+                <div class="ai-recommendations">
+                    <p class="ai-recommendations__title" data-i18n="ai.hero.reco.title">智能推荐</p>
+                    <div class="ai-recommendations__list">
+                        <div class="ai-recommendations__item">
+                            <span data-i18n="ai.hero.reco.first">深睡雨声 + Alpha 钵 · 45 分钟</span>
+                            <button type="button" class="ai-button ai-button--ghost" onclick="startAISignaturePlan('hero-recommendation')"
+                                    data-i18n="ai.hero.reco.play">播放</button>
+                        </div>
+                        <div class="ai-recommendations__item">
+                            <span data-i18n="ai.hero.reco.second">午夜焦虑复位 · 20 分钟教练</span>
+                            <button type="button" class="ai-button ai-button--ghost"
+                                    onclick="document.getElementById('conversionOffer')?.scrollIntoView({behavior: 'smooth'})"
+                                    data-i18n="ai.hero.reco.learn">了解</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ai-logo-list" aria-label="Research partners and coverage">
+            <span data-i18n="ai.hero.logo.harvard">波士顿 Sleep Hygiene Lab</span>
+            <span data-i18n="ai.hero.logo.clinic">Mindful Breathing Clinic 合作</span>
+            <span data-i18n="ai.hero.logo.press">CalmTech Journal 专题报道</span>
+            <span data-i18n="ai.hero.logo.community">12万+ 匿名疗程数据</span>
+        </section>
+
+        <section class="ai-section-wrapper ai-bento" id="aiHealingJourneys" aria-label="AI healing journeys">
+            <div>
+                <p class="ai-hero__eyebrow" data-i18n="ai.bento.eyebrow">疗程旅程</p>
+                <h3 class="ai-hero__title" data-i18n="ai.bento.title">一个顾问，四种仪式</h3>
+                <p class="ai-hero__description" data-i18n="ai.bento.desc">
+                    AI 模型按照意图混合心率友好的节拍、双耳频率与自然声景。可自主选择，或由AI全程引导。
+                </p>
+            </div>
+            <div class="ai-bento__grid">
+                <article class="ai-card" style="--ai-card-bg: url('../assets/images/blog/rain-sounds-hero.jpg')">
+                    <div class="ai-card__icon" aria-hidden="true">🌙</div>
+                    <h4 class="ai-card__title" data-i18n="ai.bento.sleep.title">深睡加速</h4>
+                    <p data-i18n="ai.bento.sleep.desc">
+                        45分钟温暖雨声+呼吸提示，渐进唤醒铃可选。
+                    </p>
+                    <div class="ai-card__meta">
+                        <span>Delta · 2.5 Hz</span>
+                        <span>68k 用户喜爱</span>
+                    </div>
+                </article>
+                <article class="ai-card" style="--ai-card-bg: url('../assets/images/blog/meditation-brain-hero.jpg')">
+                    <div class="ai-card__icon" aria-hidden="true">💛</div>
+                    <h4 class="ai-card__title" data-i18n="ai.bento.anxiety.title">平复焦虑循环</h4>
+                    <p data-i18n="ai.bento.anxiety.desc">
+                        检测思绪过载时插入引导语与海浪，稳定心率并附带日记提醒。
+                    </p>
+                    <div class="ai-card__meta">
+                        <span>HRV 同步</span>
+                        <span>日记提醒</span>
+                    </div>
+                </article>
+                <article class="ai-card" style="--ai-card-bg: url('../assets/images/blog/white-noise-hero.jpg')">
+                    <div class="ai-card__icon" aria-hidden="true">🌀</div>
+                    <h4 class="ai-card__title" data-i18n="ai.bento.focus.title">专注气泡</h4>
+                    <p data-i18n="ai.bento.focus.desc">
+                        清爽白噪和咖啡店声组合，25分钟自动提醒休息。
+                    </p>
+                    <div class="ai-card__meta">
+                        <span>番茄钟</span>
+                        <span>环境建议</span>
+                    </div>
+                </article>
+                <article class="ai-card" style="--ai-card-bg: url('../assets/images/blog/binaural-beats-focus-hero.jpg')">
+                    <div class="ai-card__icon" aria-hidden="true">✨</div>
+                    <h4 class="ai-card__title" data-i18n="ai.bento.energy.title">脉轮共振</h4>
+                    <p data-i18n="ai.bento.energy.desc">
+                        七段短仪式，唱诵与颂钵频率对应每个脉轮。
+                    </p>
+                    <div class="ai-card__meta">
+                        <span>语音引导</span>
+                        <span>梵音唱诵</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="ai-section-wrapper ai-cta" id="aiSignaturePlan">
+            <p class="ai-hero__eyebrow" data-i18n="ai.cta.eyebrow">签名计划</p>
+            <h3 class="ai-cta__title" data-i18n="ai.cta.title">免费开启 7 天 AI 声音静修</h3>
+            <p class="ai-hero__description" data-i18n="ai.cta.desc">
+                第1天校准情绪，第2天调节睡压，第3天开启提醒……全部在浏览器完成。
+            </p>
+            <div class="ai-cta__actions">
+                <button class="ai-button ai-button--primary" type="button" data-i18n="ai.cta.primary"
+                        onclick="startAISignaturePlan('cta-footer')">开始校准</button>
+                <button class="ai-button ai-button--ghost" type="button" data-i18n="ai.cta.secondary"
+                        onclick="document.getElementById('conversionOffer')?.scrollIntoView({behavior: 'smooth'})">
+                    与声音教练沟通
+                </button>
+            </div>
+        </section>
 
         <section class="experience-launchpad" id="experienceLaunchpad" aria-label="即时播放控制台">
             <div class="experience-launchpad__grid">
@@ -1906,9 +2045,11 @@
         // 添加全局函数供用户调用
         window.markMeditationPractice = markMeditationPractice;
     </script>
+    <script src="../assets/js/ai-signature.js"></script>
     <script src="../assets/js/fix-i18n-translations.js"></script>
 </body>
 </html>
+
 
 
 

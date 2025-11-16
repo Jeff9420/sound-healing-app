@@ -1,49 +1,40 @@
-/**
+﻿/**
  * 修复页面滚动条问题
- * 确保只有一个滚动条，避免嵌套滚动
+ * 确保只保留一个主滚动条，避免多重容器卡住页面
  */
 
-/* 防止模态框时出现多个滚动条（仅 html 负责滚动） */
+/* 默认让 html/body 负责滚动 */
 body {
     overflow-x: hidden !important;
-    overflow-y: visible !important;
+    overflow-y: auto !important;
     min-height: 100vh;
 }
 
-/* 根节点承担唯一滚动条 */
 html {
     overflow-x: hidden !important;
     overflow-y: auto !important;
 }
 
-/* 修复所有模态框的overflow问题 */
+/* 模态层自身禁止滚动，内部内容可滚动 */
 .player-modal.show {
     overflow: hidden !important;
 }
 
-.player-modal.show body {
-    overflow: hidden !important;
-}
-
-/* 确保模态框内容不会产生额外的滚动条 */
 .player-modal-content {
     max-height: 90vh;
     overflow-y: auto !important;
 }
 
-/* 防止播放器模态框时的滚动问题 */
 body.modal-open {
     overflow: hidden !important;
     position: fixed !important;
     width: 100% !important;
 }
 
-/* 修复所有可能的固定定位元素造成的滚动条问题 */
 .modal {
     overflow: hidden !important;
 }
 
-/* 确保模态框背景遮罩不会产生滚动条 */
 .player-modal-overlay {
     position: fixed !important;
     top: 0 !important;
@@ -53,12 +44,10 @@ body.modal-open {
     overflow: hidden !important;
 }
 
-/* 移除任何可能的嵌套滚动条 */
 * {
     scrollbar-width: thin;
 }
 
-/* Webkit 浏览器的滚动条样式 */
 ::-webkit-scrollbar {
     width: 8px;
 }

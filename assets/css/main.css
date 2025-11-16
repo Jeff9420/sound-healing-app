@@ -1127,13 +1127,13 @@ body {
    新的简化布局样式
    ======================================== */
 
-/* 页面整体无滚动布局 */
-body {
+/* 页面整体无滚动布局（仅在需要锁定滚动的沉浸式页面中使用） */
+body.forest-path-locked {
     height: 100vh;
     overflow: hidden;
 }
 
-main.forest-path {
+body.forest-path-locked main.forest-path {
     min-height: 100vh;
     display: flex;
     flex-direction: column;

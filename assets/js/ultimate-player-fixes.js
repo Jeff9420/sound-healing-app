@@ -124,6 +124,7 @@
             /* 强制只允许一个滚动条 */
             html {
                 overflow-x: hidden !important;
+                overflow-y: auto !important;
             }
 
             body {
@@ -173,7 +174,7 @@
 
             if (computed.overflowX !== 'hidden' || computed.overflow === 'hidden') {
                 body.style.overflowX = 'hidden';
-                body.style.overflowY = 'visible';
+                body.style.overflowY = 'auto';
             }
 
             // 确保html也是正确的
