@@ -173,7 +173,7 @@
 
             if (computed.overflowX !== 'hidden' || computed.overflow === 'hidden') {
                 body.style.overflowX = 'hidden';
-                body.style.overflowY = 'auto';
+                body.style.overflowY = 'visible';
             }
 
             // 确保html也是正确的

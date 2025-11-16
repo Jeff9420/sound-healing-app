@@ -50,7 +50,7 @@
             html.style.overflowX = 'hidden';
             html.style.overflowY = 'auto';
             body.style.overflowX = 'hidden';
-            body.style.overflowY = 'auto';
+            body.style.overflowY = 'visible';
         }
 
         // Initialize fixes immediately and then periodically
