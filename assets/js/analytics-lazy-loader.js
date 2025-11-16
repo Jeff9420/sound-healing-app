@@ -7,7 +7,20 @@
     return;
   }
 
-  const config = window.ANALYTICS_CONFIG || {};
+  if (!window.ANALYTICS_CONFIG && window.__ANALYTICS_CONFIG) {
+    window.ANALYTICS_CONFIG = window.__ANALYTICS_CONFIG;
+  }
+
+  const rawConfig = window.ANALYTICS_CONFIG || window.__ANALYTICS_CONFIG || {};
+  const rawOptions = rawConfig.options || {};
+  const config = {
+    enabled: rawConfig.enabled !== undefined ? rawConfig.enabled : (rawOptions.enabled !== undefined ? rawOptions.enabled : true),
+    gtmId: rawConfig.gtmId || rawConfig.googleTagManagerId || rawOptions.gtmId,
+    gaId: rawConfig.gaId || rawConfig.gaMeasurementId || rawConfig.gaMeasurementID || rawOptions.gaId,
+    amplitudeKey: rawConfig.amplitudeKey || rawConfig.amplitudeApiKey || rawOptions.amplitudeKey,
+    loadDelay: rawConfig.loadDelay || rawOptions.loadDelay || 1200,
+    amplitudeOptions: rawConfig.amplitudeOptions || rawOptions.amplitudeOptions || {}
+  };
   const aiSignatureQueue = window.__pendingAISignatureEvents = window.__pendingAISignatureEvents || [];
   const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
   const isLocalFile = window.location.protocol === 'file:';

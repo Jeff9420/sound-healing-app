@@ -75,6 +75,8 @@ window.__ANALYTICS_CONFIG = {
     }
 };
 
+window.ANALYTICS_CONFIG = window.__ANALYTICS_CONFIG;
+
 // Helper function to update configuration
 function updateAnalyticsConfig(config) {
     Object.assign(window.__ANALYTICS_CONFIG, config);

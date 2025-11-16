@@ -200,8 +200,10 @@
     }
     </script>
 
+    <link rel="stylesheet" href="../assets/css/global-theme.css">
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="../assets/css/blog-article.css">
+    <link rel="stylesheet" href="../assets/css/neptune-ui.css">
     <style>
         .language-band {
             display: flex;
@@ -245,19 +247,19 @@
                     <span class="language-toggle__icon" aria-hidden="true">🌐</span>
                 </button>
                 <div class="language-dropdown" id="languageDropdown" role="listbox" aria-label="Select Language">
-                    <button class="language-option" type="button" data-lang="en-US" role="option" aria-selected="true">
+                    <button class="language-option" type="button" data-lang="en-US" data-url="/en/" role="option" aria-selected="true">
                         <span>English</span>
                     </button>
-                    <button class="language-option" type="button" data-lang="zh-CN" role="option" aria-selected="false">
+                    <button class="language-option" type="button" data-lang="zh-CN" data-url="/zh/" role="option" aria-selected="false">
                         <span>简体中文</span>
                     </button>
-                    <button class="language-option" type="button" data-lang="ja-JP" role="option" aria-selected="false">
+                    <button class="language-option" type="button" data-lang="ja-JP" data-url="/ja/" role="option" aria-selected="false">
                         <span>日本語</span>
                     </button>
-                    <button class="language-option" type="button" data-lang="ko-KR" role="option" aria-selected="false">
+                    <button class="language-option" type="button" data-lang="ko-KR" data-url="/ko/" role="option" aria-selected="false">
                         <span>한국어</span>
                     </button>
-                    <button class="language-option" type="button" data-lang="es-ES" role="option" aria-selected="false">
+                    <button class="language-option" type="button" data-lang="es-ES" data-url="/es/" role="option" aria-selected="false">
                         <span>Español</span>
                     </button>
                 </div>
@@ -296,6 +298,143 @@
                 <img src="../assets/images/blog/pink-noise-sleep-hero.jpg" alt="40Hz pink noise sound waves for deep sleep" loading="eager" width="1200" height="630">
                 <figcaption>40Hz pink noise sound waves have been scientifically proven to enhance deep sleep stages</figcaption>
             </figure>
+
+            <section class="ai-section-wrapper ai-hero" id="aiSoundAdvisor">
+                <div>
+                    <p class="ai-hero__eyebrow" data-i18n="ai.hero.eyebrow">SoundFlows AI · Personalized for every breath</p>
+                    <h2 class="ai-hero__title" data-i18n="ai.hero.title">Meet your AI sound healing advisor</h2>
+                    <p class="ai-hero__description" data-i18n="ai.hero.desc">
+                        Share how you feel and let our model map it to curated soundscapes, ritual guidance, and gentle check-ins
+                        designed with sleep scientists and meditation coaches.
+                    </p>
+                    <div class="ai-hero__actions">
+                        <button class="ai-button ai-button--primary" type="button" data-i18n="ai.hero.primary"
+                                onclick="startAISignaturePlan('hero-primary')">Start my AI session</button>
+                        <button class="ai-button ai-button--ghost" type="button" data-i18n="ai.hero.secondary"
+                                onclick="document.getElementById('aiHealingJourneys').scrollIntoView({behavior: 'smooth'})">
+                            Explore journeys
+                        </button>
+                    </div>
+                </div>
+                <div class="ai-hero__mockup" aria-label="AI chat preview">
+                    <figure class="ai-hero__mockup-preview">
+                        <div class="ai-hero__mockup-visual">
+                            <img src="../assets/images/og-image.jpg" alt="SoundFlows AI advisor preview" loading="lazy">
+                            <div class="ai-hero__mockup-overlay">
+                                <div class="ai-metric">
+                                    <span class="ai-metric__label">HRV</span>
+                                    <span class="ai-metric__value" data-ai-hrv>68</span>
+                                </div>
+                                <div class="ai-metric ai-metric--secondary">
+                                    <span class="ai-metric__label">Mood</span>
+                                    <span class="ai-metric__value" data-ai-mood>Calm</span>
+                                </div>
+                            </div>
+                        </div>
+                    </figure>
+                    <div class="ai-chat">
+                        <div class="ai-chat__message ai-chat__message--user" data-i18n="ai.hero.chat.user">
+                            "I keep waking up at 3am and feel anxious about tomorrow."
+                        </div>
+                        <div class="ai-chat__message ai-chat__message--assistant" data-i18n="ai.hero.chat.assistant">
+                            "Acknowledged. I will slow the breathing pace, queue theta rain waves and dim visuals. Want to add a body scan reminder?"
+                        </div>
+                    </div>
+                    <div class="ai-recommendations">
+                        <p class="ai-recommendations__title" data-i18n="ai.hero.reco.title">Suggested recipes</p>
+                        <div class="ai-recommendations__list">
+                            <div class="ai-recommendations__item">
+                                <span data-i18n="ai.hero.reco.first">Deep Sleep Rain + Alpha Bowls · 45 min</span>
+                                <button type="button" class="ai-button ai-button--ghost" onclick="startAISignaturePlan('hero-recommendation')"
+                                        data-i18n="ai.hero.reco.play">Play</button>
+                            </div>
+                            <div class="ai-recommendations__item">
+                                <span data-i18n="ai.hero.reco.second">Midnight Anxiety Reset · 20 min coaching</span>
+                                <button type="button" class="ai-button ai-button--ghost"
+                                        onclick="document.getElementById('aiSignaturePlan')?.scrollIntoView({behavior: 'smooth'})"
+                                        data-i18n="ai.hero.reco.learn">Learn</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="ai-logo-list" aria-label="Research partners and coverage">
+                <span data-i18n="ai.hero.logo.harvard">Sleep Hygiene Lab · Boston</span>
+                <span data-i18n="ai.hero.logo.clinic">Mindful Breathing Clinic</span>
+                <span data-i18n="ai.hero.logo.press">Featured in CalmTech Journal</span>
+                <span data-i18n="ai.hero.logo.community">120K+ anonymized sessions</span>
+            </section>
+
+            <section class="ai-section-wrapper ai-bento" id="aiHealingJourneys" aria-label="AI healing journeys">
+                <div>
+                    <p class="ai-hero__eyebrow" data-i18n="ai.bento.eyebrow">Journeys</p>
+                    <h3 class="ai-hero__title" data-i18n="ai.bento.title">One advisor, four rituals</h3>
+                    <p class="ai-hero__description" data-i18n="ai.bento.desc">
+                        Mix breath pacing, ambient biomes, and gentle session nudges. The advisor adapts each recipe to your HRV, time of day,
+                        and journaling streaks.
+                    </p>
+                </div>
+                <div class="ai-bento-grid">
+                    <article class="ai-bento-card">
+                        <header>
+                            <p class="ai-card__eyebrow" data-i18n="ai.bento.sleep.title">Deep Sleep Wash</p>
+                            <span class="ai-card__badge" data-i18n="ai.bento.sleep.badge">HRV-guided</span>
+                        </header>
+                        <p data-i18n="ai.bento.sleep.desc">Layered rain harmonics, delta drones, and tactile breath cues as you wind down.</p>
+                        <button class="ai-button ai-button--ghost" type="button" onclick="startAISignaturePlan('bento-sleep')" data-i18n="common.play">Play</button>
+                    </article>
+                    <article class="ai-bento-card">
+                        <header>
+                            <p class="ai-card__eyebrow" data-i18n="ai.bento.anxiety.title">Midnight Anxiety Reset</p>
+                            <span class="ai-card__badge" data-i18n="ai.bento.anxiety.badge">Coach-led</span>
+                        </header>
+                        <p data-i18n="ai.bento.anxiety.desc">Guided box breathing meets theta rain loops with friendly reminders to unclench.</p>
+                        <button class="ai-button ai-button--ghost" type="button" onclick="startAISignaturePlan('bento-anxiety')" data-i18n="common.start">Start</button>
+                    </article>
+                    <article class="ai-bento-card">
+                        <header>
+                            <p class="ai-card__eyebrow" data-i18n="ai.bento.focus.title">Focus Drift Repair</p>
+                            <span class="ai-card__badge" data-i18n="ai.bento.focus.badge">Desk-friendly</span>
+                        </header>
+                        <p data-i18n="ai.bento.focus.desc">Cerebral pink noise and pulse lights that anchor attention for 25-minute sprints.</p>
+                        <button class="ai-button ai-button--ghost" type="button" onclick="startAISignaturePlan('bento-focus')" data-i18n="common.resume">Resume</button>
+                    </article>
+                    <article class="ai-bento-card">
+                        <header>
+                            <p class="ai-card__eyebrow" data-i18n="ai.bento.morning.title">Morning Chakra Sweep</p>
+                            <span class="ai-card__badge" data-i18n="ai.bento.morning.badge">Sunrise safe</span>
+                        </header>
+                        <p data-i18n="ai.bento.morning.desc">Binaural bowls and breath mantras to reset your nervous system before the day starts.</p>
+                        <button class="ai-button ai-button--ghost" type="button" onclick="startAISignaturePlan('bento-morning')" data-i18n="common.activate">Activate</button>
+                    </article>
+                </div>
+            </section>
+
+            <section class="ai-section-wrapper ai-cta" id="aiSignaturePlan">
+                <div>
+                    <p class="ai-hero__eyebrow" data-i18n="ai.cta.eyebrow">Signature plan</p>
+                    <h3 class="ai-hero__title" data-i18n="ai.cta.title">See your sound prescription in 90 seconds</h3>
+                    <p class="ai-hero__description" data-i18n="ai.cta.desc">
+                        We blend chronotype inputs, HRV snapshots, and current mood to build an adaptive sound diary.
+                        Export it to Apple Health or share with your therapist.
+                    </p>
+                    <div class="ai-hero__actions">
+                        <button class="ai-button ai-button--primary" type="button" onclick="startAISignaturePlan('cta-book')" data-i18n="ai.cta.primary">Start personalization</button>
+                        <button class="ai-button ai-button--ghost" type="button" onclick="startAISignaturePlan('cta-connect')" data-i18n="ai.cta.secondary">Preview journeys</button>
+                    </div>
+                </div>
+                <div class="ai-cta__panel">
+                    <div class="ai-cta__row">
+                        <p data-i18n="ai.cta.metric.sessions">120K+ guided sessions</p>
+                        <p data-i18n="ai.cta.metric.hrv">Avg HRV lift: +12%</p>
+                    </div>
+                    <div class="ai-cta__row">
+                        <p data-i18n="ai.cta.metric.sleep">3.6 hrs more deep sleep weekly</p>
+                        <p data-i18n="ai.cta.metric.clients">Clinics in US / EU / APAC</p>
+                    </div>
+                </div>
+            </section>
 
             <div class="article-body">
                 <h2>The Breakthrough Study That Changed Sleep Science</h2>
@@ -583,6 +722,7 @@
 
     <script src="../assets/js/i18n-system.js"></script>
     <script src="../assets/js/language-integration.js"></script>
+    <script src="../assets/js/ai-signature.js"></script>
     <script src="../assets/js/article.js"></script>
 </body>
 </html>
