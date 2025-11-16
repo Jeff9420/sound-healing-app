@@ -52,6 +52,7 @@ class LanguageIntegrationController {
         }
         
         try {
+            LanguageIntegrationController.ensureLanguageBand();
             this.initializeElements();
             this.setupEventListeners();
             this.updateLanguageDisplay();
@@ -80,6 +81,53 @@ class LanguageIntegrationController {
         if (!this.languageSelector || !this.languageToggle || !this.languageDropdown) {
             throw new Error('语言选择器DOM元素未找到');
         }
+    }
+
+    static ensureLanguageBand() {
+        if (document.getElementById('languageSelector')) {
+            return;
+        }
+
+        const body = document.body;
+        if (!body) {
+            return;
+        }
+
+        const header = document.createElement('header');
+        header.className = 'language-band';
+        header.innerHTML = `
+            <a class="language-band__brand" href="/">
+                <strong data-i18n="app.title">Sound Healing</strong>
+                <span data-i18n="header.tagline">Soundflows · Free Online Sound Healing</span>
+            </a>
+            <div class="language-band__controls">
+                <div class="language-selector" id="languageSelector">
+                    <button class="language-toggle" id="languageToggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">
+                        <span class="language-toggle__label" data-role="language-label">EN</span>
+                        <span class="language-toggle__icon" aria-hidden="true">🌐</span>
+                    </button>
+                    <div class="language-dropdown" id="languageDropdown" role="listbox" aria-label="Select Language">
+                        <button class="language-option" type="button" data-lang="en-US" role="option" aria-selected="true">
+                            <span>English</span>
+                        </button>
+                        <button class="language-option" type="button" data-lang="zh-CN" role="option" aria-selected="false">
+                            <span>简体中文</span>
+                        </button>
+                        <button class="language-option" type="button" data-lang="ja-JP" role="option" aria-selected="false">
+                            <span>日本語</span>
+                        </button>
+                        <button class="language-option" type="button" data-lang="ko-KR" role="option" aria-selected="false">
+                            <span>한국어</span>
+                        </button>
+                        <button class="language-option" type="button" data-lang="es-ES" role="option" aria-selected="false">
+                            <span>Español</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        body.insertBefore(header, body.firstChild || null);
     }
     
     /**
