@@ -1,0 +1,81 @@
+rules_version = '2';
+
+/**
+ * Firestore 安全规则
+ * 保护用户数据，防止未授权访问
+ *
+ * 部署方式：
+ * 1. 打开 Firebase Console
+ * 2. 进入 Firestore Database > 规则
+ * 3. 复制粘贴此文件内容
+ * 4. 点击"发布"
+ */
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 辅助函数：检查用户是否已认证
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // 辅助函数：检查是否是资源所有者
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // 辅助函数：验证数据大小
+    function isValidSize(data, maxSize) {
+      return request.resource.size() < maxSize;
+    }
+
+    // 用户数据规则
+    match /users/{userId} {
+      // 读取：仅本人可读
+      allow read: if isOwner(userId);
+
+      // 创建：仅认证用户可创建自己的文档
+      allow create: if isOwner(userId)
+                    && isValidSize(request.resource.data, 50000); // 50KB限制
+
+      // 更新：仅本人可更新
+      allow update: if isOwner(userId)
+                    && isValidSize(request.resource.data, 50000);
+
+      // 删除：仅本人可删除
+      allow delete: if isOwner(userId);
+
+      // 用户播放历史子集合
+      match /playHistory/{historyId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // 用户收藏夹子集合
+      match /favorites/{favoriteId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // 用户设置子集合
+      match /settings/{settingId} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+
+    // 公共数据（只读）- 如音频元数据
+    match /audioMetadata/{audioId} {
+      allow read: if true; // 所有人可读
+      allow write: if false; // 禁止写入（由管理员管理）
+    }
+
+    // 统计数据（只读）
+    match /statistics/{statId} {
+      allow read: if true; // 所有人可读
+      allow write: if false; // 禁止写入
+    }
+
+    // 默认规则：拒绝所有未匹配的访问
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

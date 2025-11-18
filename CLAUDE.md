@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a **声音疗愈 (Sound Healing)** v3.0.0 - An enterprise-grade modern web application for sound healing and meditation. The app features 213+ high-quality audio files hosted on Internet Archive, 9 dynamic video backgrounds on Cloudflare R2 CDN, and supports 5 languages with full PWA capabilities.
+This is a **声音疗愈 (Sound Healing)** v3.0.0 - An enterprise-grade modern web application for sound healing and meditation. The app features 213+ high-quality audio files hosted on Internet Archive, Canvas-based animated backgrounds, and supports 5 languages with full PWA capabilities.
 
 ### Current Production Status
 - **Version**: v3.0.0 (Enterprise-grade)
@@ -14,7 +14,6 @@ This is a **声音疗愈 (Sound Healing)** v3.0.0 - An enterprise-grade modern w
 
 ### Resource Distribution
 - **Audio**: Internet Archive (https://archive.org/download/sound-healing-collection/)
-- **Video**: Cloudflare R2 CDN (https://media.soundflows.app/)
 - **Frontend**: Vercel Edge Network
 - **Code**: GitHub repository
 
@@ -56,16 +55,14 @@ This is a **声音疗愈 (Sound Healing)** v3.0.0 - An enterprise-grade modern w
 
 ## Core Architecture
 
-### Audio & Visual System (4-Layer Architecture)
+### Audio & Visual System (3-Layer Architecture)
 1. **AudioManager** (`assets/js/audio-manager.js`) - Core audio management with format detection, playlist control, and browser compatibility handling
 2. **PlaylistUI** (`assets/js/playlist-ui.js`) - Category browsing and track selection interface
-3. **VideoBackgroundManager** (`assets/js/video-background-manager.js`) - Video background management with Cloudflare R2 CDN
-4. **BackgroundSceneManager** (`assets/js/background-scene-manager.js`) - Canvas fallback animated scenes that auto-switch based on audio category
+3. **BackgroundSceneManager** (`assets/js/background-scene-manager.js`) - Canvas animated scenes that auto-switch based on audio category
 
 ### Configuration System
 - **`assets/js/audio-config.js`** - Central configuration file mapping audio categories to Archive.org URLs
   - **Audio files**: Hosted on Internet Archive (https://archive.org/download/sound-healing-collection/)
-  - **Video files**: Hosted on Cloudflare R2 CDN (https://media.soundflows.app/)
 - Audio files are organized by category folders, with each folder representing a playlist
 - Configuration auto-generated from actual file system structure
 
@@ -131,38 +128,18 @@ python update_config.py  # Scans audio folders and regenerates audio-config.js
 python rename_files.py  # Batch rename files (remove prefixes, etc.)
 ```
 
-## Scene System Architecture
+## Background Scene System
 
-### Video Background System (Primary)
-**VideoBackgroundManager** (`assets/js/video-background-manager.js`) manages video backgrounds:
-- **CDN**: Cloudflare R2 (https://media.soundflows.app/)
-- **Auto-switching**: Videos automatically switch based on selected audio category
-- **Smart caching**: Preloads videos for smooth transitions
-- **Fallback**: Automatically switches to Canvas if video loading fails
-
-### Video Category Mapping
-Each audio category has a corresponding video:
-- **Animal sounds** → `forest-birds.ia.mp4` (Forest nature, birds)
-- **Chakra** → `energy-chakra.ia.mp4` (Energy particles, chakra colors)
-- **Fire** → `campfire-flames.ia.mp4` (Flames, warm colors)
-- **hypnosis** → `cosmic-stars.ia.mp4` (Stars, space theme)
-- **meditation** → `zen-bamboo.ia.mp4` (Bamboo, peaceful scenes)
-- **Rain** → `rain-drops.ia.mp4` (Water drops, blue tones)
-- **running water** → `flowing-stream.ia.mp4` (Flowing water)
-- **Singing bowl sound** → `temple-golden.ia.mp4` (Golden temple, sacred)
-- **Subconscious Therapy** → `dreamy-clouds.ia.mp4` (Dreamy, ethereal)
-
-### Canvas Fallback System
+### Canvas Animation System
 **BackgroundSceneManager** provides Canvas-based animated scenes:
-- **Automatic fallback**: Activates when video loading fails or browser doesn't support video
+- **Auto-switching**: Scenes automatically switch based on selected audio category
 - **Scene parameters**: Defined in `BackgroundSceneManager.sceneConfigs`
-- `colors` - Particle color palette
-- `particles` - Particle type ('leaves', 'drops', 'sparks', etc.)
-- `particleCount` - Number of active particles
-- `bgGradient` - Background gradient colors
-
-### Scene Configuration
-Both video and Canvas systems respond to the same category change events, ensuring consistent visual experience regardless of playback method.
+  - `colors` - Particle color palette
+  - `particles` - Particle type ('leaves', 'drops', 'sparks', etc.)
+  - `particleCount` - Number of active particles
+  - `bgGradient` - Background gradient colors
+- **Performance optimized**: Uses requestAnimationFrame for smooth 60fps animations
+- **Responsive**: Adapts to different screen sizes and aspect ratios
 
 ## Audio Manager Features
 
@@ -196,19 +173,16 @@ audioManager.detectSupportedFormats()
 ### Adding New Categories
 1. **Upload to Archive.org**: Create new folder and upload audio files
 2. Update `audio-config.js`: Add new category with Archive.org folder mapping
-3. **Upload video**: Add video file to Cloudflare R2 (media.soundflows.app/)
-4. Update video configuration in `VideoBackgroundManager.videoConfig`
-5. Add scene configuration in `BackgroundSceneManager.sceneConfigs`
-6. Update UI to handle new category
+3. Add scene configuration in `BackgroundSceneManager.sceneConfigs`
+4. Update UI to handle new category
 
 ## Performance Considerations
 
 - **Memory monitoring** via PerformanceMonitor tracks audio instance usage
 - **Audio instances are reused** to prevent memory leaks
-- **Video preloading** with smart caching reduces loading delays
 - **Scene animations use requestAnimationFrame** for smooth performance
 - **Large audio collections (213+ files) handled efficiently** through lazy loading
-- **Canvas fallback system** ensures visual experience when video loading fails
+- **Canvas rendering optimized** for 60fps animations across all devices
 
 ## Browser Compatibility
 
@@ -269,23 +243,15 @@ See `DEPLOYMENT.md` for complete deployment guide and troubleshooting
 5. Test with `browser-audio-test.html`
 
 ### Scene Not Switching
-1. Verify category key matches exactly in `VideoBackgroundManager.videoConfig.categories`
+1. Verify category key matches exactly in `BackgroundSceneManager.sceneConfigs`
 2. Check that AudioManager is firing category change events
-3. Check video loading status (should see video or Canvas fallback)
-4. Canvas element must be present with id `backgroundCanvas`
-
-### Video Not Loading
-1. Check console for video loading errors (CORS, network issues)
-2. Verify `https://media.soundflows.app/` is accessible
-3. Test video URL directly in browser
-4. Check that `video-background-manager.js` has correct baseUrl configuration
-5. **Note**: Cloudflare may block automated browsers - real users should see videos normally
+3. Canvas element must be present with id `backgroundCanvas`
+4. Check browser console for scene initialization errors
 
 ### Configuration Sync Issues
 - **Audio**: Must match Archive.org collection structure
-- **Video**: Must match Cloudflare R2 CDN structure
 - File names are case-sensitive and must match exactly
-- **Never use R2 CDN for audio** - only Archive.org
+- Verify `audio-config.js` category keys match scene configuration
 
 ## Email System (Formspree Integration)
 
@@ -381,7 +347,6 @@ See `DEPLOYMENT.md` for complete deployment guide and troubleshooting
 ### Caching Strategy
 - **Service Worker**: Offline PWA functionality
 - **Audio Preloading**: Smart preloading of next tracks
-- **Video Caching**: Preload videos for smooth transitions
 - **Local Storage**: User settings and preferences
 
 ### Bundle Optimization

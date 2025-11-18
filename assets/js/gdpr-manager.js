@@ -277,14 +277,24 @@ class GDPRManager {
         try {
             const userData = await this.collectAllUserData();
 
+            // 安全地显示用户数据（转义HTML）
+            const safeUserData = typeof SecurityUtils !== 'undefined'
+                ? SecurityUtils.escapeHtml(JSON.stringify(userData, null, 2))
+                : JSON.stringify(userData, null, 2).replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
             display.innerHTML = `
         <h4>我们持有的关于您的数据：</h4>
-        <pre>${JSON.stringify(userData, null, 2)}</pre>
+        <pre>${safeUserData}</pre>
         <button onclick="this.parentElement.style.display='none'" class="btn-primary">关闭</button>
       `;
         } catch (error) {
+            // 安全地显示错误消息
+            const safeErrorMsg = typeof SecurityUtils !== 'undefined'
+                ? SecurityUtils.escapeHtml(error.message)
+                : String(error.message).replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
             display.innerHTML = `
-        <p>数据获取失败：${error.message}</p>
+        <p>数据获取失败：${safeErrorMsg}</p>
         <button onclick="this.parentElement.style.display='none'" class="btn-primary">关闭</button>
       `;
         }
@@ -612,8 +622,13 @@ class GDPRManager {
                 this.showNotification('数据导出成功', 'success');
             };
         } catch (error) {
+            // 安全地显示错误消息
+            const safeErrorMsg = typeof SecurityUtils !== 'undefined'
+                ? SecurityUtils.escapeHtml(error.message)
+                : String(error.message).replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
             display.innerHTML = `
-        <p>数据导出失败：${error.message}</p>
+        <p>数据导出失败：${safeErrorMsg}</p>
         <button onclick="this.parentElement.style.display='none'" class="btn-primary">关闭</button>
       `;
         }

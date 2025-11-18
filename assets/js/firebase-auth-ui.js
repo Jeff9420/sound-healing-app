@@ -279,16 +279,18 @@ class FirebaseAuthManager {
     }
 
     /**
-     * 生成重置令牌
+     * 生成重置令牌（密码学安全）
+     * 使用 Web Crypto API 而非 Math.random()
+     *
+     * @returns {string} 密码学安全的随机令牌（64字符十六进制）
      */
     generateResetToken() {
-        // 生成一个简单的重置令牌
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        let token = '';
-        for (let i = 0; i < 32; i++) {
-            token += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return token;
+        // 使用密码学安全的随机数生成器
+        const array = new Uint8Array(32); // 32字节 = 256位
+        crypto.getRandomValues(array);
+
+        // 转换为十六进制字符串
+        return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
     }
 
     /**
@@ -322,14 +324,26 @@ class FirebaseAuthManager {
         const userProfile = document.getElementById('userProfile');
 
         if (user) {
-            // 显示用户信息
+            // 显示用户信息（使用安全的方法防止XSS）
             if (userProfile) {
+                // 使用 SecurityUtils 转义用户输入
+                const safePhotoURL = (user.photoURL && SecurityUtils.isFileNameSafe(user.photoURL))
+                    ? user.photoURL
+                    : 'assets/images/default-avatar.png';
+
+                const safeDisplayName = SecurityUtils.escapeHtml(
+                    user.displayName || user.email || '匿名用户'
+                );
+
+                const safeAlt = SecurityUtils.escapeHtml(user.displayName || 'User');
+
+                // 安全地构建HTML（已转义的内容）
                 userProfile.innerHTML = `
                     <div class="user-info">
-                        <img src="${user.photoURL || 'assets/images/default-avatar.png'}"
-                             alt="${user.displayName || 'User'}"
+                        <img src="${safePhotoURL}"
+                             alt="${safeAlt}"
                              class="user-avatar">
-                        <span class="user-name">${user.displayName || user.email || '匿名用户'}</span>
+                        <span class="user-name">${safeDisplayName}</span>
                         <button onclick="window.firebaseAuthManager.signOut()" class="btn-signout">
                             退出
                         </button>

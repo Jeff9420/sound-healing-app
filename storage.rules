@@ -1,0 +1,70 @@
+rules_version = '2';
+
+/**
+ * Firebase Storage 安全规则
+ * 保护用户上传的文件
+ *
+ * 部署方式：
+ * 1. 打开 Firebase Console
+ * 2. 进入 Storage > 规则
+ * 3. 复制粘贴此文件内容
+ * 4. 点击"发布"
+ */
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // 辅助函数
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+
+    function isValidImageType() {
+      return request.resource.contentType.matches('image/(jpeg|png|webp|gif)');
+    }
+
+    function isValidAudioType() {
+      return request.resource.contentType.matches('audio/(mpeg|mp3|wav|ogg)');
+    }
+
+    function isUnder(size) {
+      return request.resource.size < size;
+    }
+
+    // 用户头像
+    match /users/{userId}/avatar/{fileName} {
+      // 读取：所有人可读（公开头像）
+      allow read: if true;
+
+      // 上传：仅本人，限制大小和格式
+      allow create, update: if isOwner(userId)
+                            && isValidImageType()
+                            && isUnder(2 * 1024 * 1024); // 2MB限制
+
+      // 删除：仅本人
+      allow delete: if isOwner(userId);
+    }
+
+    // 用户私人文件
+    match /users/{userId}/private/{fileName} {
+      // 读写：仅本人
+      allow read, write: if isOwner(userId)
+                         && isUnder(10 * 1024 * 1024); // 10MB限制
+    }
+
+    // 公共音频文件（只读）
+    match /public/audio/{audioId} {
+      allow read: if true;
+      allow write: if false; // 仅管理员可写
+    }
+
+    // 默认规则：拒绝所有
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
