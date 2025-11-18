@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语言切换诊断工具 - Language Switch Diagnostic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 12px;
+            font-size: 28px;
+        }
+
+        h2 {
+            color: #764ba2;
+            margin-bottom: 16px;
+            font-size: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .status-item {
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .status-label {
+            font-weight: 600;
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .status-value {
+            font-size: 16px;
+            color: #333;
+            font-family: 'Courier New', monospace;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #48bb78;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #38a169;
+        }
+
+        .btn-danger {
+            background: #f56565;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #e53e3e;
+        }
+
+        .btn-warning {
+            background: #ed8936;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #dd6b20;
+        }
+
+        .test-section {
+            margin: 20px 0;
+        }
+
+        .test-item {
+            padding: 16px;
+            background: #f7fafc;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border: 2px solid transparent;
+        }
+
+        .test-item.pass {
+            border-color: #48bb78;
+            background: #f0fff4;
+        }
+
+        .test-item.fail {
+            border-color: #f56565;
+            background: #fff5f5;
+        }
+
+        .test-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .test-result {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            padding: 8px;
+            background: white;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+
+        .log-container {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .log-entry {
+            margin-bottom: 4px;
+            padding: 4px 0;
+        }
+
+        .log-entry.info {
+            color: #63b3ed;
+        }
+
+        .log-entry.success {
+            color: #68d391;
+        }
+
+        .log-entry.warning {
+            color: #fbd38d;
+        }
+
+        .log-entry.error {
+            color: #fc8181;
+        }
+
+        .demo-content {
+            padding: 20px;
+            background: #edf2f7;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+
+        .demo-text {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .badge-success {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .badge-error {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .badge-info {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>🌍 语言切换诊断工具</h1>
+            <p style="color: #666; margin-bottom: 16px;">全面测试 i18n 系统的语言切换功能</p>
+
+            <div class="button-group">
+                <button class="btn-success" onclick="runFullDiagnostic()">🔍 运行完整诊断</button>
+                <button class="btn-warning" onclick="clearLogs()">🗑️ 清空日志</button>
+                <button class="btn-danger" onclick="resetSystem()">🔄 重置系统</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📊 系统状态</h2>
+            <div class="status-grid" id="statusGrid"></div>
+        </div>
+
+        <div class="card">
+            <h2>🎛️ 语言切换控制</h2>
+            <div class="button-group">
+                <button class="btn-primary" onclick="switchLanguage('en-US')">🇺🇸 English</button>
+                <button class="btn-primary" onclick="switchLanguage('zh-CN')">🇨🇳 简体中文</button>
+                <button class="btn-primary" onclick="switchLanguage('ja-JP')">🇯🇵 日本語</button>
+                <button class="btn-primary" onclick="switchLanguage('ko-KR')">🇰🇷 한국어</button>
+                <button class="btn-primary" onclick="switchLanguage('es-ES')">🇪🇸 Español</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🧪 测试内容 - 带 data-i18n 属性的元素</h2>
+            <div class="demo-content">
+                <p class="demo-text" data-i18n="app.title">Sound Healing</p>
+                <p class="demo-text" data-i18n="app.subtitle">Listen to the healing sounds of nature, return to inner peace</p>
+                <p class="demo-text" data-i18n="header.title">Sound Healing</p>
+                <p class="demo-text" data-i18n="loading.text">Loading sound healing space...</p>
+                <p class="demo-text" data-i18n="hero.headline">Sleep Better Tonight with Rain Sounds & White Noise</p>
+                <p class="demo-text" data-i18n="nav.signin">Sign In</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🔬 诊断测试</h2>
+            <div id="testResults"></div>
+            <button class="btn-success" onclick="runTests()" style="margin-top: 16px;">运行测试</button>
+        </div>
+
+        <div class="card">
+            <h2>📝 系统日志</h2>
+            <div class="log-container" id="logContainer"></div>
+        </div>
+    </div>
+
+    <script src="assets/js/i18n-system.js"></script>
+    <script>
+        // 日志系统
+        const logs = [];
+
+        function addLog(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            logs.push({ timestamp, message, type });
+            updateLogDisplay();
+        }
+
+        function updateLogDisplay() {
+            const container = document.getElementById('logContainer');
+            container.innerHTML = logs.map(log =>
+                `<div class="log-entry ${log.type}">[${log.timestamp}] ${log.message}</div>`
+            ).join('');
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function clearLogs() {
+            logs.length = 0;
+            updateLogDisplay();
+            addLog('日志已清空', 'info');
+        }
+
+        // 更新状态显示
+        function updateStatus() {
+            const statusGrid = document.getElementById('statusGrid');
+
+            const currentLang = window.i18n?.getCurrentLanguage();
+            const storedLang = localStorage.getItem('sound_healing_language');
+            const pathLang = window.i18n?.getLanguageFromPath();
+            const htmlLang = document.documentElement.lang;
+            const browserLang = navigator.language;
+
+            const statusItems = [
+                {
+                    label: '当前语言 (Current Language)',
+                    value: currentLang?.code || '未初始化'
+                },
+                {
+                    label: 'localStorage 保存的语言',
+                    value: storedLang || '无'
+                },
+                {
+                    label: 'URL 路径检测的语言',
+                    value: pathLang || '无'
+                },
+                {
+                    label: 'HTML lang 属性',
+                    value: htmlLang || '未设置'
+                },
+                {
+                    label: '浏览器语言',
+                    value: browserLang || '未知'
+                },
+                {
+                    label: 'i18n 系统状态',
+                    value: window.i18n?.isInitialized ? '✅ 已初始化' : '❌ 未初始化'
+                },
+                {
+                    label: '已加载的语言',
+                    value: window.i18n?.loadedLanguages ? Array.from(window.i18n.loadedLanguages).join(', ') : '无'
+                },
+                {
+                    label: '当前页面路径',
+                    value: window.location.pathname
+                }
+            ];
+
+            statusGrid.innerHTML = statusItems.map(item => `
+                <div class="status-item">
+                    <div class="status-label">${item.label}</div>
+                    <div class="status-value">${item.value}</div>
+                </div>
+            `).join('');
+        }
+
+        // 语言切换
+        async function switchLanguage(langCode) {
+            addLog(`🔄 开始切换到语言: ${langCode}`, 'info');
+
+            if (!window.i18n) {
+                addLog('❌ i18n 系统未初始化', 'error');
+                return;
+            }
+
+            const result = await window.i18n.changeLanguage(langCode);
+
+            if (result) {
+                addLog(`✅ 语言切换成功: ${langCode}`, 'success');
+                updateStatus();
+
+                // 验证翻译是否生效
+                setTimeout(() => {
+                    verifyTranslations(langCode);
+                }, 500);
+            } else {
+                addLog(`❌ 语言切换失败: ${langCode}`, 'error');
+            }
+        }
+
+        // 验证翻译
+        function verifyTranslations(expectedLang) {
+            addLog(`🔍 验证翻译是否正确应用...`, 'info');
+
+            const testElements = document.querySelectorAll('[data-i18n]');
+            let successCount = 0;
+            let failCount = 0;
+
+            testElements.forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                const translation = window.i18n.getTranslation(key);
+                const currentText = element.textContent;
+
+                if (currentText === translation) {
+                    successCount++;
+                } else {
+                    failCount++;
+                    addLog(`⚠️ 元素未更新: data-i18n="${key}" | 期望: "${translation}" | 实际: "${currentText}"`, 'warning');
+                }
+            });
+
+            addLog(`📊 翻译验证完成: ${successCount} 成功, ${failCount} 失败`, successCount === testElements.length ? 'success' : 'warning');
+        }
+
+        // 运行测试
+        function runTests() {
+            addLog('🧪 开始运行诊断测试...', 'info');
+            const resultsContainer = document.getElementById('testResults');
+            const tests = [];
+
+            // 测试1: i18n系统是否初始化
+            tests.push({
+                title: 'i18n 系统初始化检查',
+                pass: window.i18n && window.i18n.isInitialized,
+                result: window.i18n?.isInitialized ? '✅ 系统已正确初始化' : '❌ 系统未初始化'
+            });
+
+            // 测试2: 语言检测优先级
+            const contextLang = window.i18n?.getContextLanguage();
+            const storedLang = window.i18n?.getStoredLanguage();
+            tests.push({
+                title: '语言检测优先级',
+                pass: true,
+                result: `Context Language: ${contextLang || 'null'}<br>Stored Language: ${storedLang || 'null'}<br>当前语言: ${window.i18n?.currentLanguage || 'null'}`
+            });
+
+            // 测试3: 翻译数据完整性
+            const hasEnTranslations = window.i18n?.translations?.has('en-US');
+            const hasZhTranslations = window.i18n?.translations?.has('zh-CN');
+            tests.push({
+                title: '翻译数据完整性',
+                pass: hasEnTranslations && hasZhTranslations,
+                result: `英文翻译: ${hasEnTranslations ? '✅' : '❌'}<br>中文翻译: ${hasZhTranslations ? '✅' : '❌'}`
+            });
+
+            // 测试4: data-i18n 元素数量
+            const i18nElements = document.querySelectorAll('[data-i18n]');
+            tests.push({
+                title: 'data-i18n 元素检测',
+                pass: i18nElements.length > 0,
+                result: `找到 ${i18nElements.length} 个带 data-i18n 属性的元素`
+            });
+
+            // 测试5: getTranslation 功能
+            const testKey = 'app.title';
+            const translation = window.i18n?.getTranslation(testKey);
+            tests.push({
+                title: 'getTranslation() 功能测试',
+                pass: translation && translation !== testKey,
+                result: `翻译 "${testKey}": "${translation}"`
+            });
+
+            // 显示测试结果
+            resultsContainer.innerHTML = tests.map(test => `
+                <div class="test-item ${test.pass ? 'pass' : 'fail'}">
+                    <div class="test-title">
+                        ${test.pass ? '✅' : '❌'} ${test.title}
+                    </div>
+                    <div class="test-result">${test.result}</div>
+                </div>
+            `).join('');
+
+            const passCount = tests.filter(t => t.pass).length;
+            addLog(`✅ 测试完成: ${passCount}/${tests.length} 通过`, passCount === tests.length ? 'success' : 'warning');
+        }
+
+        // 运行完整诊断
+        async function runFullDiagnostic() {
+            addLog('🚀 开始运行完整诊断...', 'info');
+            clearLogs();
+
+            addLog('📊 更新系统状态...', 'info');
+            updateStatus();
+
+            addLog('🧪 运行测试套件...', 'info');
+            runTests();
+
+            addLog('🔄 测试语言切换 (中文 → 英文)...', 'info');
+            await switchLanguage('zh-CN');
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            await switchLanguage('en-US');
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            addLog('✅ 完整诊断完成！', 'success');
+        }
+
+        // 重置系统
+        function resetSystem() {
+            if (confirm('确定要重置系统吗？这将清除 localStorage 中的语言偏好。')) {
+                localStorage.removeItem('sound_healing_language');
+                addLog('🔄 系统已重置，正在重新加载...', 'warning');
+                setTimeout(() => location.reload(), 1000);
+            }
+        }
+
+        // 页面加载时初始化
+        window.addEventListener('load', () => {
+            addLog('🌍 语言切换诊断工具已加载', 'success');
+            addLog('📊 正在检测 i18n 系统...', 'info');
+
+            // 等待i18n系统初始化
+            setTimeout(() => {
+                if (window.i18n && window.i18n.isInitialized) {
+                    addLog('✅ i18n 系统已初始化', 'success');
+                    updateStatus();
+                } else {
+                    addLog('❌ i18n 系统初始化失败', 'error');
+                }
+            }, 1000);
+        });
+
+        // 监听语言变更事件
+        document.addEventListener('languageChange', (event) => {
+            addLog(`🌍 语言变更事件触发: ${event.detail.langCode}`, 'info');
+            updateStatus();
+        });
+
+        // 定期更新状态（每2秒）
+        setInterval(updateStatus, 2000);
+    </script>
+</body>
+</html>

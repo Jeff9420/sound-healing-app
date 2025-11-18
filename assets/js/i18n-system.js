@@ -112,19 +112,25 @@ class InternationalizationSystem {
 
     /**
      * 根据路径、HTML属性、存储和浏览器偏好确定初始语言
+     * 优先级：用户保存的偏好 > URL路径 > 浏览器语言 > 默认语言
      */
     determineInitialLanguage() {
-        const contextLanguage = this.getContextLanguage();
-        if (contextLanguage) {
-            return contextLanguage;
-        }
-
+        // 🔧 FIX: 优先使用用户保存的语言偏好，而不是路径检测
+        // 这样用户选择的语言不会被URL路径覆盖
         const storedLanguage = this.getStoredLanguage();
         if (storedLanguage) {
-            console.log(`📱 使用保存的语言偏好: ${storedLanguage}`);
+            console.log(`📱 使用保存的语言偏好: ${storedLanguage} (优先级最高)`);
             return storedLanguage;
         }
 
+        // 如果没有保存的偏好，则使用路径/HTML属性
+        const contextLanguage = this.getContextLanguage();
+        if (contextLanguage) {
+            console.log(`🌐 根据页面上下文应用语言: ${contextLanguage}`);
+            return contextLanguage;
+        }
+
+        // 最后才使用浏览器语言
         const browserLanguage = this.getBrowserLanguage();
         if (browserLanguage) {
             console.log(`🌐 检测到浏览器语言: ${browserLanguage}`);
