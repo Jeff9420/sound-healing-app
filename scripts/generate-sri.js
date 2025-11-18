@@ -12,12 +12,12 @@ const https = require('https');
 
 // 需要生成SRI哈希的外部资源
 const resources = [
-    // Firebase SDK
-    'https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js',
-    'https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js',
-    'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js',
-    'https://www.gstatic.com/firebasejs/9.22.1/firebase-storage.js',
-    'https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics.js',
+    // Firebase SDK (compat版本 - 项目实际使用的版本)
+    'https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js',
+    'https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js',
+    'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js',
+    'https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics-compat.js',
+    'https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js',
 
     // Google Analytics (注意：这个经常变化，不建议SRI)
     // 'https://www.googletagmanager.com/gtag/js?id=G-4NZR3HR3J1',
