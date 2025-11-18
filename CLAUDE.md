@@ -4,10 +4,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a **声音疗愈 (Sound Healing)** v3.0.0 - An enterprise-grade modern web application for sound healing and meditation. The app features 213+ high-quality audio files hosted on Internet Archive, Canvas-based animated backgrounds, and supports 5 languages with full PWA capabilities.
+This is a **SoundFlows (声音疗愈)** v3.1.0 - An enterprise-grade modern web application for sound healing and meditation. The app features 213+ high-quality audio files hosted on Internet Archive, Canvas-based animated backgrounds, and supports 5 languages with full PWA capabilities.
+
+### Target Audience & Language Priority
+**IMPORTANT**:
+- **Primary Users**: International/Overseas users (English-speaking)
+- **Default Language**: English (`en-US`) - ALL configurations should prioritize English
+- **Secondary Markets**: Chinese, Japanese, Korean, Spanish speakers
+- **Development Principle**: Always configure with English/international users as the primary target
 
 ### Current Production Status
-- **Version**: v3.0.0 (Enterprise-grade)
+- **Version**: v3.1.0 (Security-hardened)
 - **Live Site**: https://soundflows.app
 - **Architecture**: Modern static site with distributed resources
 - **Deployment**: GitHub → Vercel CI/CD
@@ -17,12 +24,33 @@ This is a **声音疗愈 (Sound Healing)** v3.0.0 - An enterprise-grade modern w
 - **Frontend**: Vercel Edge Network
 - **Code**: GitHub repository
 
+## Development Principles
+
+### Language & Localization Policy
+**CRITICAL**: This project targets **international/overseas users primarily**
+
+**Configuration Priority**:
+1. ✅ **Always default to English (`en-US`)**
+2. ✅ **All documentation, comments, and examples should be in English first**
+3. ✅ **Error messages, console logs should prioritize English**
+4. ✅ **Email templates, notifications default to English**
+5. ✅ **Analytics and reporting in English**
+6. ⚠️ Chinese, Japanese, Korean, Spanish are **secondary markets only**
+
+**When to use English vs Chinese**:
+- ✅ Code comments: English
+- ✅ Git commit messages: English
+- ✅ API responses: English
+- ✅ Developer documentation: English
+- ✅ User-facing content: English (with i18n support for other languages)
+- ⚠️ Project folder name exception: 声音疗愈 (historical reasons, but use "SoundFlows" in all configs)
+
 ## Multilingual System (i18n)
 
 ### Language Configuration
 - **Default Language**: English (`en-US`) - All new users see English interface by default
 - **Supported Languages**: 5 languages with complete translations
-  - English (`en-US`) - Default, fallback language
+  - **English (`en-US`)** - Primary language, default, fallback language
   - Chinese (`zh-CN`) - Simplified Chinese with full interface support
   - Japanese (`ja-JP`) - Japanese with proper typography support
   - Korean (`ko-KR`) - Korean with native font support
