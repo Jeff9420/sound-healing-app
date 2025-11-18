@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SoundFlows · Redirecting…</title>
     <meta name="robots" content="noindex, follow">
-    <meta http-equiv="refresh" content="5; url=/en/">
-    <link rel="canonical" href="https://www.soundflows.app/">
+    <meta http-equiv="refresh" content="0; url=/en/">
+    <link rel="canonical" href="https://www.soundflows.app/en/">
     <link rel="alternate" hreflang="en" href="https://www.soundflows.app/en/">
     <link rel="alternate" hreflang="zh-Hans" href="https://www.soundflows.app/zh/">
-    <link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/">
+    <link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/en/">
     <style>
         body {
             font-family: "Segoe UI", "PingFang SC", Roboto, sans-serif;
@@ -74,16 +74,14 @@
         </div>
     </div>
     <script>
-        (function redirectByLanguage() {
+        // SoundFlows targets international/English-speaking users primarily
+        // Always redirect to English version by default
+        // Users can switch language using the language selector inside the app
+        (function redirectToEnglish() {
             try {
-                var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
-                var target = '/en/';
-                if (lang.startsWith('zh')) {
-                    target = '/zh/';
-                }
-                window.location.replace(target);
+                window.location.replace('/en/');
             } catch (error) {
-                console.warn('Language redirect failed', error);
+                console.warn('Redirect failed', error);
             }
         })();
     </script>
