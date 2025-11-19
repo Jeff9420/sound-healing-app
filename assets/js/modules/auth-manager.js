@@ -15,22 +15,34 @@ class AuthManager {
      * Initialize auth manager
      */
     async init() {
-        this.supabase = window.getSupabaseClient();
-        if (!this.supabase) {
-            console.error('Supabase client not available');
-            return;
-        }
+        try {
+            this.supabase = window.getSupabaseClient();
+            if (!this.supabase) {
+                console.error('Supabase client not available');
+                return;
+            }
 
-        // Listen to auth state changes
-        this.supabase.auth.onAuthStateChange((event, session) => {
-            console.log('Auth state changed:', event);
+            // Listen to auth state changes
+            this.supabase.auth.onAuthStateChange((event, session) => {
+                console.log('Auth state changed:', event);
+                this.currentUser = session?.user || null;
+                this.notifyAuthStateChange(event, session);
+            });
+
+            // Check for existing session
+            const { data, error } = await this.supabase.auth.getSession();
+
+            if (error) {
+                // Log but don't throw, to allow app to function offline
+                console.warn('Failed to restore session:', error.message);
+            }
+
+            const session = data?.session;
             this.currentUser = session?.user || null;
-            this.notifyAuthStateChange(event, session);
-        });
-
-        // Check for existing session
-        const { data: { session } } = await this.supabase.auth.getSession();
-        this.currentUser = session?.user || null;
+        } catch (error) {
+            console.warn('Auth initialization failed (offline or blocked):', error);
+            // Do not re-throw, just log warning so app can continue
+        }
     }
 
     /**
