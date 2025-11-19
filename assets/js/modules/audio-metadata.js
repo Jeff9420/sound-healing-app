@@ -1,12 +1,9 @@
-﻿/**
- * AudioMetadata - 闊抽鍏冩暟鎹鐞嗙郴缁? *
- * 涓烘瘡涓煶棰戞彁渚涜缁嗙殑鍏冩暟鎹俊鎭?
- * - 鎻忚堪銆佹椂闀裤€侀€傜敤鍦烘櫙
- * - 闅惧害绛夌骇銆佹爣绛? * - 绯诲垪璇剧▼淇℃伅
- *
- * @class
- * @version 1.0.0
+/**
+ * AudioMetadata Module
+ * Provides detailed metadata for audio files.
  */
+
+import { AUDIO_CONFIG } from './audio-config.js';
 
 const AUDIO_METADATA_OVERRIDES = {
     'meditation': {
@@ -85,17 +82,18 @@ const AUDIO_METADATA_OVERRIDES = {
     },
 };
 
-class AudioMetadata {
+export class AudioMetadata {
     constructor() {
         this.metadata = new Map();
         this.loadDefaultMetadata();
     }
 
     /**
-     * 鍔犺浇榛樿鍏冩暟鎹?     */
+     * 加载默认元数据
+     */
     loadDefaultMetadata() {
-        // 浠庨厤缃姞杞藉熀纭€淇℃伅
-        if (typeof AUDIO_CONFIG !== 'undefined') {
+        // 从配置加载基础信息
+        if (AUDIO_CONFIG) {
             for (const [category, data] of Object.entries(AUDIO_CONFIG.categories)) {
                 if (data.files) {
                     data.files.forEach(fileName => {
@@ -106,96 +104,97 @@ class AudioMetadata {
             }
         }
 
-        console.log(`鉁?AudioMetadata 宸插姞杞?${this.metadata.size} 涓煶棰戝厓鏁版嵁`);
+        console.log(`✅ AudioMetadata 已加载 ${this.metadata.size} 个音频元数据`);
     }
 
     /**
-     * 鐢熸垚鍏冩暟鎹?     */
+     * 生成元数据
+     */
     generateMetadata(category, fileName) {
         const displayName = fileName.replace(/\.(mp3|wav|ogg|m4a|wma|flac|aac)$/i, '');
 
-        // 鍩轰簬鍒嗙被鐨勯粯璁ゅ厓鏁版嵁
+        // 基于分类的默认元数据
         const categoryDefaults = {
             'meditation': {
-                description: '涓撲笟鍐ユ兂寮曞闊抽锛屽府鍔╂偍杩涘叆娣卞害鏀炬澗鐘舵€?,
+                description: '专业冥想引导音频，帮助您进入深度放松状态。',
                 scenarios: ['sleep', 'meditation', 'relaxation'],
                 difficulty: 'beginner',
                 duration: '15:00',
-                benefits: ['鍑忓帇', '鏀瑰杽鐫＄湢', '鎻愬崌涓撴敞鍔?],
-                tags: ['鍐ユ兂', '鏀炬澗', '姝ｅ康']
+                benefits: ['减压', '改善睡眠', '提升专注力'],
+                tags: ['冥想', '放松', '正念']
             },
             'Rain': {
-                description: '绾噣闆ㄥ０锛岃惀閫犺嚜鐒舵斁鏉炬皼鍥?,
+                description: '纯净雨声，营造自然放松氛围。',
                 scenarios: ['sleep', 'work', 'study'],
                 difficulty: 'beginner',
                 duration: '30:00',
-                benefits: ['鍔╃湢', '鐧藉櫔闊?, '闆嗕腑娉ㄦ剰鍔?],
-                tags: ['鑷劧闊虫晥', '鐧藉櫔闊?, '闆ㄥ０']
+                benefits: ['助眠', '白噪音', '集中注意力'],
+                tags: ['自然音效', '白噪音', '雨声']
             },
             'Singing bowl sound': {
-                description: '瑗胯棌棰傞挼闊崇枟锛屽钩琛¤韩蹇冭兘閲?,
+                description: '西藏颂钵音疗，平衡身心能量。',
                 scenarios: ['meditation', 'healing', 'yoga'],
                 difficulty: 'intermediate',
                 duration: '20:00',
-                benefits: ['鑳介噺骞宠　', '娣卞害鏀炬澗', '鎯呯华鐤楁剤'],
-                tags: ['闊崇枟', '棰傞挼', '鑳介噺鐤楁剤']
+                benefits: ['能量平衡', '深度放松', '情绪疗愈'],
+                tags: ['音疗', '颂钵', '能量疗愈']
             },
             'Chakra': {
-                description: '鑴夎疆涓撳睘鐤楁剤闊抽锛屽钩琛′竷澶ц兘閲忎腑蹇?,
+                description: '脉轮专属疗愈音频，平衡七大能量中心。',
                 scenarios: ['meditation', 'healing', 'energy_work'],
                 difficulty: 'intermediate',
                 duration: '25:00',
-                benefits: ['鑳介噺骞宠　', '鑴夎疆婵€娲?, '韬績鍜岃皭'],
-                tags: ['鑴夎疆', '鑳介噺', '鐤楁剤']
+                benefits: ['能量平衡', '脉轮激活', '身心和谐'],
+                tags: ['脉轮', '能量', '疗愈']
             },
             'hypnosis': {
-                description: '涓撲笟鍌湢闊抽锛屾敼鍠勭潯鐪犺川閲?,
+                description: '专业催眠音频，改善睡眠质量。',
                 scenarios: ['sleep', 'relaxation'],
                 difficulty: 'beginner',
                 duration: '45:00',
-                benefits: ['娣卞害鐫＄湢', '鍑忓皯澶辩湢', '鏀炬澗韬績'],
-                tags: ['鍌湢', '鐫＄湢', '娣卞害鏀炬澗']
+                benefits: ['深度睡眠', '减少失眠', '放松身心'],
+                tags: ['催眠', '睡眠', '深度放松']
             },
             'Animal sounds': {
-                description: '澶ц嚜鐒跺姩鐗╅煶鏁堬紝鍥炲綊鑷劧鎬€鎶?,
+                description: '大自然动物音效，回归自然怀抱。',
                 scenarios: ['relaxation', 'sleep', 'background'],
                 difficulty: 'beginner',
                 duration: '20:00',
-                benefits: ['鏀炬澗蹇冩儏', '鑷劧鐤楁剤', '鍑忓帇'],
-                tags: ['鑷劧闊虫晥', '鍔ㄧ墿', '鐜闊?]
+                benefits: ['放松心情', '自然疗愈', '减压'],
+                tags: ['自然音效', '动物', '环境音']
             },
             'Fire': {
-                description: '娓╂殩鐨勭瘽鐏０闊筹紝钀ラ€犺垝閫傛皼鍥?,
+                description: '温暖的篝火声音，营造舒适氛围。',
                 scenarios: ['relaxation', 'sleep', 'background'],
                 difficulty: 'beginner',
                 duration: '30:00',
-                benefits: ['娓╂殩鑸掗€?, '鏀炬澗', '钀ラ€犳皼鍥?],
-                tags: ['鑷劧闊虫晥', '鐏劙', '鐜闊?]
+                benefits: ['温暖舒适', '放松', '营造氛围'],
+                tags: ['自然音效', '火焰', '环境音']
             },
             'running water': {
-                description: '娓呮緢娴佹按澹帮紝瀹侀潤鐨勮嚜鐒朵箣澹?,
+                description: '清澈流水声，宁静的自然之声。',
                 scenarios: ['relaxation', 'meditation', 'work'],
                 difficulty: 'beginner',
                 duration: '25:00',
-                benefits: ['蹇冪伒鍑€鍖?, '涓撴敞', '鏀炬澗'],
-                tags: ['鑷劧闊虫晥', '姘村０', '鐧藉櫔闊?]
+                benefits: ['心灵净化', '专注', '放松'],
+                tags: ['自然音效', '水声', '白噪音']
             },
             'Subconscious Therapy': {
-                description: '娼滄剰璇嗛噸濉戦煶棰戯紝绉瀬蹇冪悊寤鸿',
+                description: '潜意识重塑音频，积极心理建设',
                 scenarios: ['self_improvement', 'meditation', 'sleep'],
                 difficulty: 'advanced',
                 duration: '35:00',
-                benefits: ['娼滄剰璇嗛噸缂栫▼', '绉瀬鏆楃ず', '蹇冪悊鐤楁剤'],
-                tags: ['娼滄剰璇?, '蹇冪悊鐤楁剤', '鑷垜鎻愬崌']
+                benefits: ['潜意识重编程', '积极暗示', '心理疗愈'],
+                tags: ['潜意识', '心理疗愈', '自我提升']
             }
         };
 
         const defaults = categoryDefaults[category] || {
-            description: '澹伴煶鐤楁剤闊抽',
+            description: '声音疗愈音频',
             scenarios: ['relaxation'],
             difficulty: 'beginner',
             duration: '20:00',
-            benefits: ['鏀炬澗'],
+            benefits: ['放松'],
             tags: [category]
         };
 
@@ -222,20 +221,22 @@ class AudioMetadata {
     }
 
     /**
-     * 鐢熸垚鍞竴閿?     */
+     * 生成唯一键
+     */
     generateKey(category, fileName) {
         return `${category}__${fileName}`;
     }
 
     /**
-     * 鑾峰彇闊抽鍏冩暟鎹?     */
+     * 获取音频元数据
+     */
     getMetadata(category, fileName) {
         const key = this.generateKey(category, fileName);
         return this.metadata.get(key) || this.generateMetadata(category, fileName);
     }
 
     /**
-     * 鑾峰彇褰撳墠璇█涓嬬殑鏄剧ず鍚嶇О
+     * 获取当前语言下的显示名称
      */
     getLocalizedTitle(category, fileName, fallbackLang = 'en') {
         const metadata = this.getMetadata(category, fileName);
@@ -254,7 +255,7 @@ class AudioMetadata {
     }
 
     /**
-     * 鏍规嵁鍦烘櫙鎼滅储闊抽
+     * 根据场景搜索音频
      */
     searchByScenario(scenario) {
         const results = [];
@@ -269,7 +270,7 @@ class AudioMetadata {
     }
 
     /**
-     * 鏍规嵁闅惧害鎼滅储
+     * 根据难度搜索
      */
     searchByDifficulty(difficulty) {
         const results = [];
@@ -284,7 +285,7 @@ class AudioMetadata {
     }
 
     /**
-     * 鏍规嵁鏍囩鎼滅储
+     * 根据标签搜索
      */
     searchByTags(tags) {
         const results = [];
@@ -308,7 +309,8 @@ class AudioMetadata {
     }
 
     /**
-     * 鑾峰彇鎵€鏈夊満鏅?     */
+     * 获取所有场景
+     */
     getAllScenarios() {
         const scenarios = new Set();
 
@@ -322,7 +324,8 @@ class AudioMetadata {
     }
 
     /**
-     * 鑾峰彇鎵€鏈夋爣绛?     */
+     * 获取所有标签
+     */
     getAllTags() {
         const tags = new Set();
 
@@ -336,7 +339,7 @@ class AudioMetadata {
     }
 
     /**
-     * 鑾峰彇鍒嗙被缁熻
+     * 获取分类统计
      */
     getCategoryStats() {
         const stats = {};
@@ -352,29 +355,23 @@ class AudioMetadata {
 
             stats[meta.category].count++;
 
-            // 闅惧害缁熻
+            // 难度统计
             if (meta.difficulty) {
                 stats[meta.category].difficulties[meta.difficulty] =
                     (stats[meta.category].difficulties[meta.difficulty] || 0) + 1;
             }
 
-            // 鍦烘櫙缁熻
+            // 场景统计
             if (meta.scenarios) {
                 meta.scenarios.forEach(s => stats[meta.category].scenarios.add(s));
             }
         }
 
-        // 杞崲Set涓烘暟缁?        for (const category in stats) {
+        // 转换Set为数组
+        for (const category in stats) {
             stats[category].scenarios = Array.from(stats[category].scenarios);
         }
 
         return stats;
     }
-}
-
-// 鍒涘缓鍏ㄥ眬瀹炰緥
-if (typeof window !== 'undefined') {
-    window.AudioMetadata = AudioMetadata;
-    window.audioMetadata = new AudioMetadata();
-    console.log('鉁?AudioMetadata 宸插垱寤?);
 }

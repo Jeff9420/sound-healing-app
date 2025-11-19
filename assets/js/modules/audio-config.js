@@ -1,6 +1,6 @@
 // Production Audio Configuration - Archive.org (191 files)
 // Only includes files that are confirmed uploaded to Archive.org
-const AUDIO_CONFIG = {
+export const AUDIO_CONFIG = {
     baseUrl: 'https://archive.org/download/sound-healing-collection/',
     categories: {
         'Animal sounds': {
@@ -264,17 +264,17 @@ const AUDIO_CONFIG = {
             icon: '🌌',
             description: '潜意识修复与疗愈音乐',
             files: [
-                '潜意识疗愈 01 宽恕与原谅.mp3',
-                '潜意识疗愈 02 感恩与欣赏.mp3',
-                '潜意识疗愈 03 创造与成功.mp3',
-                '潜意识疗愈 04 金钱丰盛.mp3',
-                '潜意识疗愈 05 圆满关系.mp3',
-                '潜意识疗愈 06 重塑自信.mp3',
-                '潜意识疗愈 07 身心健康.mp3',
-                '潜意识疗愈 08 内在小孩.mp3',
-                '潜意识疗愈 09 快乐生活.mp3',
-                '潜意识疗愈 10 母亲疗愈.mp3',
-                '潜意识疗愈 11 父亲疗愈.mp3'
+                '全新的开始.mp3',
+                '净空.mp3',
+                '唤醒.mp3',
+                '回忆微微笑.mp3',
+                '微醺.mp3',
+                '柔情.mp3',
+                '梦起始的地方.mp3',
+                '滴落的星子.mp3',
+                '生机无限.mp3',
+                '薄纱之舞.mp3',
+                '遇见林间精灵.mp3'
             ]
         }
     }
@@ -292,17 +292,13 @@ AUDIO_CONFIG.categories['Subconscious Therapy'].folder = 'subconscious-therapy';
 AUDIO_CONFIG.categories['Chakra'].folder = 'chakra';
 
 // Helper function to get full URL for a file
-function getAudioUrl(categoryKey, filename) {
+// 重要：Archive.org上的文件名使用原始中文，不需要URL编码
+export function getAudioUrl(categoryKey, filename) {
     const category = AUDIO_CONFIG.categories[categoryKey];
     if (!category) {
         return null;
     }
-    
-    const folderName = category.folder || categoryKey.toLowerCase().replace(/\s+/g, '-');
-    return `${AUDIO_CONFIG.baseUrl}${folderName}/${encodeURIComponent(filename)}`;
-}
 
-// Export for use in other modules
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { AUDIO_CONFIG, getAudioUrl };
+    const folderName = category.folder || categoryKey.toLowerCase().replace(/\s+/g, '-');
+    return `${AUDIO_CONFIG.baseUrl}${folderName}/${filename}`;
 }

@@ -1,46 +1,10 @@
-﻿﻿﻿﻿﻿/**
+﻿﻿/**
  * Index Page Styles - 声音疗愈应用主页样式
  * 从 index.html 提取的内联样式
  *
  * @author Sound Healing Team
  * @version 2.0.0
  * @date 2025-10-01
- */
-
-/* ==========================================================================
-   全局重置和基础样式
-   ========================================================================== */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: var(--font-sans);
-    background: var(--bg-primary);
-    min-height: 100vh;
-    color: var(--text-primary);
-    overflow-x: hidden;
-}
-
-@media (prefers-color-scheme: dark) {
-    body {
-        background: var(--bg-dark-primary);
-        color: var(--text-light);
-    }
-}
-
-a {
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-a:hover,
-a:focus-visible {
-    opacity: 0.8;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -95,7 +59,7 @@ section:not(.saas-hero):not(.experience-launchpad) {
 .loading-spinner {
     width: 60px;
     height: 60px;
-    border: 5px solid rgba(255,255,255,0.3);
+    border: 5px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
     border-top-color: var(--text-primary);
     animation: spin 1s ease-in-out infinite;
@@ -103,7 +67,9 @@ section:not(.saas-hero):not(.experience-launchpad) {
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .loading-text {
@@ -154,9 +120,12 @@ section:not(.saas-hero):not(.experience-launchpad) {
 }
 
 @keyframes favoriteGlow {
-    0%, 100% {
+
+    0%,
+    100% {
         box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
     }
+
     50% {
         box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
     }
@@ -274,7 +243,7 @@ section:not(.saas-hero):not(.experience-launchpad) {
 h1 {
     font-size: 3em;
     margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .subtitle {
@@ -327,6 +296,7 @@ h1 {
     font-size: 0.9em;
     color: var(--saas-muted, rgba(253, 243, 229, 0.75));
 }
+
 /* ==========================================================================
    播放列表模态框
    ========================================================================== */
@@ -338,7 +308,7 @@ h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.8);
     z-index: 1000;
 }
 
@@ -369,7 +339,7 @@ h1 {
 }
 
 .track-item {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 10px;
@@ -378,7 +348,7 @@ h1 {
 }
 
 .track-item:hover {
-    background: rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.2);
 }
 
 /* ==========================================================================
@@ -413,13 +383,17 @@ h1 {
 
 .player-compact {
     display: flex;
-    flex-direction: column; /* 改为纵向布局 - 三行设计 */
+    flex-direction: column;
+    /* 改为纵向布局 - 三行设计 */
     align-items: stretch;
-    gap: 4px; /* 行与行之间的间距 - 紧凑设计，确保100px高度 */
+    gap: 4px;
+    /* 行与行之间的间距 - 紧凑设计，确保100px高度 */
     flex-wrap: nowrap;
-    padding: 6px 12px; /* 上下6px + 左右12px */
+    padding: 6px 12px;
+    /* 上下6px + 左右12px */
     width: 100%;
-    height: 100px; /* 固定高度100px */
+    height: 100px;
+    /* 固定高度100px */
     box-sizing: border-box;
 }
 
@@ -470,9 +444,11 @@ h1 {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.12);
     color: #f8fafc;
-    font-size: 0.8em; /* 减小图标尺寸 */
+    font-size: 0.8em;
+    /* 减小图标尺寸 */
     cursor: pointer;
-    width: 28px !important; /* 减小按钮大小 */
+    width: 28px !important;
+    /* 减小按钮大小 */
     height: 28px !important;
     display: inline-flex;
     align-items: center;
@@ -480,7 +456,7 @@ h1 {
     border-radius: 50%;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     flex-shrink: 0;
     backdrop-filter: blur(8px);
 }
@@ -490,7 +466,7 @@ h1 {
     border-color: rgba(99, 102, 241, 0.9);
     transform: translateY(-1px) scale(1.05);
     box-shadow: 0 4px 12px rgba(99, 102, 241, 0.6),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .control-btn:active {
@@ -500,20 +476,22 @@ h1 {
 
 /* 播放/暂停按钮 - 最突出的视觉层次 */
 .play-btn {
-    font-size: 0.95em; /* 减小图标尺寸 */
-    width: 32px !important; /* 减小主要按钮大小 */
+    font-size: 0.95em;
+    /* 减小图标尺寸 */
+    width: 32px !important;
+    /* 减小主要按钮大小 */
     height: 32px !important;
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.9), rgba(79, 70, 229, 0.95));
     border-color: rgba(99, 102, 241, 0.8);
     box-shadow: 0 4px 12px rgba(99, 102, 241, 0.5),
-                inset 0 1px 2px rgba(255, 255, 255, 0.15);
+        inset 0 1px 2px rgba(255, 255, 255, 0.15);
 }
 
 .play-btn:hover {
     background: linear-gradient(135deg, rgba(99, 102, 241, 1), rgba(79, 70, 229, 1));
     transform: translateY(-2px) scale(1.05);
     box-shadow: 0 6px 20px rgba(99, 102, 241, 0.8),
-                inset 0 1px 2px rgba(255, 255, 255, 0.25);
+        inset 0 1px 2px rgba(255, 255, 255, 0.25);
 }
 
 /* ==========================================================================
@@ -527,14 +505,18 @@ h1 {
     gap: 10px;
     margin: 16px 0;
 }
+
 /* 第2行：进度条 + 时间显示 - 超紧凑设计 */
 .player-progress-row {
     display: flex;
     align-items: center;
-    gap: 8px; /* 进度条和时间之间的间距 */
+    gap: 8px;
+    /* 进度条和时间之间的间距 */
     width: 100%;
-    padding: 0; /* 移除padding实现100px高度 */
-    height: 24px; /* 固定进度条行高度 */
+    padding: 0;
+    /* 移除padding实现100px高度 */
+    height: 24px;
+    /* 固定进度条行高度 */
     flex-shrink: 0;
 }
 
@@ -542,19 +524,24 @@ h1 {
 .player-controls-row {
     display: flex;
     align-items: center;
-    justify-content: center; /* 按钮居中排列 */
-    gap: 8px; /* 减小按钮间距 */
+    justify-content: center;
+    /* 按钮居中排列 */
+    gap: 8px;
+    /* 减小按钮间距 */
     flex-wrap: nowrap;
     width: 100%;
-    padding: 0; /* 移除padding实现100px高度 */
-    height: 32px; /* 固定按钮行高度 */
+    padding: 0;
+    /* 移除padding实现100px高度 */
+    height: 32px;
+    /* 固定按钮行高度 */
     flex-shrink: 0;
 }
 
 /* 移除旧的分组样式 */
 .primary-controls,
 .secondary-controls {
-    display: contents; /* 移除分组容器 */
+    display: contents;
+    /* 移除分组容器 */
 }
 
 /* 第3行：音量控制 - 移除标签，和进度条保持一致 */
@@ -563,13 +550,16 @@ h1 {
     align-items: center;
     gap: 0;
     width: 100%;
-    padding: 0; /* 移除padding实现100px高度 */
-    height: 24px; /* 固定音量行高度 */
+    padding: 0;
+    /* 移除padding实现100px高度 */
+    height: 24px;
+    /* 固定音量行高度 */
     flex-shrink: 0;
 }
 
 .volume-label {
-    display: none; /* 隐藏音量标签 */
+    display: none;
+    /* 隐藏音量标签 */
 }
 
 /* 保留旧样式以防向后兼容 */
@@ -583,20 +573,22 @@ h1 {
 
 .progress-bar {
     width: 100%;
-    height: 4px; /* 精简高度 */
-    background: rgba(255,255,255,0.2);
+    height: 4px;
+    /* 精简高度 */
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     cursor: pointer;
     position: relative;
     overflow: hidden;
     transition: height 0.2s ease, background 0.2s ease;
     flex: 1;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .progress-bar:hover {
-    height: 5px; /* hover时略微增大 */
-    background: rgba(255,255,255,0.25);
+    height: 5px;
+    /* hover时略微增大 */
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .progress-fill {
@@ -614,12 +606,15 @@ h1 {
 /* 时间显示 - 显示在进度条右侧 */
 .time-display {
     display: inline-block !important;
-    font-size: 0.7em; /* 减小字体尺寸 */
+    font-size: 0.7em;
+    /* 减小字体尺寸 */
     color: rgba(255, 255, 255, 0.75);
     font-weight: 500;
-    min-width: 30px; /* 减小最小宽度 */
+    min-width: 30px;
+    /* 减小最小宽度 */
     text-align: right;
-    font-variant-numeric: tabular-nums; /* 等宽数字，避免跳动 */
+    font-variant-numeric: tabular-nums;
+    /* 等宽数字，避免跳动 */
     flex-shrink: 0;
 }
 
@@ -651,6 +646,7 @@ h1 {
         justify-content: space-between;
         align-items: flex-start;
     }
+
     .control-group {
         flex-wrap: nowrap;
     }
@@ -660,32 +656,41 @@ h1 {
     .player-content {
         text-align: left;
     }
+
     .player-controls {
         justify-content: flex-start;
         gap: 3px;
     }
+
     .control-btn {
         width: 18px !important;
         height: 18px !important;
         font-size: 0.55em;
     }
+
     .play-btn {
         width: 22px !important;
         height: 22px !important;
         font-size: 0.65em;
     }
+
     .extra-controls {
         gap: 3px;
     }
+
     .control-group {
         gap: 3px;
     }
+
     .secondary-controls .control-btn:nth-child(3) {
-        display: none; /* 移动端隐藏睡眠定时器按钮 */
+        display: none;
+        /* 移动端隐藏睡眠定时器按钮 */
     }
+
     .volume-slider {
         width: 10px;
     }
+
     .player-progress-row {
         max-width: 80px;
         min-width: 40px;
@@ -693,26 +698,30 @@ h1 {
 }
 
 .volume-slider {
-    flex: 1; /* 占满剩余空间 */
-    width: 100%; /* 和进度条一样占满宽度 */
-    height: 4px; /* 和进度条保持一致 */
+    flex: 1;
+    /* 占满剩余空间 */
+    width: 100%;
+    /* 和进度条一样占满宽度 */
+    height: 4px;
+    /* 和进度条保持一致 */
     -webkit-appearance: none;
     appearance: none;
-    background: rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     outline: none;
     transition: background 0.2s ease;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .volume-slider:hover {
-    background: rgba(255,255,255,0.25);
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 14px; /* 滑块拖柄大小 */
+    width: 14px;
+    /* 滑块拖柄大小 */
     height: 14px;
     background: linear-gradient(135deg, #6366f1, #8b5cf6);
     border-radius: 50%;
@@ -743,9 +752,9 @@ h1 {
 }
 
 .playback-rate {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     color: var(--text-primary);
-    border: 1px solid rgba(255,255,255,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     padding: 5px 10px;
     border-radius: 5px;
     outline: none;
@@ -764,12 +773,12 @@ h1 {
     bottom: 100px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0,0,0,0.95);
+    background: rgba(0, 0, 0, 0.95);
     backdrop-filter: blur(10px);
     border-radius: 15px;
     padding: 20px;
     z-index: 1000;
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .timer-content h3 {
@@ -785,9 +794,9 @@ h1 {
 }
 
 .timer-options button {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     color: var(--text-primary);
-    border: 1px solid rgba(255,255,255,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     padding: 10px;
     border-radius: 8px;
     cursor: pointer;
@@ -795,7 +804,7 @@ h1 {
 }
 
 .timer-options button:hover {
-    background: rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.2);
 }
 
 /* ==========================================================================
@@ -806,7 +815,7 @@ h1 {
 #repeatBtn.active,
 #sleepTimerBtn.active {
     color: #FF6699;
-    background: rgba(255,102,153,0.2);
+    background: rgba(255, 102, 153, 0.2);
 }
 
 /* ==========================================================================
@@ -817,7 +826,7 @@ h1 {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.8);
     color: var(--text-primary);
     padding: 15px 25px;
     border-radius: 10px;
@@ -855,13 +864,17 @@ h1 {
 
 /* Pulse animation for play button when autoplay is blocked */
 @keyframes pulse {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scale(1);
     }
+
     50% {
         transform: scale(1.1);
     }
 }
+
 /* --- Homepage value proposition layout additions --- */
 .header__inner {
     display: flex;
@@ -915,8 +928,8 @@ h1 {
         radial-gradient(140% 120% at 15% -20%, rgba(246, 169, 59, 0.28), transparent),
         radial-gradient(120% 140% at 95% 0%, rgba(122, 90, 248, 0.18), transparent),
         var(--bg-surface, #1a0f0a);
-    box-shadow: var(--shadow-soft, 0 20px 40px rgba(5,3,2,0.55));
-    border: 1px solid var(--border-subtle, rgba(255,181,115,0.15));
+    box-shadow: var(--shadow-soft, 0 20px 40px rgba(5, 3, 2, 0.55));
+    border: 1px solid var(--border-subtle, rgba(255, 181, 115, 0.15));
 }
 
 .hero-intro__content {
@@ -958,13 +971,13 @@ h1 {
     padding: 14px 30px;
     border-radius: 999px;
     border: none;
-    background: var(--gradient-primary, linear-gradient(135deg,#F6A93B 0%,#F87C0F 100%));
+    background: var(--gradient-primary, linear-gradient(135deg, #F6A93B 0%, #F87C0F 100%));
     color: var(--text-inverse);
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: var(--shadow-strong, 0 25px 60px rgba(248,124,15,0.35));
+    box-shadow: var(--shadow-strong, 0 25px 60px rgba(248, 124, 15, 0.35));
 }
 
 .hero-intro__cta-primary:hover {
@@ -976,7 +989,7 @@ h1 {
     align-self: center;
     font-size: 1rem;
     font-weight: 500;
-    color: var(--text-muted, rgba(253,243,229,0.75));
+    color: var(--text-muted, rgba(253, 243, 229, 0.75));
     text-decoration: none;
     border-bottom: 1px solid rgba(255, 181, 115, 0.5);
     padding-bottom: 4px;
@@ -1008,7 +1021,7 @@ h1 {
     display: block;
     margin-top: 6px;
     font-size: 0.95rem;
-    color: var(--text-muted, rgba(253,243,229,0.75));
+    color: var(--text-muted, rgba(253, 243, 229, 0.75));
 }
 
 .feature-summary {
@@ -1134,6 +1147,7 @@ h1 {
         font-size: 1.35rem;
     }
 }
+
 .header__persona-toggle {
     display: inline-flex;
     align-items: center;
@@ -1213,6 +1227,7 @@ h1 {
     .header__persona-toggle {
         display: none;
     }
+
     .header__persona-nav {
         display: block !important;
         position: static;
@@ -1221,19 +1236,22 @@ h1 {
         box-shadow: none;
         width: auto;
     }
+
     .mega-menu__layout {
         display: flex;
         align-items: center;
         gap: 18px;
     }
+
     .mega-menu__item {
         background: transparent;
         border-radius: 12px;
         padding: 10px 14px;
         box-shadow: none;
     }
+
     .mega-menu__item:hover,
-.mega-menu__item:focus-visible {
+    .mega-menu__item:focus-visible {
         background: rgba(141, 232, 255, 0.2);
     }
 }
@@ -1242,6 +1260,7 @@ h1 {
     .header__persona-toggle {
         margin-right: 12px;
     }
+
     .header__persona-nav {
         width: calc(100% - 40px);
     }
@@ -1360,6 +1379,7 @@ h1 {
         padding: 24px 20px;
     }
 }
+
 .hero-intro__cta-plan {
     padding: 12px 24px;
     border-radius: 999px;
@@ -1376,7 +1396,7 @@ h1 {
 .hero-intro__cta-plan:focus-visible {
     color: var(--text-inverse);
     border-color: transparent;
-    background: var(--gradient-accent, linear-gradient(135deg,#7A5AF8 0%,#EC4899 100%));
+    background: var(--gradient-accent, linear-gradient(135deg, #7A5AF8 0%, #EC4899 100%));
     transform: translateY(-2px);
     box-shadow: var(--shadow-primary);
 }
@@ -1898,6 +1918,7 @@ h1 {
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -2613,6 +2634,7 @@ h1 {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -2732,15 +2754,20 @@ h1 {
 }
 
 @keyframes fireFlicker {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scale(1) rotate(0deg);
     }
+
     25% {
         transform: scale(1.05) rotate(-2deg);
     }
+
     50% {
         transform: scale(1.1) rotate(0deg);
     }
+
     75% {
         transform: scale(1.05) rotate(2deg);
     }
@@ -2835,9 +2862,11 @@ h1 {
         opacity: 0;
         transform: scale(0.8);
     }
+
     50% {
         transform: scale(1.05);
     }
+
     100% {
         opacity: 1;
         transform: scale(1);
@@ -2851,9 +2880,12 @@ h1 {
 }
 
 @keyframes celebrate {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: rotate(-5deg) scale(1);
     }
+
     50% {
         transform: rotate(5deg) scale(1.1);
     }
@@ -2934,13 +2966,19 @@ h1 {
 }
 
 @keyframes bellRing {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: rotate(0deg);
     }
-    5%, 15% {
+
+    5%,
+    15% {
         transform: rotate(-10deg);
     }
-    10%, 20% {
+
+    10%,
+    20% {
         transform: rotate(10deg);
     }
 }
@@ -2996,8 +3034,8 @@ h1 {
 
 .saas-shell {
     background: radial-gradient(120% 140% at 10% 10%, rgba(248, 172, 59, 0.32), transparent),
-                radial-gradient(80% 120% at 80% 0%, rgba(122, 90, 248, 0.27), transparent),
-                var(--saas-bg);
+        radial-gradient(80% 120% at 80% 0%, rgba(122, 90, 248, 0.27), transparent),
+        var(--saas-bg);
     color: var(--saas-text);
     padding: 2.5rem clamp(1rem, 4vw, 3rem) 1rem;
     border-bottom: 1px solid rgba(253, 243, 229, 0.08);
@@ -3231,7 +3269,7 @@ h1 {
     position: absolute;
     inset: -40% 10%;
     background: radial-gradient(circle at 20% 20%, rgba(253, 243, 229, 0.12), transparent 55%),
-                radial-gradient(circle at 80% 10%, rgba(123, 94, 255, 0.15), transparent 60%);
+        radial-gradient(circle at 80% 10%, rgba(123, 94, 255, 0.15), transparent 60%);
     opacity: 0.6;
     pointer-events: none;
     animation: shortcutHalo 16s linear infinite;
@@ -3423,14 +3461,29 @@ h1 {
 }
 
 @keyframes shortcutHalo {
-    0% { transform: translate3d(0, 0, 0) rotate(0deg); }
-    100% { transform: translate3d(40px, 20px, 0) rotate(360deg); }
+    0% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+
+    100% {
+        transform: translate3d(40px, 20px, 0) rotate(360deg);
+    }
 }
 
 @keyframes shortcutGlow {
-    0% { transform: rotate(0deg); opacity: 0.35; }
-    50% { opacity: 0.6; }
-    100% { transform: rotate(360deg); opacity: 0.35; }
+    0% {
+        transform: rotate(0deg);
+        opacity: 0.35;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 0.35;
+    }
 }
 
 .saas-hero__content {
@@ -3504,7 +3557,7 @@ h1 {
     border-radius: 1rem;
     border: 1px solid rgba(255, 181, 115, 0.15);
     background: rgba(36, 20, 13, 0.92);
-    box-shadow: var(--shadow-sm, 0 20px 40px rgba(5,3,2,0.45));
+    box-shadow: var(--shadow-sm, 0 20px 40px rgba(5, 3, 2, 0.45));
     color: var(--saas-text);
     font: inherit;
     text-align: left;
@@ -3528,7 +3581,7 @@ h1 {
 .quick-card:hover {
     border-color: rgba(246, 169, 59, 0.8);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-strong, 0 25px 60px rgba(248,124,15,0.35));
+    box-shadow: var(--shadow-strong, 0 25px 60px rgba(248, 124, 15, 0.35));
 }
 
 .saas-hero__panel {
@@ -3755,6 +3808,7 @@ h1 {
         flex-direction: column;
     }
 }
+
 /* ============================================================
    Personalized Recommendations
    ============================================================ */
@@ -4077,6 +4131,7 @@ h1 {
 .tutorial-highlight.show {
     opacity: 1;
 }
+
 /* 禁用旧的视频背景容器，避免出现浅色渐变 */
 .video-background-container,
 .video-background-container::before,
@@ -4097,21 +4152,25 @@ h1 {
     width: 100%;
     height: 100%;
     z-index: 10000;
-    display: flex; /* 始终为flex布局 */
+    display: flex;
+    /* 始终为flex布局 */
     align-items: center;
     justify-content: center;
     opacity: 0;
-    visibility: hidden; /* 使用visibility隐藏 */
-    pointer-events: none; /* 禁用交互 */
+    visibility: hidden;
+    /* 使用visibility隐藏 */
+    pointer-events: none;
+    /* 禁用交互 */
     transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* 显示状态 */
 .player-modal.show {
     opacity: 1;
     visibility: visible;
-    pointer-events: auto; /* 启用交互 */
+    pointer-events: auto;
+    /* 启用交互 */
 }
 
 /* 半透明背景遮罩 */
@@ -4138,8 +4197,8 @@ h1 {
 /* 播放器卡片 */
 .player-modal-content .audio-player {
     background: linear-gradient(135deg,
-        rgba(15, 12, 30, 0.98) 0%,
-        rgba(22, 18, 42, 0.95) 100%);
+            rgba(15, 12, 30, 0.98) 0%,
+            rgba(22, 18, 42, 0.95) 100%);
     border-radius: 24px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 28px 32px;
@@ -4348,6 +4407,7 @@ h1 {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -4358,6 +4418,7 @@ h1 {
         transform: translateY(40px) scale(0.95);
         opacity: 0;
     }
+
     to {
         transform: translateY(0) scale(1);
         opacity: 1;

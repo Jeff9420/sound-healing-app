@@ -1,18 +1,9 @@
 /**
- * UserDataManager - 用户数据管理器
- *
- * 管理用户的本地数据，包括：
- * - 播放历史记录
- * - 收藏列表
- * - 用户偏好设置
- * - 收听统计数据
- *
- * @class
- * @author Sound Healing Team
- * @version 1.0.0
+ * UserDataManager Module
+ * Manages user local data including history, favorites, and statistics.
  */
 
-class UserDataManager {
+export class UserDataManager {
     constructor() {
         this.storagePrefix = 'soundHealing_';
         this.maxHistoryItems = 50; // 最多保存50条历史记录
@@ -396,11 +387,4 @@ class UserDataManager {
             storageSize: `${kb} KB`
         };
     }
-}
-
-// 创建全局实例
-if (typeof window !== 'undefined') {
-    window.UserDataManager = UserDataManager;
-    window.userDataManager = new UserDataManager();
-    console.log('✅ UserDataManager 已初始化');
 }

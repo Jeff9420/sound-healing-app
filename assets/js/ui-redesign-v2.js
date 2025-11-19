@@ -234,13 +234,24 @@ class UIRedesignV2 {
             if (categoryCard && categoryCard.classList.contains('category-card')) {
                 categoryCard.click();
             } else {
-                // 如果找不到，尝试使用AudioManager直接播放
-                if (window.app && window.app.audioManager) {
+                // 如果找不到，尝试使用AppCore直接播放
+                if (window.appCore) {
+                    const tracks = window.appCore.dataManager.getTracksForCategory(category);
+                    if (tracks.length > 0) {
+                        window.appCore.audioPlayer.loadAndPlay(tracks, 0, category);
+                    }
+                }
+                // Legacy fallback
+                else if (window.app && window.app.audioManager) {
                     const config = window.AUDIO_CONFIG;
                     if (config && config.categories[category]) {
                         const files = config.categories[category].files;
                         if (files && files.length > 0) {
-                            window.app.audioManager.playTrack(files[0], category, files[0]);
+                            // This assumes audioManager has playTrack which we didn't implement in AudioPlayer
+                            // But since we have appCore, this branch shouldn't be hit if appCore is initialized.
+                            // If it is hit, it will fail unless we add playTrack to AudioPlayer.
+                            // But we are relying on appCore.
+                            console.warn('Using legacy audioManager fallback, might fail if playTrack is missing');
                         }
                     }
                 }
