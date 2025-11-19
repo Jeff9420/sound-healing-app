@@ -1,5 +1,17 @@
 {
   "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/en",
+      "destination": "/en/index.html"
+    },
+    {
+      "source": "/zh",
+      "destination": "/zh/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "**/*.js",
@@ -16,6 +28,15 @@
         {
           "key": "Content-Type",
           "value": "text/css; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "source": "**/*.html",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/html; charset=utf-8"
         }
       ]
     },
