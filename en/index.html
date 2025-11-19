@@ -2027,15 +2027,21 @@
             const reminderBtn = document.getElementById('reminderBtn');
             const reminderText = document.getElementById('reminderText');
 
+            // Add null checks to prevent errors
+            if (!reminderBtn || !reminderText) {
+                console.warn('Reminder button elements not found');
+                return;
+            }
+
             if (window.dailyMeditationReminder) {
                 const status = window.dailyMeditationReminder.getReminderStatus();
 
                 if (status.isEnabled) {
                     reminderBtn.classList.add('has-streak');
-                reminderText.textContent = `${status.streakDays} day streak`;
+                    reminderText.textContent = `${status.streakDays} day streak`;
                 } else {
                     reminderBtn.classList.remove('has-streak');
-            reminderText.textContent = 'Daily reminder';
+                    reminderText.textContent = 'Daily reminder';
                 }
             }
         }

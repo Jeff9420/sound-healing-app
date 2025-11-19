@@ -733,6 +733,12 @@ class InternationalizationSystem {
                 // 提交按钮和成功消息
                 'form.plan.submit': '领取定制计划',
                 'form.plan.success': '✅ 计划申请成功！我们会在 5 分钟内将定制冥想安排发送至你的邮箱，请注意查收。',
+                'form.plan.trust': '基于 120K+ 匿名使用数据生成，可随时取消订阅。',
+                'form.plan.privacy': '我们只会发送睡眠/冥想相关内容，不会出售邮箱或推送广告。',
+
+                // Authentication (Guest Mode)
+                'auth.guestHint': '也可以先匿名体验，大部分功能随时再绑定邮箱。',
+                'auth.guestCta': '先匿名体验',
 
                 // Hero Section
                 'hero.eyebrow': '专业声音疗愈 · 5 种语言随时可用',
