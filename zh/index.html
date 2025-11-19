@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="zh-Hans">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,8 @@
     <!-- Primary Meta Tags -->
     <title>声音疗愈 SoundFlows | 免费在线冥想音乐、雨声白噪音、助眠放松音效</title>
     <meta name="title" content="声音疗愈 SoundFlows | 免费在线冥想音乐、雨声白噪音、助眠放松音效">
-    <meta name="description" content="SoundFlows 声音疗愈平台提供213+免费音频：雨声助眠、白噪音专注、冥想音乐、脉轮疗愈、焦虑缓解。无需下载APP，浏览器直接播放，科学改善睡眠、专注力和情绪健康。">
+    <meta name="description"
+        content="SoundFlows 声音疗愈平台提供213+免费音频：雨声助眠、白噪音专注、冥想音乐、脉轮疗愈、焦虑缓解。无需下载APP，浏览器直接播放，科学改善睡眠、专注力和情绪健康。">
     <meta name="keywords" content="声音疗愈,冥想音乐,雨声睡眠,白噪音,自然音效,睡眠音乐,放松音乐,减压音乐,颂钵音疗,脉轮疗愈,催眠音频,潜意识疗法,助眠音频,专注力音乐,焦虑缓解,情绪疗愈">
     <meta name="author" content="Sound Healing Team">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -73,70 +75,73 @@
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-5KF3894B');</script>
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5KF3894B');</script>
     <!-- End Google Tag Manager -->
 
     <!-- Google Analytics 4 (GA4) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4NZR3HR3J1"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-      // 配置GA4测量ID
-      gtag('config', 'G-4NZR3HR3J1', {
-        'send_page_view': true,
-        'anonymize_ip': true,
-        'cookie_flags': 'SameSite=None;Secure'
-      });
+        // 配置GA4测量ID
+        gtag('config', 'G-4NZR3HR3J1', {
+            'send_page_view': true,
+            'anonymize_ip': true,
+            'cookie_flags': 'SameSite=None;Secure'
+        });
 
-      // 自定义事件追�?- 音频播放
-      window.trackAudioPlay = function(category, trackName) {
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'audio_play', {
-            'event_category': 'Audio',
-            'event_label': category + ' - ' + trackName,
-            'audio_category': category,
-            'track_name': trackName
-          });
-        }
-      };
+        // 自定义事件追�?- 音频播放
+        window.trackAudioPlay = function (category, trackName) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'audio_play', {
+                    'event_category': 'Audio',
+                    'event_label': category + ' - ' + trackName,
+                    'audio_category': category,
+                    'track_name': trackName
+                });
+            }
+        };
 
-      // 自定义事件追�?- 语言切换
-      window.trackLanguageChange = function(language) {
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'language_change', {
-            'event_category': 'Engagement',
-            'event_label': language
-          });
-        }
-      };
+        // 自定义事件追�?- 语言切换
+        window.trackLanguageChange = function (language) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'language_change', {
+                    'event_category': 'Engagement',
+                    'event_label': language
+                });
+            }
+        };
 
-      // 自定义事件追踪 - 睡眠定时器
-      window.trackSleepTimer = function(minutes) {
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'sleep_timer_set', {
-            'event_category': 'Feature',
-            'event_label': minutes + ' minutes',
-            'timer_duration': minutes
-          });
-        }
-      };
+        // 自定义事件追踪 - 睡眠定时器
+        window.trackSleepTimer = function (minutes) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'sleep_timer_set', {
+                    'event_category': 'Feature',
+                    'event_label': minutes + ' minutes',
+                    'timer_duration': minutes
+                });
+            }
+        };
 
-      // 自定义事件追踪 - 分享点击
-      window.trackShare = function(platform) {
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'share', {
-            'event_category': 'Social',
-            'event_label': platform,
-            'method': platform
-          });
-        }
-      };
+        // 自定义事件追踪 - 分享点击
+        window.trackShare = function (platform) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'share', {
+                    'event_category': 'Social',
+                    'event_label': platform,
+                    'method': platform
+                });
+            }
+        };
     </script>
 
     <!-- Preload Critical Resources -->
@@ -144,7 +149,7 @@
     <link rel="preload" href="../assets/js/audio-config.js" as="script">
     <link rel="preload" href="../assets/js/i18n-system.js" as="script">
     <link rel="preload" href="../assets/js/index-app.js" as="script">
-  
+
     <!-- External Stylesheets -->
     <link rel="stylesheet" href="../assets/css/global-theme.css">
     <link rel="stylesheet" href="../assets/css/index-styles.css?v=20251115-modal">
@@ -164,7 +169,7 @@
     <link rel="stylesheet" href="../assets/css/theme-system.css">
 
     <link rel="stylesheet" href="../assets/css/focus-mode.css">
-    
+
     <!-- UI Redesign v2.0 CSS -->
     <link rel="stylesheet" href="../assets/css/redesign-v2.css">
 
@@ -286,17 +291,18 @@
         localStorage.setItem('sound_healing_language', 'zh-CN');
 
         // Ensure i18n system uses Chinese on initialization
-        window.addEventListener('DOMContentLoaded', function() {
+        window.addEventListener('DOMContentLoaded', function () {
             if (window.i18n && typeof window.i18n.changeLanguage === 'function') {
                 window.i18n.changeLanguage('zh-CN');
             }
         });
     </script>
 </head>
+
 <body>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5KF3894B"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5KF3894B" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
     <!-- SEO H1 (Hidden for SEO purposes, screen reader accessible) -->
@@ -319,7 +325,7 @@
         <canvas id="backgroundCanvas"></canvas>
 
         <!-- Header -->
-                <div class="saas-shell">
+        <div class="saas-shell">
             <header class="saas-hero" role="banner" id="heroIntro">
                 <nav class="saas-nav" aria-label="主导航">
                     <div class="saas-nav__brand">
@@ -337,33 +343,42 @@
                     </ul>
                     <div class="saas-nav__actions">
                         <span class="saas-nav__pill" data-i18n="nav.badge.new"></span>
-                        <button class="saas-nav__ghost" type="button" id="navHistoryBtn" aria-label="Play History" onclick="window.historyFavoritesUI?.openPanel('history')">
+                        <button class="saas-nav__ghost" type="button" id="navHistoryBtn" aria-label="Play History"
+                            onclick="window.historyFavoritesUI?.openPanel('history')">
                             <span aria-hidden="true">🕘</span>
                             <span data-i18n="nav.history"></span>
                         </button>
-                        <button class="saas-nav__ghost" type="button" id="navFavoritesBtn" aria-label="My Favorites" onclick="window.historyFavoritesUI?.openPanel('favorites')">
+                        <button class="saas-nav__ghost" type="button" id="navFavoritesBtn" aria-label="My Favorites"
+                            onclick="window.historyFavoritesUI?.openPanel('favorites')">
                             <span aria-hidden="true">⭐</span>
                             <span data-i18n="nav.favorites"></span>
                         </button>
                         <div class="language-selector" id="languageSelector">
-                            <button class="language-toggle" id="languageToggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">
+                            <button class="language-toggle" id="languageToggle" type="button" aria-haspopup="listbox"
+                                aria-expanded="false" aria-label="Select language">
                                 <span class="language-toggle__label" data-role="language-label">EN</span>
                                 <span class="language-toggle__icon" aria-hidden="true">🌐</span>
                             </button>
-                            <div class="language-dropdown" id="languageDropdown" role="listbox" aria-label="Select Language">
-                                <button class="language-option" type="button" data-lang="en-US" data-url="/en/" role="option" aria-selected="true">
+                            <div class="language-dropdown" id="languageDropdown" role="listbox"
+                                aria-label="Select Language">
+                                <button class="language-option" type="button" data-lang="en-US" data-url="/en/"
+                                    role="option" aria-selected="true">
                                     <span>English</span>
                                 </button>
-                                <button class="language-option" type="button" data-lang="zh-CN" data-url="/zh/" role="option" aria-selected="false">
+                                <button class="language-option" type="button" data-lang="zh-CN" data-url="/zh/"
+                                    role="option" aria-selected="false">
                                     <span>简体中文</span>
                                 </button>
-                                <button class="language-option" type="button" data-lang="ja-JP" role="option" aria-selected="false">
+                                <button class="language-option" type="button" data-lang="ja-JP" role="option"
+                                    aria-selected="false">
                                     <span>日本語</span>
                                 </button>
-                                <button class="language-option" type="button" data-lang="ko-KR" role="option" aria-selected="false">
+                                <button class="language-option" type="button" data-lang="ko-KR" role="option"
+                                    aria-selected="false">
                                     <span>한국어</span>
                                 </button>
-                                <button class="language-option" type="button" data-lang="es-ES" role="option" aria-selected="false">
+                                <button class="language-option" type="button" data-lang="es-ES" role="option"
+                                    aria-selected="false">
                                     <span>Español</span>
                                 </button>
                             </div>
@@ -373,15 +388,18 @@
                 </nav>
                 <div class="saas-category-shortcuts" id="categoryShortcuts" aria-label="音频类型快捷导航" role="list"></div>
                 <div class="saas-hero__grid">
-                                        <div class="saas-hero__content">
+                    <div class="saas-hero__content">
                         <p class="saas-hero__eyebrow" data-i18n="hero.eyebrow">今晚放慢呼吸</p>
                         <h2 class="saas-hero__headline" data-i18n="hero.headline">科学验证的疗愈声景，帮你更快入睡</h2>
-                        <p class="saas-hero__description" data-i18n="hero.description">213+ 雨声、白噪音与冥想音乐，设计用于深度睡眠、平稳专注与温柔清晨。</p>
+                        <p class="saas-hero__description" data-i18n="hero.description">213+
+                            雨声、白噪音与冥想音乐，设计用于深度睡眠、平稳专注与温柔清晨。</p>
                         <div class="saas-hero__cta">
-                            <button class="saas-btn saas-btn--primary" data-cta="start-experience" data-action="start-default-session" aria-label="Start sleep session">
+                            <button class="saas-btn saas-btn--primary" data-cta="start-experience"
+                                data-action="start-default-session" aria-label="Start sleep session">
                                 <span data-i18n="hero.cta.primary">开启 15 分钟助眠雨声</span>
                             </button>
-                            <button class="saas-btn saas-btn--ghost" data-scroll-target="#conversionOffer" data-track="plan-open">
+                            <button class="saas-btn saas-btn--ghost" data-scroll-target="#conversionOffer"
+                                data-track="plan-open">
                                 <span data-i18n="hero.cta.plan">领取 7 天免费练习计划</span>
                             </button>
                         </div>
@@ -393,12 +411,14 @@
                             <article class="metric-card">
                                 <p class="metric-card__number">213+</p>
                                 <p class="metric-card__title" data-i18n="hero.metrics.soundscapes">疗愈声景</p>
-                                <p class="metric-card__desc" data-i18n="hero.metrics.soundscapes.desc">雨声、白噪音、颂钵与呼吸引导。</p>
+                                <p class="metric-card__desc" data-i18n="hero.metrics.soundscapes.desc">雨声、白噪音、颂钵与呼吸引导。
+                                </p>
                             </article>
                             <article class="metric-card">
                                 <p class="metric-card__number">9</p>
                                 <p class="metric-card__title" data-i18n="hero.metrics.languages">多语言支持</p>
-                                <p class="metric-card__desc" data-i18n="hero.metrics.languages.desc">English / 中文 / 日本語 / 한국어 / Español</p>
+                                <p class="metric-card__desc" data-i18n="hero.metrics.languages.desc">English / 中文 / 日本語
+                                    / 한국어 / Español</p>
                             </article>
                             <article class="metric-card">
                                 <p class="metric-card__number">120K+</p>
@@ -434,9 +454,9 @@
                 </p>
                 <div class="ai-hero__actions">
                     <button class="ai-button ai-button--primary" type="button" data-i18n="ai.hero.primary"
-                            onclick="startAISignaturePlan('hero-primary')">开始我的AI疗程</button>
+                        onclick="startAISignaturePlan('hero-primary')">开始我的AI疗程</button>
                     <button class="ai-button ai-button--ghost" type="button" data-i18n="ai.hero.secondary"
-                            onclick="document.getElementById('aiHealingJourneys').scrollIntoView({behavior: 'smooth'})">
+                        onclick="document.getElementById('aiHealingJourneys').scrollIntoView({behavior: 'smooth'})">
                         浏览疗愈旅程
                     </button>
                 </div>
@@ -470,14 +490,15 @@
                     <div class="ai-recommendations__list">
                         <div class="ai-recommendations__item">
                             <span data-i18n="ai.hero.reco.first">深睡雨声 + Alpha 钵 · 45 分钟</span>
-                            <button type="button" class="ai-button ai-button--ghost" onclick="startAISignaturePlan('hero-recommendation')"
-                                    data-i18n="ai.hero.reco.play">播放</button>
+                            <button type="button" class="ai-button ai-button--ghost"
+                                onclick="startAISignaturePlan('hero-recommendation')"
+                                data-i18n="ai.hero.reco.play">播放</button>
                         </div>
                         <div class="ai-recommendations__item">
                             <span data-i18n="ai.hero.reco.second">午夜焦虑复位 · 20 分钟教练</span>
                             <button type="button" class="ai-button ai-button--ghost"
-                                    onclick="document.getElementById('conversionOffer')?.scrollIntoView({behavior: 'smooth'})"
-                                    data-i18n="ai.hero.reco.learn">了解</button>
+                                onclick="document.getElementById('conversionOffer')?.scrollIntoView({behavior: 'smooth'})"
+                                data-i18n="ai.hero.reco.learn">了解</button>
                         </div>
                     </div>
                 </div>
@@ -533,7 +554,8 @@
                         <span>环境建议</span>
                     </div>
                 </article>
-                <article class="ai-card" style="--ai-card-bg: url('../assets/images/blog/binaural-beats-focus-hero.jpg')">
+                <article class="ai-card"
+                    style="--ai-card-bg: url('../assets/images/blog/binaural-beats-focus-hero.jpg')">
                     <div class="ai-card__icon" aria-hidden="true">✨</div>
                     <h4 class="ai-card__title" data-i18n="ai.bento.energy.title">脉轮共振</h4>
                     <p data-i18n="ai.bento.energy.desc">
@@ -555,9 +577,9 @@
             </p>
             <div class="ai-cta__actions">
                 <button class="ai-button ai-button--primary" type="button" data-i18n="ai.cta.primary"
-                        onclick="startAISignaturePlan('cta-footer')">开始校准</button>
+                    onclick="startAISignaturePlan('cta-footer')">开始校准</button>
                 <button class="ai-button ai-button--ghost" type="button" data-i18n="ai.cta.secondary"
-                        onclick="document.getElementById('conversionOffer')?.scrollIntoView({behavior: 'smooth'})">
+                    onclick="document.getElementById('conversionOffer')?.scrollIntoView({behavior: 'smooth'})">
                     与声音教练沟通
                 </button>
             </div>
@@ -571,8 +593,11 @@
                         <h3 data-i18n="player.modal.title">体验启动台：一键播放，智能定时自动关闭</h3>
                         <p data-i18n="player.modal.description">选择疗愈音频，即刻进入沉浸式体验，播放器自动弹出、音量随时控制，定时自动关闭，不影响当前浏览。</p>
                         <div class="player-modal-prompt__actions">
-                            <button class="saas-btn saas-btn--primary" type="button" onclick="window.openPlayerModal(true)" data-i18n="player.modal.start">立即开启播放</button>
-                            <button class="saas-btn saas-btn--ghost" type="button" onclick="openPlaylist('Rain', AUDIO_CONFIG.categories['Rain'])" data-i18n="player.exploreMore">探索疗愈音频</button>
+                            <button class="saas-btn saas-btn--primary" type="button"
+                                onclick="window.openPlayerModal(true)" data-i18n="player.modal.start">立即开启播放</button>
+                            <button class="saas-btn saas-btn--ghost" type="button"
+                                onclick="openPlaylist('Rain', AUDIO_CONFIG.categories['Rain'])"
+                                data-i18n="player.exploreMore">探索疗愈音频</button>
                         </div>
                         <p class="player-modal-prompt__hint" data-i18n="player.modal.hint">每天开始疗愈音频播放，自动记录疗愈数据。</p>
                     </div>
@@ -595,514 +620,569 @@
                 </div>
             </div>
         </section>
-<section class="feature-summary" id="featureHighlights" role="region" aria-labelledby="featuresTitle">
-                <div class="feature-summary__heading">
-                    <h3 id="featuresTitle" data-i18n="features.heading.title">为什么选择声音疗愈空间？</h3>
-                    <p data-i18n="features.heading.desc">我们把专业音疗体验压缩进一个浏览器，在任何设备上都能获取科学、柔和且富有仪式感的放松流程。</p>
-                    <button type="button" class="feature-summary__cta" data-track="stats-open" data-cta="feature-summary" data-i18n="features.heading.cta"
-                            aria-label="Learn about professional sound therapy statistics" tabindex="0">了解专业音疗统计</button>
-                </div>
-                <div class="feature-summary__grid">
-                    <article class="feature-card">
-                        <h4 data-i18n="features.card1.title">沉浸场景秒匹配</h4>
-                        <p data-i18n="features.card1.desc">根据分类智能切换视频背景与氛围动画，自然进入与情绪相匹配的疗愈空间。</p>
-                    </article>
-                    <article class="feature-card">
-                        <h4 data-i18n="features.card2.title">个性混音与收藏</h4>
-                        <p data-i18n="features.card2.desc">混合雨声、白噪、颂钵等元素，保存个人配方并跨设备同步历史记录。</p>
-                    </article>
-                    <article class="feature-card">
-                        <h4 data-i18n="features.card3.title">专注模式与睡眠定时</h4>
-                        <p data-i18n="features.card3.desc">全屏专注视图与智能睡眠定时器，让冥想、午休与夜间睡眠都更轻松。</p>
-                    </article>
-                    <article class="feature-card">
-                        <h4 data-i18n="features.card4.title">数据可视化洞察</h4>
-                        <p data-i18n="features.card4.desc">内置统计面板记录播放频率、时长与偏好，帮助你建立持续的自我照护节奏。</p>
-                    </article>
-                </div>
-            </section>
-
-            <section class="journey-showcase" id="journeyShowcase">
-                <div class="journey-showcase__heading">
-                    <h3 data-i18n="journey.heading.title">选择与你状态匹配的疗愈旅程</h3>
-                    <p data-i18n="journey.heading.desc">按目标切换专属声景，立即开始更聚焦的冥想、睡眠或情绪舒缓流程。</p>
-                </div>
-                <div class="journey-showcase__grid">
-                    <article class="journey-card">
-                        <div class="journey-card__label" data-i18n="journey.meditation.label">冥想专注</div>
-                        <h4 data-i18n="journey.meditation.title">晨间冥想 & 日常正念</h4>
-                        <p data-i18n="journey.meditation.desc">精选颂钵与呼吸声景，配合轻引导帮助你在 10 分钟内回到觉察与平静。</p>
-                        <a class="journey-card__cta" href="#meditation" onclick="document.getElementById('categoryGrid').scrollIntoView({behavior: 'smooth'})" data-i18n="journey.meditation.cta">进入冥想旅程 →</a>
-                    </article>
-                    <article class="journey-card">
-                        <div class="journey-card__label" data-i18n="journey.sleep.label">深度睡眠</div>
-                        <h4 data-i18n="journey.sleep.title">夜间放松 & 快速入睡</h4>
-                        <p data-i18n="journey.sleep.desc">组合雨声、白噪与定时器，温柔覆盖夜晚每个阶段，让思绪慢慢沉静。</p>
-                        <a class="journey-card__cta" href="#rain-sounds" onclick="document.getElementById('categoryGrid').scrollIntoView({behavior: 'smooth'})" data-i18n="journey.sleep.cta">打开心流睡眠 →</a>
-                    </article>
-                    <article class="journey-card">
-                        <div class="journey-card__label" data-i18n="journey.balance.label">能量平衡</div>
-                        <h4 data-i18n="journey.balance.title">脉轮疗愈 & 气场净化</h4>
-                        <p data-i18n="journey.balance.desc">七大脉轮共振与水晶音浴，帮助身体与情绪重新找回内部秩序。</p>
-                        <a class="journey-card__cta" href="#chakra-healing" onclick="document.getElementById('categoryGrid').scrollIntoView({behavior: 'smooth'})" data-i18n="journey.balance.cta">感受能量复位 →</a>
-                    </article>
-                    <article class="journey-card">
-                        <div class="journey-card__label" data-i18n="journey.emotion.label">情绪疗愈</div>
-                        <h4 data-i18n="journey.emotion.title">释放焦虑与压力</h4>
-                        <p data-i18n="journey.emotion.desc">潜意识疗愈与引导式放松，陪你走过日常压力、告别负面循环。</p>
-                        <a class="journey-card__cta" href="#subconscious-therapy" onclick="document.getElementById('categoryGrid').scrollIntoView({behavior: 'smooth'})" data-i18n="journey.emotion.cta">开始情绪舒缓 →</a>
-                    </article>
-                </div>
-            </section>
-
-            <section class="conversion-offer" id="conversionOffer">
-                <div class="conversion-offer__content">
-                    <h3 data-i18n="form.plan.title">领取你的 7 日定制冥想计划</h3>
-                    <p data-i18n="form.plan.description">告诉我们你当前的状态，我们会组合合适的声景、冥想练习与睡眠建议，发送一份结构化的 7 日音疗安排。</p>
-                    <ul>
-                        <li data-i18n="form.plan.benefit1">每日 2 份推荐音频与练习提示</li>
-                        <li data-i18n="form.plan.benefit2">结合睡眠或专注目标的提醒计划</li>
-                        <li data-i18n="form.plan.benefit3">个性化混音建议与进度跟踪指引</li>
-                    </ul>
-                </div>
-                <div class="conversion-offer__form">
-                    <p class="plan-trust" data-i18n="form.plan.trust">基于 120K+ 匿名练习生成，随时可取消。</p>
-                    <form id="planRequestForm" novalidate>
-                        <div class="conversion-offer__field">
-                            <label for="planName" data-i18n="form.plan.label.name">你的昵称</label>
-                            <input id="planName" name="name" type="text" data-i18n-placeholder="form.plan.placeholder.name" placeholder="如：小觉" required>
-                        </div>
-                        <div class="conversion-offer__field">
-                            <label for="planEmail" data-i18n="form.plan.label.email">联系邮箱</label>
-                            <input id="planEmail" name="email" type="email" data-i18n-placeholder="form.plan.placeholder.email" placeholder="your@email.com" required>
-                        </div>
-                        <div class="conversion-offer__field">
-                            <label for="planGoal" data-i18n="form.plan.label.goal">当前最想改善的目标</label>
-                            <select id="planGoal" name="goal" required>
-                                <option value="" data-i18n="form.plan.goal.select">请选择</option>
-                                <option value="sleep" data-i18n="form.plan.goal.sleep">提升睡眠质量</option>
-                                <option value="focus" data-i18n="form.plan.goal.focus">提升专注效率</option>
-                                <option value="stress" data-i18n="form.plan.goal.stress">缓解焦虑与压力</option>
-                                <option value="mindfulness" data-i18n="form.plan.goal.mindfulness">建立规律冥想习惯</option>
-                            </select>
-                        </div>
-                        <div class="conversion-offer__field">
-                            <label for="planTime" data-i18n="form.plan.label.time">每日可投入的时长</label>
-                            <select id="planTime" name="time" required>
-                                <option value="" data-i18n="form.plan.time.select">请选择</option>
-                                <option value="5-10" data-i18n="form.plan.time.5-10">5-10 分钟</option>
-                                <option value="10-20" data-i18n="form.plan.time.10-20">10-20 分钟</option>
-                                <option value="20-30" data-i18n="form.plan.time.20-30">20-30 分钟</option>
-                                <option value="30+" data-i18n="form.plan.time.30+">30 分钟以上</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="conversion-offer__submit" data-track="plan-submit" data-i18n="form.plan.submit">领取定制计划</button>
-                    </form>
-                    <div class="conversion-offer__success" aria-live="polite" data-i18n="form.plan.success">
-                        ✅ 计划申请成功！我们会在 5 分钟内将定制冥想安排发送至你的邮箱，请注意查收。
-                    </div>
-                </div>
-            </section>
-
-            <!-- Category Section -->
-            <section class="content-hub" id="contentHub">
-                <div class="content-hub__intro">
-                    <h3 data-i18n="content.heading.title">疗愈知识库 · 每天 10 分钟提升身心觉察</h3>
-                    <p data-i18n="content.heading.desc">精选文章、实践指南与短视频，结合音疗技巧与真实案例，让"听"与"做"更有结构。</p>
-                    <a class="content-hub__cta" href="#contentHub" data-i18n="content.heading.cta">访问全部内容 →</a>
-                </div>
-                <div class="content-hub__grid">
-                    <article class="content-card">
-                        <div class="content-card__tag" data-i18n="content.card1.tag">指南</div>
-                        <h4 data-i18n="content.card1.title">30 分钟睡前音疗步骤</h4>
-                        <p data-i18n="content.card1.desc">按照"缓和呼吸 → 白噪预热 → 深度冥想"的三段结构，快速进入深层睡眠。</p>
-                        <a class="content-card__link" href="resources-detail.html?id=sleep-guide" data-i18n="content.card1.link">阅读指南 →</a>
-                    </article>
-                    <article class="content-card">
-                        <div class="content-card__tag" data-i18n="content.card2.tag">视频</div>
-                        <h4 data-i18n="content.card2.title">雨声 + 颂钵混音实操</h4>
-                        <p data-i18n="content.card2.desc">1 分钟学会在混音台里叠加雨声与颂钵，让午后专注更稳定。</p>
-                        <button class="content-card__link" onclick="window.mixerUI && window.mixerUI.open()" data-i18n="content.card2.link">即刻观看 →</button>
-                    </article>
-                    <article class="content-card">
-                        <div class="content-card__tag" data-i18n="content.card3.tag">案例</div>
-                        <h4 data-i18n="content.card3.title">设计师小安的晨间冥想</h4>
-                        <p data-i18n="content.card3.desc">看看她如何用 7 日音疗计划缓解焦虑，并保持每周 5 次冥想的习惯。</p>
-                        <a class="content-card__link" href="resources-detail.html?id=meditation-guide" data-i18n="content.card3.link">查看故事 →</a>
-                    </article>
-                    <article class="content-card">
-                        <div class="content-card__tag" data-i18n="content.card4.tag">音疗笔记</div>
-                        <h4 data-i18n="content.card4.title">脉轮共振与情绪释放</h4>
-                        <p data-i18n="content.card4.desc">从颜色、频率到身体对应部位，了解脉轮疗愈的科学基础与入门练习。</p>
-                        <a class="content-card__link" href="resources-detail.html?id=healing-guide" data-i18n="content.card4.link">下载笔记 →</a>
-                    </article>
-                </div>
-            </section>
-
-            <section class="impact-proof" id="impactProof">
-                <div class="impact-proof__grid">
-                    <article class="impact-card impact-card--stats">
-                        <h4 data-i18n="impact.stats.title">38% 用户完成 7 日引导疗程</h4>
-                        <p data-i18n="impact.stats.desc">基于 2025 年匿名数据，持续使用混音 + 冥想方案的用户中，有 38% 成功完成我们推荐的深度疗愈课程。</p>
-                        <button type="button" class="impact-card__cta" data-track="stats-open" data-cta="impact-stats" data-i18n="impact.stats.cta">查看详细数据面板</button>
-                    </article>
-                    <article class="impact-card impact-card--story">
-                        <h4 data-i18n="impact.story.title">用户故事 · 设计师小安的转变</h4>
-                        <p data-i18n="impact.story.desc">通过 7 日音疗计划，她将晨间焦虑指数降低 45%，并把 15 分钟冥想融入日常通勤前的仪式。</p>
-                        <a class="impact-card__link" href="#conversionOffer" data-i18n="impact.story.link">阅读完整故事 →</a>
-                    </article>
-                </div>
-            </section>
-
-            <section class="personalized-recommendations" id="personalizedRecommendations" aria-label="个性化声音推荐">
-                <div class="recommendations__header">
-                    <div>
-                        <p class="recommendations__eyebrow" data-i18n="recommendations.eyebrow">为你精挑细选</p>
-                        <h3 data-i18n="recommendations.title">基于行为和时间段的疗愈清单</h3>
-                        <p class="recommendations__description" data-i18n="recommendations.body">
-                            我们会结合你的最近播放、收藏偏好以及当前时间段，为你生成 6 条最契合的疗愈音频。
-                        </p>
-                    </div>
-                    <button class="recommendations__refresh" type="button" id="refreshRecommendationsBtn" aria-live="polite">
-                        <span aria-hidden="true">↻</span>
-                        <span data-i18n="recommendations.refresh">刷新推荐</span>
-                    </button>
-                </div>
-                <div class="recommendations__grid" id="recommendationsGrid" role="list" aria-live="polite">
-                    <div class="recommendations__skeleton" aria-hidden="true"></div>
-                    <div class="recommendations__skeleton" aria-hidden="true"></div>
-                    <div class="recommendations__skeleton" aria-hidden="true"></div>
-                </div>
-            </section>
-
-            <!-- 分类网格已移除 - 现在使用导航下的快捷卡片直接播放 -->
-        </div>
-
-        <!-- Playlist Modal -->
-        <div id="playlistModal" class="playlist-modal" style="display: none;" role="dialog" aria-labelledby="playlistTitle" aria-modal="true">
-            <div class="modal-content">
-                <button class="close" onclick="closePlaylist()" data-i18n="modal.close" aria-label="关闭播放列表" tabindex="0">&times;</button>
-                <h2 id="playlistTitle" data-i18n="playlist.title">选择音频</h2>
-                <div id="trackList" class="track-list" role="list" aria-label="Audio tracks"></div>
+        <section class="feature-summary" id="featureHighlights" role="region" aria-labelledby="featuresTitle">
+            <div class="feature-summary__heading">
+                <h3 id="featuresTitle" data-i18n="features.heading.title">为什么选择声音疗愈空间？</h3>
+                <p data-i18n="features.heading.desc">我们把专业音疗体验压缩进一个浏览器，在任何设备上都能获取科学、柔和且富有仪式感的放松流程。</p>
+                <button type="button" class="feature-summary__cta" data-track="stats-open" data-cta="feature-summary"
+                    data-i18n="features.heading.cta" aria-label="Learn about professional sound therapy statistics"
+                    tabindex="0">了解专业音疗统计</button>
             </div>
-        </div>
-
-        <!-- 弹窗式播放器 - 默认隐藏，播放时显示 -->
-        <div id="playerModal" class="player-modal" role="dialog" aria-labelledby="playerModalTitle" aria-hidden="true">
-            <!-- 背景遮罩 - 不自动关闭，让用户控制 -->
-            <div class="player-modal-overlay"></div>
-
-            <!-- 播放器主体 -->
-            <div class="player-modal-content">
-                <div id="audioPlayer" class="audio-player" role="region" aria-label="音频播放控制">
-                    <!-- 关闭按钮 -->
-                    <button class="player-close-btn" onclick="closePlayer()" aria-label="关闭播放器">×</button>
-
-                    <!-- 第1行：6个控制按钮 -->
-                    <div class="player-controls-row" role="group" aria-label="播放控制">
-                        <button class="control-btn" id="repeatBtn" onclick="toggleRepeat()" aria-pressed="false" aria-label="循环模式">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M17 1l4 4-4 4"/>
-                                <path d="M3 11V9a4 4 0 0 1 4-4h14"/>
-                                <path d="M7 23l-4-4 4-4"/>
-                                <path d="M21 13v2a4 4 0 0 1-4 4H3"/>
-                            </svg>
-                        </button>
-                        <button class="control-btn" onclick="previousTrack()" aria-label="上一首">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polygon points="19 20 9 12 19 4 19 20"/>
-                                <line x1="5" y1="19" x2="5" y2="5"/>
-                            </svg>
-                        </button>
-                        <button id="playPauseBtn" class="control-btn play-btn" onclick="togglePlayPause()" aria-label="播放或暂停">
-                            <svg class="play-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <polygon points="5 3 19 12 5 21 5 3"/>
-                            </svg>
-                            <svg class="pause-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display:none;">
-                                <rect x="6" y="4" width="4" height="16"/>
-                                <rect x="14" y="4" width="4" height="16"/>
-                            </svg>
-                        </button>
-                        <button class="control-btn" onclick="nextTrack()" aria-label="下一首">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polygon points="5 4 15 12 5 20 5 4"/>
-                                <line x1="19" y1="5" x2="19" y2="19"/>
-                            </svg>
-                        </button>
-                        <button class="control-btn" id="shuffleBtn" onclick="toggleShuffle()" aria-pressed="false" aria-label="随机播放">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="16 3 21 3 21 8"/>
-                                <line x1="4" y1="20" x2="21" y2="3"/>
-                                <polyline points="21 16 21 21 16 21"/>
-                                <line x1="15" y1="15" x2="21" y2="21"/>
-                                <line x1="4" y1="4" x2="9" y2="9"/>
-                            </svg>
-                        </button>
-                        <button class="control-btn" id="sleepTimerBtn" onclick="toggleSleepTimer()" aria-label="睡眠定时">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <polyline points="12 6 12 12 16 14"/>
-                            </svg>
-                        </button>
-                    </div>
-
-                    <!-- 第2行：进度条 + 时间 -->
-                    <div class="player-progress-row" role="group" aria-label="播放进度">
-                        <div class="progress-bar" onclick="seekTo(event)" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                            <div id="progressFill" class="progress-fill"></div>
-                        </div>
-                        <span id="currentTime" class="time-display">0:00</span>
-                    </div>
-
-                    <!-- 第3行：音量控制 -->
-                    <div class="player-volume-row" role="group" aria-label="音量控制">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;opacity:0.7;">
-                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
-                        </svg>
-                        <div class="volume-control" id="volumeControl">
-                            <div class="volume-fill" id="volumeFill"></div>
-                            <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="70" aria-label="音量">
-                        </div>
-                    </div>
-                </div>
+            <div class="feature-summary__grid">
+                <article class="feature-card">
+                    <h4 data-i18n="features.card1.title">沉浸场景秒匹配</h4>
+                    <p data-i18n="features.card1.desc">根据分类智能切换视频背景与氛围动画，自然进入与情绪相匹配的疗愈空间。</p>
+                </article>
+                <article class="feature-card">
+                    <h4 data-i18n="features.card2.title">个性混音与收藏</h4>
+                    <p data-i18n="features.card2.desc">混合雨声、白噪、颂钵等元素，保存个人配方并跨设备同步历史记录。</p>
+                </article>
+                <article class="feature-card">
+                    <h4 data-i18n="features.card3.title">专注模式与睡眠定时</h4>
+                    <p data-i18n="features.card3.desc">全屏专注视图与智能睡眠定时器，让冥想、午休与夜间睡眠都更轻松。</p>
+                </article>
+                <article class="feature-card">
+                    <h4 data-i18n="features.card4.title">数据可视化洞察</h4>
+                    <p data-i18n="features.card4.desc">内置统计面板记录播放频率、时长与偏好，帮助你建立持续的自我照护节奏。</p>
+                </article>
             </div>
-        </div>
-<!-- Skip to main content link for screen readers -->
-        <a href="#mainContent" class="skip-link">跳到主要内容</a>
+        </section>
 
-        <!-- Live region for screen reader announcements -->
-        <div id="ariaLiveRegion" class="sr-only" aria-live="polite" aria-atomic="true"></div>
-        <div id="ariaAlertRegion" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
-
-        <!-- Onboarding Tutorial -->
-        <div id="onboardingTutorial" class="onboarding-tutorial" aria-hidden="true">
-            <div class="tutorial-overlay" aria-hidden="true"></div>
-            <div class="tutorial-dialog" role="dialog" aria-modal="true" aria-labelledby="tutorialTitle">
-                <header class="tutorial-header">
-                    <p class="tutorial-label" data-i18n="tutorial.label">新手引导</p>
-                    <h3 id="tutorialTitle" data-i18n="tutorial.title">3 分钟熟悉声音疗愈</h3>
-                    <button class="tutorial-close tutorial-btn" data-action="skip" aria-label="跳过教程">×</button>
-                </header>
-                <ol class="tutorial-steps">
-                    <li class="tutorial-step active" data-step="1">
-                        <h4 data-i18n="tutorial.step1.title">选择当下目标</h4>
-                        <p data-i18n="tutorial.step1.desc">浏览顶部的快捷入口，告诉我们你想睡眠、专注还是舒缓压力。</p>
-                    </li>
-                    <li class="tutorial-step" data-step="2">
-                        <h4 data-i18n="tutorial.step2.title">探索 200+ 分类</h4>
-                        <p data-i18n="tutorial.step2.desc">点击任一分类卡片即可开启播放列表，还能看到多语言描述。</p>
-                    </li>
-                    <li class="tutorial-step" data-step="3">
-                        <h4 data-i18n="tutorial.step3.title">掌控播放器</h4>
-                        <p data-i18n="tutorial.step3.desc">音量、睡眠定时、收藏都在底部播放器，键盘同样可操作。</p>
-                    </li>
-                    <li class="tutorial-step" data-step="4">
-                        <h4 data-i18n="tutorial.step4.title">领取个性推荐</h4>
-                        <p data-i18n="tutorial.step4.desc">完成一个音轨即可解锁推荐区，记录会同步到历史与收藏。</p>
-                    </li>
-                </ol>
-                <div class="tutorial-progress" role="tablist" aria-label="教程进度">
-                    <button class="progress-dot active" data-step="1" aria-label="教程第 1 步"></button>
-                    <button class="progress-dot" data-step="2" aria-label="教程第 2 步"></button>
-                    <button class="progress-dot" data-step="3" aria-label="教程第 3 步"></button>
-                    <button class="progress-dot" data-step="4" aria-label="教程第 4 步"></button>
-                </div>
-                <div class="tutorial-actions">
-                    <button class="tutorial-btn tutorial-btn--ghost" data-action="prev" aria-label="上一步" type="button">
-                        <span data-i18n="tutorial.prev">上一步</span>
-                    </button>
-                    <button class="tutorial-btn tutorial-btn--primary" data-action="next" aria-label="下一步" type="button">
-                        <span data-i18n="tutorial.next">下一步</span>
-                    </button>
-                    <button class="tutorial-btn tutorial-btn--primary" data-action="start" aria-label="开始体验" type="button" style="display: none;">
-                        <span data-i18n="tutorial.start">立即开始</span>
-                    </button>
-                </div>
+        <section class="journey-showcase" id="journeyShowcase">
+            <div class="journey-showcase__heading">
+                <h3 data-i18n="journey.heading.title">选择与你状态匹配的疗愈旅程</h3>
+                <p data-i18n="journey.heading.desc">按目标切换专属声景，立即开始更聚焦的冥想、睡眠或情绪舒缓流程。</p>
             </div>
-        </div>
-        <div id="tutorialHighlight" class="tutorial-highlight" aria-hidden="true"></div>
-        <button id="tutorialHelpBtn" class="tutorial-help-btn" type="button" aria-haspopup="dialog" aria-controls="onboardingTutorial">
-            <span aria-hidden="true">❔</span>
-            <span data-i18n="tutorial.help">需要引导</span>
-        </button>
-
-        <!-- User Rating Widget -->
-        <div id="rating-widget"></div>
-
-        <!-- Compact Login Modal -->
-        <div id="compactLoginModal" class="compact-login-modal" style="display: none;" role="dialog" aria-labelledby="compactLoginTitle" aria-modal="true">
-            <div class="compact-modal-overlay" onclick="closeCompactLogin()"></div>
-            <div class="compact-modal-content">
-                <div class="compact-modal-header">
-                    <h3 id="compactLoginTitle" data-i18n="auth.welcome">欢迎回来</h3>
-                    <button class="compact-modal-close" onclick="closeCompactLogin()" aria-label="关闭登录窗口">&times;</button>
-                </div>
-                <p class="compact-login-hint" data-i18n="auth.guestHint">以访客身份即可体验大部分功能，稍后随时绑定邮箱。</p>
-
-                <!-- Email Login Form -->
-                <div id="emailLoginForm" class="compact-login-form">
-                    <div class="form-group">
-                        <input type="email" id="compactEmail" placeholder="邮箱地址" autocomplete="email" tabindex="0">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" id="compactPassword" placeholder="密码" autocomplete="current-password" tabindex="0">
-                    </div>
-                    <button class="compact-login-btn primary" onclick="handleCompactLogin()" tabindex="0">登录</button>
-                    <div class="compact-login-options">
-                        <button class="compact-link" onclick="showCompactSignup()">还没有账号？注册</button>
-                        <button class="compact-link" onclick="showCompactReset()">忘记密码？</button>
-                    </div>
-                </div>
-
-                <!-- Email Signup Form -->
-                <div id="emailSignupForm" class="compact-login-form" style="display: none;">
-                    <div class="form-group">
-                        <input type="text" id="compactName" placeholder="昵称" autocomplete="name" tabindex="0">
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="compactSignupEmail" placeholder="邮箱地址" autocomplete="email" tabindex="0">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" id="compactSignupPassword" placeholder="密码 (至少6位)" autocomplete="new-password" tabindex="0" minlength="6">
-                    </div>
-                    <button class="compact-login-btn primary" onclick="handleCompactSignup()" tabindex="0">注册</button>
-                    <div class="compact-login-options">
-                        <button class="compact-link" onclick="showCompactLogin()">已有账号？登录</button>
-                    </div>
-                </div>
-
-                <!-- Password Reset Form -->
-                <div id="passwordResetForm" class="compact-login-form" style="display: none;">
-                    <p data-i18n="auth.resetInstructions">输入您的邮箱地址，我们将发送重置链接</p>
-                    <div class="form-group">
-                        <input type="email" id="compactResetEmail" placeholder="邮箱地址" autocomplete="email" tabindex="0">
-                    </div>
-                    <button class="compact-login-btn primary" onclick="handleCompactReset()" tabindex="0">发送重置邮件</button>
-                    <div class="compact-login-options">
-                        <button class="compact-link" onclick="showCompactLogin()">返回登录</button>
-                    </div>
-                </div>
-
-                <!-- Phone Login Form -->
-                <div id="phoneLoginForm" class="compact-login-form" style="display: none;">
-                    <div class="form-group">
-                        <input type="tel" id="compactPhone" placeholder="手机号码 (+86 138 0000 0000)" autocomplete="tel" tabindex="0">
-                    </div>
-                    <div class="form-group phone-code-group">
-                        <input type="text" id="compactVerificationCode" placeholder="验证码" autocomplete="one-time-code" tabindex="0">
-                        <button class="send-code-btn" onclick="sendVerificationCode()" tabindex="0">发送验证码</button>
-                    </div>
-                    <button class="compact-login-btn primary" onclick="handlePhoneLogin()" tabindex="0">登录</button>
-                    <div class="compact-login-options">
-                        <button class="compact-link" onclick="showCompactLogin()">使用邮箱登录</button>
-                    </div>
-                </div>
-
-                <div class="compact-modal-divider">
-                    <span>或</span>
-                </div>
-
-                <!-- Quick Login Options -->
-                <div class="compact-quick-login">
-                    <button class="compact-option-btn google" onclick="handleGoogleLogin()" tabindex="0">
-                        <span class="btn-icon">🔵</span>
-                        Google
-                    </button>
-                    <button class="compact-option-btn anonymous" onclick="handleAnonymousLogin()" tabindex="0">
-                        <span class="btn-icon">👤</span>
-                        <span data-i18n="auth.guestCta">以访客身份继续</span>
-                    </button>
-                </div>
+            <div class="journey-showcase__grid">
+                <article class="journey-card">
+                    <div class="journey-card__label" data-i18n="journey.meditation.label">冥想专注</div>
+                    <h4 data-i18n="journey.meditation.title">晨间冥想 & 日常正念</h4>
+                    <p data-i18n="journey.meditation.desc">精选颂钵与呼吸声景，配合轻引导帮助你在 10 分钟内回到觉察与平静。</p>
+                    <a class="journey-card__cta" href="#meditation"
+                        onclick="document.getElementById('categoryGrid').scrollIntoView({behavior: 'smooth'})"
+                        data-i18n="journey.meditation.cta">进入冥想旅程 →</a>
+                </article>
+                <article class="journey-card">
+                    <div class="journey-card__label" data-i18n="journey.sleep.label">深度睡眠</div>
+                    <h4 data-i18n="journey.sleep.title">夜间放松 & 快速入睡</h4>
+                    <p data-i18n="journey.sleep.desc">组合雨声、白噪与定时器，温柔覆盖夜晚每个阶段，让思绪慢慢沉静。</p>
+                    <a class="journey-card__cta" href="#rain-sounds"
+                        onclick="document.getElementById('categoryGrid').scrollIntoView({behavior: 'smooth'})"
+                        data-i18n="journey.sleep.cta">打开心流睡眠 →</a>
+                </article>
+                <article class="journey-card">
+                    <div class="journey-card__label" data-i18n="journey.balance.label">能量平衡</div>
+                    <h4 data-i18n="journey.balance.title">脉轮疗愈 & 气场净化</h4>
+                    <p data-i18n="journey.balance.desc">七大脉轮共振与水晶音浴，帮助身体与情绪重新找回内部秩序。</p>
+                    <a class="journey-card__cta" href="#chakra-healing"
+                        onclick="document.getElementById('categoryGrid').scrollIntoView({behavior: 'smooth'})"
+                        data-i18n="journey.balance.cta">感受能量复位 →</a>
+                </article>
+                <article class="journey-card">
+                    <div class="journey-card__label" data-i18n="journey.emotion.label">情绪疗愈</div>
+                    <h4 data-i18n="journey.emotion.title">释放焦虑与压力</h4>
+                    <p data-i18n="journey.emotion.desc">潜意识疗愈与引导式放松，陪你走过日常压力、告别负面循环。</p>
+                    <a class="journey-card__cta" href="#subconscious-therapy"
+                        onclick="document.getElementById('categoryGrid').scrollIntoView({behavior: 'smooth'})"
+                        data-i18n="journey.emotion.cta">开始情绪舒缓 →</a>
+                </article>
             </div>
-        </div>
+        </section>
 
-        <!-- User Profile Display -->
-        <div id="userProfile" class="user-profile" style="display: none;">
-            <!-- 用户信息将在这里动态显示 -->
-        </div>
-
-        <!-- Notification -->
-        <div id="notification" class="notification"></div>
-
-        <!-- FAQ Section (SEO-Optimized for English Search Queries) -->
-        <section style="max-width: 900px; margin: 4rem auto 4rem; padding: 0 2rem;">
-            <h2 style="font-size: 2.25rem; text-align: center; margin-bottom: 2.5rem; color: var(--text-primary);">
-                Frequently Asked Questions
-            </h2>
-
-            <div style="display: flex; flex-direction: column; gap: 2rem;">
-                <!-- FAQ 1 -->
-                <div style="background: var(--bg-card); padding: 1.75rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
-                    <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.75rem;">
-                        How do I use white noise and rain sounds to fall asleep faster?
-                    </h3>
-                    <p style="line-height: 1.8; color: var(--text-secondary); font-size: 0.95rem;">
-                        Choose gentle rain or white noise from our sleep sounds collection, set volume to 50-60% (loud enough to mask disruptions but not distracting),
-                        and optionally use the sleep timer for 30-60 minutes. The consistent background noise masks sudden environmental sounds that can prevent sleep onset,
-                        helping you fall asleep 38% faster according to sleep research studies. Use the same sound nightly to build a Pavlovian sleep association.
-                    </p>
-                </div>
-
-                <!-- FAQ 2 -->
-                <div style="background: var(--bg-card); padding: 1.75rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
-                    <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.75rem;">
-                        What's the best meditation music for focus and concentration?
-                    </h3>
-                    <p style="line-height: 1.8; color: var(--text-secondary); font-size: 0.95rem;">
-                        For deep focus work, use binaural beats in the alpha range (8-13Hz) with headphones, or ambient instrumental music without lyrics.
-                        For meditation practice, try guided meditations if you're a beginner, or Tibetan singing bowls for experienced meditators.
-                        Keep volume low (30-50%) so the music supports but doesn't dominate your attention. Studies show properly selected focus music can improve
-                        task performance by 15-20%.
-                    </p>
-                </div>
-
-                <!-- FAQ 3 -->
-                <div style="background: var(--bg-card); padding: 1.75rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
-                    <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.75rem;">
-                        Can calming sounds really reduce anxiety and stress?
-                    </h3>
-                    <p style="line-height: 1.8; color: var(--text-secondary); font-size: 0.95rem;">
-                        是的！研究表明，海浪、细雨与缓慢氛围音乐能够启动副交感神经系统，让身体进入“放松模式”，皮质醇最高可下降 45%。通常聆听 3-5 分钟就会感觉呼吸放慢，10-15 分钟能显著降低压力。若有突发焦虑，可搭配 4-6 呼吸法（吸气 4 秒、呼气 6 秒）聆听海浪或雨声。每天练习会累积“平静储备”，逐渐降低基础焦虑。
-                    </p>
-                </div>
-
-                <!-- FAQ 4 -->
-                <div style="background: var(--bg-card); padding: 1.75rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
-                    <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.75rem;">
-                        432Hz、528Hz 等“疗愈频率”真的有效吗？
-                    </h3>
-                    <p style="line-height: 1.8; color: var(--text-secondary); font-size: 0.95rem;">
-                        目前关于 432Hz、528Hz 等特定频率的研究仍在持续，结论并不一致。有实验显示 432Hz 相比 440Hz 更能缓解压力，528Hz 也被用于细胞修复的探索（但证据仍有限）。可以确定的是：<strong>放松的聆听、专注的意图与持续练习</strong> 会带来可量化的身心益处，与具体频率并无绝对关系。只要某种声音让你冥想、放松或专注疗愈，它就通过身心机制发挥了作用。
-                    </p>
-                </div>
-
-                <!-- FAQ 5 -->
-                <div style="background: var(--bg-card); padding: 1.75rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
-                    <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.75rem;">
-                        SoundFlows 真的是免费的吗？需要安装 App 吗？
-                    </h3>
-                    <p style="line-height: 1.8; color: var(--text-secondary); font-size: 0.95rem;">
-                        是的，SoundFlows 完全免费，无需绑定信用卡，也不用下载 App。213+ 首疗愈音频可在任何设备的浏览器中直接播放。你可以选择注册账号来保存收藏、同步进度，也可以继续以访客身份使用全部核心功能。我们的使命是让声音疗法对所有人可得，而不是追求商业利润。
-                    </p>
-                </div>
-
-                <!-- FAQ 6 -->
-                <div style="background: var(--bg-card); padding: 1.75rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
-                    <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.75rem;">
-                        听声音疗愈音频要多久才有效？
-                    </h3>
-                    <p style="line-height: 1.8; color: var(--text-secondary); font-size: 0.95rem;">
-                        <strong>睡眠：</strong> 30-60 分钟，若环境噪音持续可整夜播放。<br>
-                        <strong>冥想：</strong> 先从 10-15 分钟开始，逐渐延长至 20-30 分钟。<br>
-                        <strong>缓解焦虑：</strong> 急性压力时聆听 10-20 分钟；日常预防保持 10 分钟即可。<br>
-                        <strong>专注工作：</strong> 25-50 分钟一个区块，搭配 5-10 分钟休息。<br>
-                        <strong>脉轮疗愈：</strong> 每个脉轮 10-20 分钟，或全套每个 5-10 分钟。<br>
-                        比起时长，规律更重要——每天 10 分钟胜过偶尔 1 小时。
-                    </p>
+        <section class="conversion-offer" id="conversionOffer">
+            <div class="conversion-offer__content">
+                <h3 data-i18n="form.plan.title">领取你的 7 日定制冥想计划</h3>
+                <p data-i18n="form.plan.description">告诉我们你当前的状态，我们会组合合适的声景、冥想练习与睡眠建议，发送一份结构化的 7 日音疗安排。</p>
+                <ul>
+                    <li data-i18n="form.plan.benefit1">每日 2 份推荐音频与练习提示</li>
+                    <li data-i18n="form.plan.benefit2">结合睡眠或专注目标的提醒计划</li>
+                    <li data-i18n="form.plan.benefit3">个性化混音建议与进度跟踪指引</li>
+                </ul>
+            </div>
+            <div class="conversion-offer__form">
+                <p class="plan-trust" data-i18n="form.plan.trust">基于 120K+ 匿名练习生成，随时可取消。</p>
+                <form id="planRequestForm" novalidate>
+                    <div class="conversion-offer__field">
+                        <label for="planName" data-i18n="form.plan.label.name">你的昵称</label>
+                        <input id="planName" name="name" type="text" data-i18n-placeholder="form.plan.placeholder.name"
+                            placeholder="如：小觉" required>
+                    </div>
+                    <div class="conversion-offer__field">
+                        <label for="planEmail" data-i18n="form.plan.label.email">联系邮箱</label>
+                        <input id="planEmail" name="email" type="email"
+                            data-i18n-placeholder="form.plan.placeholder.email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="conversion-offer__field">
+                        <label for="planGoal" data-i18n="form.plan.label.goal">当前最想改善的目标</label>
+                        <select id="planGoal" name="goal" required>
+                            <option value="" data-i18n="form.plan.goal.select">请选择</option>
+                            <option value="sleep" data-i18n="form.plan.goal.sleep">提升睡眠质量</option>
+                            <option value="focus" data-i18n="form.plan.goal.focus">提升专注效率</option>
+                            <option value="stress" data-i18n="form.plan.goal.stress">缓解焦虑与压力</option>
+                            <option value="mindfulness" data-i18n="form.plan.goal.mindfulness">建立规律冥想习惯</option>
+                        </select>
+                    </div>
+                    <div class="conversion-offer__field">
+                        <label for="planTime" data-i18n="form.plan.label.time">每日可投入的时长</label>
+                        <select id="planTime" name="time" required>
+                            <option value="" data-i18n="form.plan.time.select">请选择</option>
+                            <option value="5-10" data-i18n="form.plan.time.5-10">5-10 分钟</option>
+                            <option value="10-20" data-i18n="form.plan.time.10-20">10-20 分钟</option>
+                            <option value="20-30" data-i18n="form.plan.time.20-30">20-30 分钟</option>
+                            <option value="30+" data-i18n="form.plan.time.30+">30 分钟以上</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="conversion-offer__submit" data-track="plan-submit"
+                        data-i18n="form.plan.submit">领取定制计划</button>
+                </form>
+                <div class="conversion-offer__success" aria-live="polite" data-i18n="form.plan.success">
+                    ✅ 计划申请成功！我们会在 5 分钟内将定制冥想安排发送至你的邮箱，请注意查收。
                 </div>
             </div>
         </section>
+
+        <!-- Category Section -->
+        <section class="content-hub" id="contentHub">
+            <div class="content-hub__intro">
+                <h3 data-i18n="content.heading.title">疗愈知识库 · 每天 10 分钟提升身心觉察</h3>
+                <p data-i18n="content.heading.desc">精选文章、实践指南与短视频，结合音疗技巧与真实案例，让"听"与"做"更有结构。</p>
+                <a class="content-hub__cta" href="#contentHub" data-i18n="content.heading.cta">访问全部内容 →</a>
+            </div>
+            <div class="content-hub__grid">
+                <article class="content-card">
+                    <div class="content-card__tag" data-i18n="content.card1.tag">指南</div>
+                    <h4 data-i18n="content.card1.title">30 分钟睡前音疗步骤</h4>
+                    <p data-i18n="content.card1.desc">按照"缓和呼吸 → 白噪预热 → 深度冥想"的三段结构，快速进入深层睡眠。</p>
+                    <a class="content-card__link" href="resources-detail.html?id=sleep-guide"
+                        data-i18n="content.card1.link">阅读指南 →</a>
+                </article>
+                <article class="content-card">
+                    <div class="content-card__tag" data-i18n="content.card2.tag">视频</div>
+                    <h4 data-i18n="content.card2.title">雨声 + 颂钵混音实操</h4>
+                    <p data-i18n="content.card2.desc">1 分钟学会在混音台里叠加雨声与颂钵，让午后专注更稳定。</p>
+                    <button class="content-card__link" onclick="window.mixerUI && window.mixerUI.open()"
+                        data-i18n="content.card2.link">即刻观看 →</button>
+                </article>
+                <article class="content-card">
+                    <div class="content-card__tag" data-i18n="content.card3.tag">案例</div>
+                    <h4 data-i18n="content.card3.title">设计师小安的晨间冥想</h4>
+                    <p data-i18n="content.card3.desc">看看她如何用 7 日音疗计划缓解焦虑，并保持每周 5 次冥想的习惯。</p>
+                    <a class="content-card__link" href="resources-detail.html?id=meditation-guide"
+                        data-i18n="content.card3.link">查看故事 →</a>
+                </article>
+                <article class="content-card">
+                    <div class="content-card__tag" data-i18n="content.card4.tag">音疗笔记</div>
+                    <h4 data-i18n="content.card4.title">脉轮共振与情绪释放</h4>
+                    <p data-i18n="content.card4.desc">从颜色、频率到身体对应部位，了解脉轮疗愈的科学基础与入门练习。</p>
+                    <a class="content-card__link" href="resources-detail.html?id=healing-guide"
+                        data-i18n="content.card4.link">下载笔记 →</a>
+                </article>
+            </div>
+        </section>
+
+        <section class="impact-proof" id="impactProof">
+            <div class="impact-proof__grid">
+                <article class="impact-card impact-card--stats">
+                    <h4 data-i18n="impact.stats.title">38% 用户完成 7 日引导疗程</h4>
+                    <p data-i18n="impact.stats.desc">基于 2025 年匿名数据，持续使用混音 + 冥想方案的用户中，有 38% 成功完成我们推荐的深度疗愈课程。</p>
+                    <button type="button" class="impact-card__cta" data-track="stats-open" data-cta="impact-stats"
+                        data-i18n="impact.stats.cta">查看详细数据面板</button>
+                </article>
+                <article class="impact-card impact-card--story">
+                    <h4 data-i18n="impact.story.title">用户故事 · 设计师小安的转变</h4>
+                    <p data-i18n="impact.story.desc">通过 7 日音疗计划，她将晨间焦虑指数降低 45%，并把 15 分钟冥想融入日常通勤前的仪式。</p>
+                    <a class="impact-card__link" href="#conversionOffer" data-i18n="impact.story.link">阅读完整故事 →</a>
+                </article>
+            </div>
+        </section>
+
+        <section class="personalized-recommendations" id="personalizedRecommendations" aria-label="个性化声音推荐">
+            <div class="recommendations__header">
+                <div>
+                    <p class="recommendations__eyebrow" data-i18n="recommendations.eyebrow">为你精挑细选</p>
+                    <h3 data-i18n="recommendations.title">基于行为和时间段的疗愈清单</h3>
+                    <p class="recommendations__description" data-i18n="recommendations.body">
+                        我们会结合你的最近播放、收藏偏好以及当前时间段，为你生成 6 条最契合的疗愈音频。
+                    </p>
+                </div>
+                <button class="recommendations__refresh" type="button" id="refreshRecommendationsBtn"
+                    aria-live="polite">
+                    <span aria-hidden="true">↻</span>
+                    <span data-i18n="recommendations.refresh">刷新推荐</span>
+                </button>
+            </div>
+            <div class="recommendations__grid" id="recommendationsGrid" role="list" aria-live="polite">
+                <div class="recommendations__skeleton" aria-hidden="true"></div>
+                <div class="recommendations__skeleton" aria-hidden="true"></div>
+                <div class="recommendations__skeleton" aria-hidden="true"></div>
+            </div>
+        </section>
+
+        <!-- 分类网格已移除 - 现在使用导航下的快捷卡片直接播放 -->
+    </div>
+
+    <!-- Playlist Modal -->
+    <div id="playlistModal" class="playlist-modal" style="display: none;" role="dialog" aria-labelledby="playlistTitle"
+        aria-modal="true">
+        <div class="modal-content">
+            <button class="close" onclick="closePlaylist()" data-i18n="modal.close" aria-label="关闭播放列表"
+                tabindex="0">&times;</button>
+            <h2 id="playlistTitle" data-i18n="playlist.title">选择音频</h2>
+            <div id="trackList" class="track-list" role="list" aria-label="Audio tracks"></div>
+        </div>
+    </div>
+
+    <!-- 弹窗式播放器 - 默认隐藏，播放时显示 -->
+    <div id="playerModal" class="player-modal" role="dialog" aria-labelledby="playerModalTitle" aria-hidden="true">
+        <!-- 背景遮罩 - 不自动关闭，让用户控制 -->
+        <div class="player-modal-overlay"></div>
+
+        <!-- 播放器主体 -->
+        <div class="player-modal-content">
+            <div id="audioPlayer" class="audio-player" role="region" aria-label="音频播放控制">
+                <!-- 关闭按钮 -->
+                <button class="player-close-btn" onclick="closePlayer()" aria-label="关闭播放器">×</button>
+
+                <!-- 第1行：6个控制按钮 -->
+                <div class="player-controls-row" role="group" aria-label="播放控制">
+                    <button class="control-btn" id="repeatBtn" onclick="toggleRepeat()" aria-pressed="false"
+                        aria-label="循环模式">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M17 1l4 4-4 4" />
+                            <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+                            <path d="M7 23l-4-4 4-4" />
+                            <path d="M21 13v2a4 4 0 0 1-4 4H3" />
+                        </svg>
+                    </button>
+                    <button class="control-btn" onclick="previousTrack()" aria-label="上一首">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polygon points="19 20 9 12 19 4 19 20" />
+                            <line x1="5" y1="19" x2="5" y2="5" />
+                        </svg>
+                    </button>
+                    <button id="playPauseBtn" class="control-btn play-btn" onclick="togglePlayPause()"
+                        aria-label="播放或暂停">
+                        <svg class="play-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <polygon points="5 3 19 12 5 21 5 3" />
+                        </svg>
+                        <svg class="pause-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                            style="display:none;">
+                            <rect x="6" y="4" width="4" height="16" />
+                            <rect x="14" y="4" width="4" height="16" />
+                        </svg>
+                    </button>
+                    <button class="control-btn" onclick="nextTrack()" aria-label="下一首">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polygon points="5 4 15 12 5 20 5 4" />
+                            <line x1="19" y1="5" x2="19" y2="19" />
+                        </svg>
+                    </button>
+                    <button class="control-btn" id="shuffleBtn" onclick="toggleShuffle()" aria-pressed="false"
+                        aria-label="随机播放">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="16 3 21 3 21 8" />
+                            <line x1="4" y1="20" x2="21" y2="3" />
+                            <polyline points="21 16 21 21 16 21" />
+                            <line x1="15" y1="15" x2="21" y2="21" />
+                            <line x1="4" y1="4" x2="9" y2="9" />
+                        </svg>
+                    </button>
+                    <button class="control-btn" id="sleepTimerBtn" onclick="toggleSleepTimer()" aria-label="睡眠定时">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- 第2行：进度条 + 时间 -->
+                <div class="player-progress-row" role="group" aria-label="播放进度">
+                    <div class="progress-bar" onclick="seekTo(event)" role="slider" aria-valuemin="0"
+                        aria-valuemax="100" aria-valuenow="0">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                    <span id="currentTime" class="time-display">0:00</span>
+                </div>
+
+                <!-- 第3行：音量控制 -->
+                <div class="player-volume-row" role="group" aria-label="音量控制">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        style="flex-shrink:0;opacity:0.7;">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+                    </svg>
+                    <div class="volume-control" id="volumeControl">
+                        <div class="volume-fill" id="volumeFill"></div>
+                        <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="70"
+                            aria-label="音量">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Skip to main content link for screen readers -->
+    <a href="#mainContent" class="skip-link">跳到主要内容</a>
+
+    <!-- Live region for screen reader announcements -->
+    <div id="ariaLiveRegion" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+    <div id="ariaAlertRegion" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
+
+    <!-- Onboarding Tutorial -->
+    <div id="onboardingTutorial" class="onboarding-tutorial" aria-hidden="true">
+        <div class="tutorial-overlay" aria-hidden="true"></div>
+        <div class="tutorial-dialog" role="dialog" aria-modal="true" aria-labelledby="tutorialTitle">
+            <header class="tutorial-header">
+                <p class="tutorial-label" data-i18n="tutorial.label">新手引导</p>
+                <h3 id="tutorialTitle" data-i18n="tutorial.title">3 分钟熟悉声音疗愈</h3>
+                <button class="tutorial-close tutorial-btn" data-action="skip" aria-label="跳过教程">×</button>
+            </header>
+            <ol class="tutorial-steps">
+                <li class="tutorial-step active" data-step="1">
+                    <h4 data-i18n="tutorial.step1.title">选择当下目标</h4>
+                    <p data-i18n="tutorial.step1.desc">浏览顶部的快捷入口，告诉我们你想睡眠、专注还是舒缓压力。</p>
+                </li>
+                <li class="tutorial-step" data-step="2">
+                    <h4 data-i18n="tutorial.step2.title">探索 200+ 分类</h4>
+                    <p data-i18n="tutorial.step2.desc">点击任一分类卡片即可开启播放列表，还能看到多语言描述。</p>
+                </li>
+                <li class="tutorial-step" data-step="3">
+                    <h4 data-i18n="tutorial.step3.title">掌控播放器</h4>
+                    <p data-i18n="tutorial.step3.desc">音量、睡眠定时、收藏都在底部播放器，键盘同样可操作。</p>
+                </li>
+                <li class="tutorial-step" data-step="4">
+                    <h4 data-i18n="tutorial.step4.title">领取个性推荐</h4>
+                    <p data-i18n="tutorial.step4.desc">完成一个音轨即可解锁推荐区，记录会同步到历史与收藏。</p>
+                </li>
+            </ol>
+            <div class="tutorial-progress" role="tablist" aria-label="教程进度">
+                <button class="progress-dot active" data-step="1" aria-label="教程第 1 步"></button>
+                <button class="progress-dot" data-step="2" aria-label="教程第 2 步"></button>
+                <button class="progress-dot" data-step="3" aria-label="教程第 3 步"></button>
+                <button class="progress-dot" data-step="4" aria-label="教程第 4 步"></button>
+            </div>
+            <div class="tutorial-actions">
+                <button class="tutorial-btn tutorial-btn--ghost" data-action="prev" aria-label="上一步" type="button">
+                    <span data-i18n="tutorial.prev">上一步</span>
+                </button>
+                <button class="tutorial-btn tutorial-btn--primary" data-action="next" aria-label="下一步" type="button">
+                    <span data-i18n="tutorial.next">下一步</span>
+                </button>
+                <button class="tutorial-btn tutorial-btn--primary" data-action="start" aria-label="开始体验" type="button"
+                    style="display: none;">
+                    <span data-i18n="tutorial.start">立即开始</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="tutorialHighlight" class="tutorial-highlight" aria-hidden="true"></div>
+    <button id="tutorialHelpBtn" class="tutorial-help-btn" type="button" aria-haspopup="dialog"
+        aria-controls="onboardingTutorial">
+        <span aria-hidden="true">❔</span>
+        <span data-i18n="tutorial.help">需要引导</span>
+    </button>
+
+    <!-- User Rating Widget -->
+    <div id="rating-widget"></div>
+
+    <!-- Compact Login Modal -->
+    <div id="compactLoginModal" class="compact-login-modal" style="display: none;" role="dialog"
+        aria-labelledby="compactLoginTitle" aria-modal="true">
+        <div class="compact-modal-overlay" onclick="closeCompactLogin()"></div>
+        <div class="compact-modal-content">
+            <div class="compact-modal-header">
+                <h3 id="compactLoginTitle" data-i18n="auth.welcome">欢迎回来</h3>
+                <button class="compact-modal-close" onclick="closeCompactLogin()" aria-label="关闭登录窗口">&times;</button>
+            </div>
+            <p class="compact-login-hint" data-i18n="auth.guestHint">以访客身份即可体验大部分功能，稍后随时绑定邮箱。</p>
+
+            <!-- Email Login Form -->
+            <div id="emailLoginForm" class="compact-login-form">
+                <div class="form-group">
+                    <input type="email" id="compactEmail" placeholder="邮箱地址" autocomplete="email" tabindex="0">
+                </div>
+                <div class="form-group">
+                    <input type="password" id="compactPassword" placeholder="密码" autocomplete="current-password"
+                        tabindex="0">
+                </div>
+                <button class="compact-login-btn primary" onclick="handleCompactLogin()" tabindex="0">登录</button>
+                <div class="compact-login-options">
+                    <button class="compact-link" onclick="showCompactSignup()">还没有账号？注册</button>
+                    <button class="compact-link" onclick="showCompactReset()">忘记密码？</button>
+                </div>
+            </div>
+
+            <!-- Email Signup Form -->
+            <div id="emailSignupForm" class="compact-login-form" style="display: none;">
+                <div class="form-group">
+                    <input type="text" id="compactName" placeholder="昵称" autocomplete="name" tabindex="0">
+                </div>
+                <div class="form-group">
+                    <input type="email" id="compactSignupEmail" placeholder="邮箱地址" autocomplete="email" tabindex="0">
+                </div>
+                <div class="form-group">
+                    <input type="password" id="compactSignupPassword" placeholder="密码 (至少6位)"
+                        autocomplete="new-password" tabindex="0" minlength="6">
+                </div>
+                <button class="compact-login-btn primary" onclick="handleCompactSignup()" tabindex="0">注册</button>
+                <div class="compact-login-options">
+                    <button class="compact-link" onclick="showCompactLogin()">已有账号？登录</button>
+                </div>
+            </div>
+
+            <!-- Password Reset Form -->
+            <div id="passwordResetForm" class="compact-login-form" style="display: none;">
+                <p data-i18n="auth.resetInstructions">输入您的邮箱地址，我们将发送重置链接</p>
+                <div class="form-group">
+                    <input type="email" id="compactResetEmail" placeholder="邮箱地址" autocomplete="email" tabindex="0">
+                </div>
+                <button class="compact-login-btn primary" onclick="handleCompactReset()" tabindex="0">发送重置邮件</button>
+                <div class="compact-login-options">
+                    <button class="compact-link" onclick="showCompactLogin()">返回登录</button>
+                </div>
+            </div>
+
+            <!-- Phone Login Form -->
+            <div id="phoneLoginForm" class="compact-login-form" style="display: none;">
+                <div class="form-group">
+                    <input type="tel" id="compactPhone" placeholder="手机号码 (+86 138 0000 0000)" autocomplete="tel"
+                        tabindex="0">
+                </div>
+                <div class="form-group phone-code-group">
+                    <input type="text" id="compactVerificationCode" placeholder="验证码" autocomplete="one-time-code"
+                        tabindex="0">
+                    <button class="send-code-btn" onclick="sendVerificationCode()" tabindex="0">发送验证码</button>
+                </div>
+                <button class="compact-login-btn primary" onclick="handlePhoneLogin()" tabindex="0">登录</button>
+                <div class="compact-login-options">
+                    <button class="compact-link" onclick="showCompactLogin()">使用邮箱登录</button>
+                </div>
+            </div>
+
+            <div class="compact-modal-divider">
+                <span>或</span>
+            </div>
+
+            <!-- Quick Login Options -->
+            <div class="compact-quick-login">
+                <button class="compact-option-btn google" onclick="handleGoogleLogin()" tabindex="0">
+                    <span class="btn-icon">🔵</span>
+                    Google
+                </button>
+                <button class="compact-option-btn anonymous" onclick="handleAnonymousLogin()" tabindex="0">
+                    <span class="btn-icon">👤</span>
+                    <span data-i18n="auth.guestCta">以访客身份继续</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Profile Display -->
+    <div id="userProfile" class="user-profile" style="display: none;">
+        <!-- 用户信息将在这里动态显示 -->
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <!-- FAQ Section (SEO-Optimized for English Search Queries) -->
+    <section style="max-width: 900px; margin: 4rem auto 4rem; padding: 0 2rem;">
+        <h2 style="font-size: 2.25rem; text-align: center; margin-bottom: 2.5rem; color: var(--text-primary);">
+            Frequently Asked Questions
+        </h2>
+
+        <div style="display: flex; flex-direction: column; gap: 2rem;">
+            <!-- FAQ 1 -->
+            <div
+                style="background: var(--bg-card); padding: 1.75rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
+                <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.75rem;">
+                    How do I use white noise and rain sounds to fall asleep faster?
+                </h3>
+                <p style="line-height: 1.8; color: var(--text-secondary); font-size: 0.95rem;">
+                    Choose gentle rain or white noise from our sleep sounds collection, set volume to 50-60% (loud
+                    enough to mask disruptions but not distracting),
+                    and optionally use the sleep timer for 30-60 minutes. The consistent background noise masks sudden
+                    environmental sounds that can prevent sleep onset,
+                    helping you fall asleep 38% faster according to sleep research studies. Use the same sound nightly
+                    to build a Pavlovian sleep association.
+                </p>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div
+                style="background: var(--bg-card); padding: 1.75rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
+                <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.75rem;">
+                    What's the best meditation music for focus and concentration?
+                </h3>
+                <p style="line-height: 1.8; color: var(--text-secondary); font-size: 0.95rem;">
+                    For deep focus work, use binaural beats in the alpha range (8-13Hz) with headphones, or ambient
+                    instrumental music without lyrics.
+                    For meditation practice, try guided meditations if you're a beginner, or Tibetan singing bowls for
+                    experienced meditators.
+                    Keep volume low (30-50%) so the music supports but doesn't dominate your attention. Studies show
+                    properly selected focus music can improve
+                    task performance by 15-20%.
+                </p>
+            </div>
+
+            <!-- FAQ 3 -->
+            <div
+                style="background: var(--bg-card); padding: 1.75rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
+                <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.75rem;">
+                    Can calming sounds really reduce anxiety and stress?
+                </h3>
+                <p style="line-height: 1.8; color: var(--text-secondary); font-size: 0.95rem;">
+                    是的！研究表明，海浪、细雨与缓慢氛围音乐能够启动副交感神经系统，让身体进入“放松模式”，皮质醇最高可下降 45%。通常聆听 3-5 分钟就会感觉呼吸放慢，10-15
+                    分钟能显著降低压力。若有突发焦虑，可搭配 4-6 呼吸法（吸气 4 秒、呼气 6 秒）聆听海浪或雨声。每天练习会累积“平静储备”，逐渐降低基础焦虑。
+                </p>
+            </div>
+
+            <!-- FAQ 4 -->
+            <div
+                style="background: var(--bg-card); padding: 1.75rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
+                <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.75rem;">
+                    432Hz、528Hz 等“疗愈频率”真的有效吗？
+                </h3>
+                <p style="line-height: 1.8; color: var(--text-secondary); font-size: 0.95rem;">
+                    目前关于 432Hz、528Hz 等特定频率的研究仍在持续，结论并不一致。有实验显示 432Hz 相比 440Hz 更能缓解压力，528Hz
+                    也被用于细胞修复的探索（但证据仍有限）。可以确定的是：<strong>放松的聆听、专注的意图与持续练习</strong>
+                    会带来可量化的身心益处，与具体频率并无绝对关系。只要某种声音让你冥想、放松或专注疗愈，它就通过身心机制发挥了作用。
+                </p>
+            </div>
+
+            <!-- FAQ 5 -->
+            <div
+                style="background: var(--bg-card); padding: 1.75rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
+                <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.75rem;">
+                    SoundFlows 真的是免费的吗？需要安装 App 吗？
+                </h3>
+                <p style="line-height: 1.8; color: var(--text-secondary); font-size: 0.95rem;">
+                    是的，SoundFlows 完全免费，无需绑定信用卡，也不用下载 App。213+
+                    首疗愈音频可在任何设备的浏览器中直接播放。你可以选择注册账号来保存收藏、同步进度，也可以继续以访客身份使用全部核心功能。我们的使命是让声音疗法对所有人可得，而不是追求商业利润。
+                </p>
+            </div>
+
+            <!-- FAQ 6 -->
+            <div
+                style="background: var(--bg-card); padding: 1.75rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
+                <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.75rem;">
+                    听声音疗愈音频要多久才有效？
+                </h3>
+                <p style="line-height: 1.8; color: var(--text-secondary); font-size: 0.95rem;">
+                    <strong>睡眠：</strong> 30-60 分钟，若环境噪音持续可整夜播放。<br>
+                    <strong>冥想：</strong> 先从 10-15 分钟开始，逐渐延长至 20-30 分钟。<br>
+                    <strong>缓解焦虑：</strong> 急性压力时聆听 10-20 分钟；日常预防保持 10 分钟即可。<br>
+                    <strong>专注工作：</strong> 25-50 分钟一个区块，搭配 5-10 分钟休息。<br>
+                    <strong>脉轮疗愈：</strong> 每个脉轮 10-20 分钟，或全套每个 5-10 分钟。<br>
+                    比起时长，规律更重要——每天 10 分钟胜过偶尔 1 小时。
+                </p>
+            </div>
+        </div>
+    </section>
     </div>
 
     <!-- GDPR/CCPA Compliance Section -->
@@ -1115,11 +1195,14 @@
                 <span class="separator">|</span>
                 <a href="https://status.soundflows.app" target="_blank" rel="noopener">系统状态</a>
                 <span class="separator">|</span>
-                <button class="gdpr-ccpa-link" onclick="showCookieSettings()" data-i18n="footer.cookieSettings">Cookie设置</button>
+                <button class="gdpr-ccpa-link" onclick="showCookieSettings()"
+                    data-i18n="footer.cookieSettings">Cookie设置</button>
                 <span class="separator">|</span>
-                <button class="gdpr-ccpa-link" onclick="showDataDeletionForm()" data-i18n="footer.dataDeletion">删除我的数据</button>
+                <button class="gdpr-ccpa-link" onclick="showDataDeletionForm()"
+                    data-i18n="footer.dataDeletion">删除我的数据</button>
                 <span class="separator">|</span>
-                <button class="gdpr-ccpa-link ccpa-opt-out" onclick="toggleCCPAOptOut()" id="ccpaOptOutBtn" data-i18n="footer.doNotSell">拒绝出售个人信息</button>
+                <button class="gdpr-ccpa-link ccpa-opt-out" onclick="toggleCCPAOptOut()" id="ccpaOptOutBtn"
+                    data-i18n="footer.doNotSell">拒绝出售个人信息</button>
             </div>
             <div class="copyright">
                 <p>&copy; 2025 Sound Healing Space. 保留所有权利。</p>
@@ -1453,20 +1536,20 @@
 
     <!-- Firebase SDK (v9 Compat 版本) with SRI -->
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"
-            integrity="sha384-iseUZMjd63Pz0jb9In72RWfpJu8HrPFrK7K99+pPQmcDg2CgHIo2NdxWhrhejqRo"
-            crossorigin="anonymous"></script>
+        integrity="sha384-iseUZMjd63Pz0jb9In72RWfpJu8HrPFrK7K99+pPQmcDg2CgHIo2NdxWhrhejqRo"
+        crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"
-            integrity="sha384-+/4lqMnmLqwbdHXshvGDmBTeWlNoPRdjXi4ZsiBj10EhQXaTBe3RF5JZktdSjug6"
-            crossorigin="anonymous"></script>
+        integrity="sha384-+/4lqMnmLqwbdHXshvGDmBTeWlNoPRdjXi4ZsiBj10EhQXaTBe3RF5JZktdSjug6"
+        crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"
-            integrity="sha384-44ncECNgnaHP6ESasAOFgMcbh9SrKGi2zK28Fc5zVLneRWT6jJ4Q9vnN49UsuyQ/"
-            crossorigin="anonymous"></script>
+        integrity="sha384-44ncECNgnaHP6ESasAOFgMcbh9SrKGi2zK28Fc5zVLneRWT6jJ4Q9vnN49UsuyQ/"
+        crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics-compat.js"
-            integrity="sha384-dUrEmJE28wOTvdcg3x0NmxZBAySHCI1r6xAByT/DvVZB+xcFSUbQAseHOeoet5Zv"
-            crossorigin="anonymous"></script>
+        integrity="sha384-dUrEmJE28wOTvdcg3x0NmxZBAySHCI1r6xAByT/DvVZB+xcFSUbQAseHOeoet5Zv"
+        crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"
-            integrity="sha384-oFrOL1TiREYNET0lsYF3LjQuyi2gL7vhjH1X8vFr+umcmzAdPELopeSgbcrv4uRm"
-            crossorigin="anonymous"></script>
+        integrity="sha384-oFrOL1TiREYNET0lsYF3LjQuyi2gL7vhjH1X8vFr+umcmzAdPELopeSgbcrv4uRm"
+        crossorigin="anonymous"></script>
 
     <!-- Firebase 模块 -->
     <script src="../assets/js/firebase-config.js"></script>
@@ -1521,7 +1604,7 @@
     <script src="../assets/js/autoplay-detector.js"></script>
     <script src="../assets/js/audio-preloader.js"></script>
 
-<script>
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
             const planButtons = document.querySelectorAll('[data-track="plan-open"]');
             const statsButtons = document.querySelectorAll('[data-track="stats-open"]');
@@ -1765,18 +1848,6 @@
     <script src="../assets/js/ultimate-player-fixes.js"></script>
 
     <!-- Scrolling Fix - Prevent overlay blocking -->
-    <script src="../assets/js/scrolling-fix.js"></script>
-
-    <!-- Final Fixes - Fix Chinese encoding and double scrollbar -->
-    <script src="../assets/js/final-fixes.js"></script>
-
-    <!-- AudioManager兼容层 - 为旧模块提供window.audioManager -->
-    <script src="../assets/js/audioManager-compat.js"></script>
-    <script data-lazy-src="../assets/js/touch-gestures.js"></script>
-    <script src="../assets/js/accessibility-enhancements.js"></script>
-    <!-- Keyboard Navigation and Screen Reader Support -->
-    <script src="../assets/js/accessibility-keyboard-navigation.js"></script>
-    <!-- Accessibility Testing and Validation -->
     <script data-lazy-src="../assets/js/accessibility-validator.js"></script>
     <!-- Performance Monitor for Canvas Animations -->
     <script data-lazy-src="../assets/js/performance-monitor-overlay.js"></script>
@@ -1853,7 +1924,7 @@
             });
 
             // 显示选中的表单并激活标签
-            switch(tabName) {
+            switch (tabName) {
                 case 'login':
                     document.getElementById('loginForm').classList.add('active');
                     document.querySelectorAll('.auth-tab')[0].classList.add('active');
@@ -2015,18 +2086,49 @@
             if (window.dailyMeditationReminder) {
                 updateReminderButton();
 
-                // 监听音频播放事件，当用户完成冥想时标记练习
-                if (window.audioManager) {
-                    // 当音频播放完成时，可能表示完成了一次冥想练习
-                    window.audioManager.addEventListener('audioEnded', () => {
-                        // 可以自动标记，或者询问用户是否完成练习
-                        console.log('音频播放结束，询问用户是否完成冥想练习');
-                    });
-                }
+                // 等待 AppCore 异步初始化完成并绑定事件
+                bindReminderAudioEvents();
             }
         });
 
         // 更新提醒按钮状态
+        let reminderAudioListenerBound = false;
+
+        function bindReminderAudioEvents() {
+            if (reminderAudioListenerBound || !window.dailyMeditationReminder) {
+                return;
+            }
+
+            const manager = window.audioManager;
+            if (!manager) {
+                // AppCore 异步初始化，需要等待 window.audioManager 就绪
+                setTimeout(bindReminderAudioEvents, 600);
+                return;
+            }
+
+            const supportsDirectEvents = typeof manager.addEventListener === 'function';
+            const legacyBus = manager.eventBus && typeof manager.eventBus.addEventListener === 'function'
+                ? manager.eventBus
+                : null;
+            const eventTarget = supportsDirectEvents ? manager : legacyBus;
+
+            if (!eventTarget) {
+                console.warn('音频管理器未提供事件总线，跳过冥想提醒同步');
+                return;
+            }
+
+            const eventName = supportsDirectEvents ? 'statechange' : 'audioEnded';
+            const handlePlaybackEvent = (event) => {
+                if (eventName === 'statechange' && event?.detail?.isPlaying !== false) {
+                    return;
+                }
+                console.log('音频播放结束，正在检查冥想提醒状态');
+            };
+
+            eventTarget.addEventListener(eventName, handlePlaybackEvent);
+            reminderAudioListenerBound = true;
+        }
+
         function updateReminderButton() {
             const reminderBtn = document.getElementById('reminderBtn');
             const reminderText = document.getElementById('reminderText');
@@ -2064,8 +2166,5 @@
     <script src="../assets/js/ai-signature.js"></script>
     <script src="../assets/js/fix-i18n-translations.js"></script>
 </body>
+
 </html>
-
-
-
-

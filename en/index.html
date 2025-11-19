@@ -39,165 +39,54 @@
     <meta property="og:image:alt" content="SoundFlows - Free Rain Sounds & White Noise for Better Sleep">
     <meta property="og:site_name" content="SoundFlows">
     <meta property="og:locale" content="en_US">
-    <meta property="og:locale:alternate" content="zh_CN">
-    <meta property="og:locale:alternate" content="ja_JP">
-    <meta property="og:locale:alternate" content="ko_KR">
-    <meta property="og:locale:alternate" content="es_ES">
-    <meta property="og:updated_time" content="2025-10-01T00:00:00+00:00">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://www.soundflows.app/">
-    <meta name="twitter:title" content="Sleep Better with SoundFlows | Rain Sounds, White Noise & Sound Healing App">
-    <meta name="twitter:description"
-        content="SoundFlows is a free online sound healing app with 213+ rain sounds, white noise and meditation tracks to improve sleep, focus and anxiety.">
-    <meta name="twitter:image" content="https://www.soundflows.app/assets/images/twitter-card.jpg">
-    <meta name="twitter:image:alt" content="SoundFlows - Free Rain Sounds & White Noise for Better Sleep">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
-
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="manifest.json">
-
-    <!-- Theme Color -->
-    <meta name="theme-color" content="#6666ff">
-    <meta name="msapplication-TileColor" content="#6666ff">
-
-    <!-- Preconnect to External Resources -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- �?Archive.org CDN预连�?- 优化音频/视频加载速度 -->
-    <link rel="preconnect" href="https://media.soundflows.app">
-    <link rel="dns-prefetch" href="https://media.soundflows.app">
-
-    <!-- DNS Prefetch -->
-    <link rel="dns-prefetch" href="https://www.google-analytics.com">
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-
-    <!-- Google Tag Manager -->
-    <script>(function (w, d, s, l, i) {
-            w[l] = w[l] || []; w[l].push({
-                'gtm.start':
-                    new Date().getTime(), event: 'gtm.js'
-            }); var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-5KF3894B');</script>
-    <!-- End Google Tag Manager -->
-
-    <!-- Google Analytics 4 (GA4) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4NZR3HR3J1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        // 配置GA4测量ID
-        gtag('config', 'G-4NZR3HR3J1', {
-            'send_page_view': true,
-            'anonymize_ip': true,
-            'cookie_flags': 'SameSite=None;Secure'
-        });
-
-        // 自定义事件追�?- 音频播放
-        window.trackAudioPlay = function (category, trackName) {
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'audio_play', {
-                    'event_category': 'Audio',
-                    'event_label': category + ' - ' + trackName,
-                    'audio_category': category,
-                    'track_name': trackName
-                });
-            }
-        };
-
-        // 自定义事件追�?- 语言切换
-        window.trackLanguageChange = function (language) {
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'language_change', {
-                    'event_category': 'Engagement',
-                    'event_label': language
-                });
-            }
-        };
-
-        // 自定义事件追踪 - 睡眠定时器
-        window.trackSleepTimer = function (minutes) {
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'sleep_timer_set', {
-                    'event_category': 'Feature',
-                    'event_label': minutes + ' minutes',
-                    'timer_duration': minutes
-                });
-            }
-        };
-
-        // 自定义事件追踪 - 分享点击
-        window.trackShare = function (platform) {
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'share', {
-                    'event_category': 'Social',
-                    'event_label': platform,
-                    'method': platform
-                });
-            }
-        };
-    </script>
-
-    <!-- Preload Critical Resources -->
-    <link rel="preload" href="assets/css/index-styles.css?v=20251115-modal" as="style">
-
-    <link rel="preload" href="assets/js/i18n-system.js" as="script">
-    <link rel="preload" href="assets/js/index-app.js" as="script">
+    <link rel="preload" href="../assets/js/i18n-system.js" as="script">
+    <link rel="preload" href="../assets/js/index-app.js" as="script">
 
     <!-- External Stylesheets -->
-    <link rel="stylesheet" href="assets/css/global-theme.css">
+    <link rel="stylesheet" href="../assets/css/global-theme.css">
 
     <!-- Component CSS (New Modular Architecture) -->
-    <link rel="stylesheet" href="assets/css/components/animations.css">
-    <link rel="stylesheet" href="assets/css/components/button.css">
-    <link rel="stylesheet" href="assets/css/components/card.css">
-    <link rel="stylesheet" href="assets/css/components/player.css">
-    <link rel="stylesheet" href="assets/css/components/auth-ui.css">
+    <link rel="stylesheet" href="../assets/css/components/animations.css">
+    <link rel="stylesheet" href="../assets/css/components/button.css">
+    <link rel="stylesheet" href="../assets/css/components/card.css">
+    <link rel="stylesheet" href="../assets/css/components/player.css">
+    <link rel="stylesheet" href="../assets/css/components/auth-ui.css">
 
-    <link rel="stylesheet" href="assets/css/index-styles.css?v=20251115-modal">
-    <link rel="stylesheet" href="assets/css/history-favorites.css">
-    <link rel="stylesheet" href="assets/css/mixer.css">
-    <link rel="stylesheet" href="assets/css/stats-dashboard.css">
-    <link rel="stylesheet" href="assets/css/accessibility.css">
-    <link rel="stylesheet" href="assets/css/notification-preferences.css">
+    <link rel="stylesheet" href="../assets/css/index-styles.css?v=20251115-modal">
+    <link rel="stylesheet" href="../assets/css/history-favorites.css">
+    <link rel="stylesheet" href="../assets/css/mixer.css">
+    <link rel="stylesheet" href="../assets/css/stats-dashboard.css">
+    <link rel="stylesheet" href="../assets/css/accessibility.css">
+    <link rel="stylesheet" href="../assets/css/notification-preferences.css">
 
 
     <!-- 移动端优化CSS -->
-    <link rel="stylesheet" href="assets/css/mobile-optimized.css">
-    <link rel="stylesheet" href="assets/css/mobile-enhancement.css">
-    <link rel="stylesheet" href="assets/css/touch-target-optimization.css">
+    <link rel="stylesheet" href="../assets/css/mobile-optimized.css">
+    <link rel="stylesheet" href="../assets/css/mobile-enhancement.css">
+    <link rel="stylesheet" href="../assets/css/touch-target-optimization.css">
 
     <!-- 主题系统CSS -->
-    <link rel="stylesheet" href="assets/css/theme-system.css">
+    <link rel="stylesheet" href="../assets/css/theme-system.css">
 
-    <link rel="stylesheet" href="assets/css/focus-mode.css">
+    <link rel="stylesheet" href="../assets/css/focus-mode.css">
 
     <!-- UI Redesign v2.0 CSS -->
-    <link rel="stylesheet" href="assets/css/redesign-v2.css">
+    <link rel="stylesheet" href="../assets/css/redesign-v2.css">
 
     <!-- Audio Card Redesign - Recommended Design (Frosted Glass + Gradient Border) -->
-    <link rel="stylesheet" href="assets/css/audio-card-redesign.css">
+    <link rel="stylesheet" href="../assets/css/audio-card-redesign.css">
 
     <!-- Category Shortcuts Redesign - Navigation Cards (Frosted Glass + Gradient Border) -->
-    <link rel="stylesheet" href="assets/css/category-shortcuts-redesign.css">
+    <link rel="stylesheet" href="../assets/css/category-shortcuts-redesign.css">
 
 
-    <link rel="stylesheet" href="assets/css/neptune-ui.css">
+    <link rel="stylesheet" href="../assets/css/neptune-ui.css">
 
     <!-- Supabase Client Library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <!-- Analytics Configuration (Load before analytics.js) -->
-    <script src="assets/js/analytics-config.js"></script>
+    <script src="../assets/js/analytics-config.js"></script>
 
     <!-- Amplitude Web SDK with Autocapture -->
     <script src="https://cdn.amplitude.com/script/b6c4ebe3ec4d16c8f5fd258d29653cfc.js"></script>
@@ -673,7 +562,7 @@
             <div class="journey-showcase__heading">
                 <h3 data-i18n="journey.heading.title">Free Sound Healing Journeys for Sleep, Focus & Anxiety</h3>
                 <p data-i18n="journey.heading.desc">Choose from 5 evidence-based healing journeys: meditation music,
-                    sleep sounds, anxiety relief, chakra balancing, and emotional healing.</p>
+                    sleep sounds, anxiety balancing, and emotional healing.</p>
             </div>
             <div class="journey-showcase__grid">
                 <article class="journey-card">
@@ -1289,7 +1178,7 @@
       "name": "声音疗愈空间 | Sound Healing Space",
       "alternateName": "SoundFlows",
       "url": "https://www.soundflows.app",
-      "description": "免费在线声音疗愈平台，提�?13+专业疗愈音频：冥想音乐、自然音效、颂钵音疗、脉轮疗愈、催眠引导、潜意识疗愈。支�?种语言，助您放松身心、改善睡眠、缓解压力�?,
+      "description": "免费在线声音疗愈平台，提?13+专业疗愈音频：冥想音乐、自然音效、颂钵音疗、脉轮疗愈、催眠引导、潜意识疗愈。支?种语言，助您放松身心、改善睡眠、缓解压力?,
       "applicationCategory": "HealthApplication",
       "operatingSystem": "Web Browser",
       "offers": {
@@ -1302,12 +1191,12 @@
       "inLanguage": ["en-US", "zh-CN", "ja-JP", "ko-KR", "es-ES"],
       "featureList": [
         "213+ 免费疗愈音频",
-        "9大音频分类：冥想、自然音效、颂钵、脉轮疗愈、催眠、潜意识疗愈、动物音效、火焰音效、流水音�?,
+        "9大音频分类：冥想、自然音效、颂钵、脉轮疗愈、催眠、潜意识疗愈、动物音效、火焰音效、流水音?,
         "支持5种语言界面",
-        "睡眠定时器功�?,
-        "随机播放和循环播�?,
+        "睡眠定时器功?,
+        "随机播放和循环播?,
         "音频播放速度调节",
-        "响应式设计，支持移动�?
+        "响应式设计，支持移动?
       ],
       "author": {
         "@type": "Organization",
@@ -1344,7 +1233,7 @@
       "alternateName": "SoundFlows",
       "url": "https://www.soundflows.app",
       "logo": "https://www.soundflows.app/favicon.png",
-      "description": "专业在线声音疗愈平台，提供免费音频疗法服�?,
+      "description": "专业在线声音疗愈平台，提供免费音频疗法服?,
       "foundingDate": "2024",
       "contactPoint": {
         "@type": "ContactPoint",
@@ -1360,19 +1249,19 @@
       "@context": "https://schema.org",
       "@type": "ItemList",
       "name": "声音疗愈音频分类",
-      "description": "9大专业音频疗法分�?,
+      "description": "9大专业音频疗法分?,
       "itemListElement": [
         {
           "@type": "ListItem",
           "position": 1,
           "name": "冥想音乐",
-          "description": "14首专业冥想引导音频，帮助深度放松和内心平�?
+          "description": "14首专业冥想引导音频，帮助深度放松和内心平?
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "自然音效 - 雨声",
-          "description": "14种不同雨声音效，营造自然放松氛�?
+          "description": "14种不同雨声音效，营造自然放松氛?
         },
         {
           "@type": "ListItem",
@@ -1395,26 +1284,26 @@
         {
           "@type": "ListItem",
           "position": 6,
-          "name": "潜意识疗�?,
-          "description": "11首潜意识重塑音频，积极心理建�?
+          "name": "潜意识疗?,
+          "description": "11首潜意识重塑音频，积极心理建?
         },
         {
           "@type": "ListItem",
           "position": 7,
           "name": "动物音效",
-          "description": "26种自然动物音效，回归大自然怀�?
+          "description": "26种自然动物音效，回归大自然怀?
         },
         {
           "@type": "ListItem",
           "position": 8,
           "name": "火焰音效",
-          "description": "4种篝火音效，温暖舒适的氛围�?
+          "description": "4种篝火音效，温暖舒适的氛围?
         },
         {
           "@type": "ListItem",
           "position": 9,
           "name": "流水音效",
-          "description": "6种流水音效，清澈宁静的自然之�?
+          "description": "6种流水音效，清澈宁静的自然之?
         }
       ]
     }
@@ -1623,57 +1512,57 @@
         crossorigin="anonymous"></script>
 
     <!-- Firebase 模块 -->
-    <script src="assets/js/firebase-config.js"></script>
-    <script src="assets/js/firebase-auth-ui.js"></script>
+    <script src="../assets/js/firebase-config.js"></script>
+    <script src="../assets/js/firebase-auth-ui.js"></script>
 
     <!-- External JavaScript Files -->
-    <!-- Load in order: error handler �?config �?i18n �?user data �?metadata �?video background �?app logic �?features �?enhancements -->
-    <script src="assets/js/global-error-handler.js"></script>
+    <!-- Load in order: error handler ?config ?i18n ?user data ?metadata ?video background ?app logic ?features ?enhancements -->
+    <script src="../assets/js/global-error-handler.js"></script>
 
-    <script src="assets/js/i18n-system.js"></script>
-    <script src="assets/js/i18n-translations-addon.js"></script>
-    <script src="assets/js/i18n-extras.js"></script>
-    <script src="assets/js/language-integration.js"></script>
-    <script src="assets/js/cookie-consent-manager.js"></script>
-    <script src="assets/js/email-templates.js"></script>
-    <script src="assets/js/content-i18n-manager.js"></script>
-    <script src="assets/js/sentry-error-tracking.js"></script>
-    <script src="assets/js/dropdown-login-system.js"></script>
-    <script src="assets/js/social-share.js"></script>
-    <script src="assets/js/gdpr-compliance.js"></script>
-    <script src="assets/js/gdpr-ccpa-handler.js"></script>
+    <script src="../assets/js/i18n-system.js"></script>
+    <script src="../assets/js/i18n-translations-addon.js"></script>
+    <script src="../assets/js/i18n-extras.js"></script>
+    <script src="../assets/js/language-integration.js"></script>
+    <script src="../assets/js/cookie-consent-manager.js"></script>
+    <script src="../assets/js/email-templates.js"></script>
+    <script src="../assets/js/content-i18n-manager.js"></script>
+    <script src="../assets/js/sentry-error-tracking.js"></script>
+    <script src="../assets/js/dropdown-login-system.js"></script>
+    <script src="../assets/js/social-share.js"></script>
+    <script src="../assets/js/gdpr-compliance.js"></script>
+    <script src="../assets/js/gdpr-ccpa-handler.js"></script>
     <!-- 视频背景系统 (2.0 新增) -->
-    <script src="assets/js/focus-mode-controller.js"></script>
+    <script src="../assets/js/focus-mode-controller.js"></script>
 
 
 
-    <script src="assets/js/history-favorites-ui.js"></script>
-    <script src="assets/js/onboarding-tutorial.js"></script>
-    <script src="assets/js/audio-mixer.js"></script>
-    <script src="assets/js/mixer-ui.js"></script>
-    <script src="assets/js/chart-visualizer.js"></script>
-    <script src="assets/js/stats-dashboard.js"></script>
-    <script src="assets/js/favorite-button-controller.js"></script>
-    <script src="assets/js/pwa-manager.js"></script>
-    <script src="assets/js/notification-preferences.js"></script>
-    <script src="assets/js/theme-manager.js"></script>
-    <script src="assets/js/offline-audio-manager.js"></script>
-    <script src="assets/js/daily-meditation-reminder.js"></script>
-    <script src="assets/js/weekly-digest-email.js"></script>
-    <script src="assets/js/email-integration-handler.js"></script>
+    <script src="../assets/js/history-favorites-ui.js"></script>
+    <script src="../assets/js/onboarding-tutorial.js"></script>
+    <script src="../assets/js/audio-mixer.js"></script>
+    <script src="../assets/js/mixer-ui.js"></script>
+    <script src="../assets/js/chart-visualizer.js"></script>
+    <script src="../assets/js/stats-dashboard.js"></script>
+    <script src="../assets/js/favorite-button-controller.js"></script>
+    <script src="../assets/js/pwa-manager.js"></script>
+    <script src="../assets/js/notification-preferences.js"></script>
+    <script src="../assets/js/theme-manager.js"></script>
+    <script src="../assets/js/offline-audio-manager.js"></script>
+    <script src="../assets/js/daily-meditation-reminder.js"></script>
+    <script src="../assets/js/weekly-digest-email.js"></script>
+    <script src="../assets/js/email-integration-handler.js"></script>
 
     <!-- 邮件模板和邮件服务 -->
-    <script data-lazy-src="assets/js/email-templates-i18n.js"></script>
-    <script data-lazy-src="assets/js/email-service-mailgun.js"></script>
-    <script data-lazy-src="assets/js/email-service-sendgrid.js"></script>
-    <script data-lazy-src="assets/js/email-service-brevo.js"></script>
-    <script data-lazy-src="assets/js/email-service-formspree.js"></script>
-    <script data-lazy-src="assets/js/email-service-emailjs.js"></script>
+    <script data-lazy-src="../assets/js/email-templates-i18n.js"></script>
+    <script data-lazy-src="../assets/js/email-service-mailgun.js"></script>
+    <script data-lazy-src="../assets/js/email-service-sendgrid.js"></script>
+    <script data-lazy-src="../assets/js/email-service-brevo.js"></script>
+    <script data-lazy-src="../assets/js/email-service-formspree.js"></script>
+    <script data-lazy-src="../assets/js/email-service-emailjs.js"></script>
     <script data-lazy-src="quick-formspree-config.js"></script>
 
     <!-- 🎵 2.0 新增: 音频预加载和Autoplay检测器 -->
 
-    <script src="assets/js/audio-preloader.js"></script>
+    <script src="../assets/js/audio-preloader.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -1899,35 +1788,35 @@
         });
     </script>
 
-    <script data-lazy-src="assets/js/crm-bridge.js"></script>
-    <script data-lazy-src="assets/js/email-automation.js"></script>
-    <script src="assets/js/gtm-events.js"></script>
-    <script data-lazy-src="assets/js/content-hub.js"></script>
-    <script data-lazy-src="assets/js/config.js"></script>
+    <script data-lazy-src="../assets/js/crm-bridge.js"></script>
+    <script data-lazy-src="../assets/js/email-automation.js"></script>
+    <script src="../assets/js/gtm-events.js"></script>
+    <script data-lazy-src="../assets/js/content-hub.js"></script>
+    <script data-lazy-src="../assets/js/config.js"></script>
     <!-- Analytics Integration (Amplitude + GA4 + Clarity) -->
-    <script data-lazy-src="assets/js/analytics.js"></script>
+    <script data-lazy-src="../assets/js/analytics.js"></script>
 
     <!-- Modular App Core -->
-    <script type="module" src="assets/js/modules/app-core.js"></script>
+    <script type="module" src="../assets/js/modules/app-core.js"></script>
 
     <!-- Legacy Scripts (to be refactored) -->
     <!-- Player Modal Controller - Modal player control -->
 
     <!-- UI Redesign v2.0 -->
-    <script defer src="assets/js/ui-redesign-v2.js?v=20251108"></script>
+    <script defer src="../assets/js/ui-redesign-v2.js?v=20251108"></script>
 
     <!-- AudioManager兼容层 - 为旧模块提供window.audioManager -->
 
-    <script data-lazy-src="assets/js/touch-gestures.js"></script>
-    <script src="assets/js/accessibility-enhancements.js"></script>
+    <script data-lazy-src="../assets/js/touch-gestures.js"></script>
+    <script src="../assets/js/accessibility-enhancements.js"></script>
     <!-- Keyboard Navigation and Screen Reader Support -->
-    <script src="assets/js/accessibility-keyboard-navigation.js"></script>
+    <script src="../assets/js/accessibility-keyboard-navigation.js"></script>
     <!-- Accessibility Testing and Validation -->
-    <script data-lazy-src="assets/js/accessibility-validator.js"></script>
+    <script data-lazy-src="../assets/js/accessibility-validator.js"></script>
     <!-- Performance Monitor for Canvas Animations -->
-    <script data-lazy-src="assets/js/performance-monitor-overlay.js"></script>
+    <script data-lazy-src="../assets/js/performance-monitor-overlay.js"></script>
     <!-- Color Contrast Validator for WCAG AA Compliance -->
-    <script data-lazy-src="assets/js/color-contrast-validator.js"></script>
+    <script data-lazy-src="../assets/js/color-contrast-validator.js"></script>
     <script>
         (function setupExperienceHelpers() {
             const lazyScripts = Array.from(document.querySelectorAll('script[data-lazy-src]'));
@@ -2161,18 +2050,49 @@
             if (window.dailyMeditationReminder) {
                 updateReminderButton();
 
-                // 监听音频播放事件，当用户完成冥想时标记练习
-                if (window.audioManager) {
-                    // 当音频播放完成时，可能表示完成了一次冥想练习
-                    window.audioManager.addEventListener('audioEnded', () => {
-                        // 可以自动标记，或者询问用户是否完成练习
-                        console.log('音频播放结束，询问用户是否完成冥想练习');
-                    });
-                }
+                // Audio pipelines boot asynchronously; wait for the shared manager before wiring reminder events
+                bindReminderAudioEvents();
             }
         });
 
         // 更新提醒按钮状态
+        let reminderAudioListenerBound = false;
+
+        function bindReminderAudioEvents() {
+            if (reminderAudioListenerBound || !window.dailyMeditationReminder) {
+                return;
+            }
+
+            const manager = window.audioManager;
+            if (!manager) {
+                // AppCore initializes window.audioManager asynchronously
+                setTimeout(bindReminderAudioEvents, 600);
+                return;
+            }
+
+            const supportsDirectEvents = typeof manager.addEventListener === 'function';
+            const legacyBus = manager.eventBus && typeof manager.eventBus.addEventListener === 'function'
+                ? manager.eventBus
+                : null;
+            const eventTarget = supportsDirectEvents ? manager : legacyBus;
+
+            if (!eventTarget) {
+                console.warn('Audio manager events unavailable, skip meditation reminder sync');
+                return;
+            }
+
+            const eventName = supportsDirectEvents ? 'statechange' : 'audioEnded';
+            const handlePlaybackEvent = (event) => {
+                if (eventName === 'statechange' && event?.detail?.isPlaying !== false) {
+                    return;
+                }
+                console.log('Audio playback finished, checking meditation reminder habits');
+            };
+
+            eventTarget.addEventListener(eventName, handlePlaybackEvent);
+            reminderAudioListenerBound = true;
+        }
+
         function updateReminderButton() {
             const reminderBtn = document.getElementById('reminderBtn');
             const reminderText = document.getElementById('reminderText');
@@ -2213,10 +2133,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 
     <!-- Supabase Authentication System -->
-    <script src="assets/js/modules/supabase-client.js"></script>
-    <script src="assets/js/modules/auth-manager.js"></script>
-    <script src="assets/js/modules/sync-manager.js"></script>
-    <script src="assets/js/modules/auth-ui.js"></script>
+    <script src="../assets/js/modules/supabase-client.js"></script>
+    <script src="../assets/js/modules/auth-manager.js"></script>
+    <script src="../assets/js/modules/sync-manager.js"></script>
+    <script src="../assets/js/modules/auth-ui.js"></script>
 
 
 </body>
