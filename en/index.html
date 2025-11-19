@@ -2138,6 +2138,24 @@
     <script src="../assets/js/modules/sync-manager.js"></script>
     <script src="../assets/js/modules/auth-ui.js"></script>
 
+    <!-- Fallback loading screen hide script - Ensure page visibility -->
+    <script>
+        (function() {
+            // If AppCore doesn't hide loading screen in time, this script will force hide after 2 seconds
+            setTimeout(function() {
+                const loadingScreen = document.getElementById('loadingScreen');
+                const app = document.getElementById('app');
+
+                if (loadingScreen && loadingScreen.style.display !== 'none') {
+                    console.log('⚠️ Fallback script: Force hiding loading screen');
+                    loadingScreen.style.display = 'none';
+                }
+                if (app && app.style.display !== 'block') {
+                    app.style.display = 'block';
+                }
+            }, 2000);
+        })();
+    </script>
 
 </body>
 

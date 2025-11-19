@@ -2168,6 +2168,25 @@
     </script>
     <script src="../assets/js/ai-signature.js"></script>
     <script src="../assets/js/fix-i18n-translations.js"></script>
+
+    <!-- 后备加载屏幕隐藏脚本 - 确保页面可见 -->
+    <script>
+        (function() {
+            // 如果 AppCore 没有及时隐藏加载屏幕，这个脚本会在 2 秒后强制隐藏
+            setTimeout(function() {
+                const loadingScreen = document.getElementById('loadingScreen');
+                const app = document.getElementById('app');
+
+                if (loadingScreen && loadingScreen.style.display !== 'none') {
+                    console.log('⚠️ 后备脚本：强制隐藏加载屏幕');
+                    loadingScreen.style.display = 'none';
+                }
+                if (app && app.style.display !== 'block') {
+                    app.style.display = 'block';
+                }
+            }, 2000);
+        })();
+    </script>
 </body>
 
 </html>
