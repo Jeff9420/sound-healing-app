@@ -1,0 +1,95 @@
+/* ==========================================================================
+   Animations & Micro-interactions
+   ========================================================================== */
+
+/* 呼吸动画 - 用于核心按钮和卡片 */
+@keyframes breathe {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.5);
+    }
+
+    50% {
+        transform: scale(1.03);
+        box-shadow: 0 8px 24px rgba(99, 102, 241, 0.7);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.5);
+    }
+}
+
+.animate-breathe {
+    animation: breathe 4s ease-in-out infinite;
+}
+
+/* 波纹效果 - 用于点击反馈 */
+.ripple-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple-effect::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.4);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.ripple-effect:active::after {
+    animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(20, 20);
+        opacity: 0;
+    }
+}
+
+/* Mesh Gradient 流动动画 */
+@keyframes meshFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* 浮动动画 */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}

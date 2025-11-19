@@ -1,0 +1,378 @@
+/* ==========================================================================
+   Audio Player Component (Floating Capsule Design)
+   ========================================================================== */
+
+.audio-player {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 48px);
+    max-width: 600px;
+
+    /* 悬浮胶囊毛玻璃效果 */
+    background: rgba(20, 10, 5, 0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 32px;
+
+    /* 阴影 */
+    box-shadow:
+        0 12px 48px -8px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+    padding: 16px 20px;
+    z-index: 999;
+
+    /* 动画 */
+    opacity: 0;
+    transform: translateX(-50%) translateY(100px);
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.audio-player.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+
+/* 噪点纹理 */
+.audio-player::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+    opacity: 0.3;
+    pointer-events: none;
+    border-radius: 32px;
+    z-index: 0;
+    mix-blend-mode: overlay;
+}
+
+.audio-player>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* 播放器内容布局 */
+.player-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* 第一行：曲目信息 + 播放按钮 */
+.player-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.player-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.track-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 4px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.track-category {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+/* 播放按钮 - 呼吸动画 */
+.player-play-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f6a93b 0%, #f87c0f 100%);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(248, 124, 15, 0.4);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.player-play-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 24px rgba(248, 124, 15, 0.5);
+}
+
+.player-play-btn.playing {
+    animation: breathe 4s ease-in-out infinite;
+}
+
+/* 第二行：进度条 */
+.player-progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: height 0.2s ease;
+}
+
+.progress-bar:hover {
+    height: 8px;
+}
+
+.progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #f6a93b, #f87c0f);
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 8px rgba(246, 169, 59, 0.6);
+}
+
+.time-display {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+    min-width: 45px;
+    text-align: right;
+}
+
+/* 第三行：控制按钮 */
+.player-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.control-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+}
+
+/* 音量控制 */
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    max-width: 150px;
+}
+
+.volume-slider {
+    flex: 1;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    outline: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: linear-gradient(135deg, #f6a93b, #f87c0f);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(246, 169, 59, 0.6);
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    background: linear-gradient(135deg, #f6a93b, #f87c0f);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(246, 169, 59, 0.6);
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .audio-player {
+        bottom: 16px;
+        width: calc(100% - 32px);
+        padding: 12px 16px;
+        border-radius: 24px;
+    }
+
+    .player-play-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 1.25rem;
+    }
+
+    .control-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+    }
+
+    .volume-control {
+        max-width: 100px;
+    }
+}
+
+/* ==========================================================================
+   Fullscreen Immersive Player
+   ========================================================================== */
+
+.player-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0b0704 0%, #1b0c08 50%, #0d0805 100%);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.player-fullscreen.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* 动态背景效果容器 */
+.player-fullscreen-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+/* 全屏播放器内容 */
+.player-fullscreen-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 600px;
+    padding: 40px;
+}
+
+.player-fullscreen-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.player-fullscreen-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: 48px;
+}
+
+.player-fullscreen-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 48px;
+}
+
+.player-fullscreen-play {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f6a93b 0%, #f87c0f 100%);
+    border: none;
+    color: white;
+    font-size: 2.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(248, 124, 15, 0.5);
+    transition: all 0.3s ease;
+}
+
+.player-fullscreen-play:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 48px rgba(248, 124, 15, 0.6);
+}
+
+.player-fullscreen-play.playing {
+    animation: breathe 4s ease-in-out infinite;
+}
+
+.player-fullscreen-close {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 2;
+}
+
+.player-fullscreen-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}

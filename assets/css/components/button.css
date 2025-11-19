@@ -1,0 +1,84 @@
+/* ==========================================================================
+   Button Component
+   ========================================================================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: none;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+
+    /* 确保最小触控区域 */
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* Primary Button - 流体渐变 */
+.btn-primary {
+    background: linear-gradient(135deg, #f6a93b 0%, #f87c0f 50%, #7a5af8 100%);
+    background-size: 200% 200%;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(248, 124, 15, 0.3);
+    animation: meshFlow 8s ease infinite;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(248, 124, 15, 0.4);
+    background-position: 100% 50%;
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Ghost/Secondary Button - 毛玻璃 */
+.btn-ghost {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+.btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Icon Button - 圆形 */
+.btn-icon {
+    padding: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 播放按钮特殊样式 */
+.btn-play-large {
+    width: 64px;
+    height: 64px;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, #f6a93b 0%, #f87c0f 100%);
+    box-shadow: 0 8px 24px rgba(248, 124, 15, 0.4);
+}
+
+.btn-play-large:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 32px rgba(248, 124, 15, 0.5);
+}
