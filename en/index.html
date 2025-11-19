@@ -40,7 +40,6 @@
     <meta property="og:site_name" content="SoundFlows">
     <meta property="og:locale" content="en_US">
     <link rel="preload" href="../assets/js/i18n-system.js" as="script">
-    <link rel="preload" href="../assets/js/index-app.js" as="script">
 
     <!-- External Stylesheets -->
     <link rel="stylesheet" href="../assets/css/global-theme.css">
@@ -2141,7 +2140,7 @@
     <!-- Fallback loading screen hide script - Ensure page visibility -->
     <script>
         (function() {
-            // If AppCore doesn't hide loading screen in time, this script will force hide after 2 seconds
+            // If AppCore doesn't hide loading screen in time, this script will force hide after 1 second
             setTimeout(function() {
                 const loadingScreen = document.getElementById('loadingScreen');
                 const app = document.getElementById('app');
@@ -2153,7 +2152,7 @@
                 if (app && app.style.display !== 'block') {
                     app.style.display = 'block';
                 }
-            }, 2000);
+            }, 1000);
         })();
     </script>
 

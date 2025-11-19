@@ -2172,7 +2172,7 @@
     <!-- 后备加载屏幕隐藏脚本 - 确保页面可见 -->
     <script>
         (function() {
-            // 如果 AppCore 没有及时隐藏加载屏幕，这个脚本会在 2 秒后强制隐藏
+            // 如果 AppCore 没有及时隐藏加载屏幕，这个脚本会在 1 秒后强制隐藏
             setTimeout(function() {
                 const loadingScreen = document.getElementById('loadingScreen');
                 const app = document.getElementById('app');
@@ -2184,7 +2184,7 @@
                 if (app && app.style.display !== 'block') {
                     app.style.display = 'block';
                 }
-            }, 2000);
+            }, 1000);
         })();
     </script>
 </body>
