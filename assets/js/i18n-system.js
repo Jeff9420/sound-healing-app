@@ -112,31 +112,35 @@ class InternationalizationSystem {
 
     /**
      * 根据路径、HTML属性、存储和浏览器偏好确定初始语言
-     * 优先级：用户保存的偏好 > URL路径 > 浏览器语言 > 默认语言
+     * 优先级：URL路径 > 用户保存的偏好 > 浏览器语言 > 默认语言
+     *
+     * IMPORTANT: URL path has highest priority to support international users.
+     * When a user visits /en/, they should see English regardless of localStorage.
      */
     determineInitialLanguage() {
-        // 🔧 FIX: 优先使用用户保存的语言偏好，而不是路径检测
-        // 这样用户选择的语言不会被URL路径覆盖
-        const storedLanguage = this.getStoredLanguage();
-        if (storedLanguage) {
-            console.log(`📱 使用保存的语言偏好: ${storedLanguage} (优先级最高)`);
-            return storedLanguage;
-        }
-
-        // 如果没有保存的偏好，则使用路径/HTML属性
+        // 1. 首先检查 URL 路径 (最高优先级)
+        // URL path should override everything else for international users
         const contextLanguage = this.getContextLanguage();
         if (contextLanguage) {
-            console.log(`🌐 根据页面上下文应用语言: ${contextLanguage}`);
+            console.log(`🌐 根据 URL 路径应用语言: ${contextLanguage} (最高优先级)`);
             return contextLanguage;
         }
 
-        // 最后才使用浏览器语言
+        // 2. 其次检查用户保存的语言偏好
+        const storedLanguage = this.getStoredLanguage();
+        if (storedLanguage) {
+            console.log(`📱 使用保存的语言偏好: ${storedLanguage}`);
+            return storedLanguage;
+        }
+
+        // 3. 检测浏览器语言
         const browserLanguage = this.getBrowserLanguage();
         if (browserLanguage) {
             console.log(`🌐 检测到浏览器语言: ${browserLanguage}`);
             return browserLanguage;
         }
 
+        // 4. 默认使用英语 (国际用户优先)
         console.log(`🌐 使用默认语言: ${this.fallbackLanguage || 'en-US'}`);
         return this.fallbackLanguage || 'en-US';
     }
