@@ -71,6 +71,24 @@ class AppCore {
         window.AUDIO_CONFIG = AUDIO_CONFIG; // For ui-redesign-v2.js
 
         console.log('✅ AppCore initialized');
+
+        // Hide loading screen and show app
+        this._hideLoadingScreen();
+    }
+
+    _hideLoadingScreen() {
+        setTimeout(() => {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const app = document.getElementById('app');
+
+            if (loadingScreen) {
+                loadingScreen.style.display = 'none';
+                console.log('✅ Loading screen hidden');
+            }
+            if (app) {
+                app.style.display = 'block';
+            }
+        }, 500); // Short delay to ensure smooth transition
     }
 
     _bindEvents() {
