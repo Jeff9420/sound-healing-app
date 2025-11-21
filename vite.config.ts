@@ -1,7 +1,17 @@
+import { resolve } from 'path'
+import { defineConfig } from 'vite'
+import { VitePWA } from 'vite-plugin-pwa'
+
+// Vite configuration focused on a static PWA build.
+export default defineConfig({
+  plugins: [
+    VitePWA({
+      registerType: 'autoUpdate',
+      includeAssets: ['favicon.png', 'pwa-192x192.png', 'pwa-512x512.png', 'apple-touch-icon.png'],
       manifest: {
         name: '声音疗愈空间 - Sound Healing',
         short_name: 'Sound Healing',
-        description: '专业音频疗法平台，提供213+免费疗愈音频',
+        description: '专业音频疗法平台，提供13+免费疗愈音频',
         theme_color: '#1a1a2e',
         background_color: '#0f0f23',
         display: 'standalone',
