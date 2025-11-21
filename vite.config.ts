@@ -1,11 +1,3 @@
-import { defineConfig } from 'vite'
-import { VitePWA } from 'vite-plugin-pwa'
-
-export default defineConfig({
-  plugins: [
-    VitePWA({
-      registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
         name: '声音疗愈空间 - Sound Healing',
         short_name: 'Sound Healing',
