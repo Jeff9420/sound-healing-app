@@ -232,14 +232,14 @@ Always test in multiple browsers, especially:
 ### Production Deployment Status
 - **✅ Live Site**: https://soundflows.app
 - **Platform**: Vercel
-- **Deployment Method**: **GitHub Actions + Vercel CLI**
+- **Deployment Method**: **Vercel Git Integration (Auto-Deploy)**
 - **Production Branch**: `main`
 
 ### ⚠️ IMPORTANT: Deployment Method
-**This project uses GitHub Actions for automatic deployment:**
-- ✅ **GitHub Actions** - Triggers on every push to `main` branch
-- ✅ **Vercel CLI** - Handles the actual deployment to Vercel
-- ❌ **NOT using**: Vercel Git Integration (due to webhook issues)
+**This project uses Vercel's built-in Git Integration:**
+- ✅ **Vercel Git Integration** - Automatic deployment on git push
+- ✅ **Production Branch**: `main` (configured in Vercel settings)
+- ❌ **NOT using**: Custom GitHub Actions deployment workflow (disabled)
 - ❌ **NOT using**: Manual `vercel` CLI commands
 
 ### How Automatic Deployment Works
@@ -251,50 +251,51 @@ Always test in multiple browsers, especially:
    git push origin main
    ```
 
-2. **GitHub Actions automatically triggers**:
-   - Workflow file: `.github/workflows/deploy-vercel.yml`
-   - Checks out code
-   - Builds the project using Vercel CLI
-   - Deploys to Vercel production
+2. **Vercel automatically detects the push**:
+   - Vercel monitors the `main` branch via Git Integration
+   - Automatically triggers build and deployment
+   - No GitHub Actions needed
    - Entire process takes 2-3 minutes
 
 3. **Check deployment status**:
-   - **GitHub Actions**: https://github.com/Jeff9420/sound-healing-app/actions
-     - Look for "Deploy to Vercel" workflow
-     - Status: Running → Success ✅
-   - **Vercel Dashboard**: https://vercel.com → Your Project → Deployments
-     - Deployment will appear after GitHub Actions completes
+   - **Vercel Dashboard**: https://vercel.com → Your Project → **Deployments**
+   - Latest deployment appears at the top with your commit message
+   - Status: Building → Ready → Success ✅
 
 ### Deployment Configuration
-- **Workflow**: `.github/workflows/deploy-vercel.yml`
-- **GitHub Action**: `amondnet/vercel-action@v25` (official Vercel action)
-- **Secrets Required**:
-  - `VERCEL_TOKEN` (authentication)
-  - `VERCEL_ORG_ID` (organization/team ID)
-  - `VERCEL_PROJECT_ID` (project ID)
-- **Build Command**: Handled automatically by Vercel action
-- **Output Directory**: Detected automatically from `vercel.json`
-- **vercel.json**: Simplified configuration without `builds` section
+- **Git Integration**: Connected to `Jeff9420/sound-healing-app` repository
+- **Production Branch**: `main` (set in Vercel project settings)
+- **Build Command**: Automatically detected from `package.json`
+- **Output Directory**: `dist/` (auto-detected)
+- **vercel.json**: Contains routing, headers, and security configurations
+- **No Secrets Required**: Vercel Git Integration handles authentication automatically
 
 ### Key Requirements
 - **Directory Structure**: Must have `assets/js/` and `assets/css/` (NOT root-level)
 - **HTTPS**: Required for audio playback and service worker
 - **Service Worker**: Enabled for PWA offline functionality
-- **GitHub Secret**: `VERCEL_TOKEN` must be configured in repository secrets
+- **Vercel Git Integration**: Must be connected and enabled in Vercel project settings
 
 ### Troubleshooting Deployment
 
-**If deployment fails:**
-1. Check GitHub Actions: https://github.com/Jeff9420/sound-healing-app/actions
-2. Click on the failed workflow to see error logs
-3. Common issues:
-   - Missing `VERCEL_TOKEN` secret
-   - Build errors (check build logs)
-   - Vercel CLI connection issues
+**If deployment doesn't trigger:**
+1. **Check Vercel Settings → Git**:
+   - Ensure Git repository is connected to `Jeff9420/sound-healing-app`
+   - Production Branch should be `main`
+   - Auto-deploy should be enabled
+
+2. **Check Vercel Dashboard → Deployments**:
+   - After pushing to `main`, a new deployment should appear
+   - If not appearing, check Vercel project settings
+
+3. **Common issues**:
+   - Git Integration disconnected (reconnect in Vercel settings)
+   - Wrong production branch selected
+   - Auto-deploy disabled
 
 **GitHub Actions workflows:**
-- ✅ `deploy-vercel.yml` - **Production deployment** (triggers on push to main)
 - ✅ `lighthouse-ci.yml` - Performance testing (does NOT deploy)
+- ⚠️ `deploy-vercel.yml.disabled` - Custom deployment workflow (DISABLED, not used)
 
 See `DEPLOYMENT.md` for detailed troubleshooting
 
