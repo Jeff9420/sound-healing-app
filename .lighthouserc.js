@@ -14,11 +14,11 @@ module.exports = {
           uploadThroughputKbps: 0
         }
       },
-      startServerCommand: 'npx serve dist -p 8080',
-      startServerReadyPattern: 'Accepting connections',
+      startServerCommand: 'npm run lhci:serve',
+      startServerReadyPattern: 'http-server',
       url: [
-        'http://localhost:8080',
-        'http://localhost:8080/privacy-policy.html'
+        'http://localhost:4173/en/',
+        'http://localhost:4173/privacy-policy.html'
       ]
     },
     assert: {

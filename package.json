@@ -9,6 +9,7 @@
     "start": "py -m http.server 8000",
     "build": "node scripts/static-build.js",
     "build:vite": "vite build",
+    "lhci:serve": "http-server dist -p 4173",
     "test": "echo \"Run browser tests manually\" && exit 0"
   },
   "keywords": [
@@ -49,6 +50,7 @@
     "Edge >= 90"
   ],
   "devDependencies": {
+    "http-server": "^14.1.1",
     "serve": "^14.0.0",
     "vite": "^5.0.0",
     "vite-plugin-pwa": "^0.17.0"

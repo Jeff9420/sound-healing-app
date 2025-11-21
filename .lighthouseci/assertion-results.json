@@ -1,0 +1,44 @@
+[
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0.68,
+    "values": [
+      0.68
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditProperty": "performance",
+    "auditId": "categories",
+    "level": "warn",
+    "url": "http://localhost:4173/en/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.8,
+    "actual": 0.25,
+    "values": [
+      0.25
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditProperty": "pwa",
+    "auditId": "categories",
+    "level": "warn",
+    "url": "http://localhost:4173/en/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.8,
+    "actual": 0.25,
+    "values": [
+      0.25
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditProperty": "pwa",
+    "auditId": "categories",
+    "level": "warn",
+    "url": "http://localhost:4173/privacy-policy.html"
+  }
+]
