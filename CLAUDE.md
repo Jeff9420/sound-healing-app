@@ -232,55 +232,69 @@ Always test in multiple browsers, especially:
 ### Production Deployment Status
 - **✅ Live Site**: https://soundflows.app
 - **Platform**: Vercel
-- **Deployment Method**: **Vercel Git Integration (ONLY)**
+- **Deployment Method**: **GitHub Actions + Vercel CLI**
 - **Production Branch**: `main`
 
-### ⚠️ IMPORTANT: Single Deployment Method
-**This project uses ONLY ONE deployment method:**
-- ✅ **Vercel Git Integration** - Automatic deployment on git push
-- ❌ **NOT using**: GitHub Actions deployment workflows
+### ⚠️ IMPORTANT: Deployment Method
+**This project uses GitHub Actions for automatic deployment:**
+- ✅ **GitHub Actions** - Triggers on every push to `main` branch
+- ✅ **Vercel CLI** - Handles the actual deployment to Vercel
+- ❌ **NOT using**: Vercel Git Integration (due to webhook issues)
 - ❌ **NOT using**: Manual `vercel` CLI commands
 
 ### How Automatic Deployment Works
 
-1. **Make changes and push to GitHub**:
+1. **Make changes in your IDE and push to GitHub**:
    ```bash
    git add .
    git commit -m "Your changes description"
    git push origin main
    ```
 
-2. **Vercel automatically detects the push**:
-   - Triggers build and deployment within seconds
-   - Updates live site at https://soundflows.app
+2. **GitHub Actions automatically triggers**:
+   - Workflow file: `.github/workflows/deploy-vercel.yml`
+   - Checks out code
+   - Builds the project using Vercel CLI
+   - Deploys to Vercel production
    - Entire process takes 2-3 minutes
 
 3. **Check deployment status**:
-   - Go to [Vercel Dashboard](https://vercel.com) → Your Project → **Deployments**
-   - Latest deployment should appear at the top with your commit message
-   - Status: Building → Ready → Success ✅
+   - **GitHub Actions**: https://github.com/Jeff9420/sound-healing-app/actions
+     - Look for "Deploy to Vercel" workflow
+     - Status: Running → Success ✅
+   - **Vercel Dashboard**: https://vercel.com → Your Project → Deployments
+     - Deployment will appear after GitHub Actions completes
 
 ### Deployment Configuration
+- **Workflow**: `.github/workflows/deploy-vercel.yml`
+- **GitHub Action**: `amondnet/vercel-action@v25` (official Vercel action)
+- **Secrets Required**:
+  - `VERCEL_TOKEN` (authentication)
+  - `VERCEL_ORG_ID` (organization/team ID)
+  - `VERCEL_PROJECT_ID` (project ID)
+- **Build Command**: Handled automatically by Vercel action
+- **Output Directory**: Detected automatically from `vercel.json`
 - **vercel.json**: Simplified configuration without `builds` section
-- **Build Command**: Defined in `package.json` → `"build": "node build.js"`
-- **Output Directory**: `dist/` (auto-detected by Vercel)
-- **Production Branch**: `main` (configured in Vercel project settings)
 
 ### Key Requirements
 - **Directory Structure**: Must have `assets/js/` and `assets/css/` (NOT root-level)
 - **HTTPS**: Required for audio playback and service worker
 - **Service Worker**: Enabled for PWA offline functionality
+- **GitHub Secret**: `VERCEL_TOKEN` must be configured in repository secrets
 
 ### Troubleshooting Deployment
 
-**If deployment doesn't trigger:**
-1. Check Vercel project settings → Git → Production Branch is `main`
-2. Verify automatic deployments are enabled in project settings
-3. Check Vercel dashboard for build errors
+**If deployment fails:**
+1. Check GitHub Actions: https://github.com/Jeff9420/sound-healing-app/actions
+2. Click on the failed workflow to see error logs
+3. Common issues:
+   - Missing `VERCEL_TOKEN` secret
+   - Build errors (check build logs)
+   - Vercel CLI connection issues
 
 **GitHub Actions workflows:**
+- ✅ `deploy-vercel.yml` - **Production deployment** (triggers on push to main)
 - ✅ `lighthouse-ci.yml` - Performance testing (does NOT deploy)
-- These are for quality checks only, not deployment
 
 See `DEPLOYMENT.md` for detailed troubleshooting
 

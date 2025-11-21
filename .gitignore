@@ -35,8 +35,7 @@ out/
 .settings/
 
 # 部署平台
-.vercel/
-.vercel
+# .vercel/ - INCLUDED in repo for CI/CD deployment
 .netlify/
 
 # 临时文件
