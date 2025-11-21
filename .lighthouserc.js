@@ -14,7 +14,7 @@ module.exports = {
           uploadThroughputKbps: 0
         }
       },
-      startServerCommand: 'npx serve -p 8080',
+      startServerCommand: 'npx serve dist -p 8080',
       startServerReadyPattern: 'Accepting connections',
       url: [
         'http://localhost:8080',

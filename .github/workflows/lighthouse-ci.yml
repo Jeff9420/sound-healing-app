@@ -21,13 +21,13 @@ jobs:
         cache: 'npm'
 
     - name: Install dependencies
-      run: npm install -g @lhci/cli@0.12.x
-      run: npm install -g serve
-
-    - name: Wait for deployment
       run: |
-        echo "Waiting for Vercel deployment..."
-        sleep 60
+        npm install
+        npm install -g @lhci/cli@0.12.x
+        npm install -g serve
+
+    - name: Build project
+      run: npm run build
 
     - name: Run Lighthouse CI
       run: lhci autorun
