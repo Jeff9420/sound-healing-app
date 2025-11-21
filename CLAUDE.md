@@ -230,36 +230,59 @@ Always test in multiple browsers, especially:
 ## Deployment Notes
 
 ### Production Deployment Status
-- **✅ Successfully deployed**: https://soundflows.app
-- **Platform**: Vercel with GitHub integration
-- **Deployment Method**: GitHub → Vercel auto-deploy (RECOMMENDED)
-- **Domain**: Custom domain `soundflows.app` configured with Vercel
+- **✅ Live Site**: https://soundflows.app
+- **Platform**: Vercel
+- **Deployment Method**: **Vercel Git Integration (ONLY)**
+- **Production Branch**: `main`
 
-### Current Deployment Process (Automated)
-1. **Commit to GitHub**:
+### ⚠️ IMPORTANT: Single Deployment Method
+**This project uses ONLY ONE deployment method:**
+- ✅ **Vercel Git Integration** - Automatic deployment on git push
+- ❌ **NOT using**: GitHub Actions deployment workflows
+- ❌ **NOT using**: Manual `vercel` CLI commands
+
+### How Automatic Deployment Works
+
+1. **Make changes and push to GitHub**:
    ```bash
    git add .
    git commit -m "Your changes description"
    git push origin main
    ```
 
-2. **GitHub triggers Vercel auto-deploy**:
-   - Automatic build and deployment
+2. **Vercel automatically detects the push**:
+   - Triggers build and deployment within seconds
    - Updates live site at https://soundflows.app
-   - Takes 2-3 minutes to complete
+   - Entire process takes 2-3 minutes
 
-### ⚠️ Important Notes
-- **DO NOT use `vercel --prod --yes` directly** - creates temporary URLs
-- **USE GitHub push** - updates the actual domain
-- All changes should go through GitHub for consistency
+3. **Check deployment status**:
+   - Go to [Vercel Dashboard](https://vercel.com) → Your Project → **Deployments**
+   - Latest deployment should appear at the top with your commit message
+   - Status: Building → Ready → Success ✅
 
-### Key Deployment Requirements
-- **Directory Structure**: Must have `assets/js/` and `assets/css/` (NOT root-level `js/` and `css/`)
-- **Vercel Configuration**: Simplified `vercel.json` without builds configuration
-- **HTTPS Required**: Audio files must be served over HTTPS for full functionality
-- **Service Worker**: Caching implemented for offline functionality
+### Deployment Configuration
+- **vercel.json**: Simplified configuration without `builds` section
+- **Build Command**: Defined in `package.json` → `"build": "node build.js"`
+- **Output Directory**: `dist/` (auto-detected by Vercel)
+- **Production Branch**: `main` (configured in Vercel project settings)
 
-See `DEPLOYMENT.md` for complete deployment guide and troubleshooting
+### Key Requirements
+- **Directory Structure**: Must have `assets/js/` and `assets/css/` (NOT root-level)
+- **HTTPS**: Required for audio playback and service worker
+- **Service Worker**: Enabled for PWA offline functionality
+
+### Troubleshooting Deployment
+
+**If deployment doesn't trigger:**
+1. Check Vercel project settings → Git → Production Branch is `main`
+2. Verify automatic deployments are enabled in project settings
+3. Check Vercel dashboard for build errors
+
+**GitHub Actions workflows:**
+- ✅ `lighthouse-ci.yml` - Performance testing (does NOT deploy)
+- These are for quality checks only, not deployment
+
+See `DEPLOYMENT.md` for detailed troubleshooting
 
 ## Common Issues & Solutions
 
