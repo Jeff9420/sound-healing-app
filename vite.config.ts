@@ -76,7 +76,8 @@ export default defineConfig({
     },
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html')
+        main: resolve(__dirname, 'index.html'),
+        en: resolve(__dirname, 'en/index.html')
       }
     },
     chunkSizeWarningLimit: 1000
