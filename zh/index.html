@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://www.gstatic.com https://formspree.io https://*.firebaseio.com https://*.googleapis.com https://cdn.amplitude.com https://browser.sentry-cdn.com https://cdn.jsdelivr.net https://vercel.live; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; media-src 'self' https://archive.org https://*.archive.org https://media.soundflows.app blob: data:; connect-src 'self' https://www.google-analytics.com https://formspree.io https://archive.org https://*.archive.org https://media.soundflows.app https://*.firebaseio.com https://*.googleapis.com https://firestore.googleapis.com https://cdn.amplitude.com https://*.sentry.io; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io; upgrade-insecure-requests;">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://www.gstatic.com https://formspree.io https://*.firebaseio.com https://*.googleapis.com https://cdn.amplitude.com https://browser.sentry-cdn.com https://cdn.jsdelivr.net https://vercel.live; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; media-src 'self' https://archive.org https://*.archive.org https://media.soundflows.app blob: data:; connect-src 'self' https://www.google-analytics.com https://formspree.io https://archive.org https://*.archive.org https://media.soundflows.app https://*.firebaseio.com https://*.googleapis.com https://firestore.googleapis.com https://cdn.amplitude.com https://*.sentry.io; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io; upgrade-insecure-requests;">
     <meta name="build-version" content="v3.1.0-deploy-fix-20251119">
     <!-- 🚀 部署修复: 2025-11-19 - CSP 和路由优化 -->
 
@@ -146,14 +147,14 @@
     </script>
 
     <!-- Preload Critical Resources -->
-    <link rel="preload" href="../assets/css/index-styles.css?v=20251115-modal" as="style">
+    <link rel="preload" href="../assets/css/index-styles.css?v=20251122-fix" as="style">
     <link rel="preload" href="../assets/js/audio-config.js" as="script">
     <link rel="preload" href="../assets/js/i18n-system.js" as="script">
     <link rel="preload" href="../assets/js/index-app.js" as="script">
 
     <!-- External Stylesheets -->
     <link rel="stylesheet" href="../assets/css/global-theme.css">
-    <link rel="stylesheet" href="../assets/css/index-styles.css?v=20251115-modal">
+    <link rel="stylesheet" href="../assets/css/index-styles.css?v=20251122-fix">
     <link rel="stylesheet" href="../assets/css/history-favorites.css">
     <link rel="stylesheet" href="../assets/css/mixer.css">
     <link rel="stylesheet" href="../assets/css/stats-dashboard.css">
@@ -2172,9 +2173,9 @@
 
     <!-- 后备加载屏幕隐藏脚本 - 确保页面可见 -->
     <script>
-        (function() {
+        (function () {
             // 如果 AppCore 没有及时隐藏加载屏幕，这个脚本会在 1 秒后强制隐藏
-            setTimeout(function() {
+            setTimeout(function () {
                 const loadingScreen = document.getElementById('loadingScreen');
                 const app = document.getElementById('app');
 
