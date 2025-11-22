@@ -5,6 +5,51 @@
  * @author Sound Healing Team
  * @version 2.0.0
  * @date 2025-10-01
+ */
+
+/* ==========================================================================
+   全局重置和基础样式
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-sans);
+    background: var(--bg-primary);
+    min-height: 100vh;
+    color: var(--text-primary);
+    /* Prevent horizontal scroll but allow vertical */
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* Ensure body takes full width but respects scrollbar */
+    width: 100%;
+    position: relative;
+}
+
+body.player-modal-open {
+    overflow: hidden !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: var(--bg-dark-primary);
+        color: var(--text-light);
+    }
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover,
+a:focus-visible {
+    opacity: 0.8;
 }
 
 @media (prefers-color-scheme: dark) {
