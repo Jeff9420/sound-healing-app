@@ -1,6 +1,6 @@
 // Production Audio Configuration - Archive.org (191 files)
 // Only includes files that are confirmed uploaded to Archive.org
-export const AUDIO_CONFIG = {
+const AUDIO_CONFIG = {
     baseUrl: 'https://archive.org/download/sound-healing-collection/',
     categories: {
         'Animal sounds': {
@@ -293,7 +293,7 @@ AUDIO_CONFIG.categories['Chakra'].folder = 'chakra';
 
 // Helper function to get full URL for a file
 // 重要：Archive.org上的文件名使用原始中文，不需要URL编码
-export function getAudioUrl(categoryKey, filename) {
+function getAudioUrl(categoryKey, filename) {
     const category = AUDIO_CONFIG.categories[categoryKey];
     if (!category) {
         return null;
@@ -301,4 +301,10 @@ export function getAudioUrl(categoryKey, filename) {
 
     const folderName = category.folder || categoryKey.toLowerCase().replace(/\s+/g, '-');
     return `${AUDIO_CONFIG.baseUrl}${folderName}/${filename}`;
+}
+
+// Attach to window
+if (typeof window !== 'undefined') {
+    window.AUDIO_CONFIG = AUDIO_CONFIG;
+    window.getAudioUrl = getAudioUrl;
 }

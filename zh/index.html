@@ -7,6 +7,10 @@
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://www.gstatic.com https://formspree.io https://*.firebaseio.com https://*.googleapis.com https://cdn.amplitude.com https://browser.sentry-cdn.com https://cdn.jsdelivr.net https://vercel.live; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; media-src 'self' https://archive.org https://*.archive.org https://media.soundflows.app blob: data:; connect-src 'self' https://www.google-analytics.com https://formspree.io https://archive.org https://*.archive.org https://media.soundflows.app https://*.firebaseio.com https://*.googleapis.com https://firestore.googleapis.com https://cdn.amplitude.com https://*.sentry.io; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io; upgrade-insecure-requests;">
     <meta name="build-version" content="v4.0.0-deep-immersion">
+
+    <title>SoundFlows | 深度沉浸式声音疗愈</title>
+    <meta name="description" content="体验沉浸式声景带来的深度放松。专为睡眠和专注设计的雨声、白噪音和冥想音乐。">
+
     <base href="/">
     <!-- Canonical URL -->
     <link rel="canonical" href="https://www.soundflows.app/zh/">
@@ -19,8 +23,8 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.soundflows.app/zh/">
-    <meta property="og:title" content="SoundFlows | 沉浸式声音疗愈">
-    <meta property="og:description" content="体验深度放松的沉浸式音景。专为睡眠和专注设计的雨声、白噪音和冥想音乐。">
+    <meta property="og:title" content="SoundFlows | 深度沉浸式声音疗愈">
+    <meta property="og:description" content="体验沉浸式声景带来的深度放松。专为睡眠和专注设计的雨声、白噪音和冥想音乐。">
     <meta property="og:image" content="https://www.soundflows.app/assets/images/og-image.jpg">
 
     <!-- Fonts -->
@@ -28,35 +32,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 
-    <!-- Legacy/Functional CSS (Loaded first) -->
-    <link rel="stylesheet" href="../assets/css/components/auth-ui.css">
-    <link rel="stylesheet" href="../assets/css/history-favorites.css">
-    <link rel="stylesheet" href="../assets/css/mixer.css">
-    <link rel="stylesheet" href="../assets/css/stats-dashboard.css">
-    <link rel="stylesheet" href="../assets/css/accessibility.css">
-
-    <!-- Deep Immersion Theme (Loaded last to override) -->
+    <!-- Theme & Component CSS -->
     <link rel="stylesheet" href="../assets/css/themes/deep-immersion.css">
     <link rel="stylesheet" href="../assets/css/components/glass-card.css">
     <link rel="stylesheet" href="../assets/css/components/floating-player.css">
-
-    <!-- Supabase Client Library -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <!-- Analytics Configuration -->
-    <script src="../assets/js/analytics-config.js"></script>
-
-    <!-- Amplitude Web SDK -->
-    <script src="https://cdn.amplitude.com/script/b6c4ebe3ec4d16c8f5fd258d29653cfc.js"></script>
-    <script>
-        (function initAmplitudeSafely() {
-            try {
-                var amplitude = window.amplitude;
-                if (!amplitude || typeof amplitude.init !== 'function') return;
-                amplitude.init('b6c4ebe3ec4d16c8f5fd258d29653cfc', { "fetchRemoteConfig": true, "autocapture": true });
-            } catch (error) { console.warn('Amplitude init failed:', error); }
-        })();
-    </script>
+    <link rel="stylesheet" href="../assets/css/accessibility.css">
 </head>
 
 <body>
@@ -64,152 +44,91 @@
     <div class="ambient-bg"></div>
 
     <!-- Navbar -->
-    <nav style="padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center;">
-        <div style="font-weight: 600; font-size: 1.5rem; letter-spacing: 0.05em;">SoundFlows</div>
-        <div style="display: flex; gap: 2rem;">
-            <a href="/en/" style="color: var(--text-muted); font-size: 0.9rem;">English</a>
+    <nav
+        style="padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 10;">
+        <div style="font-weight: 600; font-size: 1.5rem; letter-spacing: 0.05em; color: var(--text-main);">SoundFlows
+        </div>
+        <div style="display: flex; gap: 2rem; align-items: center;">
+            <a href="/en/"
+                style="color: var(--text-muted); font-size: 0.9rem; text-decoration: none; transition: color 0.3s;">English</a>
             <button id="navHistoryBtn" onclick="window.historyFavoritesUI?.openPanel('history')"
-                style="background:none; border:none; color:var(--text-muted); cursor:pointer;">历史记录</button>
-            <button id="navFavoritesBtn" onclick="window.historyFavoritesUI?.openPanel('favorites')"
-                style="background:none; border:none; color:var(--text-muted); cursor:pointer;">我的收藏</button>
-        </div>
-    </nav>
+                style="padding: 1rem 2.5rem; background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: white; border-radius: 50px; font-size: 1.1rem; cursor: pointer; backdrop-filter: blur(10px); transition: all 0.3s; box-shadow: 0 0 20px rgba(124, 58, 237, 0.2);">
+                开始聆听
+            </button>
+            </header>
 
-    <!-- Hero Section -->
-    <header
-        style="height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 2rem;">
-        <h1
-            style="font-size: 4rem; margin-bottom: 1rem; background: linear-gradient(to right, #fff, #94A3B8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-            寻找你的频率</h1>
-        <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 3rem;">
-            专为深度睡眠、专注和放松设计的沉浸式音景。</p>
-        <button onclick="document.getElementById('sound-grid').scrollIntoView({behavior: 'smooth'})"
-            style="padding: 1rem 2.5rem; background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: white; border-radius: 50px; font-size: 1.1rem; cursor: pointer; backdrop-filter: blur(10px); transition: all 0.3s;">开始聆听</button>
-    </header>
-
-    <!-- Sound Grid -->
-    <div class="container" id="sound-grid">
-        <div class="cards-container">
-            <!-- Rain -->
-            <div class="glass-card" onclick="playTrack('rain_heavy', '暴雨声', '助眠')">
-                <span class="icon">🌧️</span>
-                <h3>暴雨声</h3>
-                <p>持续的暴雨声，助您深度睡眠。</p>
+            <!-- Sound Grid -->
+            <div class="container" id="sound-grid"
+                style="max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; position: relative; z-index: 5;">
+                <!-- Rain -->
+                <div class="glass-card" data-track-id="rain-heavy.mp3" data-category="Rain" data-name="倾盆大雨">
+                    <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🌧️</span>
+                    <h3 class="card-title">倾盆大雨</h3>
+                    <p class="card-desc">持续的暴雨声，助您深度睡眠。</p>
+                </div>
+                <!-- Ocean -->
+                <div class="glass-card" data-track-id="ocean-waves.mp3" data-category="running water" data-name="海浪声">
+                    <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🌊</span>
+                    <h3 class="card-title">海浪声</h3>
+                    <p class="card-desc">有节奏的海浪声，平复焦虑。</p>
+                </div>
+                <!-- Forest -->
+                <div class="glass-card" data-track-id="forest.mp3" data-category="Animal sounds" data-name="森林浴">
+                    <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🌲</span>
+                    <h3 class="card-title">森林浴</h3>
+                    <p class="card-desc">林间鸟鸣与风声。</p>
+                </div>
+                <!-- White Noise -->
+                <div class="glass-card" data-track-id="white-noise.mp3" data-category="hypnosis" data-name="白噪音">
+                    <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">⚡</span>
+                    <h3 class="card-title">白噪音</h3>
+                    <p class="card-desc">纯净的静电声，阻隔干扰。</p>
+                </div>
+                <!-- Alpha Waves -->
+                <div class="glass-card" data-track-id="binaural-alpha.mp3" data-category="meditation" data-name="阿尔法波">
+                    <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🧠</span>
+                    <h3 class="card-title">阿尔法波</h3>
+                    <p class="card-desc">10Hz双耳节拍，提升专注力。</p>
+                </div>
+                <!-- Fireplace -->
+                <div class="glass-card" data-track-id="fireplace.mp3" data-category="Fire" data-name="壁炉火声">
+                    <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🔥</span>
+                    <h3 class="card-title">壁炉火声</h3>
+                    <p class="card-desc">噼啪作响的火焰，营造温暖氛围。</p>
+                </div>
             </div>
-            <!-- Ocean -->
-            <div class="glass-card" onclick="playTrack('ocean_waves', '海浪声', '放松')">
-                <span class="icon">🌊</span>
-                <h3>海浪声</h3>
-                <p>有节奏的海浪声，缓解焦虑。</p>
+
+            <!-- Floating Player -->
+            <div id="audioPlayer" class="floating-player hidden">
+                <div class="player-info">
+                    <span id="playerTitle" class="player-title">选择一个声音</span>
+                    <span id="playerSubtitle" class="player-sub">SoundFlows</span>
+                </div>
+                <div class="player-controls">
+                    <button class="p-btn" id="prevBtn">⏮</button>
+                    <button class="p-btn play-circle" id="playPauseBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                    </button>
+                    <button class="p-btn" id="nextBtn">⏭</button>
+                </div>
             </div>
-            <!-- Forest -->
-            <div class="glass-card" onclick="playTrack('forest_birds', '森林浴', '自然')">
-                <span class="icon">🌲</span>
-                <h3>森林浴</h3>
-                <p>林间的风声与鸟鸣。</p>
-            </div>
-            <!-- White Noise -->
-            <div class="glass-card" onclick="playTrack('white_noise', '白噪音', '专注')">
-                <span class="icon">⚡</span>
-                <h3>白噪音</h3>
-                <p>纯净的静态噪音，屏蔽干扰。</p>
-            </div>
-            <!-- Alpha Waves -->
-            <div class="glass-card" onclick="playTrack('binaural_alpha', 'Alpha脑波', '专注')">
-                <span class="icon">🧠</span>
-                <h3>Alpha脑波</h3>
-                <p>10Hz双耳节拍，提升专注力。</p>
-            </div>
-            <!-- Fireplace -->
-            <div class="glass-card" onclick="playTrack('fireplace', '温暖壁炉', '放松')">
-                <span class="icon">🔥</span>
-                <h3>温暖壁炉</h3>
-                <p>噼啪作响的炉火，营造温暖氛围。</p>
-            </div>
-        </div>
-    </div>
 
-    <!-- Floating Player -->
-    <div id="audioPlayer" class="floating-player hidden">
-        <div class="player-info">
-            <span id="playerTrackTitle" class="player-title">选择一个声音</span>
-            <span id="playerTrackCategory" class="player-sub">SoundFlows</span>
-        </div>
-        <div class="player-controls">
-            <audio id="mainAudio" loop></audio>
-            <button class="p-btn" id="prevBtn" onclick="playRandomTrack()">⏮</button>
-            <button class="p-btn play-circle" id="playBtn">▶</button>
-            <button class="p-btn" id="nextBtn" onclick="playRandomTrack()">⏭</button>
-            <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.8"
-                style="width: 80px; accent-color: var(--accent-glow);">
-        </div>
-    </div>
+            <!-- Application Scripts -->
+            <script src="../assets/js/i18n-system.js"></script>
+            <script src="../assets/js/language-integration.js"></script>
 
-    <!-- Hidden Elements for Logic Compatibility -->
-    <div id="loadingScreen" style="display:none;"></div>
+            <!-- Core Modules -->
+            <script src="../assets/js/modules/audio-config.js"></script>
+            <script src="../assets/js/modules/user-data-manager.js"></script>
+            <script src="../assets/js/audio-manager.js"></script>
 
-    <!-- Scripts -->
-    <script src="../assets/js/i18n-system.js"></script>
-    <script src="../assets/js/audio-config.js"></script>
-    <script src="../assets/js/index-app.js"></script>
-    <script src="../assets/js/history-favorites.js"></script>
+            <!-- UI Components -->
+            <script src="../assets/js/history-favorites-ui.js"></script>
 
-    <script>
-        // Simple inline logic to bridge the new UI with the existing app logic
-        const audio = document.getElementById('mainAudio');
-        const playBtn = document.getElementById('playBtn');
-        const player = document.getElementById('audioPlayer');
-        const titleEl = document.getElementById('playerTrackTitle');
-        const catEl = document.getElementById('playerTrackCategory');
-
-        // Map of tracks (simplified for this demo, normally comes from audio-config.js)
-        const tracks = {
-            'rain_heavy': { url: 'https://media.soundflows.app/rain-heavy.mp3', name: '暴雨声', cat: '助眠' },
-            'ocean_waves': { url: 'https://media.soundflows.app/ocean-waves.mp3', name: '海浪声', cat: '放松' },
-            'forest_birds': { url: 'https://media.soundflows.app/forest.mp3', name: '森林浴', cat: '自然' },
-            'white_noise': { url: 'https://media.soundflows.app/white-noise.mp3', name: '白噪音', cat: '专注' },
-            'binaural_alpha': { url: 'https://media.soundflows.app/binaural-alpha.mp3', name: 'Alpha脑波', cat: '专注' },
-            'fireplace': { url: 'https://media.soundflows.app/fireplace.mp3', name: '温暖壁炉', cat: '放松' }
-        };
-
-        function playTrack(id, name, cat) {
-            const url = tracks[id] ? tracks[id].url : `https://media.soundflows.app/${id}.mp3`;
-
-            audio.src = url;
-            audio.play().catch(e => console.log('Playback failed:', e));
-
-            titleEl.textContent = name;
-            catEl.textContent = cat;
-
-            player.classList.remove('hidden');
-            playBtn.textContent = '⏸';
-
-            // Update active card state
-            document.querySelectorAll('.glass-card').forEach(c => c.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-        }
-
-        playBtn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
-                playBtn.textContent = '⏸';
-            } else {
-                audio.pause();
-                playBtn.textContent = '▶';
-            }
-        });
-
-        document.getElementById('volumeSlider').addEventListener('input', (e) => {
-            audio.volume = e.target.value;
-        });
-
-        function playRandomTrack() {
-            const keys = Object.keys(tracks);
-            const randomKey = keys[Math.floor(Math.random() * keys.length)];
-            const t = tracks[randomKey];
-            playTrack(randomKey, t.name, t.cat);
-        }
-    </script>
+            <!-- Main Application Entry Point -->
+            <script src="../assets/js/app-immersion.js"></script>
 </body>
 
 </html>

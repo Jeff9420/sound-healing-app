@@ -3,7 +3,7 @@
  * Manages user local data including history, favorites, and statistics.
  */
 
-export class UserDataManager {
+class UserDataManager {
     constructor() {
         this.storagePrefix = 'soundHealing_';
         this.maxHistoryItems = 50; // 最多保存50条历史记录
@@ -387,4 +387,11 @@ export class UserDataManager {
             storageSize: `${kb} KB`
         };
     }
+}
+
+// 注册全局实例
+if (typeof window !== 'undefined') {
+    window.UserDataManager = UserDataManager;
+    window.userDataManager = new UserDataManager();
+    console.log('✅ UserDataManager 已初始化');
 }
