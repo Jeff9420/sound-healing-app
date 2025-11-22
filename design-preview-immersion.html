@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundFlows - Deep Immersion Design Preview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #050511;
+            --accent-glow: #7C3AED;
+            /* Violet */
+            --accent-secondary: #06B6D4;
+            /* Cyan */
+            --text-main: #FFFFFF;
+            --text-muted: #94A3B8;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Background Animation Simulation */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 30%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+        }
+
+        /* Navbar */
+        .navbar {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 1.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Hero */
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, #94A3B8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            padding: 1rem 2.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            color: white;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(124, 58, 237, 0.2);
+        }
+
+        .cta-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.4);
+        }
+
+        /* Cards */
+        .cards-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+            transition: transform 0.3s, border-color 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .glass-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Floating Player */
+        .floating-player {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 600px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+            z-index: 100;
+        }
+
+        .player-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .player-title {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .player-sub {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .player-controls {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .p-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .p-btn:hover {
+            opacity: 1;
+        }
+
+        .play-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: white;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ambient-bg"></div>
+
+    <nav class="navbar">
+        <div class="logo">SoundFlows</div>
+        <div class="nav-links">
+            <a href="#">Discover</a>
+            <a href="#">Library</a>
+            <a href="#">Profile</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Find Your Frequency</h1>
+        <p>Immersive soundscapes engineered for deep sleep, focus, and relaxation. Experience the power of sonic
+            healing.</p>
+        <button class="cta-btn">Start Listening</button>
+    </header>
+
+    <section class="cards-container">
+        <div class="glass-card">
+            <h3 class="card-title">Night Rain</h3>
+            <p class="card-desc">Continuous heavy rain for deep sleep.</p>
+        </div>
+        <div class="glass-card">
+            <h3 class="card-title">Alpha Waves</h3>
+            <p class="card-desc">10Hz binaural beats for focus.</p>
+        </div>
+        <div class="glass-card">
+            <h3 class="card-title">Forest Bathing</h3>
+            <p class="card-desc">Birds and wind in the trees.</p>
+        </div>
+    </section>
+
+    <div class="floating-player">
+        <div class="player-info">
+            <span class="player-title">Cosmic Drift</span>
+            <span class="player-sub">Ambient • 432Hz</span>
+        </div>
+        <div class="player-controls">
+            <button class="p-btn">⏮</button>
+            <button class="p-btn play-circle">▶</button>
+            <button class="p-btn">⏭</button>
+        </div>
+    </div>
+</body>
+
+</html>
