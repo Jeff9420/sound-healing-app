@@ -260,25 +260,24 @@ class DeepImmersionApp {
         }
     }
 
-    togglePlayPause() {
-        if (!this.audioManager || !this.currentTrackId) return;
+    async togglePlayPause() {
+        console.log('⏯️ togglePlayPause called');
+        if (!this.audioManager) {
+            console.error('❌ AudioManager not initialized');
+            return;
+        }
 
-        if (this.isPlaying) {
-            this.audioManager.pauseTrack(this.currentTrackId);
-        } else {
-            // Resume
-            // We need to know the category and filename to resume if it was fully stopped
-            // But AudioManager.pauseTrack just pauses.
-            // AudioManager.resumeCurrentTrack() might be better if available
-            if (this.audioManager.resumeCurrentTrack) {
-                this.audioManager.resumeCurrentTrack();
+        try {
+            if (this.audioManager.isPlaying) {
+                console.log('⏸️ Requesting pause...');
+                this.audioManager.pause();
             } else {
-                // Fallback
-                const track = this.audioManager.getCurrentTrack();
-                if (track) {
-                    this.audioManager.playTrack(track.trackId, track.categoryName, track.fileName);
-                }
+                console.log('▶️ Requesting play...');
+                await this.audioManager.play();
             }
+            this.updatePlayPauseButton();
+        } catch (error) {
+            console.error('❌ Toggle play/pause failed:', error);
         }
     }
 
@@ -332,6 +331,11 @@ class DeepImmersionApp {
                 '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>' :
                 '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
         }
+    }
+
+    // Helper method to update play/pause button based on current state
+    updatePlayPauseButton() {
+        this.updatePlayButtonState(this.audioManager && this.audioManager.isPlaying);
     }
 
     showPlayer() {
