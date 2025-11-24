@@ -3,6 +3,113 @@
  * Handles UI interactions, audio playback via AudioManager, and integration with UserDataManager.
  */
 
+class TimerManager {
+    constructor(audioManager) {
+        this.audioManager = audioManager;
+        this.timerInterval = null;
+        this.endTime = null;
+        this.duration = 0;
+        this.modal = document.getElementById('timerModal');
+        this.timerBtn = document.getElementById('timerBtn');
+        this.closeBtn = document.getElementById('closeTimerModal');
+        this.optionBtns = document.querySelectorAll('.timer-opt-btn');
+    }
+
+    initialize() {
+        if (this.timerBtn) {
+            this.timerBtn.addEventListener('click', () => this.openModal());
+        }
+        if (this.closeBtn) {
+            this.closeBtn.addEventListener('click', () => this.closeModal());
+        }
+        this.optionBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const minutes = parseInt(e.target.dataset.time);
+                this.setTimer(minutes);
+                this.closeModal();
+            });
+        });
+
+        // Close modal on outside click
+        if (this.modal) {
+            this.modal.addEventListener('click', (e) => {
+                if (e.target === this.modal) this.closeModal();
+            });
+        }
+    }
+
+    openModal() {
+        if (this.modal) {
+            this.modal.classList.remove('hidden');
+            this.modal.style.display = 'flex';
+        }
+    }
+
+    closeModal() {
+        if (this.modal) {
+            this.modal.classList.add('hidden');
+            this.modal.style.display = 'none';
+        }
+    }
+
+    setTimer(minutes) {
+        this.clearTimer();
+        if (minutes > 0) {
+            this.duration = minutes;
+            this.endTime = Date.now() + minutes * 60000;
+            this.startCountdown();
+            this.updateButtonState(true);
+            console.log(`Timer set for ${minutes} minutes`);
+            if (typeof window.showNotification === 'function') {
+                window.showNotification(`Timer set for ${minutes} minutes`, 'info');
+            }
+        } else {
+            this.updateButtonState(false);
+            console.log('Timer cleared');
+            if (typeof window.showNotification === 'function') {
+                window.showNotification('Timer cleared', 'info');
+            }
+        }
+    }
+
+    clearTimer() {
+        if (this.timerInterval) {
+            clearInterval(this.timerInterval);
+            this.timerInterval = null;
+        }
+        this.endTime = null;
+        this.duration = 0;
+    }
+
+    startCountdown() {
+        this.timerInterval = setInterval(() => {
+            const remaining = this.endTime - Date.now();
+            if (remaining <= 0) {
+                this.clearTimer();
+                if (this.audioManager && typeof this.audioManager.pauseAll === 'function') {
+                    this.audioManager.pauseAll();
+                }
+                this.updateButtonState(false);
+                console.log('Timer finished, audio paused');
+                if (typeof window.showNotification === 'function') {
+                    window.showNotification('Timer finished', 'info');
+                }
+            }
+        }, 1000);
+    }
+
+    updateButtonState(isActive) {
+        if (this.timerBtn) {
+            this.timerBtn.style.color = isActive ? 'var(--primary-color)' : 'currentColor';
+            if (isActive) {
+                this.timerBtn.classList.add('active');
+            } else {
+                this.timerBtn.classList.remove('active');
+            }
+        }
+    }
+}
+
 class DeepImmersionApp {
     constructor() {
         this.audioManager = null;
@@ -35,12 +142,22 @@ class DeepImmersionApp {
         }
 
         // Initialize AudioManager
-        if (window.AudioManager) {
-            this.audioManager = new window.AudioManager();
-            await this.audioManager.initialize();
-            window.audioManager = this.audioManager; // Global access for HistoryFavoritesUI
-        } else {
-            console.error('❌ AudioManager class not found!');
+        try {
+            if (window.audioManager) {
+                this.audioManager = window.audioManager;
+                if (!this.audioManager.isInitialized) {
+                    await this.audioManager.initialize();
+                }
+            } else if (window.AudioManager) {
+                this.audioManager = new window.AudioManager();
+                await this.audioManager.initialize();
+                window.audioManager = this.audioManager;
+            } else {
+                console.error('❌ AudioManager class not found!');
+            }
+        } catch (error) {
+            console.error('⚠️ AudioManager initialization failed:', error);
+            // Continue anyway to allow UI to function (even if audio is broken)
         }
 
         // Initialize HistoryFavoritesUI
@@ -49,6 +166,10 @@ class DeepImmersionApp {
             this.historyFavoritesUI.initialize();
             window.historyFavoritesUI = this.historyFavoritesUI;
         }
+
+        // Initialize TimerManager
+        this.timerManager = new TimerManager(this.audioManager);
+        this.timerManager.initialize();
     }
 
     setupEventListeners() {
@@ -64,6 +185,24 @@ class DeepImmersionApp {
         const playPauseBtn = document.getElementById('playPauseBtn');
         if (playPauseBtn) {
             playPauseBtn.addEventListener('click', () => this.togglePlayPause());
+        }
+
+        const prevBtn = document.getElementById('prevBtn');
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                if (this.audioManager?.previousTrack) {
+                    this.audioManager.previousTrack();
+                }
+            });
+        }
+
+        const nextBtn = document.getElementById('nextBtn');
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                if (this.audioManager?.nextTrack) {
+                    this.audioManager.nextTrack();
+                }
+            });
         }
 
         // Setup Card Click Listeners (delegation)
@@ -88,27 +227,31 @@ class DeepImmersionApp {
 
         try {
             // If clicking the same track that is playing, toggle it
-            if (this.currentTrackId === trackId && this.isPlaying) {
-                this.audioManager.pauseTrack(trackId);
+            const uniqueId = this.audioManager.generateTrackId(category, trackId);
+            if (this.currentTrackId === uniqueId && this.isPlaying) {
+                this.audioManager.pauseTrack(uniqueId);
                 return;
             }
-
-            // Play the track
-            // Note: AudioManager expects (trackId, categoryName, fileName)
-            // Our trackId in HTML is usually the filename without extension or a unique key
-            // We need to map it correctly. 
-            // Assuming trackId in HTML is the fileName for now, or we construct it.
-
-            // Construct a unique ID for AudioManager
-            const uniqueId = this.audioManager.generateTrackId(category, trackId);
 
             // Update UI immediately
             this.updatePlayerUI(name, category, true);
             this.showPlayer();
 
-            await this.audioManager.playTrack(uniqueId, category, trackId);
+            // Prefer playlist playback so next/previous controls work
+            const categoryFiles = (window.AUDIO_CONFIG?.categories?.[category]?.files) ||
+                (this.audioManager.categories?.[category]?.files) ||
+                [];
+            const fileIndex = categoryFiles.indexOf(trackId);
 
-            this.currentTrackId = uniqueId; // Store the unique ID
+            if (fileIndex >= 0 && typeof this.audioManager.playPlaylist === 'function') {
+                await this.audioManager.playPlaylist(category, fileIndex);
+                const activeFile = categoryFiles[fileIndex] || trackId;
+                this.currentTrackId = this.audioManager.generateTrackId(category, activeFile);
+            } else {
+                await this.audioManager.playTrack(uniqueId, category, trackId);
+                this.currentTrackId = uniqueId; // Store the unique ID
+            }
+
             this.isPlaying = true;
 
         } catch (error) {
@@ -141,6 +284,16 @@ class DeepImmersionApp {
 
     onTrackPlay(detail) {
         this.isPlaying = true;
+        this.currentTrackId = detail?.trackId || detail;
+
+        if (detail?.fileName) {
+            const displayName = this.audioManager?.getDisplayName
+                ? this.audioManager.getDisplayName(detail.fileName)
+                : detail.fileName;
+            const subtitle = detail.categoryName || detail.category || '';
+            this.updatePlayerUI(displayName, subtitle, true);
+        }
+
         this.updatePlayButtonState(true);
 
         // Update active card state

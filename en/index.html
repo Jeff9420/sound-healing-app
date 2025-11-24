@@ -7,34 +7,23 @@
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://www.gstatic.com https://formspree.io https://*.firebaseio.com https://*.googleapis.com https://cdn.amplitude.com https://browser.sentry-cdn.com https://cdn.jsdelivr.net https://vercel.live; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; media-src 'self' https://archive.org https://*.archive.org https://media.soundflows.app blob: data:; connect-src 'self' https://www.google-analytics.com https://formspree.io https://archive.org https://*.archive.org https://media.soundflows.app https://*.firebaseio.com https://*.googleapis.com https://firestore.googleapis.com https://cdn.amplitude.com https://*.sentry.io; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io; upgrade-insecure-requests;">
     <meta name="build-version" content="v4.0.0-deep-immersion">
-
     <title>SoundFlows | Deep Immersion Sound Healing</title>
     <meta name="description"
         content="Experience deep relaxation with immersive soundscapes. Rain sounds, white noise, and meditation music designed for sleep and focus.">
-
     <base href="/">
-    <!-- Canonical URL -->
     <link rel="canonical" href="https://www.soundflows.app/en/">
-
-    <!-- Alternate Language Versions (hreflang) -->
     <link rel="alternate" hreflang="en" href="https://www.soundflows.app/en/">
     <link rel="alternate" hreflang="zh-Hans" href="https://www.soundflows.app/zh/">
     <link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/">
-
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.soundflows.app/en/">
     <meta property="og:title" content="SoundFlows | Deep Immersion Sound Healing">
     <meta property="og:description"
         content="Experience deep relaxation with immersive soundscapes. Rain sounds, white noise, and meditation music designed for sleep and focus.">
     <meta property="og:image" content="https://www.soundflows.app/assets/images/og-image.jpg">
-
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
-
-    <!-- Theme & Component CSS -->
     <link rel="stylesheet" href="../assets/css/themes/deep-immersion.css">
     <link rel="stylesheet" href="../assets/css/components/glass-card.css">
     <link rel="stylesheet" href="../assets/css/components/floating-player.css">
@@ -42,10 +31,7 @@
 </head>
 
 <body>
-    <!-- Background Animation -->
     <div class="ambient-bg"></div>
-
-    <!-- Navbar -->
     <nav
         style="padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 10;">
         <div style="font-weight: 600; font-size: 1.5rem; letter-spacing: 0.05em; color: var(--text-main);">SoundFlows
@@ -54,349 +40,113 @@
             <a href="/zh/"
                 style="color: var(--text-muted); font-size: 0.9rem; text-decoration: none; transition: color 0.3s;">中文</a>
             <button id="navHistoryBtn" onclick="window.historyFavoritesUI?.openPanel('history')"
-            content="Experience deep relaxation with immersive soundscapes. Rain sounds, white noise, and meditation music designed for sleep and focus.">
-
-        <base href="/">
-        <!-- Canonical URL -->
-        <link rel="canonical" href="https://www.soundflows.app/en/">
-
-        <!-- Alternate Language Versions (hreflang) -->
-        <link rel="alternate" hreflang="en" href="https://www.soundflows.app/en/">
-        <link rel="alternate" hreflang="zh-Hans" href="https://www.soundflows.app/zh/">
-        <link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/">
-
-        <!-- Open Graph / Facebook -->
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="https://www.soundflows.app/en/">
-        <meta property="og:title" content="SoundFlows | Deep Immersion Sound Healing">
-        <meta property="og:description"
-            content="Experience deep relaxation with immersive soundscapes. Rain sounds, white noise, and meditation music designed for sleep and focus.">
-        <meta property="og:image" content="https://www.soundflows.app/assets/images/og-image.jpg">
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
-
-        <!-- Theme & Component CSS -->
-        <link rel="stylesheet" href="../assets/css/themes/deep-immersion.css">
-        <link rel="stylesheet" href="../assets/css/components/glass-card.css">
-        <link rel="stylesheet" href="../assets/css/components/floating-player.css">
-        <link rel="stylesheet" href="../assets/css/accessibility.css">
-    </head>
-
-    <body>
-        <!-- Background Animation -->
-        <div class="ambient-bg"></div>
-
-        <!-- Navbar -->
-        <nav
-            style="padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 10;">
-            <div style="font-weight: 600; font-size: 1.5rem; letter-spacing: 0.05em; color: var(--text-main);">
-                SoundFlows
-            </div>
-            <div style="display: flex; gap: 2rem; align-items: center;">
-                <a href="/zh/"
-                    style="color: var(--text-muted); font-size: 0.9rem; text-decoration: none; transition: color 0.3s;">中文</a>
-                <button id="navHistoryBtn" onclick="window.historyFavoritesUI?.openPanel('history')"
-                    style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-family: inherit; font-size: 0.9rem; transition: color 0.3s;">History</button>
-                <button id="navFavoritesBtn" onclick="window.historyFavoritesUI?.openPanel('favorites')"
-                    style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-family: inherit; font-size: 0.9rem; transition: color 0.3s;">Favorites</button>
-            </div>
-        </nav>
-
-        <!-- Hero Section -->
-        <header
-            style="height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 2rem; position: relative; z-index: 5;">
-            <h1
-                style="font-size: 4rem; margin-bottom: 1rem; background: linear-gradient(to right, #fff, #94A3B8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 300;">
-                Find Your Frequency</h1>
-            <p
-                style="font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 3rem; line-height: 1.6;">
-                Immersive soundscapes engineered for deep sleep, focus, and relaxation.
-            </p>
-            <button onclick="document.getElementById('sound-grid').scrollIntoView({behavior: 'smooth'})"
-                style="padding: 1rem 2.5rem; background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: white; border-radius: 50px; font-size: 1.1rem; cursor: pointer; backdrop-filter: blur(10px); transition: all 0.3s; box-shadow: 0 0 20px rgba(124, 58, 237, 0.2);">
-                Start Listening
-            </button>
-        </header>
-
-        <!-- Sound Grid -->
-        <div class="container" id="sound-grid"
-            style="max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; position: relative; z-index: 5;">
-            <!-- Rain -->
-            <div class="glass-card" data-track-id="rain-heavy.mp3" data-category="Rain" data-name="Heavy Rain">
-                <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🌧️</span>
-                <h3 class="card-title">Heavy Rain</h3>
-                <p class="card-desc">Continuous heavy rain for deep sleep.</p>
-            </div>
-            <!-- Ocean -->
-            <div class="glass-card" data-track-id="ocean-waves.mp3" data-category="running water"
-                data-name="Ocean Waves">
-                <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🌊</span>
-                <h3 class="card-title">Ocean Waves</h3>
-                <p class="card-desc">Rhythmic waves to calm anxiety.</p>
-            </div>
-            <!-- Forest -->
-            <div class="glass-card" data-track-id="forest.mp3" data-category="Animal sounds" data-name="Forest Bathing">
-                <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🌲</span>
-                <h3 class="card-title">Forest Bathing</h3>
-                <p class="card-desc">Birds and wind in the trees.</p>
-            </div>
-            <!-- White Noise -->
-            <div class="glass-card" data-track-id="white-noise.mp3" data-category="hypnosis" data-name="White Noise">
-                <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">⚡</span>
-                <h3 class="card-title">White Noise</h3>
-                <p class="card-desc">Pure static to block distractions.</p>
-            </div>
-            <!-- Alpha Waves -->
-            <div class="glass-card" data-track-id="binaural-alpha.mp3" data-category="meditation"
-                data-name="Alpha Waves">
-                <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🧠</span>
-                <h3 class="card-title">Alpha Waves</h3>
-                <p class="card-desc">10Hz binaural beats for concentration.</p>
-            </div>
-            <!-- Fireplace -->
-            <div class="glass-card" data-track-id="fireplace.mp3" data-category="Fire" data-name="Fireplace">
-                <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🔥</span>
-                <h3 class="card-title">Fireplace</h3>
-                <p class="card-desc">Crackling fire for a warm ambiance.</p>
-            </div>
+                style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-family: inherit; font-size: 0.9rem; transition: color 0.3s;">History</button>
+            <button id="navFavoritesBtn" onclick="window.historyFavoritesUI?.openPanel('favorites')"
+                style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-family: inherit; font-size: 0.9rem; transition: color 0.3s;">Favorites</button>
         </div>
+    </nav>
 
-        <!-- Floating Player -->
-        <div id="audioPlayer" class="floating-player hidden">
-            <div class="player-info">
-                <span id="playerTitle" class="player-title">Select a Sound</span>
-                <span id="playerSubtitle" class="player-sub">SoundFlows</span>
+    <header
+        style="height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 2rem; position: relative; z-index: 5;">
+        <h1
+            style="font-size: 4rem; margin-bottom: 1rem; background: linear-gradient(to right, #fff, #94A3B8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 300;">
+            Find Your Frequency</h1>
+        <p
+            style="font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 3rem; line-height: 1.6;">
+            Immersive soundscapes engineered for deep sleep, focus, and relaxation.</p>
+        <button onclick="document.getElementById('sound-grid').scrollIntoView({behavior: 'smooth'})"
+            style="padding: 1rem 2.5rem; background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: white; border-radius: 50px; font-size: 1.1rem; cursor: pointer; backdrop-filter: blur(10px); transition: all 0.3s; box-shadow: 0 0 20px rgba(124, 58, 237, 0.2);">Start
+            Listening</button>
+    </header>
+
+    <div class="container" id="sound-grid"
+        style="max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; position: relative; z-index: 5;">
+        <div class="glass-card" data-track-id="一声闷雷，大雨倾盆.mp3" data-category="Rain" data-name="Heavy Rainstorm">
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">☔</span>
+            <h3 class="card-title">Heavy Rainstorm</h3>
+            <p class="card-desc">Thunderous downpour for deep sleep.</p>
+        </div>
+        <div class="glass-card" data-track-id="缓缓流水，温柔的抚摸脸颊，恋人般的感觉（上）.mp3" data-category="running water" data-name="Gentle Stream">
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">💧</span>
+            <h3 class="card-title">Gentle Stream</h3>
+            <p class="card-desc">Soft flowing water for calm focus.</p>
+        </div>
+        <div class="glass-card" data-track-id="森林里百灵鸟鸣叫.mp3" data-category="Animal sounds" data-name="Forest Birds">
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🦅</span>
+            <h3 class="card-title">Forest Birds</h3>
+            <p class="card-desc">Larks and forest ambience.</p>
+        </div>
+        <div class="glass-card" data-track-id="催眠专用冥想音乐1.mp3" data-category="hypnosis" data-name="Hypnosis Session">
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🌙</span>
+            <h3 class="card-title">Hypnosis Session</h3>
+            <p class="card-desc">Guided tones for deep sleep.</p>
+        </div>
+        <div class="glass-card" data-track-id="冥想 瑜伽必听.mp3" data-category="meditation" data-name="Meditation · Yoga">
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🧘‍♀️</span>
+            <h3 class="card-title">Meditation · Yoga</h3>
+            <p class="card-desc">Gentle pads for mindful breathing.</p>
+        </div>
+        <div class="glass-card" data-track-id="河边点燃篝火、水声和清脆的鸟鸣01.mp3" data-category="Fire" data-name="Campfire by the River">
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🔥</span>
+            <h3 class="card-title">Campfire by the River</h3>
+            <p class="card-desc">Crackling fire with water and birds.</p>
+        </div>
+    </div>
+
+    <div id="audioPlayer" class="floating-player hidden">
+        <div class="player-info">
+            <span id="playerTitle" class="player-title">Select a Sound</span>
+            <span id="playerSubtitle" class="player-sub">SoundFlows</span>
+        </div>
+        <div class="player-controls">
+            <button class="p-btn" id="prevBtn">⏮</button>
+            <button class="p-btn play-circle" id="playPauseBtn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+            </button>
+            <button class="p-btn" id="nextBtn">⏭</button>
+            <button class="p-btn" id="timerBtn" aria-label="Set Sleep Timer" style="margin-left: 0.5rem;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Timer Modal -->
+    <div id="timerModal" class="modal hidden"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 200; justify-content: center; align-items: center;">
+        <div class="glass-card" style="width: 90%; max-width: 320px; padding: 2rem; text-align: center;">
+            <h3 style="margin-bottom: 1.5rem; color: white;">Set Sleep Timer</h3>
+            <div class="timer-options"
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                <button class="timer-opt-btn" data-time="15"
+                    style="padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 12px; cursor: pointer;">15
+                    min</button>
+                <button class="timer-opt-btn" data-time="30"
+                    style="padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 12px; cursor: pointer;">30
+                    min</button>
+                <button class="timer-opt-btn" data-time="60"
+                    style="padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 12px; cursor: pointer;">60
+                    min</button>
+                <button class="timer-opt-btn" data-time="0"
+                    style="padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 12px; cursor: pointer;">Off</button>
             </div>
-            <div class="player-controls">
-                <button class="p-btn" id="prevBtn">⏮</button>
-                <button class="p-btn play-circle" id="playPauseBtn">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M8 5v14l11-7z" />
-                    </svg>
-                    <!-- Rain -->
-                    <div class="glass-card" data-track-id="rain-heavy.mp3" data-category="Rain" data-name="Heavy Rain">
-                        <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🌧️</span>
-                        <h3 class="card-title">Heavy Rain</h3>
-                        <p class="card-desc">Continuous heavy rain for deep sleep.</p>
-                    </div>
-                    <!-- Ocean -->
-                    <div class="glass-card" data-track-id="ocean-waves.mp3" data-category="running water"
-                        data-name="Ocean Waves">
-                        <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🌊</span>
-                        <h3 class="card-title">Ocean Waves</h3>
-                        <p class="card-desc">Rhythmic waves to calm anxiety.</p>
-                    </div>
-                    <!-- Forest -->
-                    <div class="glass-card" data-track-id="forest.mp3" data-category="Animal sounds"
-                        data-name="Forest Bathing">
-                        <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🌲</span>
-                        <h3 class="card-title">Forest Bathing</h3>
-                        <p class="card-desc">Birds and wind in the trees.</p>
-                    </div>
-                    <!-- White Noise -->
-                    <div class="glass-card" data-track-id="white-noise.mp3" data-category="hypnosis"
-                        data-name="White Noise">
-                        <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">⚡</span>
-                        <h3 class="card-title">White Noise</h3>
-                        <p class="card-desc">Pure static to block distractions.</p>
-                    </div>
-                    <!-- Alpha Waves -->
-                    <div class="glass-card" data-track-id="binaural-alpha.mp3" data-category="meditation"
-                        data-name="Alpha Waves">
-                        <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🧠</span>
-                        <h3 class="card-title">Alpha Waves</h3>
-                        <p class="card-desc">10Hz binaural beats for concentration.</p>
-                    </div>
-                    <!-- Fireplace -->
-                    <div class="glass-card" data-track-id="fireplace.mp3" data-category="Fire" data-name="Fireplace">
-                        <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🔥</span>
-                        <h3 class="card-title">Fireplace</h3>
-                        <p class="card-desc">Crackling fire for a warm ambiance.</p>
-                    </div>
-            </div>
+            <button id="closeTimerModal"
+                style="padding: 0.8rem 2rem; background: white; color: black; border: none; border-radius: 50px; font-weight: 600; cursor: pointer;">Cancel</button>
+        </div>
+    </div>
 
-            <!-- Floating Player -->
-            <div id="audioPlayer" class="floating-player hidden">
-                <div class="player-info">
-                    <span id="playerTitle" class="player-title">Select a Sound</span>
-                    <span id="playerSubtitle" class="player-sub">SoundFlows</span>
-                </div>
-                <div class="player-controls">
-                    <button class="p-btn" id="prevBtn">⏮</button>
-                    <button class="p-btn play-circle" id="playPauseBtn">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M8 5v14l11-7z" />
-                        </svg>
-                    </button>
-                    <button class="p-btn" id="nextBtn">⏭</button>
-                </div>
-            </div>
+    <script src="../assets/js/i18n-system.js"></script>
+    <script src="../assets/js/language-integration.js"></script>
+    <script src="../assets/js/modules/audio-config.js"></script>
+    <script src="../assets/js/modules/user-data-manager.js"></script>
+    <script src="../assets/js/audio-manager.js"></script>
+    <script src="../assets/js/history-favorites-ui.js"></script>
+    <script src="../assets/js/app-immersion.js"></script>
+</body>
 
-            <!-- Application Scripts -->
-            <!-- <script src="../assets/js/i18n-system.js"></script> -->
-            <!-- <script src="../assets/js/language-integration.js"></script> -->
-
-            <!-- Core Modules -->
-            <!-- <script src="../assets/js/modules/audio-config.js"></script> -->
-            <!DOCTYPE html>
-            <html lang="en">
-
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <meta http-equiv="Content-Security-Policy"
-                    content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://www.gstatic.com https://formspree.io https://*.firebaseio.com https://*.googleapis.com https://cdn.amplitude.com https://browser.sentry-cdn.com https://cdn.jsdelivr.net https://vercel.live; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; media-src 'self' https://archive.org https://*.archive.org https://media.soundflows.app blob: data:; connect-src 'self' https://www.google-analytics.com https://formspree.io https://archive.org https://*.archive.org https://media.soundflows.app https://*.firebaseio.com https://*.googleapis.com https://firestore.googleapis.com https://cdn.amplitude.com https://*.sentry.io; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io; upgrade-insecure-requests;">
-                <meta name="build-version" content="v4.0.0-deep-immersion">
-
-                <title>SoundFlows | Deep Immersion Sound Healing</title>
-                <meta name="description"
-                    content="Experience deep relaxation with immersive soundscapes. Rain sounds, white noise, and meditation music designed for sleep and focus.">
-
-                <base href="/">
-                <!-- Canonical URL -->
-                <link rel="canonical" href="https://www.soundflows.app/en/">
-
-                <!-- Alternate Language Versions (hreflang) -->
-                <link rel="alternate" hreflang="en" href="https://www.soundflows.app/en/">
-                <link rel="alternate" hreflang="zh-Hans" href="https://www.soundflows.app/zh/">
-                <link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/">
-
-                <!-- Open Graph / Facebook -->
-                <meta property="og:type" content="website">
-                <meta property="og:url" content="https://www.soundflows.app/en/">
-                <meta property="og:title" content="SoundFlows | Deep Immersion Sound Healing">
-                <meta property="og:description"
-                    content="Experience deep relaxation with immersive soundscapes. Rain sounds, white noise, and meditation music designed for sleep and focus.">
-                <meta property="og:image" content="https://www.soundflows.app/assets/images/og-image.jpg">
-
-                <!-- Fonts -->
-                <link rel="preconnect" href="https://fonts.googleapis.com">
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-                <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap"
-                    rel="stylesheet">
-
-                <!-- Theme & Component CSS -->
-                <link rel="stylesheet" href="../assets/css/themes/deep-immersion.css">
-                <link rel="stylesheet" href="../assets/css/components/glass-card.css">
-                <link rel="stylesheet" href="../assets/css/components/floating-player.css">
-                <link rel="stylesheet" href="../assets/css/accessibility.css">
-            </head>
-
-            <body>
-                <!-- Background Animation -->
-                <div class="ambient-bg"></div>
-
-                <!-- Navbar -->
-                <nav
-                    style="padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 10;">
-                    <div style="font-weight: 600; font-size: 1.5rem; letter-spacing: 0.05em; color: var(--text-main);">
-                        SoundFlows
-                    </div>
-                    <div style="display: flex; gap: 2rem; align-items: center;">
-                        <a href="/zh/"
-                            style="color: var(--text-muted); font-size: 0.9rem; text-decoration: none; transition: color 0.3s;">中文</a>
-                        <button id="navHistoryBtn" onclick="window.historyFavoritesUI?.openPanel('history')"
-                            style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-family: inherit; font-size: 0.9rem; transition: color 0.3s;">History</button>
-                        <button id="navFavoritesBtn" onclick="window.historyFavoritesUI?.openPanel('favorites')"
-                            style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-family: inherit; font-size: 0.9rem; transition: color 0.3s;">Favorites</button>
-                    </div>
-                </nav>
-
-                <!-- Hero Section -->
-                <header
-                    style="height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 2rem; position: relative; z-index: 5;">
-                    <h1
-                        style="font-size: 4rem; margin-bottom: 1rem; background: linear-gradient(to right, #fff, #94A3B8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 300;">
-                        Find Your Frequency</h1>
-                    <p
-                        style="font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 3rem; line-height: 1.6;">
-                        Immersive soundscapes engineered for deep sleep, focus, and relaxation.
-                    </p>
-                    <button onclick="document.getElementById('sound-grid').scrollIntoView({behavior: 'smooth'})"
-                        style="padding: 1rem 2.5rem; background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: white; border-radius: 50px; font-size: 1.1rem; cursor: pointer; backdrop-filter: blur(10px); transition: all 0.3s; box-shadow: 0 0 20px rgba(124, 58, 237, 0.2);">
-                        Start Listening
-                    </button>
-                </header>
-
-                <!-- Sound Grid -->
-                <div class="container" id="sound-grid"
-                    style="max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; position: relative; z-index: 5;">
-                    <!-- Rain -->
-                    <div class="glass-card" data-track-id="rain-heavy.mp3" data-category="Rain" data-name="Heavy Rain">
-                        <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🌧️</span>
-                        <h3 class="card-title">Heavy Rain</h3>
-                        <p class="card-desc">Continuous heavy rain for deep sleep.</p>
-                    </div>
-                    <!-- Ocean -->
-                    <div class="glass-card" data-track-id="ocean-waves.mp3" data-category="running water"
-                        data-name="Ocean Waves">
-                        <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🌊</span>
-                        <h3 class="card-title">Ocean Waves</h3>
-                        <p class="card-desc">Rhythmic waves to calm anxiety.</p>
-                    </div>
-                    <!-- Forest -->
-                    <div class="glass-card" data-track-id="forest.mp3" data-category="Animal sounds"
-                        data-name="Forest Bathing">
-                        <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🌲</span>
-                        <h3 class="card-title">Forest Bathing</h3>
-                        <p class="card-desc">Birds and wind in the trees.</p>
-                    </div>
-                    <!-- White Noise -->
-                    <div class="glass-card" data-track-id="white-noise.mp3" data-category="hypnosis"
-                        data-name="White Noise">
-                        <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">⚡</span>
-                        <h3 class="card-title">White Noise</h3>
-                        <p class="card-desc">Pure static to block distractions.</p>
-                    </div>
-                    <!-- Alpha Waves -->
-                    <div class="glass-card" data-track-id="binaural-alpha.mp3" data-category="meditation"
-                        data-name="Alpha Waves">
-                        <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🧠</span>
-                        <h3 class="card-title">Alpha Waves</h3>
-                        <p class="card-desc">10Hz binaural beats for concentration.</p>
-                    </div>
-                    <!-- Fireplace -->
-                    <div class="glass-card" data-track-id="fireplace.mp3" data-category="Fire" data-name="Fireplace">
-                        <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🔥</span>
-                        <h3 class="card-title">Fireplace</h3>
-                        <p class="card-desc">Crackling fire for a warm ambiance.</p>
-                    </div>
-                </div>
-
-                <!-- Floating Player -->
-                <div id="audioPlayer" class="floating-player hidden">
-                    <div class="player-info">
-                        <span id="playerTitle" class="player-title">Select a Sound</span>
-                        <span id="playerSubtitle" class="player-sub">SoundFlows</span>
-                    </div>
-                    <div class="player-controls">
-                        <button class="p-btn" id="prevBtn">⏮</button>
-                        <button class="p-btn play-circle" id="playPauseBtn">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8 5v14l11-7z" />
-                            </svg>
-                        </button>
-                        <button class="p-btn" id="nextBtn">⏭</button>
-                    </div>
-                </div>
-
-                <!-- Application Scripts -->
-                <!-- <script src="../assets/js/i18n-system.js"></script> -->
-                <!-- <script src="../assets/js/language-integration.js"></script> -->
-
-                <!-- Core Modules -->
-                <!-- <script src="../assets/js/modules/audio-config.js"></script> -->
-                <!-- <script src="../assets/js/modules/user-data-manager.js"></script> -->
-                <!-- <script src="../assets/js/audio-manager.js"></script> -->
-
-                <!-- UI Components -->
-                <!-- <script src="../assets/js/history-favorites-ui.js"></script> -->
-
-                <!-- Main Application Entry Point -->
-                <!-- <script src="../assets/js/app-immersion.js"></script> -->
-            </body>
-
-            </html>
+</html>
