@@ -178,6 +178,18 @@ class DeepImmersionApp {
         // Initialize TimerManager
         this.timerManager = new TimerManager(this.audioManager);
         this.timerManager.initialize();
+
+        // Initialize volume slider and icon
+        this.initializeVolumeControls();
+    }
+
+    initializeVolumeControls() {
+        const volumeSlider = document.getElementById('volumeSlider');
+        if (volumeSlider) {
+            volumeSlider.value = this.volume;
+            volumeSlider.style.setProperty('--volume', `${this.volume}%`);
+        }
+        this.updateVolumeIcon();
     }
 
     setupEventListeners() {
@@ -361,6 +373,30 @@ class DeepImmersionApp {
         // Update active card state
         this.updateActiveCard(detail.trackId || detail); // detail might be just ID or object
 
+        // Set volume for the new audio
+        if (this.audioManager && this.audioManager.currentAudio) {
+            this.audioManager.currentAudio.volume = this.volume / 100;
+
+            // Add loadedmetadata listener to update duration when available
+            const audio = this.audioManager.currentAudio;
+            const updateDurationOnce = () => {
+                if (audio.duration && !isNaN(audio.duration)) {
+                    const totalDurationEl = document.getElementById('totalDuration');
+                    if (totalDurationEl) {
+                        totalDurationEl.textContent = this.formatTime(audio.duration);
+                    }
+                }
+                audio.removeEventListener('loadedmetadata', updateDurationOnce);
+            };
+
+            // Try to update immediately if duration is already available
+            if (audio.duration && !isNaN(audio.duration)) {
+                updateDurationOnce();
+            } else {
+                audio.addEventListener('loadedmetadata', updateDurationOnce);
+            }
+        }
+
         // Start progress bar updates
         this.startProgressUpdate();
     }
@@ -530,8 +566,8 @@ class DeepImmersionApp {
         this.volume = parseInt(value);
 
         // Update audio element volume
-        if (this.audioManager && this.audioManager.audioElement) {
-            this.audioManager.audioElement.volume = this.volume / 100;
+        if (this.audioManager && this.audioManager.currentAudio) {
+            this.audioManager.currentAudio.volume = this.volume / 100;
         }
 
         // Update mute state if needed
@@ -614,9 +650,9 @@ class DeepImmersionApp {
      * Seek to a specific position (0-100%)
      */
     seekTo(percentage) {
-        if (!this.audioManager || !this.audioManager.audioElement) return;
+        if (!this.audioManager || !this.audioManager.currentAudio) return;
 
-        const audio = this.audioManager.audioElement;
+        const audio = this.audioManager.currentAudio;
         if (isNaN(audio.duration)) return;
 
         const seekTime = (percentage / 100) * audio.duration;
@@ -636,9 +672,9 @@ class DeepImmersionApp {
         this.stopProgressUpdate(); // Clear any existing interval
 
         this.progressUpdateInterval = setInterval(() => {
-            if (!this.audioManager || !this.audioManager.audioElement) return;
+            if (!this.audioManager || !this.audioManager.currentAudio) return;
 
-            const audio = this.audioManager.audioElement;
+            const audio = this.audioManager.currentAudio;
             if (!audio || isNaN(audio.duration) || audio.duration === 0) return;
 
             const percentage = (audio.currentTime / audio.duration) * 100;
