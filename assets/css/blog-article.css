@@ -789,10 +789,13 @@
 }
 
 .neurochem-item {
-    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    background: var(--immersion-glass-bg, rgba(15, 10, 25, 0.6));
+    border: 1px solid var(--immersion-glass-border, rgba(124, 58, 237, 0.15));
+    backdrop-filter: var(--immersion-blur, blur(12px));
     padding: 1rem;
     border-radius: 10px;
     text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .neurochem-item h4 {
@@ -913,10 +916,13 @@
 }
 
 .benefit-card {
-    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    background: var(--immersion-glass-bg, rgba(15, 10, 25, 0.6));
+    border: 1px solid var(--immersion-glass-border, rgba(124, 58, 237, 0.15));
+    backdrop-filter: var(--immersion-blur, blur(12px));
     padding: 1.5rem;
     border-radius: 10px;
     text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .benefit-card h4 {
