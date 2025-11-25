@@ -4,18 +4,6 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/en",
-      "destination": "/en/index.html"
-    },
-    {
-      "source": "/zh",
-      "destination": "/zh/index.html"
-    },
-    {
-      "source": "/blog",
-      "destination": "/blog/index.html"
-    },
-    {
       "source": "/40hz-pink-noise-deep-sleep",
       "destination": "/blog/40hz-pink-noise-deep-sleep.html"
     },
@@ -34,6 +22,18 @@
     {
       "source": "/white-noise-sleep-focus-complete-guide",
       "destination": "/blog/white-noise-sleep-focus-complete-guide.html"
+    },
+    {
+      "source": "/en",
+      "destination": "/en/index.html"
+    },
+    {
+      "source": "/zh",
+      "destination": "/zh/index.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog/index.html"
     },
     {
       "source": "/blog/:slug",
