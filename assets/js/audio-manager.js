@@ -521,8 +521,8 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
             }
 
             try {
-            // 显示聆听准备提示
-                this.showListeningPreparation();
+            // 显示聆听准备提示 - 已禁用以实现静默切换
+                // this.showListeningPreparation();
 
                 // 如果正在播放其他音频，暂停它们
                 const currentlyPlaying = this.getPlayingTracks().filter(track => track.trackId !== trackId);
