@@ -1,51 +1,65 @@
-﻿<!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="Content-Security-Policy"
-            content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://www.gstatic.com https://formspree.io https://*.firebaseio.com https://*.googleapis.com https://cdn.amplitude.com https://browser.sentry-cdn.com https://cdn.jsdelivr.net https://vercel.live; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; media-src 'self' https://archive.org https://*.archive.org https://media.soundflows.app blob: data:; connect-src 'self' https://www.google-analytics.com https://formspree.io https://archive.org https://*.archive.org https://media.soundflows.app https://*.firebaseio.com https://*.googleapis.com https://firestore.googleapis.com https://cdn.amplitude.com https://*.sentry.io; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io; upgrade-insecure-requests;">
-        <meta name="build-version" content="v4.0.0-deep-immersion">
-        <title>SoundFlows | Deep Immersion Sound Healing</title>
-        <meta name="description"
-            content="Experience deep relaxation with immersive soundscapes. Rain sounds, white noise, and meditation music designed for sleep and focus.">
-        <base href="/">
-        <link rel="canonical" href="https://www.soundflows.app/en/">
-        <link rel="alternate" hreflang="en" href="https://www.soundflows.app/en/">
-        <link rel="alternate" hreflang="zh-Hans" href="https://www.soundflows.app/zh/">
-        <link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/">
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="https://www.soundflows.app/en/">
-        <meta property="og:title" content="SoundFlows | Deep Immersion Sound Healing">
-        <link rel="stylesheet" href="../assets/css/redesign-v2.css">
-        <link rel="stylesheet" href="../assets/css/saas-hero.css">
-        <link rel="stylesheet" href="../assets/css/themes/saas-social-proof.css">
-        <link rel="stylesheet" href="../assets/css/themes/saas-features.css">
-        <link rel="stylesheet" href="../assets/css/themes/saas-faq.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://www.gstatic.com https://formspree.io https://*.firebaseio.com https://*.googleapis.com https://cdn.amplitude.com https://browser.sentry-cdn.com https://cdn.jsdelivr.net https://vercel.live; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; media-src 'self' https://archive.org https://*.archive.org https://media.soundflows.app blob: data:; connect-src 'self' https://www.google-analytics.com https://formspree.io https://archive.org https://*.archive.org https://media.soundflows.app https://*.firebaseio.com https://*.googleapis.com https://firestore.googleapis.com https://cdn.amplitude.com https://*.sentry.io; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io; upgrade-insecure-requests;">
+    <meta name="build-version" content="v4.0.0-deep-immersion">
+    <title>SoundFlows | Deep Immersion Sound Healing</title>
+    <meta name="description"
+        content="Experience deep relaxation with immersive soundscapes. Rain sounds, white noise, and meditation music designed for sleep and focus.">
+    <base href="/">
+    <link rel="canonical" href="https://www.soundflows.app/en/">
+    <link rel="alternate" hreflang="en" href="https://www.soundflows.app/en/">
+    <link rel="alternate" hreflang="zh-Hans" href="https://www.soundflows.app/zh/">
+    <link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.soundflows.app/en/">
+    <meta property="og:title" content="SoundFlows | Deep Immersion Sound Healing">
+    <link rel="stylesheet" href="../assets/css/redesign-v2.css">
+    <link rel="stylesheet" href="../assets/css/saas-hero.css">
+    <link rel="stylesheet" href="../assets/css/themes/saas-social-proof.css">
+    <link rel="stylesheet" href="../assets/css/themes/saas-features.css">
+    <link rel="stylesheet" href="../assets/css/themes/saas-faq.css">
 
-        <!-- Deep Immersion Theme -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../assets/css/themes/deep-immersion-unified.css">
-    </head>
+    <!-- Deep Immersion Theme -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/themes/deep-immersion-unified.css">
+</head>
 
 <body class="no-language-band">
     <div class="ambient-bg"></div>
 
-    <!-- Scheme B Navigation (Redesign V2) -->
+    <!-- Navigation -->
     <header class="header">
         <div class="header__inner">
             <div class="header__brand">
                 <span class="header__icon">🌊</span>
-                <span>History</span>
-                </button>
+                <div class="header__brand-text">
+                    <h1 class="header__title">SoundFlows</h1>
+                    <span class="header__tagline">Deep Immersion</span>
+                </div>
+            </div>
+
+            <nav class="header__nav">
+                <a href="#features">Features</a>
+                <a href="#testimonials">Reviews</a>
+                <a href="#faq">FAQ</a>
+                <a href="/blog/">Blog</a>
+            </nav>
+
+            <div class="header__actions">
+                <button class="saas-btn saas-btn--ghost" onclick="alert('Login coming soon!')">Login</button>
+                <button class="saas-btn saas-btn--primary" onclick="document.getElementById('sound-grid').scrollIntoView({behavior: 'smooth'})">Start Free</button>
             </div>
         </div>
     </header>
 
-    <!-- Scheme B Hero (SaaS Hero V2) -->
+    <!-- Hero Section -->
     <section class="saas-hero-v2">
         <div class="saas-hero-v2__container">
             <div class="saas-hero-v2__content">
@@ -124,7 +138,7 @@
         </div>
     </section>
 
-    <!-- Sound Grid (Restored 9 Categories) -->
+    <!-- Sound Grid (9 Categories) -->
     <div class="container" id="sound-grid"
         style="max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; position: relative; z-index: 5;">
 
@@ -172,7 +186,7 @@
             <p class="card-desc">Crackling fire with water and birds.</p>
         </div>
 
-        <!-- 7. Singing Bowl Sound (New) -->
+        <!-- 7. Singing Bowl Sound -->
         <div class="glass-card" data-track-id="tibetan-singing-bowl-1.mp3" data-category="Singing bowl sound"
             data-name="Tibetan Bowls">
             <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🎵</span>
@@ -180,7 +194,7 @@
             <p class="card-desc">Resonant healing vibrations.</p>
         </div>
 
-        <!-- 8. Chakra (New) -->
+        <!-- 8. Chakra -->
         <div class="glass-card" data-track-id="Wurzel-Chakra 碧玉莲华(海底轮).mp3" data-category="Chakra"
             data-name="Root Chakra">
             <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🕉️</span>
@@ -188,7 +202,7 @@
             <p class="card-desc">Grounding energy for stability.</p>
         </div>
 
-        <!-- 9. Subconscious Therapy (New) -->
+        <!-- 9. Subconscious Therapy -->
         <div class="glass-card" data-track-id="梦起始的地方.mp3" data-category="Subconscious Therapy"
             data-name="Dream Origin">
             <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🌌</span>
@@ -243,15 +257,14 @@
         </div>
     </section>
 
-    <!-- Social Proof Section -->
+    <!-- Testimonials Section -->
     <section class="saas-social-proof" role="region" id="testimonials" aria-labelledby="testimonialsTitle">
         <div class="saas-social-proof__container">
             <header class="saas-social-proof__header">
-                <p class="saas-social-proof__eyebrow" data-i18n="socialProof.eyebrow">Trusted by 120K+ Users Worldwide
-                </p>
-                <h2 class="saas-social-proof__title" id="testimonialsTitle" data-i18n="socialProof.title">Join Thousands
-                    Who Sleep Better Every Night</h2>
+                <p class="saas-social-proof__eyebrow">Trusted by 120K+ Users Worldwide</p>
+                <h2 class="saas-social-proof__title" id="testimonialsTitle">Join Thousands Who Sleep Better Every Night</h2>
             </header>
+
             <div class="social-proof-stats">
                 <div class="proof-stat">
                     <div class="proof-stat__number">120K+</div>
@@ -266,6 +279,51 @@
                     <div class="proof-stat__label">Use Timer Nightly</div>
                 </div>
             </div>
+
+            <!-- Testimonial Cards -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 4rem;">
+                <div class="glass-card">
+                    <div style="margin-bottom: 1rem;">
+                        <div style="color: #7C3AED; font-size: 1.5rem;">★★★★★</div>
+                    </div>
+                    <p style="margin-bottom: 1rem; font-style: italic;">"The rain sounds are incredibly realistic. I fall asleep within 10 minutes now. Game changer!"</p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #7C3AED, #06B6D4); display: flex; align-items: center; justify-content: center; font-weight: 600;">SJ</div>
+                        <div>
+                            <div style="font-weight: 600;">Sarah Johnson</div>
+                            <div style="color: var(--immersion-text-muted); font-size: 0.9rem;">Teacher, Seattle</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <div style="margin-bottom: 1rem;">
+                        <div style="color: #7C3AED; font-size: 1.5rem;">★★★★★</div>
+                    </div>
+                    <p style="margin-bottom: 1rem; font-style: italic;">"Love the sleep timer! No more waking up at 3am to turn off my sound machine."</p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #06B6D4, #7C3AED); display: flex; align-items: center; justify-content: center; font-weight: 600;">MC</div>
+                        <div>
+                            <div style="font-weight: 600;">Michael Chen</div>
+                            <div style="color: var(--immersion-text-muted); font-size: 0.9rem;">Engineer, San Francisco</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <div style="margin-bottom: 1rem;">
+                        <div style="color: #7C3AED; font-size: 1.5rem;">★★★★★</div>
+                    </div>
+                    <p style="margin-bottom: 1rem; font-style: italic;">"The singing bowls help me meditate deeply. Best free meditation app I've found."</p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #7C3AED, #06B6D4); display: flex; align-items: center; justify-content: center; font-weight: 600;">EP</div>
+                        <div>
+                            <div style="font-weight: 600;">Emma Patel</div>
+                            <div style="color: var(--immersion-text-muted); font-size: 0.9rem;">Yoga Instructor, NYC</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -273,21 +331,86 @@
     <section class="saas-faq" role="region" id="faq" aria-labelledby="faqTitle">
         <div class="saas-faq__container">
             <header class="saas-faq__header">
-                <p class="saas-faq__eyebrow" data-i18n="faq.eyebrow">Frequently Asked Questions</p>
-                <h2 class="saas-faq__title" id="faqTitle" data-i18n="faq.title">Everything You Need to Know</h2>
+                <p class="saas-faq__eyebrow">Frequently Asked Questions</p>
+                <h2 class="saas-faq__title" id="faqTitle">Everything You Need to Know</h2>
             </header>
             <div class="faq-grid">
                 <div class="faq-category">
                     <h3 class="faq-category__title">💰 Free Model & Pricing</h3>
                     <div class="faq-accordion">
                         <div class="faq-item">
-                            <button class="faq-item__question" aria-expanded="false" aria-controls="faq-answer-1"
-                                data-faq-toggle>
+                            <button class="faq-item__question" aria-expanded="false" aria-controls="faq-answer-1">
                                 <span class="faq-item__question-text">Why is SoundFlows 100% free?</span>
                                 <span class="faq-item__icon" aria-hidden="true">+</span>
                             </button>
                             <div class="faq-item__answer" id="faq-answer-1" hidden>
-                                <p>There is no catch. We believe healing sounds should be accessible to everyone.</p>
+                                <p>We believe healing sounds should be accessible to everyone. SoundFlows is passion project by audio engineers and meditation practitioners. No ads, no subscriptions, no catch.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-item__question" aria-expanded="false" aria-controls="faq-answer-2">
+                                <span class="faq-item__question-text">Will SoundFlows always be free?</span>
+                                <span class="faq-item__icon" aria-hidden="true">+</span>
+                            </button>
+                            <div class="faq-item__answer" id="faq-answer-2" hidden>
+                                <p>Yes! The core features will always remain free. We may add optional premium features in the future, but the current sound library and sleep timer will never require payment.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-category">
+                    <h3 class="faq-category__title">🎧 Features & Audio</h3>
+                    <div class="faq-accordion">
+                        <div class="faq-item">
+                            <button class="faq-item__question" aria-expanded="false" aria-controls="faq-answer-3">
+                                <span class="faq-item__question-text">How does the sleep timer work?</span>
+                                <span class="faq-item__icon" aria-hidden="true">+</span>
+                            </button>
+                            <div class="faq-item__answer" id="faq-answer-3" hidden>
+                                <p>Set a timer (15-120 minutes), and the audio will gently fade out over 3 seconds when the timer ends. Perfect for falling asleep without sudden interruptions.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-item__question" aria-expanded="false" aria-controls="faq-answer-4">
+                                <span class="faq-item__question-text">Can I use SoundFlows offline?</span>
+                                <span class="faq-item__icon" aria-hidden="true">+</span>
+                            </button>
+                            <div class="faq-item__answer" id="faq-answer-4" hidden>
+                                <p>Yes! SoundFlows is a Progressive Web App (PWA). Once you've played sounds, they're cached for offline playback. Works great on flights or in areas with poor connectivity.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-item__question" aria-expanded="false" aria-controls="faq-answer-5">
+                                <span class="faq-item__question-text">How many sounds are available?</span>
+                                <span class="faq-item__icon" aria-hidden="true">+</span>
+                            </button>
+                            <div class="faq-item__answer" id="faq-answer-5" hidden>
+                                <p>We currently offer 213+ high-quality audio files across 9 categories: Rain, Water, Animal Sounds, Hypnosis, Meditation, Fire, Singing Bowls, Chakra, and Subconscious Therapy.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-category">
+                    <h3 class="faq-category__title">📱 Technical</h3>
+                    <div class="faq-accordion">
+                        <div class="faq-item">
+                            <button class="faq-item__question" aria-expanded="false" aria-controls="faq-answer-6">
+                                <span class="faq-item__question-text">Do I need to create an account?</span>
+                                <span class="faq-item__icon" aria-hidden="true">+</span>
+                            </button>
+                            <div class="faq-item__answer" id="faq-answer-6" hidden>
+                                <p>No account required! Just visit the site and start listening. Optional account features (for syncing favorites across devices) coming soon.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-item__question" aria-expanded="false" aria-controls="faq-answer-7">
+                                <span class="faq-item__question-text">Which browsers are supported?</span>
+                                <span class="faq-item__icon" aria-hidden="true">+</span>
+                            </button>
+                            <div class="faq-item__answer" id="faq-answer-7" hidden>
+                                <p>SoundFlows works on all modern browsers: Chrome, Firefox, Safari, Edge. For the best experience, we recommend Chrome or Safari on mobile devices.</p>
                             </div>
                         </div>
                     </div>
@@ -296,6 +419,53 @@
         </div>
     </section>
 
+    <!-- Footer -->
+    <footer style="background: rgba(5, 5, 17, 0.8); border-top: 1px solid var(--immersion-glass-border); padding: 4rem 2rem 2rem; margin-top: 6rem;">
+        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+            <!-- About -->
+            <div>
+                <h4 style="font-weight: 600; margin-bottom: 1rem; color: var(--immersion-text-main);">SoundFlows</h4>
+                <p style="color: var(--immersion-text-muted); font-size: 0.9rem; line-height: 1.8;">Professional sound therapy for deep sleep, focus, and meditation. 100% free, forever.</p>
+            </div>
+
+            <!-- Product -->
+            <div>
+                <h4 style="font-weight: 600; margin-bottom: 1rem; color: var(--immersion-text-main);">Product</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;"><a href="#features" style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;">Features</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#sound-grid" style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;">Sound Library</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#faq" style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;">FAQ</a></li>
+                </ul>
+            </div>
+
+            <!-- Resources -->
+            <div>
+                <h4 style="font-weight: 600; margin-bottom: 1rem; color: var(--immersion-text-main);">Resources</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;"><a href="/blog/" style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;">Blog</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="/pages/sleep-science-guide.html" style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;">Sleep Science Guide</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="/resources.html" style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;">All Resources</a></li>
+                </ul>
+            </div>
+
+            <!-- Legal -->
+            <div>
+                <h4 style="font-weight: 600; margin-bottom: 1rem; color: var(--immersion-text-main);">Legal</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;"><a href="/privacy-policy.html" style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;">Privacy Policy</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="/terms.html" style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;">Terms of Service</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="/cookie-policy.html" style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div style="border-top: 1px solid var(--immersion-glass-border); padding-top: 2rem; text-align: center; color: var(--immersion-text-muted); font-size: 0.9rem;">
+            <p>&copy; 2025 SoundFlows. All rights reserved. Made with 💜 for better sleep.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Audio Player -->
     <div id="audioPlayer" class="floating-player hidden">
         <div class="player-info">
             <span id="playerTitle" class="player-title">Select a Sound</span>
@@ -343,6 +513,7 @@
         </div>
     </div>
 
+    <!-- Scripts -->
     <script src="../assets/js/i18n-system.js"></script>
     <script src="../assets/js/language-integration.js"></script>
     <script src="../assets/js/modules/audio-config.js"></script>
@@ -350,6 +521,22 @@
     <script src="../assets/js/audio-manager.js"></script>
     <script src="../assets/js/history-favorites-ui.js"></script>
     <script src="../assets/js/app-immersion.js"></script>
+
+    <!-- FAQ Accordion Script -->
+    <script>
+        document.querySelectorAll('[data-faq-toggle], .faq-item__question').forEach(button => {
+            button.addEventListener('click', () => {
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                const answerId = button.getAttribute('aria-controls');
+                const answer = document.getElementById(answerId);
+
+                if (answer) {
+                    button.setAttribute('aria-expanded', !isExpanded);
+                    answer.hidden = isExpanded;
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

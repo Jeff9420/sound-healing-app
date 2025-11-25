@@ -268,13 +268,31 @@ class DeepImmersionApp {
         }
 
         try {
-            if (this.audioManager.isPlaying) {
-                console.log('⏸️ Requesting pause...');
-                this.audioManager.pause();
-            } else {
-                console.log('▶️ Requesting play...');
-                await this.audioManager.play();
+            // Check if there's a current track
+            if (!this.currentTrackId) {
+                console.log('⚠️ No track selected');
+                return;
             }
+
+            // Get current track info
+            const currentTrack = this.audioManager.getCurrentTrack();
+
+            if (this.isPlaying && currentTrack) {
+                console.log('⏸️ Pausing current track...');
+                this.audioManager.pauseTrack(this.currentTrackId);
+                this.isPlaying = false;
+            } else if (currentTrack) {
+                console.log('▶️ Resuming track...');
+                // Resume the current track
+                await this.audioManager.playTrack(
+                    currentTrack.trackId,
+                    currentTrack.categoryName,
+                    currentTrack.fileName,
+                    false // don't reset playback time
+                );
+                this.isPlaying = true;
+            }
+
             this.updatePlayPauseButton();
         } catch (error) {
             console.error('❌ Toggle play/pause failed:', error);

@@ -1,0 +1,355 @@
+﻿<!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Security-Policy"
+            content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://www.gstatic.com https://formspree.io https://*.firebaseio.com https://*.googleapis.com https://cdn.amplitude.com https://browser.sentry-cdn.com https://cdn.jsdelivr.net https://vercel.live; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; media-src 'self' https://archive.org https://*.archive.org https://media.soundflows.app blob: data:; connect-src 'self' https://www.google-analytics.com https://formspree.io https://archive.org https://*.archive.org https://media.soundflows.app https://*.firebaseio.com https://*.googleapis.com https://firestore.googleapis.com https://cdn.amplitude.com https://*.sentry.io; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io; upgrade-insecure-requests;">
+        <meta name="build-version" content="v4.0.0-deep-immersion">
+        <title>SoundFlows | Deep Immersion Sound Healing</title>
+        <meta name="description"
+            content="Experience deep relaxation with immersive soundscapes. Rain sounds, white noise, and meditation music designed for sleep and focus.">
+        <base href="/">
+        <link rel="canonical" href="https://www.soundflows.app/en/">
+        <link rel="alternate" hreflang="en" href="https://www.soundflows.app/en/">
+        <link rel="alternate" hreflang="zh-Hans" href="https://www.soundflows.app/zh/">
+        <link rel="alternate" hreflang="x-default" href="https://www.soundflows.app/">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://www.soundflows.app/en/">
+        <meta property="og:title" content="SoundFlows | Deep Immersion Sound Healing">
+        <link rel="stylesheet" href="../assets/css/redesign-v2.css">
+        <link rel="stylesheet" href="../assets/css/saas-hero.css">
+        <link rel="stylesheet" href="../assets/css/themes/saas-social-proof.css">
+        <link rel="stylesheet" href="../assets/css/themes/saas-features.css">
+        <link rel="stylesheet" href="../assets/css/themes/saas-faq.css">
+
+        <!-- Deep Immersion Theme -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../assets/css/themes/deep-immersion-unified.css">
+    </head>
+
+<body class="no-language-band">
+    <div class="ambient-bg"></div>
+
+    <!-- Scheme B Navigation (Redesign V2) -->
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__brand">
+                <span class="header__icon">🌊</span>
+                <span>History</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Scheme B Hero (SaaS Hero V2) -->
+    <section class="saas-hero-v2">
+        <div class="saas-hero-v2__container">
+            <div class="saas-hero-v2__content">
+                <p class="saas-hero-v2__eyebrow">Professional Sound Therapy</p>
+                <h2 class="saas-hero-v2__headline">Find Your Frequency for Deep Sleep & Focus</h2>
+                <p class="saas-hero-v2__description">
+                    Immersive soundscapes engineered by audio professionals.
+                    Experience the power of 432Hz tuning, binaural beats, and nature's own rhythms.
+                </p>
+
+                <div class="saas-hero-v2__feature-badge">
+                    <div class="feature-badge__icon">🌙</div>
+                    <div class="feature-badge__content">
+                        <h3 class="feature-badge__title">Smart Sleep Timer</h3>
+                        <p class="feature-badge__desc">Drift off peacefully with our intelligent fade-out timer. Set it
+                            and forget it.</p>
+                    </div>
+                </div>
+
+                <div class="saas-hero-v2__cta-group">
+                    <button class="saas-btn saas-btn--primary saas-btn--large"
+                        onclick="document.getElementById('sound-grid').scrollIntoView({behavior: 'smooth'})">
+                        Start Listening
+                    </button>
+                    <button class="saas-btn saas-btn--ghost saas-btn--large"
+                        onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">
+                        Learn More
+                    </button>
+                </div>
+
+                <div class="saas-hero-v2__trust-bar">
+                    <div class="trust-item">
+                        <span class="trust-item__icon">✓</span> 100% Free
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-item__icon">✓</span> No Ads
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-item__icon">✓</span> High Fidelity Audio
+                    </div>
+                </div>
+            </div>
+
+            <div class="saas-hero-v2__panel">
+                <div class="stats-grid-v2">
+                    <div class="stat-card-v2 stat-card-v2--highlight">
+                        <div class="stat-card-v2__number">9+</div>
+                        <div class="stat-card-v2__label">Sound Categories</div>
+                        <p class="stat-card-v2__desc">From Rain to Singing Bowls</p>
+                    </div>
+                    <div class="stat-card-v2">
+                        <div class="stat-card-v2__number">120K</div>
+                        <div class="stat-card-v2__label">Active Users</div>
+                        <p class="stat-card-v2__desc">Trust SoundFlows nightly</p>
+                    </div>
+                </div>
+
+                <div class="feature-list-v2">
+                    <h4 class="feature-list-v2__title">Why Choose SoundFlows?</h4>
+                    <ul class="feature-list-v2__items">
+                        <li class="feature-list-v2__item">
+                            <span class="feature-item__icon">🎧</span>
+                            <span>Spatial Audio Support</span>
+                        </li>
+                        <li class="feature-list-v2__item">
+                            <span class="feature-item__icon">♾️</span>
+                            <span>Seamless Looping</span>
+                        </li>
+                        <li class="feature-list-v2__item">
+                            <span class="feature-item__icon">📱</span>
+                            <span>Background Playback</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sound Grid (Restored 9 Categories) -->
+    <div class="container" id="sound-grid"
+        style="max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; position: relative; z-index: 5;">
+
+        <!-- 1. Rain -->
+        <div class="glass-card" data-track-id="一声闷雷，大雨倾盆.mp3" data-category="Rain" data-name="Heavy Rainstorm">
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">☔</span>
+            <h3 class="card-title">Heavy Rainstorm</h3>
+            <p class="card-desc">Thunderous downpour for deep sleep.</p>
+        </div>
+
+        <!-- 2. Running Water -->
+        <div class="glass-card" data-track-id="缓缓流水，温柔的抚摸脸颊，恋人般的感觉（上）.mp3" data-category="running water"
+            data-name="Gentle Stream">
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">💧</span>
+            <h3 class="card-title">Gentle Stream</h3>
+            <p class="card-desc">Soft flowing water for calm focus.</p>
+        </div>
+
+        <!-- 3. Animal Sounds -->
+        <div class="glass-card" data-track-id="森林里百灵鸟鸣叫.mp3" data-category="Animal sounds" data-name="Forest Birds">
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🦅</span>
+            <h3 class="card-title">Forest Birds</h3>
+            <p class="card-desc">Larks and forest ambience.</p>
+        </div>
+
+        <!-- 4. Hypnosis -->
+        <div class="glass-card" data-track-id="催眠专用冥想音乐1.mp3" data-category="hypnosis" data-name="Hypnosis Session">
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🌙</span>
+            <h3 class="card-title">Hypnosis Session</h3>
+            <p class="card-desc">Guided tones for deep sleep.</p>
+        </div>
+
+        <!-- 5. Meditation -->
+        <div class="glass-card" data-track-id="冥想 瑜伽必听.mp3" data-category="meditation" data-name="Meditation · Yoga">
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🧘‍♀️</span>
+            <h3 class="card-title">Meditation · Yoga</h3>
+            <p class="card-desc">Gentle pads for mindful breathing.</p>
+        </div>
+
+        <!-- 6. Fire -->
+        <div class="glass-card" data-track-id="河边点燃篝火、水声和清脆的鸟鸣01.mp3" data-category="Fire"
+            data-name="Campfire by the River">
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🔥</span>
+            <h3 class="card-title">Campfire by the River</h3>
+            <p class="card-desc">Crackling fire with water and birds.</p>
+        </div>
+
+        <!-- 7. Singing Bowl Sound (New) -->
+        <div class="glass-card" data-track-id="tibetan-singing-bowl-1.mp3" data-category="Singing bowl sound"
+            data-name="Tibetan Bowls">
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🎵</span>
+            <h3 class="card-title">Tibetan Bowls</h3>
+            <p class="card-desc">Resonant healing vibrations.</p>
+        </div>
+
+        <!-- 8. Chakra (New) -->
+        <div class="glass-card" data-track-id="Wurzel-Chakra 碧玉莲华(海底轮).mp3" data-category="Chakra"
+            data-name="Root Chakra">
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🕉️</span>
+            <h3 class="card-title">Root Chakra</h3>
+            <p class="card-desc">Grounding energy for stability.</p>
+        </div>
+
+        <!-- 9. Subconscious Therapy (New) -->
+        <div class="glass-card" data-track-id="梦起始的地方.mp3" data-category="Subconscious Therapy"
+            data-name="Dream Origin">
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🌌</span>
+            <h3 class="card-title">Dream Origin</h3>
+            <p class="card-desc">Deep subconscious healing journey.</p>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="saas-features" role="region" id="features" aria-labelledby="featuresTitle">
+        <div class="saas-features__container">
+            <header class="saas-features__header">
+                <p class="saas-features__eyebrow" data-i18n="features.eyebrow">Powerful Features for Better Sleep &
+                    Focus</p>
+                <h2 class="saas-features__title" id="featuresTitle" data-i18n="features.title">Everything You Need for
+                    Deep Relaxation & Mindful Living</h2>
+                <p class="saas-features__description" data-i18n="features.description">Professional sound therapy tools
+                    designed for modern lifestyles — smart timers, personalized mixing, usage insights, and more. All
+                    free, forever.</p>
+            </header>
+            <div class="saas-features__grid">
+                <article class="feature-showcase feature-showcase--primary">
+                    <div class="feature-showcase__content">
+                        <div class="feature-showcase__badge" data-i18n="features.timer.badge">#1 Most Used Feature</div>
+                        <h3 class="feature-showcase__title" data-i18n="features.timer.title">🌙 Smart Sleep Timer</h3>
+                        <p class="feature-showcase__description" data-i18n="features.timer.description">Set a timer,
+                            drift off peacefully. Audio gently fades out in 3 seconds — no jarring stops, no sudden
+                            wake-ups. Perfect for bedtime routines.</p>
+                        <ul class="feature-showcase__list">
+                            <li data-i18n="features.timer.point1"><strong>60-min default</strong> — optimal for most
+                                sleep cycles</li>
+                            <li data-i18n="features.timer.point2"><strong>Customizable 15-120 min</strong> — naps to
+                                full nights</li>
+                            <li data-i18n="features.timer.point3"><strong>3-second fade-out</strong> — gentle, not
+                                jarring</li>
+                            <li data-i18n="features.timer.point4"><strong>Auto-stop saves battery</strong> —
+                                eco-friendly design</li>
+                        </ul>
+                    </div>
+                    <div class="feature-showcase__visual">
+                        <div class="feature-demo feature-demo--timer">
+                            <div class="timer-display">
+                                <div class="timer-display__icon">🌙</div>
+                                <div class="timer-display__time">60:00</div>
+                                <div class="timer-display__label" data-i18n="features.timer.demo.label">Sleep Timer
+                                    Active</div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="saas-social-proof" role="region" id="testimonials" aria-labelledby="testimonialsTitle">
+        <div class="saas-social-proof__container">
+            <header class="saas-social-proof__header">
+                <p class="saas-social-proof__eyebrow" data-i18n="socialProof.eyebrow">Trusted by 120K+ Users Worldwide
+                </p>
+                <h2 class="saas-social-proof__title" id="testimonialsTitle" data-i18n="socialProof.title">Join Thousands
+                    Who Sleep Better Every Night</h2>
+            </header>
+            <div class="social-proof-stats">
+                <div class="proof-stat">
+                    <div class="proof-stat__number">120K+</div>
+                    <div class="proof-stat__label">Active Users</div>
+                </div>
+                <div class="proof-stat">
+                    <div class="proof-stat__number">4.8/5</div>
+                    <div class="proof-stat__label">Average Rating</div>
+                </div>
+                <div class="proof-stat">
+                    <div class="proof-stat__number">82%</div>
+                    <div class="proof-stat__label">Use Timer Nightly</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="saas-faq" role="region" id="faq" aria-labelledby="faqTitle">
+        <div class="saas-faq__container">
+            <header class="saas-faq__header">
+                <p class="saas-faq__eyebrow" data-i18n="faq.eyebrow">Frequently Asked Questions</p>
+                <h2 class="saas-faq__title" id="faqTitle" data-i18n="faq.title">Everything You Need to Know</h2>
+            </header>
+            <div class="faq-grid">
+                <div class="faq-category">
+                    <h3 class="faq-category__title">💰 Free Model & Pricing</h3>
+                    <div class="faq-accordion">
+                        <div class="faq-item">
+                            <button class="faq-item__question" aria-expanded="false" aria-controls="faq-answer-1"
+                                data-faq-toggle>
+                                <span class="faq-item__question-text">Why is SoundFlows 100% free?</span>
+                                <span class="faq-item__icon" aria-hidden="true">+</span>
+                            </button>
+                            <div class="faq-item__answer" id="faq-answer-1" hidden>
+                                <p>There is no catch. We believe healing sounds should be accessible to everyone.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="audioPlayer" class="floating-player hidden">
+        <div class="player-info">
+            <span id="playerTitle" class="player-title">Select a Sound</span>
+            <span id="playerSubtitle" class="player-sub">SoundFlows</span>
+        </div>
+        <div class="player-controls">
+            <button class="p-btn" id="prevBtn">⏮</button>
+            <button class="p-btn play-circle" id="playPauseBtn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+            </button>
+            <button class="p-btn" id="nextBtn">⏭</button>
+            <button class="p-btn" id="timerBtn" aria-label="Set Sleep Timer" style="margin-left: 0.5rem;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Timer Modal -->
+    <div id="timerModal" class="modal hidden"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 200; justify-content: center; align-items: center;">
+        <div class="glass-card" style="width: 90%; max-width: 320px; padding: 2rem; text-align: center;">
+            <h3 style="margin-bottom: 1.5rem; color: white;">Set Sleep Timer</h3>
+            <div class="timer-options"
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                <button class="timer-opt-btn" data-time="15"
+                    style="padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 12px; cursor: pointer;">15
+                    min</button>
+                <button class="timer-opt-btn" data-time="30"
+                    style="padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 12px; cursor: pointer;">30
+                    min</button>
+                <button class="timer-opt-btn" data-time="60"
+                    style="padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 12px; cursor: pointer;">60
+                    min</button>
+                <button class="timer-opt-btn" data-time="0"
+                    style="padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 12px; cursor: pointer;">Off</button>
+            </div>
+            <button id="closeTimerModal"
+                style="padding: 0.8rem 2rem; background: white; color: black; border: none; border-radius: 50px; font-weight: 600; cursor: pointer;">Cancel</button>
+        </div>
+    </div>
+
+    <script src="../assets/js/i18n-system.js"></script>
+    <script src="../assets/js/language-integration.js"></script>
+    <script src="../assets/js/modules/audio-config.js"></script>
+    <script src="../assets/js/modules/user-data-manager.js"></script>
+    <script src="../assets/js/audio-manager.js"></script>
+    <script src="../assets/js/history-favorites-ui.js"></script>
+    <script src="../assets/js/app-immersion.js"></script>
+</body>
+
+</html>
