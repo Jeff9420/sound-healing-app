@@ -1402,59 +1402,11 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
         }
 
         /**
-         * 显示聆听准备提示
+         * 显示聆听准备提示 - 已禁用以实现静默音频切换
          */
         showListeningPreparation() {
-            const i18n = window.i18n;
-            const message = i18n ? i18n.t('message.readyToListen') : '准备好聆听了吗？即将开始疗愈之旅';
-
-            // 创建提示元素
-            const notification = document.createElement('div');
-            notification.className = 'listening-preparation-toast';
-            notification.innerHTML = `
-                <div class="toast-content">
-                    <div class="toast-icon">🎧</div>
-                    <div class="toast-message">${message}</div>
-                </div>
-            `;
-
-            // 添加样式
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(59, 130, 246, 0.9));
-                color: white;
-                padding: 16px 24px;
-                border-radius: 12px;
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-                z-index: 10000;
-                font-size: 16px;
-                font-weight: 500;
-                backdrop-filter: blur(10px);
-                opacity: 0;
-                transition: opacity 0.3s ease;
-                pointer-events: none;
-            `;
-
-            // 添加到页面
-            document.body.appendChild(notification);
-
-            // 显示动画
-            setTimeout(() => {
-                notification.style.opacity = '1';
-            }, 100);
-
-            // 3秒后移除
-            setTimeout(() => {
-                notification.style.opacity = '0';
-                setTimeout(() => {
-                    if (document.body.contains(notification)) {
-                        document.body.removeChild(notification);
-                    }
-                }, 300);
-            }, 3000);
+            // 方法已禁用 - 不显示任何提示,实现完全静默的音频切换
+            return;
         }
     }
 
