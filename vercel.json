@@ -16,6 +16,26 @@
       "destination": "/blog/index.html"
     },
     {
+      "source": "/40hz-pink-noise-deep-sleep",
+      "destination": "/blog/40hz-pink-noise-deep-sleep.html"
+    },
+    {
+      "source": "/binaural-beats-focus-productivity",
+      "destination": "/blog/binaural-beats-focus-productivity.html"
+    },
+    {
+      "source": "/meditation-music-brain-changes",
+      "destination": "/blog/meditation-music-brain-changes.html"
+    },
+    {
+      "source": "/rain-sounds-healing-benefits-science",
+      "destination": "/blog/rain-sounds-healing-benefits-science.html"
+    },
+    {
+      "source": "/white-noise-sleep-focus-complete-guide",
+      "destination": "/blog/white-noise-sleep-focus-complete-guide.html"
+    },
+    {
       "source": "/blog/:slug",
       "destination": "/blog/:slug.html"
     }
