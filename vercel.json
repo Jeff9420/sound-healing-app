@@ -10,6 +10,14 @@
     {
       "source": "/zh",
       "destination": "/zh/index.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog/index.html"
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/blog/:slug.html"
     }
   ],
   "headers": [
