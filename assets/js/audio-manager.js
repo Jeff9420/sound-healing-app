@@ -600,11 +600,12 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
 
             instance.audio.pause();
             instance.isPlaying = false;
-        
-            // 停止进度更新
+
+            // 停止进度更新，但保留currentAudio引用以便继续播放
             if (this.currentAudio === instance.audio) {
                 this.stopProgressUpdate();
-                this.currentAudio = null;
+                // 不清空currentAudio，这样暂停后再播放时可以从暂停位置继续
+                // this.currentAudio = null;
             }
         
             this.eventBus.dispatchEvent(new CustomEvent('trackPause', { detail: trackId }));

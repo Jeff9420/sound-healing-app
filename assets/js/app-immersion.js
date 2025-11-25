@@ -423,7 +423,7 @@ class DeepImmersionApp {
 
     // Helper method to update play/pause button based on current state
     updatePlayPauseButton() {
-        this.updatePlayButtonState(this.audioManager && this.audioManager.isPlaying);
+        this.updatePlayButtonState(this.isPlaying);
     }
 
     showPlayer() {
