@@ -117,6 +117,14 @@ class DeepImmersionApp {
         this.historyFavoritesUI = null;
         this.currentTrackId = null;
         this.isPlaying = false;
+
+        // New playback control states
+        this.shuffleEnabled = false;
+        this.repeatMode = 'off'; // 'off', 'all', 'one'
+        this.volume = 80; // 0-100
+        this.isMuted = false;
+        this.previousVolume = 80;
+        this.progressUpdateInterval = null;
     }
 
     async initialize() {
@@ -203,6 +211,43 @@ class DeepImmersionApp {
                     this.audioManager.nextTrack();
                 }
             });
+        }
+
+        // Shuffle Button
+        const shuffleBtn = document.getElementById('shuffleBtn');
+        if (shuffleBtn) {
+            shuffleBtn.addEventListener('click', () => this.toggleShuffle());
+        }
+
+        // Repeat Button
+        const repeatBtn = document.getElementById('repeatBtn');
+        if (repeatBtn) {
+            repeatBtn.addEventListener('click', () => this.cycleRepeatMode());
+        }
+
+        // Volume Button and Slider
+        const volumeBtn = document.getElementById('volumeBtn');
+        if (volumeBtn) {
+            volumeBtn.addEventListener('click', () => this.toggleMute());
+        }
+
+        const volumeSlider = document.getElementById('volumeSlider');
+        if (volumeSlider) {
+            volumeSlider.addEventListener('input', (e) => this.setVolume(e.target.value));
+            // Update CSS variable for visual gradient
+            volumeSlider.addEventListener('input', (e) => {
+                e.target.style.setProperty('--volume', `${e.target.value}%`);
+            });
+        }
+
+        // Progress Bar
+        const progressBar = document.getElementById('progressBar');
+        if (progressBar) {
+            progressBar.addEventListener('input', (e) => this.seekTo(e.target.value));
+            progressBar.addEventListener('mousedown', () => this.stopProgressUpdate());
+            progressBar.addEventListener('mouseup', () => this.startProgressUpdate());
+            progressBar.addEventListener('touchstart', () => this.stopProgressUpdate());
+            progressBar.addEventListener('touchend', () => this.startProgressUpdate());
         }
 
         // Setup Card Click Listeners (delegation)
@@ -315,12 +360,18 @@ class DeepImmersionApp {
 
         // Update active card state
         this.updateActiveCard(detail.trackId || detail); // detail might be just ID or object
+
+        // Start progress bar updates
+        this.startProgressUpdate();
     }
 
     onTrackPause(detail) {
         this.isPlaying = false;
         this.updatePlayButtonState(false);
         this.updateActiveCard(null);
+
+        // Stop progress bar updates
+        this.stopProgressUpdate();
     }
 
     onLoadingStart(trackId) {
@@ -394,6 +445,242 @@ class DeepImmersionApp {
 
     handleUrlParameters() {
         // TODO: Implement deep linking if needed
+    }
+
+    // ===== NEW PLAYBACK CONTROL METHODS =====
+
+    /**
+     * Toggle Shuffle Mode
+     */
+    toggleShuffle() {
+        this.shuffleEnabled = !this.shuffleEnabled;
+        const shuffleBtn = document.getElementById('shuffleBtn');
+
+        if (shuffleBtn) {
+            if (this.shuffleEnabled) {
+                shuffleBtn.classList.add('active');
+                shuffleBtn.title = 'Shuffle On';
+            } else {
+                shuffleBtn.classList.remove('active');
+                shuffleBtn.title = 'Shuffle Off';
+            }
+        }
+
+        // Update AudioManager shuffle state if it supports it
+        if (this.audioManager && typeof this.audioManager.setShuffle === 'function') {
+            this.audioManager.setShuffle(this.shuffleEnabled);
+        }
+
+        console.log(`🔀 Shuffle: ${this.shuffleEnabled ? 'ON' : 'OFF'}`);
+    }
+
+    /**
+     * Cycle through repeat modes: off -> all -> one -> off
+     */
+    cycleRepeatMode() {
+        const modes = ['off', 'all', 'one'];
+        const currentIndex = modes.indexOf(this.repeatMode);
+        this.repeatMode = modes[(currentIndex + 1) % modes.length];
+
+        const repeatBtn = document.getElementById('repeatBtn');
+
+        if (repeatBtn) {
+            // Update button state
+            if (this.repeatMode === 'off') {
+                repeatBtn.classList.remove('active');
+                repeatBtn.title = 'Repeat Off';
+            } else {
+                repeatBtn.classList.add('active');
+                repeatBtn.title = this.repeatMode === 'all' ? 'Repeat All' : 'Repeat One';
+            }
+
+            // Update icon based on mode
+            let icon = '';
+            if (this.repeatMode === 'one') {
+                icon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="17 1 21 5 17 9"></polyline>
+                    <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+                    <polyline points="7 23 3 19 7 15"></polyline>
+                    <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+                    <text x="12" y="16" text-anchor="middle" font-size="10" font-weight="bold" fill="currentColor">1</text>
+                </svg>`;
+            } else {
+                icon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="17 1 21 5 17 9"></polyline>
+                    <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+                    <polyline points="7 23 3 19 7 15"></polyline>
+                    <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+                </svg>`;
+            }
+            repeatBtn.innerHTML = icon;
+        }
+
+        // Update AudioManager repeat state if it supports it
+        if (this.audioManager && typeof this.audioManager.setRepeat === 'function') {
+            this.audioManager.setRepeat(this.repeatMode);
+        }
+
+        console.log(`🔁 Repeat: ${this.repeatMode.toUpperCase()}`);
+    }
+
+    /**
+     * Set volume (0-100)
+     */
+    setVolume(value) {
+        this.volume = parseInt(value);
+
+        // Update audio element volume
+        if (this.audioManager && this.audioManager.audioElement) {
+            this.audioManager.audioElement.volume = this.volume / 100;
+        }
+
+        // Update mute state if needed
+        if (this.volume > 0 && this.isMuted) {
+            this.isMuted = false;
+            this.updateVolumeIcon();
+        }
+
+        // Update slider CSS variable
+        const volumeSlider = document.getElementById('volumeSlider');
+        if (volumeSlider) {
+            volumeSlider.style.setProperty('--volume', `${this.volume}%`);
+        }
+    }
+
+    /**
+     * Toggle mute
+     */
+    toggleMute() {
+        this.isMuted = !this.isMuted;
+
+        if (this.isMuted) {
+            this.previousVolume = this.volume;
+            this.setVolume(0);
+
+            const volumeSlider = document.getElementById('volumeSlider');
+            if (volumeSlider) {
+                volumeSlider.value = 0;
+            }
+        } else {
+            this.setVolume(this.previousVolume);
+
+            const volumeSlider = document.getElementById('volumeSlider');
+            if (volumeSlider) {
+                volumeSlider.value = this.previousVolume;
+            }
+        }
+
+        this.updateVolumeIcon();
+    }
+
+    /**
+     * Update volume icon based on volume level and mute state
+     */
+    updateVolumeIcon() {
+        const volumeBtn = document.getElementById('volumeBtn');
+        if (!volumeBtn) return;
+
+        let icon = '';
+        if (this.isMuted || this.volume === 0) {
+            // Muted icon
+            icon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <line x1="23" y1="9" x2="17" y2="15"></line>
+                <line x1="17" y1="9" x2="23" y2="15"></line>
+            </svg>`;
+        } else if (this.volume < 33) {
+            // Low volume icon
+            icon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            </svg>`;
+        } else if (this.volume < 66) {
+            // Medium volume icon
+            icon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>`;
+        } else {
+            // High volume icon
+            icon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>`;
+        }
+
+        volumeBtn.innerHTML = icon;
+    }
+
+    /**
+     * Seek to a specific position (0-100%)
+     */
+    seekTo(percentage) {
+        if (!this.audioManager || !this.audioManager.audioElement) return;
+
+        const audio = this.audioManager.audioElement;
+        if (isNaN(audio.duration)) return;
+
+        const seekTime = (percentage / 100) * audio.duration;
+        audio.currentTime = seekTime;
+
+        // Update progress bar CSS variable
+        const progressBar = document.getElementById('progressBar');
+        if (progressBar) {
+            progressBar.style.setProperty('--progress', `${percentage}%`);
+        }
+    }
+
+    /**
+     * Start updating progress bar
+     */
+    startProgressUpdate() {
+        this.stopProgressUpdate(); // Clear any existing interval
+
+        this.progressUpdateInterval = setInterval(() => {
+            if (!this.audioManager || !this.audioManager.audioElement) return;
+
+            const audio = this.audioManager.audioElement;
+            if (!audio || isNaN(audio.duration) || audio.duration === 0) return;
+
+            const percentage = (audio.currentTime / audio.duration) * 100;
+            const currentTime = this.formatTime(audio.currentTime);
+            const totalDuration = this.formatTime(audio.duration);
+
+            // Update progress bar
+            const progressBar = document.getElementById('progressBar');
+            if (progressBar) {
+                progressBar.value = percentage;
+                progressBar.style.setProperty('--progress', `${percentage}%`);
+            }
+
+            // Update time displays
+            const currentTimeEl = document.getElementById('currentTime');
+            const totalDurationEl = document.getElementById('totalDuration');
+
+            if (currentTimeEl) currentTimeEl.textContent = currentTime;
+            if (totalDurationEl) totalDurationEl.textContent = totalDuration;
+
+        }, 500); // Update every 500ms
+    }
+
+    /**
+     * Stop updating progress bar
+     */
+    stopProgressUpdate() {
+        if (this.progressUpdateInterval) {
+            clearInterval(this.progressUpdateInterval);
+            this.progressUpdateInterval = null;
+        }
+    }
+
+    /**
+     * Format seconds to MM:SS
+     */
+    formatTime(seconds) {
+        if (isNaN(seconds) || !isFinite(seconds)) return '0:00';
+
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
     }
 }
 
