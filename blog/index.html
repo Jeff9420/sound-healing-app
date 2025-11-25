@@ -27,6 +27,7 @@
     <meta name="twitter:image" content="https://www.soundflows.app/assets/images/blog-hero.jpg">
 
     <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/themes/deep-immersion-unified.css">
     <link rel="stylesheet" href="../assets/css/index-styles.css">
     <link rel="stylesheet" href="../assets/css/neptune-ui.css">
 
@@ -62,15 +63,18 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            background: var(--immersion-bg-dark);
+            min-height: 100vh;
         }
 
         .blog-hero {
             text-align: center;
             padding: 60px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--immersion-violet) 0%, var(--immersion-cyan) 100%);
             color: white;
-            border-radius: 20px;
+            border-radius: var(--immersion-radius);
             margin-bottom: 60px;
+            box-shadow: 0 20px 60px rgba(124, 58, 237, 0.3);
         }
 
         .blog-hero h1 {
@@ -93,16 +97,19 @@
         }
 
         .article-card {
-            background: white;
-            border-radius: 15px;
+            background: var(--immersion-glass-bg);
+            border: 1px solid var(--immersion-glass-border);
+            border-radius: var(--immersion-radius);
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: var(--immersion-blur);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: var(--immersion-transition);
         }
 
         .article-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 50px rgba(124, 58, 237, 0.4);
         }
 
         .article-card img {
@@ -113,15 +120,17 @@
 
         .article-content {
             padding: 30px;
+            background: rgba(5, 5, 17, 0.6);
         }
 
         .article-category {
             display: inline-block;
             padding: 5px 15px;
-            background: #f0f0f0;
+            background: rgba(124, 58, 237, 0.2);
+            border: 1px solid rgba(124, 58, 237, 0.3);
             border-radius: 20px;
             font-size: 0.9em;
-            color: #666;
+            color: var(--immersion-violet-light);
             margin-bottom: 15px;
         }
 
@@ -132,16 +141,17 @@
         }
 
         .article-title a {
-            color: #333;
+            color: var(--immersion-text-main);
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         .article-title a:hover {
-            color: #667eea;
+            color: var(--immersion-violet-light);
         }
 
         .article-excerpt {
-            color: #666;
+            color: var(--immersion-text-muted);
             line-height: 1.6;
             margin-bottom: 20px;
         }
@@ -150,16 +160,18 @@
             display: flex;
             justify-content: space-between;
             font-size: 0.9em;
-            color: #999;
+            color: var(--immersion-text-dim);
         }
 
         .read-more {
-            color: #667eea;
+            color: var(--immersion-cyan);
             font-weight: 600;
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         .read-more:hover {
+            color: var(--immersion-cyan-light);
             text-decoration: underline;
         }
 
@@ -176,14 +188,18 @@
 
         .category-card {
             padding: 30px;
-            background: #f8f9fa;
-            border-radius: 15px;
+            background: var(--immersion-glass-bg);
+            border: 1px solid var(--immersion-glass-border);
+            border-radius: var(--immersion-radius);
             text-align: center;
-            transition: background 0.3s ease;
+            backdrop-filter: var(--immersion-blur);
+            transition: var(--immersion-transition);
         }
 
         .category-card:hover {
-            background: #e9ecef;
+            background: var(--immersion-glass-hover);
+            border-color: rgba(124, 58, 237, 0.3);
+            transform: translateY(-4px);
         }
 
         .category-icon {
@@ -194,20 +210,21 @@
         .category-name {
             font-size: 1.2em;
             font-weight: 600;
-            color: #333;
+            color: var(--immersion-text-main);
             margin-bottom: 10px;
         }
 
         .category-count {
-            color: #666;
+            color: var(--immersion-text-muted);
         }
 
         .newsletter-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--immersion-violet) 0%, var(--immersion-cyan) 100%);
             color: white;
             padding: 60px;
-            border-radius: 20px;
+            border-radius: var(--immersion-radius);
             text-align: center;
+            box-shadow: 0 20px 60px rgba(124, 58, 237, 0.4);
         }
 
         .newsletter-form {
@@ -227,23 +244,28 @@
 
         .newsletter-form button {
             padding: 15px 30px;
-            background: #333;
+            background: rgba(5, 5, 17, 0.8);
             color: white;
-            border: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 10px;
             cursor: pointer;
             font-size: 1em;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
+            font-weight: 600;
         }
 
         .newsletter-form button:hover {
-            background: #555;
+            background: rgba(5, 5, 17, 1);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
         }
 
         .blog-header {
             padding: 20px 0;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: rgba(5, 5, 17, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--immersion-glass-border);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
         }
 
         .blog-nav {
@@ -259,7 +281,12 @@
             font-size: 1.5em;
             font-weight: bold;
             text-decoration: none;
-            color: #333;
+            color: var(--immersion-text-main);
+            transition: color 0.3s ease;
+        }
+
+        .blog-logo:hover {
+            color: var(--immersion-violet-light);
         }
 
         .blog-nav-links {
@@ -269,16 +296,18 @@
 
         .blog-nav-links a {
             text-decoration: none;
-            color: #666;
+            color: var(--immersion-text-muted);
             font-weight: 500;
+            transition: color 0.3s ease;
         }
 
         .blog-nav-links a:hover {
-            color: #667eea;
+            color: var(--immersion-violet-light);
         }
 
         .blog-footer {
-            background: #333;
+            background: rgba(5, 5, 17, 0.95);
+            border-top: 1px solid var(--immersion-glass-border);
             color: white;
             padding: 40px 0;
             margin-top: 80px;
@@ -303,19 +332,26 @@
         }
 
         .footer-section a {
-            color: #ccc;
+            color: var(--immersion-text-muted);
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         .footer-section a:hover {
-            color: white;
+            color: var(--immersion-violet-light);
         }
 
         .footer-bottom {
             text-align: center;
             margin-top: 40px;
             padding-top: 20px;
-            border-top: 1px solid #555;
+            border-top: 1px solid var(--immersion-glass-border);
+        }
+
+        body {
+            background: var(--immersion-bg-dark);
+            color: var(--immersion-text-main);
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
         }
     </style>
 </head>
