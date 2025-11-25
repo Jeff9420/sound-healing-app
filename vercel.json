@@ -2,27 +2,34 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
+  "redirects": [
     {
       "source": "/40hz-pink-noise-deep-sleep",
-      "destination": "/blog/40hz-pink-noise-deep-sleep.html"
+      "destination": "/blog/40hz-pink-noise-deep-sleep",
+      "permanent": true
     },
     {
       "source": "/binaural-beats-focus-productivity",
-      "destination": "/blog/binaural-beats-focus-productivity.html"
+      "destination": "/blog/binaural-beats-focus-productivity",
+      "permanent": true
     },
     {
       "source": "/meditation-music-brain-changes",
-      "destination": "/blog/meditation-music-brain-changes.html"
+      "destination": "/blog/meditation-music-brain-changes",
+      "permanent": true
     },
     {
       "source": "/rain-sounds-healing-benefits-science",
-      "destination": "/blog/rain-sounds-healing-benefits-science.html"
+      "destination": "/blog/rain-sounds-healing-benefits-science",
+      "permanent": true
     },
     {
       "source": "/white-noise-sleep-focus-complete-guide",
-      "destination": "/blog/white-noise-sleep-focus-complete-guide.html"
-    },
+      "destination": "/blog/white-noise-sleep-focus-complete-guide",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
     {
       "source": "/en",
       "destination": "/en/index.html"
