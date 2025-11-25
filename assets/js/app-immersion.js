@@ -59,16 +59,8 @@ class TimerManager {
             this.endTime = Date.now() + minutes * 60000;
             this.startCountdown();
             this.updateButtonState(true);
-            console.log(`Timer set for ${minutes} minutes`);
-            if (typeof window.showNotification === 'function') {
-                window.showNotification(`Timer set for ${minutes} minutes`, 'info');
-            }
         } else {
             this.updateButtonState(false);
-            console.log('Timer cleared');
-            if (typeof window.showNotification === 'function') {
-                window.showNotification('Timer cleared', 'info');
-            }
         }
     }
 
@@ -90,10 +82,6 @@ class TimerManager {
                     this.audioManager.pauseAll();
                 }
                 this.updateButtonState(false);
-                console.log('Timer finished, audio paused');
-                if (typeof window.showNotification === 'function') {
-                    window.showNotification('Timer finished', 'info');
-                }
             }
         }, 1000);
     }
@@ -318,16 +306,13 @@ class DeepImmersionApp {
     }
 
     async togglePlayPause() {
-        console.log('⏯️ togglePlayPause called');
         if (!this.audioManager) {
-            console.error('❌ AudioManager not initialized');
             return;
         }
 
         try {
             // Check if there's a current track
             if (!this.currentTrackId) {
-                console.log('⚠️ No track selected');
                 return;
             }
 
@@ -335,11 +320,9 @@ class DeepImmersionApp {
             const currentTrack = this.audioManager.getCurrentTrack();
 
             if (this.isPlaying && currentTrack) {
-                console.log('⏸️ Pausing current track...');
                 this.audioManager.pauseTrack(this.currentTrackId);
                 this.isPlaying = false;
             } else if (currentTrack) {
-                console.log('▶️ Resuming track...');
                 // Resume the current track
                 await this.audioManager.playTrack(
                     currentTrack.trackId,
@@ -352,7 +335,7 @@ class DeepImmersionApp {
 
             this.updatePlayPauseButton();
         } catch (error) {
-            console.error('❌ Toggle play/pause failed:', error);
+            console.error('Toggle play/pause failed:', error);
         }
     }
 
@@ -506,8 +489,6 @@ class DeepImmersionApp {
         if (this.audioManager && typeof this.audioManager.setShuffle === 'function') {
             this.audioManager.setShuffle(this.shuffleEnabled);
         }
-
-        console.log(`🔀 Shuffle: ${this.shuffleEnabled ? 'ON' : 'OFF'}`);
     }
 
     /**
@@ -555,8 +536,6 @@ class DeepImmersionApp {
         if (this.audioManager && typeof this.audioManager.setRepeat === 'function') {
             this.audioManager.setRepeat(this.repeatMode);
         }
-
-        console.log(`🔁 Repeat: ${this.repeatMode.toUpperCase()}`);
     }
 
     /**
