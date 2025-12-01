@@ -300,7 +300,9 @@ function getAudioUrl(categoryKey, filename) {
     }
 
     const folderName = category.folder || categoryKey.toLowerCase().replace(/\s+/g, '-');
-    return `${AUDIO_CONFIG.baseUrl}${folderName}/${filename}`;
+    // 编码文件名，避免 URL 中的空格/特殊字符导致加载失败
+    const safeFilename = encodeURIComponent(filename);
+    return `${AUDIO_CONFIG.baseUrl}${folderName}/${safeFilename}`;
 }
 
 // Attach to window

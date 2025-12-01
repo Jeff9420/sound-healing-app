@@ -251,6 +251,11 @@ class DeepImmersionApp {
             repeatBtn.addEventListener('click', () => this.cycleRepeatMode());
         }
 
+        const closeBtn = document.getElementById('closePlayerBtn');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => this.hidePlayer());
+        }
+
         // Volume Button and Slider
         const volumeBtn = document.getElementById('volumeBtn');
         if (volumeBtn) {
@@ -465,6 +470,21 @@ class DeepImmersionApp {
             player.classList.remove('hidden');
             player.classList.add('visible');
         }
+    }
+
+    hidePlayer() {
+        const player = document.getElementById('audioPlayer');
+        if (player) {
+            player.classList.add('hidden');
+            player.classList.remove('visible');
+        }
+        if (this.audioManager?.pauseAll) {
+            this.audioManager.pauseAll();
+        }
+        this.isPlaying = false;
+        this.currentTrackId = null;
+        this.updatePlayerUI(this.recommendedTrack?.name || '', this.recommendedTrack?.subtitle || '', false);
+        this.stopProgressUpdate();
     }
 
     updateActiveCard(activeTrackId) {
