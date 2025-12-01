@@ -39,6 +39,18 @@
       "destination": "/zh/index.html"
     },
     {
+      "source": "/ja",
+      "destination": "/ja/index.html"
+    },
+    {
+      "source": "/ko",
+      "destination": "/ko/index.html"
+    },
+    {
+      "source": "/es",
+      "destination": "/es/index.html"
+    },
+    {
       "source": "/blog",
       "destination": "/blog/index.html"
     },
