@@ -607,10 +607,11 @@
                 }
             }
 
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', initDict);
+            // Wait for all resources and scripts to load before applying translations
+            if (document.readyState === 'complete') {
+                setTimeout(initDict, 100);
             } else {
-                initDict();
+                window.addEventListener('load', () => setTimeout(initDict, 100));
             }
             document.cookie = `lang=${currentLocale}; path=/; max-age=31536000; SameSite=Lax`;
             const select = document.getElementById('localeSwitcher');
