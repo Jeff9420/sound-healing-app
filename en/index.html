@@ -591,15 +591,27 @@
         (function () {
             const currentLocale = 'en';
             document.cookie = `lang=${currentLocale}; path=/; max-age=31536000; SameSite=Lax`;
-            if (window.simpleDict) {
-                window.simpleDict.applyDictionary(currentLocale).then(() => {
-                    if (window.simpleDict.get) {
-                        window.recommendedTrackOverride = {
-                            name: window.simpleDict.get('player.title', 'Sleep Rain 路 15 min'),
-                            subtitle: window.simpleDict.get('player.subtitle', 'Press 鈻?to start your session')
-                        };
-                    }
-                });
+
+            function initDict() {
+                if (window.simpleDict && typeof window.simpleDict.applyDictionary === 'function') {
+                    window.simpleDict.applyDictionary(currentLocale).then(() => {
+                        console.log(`✅ Dictionary loaded: ${currentLocale}`);
+                        if (window.simpleDict.get) {
+                            window.recommendedTrackOverride = {
+                                name: window.simpleDict.get('player.title', 'Sleep Rain · 15 min'),
+                                subtitle: window.simpleDict.get('player.subtitle', 'Press ▶ to start your session')
+                            };
+                        }
+                    }).catch(e => console.error('❌ Dict load failed:', e));
+                } else {
+                    setTimeout(initDict, 50);
+                }
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initDict);
+            } else {
+                initDict();
             }
             const select = document.getElementById('localeSwitcher');
             if (select) {
