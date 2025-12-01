@@ -134,6 +134,9 @@ class DeepImmersionApp {
         this.handleUrlParameters();
 
         console.log('✅ Deep Immersion App Initialized');
+
+        // Trigger custom event for dictionary system
+        window.dispatchEvent(new CustomEvent('appInitialized'));
     }
 
     async initializeManagers() {

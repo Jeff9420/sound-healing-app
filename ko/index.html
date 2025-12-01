@@ -607,29 +607,17 @@
                 }
             }
 
-            // Wait for all resources and scripts to load before applying translations
-            if (document.readyState === 'complete') {
-                setTimeout(initDict, 500);
-            } else {
-                window.addEventListener('load', () => setTimeout(initDict, 500));
+            // Wait for app initialization to complete before applying translations
+            window.addEventListener('appInitialized', initDict);
             }
-            // Wait for all resources and scripts to load before applying translations
-            if (document.readyState === 'complete') {
-                setTimeout(initDict, 500);
-            } else {
-                window.addEventListener('load', () => setTimeout(initDict, 500));
+            // Wait for app initialization to complete before applying translations
+            window.addEventListener('appInitialized', initDict);
             }
-            // Wait for all resources and scripts to load before applying translations
-            if (document.readyState === 'complete') {
-                setTimeout(initDict, 500);
-            } else {
-                window.addEventListener('load', () => setTimeout(initDict, 500));
+            // Wait for app initialization to complete before applying translations
+            window.addEventListener('appInitialized', initDict);
             }
-            // Wait for all resources and scripts to load before applying translations
-            if (document.readyState === 'complete') {
-                setTimeout(initDict, 500);
-            } else {
-                window.addEventListener('load', () => setTimeout(initDict, 500));
+            // Wait for app initialization to complete before applying translations
+            window.addEventListener('appInitialized', initDict);
             }
             }
             document.cookie = `lang=${currentLocale}; path=/; max-age=31536000; SameSite=Lax`;
