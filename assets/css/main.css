@@ -146,7 +146,6 @@ body {
     min-height: 100vh;
     line-height: 1.7;
     position: relative;
-    overflow-x: hidden;
     letter-spacing: 0.3px;
 }
 
@@ -1452,4 +1451,10 @@ body.forest-path-locked main.forest-path {
     .volume-value {
         font-size: 0.8rem;
     }
+}
+
+/* Global scroll safety: ensure single vertical scrollbar */
+html, body {
+    overflow-x: hidden;
+    overflow-y: auto !important;
 }

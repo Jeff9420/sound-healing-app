@@ -13,6 +13,8 @@ class LanguageIntegrationController {
         this.languageToggle = null;
         this.languageDropdown = null;
         this.isInitialized = false;
+        this.COOKIE_NAME = 'preferred_language';
+        this.COOKIE_MAX_AGE = 31536000; // 1 year in seconds
 
         // 等待i18n系统初始化
         this.waitForI18nSystem();
@@ -331,6 +333,9 @@ class LanguageIntegrationController {
             // 切换语言
             await this.i18nSystem.changeLanguage(langCode);
 
+            // 保存语言偏好到 Cookie
+            this.saveLanguagePreference(langCode);
+
             // 关闭下拉菜单
             this.closeDropdown();
 
@@ -340,10 +345,10 @@ class LanguageIntegrationController {
             // 触发自定义事件
             this.dispatchLanguageChangeEvent(langCode);
 
-            console.log(`🌍 语言已切换为: ${langCode}`);
+            console.log(`🌍 语言已切换为: ${langCode}, Cookie 已保存`);
         } catch (error) {
             console.error('❌ 语言切换失败:', error);
-            this.showErrorMessage('语言切换失败，请稍后重试');
+            this.showErrorMessage('语言切换失败,请稍后重试');
         }
     }
 
@@ -465,6 +470,49 @@ class LanguageIntegrationController {
         if (this.i18nSystem && this.i18nSystem.updatePageContent) {
             this.i18nSystem.updatePageContent();
         }
+    }
+
+    /**
+     * 设置 Cookie
+     */
+    setCookie(name, value, maxAge = this.COOKIE_MAX_AGE) {
+        try {
+            document.cookie = `${name}=${encodeURIComponent(value)}; max-age=${maxAge}; path=/; SameSite=Lax`;
+            console.log(`🍪 Cookie 已设置: ${name}=${value}`);
+        } catch (error) {
+            console.warn('⚠️ Cookie 设置失败:', error);
+        }
+    }
+
+    /**
+     * 获取 Cookie
+     */
+    getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) {
+            return decodeURIComponent(parts.pop().split(';').shift());
+        }
+        return null;
+    }
+
+    /**
+     * 保存语言偏好到 Cookie
+     */
+    saveLanguagePreference(langCode) {
+        this.setCookie(this.COOKIE_NAME, langCode);
+    }
+
+    /**
+     * 从 Cookie 加载语言偏好
+     */
+    loadLanguagePreference() {
+        const savedLang = this.getCookie(this.COOKIE_NAME);
+        if (savedLang) {
+            console.log(`🍪 从 Cookie 加载语言偏好: ${savedLang}`);
+            return savedLang;
+        }
+        return null;
     }
 
     /**

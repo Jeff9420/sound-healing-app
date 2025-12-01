@@ -1,1 +1,16 @@
-{"projectId":"prj_ShUhdayMdkLyDAfVbFGqkpMTVpII","orgId":"team_mFuK3Tf4gAoTZOZBOh6nbll2"}
+{
+  "projectId": "prj_ShUhdayMdkLyDAfVbFGqkpMTVpII",
+  "orgId": "team_mFuK3Tf4gAoTZOZBOh6nbll2",
+  "projectName": "sound-healing-app",
+  "settings": {
+    "createdAt": 1757380170694,
+    "framework": null,
+    "devCommand": null,
+    "installCommand": null,
+    "buildCommand": null,
+    "outputDirectory": null,
+    "rootDirectory": null,
+    "directoryListing": false,
+    "nodeVersion": "22.x"
+  }
+}

@@ -104,6 +104,12 @@ class DeepImmersionApp {
         this.userDataManager = null;
         this.historyFavoritesUI = null;
         this.currentTrackId = null;
+        this.recommendedTrack = {
+            trackId: '一声闷雷，大雨倾盆.mp3',
+            category: 'Rain',
+            name: 'Sleep Rain · 15 min',
+            subtitle: 'Press ▶ to start your session'
+        };
         this.isPlaying = false;
 
         // New playback control states
@@ -169,6 +175,9 @@ class DeepImmersionApp {
 
         // Initialize volume slider and icon
         this.initializeVolumeControls();
+
+        // Prime a recommended track without autoplay
+        this.primeRecommendedTrack();
     }
 
     initializeVolumeControls() {
@@ -178,6 +187,20 @@ class DeepImmersionApp {
             volumeSlider.style.setProperty('--volume', `${this.volume}%`);
         }
         this.updateVolumeIcon();
+    }
+
+    primeRecommendedTrack() {
+        const override = (typeof window !== 'undefined' && window.recommendedTrackOverride) ? window.recommendedTrackOverride : null;
+        if (override) {
+            this.recommendedTrack = { ...this.recommendedTrack, ...override };
+        }
+        if (!this.recommendedTrack) return;
+        this.updatePlayerUI(this.recommendedTrack.name, this.recommendedTrack.subtitle, false);
+    }
+
+    startRecommendedSession() {
+        if (!this.recommendedTrack) return;
+        this.playTrack(this.recommendedTrack.trackId, this.recommendedTrack.name, this.recommendedTrack.category);
     }
 
     setupEventListeners() {
@@ -313,6 +336,13 @@ class DeepImmersionApp {
         try {
             // Check if there's a current track
             if (!this.currentTrackId) {
+                if (this.recommendedTrack) {
+                    await this.playTrack(
+                        this.recommendedTrack.trackId,
+                        this.recommendedTrack.name,
+                        this.recommendedTrack.category
+                    );
+                }
                 return;
             }
 
@@ -703,4 +733,6 @@ class DeepImmersionApp {
 document.addEventListener('DOMContentLoaded', () => {
     window.app = new DeepImmersionApp();
     window.app.initialize();
-});
+    // Expose CTA helper
+    window.startRecommendedSession = () => window.app.startRecommendedSession();
+}); 
