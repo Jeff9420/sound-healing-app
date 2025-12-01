@@ -150,30 +150,30 @@ class CookieConsent {
         this.banner.innerHTML = `
       <div class="cookie-banner">
         <div class="cookie-content">
-          <h3 data-i18n="cookie.title">🍪 我们重视您的隐私</h3>
-          <p data-i18n="cookie.description">
-            我们使用 Cookie 来改善您的体验、分析网站使用情况，并提供个性化内容。
-            根据您的偏好，您可以接受或拒绝不同类型的 Cookie。
-            <a href="#privacy-policy" onclick="window.open('/privacy-policy.html', '_blank'); return false;" style="color: #e8b86d; text-decoration: underline;">查看隐私政策</a>
+          <h3 data-dict="cookie.title">🍪 We Value Your Privacy</h3>
+          <p data-dict="cookie.description">
+            We use cookies to improve your experience, analyze site usage, and provide personalized content.
+            You can accept or reject different types of cookies based on your preferences.
+            <a href="#privacy-policy" onclick="window.open('/privacy-policy.html', '_blank'); return false;" style="color: #e8b86d; text-decoration: underline;" data-dict="cookie.privacyLink">View Privacy Policy</a>
           </p>
 
           <div class="cookie-options">
             <label class="cookie-option">
               <input type="radio" name="cookieConsent" value="accepted" checked>
-              <span>接受所有 Cookie</span>
-              <small>包括分析、营销和个性化 Cookie</small>
+              <span data-dict="cookie.acceptAll">Accept All Cookies</span>
+              <small data-dict="cookie.acceptAllDesc">Including analytics, marketing and personalization cookies</small>
             </label>
 
             <label class="cookie-option">
               <input type="radio" name="cookieConsent" value="necessary">
-              <span>仅必要 Cookie</span>
-              <small>仅运行网站所需的 Cookie</small>
+              <span data-dict="cookie.onlyNecessary">Only Necessary Cookies</span>
+              <small data-dict="cookie.onlyNecessaryDesc">Only cookies required to run the site</small>
             </label>
           </div>
 
           <div class="cookie-actions">
-            <button id="cookieAccept" class="btn-primary" data-i18n="cookie.acceptSelected">确认选择</button>
-            <button id="cookiePreferences" class="btn-secondary" data-i18n="cookie.preferences">自定义设置</button>
+            <button id="cookieAccept" class="btn-primary" data-dict="cookie.confirmChoice">Confirm Choice</button>
+            <button id="cookiePreferences" class="btn-secondary" data-dict="cookie.customSettings">Custom Settings</button>
           </div>
         </div>
       </div>
@@ -184,6 +184,11 @@ class CookieConsent {
 
         // Add to page
         document.body.appendChild(this.banner);
+
+        // Apply dictionary translations
+        if (window.simpleDict && typeof window.simpleDict.applyDictionary === 'function') {
+            window.simpleDict.applyDictionary();
+        }
 
         // Bind events
         this.bindEvents();

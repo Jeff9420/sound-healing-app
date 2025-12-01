@@ -1,0 +1,206 @@
+{
+  "hero": {
+    "eyebrow": "科学驱动的睡眠与专注音频",
+    "title": "今晚更快入睡，213+ 舒缓音景",
+    "desc": "一键播放，离线友好，科学循证的睡眠与专注音频。",
+    "featureBadge": {
+      "title": "智能睡眠定时器",
+      "desc": "使用智能淡出定时器安然入睡。设置后即可忘记。"
+    }
+  },
+  "nav": {
+    "features": "功能特性",
+    "reviews": "用户评价",
+    "faq": "常见问题",
+    "blog": "博客",
+    "login": "登录",
+    "startFree": "免费开始"
+  },
+  "cta": {
+    "primary": "开始睡眠疗程",
+    "secondary": "获取免费7天计划"
+  },
+  "stats": {
+    "1": {
+      "value": "213+",
+      "label": "睡眠与专注音景",
+      "desc": "为休息、专注和平静而精选"
+    },
+    "2": {
+      "value": "9",
+      "label": "支持的语言",
+      "desc": "本地化引导体验"
+    },
+    "3": {
+      "value": "120K+",
+      "label": "完成的引导疗程",
+      "desc": "基于匿名使用数据"
+    }
+  },
+  "trust": {
+    "1": "100% 免费",
+    "2": "无广告",
+    "3": "高保真音频"
+  },
+  "features": {
+    "title": "为什么选择 SoundFlows?",
+    "item1": "空间音频支持",
+    "item2": "无缝循环播放",
+    "item3": "后台播放",
+    "sectionEyebrow": "更好睡眠与专注的强大功能",
+    "sectionTitle": "深度放松与正念生活所需的一切",
+    "sectionDesc": "为现代生活方式设计的专业声音疗法工具——智能定时器、个性化混音、使用洞察等。永久免费。",
+    "timer": {
+      "badge": "#1 最常用功能",
+      "title": "智能睡眠定时器",
+      "desc": "设定定时器，安然入睡。音频在3秒内柔和淡出——无突然停止，无惊醒。完美的睡前仪式。",
+      "point1": "<strong>默认60分钟</strong> — 适合大多数睡眠周期",
+      "point2": "<strong>可自定义15-120分钟</strong> — 从小憩到整晚",
+      "point3": "<strong>3秒淡出</strong> — 柔和不突兀",
+      "point4": "<strong>自动停止节省电池</strong> — 环保设计",
+      "demoLabel": "睡眠定时器已激活"
+    }
+  },
+  "soundCards": {
+    "rain": {
+      "title": "暴雨倾盆",
+      "desc": "雷鸣般的倾盆大雨，助您深度睡眠。"
+    },
+    "water": {
+      "title": "温柔溪流",
+      "desc": "轻柔流水，带来平静专注。"
+    },
+    "animals": {
+      "title": "森林鸟鸣",
+      "desc": "百灵鸟与森林氛围。"
+    },
+    "hypnosis": {
+      "title": "催眠疗程",
+      "desc": "引导音调，助您深度睡眠。"
+    },
+    "meditation": {
+      "title": "冥想·瑜伽",
+      "desc": "温柔音垫，助您正念呼吸。"
+    },
+    "fire": {
+      "title": "河边篝火",
+      "desc": "噼啪作响的火焰，水声与鸟鸣。"
+    },
+    "bowls": {
+      "title": "西藏颂钵",
+      "desc": "共鸣疗愈振动。"
+    },
+    "chakra": {
+      "title": "根轮",
+      "desc": "接地能量，带来稳定。"
+    },
+    "therapy": {
+      "title": "梦起之处",
+      "desc": "深层潜意识疗愈之旅。"
+    }
+  },
+  "testimonials": {
+    "eyebrow": "深受全球120K+用户信赖",
+    "title": "加入数千名每晚睡眠更好的用户",
+    "statsActiveUsers": "活跃用户",
+    "statsRating": "平均评分",
+    "statsTimerUsage": "每晚使用定时器",
+    "quote1": {
+      "text": "\"雨声非常真实。我现在10分钟内就能入睡。改变了游戏规则！\"",
+      "name": "Sarah Johnson",
+      "role": "教师，西雅图"
+    },
+    "quote2": {
+      "text": "\"喜欢这个睡眠定时器！不再凌晨3点起来关掉音响了。\"",
+      "name": "Michael Chen",
+      "role": "工程师，旧金山"
+    },
+    "quote3": {
+      "text": "\"颂钵帮助我深度冥想。这是我找到的最好的免费冥想应用。\"",
+      "name": "Emma Patel",
+      "role": "瑜伽教练，纽约"
+    }
+  },
+  "faq": {
+    "eyebrow": "常见问题",
+    "title": "您需要了解的一切",
+    "pricing": {
+      "title": "💰 免费模式与定价",
+      "q1": "为什么 SoundFlows 100% 免费？",
+      "a1": "我们相信疗愈声音应该人人可及。SoundFlows 是由音频工程师和冥想从业者创建的激情项目。无广告，无订阅，无套路。",
+      "q2": "SoundFlows 会永久免费吗？",
+      "a2": "是的！核心功能将永远保持免费。我们未来可能会添加可选的高级功能，但当前的声音库和睡眠定时器永远不需要付费。"
+    },
+    "features": {
+      "title": "🎧 功能与音频",
+      "q1": "睡眠定时器如何工作？",
+      "a1": "设置定时器（15-120分钟），当定时器结束时，音频将在3秒内柔和淡出。完美适合入睡，无突然中断。",
+      "q2": "我可以离线使用 SoundFlows 吗？",
+      "a2": "可以！SoundFlows 是渐进式 Web 应用（PWA）。播放过的声音会被缓存以供离线播放。在航班或网络不佳的地区效果很好。",
+      "q3": "有多少音频可用？",
+      "a3": "我们目前提供 213+ 高质量音频文件，跨越9个类别：雨声、流水、动物声音、催眠、冥想、火焰、颂钵、脉轮和潜意识疗愈。"
+    },
+    "technical": {
+      "title": "📱 技术相关",
+      "q1": "我需要创建账户吗？",
+      "a1": "无需账户！只需访问网站即可开始聆听。可选的账户功能（用于跨设备同步收藏）即将推出。",
+      "q2": "支持哪些浏览器？",
+      "a2": "SoundFlows 适用于所有现代浏览器：Chrome、Firefox、Safari、Edge。为获得最佳体验，我们推荐在移动设备上使用 Chrome 或 Safari。"
+    }
+  },
+  "footer": {
+    "about": {
+      "title": "SoundFlows",
+      "desc": "专业声音疗法，助您深度睡眠、专注和冥想。永久100%免费。"
+    },
+    "product": {
+      "title": "产品",
+      "features": "功能特性",
+      "library": "声音库",
+      "faq": "常见问题"
+    },
+    "resources": {
+      "title": "资源",
+      "blog": "博客",
+      "guide": "睡眠科学指南",
+      "all": "所有资源"
+    },
+    "legal": {
+      "title": "法律",
+      "privacy": "隐私政策",
+      "terms": "服务条款",
+      "cookie": "Cookie 政策"
+    },
+    "copyright": "© 2025 SoundFlows. 保留所有权利。用 ♥ 为更好的睡眠而制作。"
+  },
+  "player": {
+    "title": "睡眠雨声 · 15 分钟",
+    "subtitle": "按 ▶ 开始您的疗程",
+    "shuffle": "切换随机播放",
+    "repeat": "切换重复播放",
+    "prev": "上一曲",
+    "playPause": "播放/暂停",
+    "next": "下一曲",
+    "mute": "静音/取消静音",
+    "timer": "设置睡眠定时器"
+  },
+  "timer": {
+    "title": "设置睡眠定时器",
+    "opt15": "15 分钟",
+    "opt30": "30 分钟",
+    "opt60": "60 分钟",
+    "off": "关闭",
+    "cancel": "取消"
+  },
+  "cookie": {
+    "title": "🍪 我们重视您的隐私",
+    "description": "我们使用 Cookie 来改善您的体验、分析网站使用情况，并提供个性化内容。根据您的偏好，您可以接受或拒绝不同类型的 Cookie。",
+    "privacyLink": "查看隐私政策",
+    "acceptAll": "接受所有 Cookie",
+    "acceptAllDesc": "包括分析、营销和个性化 Cookie",
+    "onlyNecessary": "仅必要 Cookie",
+    "onlyNecessaryDesc": "仅运行网站所需的 Cookie",
+    "confirmChoice": "确认选择",
+    "customSettings": "自定义设置"
+  }
+}

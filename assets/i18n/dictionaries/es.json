@@ -1,0 +1,206 @@
+{
+  "hero": {
+    "eyebrow": "Audio basado en ciencia para dormir y concentrarse",
+    "title": "Duerme más rápido esta noche con 213+ paisajes sonoros calmantes",
+    "desc": "Reproductor de un toque, modo sin conexión, audio informado por la ciencia para dormir y enfocarte.",
+    "featureBadge": {
+      "title": "Temporizador Inteligente de Sueño",
+      "desc": "Duerme tranquilamente con nuestro temporizador inteligente de desvanecimiento. Configúralo y olvídate."
+    }
+  },
+  "nav": {
+    "features": "Características",
+    "reviews": "Reseñas",
+    "faq": "FAQ",
+    "blog": "Blog",
+    "login": "Iniciar sesión",
+    "startFree": "Empezar gratis"
+  },
+  "cta": {
+    "primary": "Iniciar sesión de sueño",
+    "secondary": "Obtén el plan gratis de 7 días"
+  },
+  "stats": {
+    "1": {
+      "value": "213+",
+      "label": "Paisajes sonoros para dormir y enfocarse",
+      "desc": "Curados para descanso, foco y calma"
+    },
+    "2": {
+      "value": "9",
+      "label": "Idiomas compatibles",
+      "desc": "Onboarding localizado"
+    },
+    "3": {
+      "value": "120K+",
+      "label": "Sesiones guiadas completadas",
+      "desc": "Respaldado por datos anónimos"
+    }
+  },
+  "trust": {
+    "1": "100% Gratis",
+    "2": "Sin anuncios",
+    "3": "Audio de alta fidelidad"
+  },
+  "features": {
+    "title": "¿Por qué elegir SoundFlows?",
+    "item1": "Compatible con audio espacial",
+    "item2": "Bucle sin cortes",
+    "item3": "Reproducción en segundo plano",
+    "sectionEyebrow": "Características poderosas para mejor sueño y concentración",
+    "sectionTitle": "Todo lo que necesitas para relajación profunda y vida consciente",
+    "sectionDesc": "Herramientas profesionales de terapia de sonido diseñadas para estilos de vida modernos — temporizadores inteligentes, mezclas personalizadas, estadísticas de uso y más. Todo gratis, para siempre.",
+    "timer": {
+      "badge": "#1 Característica más usada",
+      "title": "Temporizador Inteligente de Sueño",
+      "desc": "Configura un temporizador, duerme tranquilamente. El audio se desvanece suavemente en 3 segundos — sin paradas bruscas, sin despertares repentinos. Perfecto para rutinas nocturnas.",
+      "point1": "<strong>60 min por defecto</strong> — óptimo para la mayoría de los ciclos de sueño",
+      "point2": "<strong>Personalizable 15-120 min</strong> — desde siestas hasta noches completas",
+      "point3": "<strong>Desvanecimiento de 3 segundos</strong> — suave, no brusco",
+      "point4": "<strong>Apagado automático ahorra batería</strong> — diseño ecológico",
+      "demoLabel": "Temporizador de sueño activo"
+    }
+  },
+  "soundCards": {
+    "rain": {
+      "title": "Tormenta Intensa",
+      "desc": "Aguacero atronador para sueño profundo."
+    },
+    "water": {
+      "title": "Arroyo Suave",
+      "desc": "Agua fluyendo suavemente para concentración tranquila."
+    },
+    "animals": {
+      "title": "Pájaros del Bosque",
+      "desc": "Alondras y ambiente de bosque."
+    },
+    "hypnosis": {
+      "title": "Sesión de Hipnosis",
+      "desc": "Tonos guiados para sueño profundo."
+    },
+    "meditation": {
+      "title": "Meditación · Yoga",
+      "desc": "Pads suaves para respiración consciente."
+    },
+    "fire": {
+      "title": "Fogata junto al Río",
+      "desc": "Fuego crepitante con agua y pájaros."
+    },
+    "bowls": {
+      "title": "Cuencos Tibetanos",
+      "desc": "Vibraciones curativas resonantes."
+    },
+    "chakra": {
+      "title": "Chakra Raíz",
+      "desc": "Energía de enraizamiento para estabilidad."
+    },
+    "therapy": {
+      "title": "Origen del Sueño",
+      "desc": "Viaje de sanación subconsciente profunda."
+    }
+  },
+  "testimonials": {
+    "eyebrow": "Confiado por 120K+ usuarios en todo el mundo",
+    "title": "Únete a miles que duermen mejor cada noche",
+    "statsActiveUsers": "Usuarios activos",
+    "statsRating": "Calificación promedio",
+    "statsTimerUsage": "Usan temporizador cada noche",
+    "quote1": {
+      "text": "\"Los sonidos de lluvia son increíblemente realistas. Ahora me duermo en 10 minutos. ¡Un cambio total!\"",
+      "name": "Sarah Johnson",
+      "role": "Profesora, Seattle"
+    },
+    "quote2": {
+      "text": "\"¡Adoro el temporizador de sueño! Ya no me despierto a las 3 am para apagar la máquina de sonido.\"",
+      "name": "Michael Chen",
+      "role": "Ingeniero, San Francisco"
+    },
+    "quote3": {
+      "text": "\"Los cuencos tibetanos me ayudan a meditar profundamente. La mejor app gratuita de meditación que he encontrado.\"",
+      "name": "Emma Patel",
+      "role": "Instructora de Yoga, NYC"
+    }
+  },
+  "faq": {
+    "eyebrow": "Preguntas Frecuentes",
+    "title": "Todo lo que necesitas saber",
+    "pricing": {
+      "title": "💰 Modelo Gratuito y Precios",
+      "q1": "¿Por qué SoundFlows es 100% gratis?",
+      "a1": "Creemos que los sonidos curativos deben ser accesibles para todos. SoundFlows es un proyecto apasionado de ingenieros de audio y practicantes de meditación. Sin anuncios, sin suscripciones, sin trampas.",
+      "q2": "¿SoundFlows será siempre gratis?",
+      "a2": "¡Sí! Las características principales siempre permanecerán gratuitas. Podemos agregar características premium opcionales en el futuro, pero la biblioteca de sonido actual y el temporizador de sueño nunca requerirán pago."
+    },
+    "features": {
+      "title": "🎧 Características y Audio",
+      "q1": "¿Cómo funciona el temporizador de sueño?",
+      "a1": "Configura un temporizador (15-120 minutos), y el audio se desvanecerá suavemente en 3 segundos cuando termine el temporizador. Perfecto para quedarse dormido sin interrupciones repentinas.",
+      "q2": "¿Puedo usar SoundFlows sin conexión?",
+      "a2": "¡Sí! SoundFlows es una Aplicación Web Progresiva (PWA). Una vez que reproduzcas sonidos, se almacenan en caché para reproducción sin conexión. Funciona genial en vuelos o en áreas con mala conectividad.",
+      "q3": "¿Cuántos sonidos están disponibles?",
+      "a3": "Actualmente ofrecemos más de 213 archivos de audio de alta calidad en 9 categorías: Lluvia, Agua, Sonidos de Animales, Hipnosis, Meditación, Fuego, Cuencos Tibetanos, Chakra y Terapia Subconsciente."
+    },
+    "technical": {
+      "title": "📱 Técnico",
+      "q1": "¿Necesito crear una cuenta?",
+      "a1": "¡No se requiere cuenta! Solo visita el sitio y empieza a escuchar. Las características de cuenta opcionales (para sincronizar favoritos entre dispositivos) llegarán pronto.",
+      "q2": "¿Qué navegadores son compatibles?",
+      "a2": "SoundFlows funciona en todos los navegadores modernos: Chrome, Firefox, Safari, Edge. Para la mejor experiencia, recomendamos Chrome o Safari en dispositivos móviles."
+    }
+  },
+  "footer": {
+    "about": {
+      "title": "SoundFlows",
+      "desc": "Terapia de sonido profesional para sueño profundo, concentración y meditación. 100% gratis, para siempre."
+    },
+    "product": {
+      "title": "Producto",
+      "features": "Características",
+      "library": "Biblioteca de Sonidos",
+      "faq": "FAQ"
+    },
+    "resources": {
+      "title": "Recursos",
+      "blog": "Blog",
+      "guide": "Guía de Ciencia del Sueño",
+      "all": "Todos los recursos"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Política de Privacidad",
+      "terms": "Términos de Servicio",
+      "cookie": "Política de Cookies"
+    },
+    "copyright": "© 2025 SoundFlows. Todos los derechos reservados. Hecho con ♥ para mejor sueño."
+  },
+  "player": {
+    "title": "Lluvia para dormir · 15 min",
+    "subtitle": "Presiona ▶ para iniciar tu sesión",
+    "shuffle": "Activar aleatorio",
+    "repeat": "Activar repetición",
+    "prev": "Pista anterior",
+    "playPause": "Reproducir/Pausar",
+    "next": "Siguiente pista",
+    "mute": "Silenciar/Desilenciar",
+    "timer": "Configurar temporizador de sueño"
+  },
+  "timer": {
+    "title": "Configura el temporizador de sueño",
+    "opt15": "15 min",
+    "opt30": "30 min",
+    "opt60": "60 min",
+    "off": "Apagar",
+    "cancel": "Cancelar"
+  },
+  "cookie": {
+    "title": "🍪 Valoramos Tu Privacidad",
+    "description": "Usamos cookies para mejorar tu experiencia, analizar el uso del sitio y proporcionar contenido personalizado. Puedes aceptar o rechazar diferentes tipos de cookies según tus preferencias.",
+    "privacyLink": "Ver Política de Privacidad",
+    "acceptAll": "Aceptar Todas las Cookies",
+    "acceptAllDesc": "Incluye cookies de análisis, marketing y personalización",
+    "onlyNecessary": "Solo Cookies Necesarias",
+    "onlyNecessaryDesc": "Solo las cookies necesarias para ejecutar el sitio",
+    "confirmChoice": "Confirmar Elección",
+    "customSettings": "Configuración Personalizada"
+  }
+}
