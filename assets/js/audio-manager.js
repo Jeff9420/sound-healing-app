@@ -270,7 +270,7 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
             }
 
             // 从对象池获取音频实例，减少内存分配
-            const audio = this.getAudioFromPool();
+            let audio = this.getAudioFromPool();
             audio.preload = 'auto'; // 改为auto积极预加载，减少播放延迟
 
             // 设置音频路径
