@@ -1,12 +1,8 @@
-{
+﻿{
   "hero": {
     "eyebrow": "Science-informed audio for sleep & focus",
     "title": "Sleep faster tonight with 213+ calming soundscapes",
-    "desc": "One-tap player, offline-friendly, science-informed audio for sleep & focus.",
-    "featureBadge": {
-      "title": "Smart Sleep Timer",
-      "desc": "Drift off peacefully with our intelligent fade-out timer. Set it and forget it."
-    }
+    "desc": "One-tap player, offline-friendly, science-informed audio for sleep & focus."
   },
   "nav": {
     "features": "Features",
@@ -21,21 +17,9 @@
     "secondary": "Get free 7-day plan"
   },
   "stats": {
-    "1": {
-      "value": "213+",
-      "label": "Sleep & focus soundscapes",
-      "desc": "Curated for rest, focus, and calm"
-    },
-    "2": {
-      "value": "9",
-      "label": "Supported languages",
-      "desc": "Localized onboarding"
-    },
-    "3": {
-      "value": "120K+",
-      "label": "Guided sessions completed",
-      "desc": "Backed by anonymized usage data"
-    }
+    "1": { "value": "213+", "label": "Sleep & focus soundscapes", "desc": "Curated for rest, focus, and calm" },
+    "2": { "value": "9", "label": "Supported languages", "desc": "Localized onboarding" },
+    "3": { "value": "120K+", "label": "Guided sessions completed", "desc": "Backed by anonymized usage data" }
   },
   "trust": {
     "1": "100% Free",
@@ -44,67 +28,40 @@
   },
   "features": {
     "title": "Why Choose SoundFlows?",
-    "item1": "Spatial Audio Support",
-    "item2": "Seamless Looping",
-    "item3": "Background Playback",
-    "sectionEyebrow": "Powerful Features for Better Sleep & Focus",
-    "sectionTitle": "Everything You Need for Deep Relaxation & Mindful Living",
+    "sectionEyebrow": "Powerful features for better sleep & focus",
+    "sectionTitle": "Everything you need for deep relaxation & mindful living",
     "sectionDesc": "Professional sound therapy tools designed for modern lifestyles — smart timers, personalized mixing, usage insights, and more. All free, forever.",
+    "item1": "Spatial audio support",
+    "item2": "Seamless looping",
+    "item3": "Background playback",
     "timer": {
-      "badge": "#1 Most Used Feature",
+      "badge": "#1 most used feature",
       "title": "Smart Sleep Timer",
       "desc": "Set a timer, drift off peacefully. Audio gently fades out in 3 seconds — no jarring stops, no sudden wake-ups. Perfect for bedtime routines.",
-      "point1": "<strong>60-min default</strong> — optimal for most sleep cycles",
-      "point2": "<strong>Customizable 15-120 min</strong> — naps to full nights",
-      "point3": "<strong>3-second fade-out</strong> — gentle, not jarring",
-      "point4": "<strong>Auto-stop saves battery</strong> — eco-friendly design",
+      "point1": "60-min default — optimal for most sleep cycles",
+      "point2": "Customizable 15-120 min — naps to full nights",
+      "point3": "3-second fade-out — gentle, not jarring",
+      "point4": "Auto-stop saves battery — eco-friendly design",
       "demoLabel": "Sleep Timer Active"
     }
   },
   "soundCards": {
-    "rain": {
-      "title": "Heavy Rainstorm",
-      "desc": "Thunderous downpour for deep sleep."
-    },
-    "water": {
-      "title": "Gentle Stream",
-      "desc": "Soft flowing water for calm focus."
-    },
-    "animals": {
-      "title": "Forest Birds",
-      "desc": "Larks and forest ambience."
-    },
-    "hypnosis": {
-      "title": "Hypnosis Session",
-      "desc": "Guided tones for deep sleep."
-    },
-    "meditation": {
-      "title": "Meditation · Yoga",
-      "desc": "Gentle pads for mindful breathing."
-    },
-    "fire": {
-      "title": "Campfire by the River",
-      "desc": "Crackling fire with water and birds."
-    },
-    "bowls": {
-      "title": "Tibetan Bowls",
-      "desc": "Resonant healing vibrations."
-    },
-    "chakra": {
-      "title": "Root Chakra",
-      "desc": "Grounding energy for stability."
-    },
-    "therapy": {
-      "title": "Dream Origin",
-      "desc": "Deep subconscious healing journey."
-    }
+    "rain": { "title": "Heavy Rainstorm", "desc": "Thunderous downpour for deep sleep." },
+    "water": { "title": "Gentle Stream", "desc": "Soft flowing water for calm focus." },
+    "animals": { "title": "Forest Birds", "desc": "Larks and forest ambience." },
+    "hypnosis": { "title": "Hypnosis Session", "desc": "Guided tones for deep sleep." },
+    "meditation": { "title": "Meditation · Yoga", "desc": "Gentle pads for mindful breathing." },
+    "fire": { "title": "Campfire by the River", "desc": "Crackling fire with water and birds." },
+    "bowls": { "title": "Tibetan Bowls", "desc": "Resonant healing vibrations." },
+    "chakra": { "title": "Root Chakra", "desc": "Grounding energy for stability." },
+    "therapy": { "title": "Dream Origin", "desc": "Deep subconscious healing journey." }
   },
   "testimonials": {
-    "eyebrow": "Trusted by 120K+ Users Worldwide",
-    "title": "Join Thousands Who Sleep Better Every Night",
-    "statsActiveUsers": "Active Users",
-    "statsRating": "Average Rating",
-    "statsTimerUsage": "Use Timer Nightly",
+    "eyebrow": "Trusted by 120K+ users worldwide",
+    "title": "Join thousands who sleep better every night",
+    "statsActiveUsers": "Active users",
+    "statsRating": "Average rating",
+    "statsTimerUsage": "Use timer nightly",
     "quote1": {
       "text": "\"The rain sounds are incredibly realistic. I fall asleep within 10 minutes now. Game changer!\"",
       "name": "Sarah Johnson",
@@ -123,30 +80,64 @@
   },
   "faq": {
     "eyebrow": "Frequently Asked Questions",
-    "title": "Everything You Need to Know",
+    "title": "Everything you need to know",
     "pricing": {
-      "title": "💰 Free Model & Pricing",
+      "title": "Free model & pricing",
       "q1": "Why is SoundFlows 100% free?",
-      "a1": "We believe healing sounds should be accessible to everyone. SoundFlows is passion project by audio engineers and meditation practitioners. No ads, no subscriptions, no catch.",
+      "a1": "We believe healing sounds should be accessible to everyone. SoundFlows is a passion project by audio engineers and meditation practitioners. No ads, no subscriptions, no catch.",
       "q2": "Will SoundFlows always be free?",
-      "a2": "Yes! The core features will always remain free. We may add optional premium features in the future, but the current sound library and sleep timer will never require payment."
+      "a2": "Yes! The core features will always remain free. Optional premium add-ons may come later, but the library and timer stay free."
     },
     "features": {
-      "title": "🎧 Features & Audio",
+      "title": "Features & audio",
       "q1": "How does the sleep timer work?",
-      "a1": "Set a timer (15-120 minutes), and the audio will gently fade out over 3 seconds when the timer ends. Perfect for falling asleep without sudden interruptions.",
+      "a1": "Set a timer (15-120 minutes) and the audio will gently fade out over 3 seconds when it ends — no sudden stops.",
       "q2": "Can I use SoundFlows offline?",
-      "a2": "Yes! SoundFlows is a Progressive Web App (PWA). Once you've played sounds, they're cached for offline playback. Works great on flights or in areas with poor connectivity.",
+      "a2": "Yes. Once you've played sounds, they're cached for offline playback. Great for flights or low-connectivity areas.",
       "q3": "How many sounds are available?",
-      "a3": "We currently offer 213+ high-quality audio files across 9 categories: Rain, Water, Animal Sounds, Hypnosis, Meditation, Fire, Singing Bowls, Chakra, and Subconscious Therapy."
+      "a3": "We offer 213+ high-quality audio files across 9 categories: Rain, Water, Animal Sounds, Hypnosis, Meditation, Fire, Singing Bowls, Chakra, and Subconscious Therapy."
     },
     "technical": {
-      "title": "📱 Technical",
+      "title": "Technical",
       "q1": "Do I need to create an account?",
-      "a1": "No account required! Just visit the site and start listening. Optional account features (for syncing favorites across devices) coming soon.",
+      "a1": "No account required. Just visit the site and start listening. Optional sync features may come later.",
       "q2": "Which browsers are supported?",
-      "a2": "SoundFlows works on all modern browsers: Chrome, Firefox, Safari, Edge. For the best experience, we recommend Chrome or Safari on mobile devices."
+      "a2": "SoundFlows works on all modern browsers: Chrome, Firefox, Safari, Edge. Best experience on Chrome or Safari mobile."
     }
+  },
+  "player": {
+    "title": "Sleep Rain · 15 min",
+    "subtitle": "Press ▶ to start your session",
+    "shuffle": "Toggle shuffle",
+    "repeat": "Toggle repeat",
+    "prev": "Previous track",
+    "playPause": "Play/Pause",
+    "next": "Next track",
+    "mute": "Mute/Unmute",
+    "timer": "Set sleep timer"
+  },
+  "timer": {
+    "title": "Set sleep timer",
+    "opt15": "15 min",
+    "opt30": "30 min",
+    "opt60": "60 min",
+    "off": "Off",
+    "cancel": "Cancel"
+  },
+  "cookie": {
+    "title": "🍪 We value your privacy",
+    "description": "We use cookies to improve your experience, analyze usage, and provide personalized content.",
+    "privacyLink": "View Privacy Policy",
+    "acceptAll": "Accept all cookies",
+    "acceptAllDesc": "Including analytics, marketing, and personalization cookies",
+    "onlyNecessary": "Only necessary cookies",
+    "onlyNecessaryDesc": "Only cookies required to run the site",
+    "confirmChoice": "Confirm choice",
+    "customSettings": "Custom settings"
+  },
+  "misc": {
+    "sampleCardTitle": "Sample Card",
+    "sampleCardDesc": "Content"
   },
   "footer": {
     "about": {
@@ -172,35 +163,5 @@
       "cookie": "Cookie Policy"
     },
     "copyright": "© 2025 SoundFlows. All rights reserved. Made with ♥ for better sleep."
-  },
-  "player": {
-    "title": "Sleep Rain · 15 min",
-    "subtitle": "Press ▶ to start your session",
-    "shuffle": "Toggle Shuffle",
-    "repeat": "Toggle Repeat",
-    "prev": "Previous Track",
-    "playPause": "Play/Pause",
-    "next": "Next Track",
-    "mute": "Mute/Unmute",
-    "timer": "Set Sleep Timer"
-  },
-  "timer": {
-    "title": "Set Sleep Timer",
-    "opt15": "15 min",
-    "opt30": "30 min",
-    "opt60": "60 min",
-    "off": "Off",
-    "cancel": "Cancel"
-  },
-  "cookie": {
-    "title": "🍪 We Value Your Privacy",
-    "description": "We use cookies to improve your experience, analyze site usage, and provide personalized content. You can accept or reject different types of cookies based on your preferences.",
-    "privacyLink": "View Privacy Policy",
-    "acceptAll": "Accept All Cookies",
-    "acceptAllDesc": "Including analytics, marketing and personalization cookies",
-    "onlyNecessary": "Only Necessary Cookies",
-    "onlyNecessaryDesc": "Only cookies required to run the site",
-    "confirmChoice": "Confirm Choice",
-    "customSettings": "Custom Settings"
   }
 }

@@ -9,7 +9,7 @@
     <meta name="build-version" content="v4.0.0-deep-immersion">
     <title>SoundFlows | Deep Immersion Sound Healing</title>
     <meta name="description"
-        content="Experience deep relaxation with immersive soundscapes. Rain sounds, white noise, and meditation music designed for sleep and focus.">
+        content="Sleep faster tonight with 213+ calming soundscapes. One-tap player, offline-friendly, science-informed audio for sleep and focus.">
     <base href="/">
     <link rel="canonical" href="https://www.soundflows.app/en/">
     <link rel="alternate" hreflang="en" href="https://www.soundflows.app/en/">
@@ -22,6 +22,8 @@
     <meta property="og:url" content="https://www.soundflows.app/en/">
     <meta property="og:locale" content="en_US">
     <meta property="og:title" content="SoundFlows | Deep Immersion Sound Healing">
+    <meta property="og:description"
+        content="Sleep faster tonight with 213+ calming soundscapes. One-tap player, offline-friendly, science-informed audio for sleep and focus.">
     <link rel="stylesheet" href="../assets/css/redesign-v2.css">
     <link rel="stylesheet" href="../assets/css/saas-hero.css">
     <link rel="stylesheet" href="../assets/css/themes/saas-social-proof.css">
@@ -34,8 +36,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/themes/deep-immersion-unified.css">
     <style>
-        html, body { overflow-x: hidden; }
-        .saas-cards-grid, .saas-category-grid, .section--cards, .category-grid {
+        html,
+        body {
+            overflow-x: hidden;
+        }
+
+        .saas-cards-grid,
+        .saas-category-grid,
+        .section--cards,
+        .category-grid {
             max-height: none !important;
             overflow-y: visible !important;
             overflow-x: clip;
@@ -50,7 +59,7 @@
     <header class="header">
         <div class="header__inner">
             <div class="header__brand">
-                <span class="header__icon">馃寠</span>
+                <span class="header__icon">🌊</span>
                 <div class="header__brand-text">
                     <h1 class="header__title">SoundFlows</h1>
                     <span class="header__tagline">Deep Immersion</span>
@@ -72,8 +81,9 @@
                     <option value="ko">KO</option>
                     <option value="zh">ZH</option>
                 </select>
-                <button class="saas-btn saas-btn--ghost" onclick="alert('Login coming soon!')">Login</button>
-                <button class="saas-btn saas-btn--primary" onclick="window.startRecommendedSession && window.startRecommendedSession()">Start sleep session</button>
+                <button class="saas-btn saas-btn--ghost" data-dict="nav.login" onclick="alert('Login coming soon!')">Login</button>
+                <button class="saas-btn saas-btn--primary" data-dict="cta.primary"
+                    onclick="window.startRecommendedSession && window.startRecommendedSession()">Start sleep session</button>
             </div>
         </div>
     </header>
@@ -83,26 +93,29 @@
         <div class="saas-hero-v2__container">
             <div class="saas-hero-v2__content">
                 <p class="saas-hero-v2__eyebrow" data-dict="hero.eyebrow">Science-informed audio for sleep & focus</p>
-                <h2 class="saas-hero-v2__headline" data-dict="hero.title">Sleep faster tonight with 213+ calming soundscapes</h2>
+                <h2 class="saas-hero-v2__headline" data-dict="hero.title">Sleep faster tonight with 213+ calming
+                    soundscapes</h2>
                 <p class="saas-hero-v2__description" data-dict="hero.desc">
                     One-tap player, offline-friendly, science-informed audio for sleep & focus.
                 </p>
 
                 <div class="saas-hero-v2__feature-badge">
-                    <div class="feature-badge__icon">馃寵</div>
+                    <div class="feature-badge__icon">&#127773;</div>
                     <div class="feature-badge__content">
-                        <h3 class="feature-badge__title"><span data-dict="features.item1">Smart Sleep Timer</span></h3>
-                        <p class="feature-badge__desc">Drift off peacefully with our intelligent fade-out timer. Set it
-                            and forget it.</p>
+                        <h3 class="feature-badge__title" data-dict="features.timer.title">Smart Sleep Timer</h3>
+                        <p class="feature-badge__desc" data-dict="features.timer.desc">Drift off peacefully with our intelligent fade-out timer. Set it and forget it.</p>
                     </div>
                 </div>
 
-                                <div class="saas-hero-v2__cta-group">
-                    <button class="saas-btn saas-btn--primary saas-btn--large" onclick="window.startRecommendedSession && window.startRecommendedSession()" data-dict="cta.primary">
+                <div class="saas-hero-v2__cta-group">
+                    <button class="saas-btn saas-btn--primary saas-btn--large"
+                        onclick="window.startRecommendedSession && window.startRecommendedSession()"
+                        data-dict="cta.primary">
                         Start sleep session
                     </button>
                     <button class="saas-btn saas-btn--ghost saas-btn--large"
-                        onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})" data-dict="cta.secondary">
+                        onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})"
+                        data-dict="cta.secondary">
                         Get free 7-day plan
                     </button>
                 </div>
@@ -115,48 +128,49 @@
                         <span class="trust-item__icon">&#128274;</span> <span data-dict="trust.2">No Ads</span>
                     </div>
                     <div class="trust-item">
-                        <span class="trust-item__icon">&#127911;</span> <span data-dict="trust.3">High Fidelity Audio</span>
+                        <span class="trust-item__icon">&#127911;</span> <span data-dict="trust.3">High Fidelity
+                            Audio</span>
                     </div>
                 </div>
 
-            <div class="saas-hero-v2__panel">
-                <div class="stats-grid-v2">
-                    <div class="stat-card-v2 stat-card-v2--highlight">
-                        <div class="stat-card-v2__number" data-dict="stats.1.value">213+</div>
-                        <div class="stat-card-v2__label" data-dict="stats.1.label">Sleep & focus soundscapes</div>
-                        <p class="stat-card-v2__desc" data-dict="stats.1.desc">Curated for rest, focus, and calm</p>
+                <div class="saas-hero-v2__panel">
+                    <div class="stats-grid-v2">
+                        <div class="stat-card-v2 stat-card-v2--highlight">
+                            <div class="stat-card-v2__number" data-dict="stats.1.value">213+</div>
+                            <div class="stat-card-v2__label" data-dict="stats.1.label">Sleep & focus soundscapes</div>
+                            <p class="stat-card-v2__desc" data-dict="stats.1.desc">Curated for rest, focus, and calm</p>
+                        </div>
+                        <div class="stat-card-v2">
+                            <div class="stat-card-v2__number" data-dict="stats.2.value">9</div>
+                            <div class="stat-card-v2__label" data-dict="stats.2.label">Supported languages</div>
+                            <p class="stat-card-v2__desc" data-dict="stats.2.desc">Localized onboarding</p>
+                        </div>
+                        <div class="stat-card-v2">
+                            <div class="stat-card-v2__number" data-dict="stats.3.value">120K+</div>
+                            <div class="stat-card-v2__label" data-dict="stats.3.label">Guided sessions completed</div>
+                            <p class="stat-card-v2__desc" data-dict="stats.3.desc">Backed by anonymized usage data</p>
+                        </div>
                     </div>
-                    <div class="stat-card-v2">
-                        <div class="stat-card-v2__number" data-dict="stats.2.value">9</div>
-                        <div class="stat-card-v2__label" data-dict="stats.2.label">Supported languages</div>
-                        <p class="stat-card-v2__desc" data-dict="stats.2.desc">Localized onboarding</p>
-                    </div>
-                    <div class="stat-card-v2">
-                        <div class="stat-card-v2__number" data-dict="stats.3.value">120K+</div>
-                        <div class="stat-card-v2__label" data-dict="stats.3.label">Guided sessions completed</div>
-                        <p class="stat-card-v2__desc" data-dict="stats.3.desc">Backed by anonymized usage data</p>
-                    </div>
-                </div>
 
-                <div class="feature-list-v2">
-                    <h4 class="feature-list-v2__title" data-dict="features.title">Why Choose SoundFlows?</h4>
-                    <ul class="feature-list-v2__items">
-                        <li class="feature-list-v2__item">
-                            <span class="feature-item__icon">馃帶</span>
-                            <span data-dict="features.item1">Spatial Audio Support</span>
-                        </li>
-                        <li class="feature-list-v2__item">
-                            <span class="feature-item__icon">鈾撅笍</span>
-                            <span data-dict="features.item2">Seamless Looping</span>
-                        </li>
-                        <li class="feature-list-v2__item">
-                            <span class="feature-item__icon">馃摫</span>
-                            <span data-dict="features.item3">Background Playback</span>
-                        </li>
-                    </ul>
+                    <div class="feature-list-v2">
+                        <h4 class="feature-list-v2__title" data-dict="features.title">Why Choose SoundFlows?</h4>
+                        <ul class="feature-list-v2__items">
+                            <li class="feature-list-v2__item">
+                                <span class="feature-item__icon">&#127911;</span>
+                                <span data-dict="features.item1">Spatial Audio Support</span>
+                            </li>
+                            <li class="feature-list-v2__item">
+                                <span class="feature-item__icon">&#8734;</span>
+                                <span data-dict="features.item2">Seamless Looping</span>
+                            </li>
+                            <li class="feature-list-v2__item">
+                                <span class="feature-item__icon">&#128241;</span>
+                                <span data-dict="features.item3">Background Playback</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
     </section>
 
     <!-- Sound Grid (9 Categories) -->
@@ -165,36 +179,36 @@
 
         <!-- 1. Rain -->
         <div class="glass-card" data-track-id="涓€澹伴椃闆凤紝澶ч洦鍊剧泦.mp3" data-category="Rain" data-name="Heavy Rainstorm">
-            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">锟?/span>
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🌧️</span>
             <h3 class="card-title" data-dict="soundCards.rain.title">Heavy Rainstorm</h3>
             <p class="card-desc" data-dict="soundCards.rain.desc">Thunderous downpour for deep sleep.</p>
         </div>
 
         <!-- 2. Running Water -->
-        <div class="glass-card" data-track-id="缂撶紦娴佹按锛屾俯鏌旂殑鎶氭懜鑴搁锛屾亱浜鸿埇鐨勬劅瑙夛紙涓婏級.mp3" data-category="running water"
+        <div class="glass-card" data-track-id="缂撶紦娴佹按锛屾俯鏌旂殑鎶氭懜鑴搁锛屾亱浜鸿埇鐨勬劅瑙夛紙涓婏級.mp3" data-category="running water"
             data-name="Gentle Stream">
-            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">馃挧</span>
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">💧</span>
             <h3 class="card-title" data-dict="soundCards.water.title">Gentle Stream</h3>
             <p class="card-desc" data-dict="soundCards.water.desc">Soft flowing water for calm focus.</p>
         </div>
 
         <!-- 3. Animal Sounds -->
         <div class="glass-card" data-track-id="妫灄閲岀櫨鐏甸笩楦ｅ彨.mp3" data-category="Animal sounds" data-name="Forest Birds">
-            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">馃</span>
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🐦</span>
             <h3 class="card-title" data-dict="soundCards.animals.title">Forest Birds</h3>
             <p class="card-desc" data-dict="soundCards.animals.desc">Larks and forest ambience.</p>
         </div>
 
         <!-- 4. Hypnosis -->
         <div class="glass-card" data-track-id="鍌湢涓撶敤鍐ユ兂闊充箰1.mp3" data-category="hypnosis" data-name="Hypnosis Session">
-            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">馃寵</span>
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🌀</span>
             <h3 class="card-title" data-dict="soundCards.hypnosis.title">Hypnosis Session</h3>
             <p class="card-desc" data-dict="soundCards.hypnosis.desc">Guided tones for deep sleep.</p>
         </div>
 
         <!-- 5. Meditation -->
         <div class="glass-card" data-track-id="鍐ユ兂 鐟滀冀蹇呭惉.mp3" data-category="meditation" data-name="Meditation 路 Yoga">
-            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">馃鈥嶁檧锟?/span>
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🧘</span>
             <h3 class="card-title" data-dict="soundCards.meditation.title">Meditation 路 Yoga</h3>
             <p class="card-desc" data-dict="soundCards.meditation.desc">Gentle pads for mindful breathing.</p>
         </div>
@@ -202,7 +216,7 @@
         <!-- 6. Fire -->
         <div class="glass-card" data-track-id="娌宠竟鐐圭噧绡濈伀銆佹按澹板拰娓呰剢鐨勯笩锟?1.mp3" data-category="Fire"
             data-name="Campfire by the River">
-            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">馃敟</span>
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🔥</span>
             <h3 class="card-title" data-dict="soundCards.fire.title">Campfire by the River</h3>
             <p class="card-desc" data-dict="soundCards.fire.desc">Crackling fire with water and birds.</p>
         </div>
@@ -210,7 +224,7 @@
         <!-- 7. Singing Bowl Sound -->
         <div class="glass-card" data-track-id="tibetan-singing-bowl-1.mp3" data-category="Singing bowl sound"
             data-name="Tibetan Bowls">
-            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">馃幍</span>
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🔔</span>
             <h3 class="card-title" data-dict="soundCards.bowls.title">Tibetan Bowls</h3>
             <p class="card-desc" data-dict="soundCards.bowls.desc">Resonant healing vibrations.</p>
         </div>
@@ -218,7 +232,7 @@
         <!-- 8. Chakra -->
         <div class="glass-card" data-track-id="Wurzel-Chakra 纰х帀鑾插崕(娴峰簳锟?.mp3" data-category="Chakra"
             data-name="Root Chakra">
-            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">馃晧锟?/span>
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🕉️</span>
             <h3 class="card-title" data-dict="soundCards.chakra.title">Root Chakra</h3>
             <p class="card-desc" data-dict="soundCards.chakra.desc">Grounding energy for stability.</p>
         </div>
@@ -226,7 +240,7 @@
         <!-- 9. Subconscious Therapy -->
         <div class="glass-card" data-track-id="姊﹁捣濮嬬殑鍦版柟.mp3" data-category="Subconscious Therapy"
             data-name="Dream Origin">
-            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">馃寣</span>
+            <span class="icon" style="font-size: 2rem; margin-bottom: 1rem; display: block;">🌌</span>
             <h3 class="card-title" data-dict="soundCards.therapy.title">Dream Origin</h3>
             <p class="card-desc" data-dict="soundCards.therapy.desc">Deep subconscious healing journey.</p>
         </div>
@@ -236,37 +250,31 @@
     <section class="saas-features" role="region" id="features" aria-labelledby="featuresTitle">
         <div class="saas-features__container">
             <header class="saas-features__header">
-                <p class="saas-features__eyebrow" data-dict="features.sectionEyebrow">Powerful Features for Better Sleep &
+                <p class="saas-features__eyebrow" data-dict="features.sectionEyebrow">Powerful Features for Better Sleep
+                    &
                     Focus</p>
-                <h2 class="saas-features__title" id="featuresTitle" data-dict="features.sectionTitle">Everything You Need for
+                <h2 class="saas-features__title" id="featuresTitle" data-dict="features.sectionTitle">Everything You
+                    Need for
                     Deep Relaxation & Mindful Living</h2>
-                <p class="saas-features__description" data-dict="features.sectionDesc">Professional sound therapy tools
-                    designed for modern lifestyles 锟?smart timers, personalized mixing, usage insights, and more. All
-                    free, forever.</p>
+                <p class="saas-features__description" data-dict="features.sectionDesc">Professional sound therapy tools designed for modern lifestyles -- smart timers, personalized mixing, usage insights, and more. All free, forever.</p>
             </header>
             <div class="saas-features__grid">
                 <article class="feature-showcase feature-showcase--primary">
                     <div class="feature-showcase__content">
                         <div class="feature-showcase__badge" data-dict="features.timer.badge">#1 Most Used Feature</div>
-                        <h3 class="feature-showcase__title" data-dict="features.timer.title">馃寵 <span data-dict="features.item1">Smart Sleep Timer</span></h3>
-                        <p class="feature-showcase__description" data-dict="features.timer.desc">Set a timer,
-                            drift off peacefully. Audio gently fades out in 3 seconds 锟?no jarring stops, no sudden
-                            wake-ups. Perfect for bedtime routines.</p>
+                        <h3 class="feature-showcase__title" data-dict="features.timer.title">Smart Sleep Timer</h3>
+                        <p class="feature-showcase__description" data-dict="features.timer.desc">Set a timer, drift off peacefully. Audio gently fades out in 3 seconds ? no jarring stops, no sudden wake-ups. Perfect for bedtime routines.</p>
                         <ul class="feature-showcase__list">
-                            <li data-dict="features.timer.point1"><strong>60-min default</strong> 锟?optimal for most
-                                sleep cycles</li>
-                            <li data-dict="features.timer.point2"><strong>Customizable 15-120 min</strong> 锟?naps to
-                                full nights</li>
-                            <li data-dict="features.timer.point3"><strong>3-second fade-out</strong> 锟?gentle, not
-                                jarring</li>
-                            <li data-dict="features.timer.point4"><strong>Auto-stop saves battery</strong> 锟?
-                                eco-friendly design</li>
+                            <li data-dict="features.timer.point1">60-min default ? optimal for most sleep cycles</li>
+                            <li data-dict="features.timer.point2">Customizable 15-120 min ? naps to full nights</li>
+                            <li data-dict="features.timer.point3">3-second fade-out ? gentle, not jarring</li>
+                            <li data-dict="features.timer.point4">Auto-stop saves battery ? eco-friendly design</li>
                         </ul>
                     </div>
                     <div class="feature-showcase__visual">
                         <div class="feature-demo feature-demo--timer">
                             <div class="timer-display">
-                                <div class="timer-display__icon">馃寵</div>
+                                <div class="timer-display__icon">&#9201;</div>
                                 <div class="timer-display__time">60:00</div>
                                 <div class="timer-display__label" data-dict="features.timer.demoLabel">Sleep Timer
                                     Active</div>
@@ -282,8 +290,10 @@
     <section class="saas-social-proof" role="region" id="testimonials" aria-labelledby="testimonialsTitle">
         <div class="saas-social-proof__container">
             <header class="saas-social-proof__header">
-                <p class="saas-social-proof__eyebrow" data-dict="testimonials.eyebrow">Trusted by 120K+ Users Worldwide</p>
-                <h2 class="saas-social-proof__title" id="testimonialsTitle" data-dict="testimonials.title">Join Thousands Who Sleep Better Every Night</h2>
+                <p class="saas-social-proof__eyebrow" data-dict="testimonials.eyebrow">Trusted by 120K+ Users Worldwide
+                </p>
+                <h2 class="saas-social-proof__title" id="testimonialsTitle" data-dict="testimonials.title">Join
+                    Thousands Who Sleep Better Every Night</h2>
             </header>
 
             <div class="social-proof-stats">
@@ -301,11 +311,11 @@
                 </div>
             </div>
 
-            <!-- Testimonial Cards -->
+                        <!-- Testimonial Cards -->
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 4rem;">
                 <div class="glass-card">
                     <div style="margin-bottom: 1rem;">
-                        <div style="color: #7C3AED; font-size: 1.5rem;">鈽呪槄鈽呪槄锟?/div>
+                        <div style="color: #7C3AED; font-size: 1.5rem;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                     </div>
                     <p style="margin-bottom: 1rem; font-style: italic;" data-dict="testimonials.quote1.text">"The rain sounds are incredibly realistic. I fall asleep within 10 minutes now. Game changer!"</p>
                     <div style="display: flex; align-items: center; gap: 1rem;">
@@ -319,7 +329,7 @@
 
                 <div class="glass-card">
                     <div style="margin-bottom: 1rem;">
-                        <div style="color: #7C3AED; font-size: 1.5rem;">鈽呪槄鈽呪槄锟?/div>
+                        <div style="color: #7C3AED; font-size: 1.5rem;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                     </div>
                     <p style="margin-bottom: 1rem; font-style: italic;" data-dict="testimonials.quote2.text">"Love the sleep timer! No more waking up at 3am to turn off my sound machine."</p>
                     <div style="display: flex; align-items: center; gap: 1rem;">
@@ -333,7 +343,7 @@
 
                 <div class="glass-card">
                     <div style="margin-bottom: 1rem;">
-                        <div style="color: #7C3AED; font-size: 1.5rem;">鈽呪槄鈽呪槄锟?/div>
+                        <div style="color: #7C3AED; font-size: 1.5rem;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                     </div>
                     <p style="margin-bottom: 1rem; font-style: italic;" data-dict="testimonials.quote3.text">"The singing bowls help me meditate deeply. Best free meditation app I've found."</p>
                     <div style="display: flex; align-items: center; gap: 1rem;">
@@ -345,7 +355,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+
     </section>
 
     <!-- FAQ Section -->
@@ -357,81 +367,102 @@
             </header>
             <div class="faq-grid">
                 <div class="faq-category">
-                    <h3 class="faq-category__title" data-dict="faq.pricing.title">馃挵 Free Model & Pricing</h3>
+                    <h3 class="faq-category__title" data-dict="faq.pricing.title">Free Model & Pricing</h3>
                     <div class="faq-accordion">
                         <div class="faq-item">
                             <button class="faq-item__question" aria-expanded="false" aria-controls="faq-answer-1">
-                                <span class="faq-item__question-text" data-dict="faq.pricing.q1">Why is SoundFlows 100% free?</span>
+                                <span class="faq-item__question-text" data-dict="faq.pricing.q1">Why is SoundFlows 100%
+                                    free?</span>
                                 <span class="faq-item__icon" aria-hidden="true">+</span>
                             </button>
                             <div class="faq-item__answer" id="faq-answer-1" hidden>
-                                <p data-dict="faq.pricing.a1">We believe healing sounds should be accessible to everyone. SoundFlows is passion project by audio engineers and meditation practitioners. No ads, no subscriptions, no catch.</p>
+                                <p data-dict="faq.pricing.a1">We believe healing sounds should be accessible to
+                                    everyone. SoundFlows is passion project by audio engineers and meditation
+                                    practitioners. No ads, no subscriptions, no catch.</p>
                             </div>
                         </div>
                         <div class="faq-item">
                             <button class="faq-item__question" aria-expanded="false" aria-controls="faq-answer-2">
-                                <span class="faq-item__question-text" data-dict="faq.pricing.q2">Will SoundFlows always be free?</span>
+                                <span class="faq-item__question-text" data-dict="faq.pricing.q2">Will SoundFlows always
+                                    be free?</span>
                                 <span class="faq-item__icon" aria-hidden="true">+</span>
                             </button>
                             <div class="faq-item__answer" id="faq-answer-2" hidden>
-                                <p data-dict="faq.pricing.a2">Yes! The core features will always remain free. We may add optional premium features in the future, but the current sound library and sleep timer will never require payment.</p>
+                                <p data-dict="faq.pricing.a2">Yes! The core features will always remain free. We may add
+                                    optional premium features in the future, but the current sound library and sleep
+                                    timer will never require payment.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="faq-category">
-                    <h3 class="faq-category__title" data-dict="faq.features.title">馃帶 Features & Audio</h3>
+                    <h3 class="faq-category__title" data-dict="faq.features.title">Features & Audio</h3>
                     <div class="faq-accordion">
                         <div class="faq-item">
                             <button class="faq-item__question" aria-expanded="false" aria-controls="faq-answer-3">
-                                <span class="faq-item__question-text" data-dict="faq.features.q1">How does the sleep timer work?</span>
+                                <span class="faq-item__question-text" data-dict="faq.features.q1">How does the sleep
+                                    timer work?</span>
                                 <span class="faq-item__icon" aria-hidden="true">+</span>
                             </button>
                             <div class="faq-item__answer" id="faq-answer-3" hidden>
-                                <p data-dict="faq.features.a1">Set a timer (15-120 minutes), and the audio will gently fade out over 3 seconds when the timer ends. Perfect for falling asleep without sudden interruptions.</p>
+                                <p data-dict="faq.features.a1">Set a timer (15-120 minutes), and the audio will gently
+                                    fade out over 3 seconds when the timer ends. Perfect for falling asleep without
+                                    sudden interruptions.</p>
                             </div>
                         </div>
                         <div class="faq-item">
                             <button class="faq-item__question" aria-expanded="false" aria-controls="faq-answer-4">
-                                <span class="faq-item__question-text" data-dict="faq.features.q2">Can I use SoundFlows offline?</span>
+                                <span class="faq-item__question-text" data-dict="faq.features.q2">Can I use SoundFlows
+                                    offline?</span>
                                 <span class="faq-item__icon" aria-hidden="true">+</span>
                             </button>
                             <div class="faq-item__answer" id="faq-answer-4" hidden>
-                                <p data-dict="faq.features.a2">Yes! SoundFlows is a Progressive Web App (PWA). Once you've played sounds, they're cached for offline playback. Works great on flights or in areas with poor connectivity.</p>
+                                <p data-dict="faq.features.a2">Yes! SoundFlows is a Progressive Web App (PWA). Once
+                                    you've played sounds, they're cached for offline playback. Works great on flights or
+                                    in areas with poor connectivity.</p>
                             </div>
                         </div>
                         <div class="faq-item">
                             <button class="faq-item__question" aria-expanded="false" aria-controls="faq-answer-5">
-                                <span class="faq-item__question-text" data-dict="faq.features.q3">How many sounds are available?</span>
+                                <span class="faq-item__question-text" data-dict="faq.features.q3">How many sounds are
+                                    available?</span>
                                 <span class="faq-item__icon" aria-hidden="true">+</span>
                             </button>
                             <div class="faq-item__answer" id="faq-answer-5" hidden>
-                                <p data-dict="faq.features.a3">We currently offer 213+ high-quality audio files across 9 categories: Rain, Water, Animal Sounds, Hypnosis, Meditation, Fire, Singing Bowls, Chakra, and Subconscious Therapy.</p>
+                                <p data-dict="faq.features.a3">We currently offer 213+ high-quality audio files across 9
+                                    categories: Rain, Water, Animal Sounds, Hypnosis, Meditation, Fire, Singing Bowls,
+                                    Chakra, and Subconscious Therapy.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="faq-category">
-                    <h3 class="faq-category__title" data-dict="faq.technical.title">馃摫 Technical</h3>
+                    <h3 class="faq-category__title" data-dict="faq.technical.title">Technical</h3>
                     <div class="faq-accordion">
                         <div class="faq-item">
                             <button class="faq-item__question" aria-expanded="false" aria-controls="faq-answer-6">
-                                <span class="faq-item__question-text" data-dict="faq.technical.q1">Do I need to create an account?</span>
+                                <span class="faq-item__question-text" data-dict="faq.technical.q1">Do I need to create
+                                    an account?</span>
                                 <span class="faq-item__icon" aria-hidden="true">+</span>
                             </button>
                             <div class="faq-item__answer" id="faq-answer-6" hidden>
-                                <p data-dict="faq.technical.a1">No account required! Just visit the site and start listening. Optional account features (for syncing favorites across devices) coming soon.</p>
+                                <p data-dict="faq.technical.a1">No account required! Just visit the site and start
+                                    listening. Optional account features (for syncing favorites across devices) coming
+                                    soon.</p>
                             </div>
                         </div>
                         <div class="faq-item">
                             <button class="faq-item__question" aria-expanded="false" aria-controls="faq-answer-7">
-                                <span class="faq-item__question-text" data-dict="faq.technical.q2">Which browsers are supported?</span>
+                                <span class="faq-item__question-text" data-dict="faq.technical.q2">Which browsers are
+                                    supported?</span>
                                 <span class="faq-item__icon" aria-hidden="true">+</span>
                             </button>
                             <div class="faq-item__answer" id="faq-answer-7" hidden>
-                                <p data-dict="faq.technical.a2">SoundFlows works on all modern browsers: Chrome, Firefox, Safari, Edge. For the best experience, we recommend Chrome or Safari on mobile devices.</p>
+                                <p data-dict="faq.technical.a2">SoundFlows works on all modern browsers: Chrome,
+                                    Firefox, Safari, Edge. For the best experience, we recommend Chrome or Safari on
+                                    mobile devices.</p>
                             </div>
                         </div>
                     </div>
@@ -441,48 +472,76 @@
     </section>
 
     <!-- Footer -->
-    <footer style="background: rgba(5, 5, 17, 0.8); border-top: 1px solid var(--immersion-glass-border); padding: 4rem 2rem 2rem; margin-top: 6rem;">
-        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+    <footer
+        style="background: rgba(5, 5, 17, 0.8); border-top: 1px solid var(--immersion-glass-border); padding: 4rem 2rem 2rem; margin-top: 6rem;">
+        <div
+            style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
             <!-- About -->
             <div>
-                <h4 style="font-weight: 600; margin-bottom: 1rem; color: var(--immersion-text-main);" data-dict="footer.about.title">SoundFlows</h4>
-                <p style="color: var(--immersion-text-muted); font-size: 0.9rem; line-height: 1.8;" data-dict="footer.about.desc">Professional sound therapy for deep sleep, focus, and meditation. 100% free, forever.</p>
+                <h4 style="font-weight: 600; margin-bottom: 1rem; color: var(--immersion-text-main);"
+                    data-dict="footer.about.title">SoundFlows</h4>
+                <p style="color: var(--immersion-text-muted); font-size: 0.9rem; line-height: 1.8;"
+                    data-dict="footer.about.desc">Professional sound therapy for deep sleep, focus, and meditation. 100%
+                    free, forever.</p>
             </div>
 
             <!-- Product -->
             <div>
-                <h4 style="font-weight: 600; margin-bottom: 1rem; color: var(--immersion-text-main);" data-dict="footer.product.title">Product</h4>
+                <h4 style="font-weight: 600; margin-bottom: 1rem; color: var(--immersion-text-main);"
+                    data-dict="footer.product.title">Product</h4>
                 <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 0.5rem;"><a href="#features" style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;" data-dict="footer.product.features">Features</a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="#sound-grid" style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;" data-dict="footer.product.library">Sound Library</a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="#faq" style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;" data-dict="footer.product.faq">FAQ</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#features"
+                            style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;"
+                            data-dict="footer.product.features">Features</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#sound-grid"
+                            style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;"
+                            data-dict="footer.product.library">Sound Library</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#faq"
+                            style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;"
+                            data-dict="footer.product.faq">FAQ</a></li>
                 </ul>
             </div>
 
             <!-- Resources -->
             <div>
-                <h4 style="font-weight: 600; margin-bottom: 1rem; color: var(--immersion-text-main);" data-dict="footer.resources.title">Resources</h4>
+                <h4 style="font-weight: 600; margin-bottom: 1rem; color: var(--immersion-text-main);"
+                    data-dict="footer.resources.title">Resources</h4>
                 <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 0.5rem;"><a href="/blog/" style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;" data-dict="footer.resources.blog">Blog</a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="/pages/sleep-science-guide.html" style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;" data-dict="footer.resources.guide">Sleep Science Guide</a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="/resources.html" style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;" data-dict="footer.resources.all">All Resources</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="/blog/"
+                            style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;"
+                            data-dict="footer.resources.blog">Blog</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="/pages/sleep-science-guide.html"
+                            style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;"
+                            data-dict="footer.resources.guide">Sleep Science Guide</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="/resources.html"
+                            style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;"
+                            data-dict="footer.resources.all">All Resources</a></li>
                 </ul>
             </div>
 
             <!-- Legal -->
             <div>
-                <h4 style="font-weight: 600; margin-bottom: 1rem; color: var(--immersion-text-main);" data-dict="footer.legal.title">Legal</h4>
+                <h4 style="font-weight: 600; margin-bottom: 1rem; color: var(--immersion-text-main);"
+                    data-dict="footer.legal.title">Legal</h4>
                 <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 0.5rem;"><a href="/privacy-policy.html" style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;" data-dict="footer.legal.privacy">Privacy Policy</a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="/terms.html" style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;" data-dict="footer.legal.terms">Terms of Service</a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="/cookie-policy.html" style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;" data-dict="footer.legal.cookie">Cookie Policy</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="/privacy-policy.html"
+                            style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;"
+                            data-dict="footer.legal.privacy">Privacy Policy</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="/terms.html"
+                            style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;"
+                            data-dict="footer.legal.terms">Terms of Service</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="/cookie-policy.html"
+                            style="color: var(--immersion-text-muted); text-decoration: none; transition: color 0.3s;"
+                            data-dict="footer.legal.cookie">Cookie Policy</a></li>
                 </ul>
             </div>
         </div>
 
         <!-- Copyright -->
-        <div style="border-top: 1px solid var(--immersion-glass-border); padding-top: 2rem; text-align: center; color: var(--immersion-text-muted); font-size: 0.9rem;">
-            <p data-dict="footer.copyright">&copy; 2025 SoundFlows. All rights reserved. Made with 馃挏 for better sleep.</p>
+        <div
+            style="border-top: 1px solid var(--immersion-glass-border); padding-top: 2rem; text-align: center; color: var(--immersion-text-muted); font-size: 0.9rem;">
+            <p data-dict="footer.copyright">&copy; 2025 SoundFlows. All rights reserved. Made with 💜 for better sleep.
+            </p>
         </div>
     </footer>
 
@@ -490,8 +549,8 @@
     <div id="audioPlayer" class="floating-player hidden">
         <div class="player-top">
             <div class="player-info">
-                <span id="playerTitle" class="player-title" data-dict="player.title">Sleep Rain 路 15 min</span>
-                <span id="playerSubtitle" class="player-sub" data-dict="player.subtitle">Press 锟?to start your session</span>
+                <span id="playerTitle" class="player-title" data-dict="player.title">Sleep Rain · 15 min</span>
+                <span id="playerSubtitle" class="player-sub" data-dict="player.subtitle">Press &#9654; to start your session</span>
             </div>
 
             <!-- Progress Bar Section -->
@@ -504,8 +563,10 @@
 
         <div class="player-controls">
             <!-- Playback Mode Controls -->
-            <button class="p-btn p-btn-small" id="shuffleBtn" title="Shuffle" aria-label="Toggle Shuffle" data-dict="player.shuffle">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <button class="p-btn p-btn-small" id="shuffleBtn" title="Shuffle" aria-label="Toggle Shuffle"
+                data-dict="player.shuffle">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="16 3 21 3 21 8"></polyline>
                     <line x1="4" y1="20" x2="21" y2="3"></line>
                     <polyline points="21 16 21 21 16 21"></polyline>
@@ -513,8 +574,10 @@
                     <line x1="4" y1="4" x2="9" y2="9"></line>
                 </svg>
             </button>
-            <button class="p-btn p-btn-small" id="repeatBtn" title="Repeat Off" aria-label="Toggle Repeat" data-dict="player.repeat">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <button class="p-btn p-btn-small" id="repeatBtn" title="Repeat Off" aria-label="Toggle Repeat"
+                data-dict="player.repeat">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="17 1 21 5 17 9"></polyline>
                     <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
                     <polyline points="7 23 3 19 7 15"></polyline>
@@ -523,18 +586,19 @@
             </button>
 
             <!-- Track Navigation -->
-            <button class="p-btn" id="prevBtn" aria-label="Previous Track" data-dict="player.prev">锟?/button>
+            <button class="p-btn" id="prevBtn" aria-label="Previous Track" data-dict="player.prev">&#9194;</button>
             <button class="p-btn play-circle" id="playPauseBtn" aria-label="Play/Pause" data-dict="player.playPause">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M8 5v14l11-7z" />
                 </svg>
             </button>
-            <button class="p-btn" id="nextBtn" aria-label="Next Track" data-dict="player.next">锟?/button>
+            <button class="p-btn" id="nextBtn" aria-label="Next Track" data-dict="player.next">&#9193;</button>
 
             <!-- Volume Control -->
             <div class="volume-control">
                 <button class="p-btn" id="volumeBtn" aria-label="Mute/Unmute" data-dict="player.mute">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
                         <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
                     </svg>
@@ -561,19 +625,24 @@
             <div class="timer-options"
                 style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
                 <button class="timer-opt-btn" data-time="15"
-                    style="padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 12px; cursor: pointer;" data-dict="timer.opt15">15
+                    style="padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 12px; cursor: pointer;"
+                    data-dict="timer.opt15">15
                     min</button>
                 <button class="timer-opt-btn" data-time="30"
-                    style="padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 12px; cursor: pointer;" data-dict="timer.opt30">30
+                    style="padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 12px; cursor: pointer;"
+                    data-dict="timer.opt30">30
                     min</button>
                 <button class="timer-opt-btn" data-time="60"
-                    style="padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 12px; cursor: pointer;" data-dict="timer.opt60">60
+                    style="padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 12px; cursor: pointer;"
+                    data-dict="timer.opt60">60
                     min</button>
                 <button class="timer-opt-btn" data-time="0"
-                    style="padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 12px; cursor: pointer;" data-dict="timer.off">Off</button>
+                    style="padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 12px; cursor: pointer;"
+                    data-dict="timer.off">Off</button>
             </div>
             <button id="closeTimerModal"
-                style="padding: 0.8rem 2rem; background: white; color: black; border: none; border-radius: 50px; font-weight: 600; cursor: pointer;" data-dict="timer.cancel">Cancel</button>
+                style="padding: 0.8rem 2rem; background: white; color: black; border: none; border-radius: 50px; font-weight: 600; cursor: pointer;"
+                data-dict="timer.cancel">Cancel</button>
         </div>
     </div>
 
@@ -597,9 +666,16 @@
                     window.simpleDict.applyDictionary(currentLocale).then(() => {
                         console.log(`✅ Dictionary loaded: ${currentLocale}`);
                         if (window.simpleDict.get) {
+                            const trackFallbacks = {
+                                en: { title: 'Sleep Rain · 15 min', subtitle: 'Press ▶ to start your session' },
+                                es: { title: 'Lluvia para dormir · 15 min', subtitle: 'Presiona ▶ para iniciar tu sesión' },
+                                ja: { title: 'スリープレイン · 15分', subtitle: '▶ を押してセッション開始' },
+                                zh: { title: '睡眠雨声 · 15 分钟', subtitle: '按 ▶ 开始你的会话' }
+                            };
+                            const fallback = trackFallbacks[currentLocale] || trackFallbacks.en;
                             window.recommendedTrackOverride = {
-                                name: window.simpleDict.get('player.title', 'Sleep Rain · 15 min'),
-                                subtitle: window.simpleDict.get('player.subtitle', 'Press ▶ to start your session')
+                                name: window.simpleDict.get('player.title', fallback.title),
+                                subtitle: window.simpleDict.get('player.subtitle', fallback.subtitle)
                             };
                         }
                     }).catch(e => console.error('❌ Dict load failed:', e));
@@ -610,17 +686,6 @@
 
             // Wait for app initialization to complete before applying translations
             window.addEventListener('appInitialized', initDict);
-            }
-            // Wait for app initialization to complete before applying translations
-            window.addEventListener('appInitialized', initDict);
-            }
-            // Wait for app initialization to complete before applying translations
-            window.addEventListener('appInitialized', initDict);
-            }
-            // Wait for app initialization to complete before applying translations
-            window.addEventListener('appInitialized', initDict);
-            }
-            }
             const select = document.getElementById('localeSwitcher');
             if (select) {
                 const pathLocale = (window.location.pathname.split('/')[1] || 'en').toLowerCase();
@@ -656,5 +721,13 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+
 
 

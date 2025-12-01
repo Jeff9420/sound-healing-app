@@ -2,10 +2,11 @@
 // GDPR compliant cookie consent management for SoundFlows
 
 class CookieConsent {
-    constructor() {
+    constructor(locale = null) {
         this.banner = null;
         this.preferences = null;
         this.consentGiven = false;
+        this.locale = locale || document.documentElement.lang || 'en';
         this.init();
     }
 
@@ -184,10 +185,14 @@ class CookieConsent {
 
         // Add to page
         document.body.appendChild(this.banner);
+        // Re-apply translations so late-inserted banner follows current locale
+        if (window.simpleDict && typeof window.simpleDict.applyDictionary === 'function') {
+            window.simpleDict.applyDictionary(this.locale || 'en');
+        }
 
         // Apply dictionary translations
         if (window.simpleDict && typeof window.simpleDict.applyDictionary === 'function') {
-            window.simpleDict.applyDictionary();
+            window.simpleDict.applyDictionary(this.locale);
         }
 
         // Bind events
@@ -628,7 +633,8 @@ class CookieConsent {
 
 // Initialize cookie consent
 document.addEventListener('DOMContentLoaded', () => {
-    window.cookieConsent = new CookieConsent();
+    const lang = document.documentElement.lang || 'en';
+    window.cookieConsent = new CookieConsent(lang);
 });
 
 // Export for global access
