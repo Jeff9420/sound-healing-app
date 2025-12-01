@@ -18,18 +18,41 @@
   }
 
   async function applyDictionary(locale) {
+    console.log(`[simple-dict] Starting applyDictionary for locale: ${locale}`);
     const dict = await loadDictionary(locale);
+    console.log(`[simple-dict] Dictionary loaded, keys:`, Object.keys(dict));
     currentLocale = locale;
     currentDict = dict || {};
     const elements = document.querySelectorAll('[data-dict]');
-    elements.forEach(el => {
+    console.log(`[simple-dict] Found ${elements.length} elements with [data-dict]`);
+
+    let appliedCount = 0;
+    let skippedCount = 0;
+
+    elements.forEach((el, idx) => {
       const key = el.getAttribute('data-dict');
-      if (!key) return;
+      if (!key) {
+        skippedCount++;
+        return;
+      }
       const value = key.split('.').reduce((acc, k) => (acc && acc[k] !== undefined ? acc[k] : undefined), dict);
+
+      if (idx < 5) {
+        console.log(`[simple-dict] Element ${idx}: key="${key}", value="${value}", current="${el.textContent?.substring(0, 30)}"`);
+      }
+
       if (typeof value === 'string') {
         el.textContent = value;
+        appliedCount++;
+      } else {
+        skippedCount++;
+        if (idx < 5) {
+          console.warn(`[simple-dict] No translation for key: ${key}`);
+        }
       }
     });
+
+    console.log(`[simple-dict] Applied: ${appliedCount}, Skipped: ${skippedCount}`);
   }
 
   function get(key, fallback = '') {
