@@ -121,7 +121,7 @@
       ]
     },
     {
-      "source": "/assets/(.*\\.(js|css))",
+      "source": "/assets/:path*.(js|css)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -130,7 +130,7 @@
       ]
     },
     {
-      "source": "/assets/(.*\\.(png|jpg|jpeg|gif|svg|webp|woff|woff2|ttf|eot))",
+      "source": "/assets/:path*.(png|jpg|jpeg|gif|svg|webp|woff|woff2|ttf|eot)",
       "headers": [
         {
           "key": "Cache-Control",
