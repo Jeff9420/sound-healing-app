@@ -192,6 +192,8 @@ class HistoryFavoritesUI {
      */
     renderHistoryList() {
         const content = document.getElementById('hfContent');
+        if (!content) return; // 如果元素不存在（如在沉浸式页面上），直接返回
+
         const history = this.userDataManager.getHistory();
 
         if (history.length === 0) {
@@ -237,6 +239,8 @@ class HistoryFavoritesUI {
      */
     renderFavoritesList() {
         const content = document.getElementById('hfContent');
+        if (!content) return; // 如果元素不存在（如在沉浸式页面上），直接返回
+
         const favorites = this.userDataManager.getFavorites();
 
         if (favorites.length === 0) {
