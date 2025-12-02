@@ -287,11 +287,15 @@ class DeepImmersionApp {
             grid.addEventListener('click', (e) => {
                 const card = e.target.closest('.glass-card');
                 if (card) {
-                    const trackId = card.dataset.trackId;
                     const name = card.dataset.name;
                     const category = card.dataset.category;
-                    if (trackId && name && category) {
-                        this.playTrack(trackId, name, category);
+                    if (name && category) {
+                        // 从 AUDIO_CONFIG 获取第一个文件名，避免依赖 HTML 中可能乱码的 data-track-id
+                        const categoryFiles = window.AUDIO_CONFIG?.categories?.[category]?.files || [];
+                        const trackId = categoryFiles[0] || '';
+                        if (trackId) {
+                            this.playTrack(trackId, name, category);
+                        }
                     }
                 }
             });
