@@ -269,7 +269,7 @@ if (typeof window !== 'undefined' && typeof window.AudioManager === 'undefined')
                 console.warn(`文件格式 ${fileExtension} 不被支持，考虑转换为MP3格式: ${fileName}`);
             }
 
-            // 从对象池获取音频实例，减少内存分配
+            // 从对象池获取音频实例，减少内存分配 (Fixed: changed from const to let)
             let audio = this.getAudioFromPool();
             audio.preload = 'auto'; // 改为auto积极预加载，减少播放延迟
 
